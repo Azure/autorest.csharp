@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.Azure.Model
 {
@@ -30,6 +33,21 @@ namespace AutoRest.CSharp.Azure.Model
                 {
                     yield return ModelsName;
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Attempts to infer the name of the service referenced by this CodeModel.
+        /// </summary>
+        [JsonIgnore]
+        public string ServiceName
+        {
+            get
+            {
+                var method = Methods[0];
+                var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+                var serviceName = match.Groups[1].Value.ToPascalCase();
+                return serviceName;
             }
         }
     }
