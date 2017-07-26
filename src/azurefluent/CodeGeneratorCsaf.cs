@@ -117,12 +117,15 @@ namespace AutoRest.CSharp.Azure.Fluent
                 await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
             }
 
-            if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
+            //if (Settings.Instance.RegenerateManager)
             {
                 await Write(
                     new AzureServiceManagerTemplate { Model = codeModel },
                     codeModel.ServiceName + "Manager" + ImplementationFileExtension);
                 
+                await Write(
+                    new AzureCsprojTemplate { Model = codeModel },
+                    $"Microsoft.Azure.Management.{codeModel.ServiceName}.Fluent.csproj");
             }
         }
     }
