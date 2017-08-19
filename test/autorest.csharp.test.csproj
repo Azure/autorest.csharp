@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" >
+  <PropertyGroup>
+    <VersionPrefix>1.2.2</VersionPrefix>
+    <GenerateFullPaths>true</GenerateFullPaths>
+    <Common>$(MsBuildThisFileDirectory)</Common>
+    <SolutionDir>$(Common)../</SolutionDir>
+    
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <Target Name="Nuke" AfterTargets="clean" >
+    <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
+    <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
+  </Target>
+  
+  <ItemGroup>
+    <Content Include="$(MSBuildProjectDirectory)\Resource\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)src/autorest.csharp.csproj" />
+  </ItemGroup>
+ 
+  <ProjectExtensions><VisualStudio><UserProperties Resource_4Swagger_4swagger-x-ms-discriminator-value_1json__JSONSchema="..\..\..\..\..\schema\swagger-extensions.json" /></VisualStudio></ProjectExtensions>
+</Project>
