@@ -377,34 +377,41 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   return null
 
 task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
-  mappings = Object.assign({
-    'Mirror.RecursiveTypes': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-recursive-type.json',
-    'Mirror.Primitives': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-primitives.json',
-    'Mirror.Sequences': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-sequences.json',
-    'Mirror.Polymorphic': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-polymorphic.json',
-    'Internal.Ctors': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-internal-ctors.json',
-    'Additional.Properties': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-additional-properties.yaml',
-    'DateTimeOffset': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-datetimeoffset.json',
-    'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
-  }, defaultMappings)
+  mappings = {
+    'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
+    'Mirror.Primitives': 'swagger-mirror-primitives.json',
+    'Mirror.Sequences': 'swagger-mirror-sequences.json',
+    'Mirror.Polymorphic': 'swagger-mirror-polymorphic.json',
+    'Internal.Ctors': 'swagger-internal-ctors.json',
+    'Additional.Properties': 'swagger-additional-properties.yaml',
+    'DateTimeOffset': 'swagger-datetimeoffset.json'
+  }
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
+    'inputBaseDir': 'test/vanilla/Swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  },done
+  }, () ->
+    regenExpected {
+      'outputBaseDir': 'test/vanilla',
+      'inputBaseDir': swaggerDir,
+      'mappings': Object.assign({ 'AcceptanceTests/UrlMultiCollectionFormat': 'url-multi-collectionFormat.json' }, defaultMappings),
+      'outputDir': 'Expected',
+      'language': 'csharp',
+      'nsPrefix': 'Fixtures',
+      'flatteningThreshold': '1'
+    }, done
   return null
 
 task 'regenerate-cswithcreds', '', (done) ->
   mappings = {
-    'PetstoreV2': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2': 'test/vanilla/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
     'language': 'csharp',
@@ -416,11 +423,10 @@ task 'regenerate-cswithcreds', '', (done) ->
 
 task 'regenerate-csallsync', '', (done) ->
   mappings = {
-    'PetstoreV2AllSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2AllSync': 'test/vanilla/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
     'language': 'csharp',
@@ -432,11 +438,10 @@ task 'regenerate-csallsync', '', (done) ->
 
 task 'regenerate-csnosync', '', (done) ->
   mappings = {
-    'PetstoreV2NoSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2NoSync': 'test/vanilla/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
     'language': 'csharp',
@@ -626,74 +631,18 @@ task 'regenerate-ars', '', (done) ->
   },done
   return null
 
-task 'regenerate-samples', '', (done) ->
-  count = 0
-  source 'Samples/*/**/readme.md'
-    .pipe foreach (each,next)->
-      count++
-      autorest [each.path, "--clear-output-folder"]
-        , (code,stdout,stderr) ->
-          setTimeout () => 
-            count--
-            done() if( count == 0 ) 
-          , 100
-          outputFolder = path.join(each.path, "../shell")
-          mkdir outputFolder if !(test "-d", outputFolder)
-          ShellString(code).to(path.join(outputFolder, "code.txt"))
-          ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
-          ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
+task 'regenerate', "regenerate expected code for tests", ['regenerate-cs', 'regenerate-csazure', 'regenerate-csazurefluent'], (done) ->
+  done();
 
-          # sanitize generated files (source maps and shell stuff may contain file:/// paths)
-          (find path.join(each.path, ".."))
-            .filter((file) -> file.match(/.(map|txt)$/))
-            .forEach((file) -> 
-              sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
-              sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
-              sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                        # memory URIs (depend on timing)
-              (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
-              (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
-            )
-          
-          (find path.join(each.path, ".."))
-            .filter((file) -> file.match(/.(yaml)$/))
-            .forEach((file) -> 
-              sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/ig, "", file  # source file names
-            )
-
-          next null
-        , true # don't fail on failures (since we wanna record them)
-      return null;
-  return null
-
-task 'regenerate', "regenerate expected code for tests", ['reset'], (done) ->
-  # remove the installed autorest so that it doesn't use an old one.
-  rmdir "#{os.homedir()}/.autorest" , ->
-    run [
-        'regenerate-cs',
-        'regenerate-csazure'
-        'regenerate-csazurefluent'
-        # 'regenerate-ars'
-        # 'regenerate-go'
-        # 'regenerate-java'
-        # 'regenerate-javaazure'
-        # 'regenerate-javaazurefluent'
-        # 'regenerate-node'
-        # 'regenerate-nodeazure'
-        # 'regenerate-python'
-        # 'regenerate-pythonazure'
-        # 'regenerate-ruby'
-        # 'regenerate-rubyazure'
-        # 'regenerate-samples'
-        ], done
-    return null
+# 'regenerate-ars'
+# 'regenerate-go'
+# 'regenerate-java'
+# 'regenerate-javaazure'
+# 'regenerate-javaazurefluent'
+# 'regenerate-node'
+# 'regenerate-nodeazure'
+# 'regenerate-python'
+# 'regenerate-pythonazure'
+# 'regenerate-ruby'
+# 'regenerate-rubyazure'
   
-
-path = require('path')
-
-
-
-task 'autorest-preview-build', '', ->
-  exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"
-
-task 'autorest-preview', '', ->
-  exec "#{basefolder}/src/dev/AutoRest.Preview/bin/Debug/net461/AutoRest.Preview.exe", {cwd: "./src/dev/AutoRest.Preview"}
