@@ -60,7 +60,7 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="8.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
     <!-- <PackageReference Include="autorest.common"  Version="2.0.14" /> -->
   </ItemGroup>
@@ -78,4 +78,18 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
+  <Target Name="UpdateDepsJson" AfterTargets="AfterBuild" >
+    <Message Text="Fixing deps.json" Importance="high" />
+    <PropertyGroup>
+      <ResGenFix>$(Powershell)
+        $path = "$(BaseOutputPath)/netcoreapp2.0/$(TargetName).deps.json"
+        $content = (Get-Content "$path" -Raw )
+        $content = $content -replace '      "System.Threading.Thread/4.3.0', '      "System.Threading.Thread/0.0.0'
+        $content = $content -replace '      "System.Threading/4.3.0', '      "System.Threading/0.0.0'
+        Set-Content -value $content -path $path
+      </ResGenFix>
+    </PropertyGroup>
+    <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+  </Target>
 </Project>
