@@ -59,7 +59,7 @@ task 'restore','restores the dotnet packages for the projects',['clear-cache-on-
       execute "dotnet restore #{ each.path } /nologo", {retry:1},(code,stderr,stdout) ->
         done()
         
-task 'test', 'dotnet',['restore'] , (done) ->
+task 'test', 'dotnet', ['restore'] , (done) ->
   # run xunit test in parallel with each other.
   tests()
     .pipe foreach (each,done)->

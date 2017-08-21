@@ -21,17 +21,14 @@ namespace AutoRest.CSharp.Unit.Tests {
     using Xunit.Abstractions;
     using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
     using System.Reflection;
-    using System.Runtime.Loader; 
+    using System.Runtime.Loader;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
     
 
     public class BugTest {
         internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591"};
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
-
-        internal static string[] VsCode = new string[] {
-            @"C:\Program Files (x86)\Microsoft VS Code Insiders\Code - Insiders.exe",
-            @"C:\Program Files (x86)\Microsoft VS Code\Code.exe"
-        };
 
         protected Assembly LoadAssembly(MemoryStream stream) {
             return AssemblyLoadContext.Default.LoadFromStream(stream);    
@@ -134,10 +131,10 @@ namespace AutoRest.CSharp.Unit.Tests {
             typeof(Enumerable).GetAssembly().Location,
             typeof(JsonArrayAttribute).GetAssembly().Location,
             typeof(EnumMemberAttribute).GetAssembly().Location,
-            // typeof(Controller).GetAssembly().Location,
-            // typeof(ActionContext).GetAssembly().Location,
-            // typeof(InlineRouteParameterParser).GetAssembly().Location,
-            // typeof(ControllerBase).GetAssembly().Location,
+            typeof(Controller).GetAssembly().Location,
+            typeof(ActionContext).GetAssembly().Location,
+            typeof(InlineRouteParameterParser).GetAssembly().Location,
+            typeof(ControllerBase).GetAssembly().Location,
 
         };
 

@@ -21,7 +21,7 @@ task 'init', "" ,(done)->
   
 # Run language-specific tests:
 # (ie, things that call stuff like 'mvn test', 'npm test', 'tox', 'go run' etc)
-task 'test', "more", ["regenerate"], (done) ->
+task 'test', "more", [], (done) ->
   # insert commands here to do other kinds of testing
   # echo "Testing More"
   done();
