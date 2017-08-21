@@ -19,9 +19,6 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 use-extension:
   "@microsoft.azure/autorest.modeler": "*"
 
-scope-transform-string:
-  is-object: false
-
 pipeline:
   csharp/modeler:
     input: swagger-document/identity
@@ -38,9 +35,7 @@ pipeline:
     scope: scope-cm/emitter
   csharp/generate:
     plugin: csharp
-    input: 
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-csharp
   csharp/simplifier:
     plugin: csharp-simplifier
@@ -72,9 +67,7 @@ pipeline:
     scope: jsonrpcclient
   jsonrpcclient/generate:
     plugin: jsonrpcclient
-    input: 
-      - swagger-document/identity
-      - modeler
+    input: modeler
     output-artifact: source-file-jsonrpcclient
   jsonrpcclient/transform:
     input: generate

@@ -73,7 +73,7 @@ namespace AutoRest.CSharp
             var codeGenerator = "csharp";
 
             var files = await ListInputs();
-            if (files.Length != 2)
+            if (files.Length != 1)
             {
                 throw new Exception($"Generator received incorrect number of inputs: {files.Length} : {string.Join(",", files)}");
             }
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp
                 language +
                 (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
                 (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
-            var modelAsJson = (await ReadFile(files[1])).EnsureYamlIsJson();
+            var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
 
             using (plugin.Activate())
             {
