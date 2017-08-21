@@ -41,7 +41,7 @@ namespace AutoRest.CSharp
                 {
                     codeModel.Name = methodGrp;
                     // Service server
-                    var serviceControllerTemplate = new AutoRest.CSharp.Templates.Rest.Server.ServiceControllerTemplate { Model = codeModel };
+                    var serviceControllerTemplate = new AutoRest.CSharp.vanilla.Templates.Rest.Server.ServiceControllerTemplate { Model = codeModel };
                     await Write(serviceControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
@@ -158,9 +158,7 @@ namespace AutoRest.CSharp
             }
             else
             {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture,
-                        string.Format(AutoRest.Core.Properties.Resources.ParameterValueIsNotValid, Settings.Instance.CodeGenerationMode, "server/client"), "CodeGenerator"));
+                throw new ArgumentException($"Parameter '{Settings.Instance.CodeGenerationMode}' value is not valid. Expect 'server/client'");
             }
         }
 

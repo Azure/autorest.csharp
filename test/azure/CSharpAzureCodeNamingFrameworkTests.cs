@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure;
+using AutoRest.Modeler;
 using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;

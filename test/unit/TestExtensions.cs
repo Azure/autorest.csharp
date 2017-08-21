@@ -11,6 +11,7 @@ using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Swagger;
+using AutoRest.Modeler;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
             var plugin = ExtensionsLoader.GetPlugin(settings.CodeGenerator);
             var modeler = new SwaggerModeler(Settings.Instance);
-            var swagger = Singleton<Swagger.Model.ServiceDefinition>.Instance = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
+            var swagger = Singleton<AutoRest.Modeler.Model.ServiceDefinition>.Instance = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
             var codeModel = modeler.Build(swagger);
 
             using (plugin.Activate())

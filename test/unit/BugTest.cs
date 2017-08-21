@@ -13,8 +13,6 @@ namespace AutoRest.CSharp.Unit.Tests {
     using System.Runtime.Serialization;
     using System.Threading.Tasks;
     using Core.Utilities;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
     using Microsoft.CodeAnalysis;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
@@ -133,13 +131,13 @@ namespace AutoRest.CSharp.Unit.Tests {
             typeof(RestException).GetAssembly().Location,
             typeof(Uri).GetAssembly().Location,
             typeof(File).GetAssembly().Location,
-            typeof(ActionContext).GetAssembly().Location,
-            typeof(Controller).GetAssembly().Location,
             typeof(Enumerable).GetAssembly().Location,
             typeof(JsonArrayAttribute).GetAssembly().Location,
             typeof(EnumMemberAttribute).GetAssembly().Location,
-            typeof(InlineRouteParameterParser).GetAssembly().Location,
-            typeof(ControllerBase).GetAssembly().Location,
+            // typeof(Controller).GetAssembly().Location,
+            // typeof(ActionContext).GetAssembly().Location,
+            // typeof(InlineRouteParameterParser).GetAssembly().Location,
+            // typeof(ControllerBase).GetAssembly().Location,
 
         };
 
