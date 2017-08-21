@@ -3,6 +3,7 @@ require './common.iced'
 # ==============================================================================
 # tasks required for this build 
 Tasks "dotnet"  # dotnet functions
+Tasks "regeneration"
 
 # ==============================================================================
 # Settings
@@ -23,9 +24,4 @@ task 'init', "" ,(done)->
 task 'test', "more", ["regenerate"], (done) ->
   # insert commands here to do other kinds of testing
   # echo "Testing More"
-  done();
-  
-# Regnerate files using autorest
-task 'regenerate', 'files', (done) ->
-  echo marked "#           Calling autorest.testserver/regenerate ..."
   done();

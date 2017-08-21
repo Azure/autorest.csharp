@@ -366,6 +366,11 @@ module.exports =
     proc.stdout.on 'data', ondata if ondata
     return proc
 
+  autorest: (args,done,ignoreexitcode) ->
+    echo info "Queuing up: AutoRest #{args.join(' ')}"
+    execute "autorest \"--use=#{basefolder}\" #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+      return done(code,stdout,stderr)
+
 # build task for global build
 module.exports.task 'build', 'builds project', -> 
   echo "Building project in #{basefolder}"

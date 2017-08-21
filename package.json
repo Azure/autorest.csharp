@@ -37,7 +37,8 @@
     "run-sequence": "*",
     "shx": "^0.2.2",
     "through2-parallel": "^0.1.3",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "@microsoft.azure/autorest.testserver": "../autorest.testserver"
   },
   "dependencies": {
     "dotnet-2.0.0": "^1.1.0"
