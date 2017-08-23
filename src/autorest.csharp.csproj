@@ -85,6 +85,7 @@
       <ResGenFix>$(Powershell)
         $path = "$(BaseOutputPath)/netcoreapp2.0/$(TargetName).deps.json"
         $content = (Get-Content "$path" -Raw )
+        $content = $content -replace '      "System.ComponentModel.Primitives/4.3.0', '      "System.ComponentModel.Primitives/0.0.0'
         $content = $content -replace '      "System.Linq/4.3.0', '      "System.Linq/0.0.0'
         $content = $content -replace '      "System.Text.RegularExpressions/4.3.0', '      "System.Text.RegularExpressions/0.0.0'
         $content = $content -replace '      "System.Threading.Thread/4.3.0', '      "System.Threading.Thread/0.0.0'
