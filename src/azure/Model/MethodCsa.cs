@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.CSharp.Azure.Properties;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
 using Newtonsoft.Json;
@@ -39,9 +38,7 @@ namespace AutoRest.CSharp.Azure.Model
                 if (getMethod == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(CultureInfo.InvariantCulture,
-                        Resources.InvalidLongRunningOperationForCreateOrUpdate,
-                            Name, Group));
+                        $"Long running operations for '{Name}' requires a GET operation under the same path and same operation group '{Group}'.");
                 }
                 MethodCsa method = getMethod as MethodCsa;
                 method.SyncMethods = SyncMethods;

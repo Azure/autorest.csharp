@@ -190,12 +190,6 @@ namespace AutoRest.CSharp
                 var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
                 foreach (var outFile in outFiles)
                 {
-                    if (outFile == "SwaggerPetstoreExtensions.cs")
-                        continue;
-                    if (outFile == "Models/Order.cs")
-                        continue;
-                    if (outFile == "Models/XmlSerialization.cs")
-                        continue;
                     WriteFile(outFile, outFS.ReadAllText(outFile), null);
                 }
 
