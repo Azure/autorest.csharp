@@ -172,7 +172,6 @@ namespace AutoRest.CSharp
                 
                 using (plugin.Activate())
                 {
-                    System.Console.Error.WriteLine(DependencyInjection.Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation);
                     Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);
                     var codeModel = plugin.Serializer.Load(modelAsJson);
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
