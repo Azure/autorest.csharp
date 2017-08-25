@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void TestInputMapping()
         {
-            var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json");
+            var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory(typeof(MappingExtensionsTests)), "Resource", "swagger-payload-flatten.json");
             var modeler = new SwaggerModeler(new Settings { PayloadFlatteningThreshold = 3 });
             var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
             var plugin = new PluginCs();

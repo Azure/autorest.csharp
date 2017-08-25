@@ -38,7 +38,9 @@
   </ItemGroup>
  
   <ItemGroup>
-    <ProjectReference Include="../../autorest.modeler/src/autorest.modeler.csproj" />
+    <Reference Include="autorest.modeler">
+      <HintPath>$(SolutionDir)\node_modules\@microsoft.azure\autorest.modeler\src\bin\netcoreapp2.0\autorest.modeler.dll</HintPath>
+    </Reference>
     <ProjectReference Include="$(SolutionDir)src/autorest.csharp.csproj" />
   </ItemGroup>
  

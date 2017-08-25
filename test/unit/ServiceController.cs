@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     serverPath = FindFolderByWalkingUpPath(Path.Combine("node_modules", "@microsoft.azure", "autorest.testserver"));
                     if (serverPath == null)
                     {
-                        throw new Exception("Unable to find TestServerPath.\r\n");
+                        throw new Exception("Unable to find TestServerPath.");
                     }
                 }
 
