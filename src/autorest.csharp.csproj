@@ -25,7 +25,6 @@
     -->
  
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>AutoRest.CSharp</RootNamespace>
  
