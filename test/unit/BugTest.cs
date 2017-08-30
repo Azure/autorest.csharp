@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected static string FRAMEWORK { 
             get {
                 if (string.IsNullOrEmpty(_framework ) ) {
-                    _framework = Path.Combine( Shared, Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
+                    _framework = Path.Combine( Shared, "2.0.0");
                 }
                 return _framework;
             }

@@ -79,22 +79,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="UpdateDepsJson" AfterTargets="GenerateBuildDependencyFile;Publish">
-    <Message Text="Fixing deps.json" Importance="high" />
-    <PropertyGroup>
-      <ResGenFix>$(Powershell)
-        $path = "$(BaseOutputPath)/netcoreapp2.0/$(TargetName).deps.json"
-        $content = (Get-Content "$path" -Raw )
-        $content = $content -replace '      "System.ComponentModel.Primitives/', '      "System.ComponentModel.Primitives.Nope/'
-        $content = $content -replace '      "System.Linq/', '      "System.Linq.Nope/'
-        $content = $content -replace '      "System.Net.Http/', '      "System.Net.Http.Nope/'
-        $content = $content -replace '      "System.Text.RegularExpressions/', '      "System.Text.RegularExpressions.Nope/'
-        $content = $content -replace '      "System.Threading.Thread/', '      "System.Threading.Thread.Nope/'
-        $content = $content -replace '      "System.Threading/', '      "System.Threading.Nope/'
-        $content = $content -replace '      "System.Xml.XDocument/', '      "System.Xml.XDocument.Nope/'
-        Set-Content -value $content -path $path
-      </ResGenFix>
-    </PropertyGroup>
-    <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
-  </Target>
 </Project>
