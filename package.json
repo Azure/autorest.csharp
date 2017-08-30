@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest.csharp",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "The C# extension for classic generators in AutoRest.",
   "scripts": {
     "start": "dotnet src/bin/netcoreapp2.0/autorest.csharp.dll --server",
