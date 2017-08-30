@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task EnsureClientNameEndsWithClient()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"SimpleAPIClient.cs"));

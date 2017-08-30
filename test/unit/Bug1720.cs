@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task PolymorphicTypesAreNotConstants()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"JobDefinitionsOperations.cs"));

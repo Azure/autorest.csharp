@@ -24,7 +24,8 @@ namespace AutoRest.CSharp.Unit.Tests {
     using System.Runtime.Loader;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
-    
+
+    using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
     public class BugTest {
         internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591"};
@@ -46,13 +47,13 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp") {
-            return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator);
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(IAnyPlugin plugin = null) {
+            return GenerateCodeForTestFromSpec($"{GetType().Name}", plugin);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp") {
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, IAnyPlugin plugin = null) {
             var fs = CreateMockFilesystem();
-            return dirName.GenerateCodeInto(fs, codeGenerator);
+            return dirName.GenerateCodeInto(fs, plugin ?? new PluginCs());
         }
 
         protected virtual void WriteLine(string format, params object[] values) {
