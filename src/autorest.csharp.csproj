@@ -66,7 +66,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
-    <PackageReference Include="autorest.common"  Version="2.0.26" />
+    <PackageReference Include="autorest.common"  Version="2.1.14" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
   </ItemGroup>
 
