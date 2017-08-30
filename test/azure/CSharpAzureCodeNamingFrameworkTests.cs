@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory(typeof(CSharpAzureCodeNamingFrameworkTests)), "Resource", "azure-paging.json");
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
-                var plugin = new PluginCsa();
+                var plugin = new AutoRest.CSharp.Azure.PluginCsa();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);

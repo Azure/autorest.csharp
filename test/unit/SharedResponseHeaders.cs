@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckGeneratesValidCSharp()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 Assert.True(fileSystem.FileExists("Models/RetryHeader.cs"));
                 Assert.False(fileSystem.FileExists("Models/BatchAccountCreateHeaders.cs"));

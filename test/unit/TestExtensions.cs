@@ -13,6 +13,8 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Swagger;
 using AutoRest.Modeler;
 
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
+
 namespace AutoRest.CSharp.Unit.Tests
 {
     internal static class TestExtensions
@@ -60,25 +62,25 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, IAnyPlugin plugin = null)
         {
             using (NewContext)
             {
                 var settings = new Settings
                 {
-                    CodeGenerator = codeGenerator,
                     FileSystemInput = inputFileSystem,
                     OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
 
-                return testName.GenerateCodeInto(inputFileSystem, settings);
+                return testName.GenerateCodeInto(inputFileSystem, settings, plugin);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, Settings settings, IAnyPlugin plugin = null)
         {
+            plugin = plugin ?? new PluginCs();
             Settings.Instance.FileSystemInput = inputFileSystem;
             // copy the whole input directory into the memoryfilesystem.
             inputFileSystem.CopyFolder("Resource", testName,"");
@@ -95,7 +97,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 throw new Exception($"Can't find swagger file ${testName} [.yaml] [.json] [.md]");
             }
 
-            var plugin = ExtensionsLoader.GetPlugin(settings.CodeGenerator);
             var modeler = new SwaggerModeler(Settings.Instance);
             var swagger = Singleton<AutoRest.Modeler.Model.ServiceDefinition>.Instance = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
             var codeModel = modeler.Build(swagger);
