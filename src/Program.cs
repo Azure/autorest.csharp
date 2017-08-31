@@ -49,12 +49,7 @@ namespace AutoRest.CSharp
             return 1;
         }
 
-        private string plugin;
-
-        public Program(Connection connection, string plugin, string sessionId) : base(connection, sessionId)
-        {
-            this.plugin = plugin;
-        }
+        public Program(Connection connection, string plugin, string sessionId) : base(connection, plugin, sessionId) { }
 
         private T GetXmsCodeGenSetting<T>(CodeModel codeModel, string name)
         {
@@ -73,7 +68,7 @@ namespace AutoRest.CSharp
 
         protected override async Task<bool> ProcessInternal()
         {
-            if (this.plugin == "csharp-simplifier")
+            if (this.Plugin == "csharp-simplifier")
             {
                 var fs = new MemoryFileSystem();
 
@@ -134,7 +129,7 @@ namespace AutoRest.CSharp
                 // process
                 var plugin = ExtensionsLoader.GetPlugin(
                     (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
-                    this.plugin +
+                    this.Plugin +
                     (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
                     (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
                 Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);

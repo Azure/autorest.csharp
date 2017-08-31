@@ -396,7 +396,6 @@ Import module.exports
 
 ###############################################
 # Global values
-process.env["autorest.home"] = path.normalize("#{os.tmpdir()}/autorest#{hashCode(basefolder)}")
 process.env.tmp = process.env.tmp or "#{basefolder}/tmp"
 
 package_json = require("#{basefolder}/package.json")
