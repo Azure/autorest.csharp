@@ -1231,55 +1231,117 @@ namespace AutoRest.CSharp.Tests
                 client.Inheritance.PutValid(inheritanceRequest);
 
                 /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM */
-                // GET polymorphism/valid
-                var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
-                Assert.NotNull(polymorphismResult);
-                Assert.Equal("alaska", polymorphismResult.Location);
-                Assert.Equal(3, polymorphismResult.Siblings.Count);
-                Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
-                Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
-                Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
-                Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
-                Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
-                Assert.Equal(1, ((Goblinshark) polymorphismResult.Siblings[2]).Age);
-                Assert.Equal("pinkish-gray", ((Goblinshark) polymorphismResult.Siblings[2]).Color);
-                
-                // PUT polymorphism/valid
-                var polymorphismRequest = new Salmon
-                {
-                    Iswild = true,
-                    Length = 1,
-                    Location = "alaska",
-                    Species = "king",
-                    Siblings = new List<Fish>
+                { 
+                    // GET polymorphism/valid
+                    var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
+                    Assert.NotNull(polymorphismResult);
+                    Assert.Equal("alaska", polymorphismResult.Location);
+                    Assert.Equal(3, polymorphismResult.Siblings.Count);
+                    Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                    Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                    Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
+                    Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
+                    Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
+                    Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    Assert.Equal("pinkish-gray", ((Goblinshark) polymorphismResult.Siblings[2]).Color);
+                    // PUT polymorphism/valid
+                    var polymorphismRequest = new Salmon
                     {
-                        new Shark
+                        Iswild = true,
+                        Length = 1,
+                        Location = "alaska",
+                        Species = "king",
+                        Siblings = new List<Fish>
                         {
-                            Age = 6,
-                            Length = 20,
-                            Species = "predator",
-                            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
-                        },
-                        new Sawshark
-                        {
-                            Age = 105,
-                            Length = 10,
-                            Species = "dangerous",
-                            Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
-                            Picture = new byte[] {255, 255, 255, 255, 254}
-                        },
-                        new Goblinshark
-                        {
-                            Age = 1,
-                            Length = 30,
-                            Species = "scary",
-                            Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Jawsize = 5,
-                            Color = "pinkish-gray"
+                            new Shark
+                            {
+                                Age = 6,
+                                Length = 20,
+                                Species = "predator",
+                                Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+                            },
+                            new Sawshark
+                            {
+                                Age = 105,
+                                Length = 10,
+                                Species = "dangerous",
+                                Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
+                                Picture = new byte[] {255, 255, 255, 255, 254}
+                            },
+                            new Goblinshark
+                            {
+                                Age = 1,
+                                Length = 30,
+                                Species = "scary",
+                                Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                                Jawsize = 5
+                            }
                         }
-                    }
-                };
-                client.Polymorphism.PutValid(polymorphismRequest);
+                    };
+                    client.Polymorphism.PutValid(polymorphismRequest);
+                }
+
+                /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM: not the peek of the hierarchy */
+                {
+                    // GET polymorphism/valid
+                    var polymorphismResult = client.Polymorphism.GetComplicated() as SmartSalmon;
+                    Assert.NotNull(polymorphismResult);
+                    Assert.Equal(5, polymorphismResult.AdditionalProperties.Count);
+                    Assert.Equal(1, (long)polymorphismResult.AdditionalProperties["additionalProperty1"]);
+                    Assert.Equal(false, (bool)polymorphismResult.AdditionalProperties["additionalProperty2"]);
+                    Assert.Equal("hello", (string)polymorphismResult.AdditionalProperties["additionalProperty3"]);
+                    Assert.Equal("alaska", polymorphismResult.Location);
+                    Assert.Equal(3, polymorphismResult.Siblings.Count);
+                    Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                    Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                    Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
+                    Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
+                    Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
+                    Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    // PUT polymorphism/valid
+                    var polymorphismRequest = new SmartSalmon
+                    {
+                        Iswild = true,
+                        Length = 1,
+                        Location = "alaska",
+                        Species = "king",
+                        Siblings = new List<Fish>
+                        {
+                            new Shark
+                            {
+                                Age = 6,
+                                Length = 20,
+                                Species = "predator",
+                                Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+                            },
+                            new Sawshark
+                            {
+                                Age = 105,
+                                Length = 10,
+                                Species = "dangerous",
+                                Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
+                                Picture = new byte[] {255, 255, 255, 255, 254}
+                            },
+                            new Goblinshark
+                            {
+                                Age = 1,
+                                Length = 30,
+                                Species = "scary",
+                                Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                                Jawsize = 5,
+                                Color = "pinkish-gray"
+                            }
+                        },
+                        AdditionalProperties = new Dictionary<string, object> {
+                            { "additionalProperty1", 1 },
+                            { "additionalProperty2", false },
+                            { "additionalProperty3", "hello" },
+                            { "additionalProperty4", new Dictionary<string, int> { { "a", 1 }, { "b", 2 } } },
+                            { "additionalProperty5", new int[] { 1, 3 } }
+                        }
+                    };
+                    client.Polymorphism.PutComplicated(polymorphismRequest);
+                }
 
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid
