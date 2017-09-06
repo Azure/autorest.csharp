@@ -15,6 +15,7 @@ regenExpected = (opts,done) ->
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
       "--#{opts.language}",
+      "--clear-output-folder",
       "--output-folder=#{outputDir}/#{key}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--enable-xml"
