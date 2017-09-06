@@ -31,9 +31,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the SmartSalmon class.
         /// </summary>
-        public SmartSalmon(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?), string collegeDegree = default(string))
+        /// <param name="additionalProperties">Unmatched properties from the
+        /// message are deserialized this collection</param>
+        public SmartSalmon(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?), IDictionary<string, object> additionalProperties = default(IDictionary<string, object>), string collegeDegree = default(string))
             : base(length, species, siblings, location, iswild)
         {
+            AdditionalProperties = additionalProperties;
             CollegeDegree = collegeDegree;
             CustomInit();
         }
@@ -42,6 +45,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets unmatched properties from the message are deserialized
+        /// this collection
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
 
         /// <summary>
         /// </summary>
