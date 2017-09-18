@@ -21,7 +21,6 @@ namespace AutoRest.Simplify
         private static readonly SyntaxTrivia _trailingTrivia = SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, "\r\n");
 
         public IEnumerable<string> _namespaces;
-        private SemanticModel _semanticModel;
 
         public AddUsingsRewriter(IEnumerable<string> namespaces)
         {
