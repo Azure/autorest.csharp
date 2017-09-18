@@ -127,7 +127,10 @@ namespace AutoRest.CSharp.Model
 
             // TODO: this could just be the "required" parameters instead of required and all the optional ones
             // with defaults if we wanted a bit cleaner constructors
-            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth).Select(p => new ConstructorParameterModel(p.Property));
+            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels
+                .OrderBy(p => !p.Property.IsEffectivelyRequired)
+                .ThenBy(p => p.Depth)
+                .Select(p => new ConstructorParameterModel(p.Property));
 
             public IEnumerable<string> SignatureDocumentation
             {
@@ -156,16 +159,16 @@ namespace AutoRest.CSharp.Model
                 get
                 {
                     var declarations = new List<string>();
-                    foreach (PropertyCs property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                    foreach (PropertyCs property in Parameters
+                        .Where(p => !p.UnderlyingProperty.IsConstant && (Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors || p.UnderlyingProperty.IsEffectivelyRequired))
+                        .Select(p => p.UnderlyingProperty))
                     {
-                        string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                        // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
-                        if (property.UseDefaultInConstructor && property.DefaultValue != null)
-                        {
-                            format = "{0} {1} = " + property.DefaultValue;
-                        }
-                        declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                            format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
+                        var paramType = property.ModelTypeName;
+                        var paramName = CodeNamer.Instance.CamelCase(property.Name);
+                        var effectiveDefault = property.DefaultValue ?? $"default({paramType})"; // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
+                        declarations.Add(property.IsEffectivelyRequired
+                            ? $"{paramType} {paramName}"
+                            : $"{paramType} {paramName} = {effectiveDefault}");
                     }
 
                     return string.Join(", ", declarations);

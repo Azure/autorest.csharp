@@ -24,6 +24,12 @@ namespace AutoRest.CSharp.Model
         public bool UseDefaultInConstructor { get; set; } = Singleton<GeneratorSettingsCs>.Instance.UseDefaultInConstructor;
 
         [JsonIgnore]
+        /// <summary>
+        /// Whether the property is required from a code(r) point of view.
+        /// </summary>
+        public bool IsEffectivelyRequired => IsRequired && (!UseDefaultInConstructor || DefaultValue == null)
+
+        [JsonIgnore]
         public IEnumerable<string> JsonConverters
         {
             get
