@@ -25,5 +25,12 @@ namespace AutoRest.CSharp
         /// Indicates whether to generate client side validation.
         /// </summary>
         public bool ClientSideValidation { get; set; }
+
+        /// <summary>
+        /// Whether to let `default`s on properties make their way into model constructors.
+        /// </summary>
+        public bool UseDefaultInConstructor { get; set; }
+
+        public bool HaveOptionalPropertiesOnConstructors { get; set; }
     }
 }

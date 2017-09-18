@@ -19,10 +19,11 @@ namespace AutoRest.CSharp.Model
         [JsonIgnore]
         public bool IsHeaderCollection => !string.IsNullOrEmpty(HeaderCollectionPrefix);
 
-        // not spec copmpliant
+        // not spec compliant
         [JsonProperty("useDefaultInConstructor")]
-        public bool UseDefaultInConstructor { get; set; } = false;
+        public bool UseDefaultInConstructor { get; set; } = Singleton<GeneratorSettingsCs>.Instance.UseDefaultInConstructor;
 
+        [JsonIgnore]
         public IEnumerable<string> JsonConverters
         {
             get
