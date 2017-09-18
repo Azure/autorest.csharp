@@ -44,7 +44,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType ct
     && !p.IsConstant
     && p.IsRequired
-    && (ct.ContainsConstantProperties))
+    && ct.ContainsConstantProperties))
 {
             @:this.@(property.Name) = new @(property.ModelTypeName)();
 }
@@ -72,7 +72,7 @@ if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
 foreach (var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType ct
     && !p.IsConstant
     && p.IsRequired
-    && (ct.ContainsConstantProperties))
+    && ct.ContainsConstantProperties))
 {
             @:this.@(property.Name) = new @(property.ModelTypeName)();
 }
