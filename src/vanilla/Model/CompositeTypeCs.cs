@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Model
         [JsonIgnore]
         public string EffectiveDocumentation =>
             (string.IsNullOrEmpty(Summary) ? Documentation : Summary)?.EscapeXmlComment() +
-            (string.IsNullOrEmpty(ExternalDocsUrl) ? "" : "\n" + ExternalDocsUrl);
+            (string.IsNullOrEmpty(ExternalDocsUrl) ? "" : $"\n<see href=\"{ExternalDocsUrl}\" />");
 
         // the following two properties should be disjoint and their union equal to `Properties`
         [JsonIgnore]
