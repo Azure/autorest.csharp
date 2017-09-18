@@ -14,7 +14,8 @@ regenExpected = (opts,done) ->
     
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
-      "--#{opts.language}",
+      "--csharp",
+      "--clear-output-folder",
       "--output-folder=#{outputDir}/#{key}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--enable-xml"
@@ -24,25 +25,25 @@ regenExpected = (opts,done) ->
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
 
     if (opts.addCredentials)
-      args.push("--#{opts.language}.add-credentials=true")
+      args.push("--csharp.add-credentials=true")
 
     if (opts.azureArm)
-      args.push("--#{opts.language}.azure-arm=true")
+      args.push("--csharp.azure-arm=true")
 
     if (opts.fluent)
-      args.push("--#{opts.language}.fluent=true")
+      args.push("--csharp.fluent=true")
     
     if (opts.syncMethods)
-      args.push("--#{opts.language}.sync-methods=#{opts.syncMethods}")
+      args.push("--csharp.sync-methods=#{opts.syncMethods}")
     
     if (opts.flatteningThreshold)
-      args.push("--#{opts.language}.payload-flattening-threshold=#{opts.flatteningThreshold}")
+      args.push("--csharp.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
-        args.push("--#{opts.language}.namespace=#{optsMappingsValue[1]}")
+        args.push("--csharp.namespace=#{optsMappingsValue[1]}")
       else
-        args.push("--#{opts.language}.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
+        args.push("--csharp.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
 
     if (opts['override-info.version'])
       args.push("--override-info.version=#{opts['override-info.version']}")
@@ -115,7 +116,6 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1'
@@ -131,7 +131,6 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'fluent': true,
     'nsPrefix': 'Fixtures.Azure.Fluent',
@@ -154,7 +153,6 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
     'inputBaseDir': 'test/vanilla/Swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
   }, () ->
@@ -163,7 +161,6 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
       'inputBaseDir': swaggerDir,
       'mappings': Object.assign({ 'AcceptanceTests/UrlMultiCollectionFormat': 'url-multi-collectionFormat.json' }, defaultMappings),
       'outputDir': 'Expected',
-      'language': 'csharp',
       'nsPrefix': 'Fixtures',
       'flatteningThreshold': '1'
     }, done
@@ -177,7 +174,6 @@ task 'regenerate-cswithcreds', '', (done) ->
     'outputBaseDir': 'test/vanilla',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
@@ -192,7 +188,6 @@ task 'regenerate-csallsync', '', (done) ->
     'outputBaseDir': 'test/vanilla',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
@@ -207,7 +202,6 @@ task 'regenerate-csnosync', '', (done) ->
     'outputBaseDir': 'test/vanilla',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
@@ -223,7 +217,6 @@ task 'regenerate-csazureallsync', '', (done) ->
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
@@ -240,7 +233,6 @@ task 'regenerate-csazurefluentallsync', '', (done) ->
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'fluent': true,
     'nsPrefix': 'Fixtures.Azure.Fluent',
@@ -258,7 +250,6 @@ task 'regenerate-csazurenosync', '', (done) ->
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
@@ -275,7 +266,6 @@ task 'regenerate-csazurefluentnosync', '', (done) ->
     'inputBaseDir': swaggerDir,
     'mappings': mappings,
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'fluent': true,
     'nsPrefix': 'Fixtures.Azure.Fluent',
@@ -291,7 +281,6 @@ task 'regenerate-cscomposite', '', (done) ->
     'mappings': compositeMappings,
     'modeler' : 'CompositeSwagger',
     'outputDir': 'Expected',
-    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'override-info.title': "Composite Bool Int",
@@ -306,7 +295,6 @@ task 'regenerate-csazurecomposite', '', (done) ->
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
@@ -323,7 +311,6 @@ task 'regenerate-csazurefluentcomposite', '', (done) ->
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'language': 'csharp',
     'azureArm': true,
     'fluent': true,
     'nsPrefix': 'Fixtures.Azure.Fluent',

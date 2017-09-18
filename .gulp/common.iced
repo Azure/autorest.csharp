@@ -368,7 +368,7 @@ module.exports =
 
   autorest: (args,done,ignoreexitcode) ->
     echo info "Queuing up: AutoRest #{args.join(' ')}"
-    execute "autorest \"--use=#{basefolder}\" #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    execute "#{basefolder}/node_modules/.bin/autorest \"--use=#{basefolder}\" #{args.map((a) -> "\"#{a}\"").join(' ')}" , { silent:true, ignoreexitcode: ignoreexitcode || false }, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
 # build task for global build
@@ -411,9 +411,9 @@ Import
   now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
   threshold: argv.threshold or ((os.cpus().length)-1) or 1
-  verbose: argv.verbose or null
   workdir: "#{process.env.tmp}/gulp/#{module.exports.guid()}"
   watch: argv.watch or false
+global.verbose = argv.verbose or null
 
 mkdir "-p", workdir if !test "-d", workdir
 
