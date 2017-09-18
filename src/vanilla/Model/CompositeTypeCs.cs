@@ -28,6 +28,17 @@ namespace AutoRest.CSharp.Model
         }
 
         [JsonIgnore]
+        public string EffectiveDocumentation =>
+            (string.IsNullOrEmpty(Summary) ? Documentation : Summary)?.EscapeXmlComment() +
+            (string.IsNullOrEmpty(ExternalDocsUrl) ? "" : "\n" + ExternalDocsUrl);
+
+        // the following two properties should be disjoint and their union equal to `Properties`
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant);
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> ClassProperties => Properties.OfType<PropertyCs>().Where(p => p.IsConstant);
+
+        [JsonIgnore]
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
 
         [JsonIgnore]
