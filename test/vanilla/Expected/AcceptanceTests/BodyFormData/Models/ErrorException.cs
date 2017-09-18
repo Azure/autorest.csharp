@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyFormData.Models
 {
-    using Fixtures.AcceptanceTestsBodyFormData;
     using Microsoft.Rest;
 
     /// <summary>

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrl.Models
 {
-    using Fixtures.AcceptanceTestsUrl;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;

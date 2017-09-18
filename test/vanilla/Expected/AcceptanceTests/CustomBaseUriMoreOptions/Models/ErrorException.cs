@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
 {
-    using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
     using Microsoft.Rest;
 
     /// <summary>

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using Fixtures.AcceptanceTestsValidation;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;

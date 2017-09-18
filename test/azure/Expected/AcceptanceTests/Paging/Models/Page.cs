@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsPaging;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;

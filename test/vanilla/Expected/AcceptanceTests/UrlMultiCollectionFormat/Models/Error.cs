@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 {
-    using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
     using Newtonsoft.Json;
     using System.Linq;
 

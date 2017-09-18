@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using Fixtures.MirrorRecursiveTypes;
     using Newtonsoft.Json;
     using System.Linq;
 

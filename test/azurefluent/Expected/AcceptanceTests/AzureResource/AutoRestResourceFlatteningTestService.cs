@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;

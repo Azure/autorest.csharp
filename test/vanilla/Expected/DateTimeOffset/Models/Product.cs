@@ -10,7 +10,6 @@
 
 namespace Fixtures.DateTimeOffset.Models
 {
-    using Fixtures.DateTimeOffset;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using Fixtures.AcceptanceTestsHeader;
     using Microsoft.Rest;
 
     /// <summary>

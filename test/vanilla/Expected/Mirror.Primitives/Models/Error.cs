@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using Fixtures.MirrorPrimitives;
     using Newtonsoft.Json;
     using System.Linq;
 

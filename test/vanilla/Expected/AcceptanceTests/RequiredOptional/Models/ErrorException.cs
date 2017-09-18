@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using Fixtures.AcceptanceTestsRequiredOptional;
     using Microsoft.Rest;
 
     /// <summary>

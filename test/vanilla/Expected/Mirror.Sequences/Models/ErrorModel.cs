@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;

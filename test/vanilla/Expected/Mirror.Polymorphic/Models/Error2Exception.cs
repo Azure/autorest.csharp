@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using Fixtures.MirrorPolymorphic;
     using Microsoft.Rest;
 
     /// <summary>

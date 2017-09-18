@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;

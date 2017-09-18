@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyNumber.Models
 {
-    using Fixtures.AcceptanceTestsBodyNumber;
     using Newtonsoft.Json;
     using System.Linq;
 

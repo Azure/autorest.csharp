@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrl.Models
 {
-    using Fixtures.AcceptanceTestsUrl;
     using Microsoft.Rest;
 
     /// <summary>

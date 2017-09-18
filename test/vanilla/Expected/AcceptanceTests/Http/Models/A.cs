@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using Fixtures.AcceptanceTestsHttp;
     using Newtonsoft.Json;
     using System.Linq;
 

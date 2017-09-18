@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyByte.Models
 {
-    using Fixtures.AcceptanceTestsBodyByte;
     using Microsoft.Rest;
 
     /// <summary>

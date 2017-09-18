@@ -10,7 +10,6 @@
 
 namespace Fixtures.PetstoreV2AllSync.Models
 {
-    using Fixtures.PetstoreV2AllSync;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;

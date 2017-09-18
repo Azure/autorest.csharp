@@ -10,7 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 {
-    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;

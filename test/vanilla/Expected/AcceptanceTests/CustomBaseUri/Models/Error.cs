@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
-    using Fixtures.AcceptanceTestsCustomBaseUri;
     using Newtonsoft.Json;
     using System.Linq;
 

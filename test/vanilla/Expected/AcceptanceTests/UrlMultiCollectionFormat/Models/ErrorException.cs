@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 {
-    using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
     using Microsoft.Rest;
 
     /// <summary>

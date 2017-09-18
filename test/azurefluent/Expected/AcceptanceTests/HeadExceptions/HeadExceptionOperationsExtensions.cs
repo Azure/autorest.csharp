@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsHeadExceptions
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using System.Threading;

@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using Fixtures.MirrorPrimitives;
     using Microsoft.Rest;
 
     /// <summary>

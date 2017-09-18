@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;

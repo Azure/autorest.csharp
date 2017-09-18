@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
     using Newtonsoft.Json;
     using System.Linq;
 

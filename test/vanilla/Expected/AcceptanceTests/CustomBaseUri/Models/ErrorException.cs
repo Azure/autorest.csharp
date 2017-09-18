@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
-    using Fixtures.AcceptanceTestsCustomBaseUri;
     using Microsoft.Rest;
 
     /// <summary>

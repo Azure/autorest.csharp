@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTime.Models
 {
-    using Fixtures.AcceptanceTestsBodyDateTime;
     using Newtonsoft.Json;
     using System.Linq;
 

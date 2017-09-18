@@ -10,7 +10,6 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using Fixtures.AdditionalProperties;
     using Newtonsoft.Json;
     using System.Linq;
 

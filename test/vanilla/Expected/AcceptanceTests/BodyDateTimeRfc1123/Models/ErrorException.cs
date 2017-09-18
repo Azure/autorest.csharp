@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
-    using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
     using Microsoft.Rest;
 
     /// <summary>

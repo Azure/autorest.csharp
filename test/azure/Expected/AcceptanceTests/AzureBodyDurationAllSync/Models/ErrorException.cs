@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationAllSync.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureBodyDurationAllSync;
     using Microsoft.Rest;
 
     /// <summary>

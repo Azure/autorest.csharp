@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDuration.Models
 {
-    using Fixtures.AcceptanceTestsBodyDuration;
     using Microsoft.Rest;
 
     /// <summary>

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient.Models
 {
-    using Fixtures.AcceptanceTestsCompositeBoolIntClient;
     using Microsoft.Rest;
 
     /// <summary>

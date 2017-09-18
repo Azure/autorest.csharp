@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDictionary.Models
 {
-    using Fixtures.AcceptanceTestsBodyDictionary;
     using Microsoft.Rest;
 
     /// <summary>
