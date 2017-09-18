@@ -16,7 +16,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @if (!string.IsNullOrEmpty(Model.EffectiveDocumentation))
 {
     @:/// <summary>
-    @:@WrapComment("/// ", Model.EffectiveDocumentation))
+    @:@WrapComment("/// ", Model.EffectiveDocumentation)
     @:/// </summary>
 }
 @if (!string.IsNullOrEmpty(Model.Summary) && !string.IsNullOrWhiteSpace(Model.Documentation))
@@ -171,13 +171,11 @@ foreach (PropertyCs property in Model.InstanceProperties.Where(p => p.IsRequired
             @:{
                 @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@property.Name");
             @:}
-            @EmptyLine
 }
 foreach (var property in Model.InstanceProperties.Where(p => p.Constraints.Any() || !(p.ModelType is PrimaryType)))
 {
     anythingToValidate = true;
             @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
-            @EmptyLine
 }
 if (!anythingToValidate)
 {
