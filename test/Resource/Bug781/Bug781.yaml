@@ -18,6 +18,8 @@ paths:
           description: OK
 definitions:
   Product:
+    required:
+      - productId
     type: object
     properties:
       productId:

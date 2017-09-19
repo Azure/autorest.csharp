@@ -10,6 +10,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
 {
@@ -75,20 +76,24 @@ namespace AutoRest.CSharp.Model
 
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> ConstructorProperties => InstanceProperties
+            .Where(p => p.IsEffectivelyRequired || Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors);
+
         /// <summary>
         /// Returns properties for this type and all ancestor types, including information on which level of ancestry
         /// the property comes from (0 for top-level base class that has properties, 1 for a class derived from that
         /// top-level class, etc.).
         /// </summary>
-        private IEnumerable<InheritedPropertyInfo> AllPropertyTemplateModels
+        private IEnumerable<InheritedPropertyInfo> AllConstructorProperties
         {
             get
             {
-                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
+                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllConstructorProperties ??
                     Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
-                return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
+                return baseProperties.Concat(ConstructorProperties.Select(p => new InheritedPropertyInfo(p, depth)));
             }
         }
 
@@ -127,7 +132,10 @@ namespace AutoRest.CSharp.Model
 
             // TODO: this could just be the "required" parameters instead of required and all the optional ones
             // with defaults if we wanted a bit cleaner constructors
-            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth).Select(p => new ConstructorParameterModel(p.Property));
+            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllConstructorProperties
+                .OrderBy(p => !(p.Property as PropertyCs).IsEffectivelyRequired)
+                .ThenBy(p => p.Depth)
+                .Select(p => new ConstructorParameterModel(p.Property));
 
             public IEnumerable<string> SignatureDocumentation
             {
@@ -156,16 +164,14 @@ namespace AutoRest.CSharp.Model
                 get
                 {
                     var declarations = new List<string>();
-                    foreach (PropertyCs property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                    foreach (PropertyCs property in Parameters.Select(p => p.UnderlyingProperty))
                     {
-                        string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                        // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
-                        if (property.UseDefaultInConstructor && property.DefaultValue != null)
-                        {
-                            format = "{0} {1} = " + property.DefaultValue;
-                        }
-                        declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                            format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
+                        var paramType = property.ModelTypeName;
+                        var paramName = CodeNamer.Instance.CamelCase(property.Name);
+                        var effectiveDefault = property.DefaultValue?.Value ?? $"default({paramType})"; // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
+                        declarations.Add(property.IsEffectivelyRequired
+                            ? $"{paramType} {paramName}"
+                            : $"{paramType} {paramName} = {effectiveDefault}");
                     }
 
                     return string.Join(", ", declarations);

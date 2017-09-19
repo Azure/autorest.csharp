@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, IAnyPlugin plugin = null)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, IAnyPlugin plugin = null, Action<Settings> settingsManip = null)
         {
             using (NewContext)
             {
@@ -73,6 +73,10 @@ namespace AutoRest.CSharp.Unit.Tests
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
+                if (settingsManip != null)
+                {
+                    settingsManip(settings);
+                }
 
                 return testName.GenerateCodeInto(inputFileSystem, settings, plugin);
             }
@@ -100,6 +104,8 @@ namespace AutoRest.CSharp.Unit.Tests
             var modeler = new SwaggerModeler(Settings.Instance);
             var swagger = Singleton<AutoRest.Modeler.Model.ServiceDefinition>.Instance = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
             var codeModel = modeler.Build(swagger);
+
+            Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
 
             using (plugin.Activate())
             {
