@@ -76,20 +76,24 @@ namespace AutoRest.CSharp.Model
 
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> ConstructorProperties => InstanceProperties
+            .Where(p => p.IsEffectivelyRequired || Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors);
+
         /// <summary>
         /// Returns properties for this type and all ancestor types, including information on which level of ancestry
         /// the property comes from (0 for top-level base class that has properties, 1 for a class derived from that
         /// top-level class, etc.).
         /// </summary>
-        private IEnumerable<InheritedPropertyInfo> AllPropertyTemplateModels
+        private IEnumerable<InheritedPropertyInfo> AllConstructorProperties
         {
             get
             {
-                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
+                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllConstructorProperties ??
                     Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
-                return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
+                return baseProperties.Concat(ConstructorProperties.Select(p => new InheritedPropertyInfo(p, depth)));
             }
         }
 
@@ -128,8 +132,7 @@ namespace AutoRest.CSharp.Model
 
             // TODO: this could just be the "required" parameters instead of required and all the optional ones
             // with defaults if we wanted a bit cleaner constructors
-            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels
-                .Where(p => (p.Property as PropertyCs).IsEffectivelyRequired || Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors)
+            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllConstructorProperties
                 .OrderBy(p => !(p.Property as PropertyCs).IsEffectivelyRequired)
                 .ThenBy(p => p.Depth)
                 .Select(p => new ConstructorParameterModel(p.Property));
@@ -165,7 +168,7 @@ namespace AutoRest.CSharp.Model
                     {
                         var paramType = property.ModelTypeName;
                         var paramName = CodeNamer.Instance.CamelCase(property.Name);
-                        var effectiveDefault = property.DefaultValue ?? $"default({paramType})"; // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
+                        var effectiveDefault = property.DefaultValue?.Value ?? $"default({paramType})"; // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
                         declarations.Add(property.IsEffectivelyRequired
                             ? $"{paramType} {paramName}"
                             : $"{paramType} {paramName} = {effectiveDefault}");

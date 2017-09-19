@@ -51,9 +51,9 @@ namespace AutoRest.CSharp.Unit.Tests {
             return GenerateCodeForTestFromSpec($"{GetType().Name}", plugin);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, IAnyPlugin plugin = null) {
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, IAnyPlugin plugin = null, Action<AutoRest.Core.Settings> settings = null) {
             var fs = CreateMockFilesystem();
-            return dirName.GenerateCodeInto(fs, plugin ?? new PluginCs());
+            return dirName.GenerateCodeInto(fs, plugin ?? new PluginCs(), settings);
         }
 
         protected virtual void WriteLine(string format, params object[] values) {
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected void Write(IEnumerable<Diagnostic> messages, MemoryFileSystem fileSystem) {
             if (messages.Any()) {
                 foreach (var file in messages.GroupBy(each => each.Location?.SourceTree?.FilePath, each => each)) {
-                    var text = file.Key != null ? fileSystem.VirtualStore[file.Key].ToString() : string.Empty;
+                    // var text = file.Key != null ? fileSystem.VirtualStore[file.Key].ToString() : string.Empty;
 
                     foreach (var error in file) {
                         WriteLine(error.ToString());
