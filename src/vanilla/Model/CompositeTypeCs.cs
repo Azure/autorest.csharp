@@ -10,6 +10,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
 {
@@ -128,7 +129,8 @@ namespace AutoRest.CSharp.Model
             // TODO: this could just be the "required" parameters instead of required and all the optional ones
             // with defaults if we wanted a bit cleaner constructors
             public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels
-                .OrderBy(p => !p.Property.IsEffectivelyRequired)
+                .Where(p => (p.Property as PropertyCs).IsEffectivelyRequired || Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors)
+                .OrderBy(p => !(p.Property as PropertyCs).IsEffectivelyRequired)
                 .ThenBy(p => p.Depth)
                 .Select(p => new ConstructorParameterModel(p.Property));
 
@@ -159,9 +161,7 @@ namespace AutoRest.CSharp.Model
                 get
                 {
                     var declarations = new List<string>();
-                    foreach (PropertyCs property in Parameters
-                        .Where(p => !p.UnderlyingProperty.IsConstant && (Singleton<GeneratorSettingsCs>.Instance.HaveOptionalPropertiesOnConstructors || p.UnderlyingProperty.IsEffectivelyRequired))
-                        .Select(p => p.UnderlyingProperty))
+                    foreach (PropertyCs property in Parameters.Select(p => p.UnderlyingProperty))
                     {
                         var paramType = property.ModelTypeName;
                         var paramName = CodeNamer.Instance.CamelCase(property.Name);

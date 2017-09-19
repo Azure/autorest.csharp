@@ -6,6 +6,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
 {
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Whether the property is required from a code(r) point of view.
         /// </summary>
-        public bool IsEffectivelyRequired => IsRequired && (!UseDefaultInConstructor || DefaultValue == null)
+        public bool IsEffectivelyRequired => IsRequired && (!UseDefaultInConstructor || DefaultValue == null) && !IsConstant;
 
         [JsonIgnore]
         public IEnumerable<string> JsonConverters
