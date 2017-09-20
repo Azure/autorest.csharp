@@ -36,7 +36,7 @@ namespace AutoRest.Simplify
             );
             
 
-            if(node.Name!=null)
+            if(node.Name!=null  && node.GetType().Name=="QualifiedNameSyntax")
             {
                 var currUsings = new List<string>();
                 var currNode = ((QualifiedNameSyntax)node.Name);

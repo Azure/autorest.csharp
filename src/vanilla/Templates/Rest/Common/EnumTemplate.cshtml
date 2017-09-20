@@ -21,9 +21,11 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {<text>
         /// <summary>
         @WrapComment("/// ", value.Description)
+        // booya booya
         /// </summary>
 </text>
         }
+
 @:        [System.Runtime.Serialization.EnumMember(Value = "@value.SerializedName")]
           if (value == last)
           {
@@ -33,6 +35,11 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
           {
 @:        @(value.MemberName),
           }
+        }
+                @:/// boooya
+        @if ((bool)Settings.CustomSettings["ExtensibleEnums"])
+        {
+            @:public static readonly @Model.ClassName value.ToString() = new @Model.ClassName+"(\""+value.ToString()+"\"");
         }
     @:}
 <text>
