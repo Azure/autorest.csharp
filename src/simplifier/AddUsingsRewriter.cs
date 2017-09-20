@@ -36,7 +36,11 @@ namespace AutoRest.Simplify
             );
             
 
+<<<<<<< HEAD
             if(node.Name!=null  && node.GetType().Name=="QualifiedNameSyntax")
+=======
+            if(node.Name!=null && node.Name.GetType()==typeof(QualifiedNameSyntax))
+>>>>>>> 38631c94fb9dfcb7f629a3650f7c7414371bd360
             {
                 var currUsings = new List<string>();
                 var currNode = ((QualifiedNameSyntax)node.Name);
@@ -44,7 +48,7 @@ namespace AutoRest.Simplify
                 while(true)
                 {
                     currUsings.Add(currNode.ToString());
-                    if(currNode.Left ==null || currNode.Left.GetType().Name!="QualifiedNameSyntax")
+                    if(currNode.Left ==null || currNode.Left.GetType()!=typeof(QualifiedNameSyntax))
                     {
                         break;
                     }
