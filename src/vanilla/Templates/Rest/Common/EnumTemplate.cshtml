@@ -9,7 +9,67 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
-    @if (!Model.ModelAsString)
+    @if((bool)Settings.CustomSettings["ExtensibleEnums"])
+    {
+    @:[JsonConverter(typeof(ExtensibleEnumConverter<@Model.ClassName>))]
+    @:public sealed class @Model.ClassName : ExtensibleEnum<@Model.ClassName>
+    @:{
+        @foreach (var t in Model.Values)
+        {
+            if (t.Description != null)
+            {<text>
+        /// <summary>
+        @WrapComment("/// ", t.Description)
+        /// </summary>
+        </text>
+        }
+        string ctor = "new "+Model.ClassName+"(\""+t.Name+"\")";
+        @:public static readonly @Model.ClassName @t.Name = new @(Model.ClassName)("@(t.Name)");
+    }
+    @EmptyLine
+        @:private @(Model.ClassName)(string typeName) : base(typeName)
+        @:{
+            @:// Base class does all initialization.
+        @:}
+    @EmptyLine
+
+        <text>
+        /// <summary>
+        /// Creates a new @(Model.ClassName) instance, or returns an existing instance if the given value matches that of a known @(Model.ClassName).
+        /// </summary>
+        /// <param name="value">Value of @(Model.ClassName).</param>
+        /// <returns>@(Model.ClassName) instance with the given value.</returns> </text>
+        @:public static @(Model.ClassName) Create(string value) => Lookup(value) ?? new @(Model.ClassName)(value);
+
+        @EmptyLine
+        <text>
+        /// <summary>
+        @WrapComment("/// ", "Creates a "+Model.ClassName+" for a collection of the given type.")
+        /// </summary>
+        /// <param name="elementType">The @(Model.ClassName) of the elements of the collection.</param>
+        /// <returns>A new @(Model.ClassName) for a collection.</returns> </text>
+        @:public static @(Model.ClassName) Collection(@Model.ClassName elementType)
+        @:{
+        @:    if(elementType == null)
+        @:    {
+        @:        throw new ArgumentNullException(elementType, nameof(elementType));
+        @:    }
+        @:    return new @(Model.ClassName)($"Collection({elementType})");
+        @:}
+
+        @EmptyLine
+        <text>
+        /// <summary>
+        @WrapComment("/// ", "Defines implicit conversion from string to "+Model.ClassName+".")
+        /// </summary>
+        /// <param name="value">string to convert.</param>
+        /// <returns>The string as a @(Model.ClassName).</returns> </text>
+        @:public static implicit operator @(Model.ClassName)(string value) => Create(value);
+
+        @EmptyLine        
+    @:}
+    }
+    else if (!Model.ModelAsString)
     {
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     @:public enum @Model.ClassName
@@ -21,7 +81,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {<text>
         /// <summary>
         @WrapComment("/// ", value.Description)
-        // booya booya
         /// </summary>
 </text>
         }
@@ -35,11 +94,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
           {
 @:        @(value.MemberName),
           }
-        }
-                @:/// boooya
-        @if ((bool)Settings.CustomSettings["ExtensibleEnums"])
-        {
-            @:public static readonly @Model.ClassName value.ToString() = new @Model.ClassName+"(\""+value.ToString()+"\"");
         }
     @:}
 <text>

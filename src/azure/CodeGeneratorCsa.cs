@@ -84,7 +84,6 @@ namespace AutoRest.CSharp.Azure
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
-                System.Console.Error.WriteLine("We are in the genmerattor");
                 var enumTemplate = new EnumTemplate {Model = enumType};
                 await Write(enumTemplate,Path.Combine(Settings.Instance.ModelsName,
                     $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
