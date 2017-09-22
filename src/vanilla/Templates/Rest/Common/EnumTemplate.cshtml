@@ -11,8 +11,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// </summary>
     @if((bool)Settings.CustomSettings["ExtensibleEnums"])
     {
-    @:[JsonConverter(typeof(ExtensibleEnumConverter<@Model.ClassName>))]
-    @:public sealed class @Model.ClassName : ExtensibleEnum<@Model.ClassName>
+    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName>))]
+    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName>
     @:{
         @foreach (var t in Model.Values)
         {
@@ -40,22 +40,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <param name="value">Value of @(Model.ClassName).</param>
         /// <returns>@(Model.ClassName) instance with the given value.</returns> </text>
         @:public static @(Model.ClassName) Create(string value) => Lookup(value) ?? new @(Model.ClassName)(value);
-
-        @EmptyLine
-        <text>
-        /// <summary>
-        @WrapComment("/// ", "Creates a "+Model.ClassName+" for a collection of the given type.")
-        /// </summary>
-        /// <param name="elementType">The @(Model.ClassName) of the elements of the collection.</param>
-        /// <returns>A new @(Model.ClassName) for a collection.</returns> </text>
-        @:public static @(Model.ClassName) Collection(@Model.ClassName elementType)
-        @:{
-        @:    if(elementType == null)
-        @:    {
-        @:        throw new ArgumentNullException(elementType, nameof(elementType));
-        @:    }
-        @:    return new @(Model.ClassName)($"Collection({elementType})");
-        @:}
 
         @EmptyLine
         <text>
