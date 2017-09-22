@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.Rest;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -27,7 +28,9 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckGeneratesValidCSharp()
         {
-            var settings = new Settings();
+            var settings = new Settings{
+                Namespace = "ExtensibleEnums"
+            };
             settings.CustomSettings.Add("ExtensibleEnums", true);
             
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
@@ -45,23 +48,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 
                 Assert.True(true);
 
-                //Write(warnings, fileSystem);
-                //Write(errors, fileSystem);
+                Write(warnings, fileSystem);
+                Write(errors, fileSystem);
 
                 // use this to write out all the messages, even hidden ones.
                 // Write(result.Messages, fileSystem);
 
                 // Don't proceed unless we have zero warnings.
                 Assert.Empty(warnings);
-
-                System.IO.StreamWriter logfile = new System.IO.StreamWriter(@"F:\artemp\rcm\autorest.csharp\src\bin\netcoreapp2.0\log.log", false);
-                foreach(var err in errors)
-                {
-                        logfile.WriteLine(err.ToString());
-                }
-                    
-                    logfile.Close();
-                    
 
                 // Don't proceed unless we have zero Errors.
                 Assert.Empty(errors);
@@ -73,17 +67,13 @@ namespace AutoRest.CSharp.Unit.Tests
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
-                /*
-                foreach(var name in asm.ExportedTypes)
-                {
-                    System.Console.WriteLine("Type is");
-                    System.Console.WriteLine(name.FullName);
-                }
-                
-                //var extensibleEnumsModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "ExtensibleEnums.Models.Category");
-                //Assert.NotNull(testApi);
-                */
-               
+                var extensibleEnumsModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "ExtensibleEnums.Models.Category");
+                Assert.NotNull(extensibleEnumsModel);
+
+                var enumVals = extensibleEnumsModel.GetFields().Where(f=>f.IsPublic && f.IsStatic && f.DeclaringType.ToString() == "ExtensibleEnums.Models.Category");
+                Assert.Equal(enumVals.Count(), 4);
+                Assert.True(Enumerable.SequenceEqual(enumVals.Select(val=>val.GetValue(null).ToString()), 
+                    new List<string>(){"HighAvailability", "Security", "Performance", "Cost" }));
             }
             
         }
