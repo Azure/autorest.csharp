@@ -289,3 +289,10 @@ __pycache__/
 
 package-lock.json
 *.tgz
+yarn.lock
+
+package/
+*.tar
+*.tgz
+src/obj/
+*.log
