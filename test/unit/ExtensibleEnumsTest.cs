@@ -29,12 +29,12 @@ namespace AutoRest.CSharp.Unit.Tests
         {
             var settings = new Settings();
             settings.CustomSettings.Add("ExtensibleEnums", true);
-
+            
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
             {
                 // if newlines and stuff aren't excaped properly, compilation will fail
                 var result = await Compile(fileSystem);
-
+                
                 // filter the warnings
                 var warnings = result.Messages.Where(
                     each => each.Severity == DiagnosticSeverity.Warning
@@ -42,15 +42,27 @@ namespace AutoRest.CSharp.Unit.Tests
                 
                 // filter the errors
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
+                
+                Assert.True(true);
 
-                Write(warnings, fileSystem);
-                Write(errors, fileSystem);
+                //Write(warnings, fileSystem);
+                //Write(errors, fileSystem);
 
                 // use this to write out all the messages, even hidden ones.
                 // Write(result.Messages, fileSystem);
 
                 // Don't proceed unless we have zero warnings.
                 Assert.Empty(warnings);
+
+                System.IO.StreamWriter logfile = new System.IO.StreamWriter(@"F:\artemp\rcm\autorest.csharp\src\bin\netcoreapp2.0\log.log", false);
+                foreach(var err in errors)
+                {
+                        logfile.WriteLine(err.ToString());
+                }
+                    
+                    logfile.Close();
+                    
+
                 // Don't proceed unless we have zero Errors.
                 Assert.Empty(errors);
 
@@ -67,11 +79,13 @@ namespace AutoRest.CSharp.Unit.Tests
                     System.Console.WriteLine("Type is");
                     System.Console.WriteLine(name.FullName);
                 }
-                */
+                
                 //var extensibleEnumsModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "ExtensibleEnums.Models.Category");
                 //Assert.NotNull(testApi);
-                
+                */
+               
             }
+            
         }
     }
 }
