@@ -1,70 +1,49 @@
-{
- "swagger": "2.0",
- "info": {
-  "version": "2017-04-19",
-  "title": "AdvisorManagementClient",
-  "description": "REST APIs for Azure Advisor"
- },
- "host": "management.azure.com",
- "schemes": [
-  "https"
- ],
- "paths": {
-  "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
-   "get": {
-    "description": "Obtains the details of a suppression.",
-    "operationId": "Suppressions_Get",
-    "parameters": [
-     {
-      "$ref": "#/parameters/subscriptionIdParameter"
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "OK. Successfully got suppression detail.",
-      "schema": {
-       "$ref": "#/definitions/SuppressionContract"
-      }
-     }
-    },
-    "produces": [
-     "application/json"
-    ],
-    "consumes": [
-     "application/json"
-    ]
-   }
-  }
- },
- "definitions": {
-  "SuppressionContract": {
-   "description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
-   "type": "object",
-   "properties": {
-    "category": {
-     "description": "The category of the recommendation.",
-     "enum": [
-      "HighAvailability",
-      "Security",
-      "Performance",
-      "Cost"
-     ],
-     "type": "string",
-     "x-ms-enum": {
-      "name": "category",
-      "modelAsString": true
-     }
-    }
-   }
-  }
- },
- "parameters": {
-  "subscriptionIdParameter": {
-   "name": "subscriptionId",
-   "in": "path",
-   "description": "The Azure subscription ID.",
-   "required": true,
-   "type": "string"
-  }
- }
-}
+---
+swagger: '2.0'
+info:
+  version: '2017-04-19'
+  title: AdvisorManagementClient
+  description: REST APIs for Azure Advisor
+host: management.azure.com
+schemes:
+- https
+paths:
+  "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}":
+    get:
+      description: Obtains the details of a suppression.
+      operationId: Suppressions_Get
+      parameters:
+      - "$ref": "#/parameters/subscriptionIdParameter"
+      responses:
+        '200':
+          description: OK. Successfully got suppression detail.
+          schema:
+            "$ref": "#/definitions/SuppressionContract"
+      produces:
+      - application/json
+      consumes:
+      - application/json
+definitions:
+  SuppressionContract:
+    description: The details of the snoozed or dismissed rule; for example, the duration,
+      name, and GUID associated with the rule.
+    type: object
+    properties:
+      category:
+        description: The category of the recommendation.
+        enum:
+        - HighAvailability
+        - Security
+        - Performance
+        - Cost
+        type: string
+        x-ms-enum:
+          name: category
+          modelAsString: true
+parameters:
+  subscriptionIdParameter:
+    name: subscriptionId
+    in: path
+    description: The Azure subscription ID.
+    required: true
+    type: string

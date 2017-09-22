@@ -45,11 +45,20 @@ namespace AutoRest.CSharp.Unit.Tests
                 
                 // filter the errors
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
+                using (System.IO.StreamWriter file = 
+            new System.IO.StreamWriter(@"F:\artemp\rcm\autorest.csharp\test\bin\Debug\netcoreapp2.0\log.log"))
+        {
+            foreach (var err in errors)
+            {
+                    file.WriteLine(err.ToString());
+                
+            }
+        }
                 
                 Assert.True(true);
 
-                Write(warnings, fileSystem);
-                Write(errors, fileSystem);
+                //Write(warnings, fileSystem);
+                //Write(errors, fileSystem);
 
                 // use this to write out all the messages, even hidden ones.
                 // Write(result.Messages, fileSystem);
