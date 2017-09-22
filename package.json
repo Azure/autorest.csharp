@@ -9,6 +9,7 @@
     "build": "gulp build",
     "prepare": "gulp build",
     "regenerate": "gulp regenerate",
+    "publish-preview": "gulp publish-preview",
     "clean": "gulp clean",
     "nuke": "git clean -xdf"
   },
