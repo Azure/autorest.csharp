@@ -1,15 +1,16 @@
 {
   "name": "@microsoft.azure/autorest.csharp",
-  "version": "1.9.5",
+  "version": "2.0.0",
   "description": "The C# extension for classic generators in AutoRest.",
   "scripts": {
+    "autorest": "autorest",
     "start": "dotnet src/bin/netcoreapp2.0/autorest.csharp.dll --server",
-    "test": "gulp testci",
+    "test": "gulp test",
     "testci": "gulp testci",
     "build": "gulp build",
     "prepare": "gulp build",
-    "regenerate": "gulp regenerate",
     "publish-preview": "gulp publish-preview",
+    "regenerate": "gulp regenerate",
     "clean": "gulp clean",
     "nuke": "git clean -xdf"
   },
@@ -30,8 +31,8 @@
   },
   "homepage": "https://github.com/Azure/autorest.csharp/blob/master/README.md",
   "devDependencies": {
-    "@microsoft.azure/autorest.modeler": "1.9.6",
-    "autorest": "^1.9.1",
+    "@microsoft.azure/autorest.modeler": "~2.0.0",
+    "autorest": "^2.0.0",
     "coffee-script": "^1.11.1",
     "dotnet-sdk-2.0.0": "^1.1.1",
     "gulp": "^3.9.1",
