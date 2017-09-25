@@ -32,14 +32,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:}
     @EmptyLine
 
-        <text>
-        /// <summary>
-        /// Creates a new @(Model.ClassName) instance, or returns an existing instance if the given value matches that of a known @(Model.ClassName).
-        /// </summary>
-        /// <param name="value">Value of @(Model.ClassName).</param>
-        /// <returns>@(Model.ClassName) instance with the given value.</returns> </text>
-        @:public static @(Model.ClassName) Create(@Model.UnderlyingType value) => Lookup(value) ?? new @(Model.ClassName)(value);
-
         @EmptyLine
         <text>
         /// <summary>
