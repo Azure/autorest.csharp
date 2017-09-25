@@ -11,10 +11,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// </summary>
     @if((bool)Settings.CustomSettings["ExtensibleEnums"])
     {
-    // Ideally should be @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName @Model.UnderlyingType>))]
-    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, string>))]
-    // Ideally should be @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @Model.UnderlyingType>
-    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, string>
+    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, @Model.UnderlyingType>))]
+    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @Model.UnderlyingType>
     @:{
         @foreach (var t in Model.Values)
         {
@@ -25,8 +23,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         </text>
         }
-        string ctor = "new "+Model.ClassName+"(\""+t.Name+"\")";
-        @:public static readonly @Model.ClassName @t.Name = new @(Model.ClassName)("@(t.Name)");
+        @:public static readonly @Model.ClassName @t.SerializedName = new @(Model.ClassName)("@(t.Name)");
     }
     @EmptyLine
         @:private @(Model.ClassName)(string typeName) : base(typeName)
@@ -41,7 +38,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         /// <param name="value">Value of @(Model.ClassName).</param>
         /// <returns>@(Model.ClassName) instance with the given value.</returns> </text>
-        @:public static @(Model.ClassName) Create(string value) => Lookup(value) ?? new @(Model.ClassName)(value);
+        @:public static @(Model.ClassName) Create(@Model.UnderlyingType value) => Lookup(value) ?? new @(Model.ClassName)(value);
 
         @EmptyLine
         <text>
@@ -50,7 +47,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         /// <param name="value">string to convert.</param>
         /// <returns>The string as a @(Model.ClassName).</returns> </text>
-        @:public static implicit operator @(Model.ClassName)(string value) => Create(value);
+        @:public static implicit operator @(Model.ClassName)(@Model.UnderlyingType value) => Create(value);
 
         @EmptyLine        
     @:}
@@ -70,7 +67,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
 </text>
         }
-
 @:        [System.Runtime.Serialization.EnumMember(Value = "@value.SerializedName")]
           if (value == last)
           {
