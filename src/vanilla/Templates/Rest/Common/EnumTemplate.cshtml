@@ -11,8 +11,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// </summary>
     @if((bool)Settings.CustomSettings["ExtensibleEnums"])
     {
-    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName>))]
-    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName>
+    // Ideally should be @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName @Model.UnderlyingType>))]
+    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, string>))]
+    // Ideally should be @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @Model.UnderlyingType>
+    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, string>
     @:{
         @foreach (var t in Model.Values)
         {
