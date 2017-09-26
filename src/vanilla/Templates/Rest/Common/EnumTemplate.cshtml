@@ -32,6 +32,18 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:}
     @EmptyLine
 
+        @:public static @Model.ClassName Create(@Model.UnderlyingType value)
+        @:{
+            @:var existingItem = Lookup(value);
+            @:if (existingItem!=null)
+            @:{
+                @:return existingItem;
+            @:}
+            @:var newItem = new @(Model.ClassName + "(value)");
+            @:CacheValue(value, newItem);
+            @:return newItem;
+        @:}
+
         @EmptyLine
         <text>
         /// <summary>
