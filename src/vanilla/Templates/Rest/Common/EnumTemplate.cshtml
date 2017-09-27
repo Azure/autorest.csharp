@@ -14,6 +14,12 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, @Model.UnderlyingType>))]
     @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @Model.UnderlyingType>
     @:{
+        @:private @(Model.ClassName+"("+@Model.UnderlyingType+" value):base(value)")
+        @:{
+
+        @:}
+
+        @EmptyLine
         @foreach (var t in Model.Values)
         {
             if (t.Description != null)
@@ -44,7 +50,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <returns>The string as a @(Model.ClassName).</returns> </text>
         @:public static implicit operator @(Model.ClassName)(@Model.UnderlyingType value) => Create(value);
         @EmptyLine
-        
+
     @:}
     }
     else if (!Model.ModelAsString)
