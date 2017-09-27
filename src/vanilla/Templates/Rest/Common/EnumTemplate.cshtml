@@ -23,26 +23,17 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         </text>
         }
-        @:public static readonly @Model.ClassName @t.SerializedName = new @(Model.ClassName)("@(t.Name)");
+        @:public static readonly @Model.ClassName @t.SerializedName = @(Model.ClassName).Create("@(t.Name)");
     }
-    @EmptyLine
-        @:private @(Model.ClassName)(string typeName) : base(typeName)
-        @:{
-            @:// Base class does all initialization.
-        @:}
-    @EmptyLine
-
-        @:public static @Model.ClassName Create(@Model.UnderlyingType value)
-        @:{
-            @:var existingItem = Lookup(value);
-            @:if (existingItem!=null)
-            @:{
-                @:return existingItem;
-            @:}
-            @:var newItem = new @(Model.ClassName + "(value)");
-            @:CacheValue(value, newItem);
-            @:return newItem;
-        @:}
+        @EmptyLine
+        <text>
+        /// <summary>
+        @WrapComment("/// ", "Defines static create method for conversion from "+Model.UnderlyingType+" to "+Model.ClassName+".")
+        /// </summary>
+        /// <param name="value">string to convert.</param>
+        /// <returns>The string as a @(Model.ClassName).</returns> </text>
+        @:public static @(Model.ClassName) Create(@Model.UnderlyingType value) => _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
+        @EmptyLine
 
         @EmptyLine
         <text>
@@ -52,8 +43,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <param name="value">string to convert.</param>
         /// <returns>The string as a @(Model.ClassName).</returns> </text>
         @:public static implicit operator @(Model.ClassName)(@Model.UnderlyingType value) => Create(value);
-
-        @EmptyLine        
+        @EmptyLine
+        
     @:}
     }
     else if (!Model.ModelAsString)
