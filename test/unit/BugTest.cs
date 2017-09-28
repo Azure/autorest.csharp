@@ -120,6 +120,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             Path.Combine(FRAMEWORK, "System.Text.Encoding.dll"),
             Path.Combine(FRAMEWORK, "System.Text.RegularExpressions.dll"),
             Path.Combine(FRAMEWORK, "System.IO.dll"),
+            Path.Combine(FRAMEWORK, "System.Collections.Concurrent.dll"),
 
 
             typeof(HttpClient).GetAssembly().Location,
