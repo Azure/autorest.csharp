@@ -15,7 +15,7 @@ namespace Fixtures.MirrorSequences.Models
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public class ErrorModelException : RestException
+    public partial class ErrorModelException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
