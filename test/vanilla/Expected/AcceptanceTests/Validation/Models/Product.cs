@@ -42,7 +42,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// values include: 'constant_string_as_enum'</param>
         public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
-            Child = new ChildProduct();
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
