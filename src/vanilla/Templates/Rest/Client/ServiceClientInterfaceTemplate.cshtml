@@ -60,6 +60,7 @@ namespace @Settings.Namespace
      
     @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
     {
+        if (method.ExcludeFromInterface) continue;
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {
         @:/// <summary>
