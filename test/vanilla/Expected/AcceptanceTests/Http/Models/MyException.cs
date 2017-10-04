@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-    public class MyException : RestException
+    public partial class MyException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.

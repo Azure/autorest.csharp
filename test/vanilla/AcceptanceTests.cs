@@ -2291,6 +2291,14 @@ namespace AutoRest.CSharp.Tests
             Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
         }
 
+        [Fact]
+        // Really, this test is more useful at compile time since this field is introduced by a partial and compilation
+        // will fail if the partials can't be merged.
+        public void SupportsPartialExceptionTest()
+        {
+            Assert.NotNull(ErrorException.StringFromPartial);
+        }
+
         public void EnsureTestCoverage()
         {
             using (var client =
