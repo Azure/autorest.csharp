@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public DictionaryWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

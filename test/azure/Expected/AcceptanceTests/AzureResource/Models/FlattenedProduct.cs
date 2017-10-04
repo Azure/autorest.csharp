@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// </summary>
         public FlattenedProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

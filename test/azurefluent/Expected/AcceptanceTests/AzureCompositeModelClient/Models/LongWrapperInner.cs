@@ -20,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public LongWrapperInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

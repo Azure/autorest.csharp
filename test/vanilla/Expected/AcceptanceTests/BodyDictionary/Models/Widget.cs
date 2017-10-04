@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// </summary>
         public Widget()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

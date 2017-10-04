@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         public ChildProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

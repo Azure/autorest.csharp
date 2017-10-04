@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Datetimerfc1123Wrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

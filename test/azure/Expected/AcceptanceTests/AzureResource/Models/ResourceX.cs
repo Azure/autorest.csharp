@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// </summary>
         public ResourceX()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

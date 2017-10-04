@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseStringHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

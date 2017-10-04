@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyByte.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

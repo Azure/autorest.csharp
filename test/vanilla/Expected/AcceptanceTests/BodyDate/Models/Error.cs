@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDate.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

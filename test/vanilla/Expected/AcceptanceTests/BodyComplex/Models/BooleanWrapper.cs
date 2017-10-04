@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public BooleanWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

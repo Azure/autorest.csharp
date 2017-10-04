@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

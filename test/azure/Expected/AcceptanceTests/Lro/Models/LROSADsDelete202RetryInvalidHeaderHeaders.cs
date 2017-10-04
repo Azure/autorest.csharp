@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsDelete202RetryInvalidHeaderHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

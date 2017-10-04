@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

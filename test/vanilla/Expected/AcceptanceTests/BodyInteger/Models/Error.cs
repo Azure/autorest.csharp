@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

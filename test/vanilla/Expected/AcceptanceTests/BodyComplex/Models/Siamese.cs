@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Siamese()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

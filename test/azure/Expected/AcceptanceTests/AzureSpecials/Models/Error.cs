@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

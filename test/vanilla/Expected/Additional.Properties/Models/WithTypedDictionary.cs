@@ -22,7 +22,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         public WithTypedDictionary()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

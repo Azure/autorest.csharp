@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Cat()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

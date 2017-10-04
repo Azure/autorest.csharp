@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         public ConstantProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

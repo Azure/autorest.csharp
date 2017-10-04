@@ -22,7 +22,7 @@ namespace Fixtures.PetstoreV2.Models
         /// </summary>
         public Tag()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

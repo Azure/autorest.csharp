@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseDatetimeRfc1123Headers()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

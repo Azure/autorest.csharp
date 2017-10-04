@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         public HttpRedirectsPost303Headers()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
