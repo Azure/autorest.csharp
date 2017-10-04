@@ -16,7 +16,11 @@ namespace @Settings.Namespace
     {
         @foreach (MethodCs method in Model.Methods)
         {
-            if (method.ExcludeFromInterface) continue;
+            if (method.ExcludeFromInterface)
+            {
+                continue;
+            }
+
             @:@(Include(new ExtensionMethodTemplate(), method))
             @EmptyLine 
         }

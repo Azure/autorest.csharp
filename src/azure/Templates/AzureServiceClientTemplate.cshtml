@@ -101,7 +101,11 @@ namespace @Settings.Namespace
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
         {
-        if (method.ExcludeFromInterface) continue;
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
         @:@(Include(DependencyInjection.New<AzureMethodTemplate>(), (MethodCsa)method))
         @EmptyLine
         @:
