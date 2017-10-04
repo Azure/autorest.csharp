@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public Sku()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

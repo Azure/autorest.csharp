@@ -23,7 +23,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Cookiecuttershark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

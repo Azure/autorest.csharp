@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public DoubleWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

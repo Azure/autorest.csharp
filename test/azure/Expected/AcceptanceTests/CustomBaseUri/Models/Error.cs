@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// </summary>
         public SampleResourceGroup()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

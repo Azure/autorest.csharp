@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

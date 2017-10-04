@@ -29,7 +29,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public FlattenedProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

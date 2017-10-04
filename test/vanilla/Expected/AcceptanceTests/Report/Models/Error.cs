@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsReport.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

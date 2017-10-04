@@ -25,7 +25,7 @@ namespace Fixtures.PetstoreV2.Models
         /// </summary>
         public LoginUserHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

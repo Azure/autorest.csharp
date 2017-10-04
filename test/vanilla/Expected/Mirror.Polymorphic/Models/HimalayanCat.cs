@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public HimalayanCat()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

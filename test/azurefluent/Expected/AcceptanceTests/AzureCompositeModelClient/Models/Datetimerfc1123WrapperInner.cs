@@ -23,7 +23,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Datetimerfc1123WrapperInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

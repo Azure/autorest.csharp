@@ -24,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROsDeleteProvisioning202DeletingFailed200HeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsDeleteAsyncRelativeRetry400HeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

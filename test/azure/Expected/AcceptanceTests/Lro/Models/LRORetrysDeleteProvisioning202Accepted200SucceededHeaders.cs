@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

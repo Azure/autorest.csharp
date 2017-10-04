@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// </summary>
         public OperationResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

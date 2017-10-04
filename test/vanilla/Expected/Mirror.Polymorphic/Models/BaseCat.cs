@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public BaseCat()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

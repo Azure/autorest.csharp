@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public WrappedProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

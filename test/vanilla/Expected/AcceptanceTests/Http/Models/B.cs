@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         public B()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

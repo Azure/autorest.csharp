@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public Resource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

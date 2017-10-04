@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public Horsey()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

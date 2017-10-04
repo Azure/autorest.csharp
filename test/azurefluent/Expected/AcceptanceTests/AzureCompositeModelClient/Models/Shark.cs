@@ -23,7 +23,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Shark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

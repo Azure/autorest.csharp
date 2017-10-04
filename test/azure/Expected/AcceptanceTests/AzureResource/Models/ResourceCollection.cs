@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// </summary>
         public ResourceCollection()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         /// </summary>
         public RefColorConstant()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
