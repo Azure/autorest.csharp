@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsPost202NoLocationHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

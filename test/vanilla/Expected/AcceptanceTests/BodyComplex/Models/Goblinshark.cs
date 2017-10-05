@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Goblinshark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

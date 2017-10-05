@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// </summary>
         public PagingGetMultiplePagesOptions()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

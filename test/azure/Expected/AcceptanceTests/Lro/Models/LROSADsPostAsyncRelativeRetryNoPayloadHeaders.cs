@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsPostAsyncRelativeRetryNoPayloadHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

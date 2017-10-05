@@ -23,7 +23,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROsPost202Retry200Headers()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

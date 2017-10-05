@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </summary>
         public IntWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         public ParameterGroupingPostMultiParamGroupsSecondParamGroup()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

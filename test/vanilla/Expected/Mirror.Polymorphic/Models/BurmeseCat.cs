@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public BurmeseCat()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

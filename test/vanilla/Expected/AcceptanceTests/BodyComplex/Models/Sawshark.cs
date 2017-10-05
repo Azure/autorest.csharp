@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Sawshark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

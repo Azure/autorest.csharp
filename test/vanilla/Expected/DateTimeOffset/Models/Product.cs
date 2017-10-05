@@ -24,7 +24,7 @@ namespace Fixtures.DateTimeOffset.Models
         /// </summary>
         public Product()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

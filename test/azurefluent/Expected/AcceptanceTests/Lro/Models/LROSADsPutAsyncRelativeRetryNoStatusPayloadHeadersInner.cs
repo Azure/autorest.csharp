@@ -24,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

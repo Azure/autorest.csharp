@@ -24,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
         /// </summary>
         public PagingGetMultiplePagesWithOffsetNextOptionsInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

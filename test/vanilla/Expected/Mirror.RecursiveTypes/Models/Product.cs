@@ -22,7 +22,7 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// </summary>
         public Product()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public HeaderCustomNamedRequestIdParamGroupingParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

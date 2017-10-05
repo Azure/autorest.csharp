@@ -20,7 +20,7 @@ namespace Fixtures.DateTimeOffset.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

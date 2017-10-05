@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public HeaderCustomNamedRequestIdHeadHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

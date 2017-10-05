@@ -22,7 +22,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// </summary>
         public Tag()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

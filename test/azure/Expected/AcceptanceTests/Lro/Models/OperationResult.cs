@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public OperationResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

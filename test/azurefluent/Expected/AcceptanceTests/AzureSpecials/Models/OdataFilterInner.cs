@@ -20,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public OdataFilterInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

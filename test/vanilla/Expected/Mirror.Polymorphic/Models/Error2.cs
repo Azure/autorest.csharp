@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public Error2()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

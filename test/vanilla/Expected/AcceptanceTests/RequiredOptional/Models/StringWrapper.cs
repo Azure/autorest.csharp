@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </summary>
         public StringWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

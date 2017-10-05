@@ -15,7 +15,7 @@ namespace Fixtures.MirrorPolymorphic.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
     /// </summary>
-    public class Error2Exception : RestException
+    public partial class Error2Exception : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.

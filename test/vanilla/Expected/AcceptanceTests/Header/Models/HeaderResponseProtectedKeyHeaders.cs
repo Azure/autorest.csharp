@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseProtectedKeyHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

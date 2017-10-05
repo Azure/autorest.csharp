@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public Animal()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

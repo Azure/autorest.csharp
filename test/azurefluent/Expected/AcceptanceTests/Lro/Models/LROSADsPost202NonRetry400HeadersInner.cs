@@ -24,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsPost202NonRetry400HeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

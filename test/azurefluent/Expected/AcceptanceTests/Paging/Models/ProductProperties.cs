@@ -20,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
         /// </summary>
         public ProductProperties()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

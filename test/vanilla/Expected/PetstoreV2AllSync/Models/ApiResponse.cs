@@ -22,7 +22,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// </summary>
         public ApiResponse()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

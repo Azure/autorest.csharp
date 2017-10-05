@@ -2292,6 +2292,14 @@ namespace AutoRest.CSharp.Tests
         }
 
         [Fact]
+        // Really, this test is more useful at compile time since this field is introduced by a partial and compilation
+        // will fail if the partials can't be merged.
+        public void SupportsPartialExceptionTest()
+        {
+            Assert.NotNull(ErrorException.StringFromPartial);
+        }
+
+        [Fact]
         public async Task EnsureHiddenMethodsMissingTest()
         {
             // Confirm the method exists in body-complex, which hidden methods is based on

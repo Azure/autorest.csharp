@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
