@@ -9,12 +9,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
-    @if((bool)Settings.CustomSettings["ExtensibleEnums"])
+    @if(Settings.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.CustomSettings["ExtensibleEnums"])
     {
-    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, @Model.UnderlyingType>))]
-    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @Model.UnderlyingType>
+    var underlyingType = (Model.UnderlyingType == null)? "string" : Model.UnderlyingType.ToString();
+    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues!=null);
+    
+    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, @underlyingType>))]
+    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @underlyingType>
     @:{
-        @:private @(Model.ClassName+"("+@Model.UnderlyingType+" value):base(value)")
+        @:private @(Model.ClassName+"("+underlyingType+" value):base(value)")
         @:{
 
         @:}
@@ -29,28 +32,58 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         </text>
         }
-        @:public static readonly @Model.ClassName @t.SerializedName = @(Model.ClassName).Create("@(t.Name)");
+        var initName = (underlyingType == "string" || (Model.UnderlyingType != null && Model.UnderlyingType.KnownPrimaryType == KnownPrimaryType.String)) ? "\""+t.SerializedName+"\"": t.SerializedName;
+        @:public static readonly @Model.ClassName @t.MemberName = @(initName);
+        @EmptyLine
+    }
+
+    if(hasAllowedValues)
+    {
+        @:///<summary>
+        @WrapComment("/// ", "Static map to store allowed values for enums");
+        @:///</summary>
+        @EmptyLine
+        @:AllowedValuesMap = new Dictionary<@underlyingType, @Model.ClassName>()
+        @:{
+            var initializers = Model.Values.SelectMany(enumVal=>enumVal.AllowedValues?.Select(allowedValue
+                =>"{ "+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+"}"));
+            @string.Join(", \n", initializers.ToArray());
+        @:}
+        
     }
         @EmptyLine
         <text>
         /// <summary>
-        @WrapComment("/// ", "Defines static create method for conversion from "+Model.UnderlyingType+" to "+Model.ClassName+".")
+        @WrapComment("/// ", "Defines ctor/explicit conversion from value type to "+Model.ClassName+".")
         /// </summary>
         /// <param name="value">string to convert.</param>
-        /// <returns>The string as a @(Model.ClassName).</returns> </text>
-        @:public static @(Model.ClassName) Create(@Model.UnderlyingType value) => _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
-        @EmptyLine
-
+        /// <returns>The value as a @(Model.ClassName).</returns> </text>
+        @:public static implicit operator @(Model.ClassName)(@underlyingType value) => Create(value);
+        
         @EmptyLine
         <text>
         /// <summary>
-        @WrapComment("/// ", "Defines implicit conversion from string to "+Model.ClassName+".")
-        /// </summary>
-        /// <param name="value">string to convert.</param>
-        /// <returns>The string as a @(Model.ClassName).</returns> </text>
-        @:public static implicit operator @(Model.ClassName)(@Model.UnderlyingType value) => Create(value);
+        /// Create method used by deserializer to create instances of @Model.ClassName type
+        /// </summary> 
+        /// <returns>The value as a @(Model.ClassName).</returns> </text>
+        @:public static @Model.ClassName Create(@underlyingType value)
+        if(hasAllowedValues)
+        {
+        @:{ 
+            @:if(AllowedValuesMap.ContainsKey(value))
+            @:{
+                @:return AllowedValuesMap[value];
+            @:}
+            @EmptyLine
+            @:return _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
+        @:}
         @EmptyLine
-
+        }
+        else
+        {
+            @:=> _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
+        }
+        
     @:}
     }
     else if (!Model.ModelAsString)
