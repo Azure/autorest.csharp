@@ -31,10 +31,10 @@
   },
   "homepage": "https://github.com/Azure/autorest.csharp/blob/master/README.md",
   "devDependencies": {
-    "@microsoft.azure/autorest.modeler": "~2.0.0",
+    "@microsoft.azure/autorest.modeler": "2.1.22",
     "autorest": "^2.0.0",
     "coffee-script": "^1.11.1",
-    "dotnet-sdk-2.0.0": "^1.1.1",
+    "dotnet-sdk-2.0.0": "^1.4.4",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
     "gulp-line-ending-corrector": "^1.0.1",
@@ -50,6 +50,6 @@
     "yarn": "^1.0.2"
   },
   "dependencies": {
-    "dotnet-2.0.0": "^1.1.0"
+    "dotnet-2.0.0": "^1.4.4"
   }
 }
