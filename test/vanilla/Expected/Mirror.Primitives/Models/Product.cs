@@ -24,7 +24,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         public Product()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

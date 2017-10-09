@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public SubResource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROsDelete202NoRetry204Headers()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

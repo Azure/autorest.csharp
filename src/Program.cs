@@ -62,6 +62,16 @@ namespace AutoRest.CSharp
             }
         }
 
+        protected async Task WriteFiles(MemoryFileSystem fs)
+        {
+            var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
+            foreach (var outFile in outFiles)
+            {
+                WriteFile(outFile, fs.ReadAllText(outFile), null);
+            }
+
+        }
+
         protected override async Task<bool> ProcessInternal()
         {
             if (this.Plugin == "csharp-simplifier")
@@ -77,14 +87,8 @@ namespace AutoRest.CSharp
 
                 // simplify
                 new AutoRest.Simplify.CSharpSimplifier().Run(fs).ConfigureAwait(false).GetAwaiter().GetResult();
-
-                // write out files
-                var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, fs.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(fs);
+                
                 return true;
             }
             else
@@ -146,13 +150,7 @@ namespace AutoRest.CSharp
                 }
 
                 // write out files
-                var outFS = Settings.Instance.FileSystemOutput;
-                var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, outFS.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(Settings.Instance.FileSystemOutput);
                 return true;
             }
         }

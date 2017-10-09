@@ -20,7 +20,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         public Feature()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

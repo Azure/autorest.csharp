@@ -26,7 +26,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

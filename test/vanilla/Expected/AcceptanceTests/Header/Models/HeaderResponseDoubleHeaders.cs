@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseDoubleHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

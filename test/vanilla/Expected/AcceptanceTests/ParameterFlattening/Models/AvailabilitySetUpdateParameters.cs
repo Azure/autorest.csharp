@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// </summary>
         public AvailabilitySetUpdateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         public FirstParameterGroupInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

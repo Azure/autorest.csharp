@@ -23,7 +23,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Sawshark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public SimpleProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

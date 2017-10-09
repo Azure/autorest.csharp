@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Fish()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

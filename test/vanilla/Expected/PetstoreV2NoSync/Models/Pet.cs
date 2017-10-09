@@ -25,7 +25,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

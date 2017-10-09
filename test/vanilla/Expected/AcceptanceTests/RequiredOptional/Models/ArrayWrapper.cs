@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </summary>
         public ArrayWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

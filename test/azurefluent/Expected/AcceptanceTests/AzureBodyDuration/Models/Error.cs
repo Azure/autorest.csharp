@@ -20,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDuration.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

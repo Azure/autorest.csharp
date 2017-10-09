@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public CatalogArrayOfDictionary()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

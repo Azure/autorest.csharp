@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public GenericUrl()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

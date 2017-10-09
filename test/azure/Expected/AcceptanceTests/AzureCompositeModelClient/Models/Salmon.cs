@@ -23,7 +23,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Salmon()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

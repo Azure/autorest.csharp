@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public DateWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

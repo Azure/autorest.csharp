@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public Product()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

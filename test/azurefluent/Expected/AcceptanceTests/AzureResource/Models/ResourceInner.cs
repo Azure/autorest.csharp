@@ -26,7 +26,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
         /// </summary>
         public ResourceInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

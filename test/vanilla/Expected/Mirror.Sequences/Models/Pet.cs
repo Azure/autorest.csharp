@@ -23,7 +23,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

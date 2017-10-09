@@ -20,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public BasicInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

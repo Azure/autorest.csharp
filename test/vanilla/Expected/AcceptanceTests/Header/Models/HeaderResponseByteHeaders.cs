@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseByteHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

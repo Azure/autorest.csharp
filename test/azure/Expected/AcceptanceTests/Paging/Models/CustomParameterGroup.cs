@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// </summary>
         public CustomParameterGroup()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

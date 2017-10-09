@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROsCustomHeaderPostAsyncRetrySucceededHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
