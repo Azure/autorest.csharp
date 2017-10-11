@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Model
                         yield return string.Format(
                             CultureInfo.InvariantCulture,
                             "<param name=\"{0}\">{1}</param>",
-                            char.ToLower(property.Name.CharAt(0)) + property.Name.Substring(1),
+                            CodeNamer.Instance.CamelCase(property.Name),
                             documentationInnerText);
                     }
                 }
