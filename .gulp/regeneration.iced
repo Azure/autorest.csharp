@@ -54,6 +54,23 @@ regenExpected = (opts,done) ->
 
     autorest args,() =>
       instances--
+      return done() if instances is 0
+
+regenExpectedConfigurations = (opts,done) ->
+  instances = opts.configFiles.length
+
+  for configFile in opts.configFiles
+    args = [
+      configFile
+    ]
+
+    if (opts.tag)
+      args.push("--tag=#{opts.tag}")
+
+    autorest args,(code, stdout, stderr) =>
+      # console.log(stdout)
+      # console.error(stderr)
+      instances--
       return done() if instances is 0 
 
 defaultMappings = {
@@ -103,6 +120,10 @@ compositeMappings = {
 azureCompositeMappings = {
   'AcceptanceTests/AzureCompositeModelClient': 'complex-model.json;body-complex.json'
 }
+
+defaultConfigurationFiles = [
+  'test/vanilla/Configurations/hidden-methods.md'
+]
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
@@ -163,7 +184,15 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
       'outputDir': 'Expected',
       'nsPrefix': 'Fixtures',
       'flatteningThreshold': '1'
-    }, done
+    }, () ->
+      regenExpectedConfigurations {
+        configFiles: defaultConfigurationFiles,
+        tag: 'vanilla'
+      },done
+  return null
+
+task 'regenerate-cs-config', '', [], (done) ->
+  regenExpectedConfigurations defaultConfigurationFiles, done
   return null
 
 task 'regenerate-cswithcreds', '', (done) ->
