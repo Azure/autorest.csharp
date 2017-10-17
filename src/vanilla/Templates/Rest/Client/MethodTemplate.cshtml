@@ -8,7 +8,9 @@
 @using AutoRest.Extensions
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
 
-@foreach (var errorCode in Model.Responses.Keys.Where(key=> Model.Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Model.Responses[key].Extensions["x-ms-error-response"]))
+@{ var errorCodes = Model.Responses.Keys.Where(key=> Model.Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Model.Responses[key].Extensions["x-ms-error-response"]); }
+
+@foreach (var errorCode in errorCodes)
 {
 @:/// <summary>
 @:/// Handle @((int)errorCode) errors
@@ -400,6 +402,16 @@ else
     {
         @:try
         @:{
+            @:switch((int)_statusCode)
+            @:{
+                @foreach(var errorCode in errorCodes)
+                {
+                @:case errorCode:
+                    @:await this.Handle@(errorCode)ErrorResponse(_httpRequest, _httpResponse);
+                }
+                @:default:
+                    @:await this.HandleDefaultErrorResponse(_httpRequest, _httpResponse, (int)_statusCode);
+            @:}
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
             @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
