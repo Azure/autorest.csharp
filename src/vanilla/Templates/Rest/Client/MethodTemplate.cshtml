@@ -402,7 +402,7 @@ else
     {
         @:try
         @:{
-            @:switch((int)_statusCode)
+            @:switch((((int)))_statusCode)
             @:{
                 @foreach(var errorCode in errorCodes)
                 {
@@ -410,7 +410,7 @@ else
                     @:await this.Handle@(errorCode)ErrorResponse(_httpRequest, _httpResponse);
                 }
                 @:default:
-                    @:await this.HandleDefaultErrorResponse(_httpRequest, _httpResponse, (int)_statusCode);
+                    @:await this.HandleDefaultErrorResponse(_httpRequest, _httpResponse, (((int)))_statusCode);
             @:}
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
