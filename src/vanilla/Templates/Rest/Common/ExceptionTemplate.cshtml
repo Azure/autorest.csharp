@@ -1,6 +1,10 @@
 ﻿@using System.Linq
 @using AutoRest.CSharp
 @using AutoRest.CSharp.Model
+@using AutoRest.Extensions
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
@@ -64,7 +68,17 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         public SetErrorModel (string message, @(Model.Name) errorModel) => Body = errorModel;
 @EmptyLine
 
-@foreach (PropertyCs property in Model.InstanceProperties)
+@{
+var props = Model.InstanceProperties;
+var modelType = Model.BaseModelType;
+while(modelType!=null && modelType is CompositeTypeCs)
+{
+props = props.Union((modelType as CompositeTypeCs).InstanceProperties);
+modelType=modelType.BaseModelType;
+}
+}
+
+@foreach (PropertyCs property in props)
 {
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
