@@ -18,15 +18,15 @@
 @:/// <exception cref="@(Model.Responses[errorCode].Body.ClassName)Exception">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async System.Threading.Tasks.Task Handle@((int)errorCode)Response(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
-@:  => HandleErrorResponse<@(Model.Responses[errorCode].Body.ClassName)Exception, @(Model.Responses[errorCode].Body.ClassName)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+@:private async System.Threading.Tasks.Task Handle@((int)errorCode)ResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
+@:  => HandleErrorResponseFor@(Model.Name)<@(Model.Responses[errorCode].Body.ClassName)Exception, @(Model.Responses[errorCode].Body.ClassName)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
 }
 
 @EmptyLine
 /// <summary>
 /// Handle error responses, deserialize errors of types V and throw exceptions of type T
 /// </summary>
-private async System.Threading.Tasks.Task HandlErrorResponse<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings)
+private async System.Threading.Tasks.Task HandlErrorResponseFor@(Model.Name)<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings)
 {
     string _responseContent = null;
     T ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
@@ -407,10 +407,10 @@ else
                 @foreach(var errorCode in errorCodes)
                 {
                 @:case errorCode:
-                    @:await this.Handle@(errorCode)ErrorResponse(_httpRequest, _httpResponse);
+                    @:await this.Handle@(errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
                 }
                 @:default:
-                    @:await this.HandleDefaultErrorResponse(_httpRequest, _httpResponse, (((int)))_statusCode);
+                    @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (((int)))_statusCode);
             @:}
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
