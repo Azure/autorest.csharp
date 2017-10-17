@@ -1,4 +1,6 @@
 ﻿@using System.Linq
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
@@ -60,7 +62,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         /// <param name="errorModel">Error model to be set</param>
         public SetErrorModel (string message, @(Model.Name) errorModel) => Body = errorModel;
-
+@EmptyLine
 
 @foreach (PropertyCs property in Model.InstanceProperties)
 {
@@ -73,25 +75,9 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:@WrapComment("/// ", property.Documentation)
         @:/// </remarks>
             }
-        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @:public @property.ModelTypeName @property.Name => Body.@property.Name;
         @EmptyLine
 }
-
-@foreach (var property in Model.ClassProperties)
-{
-        @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
-        @:/// </summary>
-foreach (var conv in property.JsonConverters)
-{
-        @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
-}
-        @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
-        @:public static @property.ModelTypeName @property.Name { get; private set; }
-        @EmptyLine
-}
-
-
 
     }
 }
