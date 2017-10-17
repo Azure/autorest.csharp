@@ -21,9 +21,9 @@
 }
 
 @EmptyLine
-@:/// <summary>
-@:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
-@:/// </summary>
+/// <summary>
+/// Handle error responses, deserialize errors of types V and throw exceptions of type T
+/// </summary>
 private async System.Threading.Tasks.Task HandlErrorResponse<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings)
 {
     string _responseContent = null;

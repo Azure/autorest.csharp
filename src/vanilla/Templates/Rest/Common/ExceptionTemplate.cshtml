@@ -8,7 +8,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-    @{var baseModelType = (Model.BaseModelType == null) ? "Microsoft.Rest.HttpRestException" : (string)Model.BaseModelType.Name;}
+    @{var baseModelType = (Model.BaseModelType == null) ? "Microsoft.Rest.HttpRestException<"+Model.Name+">" : (string)Model.BaseModelType.Name;}
     public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
     {
         /// <summary>
@@ -41,5 +41,57 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             : base(message, innerException)
         {
         }
+
+@EmptyLine
+        /// <summary>
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Underlying error model.</param>
+        public @(Model.ExceptionTypeDefinitionName)(string message, @(Model.Name) errorModel)
+            : base(message, null)
+        {
+                Body = errorModel;
+        }
+
+@EmptyLine
+        /// <summary>
+        /// Sets the underlying errror model
+        /// </summary>
+        /// <param name="errorModel">Error model to be set</param>
+        public SetErrorModel (string message, @(Model.Name) errorModel) => Body = errorModel;
+
+
+@foreach (PropertyCs property in Model.InstanceProperties)
+{
+        @:/// <summary>
+        @:@WrapComment("/// ", property.GetFormattedPropertySummary())
+        @:/// </summary>
+            if(!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
+            { 
+        @:/// <remarks>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </remarks>
+            }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @EmptyLine
+}
+
+@foreach (var property in Model.ClassProperties)
+{
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+foreach (var conv in property.JsonConverters)
+{
+        @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
+}
+        @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+        @:public static @property.ModelTypeName @property.Name { get; private set; }
+        @EmptyLine
+}
+
+
+
     }
 }
