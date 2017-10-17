@@ -10,11 +10,20 @@
 
 @foreach (var errorCode in Model.Responses.Keys.Where(key=> Model.Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Model.Responses[key].Extensions["x-ms-error-response"]))
 {
-@:private async System.Threading.Tasks.Task Handle@(errorCode)Response(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
+@:/// <summary>
+@:/// Handle @((int)errorCode) errors
+@:/// </summary>
+@:/// <exception cref="@(Model.Responses[errorCode].Body.ClassName)Exception">
+@:/// Deserialize error body returned by the operation
+@:/// </exception>
+@:private async System.Threading.Tasks.Task Handle@((int)errorCode)Response(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
 @:  => HandleErrorResponse<@(Model.Responses[errorCode].Body.ClassName)Exception, @(Model.Responses[errorCode].Body.ClassName)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
 }
 
 @EmptyLine
+@:/// <summary>
+@:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
+@:/// </summary>
 private async System.Threading.Tasks.Task HandlErrorResponse<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings)
 {
     string _responseContent = null;
