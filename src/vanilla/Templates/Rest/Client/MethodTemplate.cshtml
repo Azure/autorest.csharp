@@ -10,23 +10,39 @@
 
 @{ var errorCodes = Model.Responses.Keys.Where(key=> Model.Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Model.Responses[key].Extensions["x-ms-error-response"]); }
 
+@{ var exceptionName = ""; }
+@{ var responseBody = ""; }
 @foreach (var errorCode in errorCodes)
 {
+    responseBody = (Model.Responses[errorCode].Body==null)? "string" : Model.Responses[errorCode].Body.ClassName;
+    exceptionName = (Model.Responses[errorCode].Body is PrimaryTypeCs) ?  "HttpRestException<"+responseBody+">" : responseBody+"Exception<"+responseBody+">";
 @:/// <summary>
 @:/// Handle @((int)errorCode) errors
 @:/// </summary>
-@:/// <exception cref="@(Model.Responses[errorCode].Body.ClassName)Exception">
+@:/// <exception cref="@(exceptionName)">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async System.Threading.Tasks.Task Handle@((int)errorCode)ResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
-@:  => HandleErrorResponseFor@(Model.Name)<@(Model.Responses[errorCode].Body.ClassName)Exception, @(Model.Responses[errorCode].Body.ClassName)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+@:private async System.Threading.Tasks.Task Handle@((int)errorCode)ResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse)
+@:  => await HandleErrorResponseFor@(Model.Name)<@(exceptionName), @(responseBody)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", @((int)errorCode)), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
 }
+@{ responseBody = (Model.DefaultResponse.Body==null)? Model.DefaultResponse.Body.ClassName : "string"; }
+@{ exceptionName = (Model.DefaultResponse.Body is PrimaryTypeCs) ?  "HttpRestException<"+responseBody+">" : responseBody+"Exception<"+responseBody+">"; }
+@EmptyLine
+/// <summary>
+/// Handle other unhandled status codes
+/// </summary>
+/// <exception cref="@(exceptionName)">
+/// Deserialize error body returned by the operation
+/// </exception>
+private async System.Threading.Tasks.Task HandleDefaultResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
+  => await HandleErrorResponseFor@(Model.Name)<@(exceptionName), @(responseBody)>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+
 
 @EmptyLine
 /// <summary>
 /// Handle error responses, deserialize errors of types V and throw exceptions of type T
 /// </summary>
-private async System.Threading.Tasks.Task HandlErrorResponseFor@(Model.Name)<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings)
+private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings) where T : System.Exception, IHttpRestException<V>
 {
     string _responseContent = null;
     T ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
@@ -42,7 +58,7 @@ private async System.Threading.Tasks.Task HandlErrorResponseFor@(Model.Name)<T,V
             // Ignore the exception
         }
     }
-    ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+    ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
     @(Model.InitializeException)
     if (_shouldTrace)
@@ -54,6 +70,10 @@ private async System.Threading.Tasks.Task HandlErrorResponseFor@(Model.Name)<T,V
     if (_httpResponse != null)
     {
         _httpResponse.Dispose();
+    }
+    if (_shouldTrace)
+    {
+        Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
     }
     throw ex;   
 }
@@ -407,7 +427,7 @@ else
                 @foreach(var errorCode in errorCodes)
                 {
                 @:case errorCode:
-                    @:await this.Handle@(errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
+                    @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
                 }
                 @:default:
                     @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (((int)))_statusCode);
@@ -431,6 +451,7 @@ else
         @:catch (Newtonsoft.Json.JsonException)
         @:{
         @:    // Ignore the exception
+
         @:}
     }
     else
@@ -442,15 +463,14 @@ else
         @:else {
             @:_responseContent = string.Empty;
         @:}
+        @:if (_shouldTrace)
+        @:{
+        @:    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+        @:}
     }
 
-        ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-        ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
         @(Model.InitializeException)
-        if (_shouldTrace)
-        {
-            Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
-        }
+        
 
         _httpRequest.Dispose();
         if (_httpResponse != null)
