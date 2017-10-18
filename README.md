@@ -51,7 +51,6 @@ pipeline:
 
 scope-csharp/emitter:
   input-artifact: source-file-csharp
-  output-uri-expr: $key
 
 output-artifact:
 - source-file-csharp
@@ -79,7 +78,6 @@ pipeline:
 
 scope-jsonrpcclient/emitter:
   input-artifact: source-file-jsonrpcclient
-  output-uri-expr: $key
 output-artifact:
 - source-file-jsonrpcclient
 ```
