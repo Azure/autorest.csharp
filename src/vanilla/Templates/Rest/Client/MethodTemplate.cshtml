@@ -418,66 +418,23 @@ else
     if (@(Model.FailureStatusCodePredicate))
     {
         var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-    @if (Model.DefaultResponse.Body != null)
-    {
-        @:try
-        @:{
-            @:switch((((int)))_statusCode)
-            @:{
+        try
+        {
+            switch((((int)))_statusCode)
+            {
                 @foreach(var errorCode in errorCodes)
                 {
-                @:case errorCode:
+                @:case @((int)errorCode):
                     @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
                 }
-                @:default:
-                    @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (((int)))_statusCode);
-            @:}
-            if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                default:
+                    await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (((int)))_statusCode);
             }
-            else
-            {
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
-            }
-            @:if (_errorBody != null)
-            @:{
-                @:@(Model.InitializeExceptionWithMessage)
-                @:ex.Body = _errorBody;
-            @:}
-
-        @:}
-        @:catch (Newtonsoft.Json.JsonException)
-        @:{
-        @:    // Ignore the exception
-
-        @:}
-    }
-    else
-    {
-        //If not defined by default model, read content as string
-        @:if (_httpResponse.Content != null) {
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:}
-        @:else {
-            @:_responseContent = string.Empty;
-        @:}
-        @:if (_shouldTrace)
-        @:{
-        @:    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
-        @:}
-    }
-
-        @(Model.InitializeException)
-        
-
-        _httpRequest.Dispose();
-        if (_httpResponse != null)
-        {
-            _httpResponse.Dispose();
         }
-        throw ex;
+        catch (Newtonsoft.Json.JsonException)
+        {
+            // Ignore the exception
+        }
     }
 
     // Create Result
