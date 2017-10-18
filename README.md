@@ -81,3 +81,13 @@ scope-jsonrpcclient/emitter:
 output-artifact:
 - source-file-jsonrpcclient
 ```
+
+## Help
+
+``` yaml
+pipeline:
+  help/help-csharp:
+    scope: help
+  help/help-csharp/emitter:
+    input: help-csharp
+```
