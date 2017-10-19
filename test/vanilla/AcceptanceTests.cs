@@ -1298,6 +1298,7 @@ namespace AutoRest.CSharp.Tests
                     Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
                     Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
                     Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    client.Polymorphism.PutComplicated(polymorphismResult); // roundtrips?
                     // PUT polymorphism/valid
                     var polymorphismRequest = new SmartSalmon
                     {
