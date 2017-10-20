@@ -14,13 +14,9 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-    @{var baseModelType = (Model.BaseModelType == null) ? "Microsoft.Rest.HttpRestException<"+Model.Name+">" : (string)Model.BaseModelType.Name;}
+    @{var baseModelType = "Microsoft.Rest.HttpRestExceptionBase<"+Model.Name+">";}
     public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
     {
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public @Model.Name Body { get; set; }
 @EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
@@ -47,25 +43,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             : base(message, innerException)
         {
         }
-
-@EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Underlying error model.</param>
-        public @(Model.ExceptionTypeDefinitionName)(string message, @(Model.Name) errorModel)
-            : base(message, null)
-        {
-                Body = errorModel;
-        }
-
-@EmptyLine
-        /// <summary>
-        /// Sets the underlying errror model
-        /// </summary>
-        /// <param name="errorModel">Error model to be set</param>
-        public SetErrorModel (string message, @(Model.Name) errorModel) => Body = errorModel;
 @EmptyLine
 
 @{

@@ -480,5 +480,22 @@ namespace AutoRest.CSharp.Model
                     .Where(m => m.InputParameter.IsNullable())
                     .Select(m => m.InputParameter.Name + " != null"));
         }
+
+        public static string GetResponseTypeName(Response response) => (response.Body==null)? "Microsoft.Rest.Azure.CloudError": response.Body.ClassName;
+       
+        public static string GetExceptionTypeName(Response response)
+        {
+            if (response.Body==null)
+            {
+                return "Microsoft.Rest.HttpRestCloudException";
+            }
+            if(response.Body is PrimaryTypeCs)
+            {
+                return "Microsoft.Rest.HttpRestException<"+response.Body.ClassName+">";
+            }
+            return response.Body.ClassName+"Exception";
+        }
+
+        public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
     }
 }
