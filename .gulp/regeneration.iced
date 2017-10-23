@@ -139,7 +139,8 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
     'outputDir': 'Expected',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'syncMethods': 'essential'
   },done
   return null
 
@@ -155,7 +156,8 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
     'azureArm': true,
     'fluent': true,
     'nsPrefix': 'Fixtures.Azure.Fluent',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'syncMethods': 'essential'
   },done
   return null
 
@@ -175,7 +177,8 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
     'mappings': mappings,
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'syncMethods': 'essential'
   }, () ->
     regenExpected {
       'outputBaseDir': 'test/vanilla',
@@ -183,7 +186,8 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
       'mappings': Object.assign({ 'AcceptanceTests/UrlMultiCollectionFormat': 'url-multi-collectionFormat.json' }, defaultMappings),
       'outputDir': 'Expected',
       'nsPrefix': 'Fixtures',
-      'flatteningThreshold': '1'
+      'flatteningThreshold': '1',
+      'syncMethods': 'essential'
     }, () ->
       regenExpectedConfigurations {
         configFiles: defaultConfigurationFiles,
@@ -205,7 +209,8 @@ task 'regenerate-cswithcreds', '', (done) ->
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'addCredentials': true
+    'addCredentials': true,
+    'syncMethods': 'essential'
   },done
   return null
 
@@ -313,7 +318,8 @@ task 'regenerate-cscomposite', '', (done) ->
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'override-info.title': "Composite Bool Int",
-    'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
+    'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients",
+    'syncMethods': 'essential'
   },done
   return null
 
@@ -329,7 +335,8 @@ task 'regenerate-csazurecomposite', '', (done) ->
     'flatteningThreshold': '1',
     'override-info.version': "1.0.0",
     'override-info.title': "Azure Composite Model",
-    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients"
+    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients",
+    'syncMethods': 'essential'
   },done
   return null
 
@@ -346,7 +353,8 @@ task 'regenerate-csazurefluentcomposite', '', (done) ->
     'flatteningThreshold': '1',
     'override-info.version': "1.0.0",
     'override-info.title': "Azure Composite Model",
-    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients"
+    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients",
+    'syncMethods': 'essential'
   },done
   return null
 
