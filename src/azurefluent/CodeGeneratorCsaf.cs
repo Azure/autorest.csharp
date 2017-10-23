@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Azure.Fluent
 
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
                 await Write(exceptionTemplate, Path.Combine("Generated", Settings.Instance.ModelsName,
-                     $"Generated/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                     $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
 
             // Xml Serialization
