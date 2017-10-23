@@ -28,43 +28,6 @@ namespace Fixtures.MirrorPrimitives.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Product class.
-        /// </summary>
-        /// <param name="enumProperty">Possible values include: 'red', 'blue',
-        /// 'green'</param>
-        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), byte[] base64url = default(byte[]), System.Guid? uuid = default(System.Guid?), string enumProperty = default(string), bool? boolean = default(bool?), System.DateTime? date = default(System.DateTime?), System.DateTime? dateTime = default(System.DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<byte[]> base64urlArray = default(IList<byte[]>), IList<System.DateTime?> dateArray = default(IList<System.DateTime?>), IList<System.DateTime?> dateTimeArray = default(IList<System.DateTime?>), IList<System.Guid?> uuidArray = default(IList<System.Guid?>))
-        {
-            Integer = integer;
-            IntProperty = intProperty;
-            LongProperty = longProperty;
-            Number = number;
-            FloatProperty = floatProperty;
-            DoubleProperty = doubleProperty;
-            ByteProperty = byteProperty;
-            StringProperty = stringProperty;
-            Base64url = base64url;
-            Uuid = uuid;
-            EnumProperty = enumProperty;
-            Boolean = boolean;
-            Date = date;
-            DateTime = dateTime;
-            IntegerArray = integerArray;
-            IntArray = intArray;
-            LongArray = longArray;
-            NumberArray = numberArray;
-            FloatArray = floatArray;
-            DoubleArray = doubleArray;
-            ByteArray = byteArray;
-            BooleanArray = booleanArray;
-            StringArray = stringArray;
-            Base64urlArray = base64urlArray;
-            DateArray = dateArray;
-            DateTimeArray = dateTimeArray;
-            UuidArray = uuidArray;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

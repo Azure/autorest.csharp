@@ -28,22 +28,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPutAsyncNoRetrySucceededHeaders class.
-        /// </summary>
-        /// <param name="azureAsyncOperation">Location to poll for result
-        /// status: will be set to
-        /// /lro/putasync/noretry/succeeded/operationResults/200</param>
-        /// <param name="location">Location to poll for result status: will be
-        /// set to /lro/putasync/noretry/succeeded/operationResults/200</param>
-        public LROsPutAsyncNoRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string))
-        {
-            AzureAsyncOperation = azureAsyncOperation;
-            Location = location;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

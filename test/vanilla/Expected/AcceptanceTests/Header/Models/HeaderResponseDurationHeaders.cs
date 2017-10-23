@@ -28,18 +28,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HeaderResponseDurationHeaders
-        /// class.
-        /// </summary>
-        /// <param name="value">response with header values
-        /// "P123DT22H14M12.011S"</param>
-        public HeaderResponseDurationHeaders(System.TimeSpan? value = default(System.TimeSpan?))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

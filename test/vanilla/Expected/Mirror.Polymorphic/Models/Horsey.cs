@@ -24,19 +24,6 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Horsey class.
-        /// </summary>
-        /// <param name="id">Id.</param>
-        /// <param name="description">Description of a Animal.</param>
-        /// <param name="breed">horse breed</param>
-        public Horsey(string id = default(string), string description = default(string), string breed = default(string))
-            : base(id, description)
-        {
-            Breed = breed;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

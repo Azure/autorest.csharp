@@ -22,16 +22,6 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         {
             CustomInit();
         }
-
-        /// <summary>
-        /// Initializes a new instance of the RefColorConstant class.
-        /// </summary>
-        /// <param name="field1">Sample string.</param>
-        public RefColorConstant(string field1 = default(string))
-        {
-            Field1 = field1;
-            CustomInit();
-        }
         /// <summary>
         /// Static constructor for RefColorConstant class.
         /// </summary>

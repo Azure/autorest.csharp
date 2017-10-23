@@ -24,16 +24,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the BooleanWrapper class.
-        /// </summary>
-        public BooleanWrapper(bool? fieldTrue = default(bool?), bool? fieldFalse = default(bool?))
-        {
-            FieldTrue = fieldTrue;
-            FieldFalse = fieldFalse;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

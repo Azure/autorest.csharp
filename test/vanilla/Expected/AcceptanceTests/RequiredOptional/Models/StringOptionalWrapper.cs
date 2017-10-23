@@ -24,15 +24,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the StringOptionalWrapper class.
-        /// </summary>
-        public StringOptionalWrapper(string value = default(string))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -25,16 +25,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         {
             CustomInit();
         }
-
-        /// <summary>
-        /// Initializes a new instance of the ChildProduct class.
-        /// </summary>
-        /// <param name="count">Count</param>
-        public ChildProduct(int? count = default(int?))
-        {
-            Count = count;
-            CustomInit();
-        }
         /// <summary>
         /// Static constructor for ChildProduct class.
         /// </summary>

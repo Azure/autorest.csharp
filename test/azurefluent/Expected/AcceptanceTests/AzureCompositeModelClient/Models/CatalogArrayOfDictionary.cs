@@ -26,17 +26,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the CatalogArrayOfDictionary class.
-        /// </summary>
-        /// <param name="productArrayOfDictionary">Array of dictionary of
-        /// products</param>
-        public CatalogArrayOfDictionary(IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>))
-        {
-            ProductArrayOfDictionary = productArrayOfDictionary;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

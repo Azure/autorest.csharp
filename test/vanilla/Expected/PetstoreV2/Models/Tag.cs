@@ -26,16 +26,6 @@ namespace Fixtures.PetstoreV2.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Tag class.
-        /// </summary>
-        public Tag(long? id = default(long?), string name = default(string))
-        {
-            Id = id;
-            Name = name;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

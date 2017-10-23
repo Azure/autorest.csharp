@@ -26,16 +26,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the SubResource class.
-        /// </summary>
-        /// <param name="id">Sub Resource Id</param>
-        public SubResource(string id = default(string))
-        {
-            Id = id;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

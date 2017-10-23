@@ -28,17 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// HeaderCustomNamedRequestIdHeadHeadersInner class.
-        /// </summary>
-        /// <param name="fooRequestId">Gets the foo-request-id.</param>
-        public HeaderCustomNamedRequestIdHeadHeadersInner(string fooRequestId = default(string))
-        {
-            FooRequestId = fooRequestId;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -28,18 +28,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// ParameterGroupingPostOptionalParameters class.
-        /// </summary>
-        /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostOptionalParameters(string customHeader = default(string), int? query = default(int?))
-        {
-            CustomHeader = customHeader;
-            Query = query;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -27,17 +27,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HeaderResponseByteHeaders class.
-        /// </summary>
-        /// <param name="value">response with header values
-        /// "啊齄丂狛狜隣郎隣兀﨩"</param>
-        public HeaderResponseByteHeaders(byte[] value = default(byte[]))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

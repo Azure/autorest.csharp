@@ -26,16 +26,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the CatalogDictionaryInner class.
-        /// </summary>
-        /// <param name="productDictionary">Dictionary of products</param>
-        public CatalogDictionaryInner(IDictionary<string, ProductInner> productDictionary = default(IDictionary<string, ProductInner>))
-        {
-            ProductDictionary = productDictionary;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

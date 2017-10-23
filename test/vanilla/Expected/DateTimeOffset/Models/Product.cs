@@ -28,18 +28,6 @@ namespace Fixtures.DateTimeOffset.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Product class.
-        /// </summary>
-        public Product(System.DateTime? date = default(System.DateTime?), System.DateTimeOffset? dateTime = default(System.DateTimeOffset?), IList<System.DateTime?> dateArray = default(IList<System.DateTime?>), IList<System.DateTimeOffset?> dateTimeArray = default(IList<System.DateTimeOffset?>))
-        {
-            Date = date;
-            DateTime = dateTime;
-            DateArray = dateArray;
-            DateTimeArray = dateTimeArray;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

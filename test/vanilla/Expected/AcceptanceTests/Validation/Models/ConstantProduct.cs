@@ -25,7 +25,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         {
             CustomInit();
         }
-
         /// <summary>
         /// Static constructor for ConstantProduct class.
         /// </summary>

@@ -7,8 +7,6 @@
 namespace Fixtures.AcceptanceTestsHiddenMethods.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("cookiecuttershark")]
@@ -25,8 +23,8 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
-            : base(length, birthday, species, siblings, age)
+        public Cookiecuttershark(double length, System.DateTime birthday)
+            : base(length, birthday)
         {
             CustomInit();
         }

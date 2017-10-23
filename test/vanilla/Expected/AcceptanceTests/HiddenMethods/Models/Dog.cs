@@ -20,16 +20,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Dog class.
-        /// </summary>
-        public Dog(int? id = default(int?), string name = default(string), string food = default(string))
-            : base(id, name)
-        {
-            Food = food;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

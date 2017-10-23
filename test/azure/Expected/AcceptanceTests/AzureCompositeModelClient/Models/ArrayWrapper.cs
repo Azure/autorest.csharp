@@ -26,15 +26,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ArrayWrapper class.
-        /// </summary>
-        public ArrayWrapper(IList<string> array = default(IList<string>))
-        {
-            Array = array;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

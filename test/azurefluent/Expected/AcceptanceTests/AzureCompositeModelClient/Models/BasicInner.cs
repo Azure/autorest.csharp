@@ -24,22 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the BasicInner class.
-        /// </summary>
-        /// <param name="id">Basic Id</param>
-        /// <param name="name">Name property with a very long description that
-        /// does not fit on a single line and a line break.</param>
-        /// <param name="color">Possible values include: 'cyan', 'Magenta',
-        /// 'YELLOW', 'blacK'</param>
-        public BasicInner(int? id = default(int?), string name = default(string), string color = default(string))
-        {
-            Id = id;
-            Name = name;
-            Color = color;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

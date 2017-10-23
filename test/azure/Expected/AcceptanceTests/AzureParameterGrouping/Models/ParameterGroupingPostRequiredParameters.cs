@@ -33,12 +33,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// ParameterGroupingPostRequiredParameters class.
         /// </summary>
         /// <param name="path">Path parameter</param>
-        /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostRequiredParameters(int body, string path, string customHeader = default(string), int? query = default(int?))
+        public ParameterGroupingPostRequiredParameters(int body, string path)
         {
             Body = body;
-            CustomHeader = customHeader;
-            Query = query;
             Path = path;
             CustomInit();
         }

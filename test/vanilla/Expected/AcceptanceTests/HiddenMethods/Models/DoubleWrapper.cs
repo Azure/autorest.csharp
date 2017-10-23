@@ -20,16 +20,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the DoubleWrapper class.
-        /// </summary>
-        public DoubleWrapper(double? field1 = default(double?), double? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default(double?))
-        {
-            Field1 = field1;
-            Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

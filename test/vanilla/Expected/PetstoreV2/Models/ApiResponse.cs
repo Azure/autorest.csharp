@@ -26,17 +26,6 @@ namespace Fixtures.PetstoreV2.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ApiResponse class.
-        /// </summary>
-        public ApiResponse(int? code = default(int?), string type = default(string), string message = default(string))
-        {
-            Code = code;
-            Type = type;
-            Message = message;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

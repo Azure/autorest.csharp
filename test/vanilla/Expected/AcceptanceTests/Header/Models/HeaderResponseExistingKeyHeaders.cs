@@ -28,18 +28,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HeaderResponseExistingKeyHeaders
-        /// class.
-        /// </summary>
-        /// <param name="userAgent">response with header value "User-Agent":
-        /// "overwrite"</param>
-        public HeaderResponseExistingKeyHeaders(string userAgent = default(string))
-        {
-            UserAgent = userAgent;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -29,11 +29,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the FishInner class.
         /// </summary>
-        public FishInner(double length, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>))
+        public FishInner(double length)
         {
-            Species = species;
             Length = length;
-            Siblings = siblings;
             CustomInit();
         }
 

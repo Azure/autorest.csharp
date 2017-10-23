@@ -26,17 +26,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Cat class.
-        /// </summary>
-        public Cat(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>))
-            : base(id, name)
-        {
-            Color = color;
-            Hates = hates;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

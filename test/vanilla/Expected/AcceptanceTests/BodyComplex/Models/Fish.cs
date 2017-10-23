@@ -28,11 +28,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
+        public Fish(double length)
         {
-            Species = species;
             Length = length;
-            Siblings = siblings;
             CustomInit();
         }
 

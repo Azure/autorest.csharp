@@ -24,16 +24,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the B class.
-        /// </summary>
-        public B(string statusCode = default(string), string textStatusCode = default(string))
-            : base(statusCode)
-        {
-            TextStatusCode = textStatusCode;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

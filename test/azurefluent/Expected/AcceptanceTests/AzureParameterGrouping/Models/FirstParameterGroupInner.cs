@@ -29,17 +29,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the FirstParameterGroupInner class.
-        /// </summary>
-        /// <param name="queryOne">Query parameter with default</param>
-        public FirstParameterGroupInner(string headerOne = default(string), int? queryOne = default(int?))
-        {
-            HeaderOne = headerOne;
-            QueryOne = queryOne;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

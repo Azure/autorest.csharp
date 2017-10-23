@@ -28,18 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsDeleteNoHeaderInRetryHeadersInner class.
-        /// </summary>
-        /// <param name="location">Location to poll for result status: will be
-        /// set to /lro/put/noheader/202/204/operationresults</param>
-        public LROsDeleteNoHeaderInRetryHeadersInner(string location = default(string))
-        {
-            Location = location;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

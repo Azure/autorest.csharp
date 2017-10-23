@@ -22,16 +22,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the DateWrapper class.
-        /// </summary>
-        public DateWrapper(System.DateTime? field = default(System.DateTime?), System.DateTime? leap = default(System.DateTime?))
-        {
-            Field = field;
-            Leap = leap;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

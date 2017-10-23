@@ -11,8 +11,6 @@
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     public partial class SiameseInner : Cat
@@ -22,16 +20,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public SiameseInner()
         {
-            CustomInit();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the SiameseInner class.
-        /// </summary>
-        public SiameseInner(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>), string breed = default(string))
-            : base(id, name, color, hates)
-        {
-            Breed = breed;
             CustomInit();
         }
 

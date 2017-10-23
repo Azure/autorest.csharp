@@ -24,18 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationResultError class.
-        /// </summary>
-        /// <param name="code">The error code for an operation failure</param>
-        /// <param name="message">The detailed arror message</param>
-        public OperationResultError(int? code = default(int?), string message = default(string))
-        {
-            Code = code;
-            Message = message;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

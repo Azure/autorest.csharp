@@ -34,11 +34,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// product for a given latitude &amp; longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
-        /// <param name="description">Description of product.</param>
-        public BaseProduct(string productId, string description = default(string))
+        public BaseProduct(string productId)
         {
             ProductId = productId;
-            Description = description;
             CustomInit();
         }
 

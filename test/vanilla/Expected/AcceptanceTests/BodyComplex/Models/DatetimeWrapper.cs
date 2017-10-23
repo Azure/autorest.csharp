@@ -24,16 +24,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the DatetimeWrapper class.
-        /// </summary>
-        public DatetimeWrapper(System.DateTime? field = default(System.DateTime?), System.DateTime? now = default(System.DateTime?))
-        {
-            Field = field;
-            Now = now;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -28,21 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsPost202RetryInvalidHeaderHeadersInner class.
-        /// </summary>
-        /// <param name="location">Location to poll for result status: will be
-        /// set to /foo</param>
-        /// <param name="retryAfter">Number of milliseconds until the next poll
-        /// should be sent, will be set to /bar</param>
-        public LROSADsPost202RetryInvalidHeaderHeadersInner(string location = default(string), int? retryAfter = default(int?))
-        {
-            Location = location;
-            RetryAfter = retryAfter;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

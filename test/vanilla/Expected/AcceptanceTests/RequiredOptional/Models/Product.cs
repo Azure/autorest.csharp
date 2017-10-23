@@ -26,10 +26,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(int id, string name = default(string))
+        public Product(int id)
         {
             Id = id;
-            Name = name;
             CustomInit();
         }
 

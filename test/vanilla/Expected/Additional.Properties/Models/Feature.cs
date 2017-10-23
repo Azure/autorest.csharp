@@ -24,16 +24,6 @@ namespace Fixtures.AdditionalProperties.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Feature class.
-        /// </summary>
-        public Feature(string foo = default(string), int? bar = default(int?))
-        {
-            Foo = foo;
-            Bar = bar;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

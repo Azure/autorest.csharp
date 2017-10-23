@@ -22,15 +22,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the DictionaryWrapper class.
-        /// </summary>
-        public DictionaryWrapper(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
-        {
-            DefaultProgram = defaultProgram;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

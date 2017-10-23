@@ -11,8 +11,6 @@
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("salmon")]
@@ -29,11 +27,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon(double length, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), string location = default(string), bool? iswild = default(bool?))
-            : base(length, species, siblings)
+        public Salmon(double length)
+            : base(length)
         {
-            Location = location;
-            Iswild = iswild;
             CustomInit();
         }
 

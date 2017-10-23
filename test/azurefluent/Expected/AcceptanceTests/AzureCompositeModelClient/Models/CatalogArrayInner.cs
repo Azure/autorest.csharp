@@ -26,16 +26,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the CatalogArrayInner class.
-        /// </summary>
-        /// <param name="productArray">Array of products</param>
-        public CatalogArrayInner(IList<ProductInner> productArray = default(IList<ProductInner>))
-        {
-            ProductArray = productArray;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

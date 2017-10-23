@@ -27,22 +27,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the SubProduct class.
-        /// </summary>
-        /// <param name="id">Sub Resource Id</param>
-        /// <param name="provisioningStateValues">Possible values include:
-        /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
-        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-        /// 'OK'</param>
-        public SubProduct(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
-            : base(id)
-        {
-            ProvisioningState = provisioningState;
-            ProvisioningStateValues = provisioningStateValues;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

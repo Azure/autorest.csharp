@@ -11,8 +11,6 @@
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("cookiecuttershark")]
@@ -29,8 +27,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), int? age = default(int?))
-            : base(length, birthday, species, siblings, age)
+        public Cookiecuttershark(double length, System.DateTime birthday)
+            : base(length, birthday)
         {
             CustomInit();
         }

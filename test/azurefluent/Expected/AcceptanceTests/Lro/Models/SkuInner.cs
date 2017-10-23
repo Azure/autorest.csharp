@@ -24,16 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the SkuInner class.
-        /// </summary>
-        public SkuInner(string name = default(string), string id = default(string))
-        {
-            Name = name;
-            Id = id;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

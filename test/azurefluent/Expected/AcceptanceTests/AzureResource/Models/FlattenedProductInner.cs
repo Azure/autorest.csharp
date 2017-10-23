@@ -14,8 +14,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [JsonTransformation]
@@ -26,18 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
         /// </summary>
         public FlattenedProductInner()
         {
-            CustomInit();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the FlattenedProductInner class.
-        /// </summary>
-        public FlattenedProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
-            : base(location, id, name, type, tags)
-        {
-            Pname = pname;
-            Lsize = lsize;
-            ProvisioningState = provisioningState;
             CustomInit();
         }
 

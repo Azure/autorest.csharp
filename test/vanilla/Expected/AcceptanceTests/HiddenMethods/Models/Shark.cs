@@ -7,8 +7,6 @@
 namespace Fixtures.AcceptanceTestsHiddenMethods.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("shark")]
@@ -25,10 +23,9 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
-            : base(length, species, siblings)
+        public Shark(double length, System.DateTime birthday)
+            : base(length)
         {
-            Age = age;
             Birthday = birthday;
             CustomInit();
         }

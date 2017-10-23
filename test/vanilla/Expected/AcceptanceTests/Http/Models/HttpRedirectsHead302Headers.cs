@@ -28,18 +28,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HttpRedirectsHead302Headers
-        /// class.
-        /// </summary>
-        /// <param name="location">The redirect location for this request.
-        /// Possible values include: '/http/success/head/200'</param>
-        public HttpRedirectsHead302Headers(string location = default(string))
-        {
-            Location = location;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
