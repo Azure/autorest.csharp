@@ -38,6 +38,11 @@ public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; pri
 @EmptyLine
 }
 
+public I@(Model.Name) WithHttpMessages()
+{
+    return new @(Model.Name)Operations(this);
+}
+       
 @XmlDocCtor(Model.Name)
 @XmlDocParam("handlers", "delegating handlers to add to the http client pipeline", true)
 @(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)

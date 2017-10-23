@@ -1,0 +1,53 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<CodeModelCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    public partial interface I@(Model.Name)Operations @(string.Concat(Model.AllOperations.Select((group, i) => $"{(i == 0 ? ": " : ", ")}I{group.TypeName}")))
+    {
+     
+    @foreach(MethodCs method in Model.Methods)
+    {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+        @:/// </summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <remarks>
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        @:/// </remarks>
+        }
+        foreach (var parameter in method.LocalParameters)
+        {
+        @:/// <param name='@parameter.Name'>
+        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+        @:/// </param>
+        }
+        @:/// <param name='customHeaders'>
+        @:/// The headers that will be added to request.
+        @:/// </param>
+        @:/// <param name='cancellationToken'>
+        @:/// The cancellation token.
+        @:/// </param>
+        @:System.Threading.Tasks.Task<@(method.OperationResponseReturnTypeString)> @(method.SerializedName)(@(method.GetAsyncMethodParameterDeclaration(true)));
+
+    }
+
+    }
+}
