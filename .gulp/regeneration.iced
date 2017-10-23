@@ -161,7 +161,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cs-config', 'regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -188,15 +188,14 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
       'nsPrefix': 'Fixtures',
       'flatteningThreshold': '1',
       'syncMethods': 'essential'
-    }, () ->
-      regenExpectedConfigurations {
-        configFiles: defaultConfigurationFiles,
-        tag: 'vanilla'
-      },done
+    }, done
   return null
 
 task 'regenerate-cs-config', '', [], (done) ->
-  regenExpectedConfigurations defaultConfigurationFiles, done
+  regenExpectedConfigurations {
+    configFiles: defaultConfigurationFiles,
+    tag: 'vanilla'
+  }, done
   return null
 
 task 'regenerate-cswithcreds', '', (done) ->

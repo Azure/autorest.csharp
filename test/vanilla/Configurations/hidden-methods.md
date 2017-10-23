@@ -5,6 +5,7 @@
 ## Configuration
 
 ``` yaml
+sync-methods: essential
 base-folder: ../../../
 input-file: node_modules/@microsoft.azure/autorest.testserver/swagger/body-complex.json
 payload-flattening-threshold: 1
