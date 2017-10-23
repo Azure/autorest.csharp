@@ -26,17 +26,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ResourceCollectionInner class.
-        /// </summary>
-        public ResourceCollectionInner(FlattenedProductInner productresource = default(FlattenedProductInner), IList<FlattenedProductInner> arrayofresources = default(IList<FlattenedProductInner>), IDictionary<string, FlattenedProductInner> dictionaryofresources = default(IDictionary<string, FlattenedProductInner>))
-        {
-            Productresource = productresource;
-            Arrayofresources = arrayofresources;
-            Dictionaryofresources = dictionaryofresources;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

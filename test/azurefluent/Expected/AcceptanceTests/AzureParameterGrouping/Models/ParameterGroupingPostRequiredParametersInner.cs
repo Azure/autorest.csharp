@@ -33,12 +33,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
         /// ParameterGroupingPostRequiredParametersInner class.
         /// </summary>
         /// <param name="path">Path parameter</param>
-        /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostRequiredParametersInner(int body, string path, string customHeader = default(string), int? query = default(int?))
+        public ParameterGroupingPostRequiredParametersInner(int body, string path)
         {
             Body = body;
-            CustomHeader = customHeader;
-            Query = query;
             Path = path;
             CustomInit();
         }

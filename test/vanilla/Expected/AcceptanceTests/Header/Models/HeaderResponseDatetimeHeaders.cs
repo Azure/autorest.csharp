@@ -28,18 +28,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HeaderResponseDatetimeHeaders
-        /// class.
-        /// </summary>
-        /// <param name="value">response with header values
-        /// "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</param>
-        public HeaderResponseDatetimeHeaders(System.DateTime? value = default(System.DateTime?))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

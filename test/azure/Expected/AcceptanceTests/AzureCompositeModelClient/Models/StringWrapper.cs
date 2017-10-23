@@ -24,17 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the StringWrapper class.
-        /// </summary>
-        public StringWrapper(string field = default(string), string empty = default(string), string nullProperty = default(string))
-        {
-            Field = field;
-            Empty = empty;
-            NullProperty = nullProperty;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

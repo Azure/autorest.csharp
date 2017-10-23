@@ -26,16 +26,6 @@ namespace Fixtures.PetstoreV2NoSync.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Category class.
-        /// </summary>
-        public Category(long? id = default(long?), string name = default(string))
-        {
-            Id = id;
-            Name = name;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

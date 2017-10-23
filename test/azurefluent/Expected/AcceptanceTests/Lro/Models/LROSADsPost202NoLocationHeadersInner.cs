@@ -28,21 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsPost202NoLocationHeadersInner class.
-        /// </summary>
-        /// <param name="location">Location to poll for result status: will not
-        /// be set</param>
-        /// <param name="retryAfter">Number of milliseconds until the next poll
-        /// should be sent, will be set to zero</param>
-        public LROSADsPost202NoLocationHeadersInner(string location = default(string), int? retryAfter = default(int?))
-        {
-            Location = location;
-            RetryAfter = retryAfter;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

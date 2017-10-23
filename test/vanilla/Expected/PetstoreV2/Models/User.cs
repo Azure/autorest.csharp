@@ -26,23 +26,6 @@ namespace Fixtures.PetstoreV2.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the User class.
-        /// </summary>
-        /// <param name="userStatus">User Status</param>
-        public User(long? id = default(long?), string username = default(string), string firstName = default(string), string lastName = default(string), string email = default(string), string password = default(string), string phone = default(string), int? userStatus = default(int?))
-        {
-            Id = id;
-            Username = username;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            Phone = phone;
-            UserStatus = userStatus;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

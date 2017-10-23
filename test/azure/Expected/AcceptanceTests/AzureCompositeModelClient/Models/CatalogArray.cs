@@ -26,16 +26,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the CatalogArray class.
-        /// </summary>
-        /// <param name="productArray">Array of products</param>
-        public CatalogArray(IList<Product> productArray = default(IList<Product>))
-        {
-            ProductArray = productArray;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

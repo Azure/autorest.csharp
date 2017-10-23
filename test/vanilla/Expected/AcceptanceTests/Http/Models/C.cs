@@ -24,15 +24,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the C class.
-        /// </summary>
-        public C(string httpCode = default(string))
-        {
-            HttpCode = httpCode;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

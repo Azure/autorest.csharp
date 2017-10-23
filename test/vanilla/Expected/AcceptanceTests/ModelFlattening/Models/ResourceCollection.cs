@@ -26,17 +26,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ResourceCollection class.
-        /// </summary>
-        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), IList<FlattenedProduct> arrayofresources = default(IList<FlattenedProduct>), IDictionary<string, FlattenedProduct> dictionaryofresources = default(IDictionary<string, FlattenedProduct>))
-        {
-            Productresource = productresource;
-            Arrayofresources = arrayofresources;
-            Dictionaryofresources = dictionaryofresources;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

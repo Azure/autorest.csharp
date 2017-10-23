@@ -11,8 +11,6 @@
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("shark")]
@@ -29,10 +27,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double length, System.DateTime birthday, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), int? age = default(int?))
-            : base(length, species, siblings)
+        public Shark(double length, System.DateTime birthday)
+            : base(length)
         {
-            Age = age;
             Birthday = birthday;
             CustomInit();
         }

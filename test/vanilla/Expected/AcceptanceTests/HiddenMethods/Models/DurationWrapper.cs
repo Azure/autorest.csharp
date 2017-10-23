@@ -20,15 +20,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the DurationWrapper class.
-        /// </summary>
-        public DurationWrapper(System.TimeSpan? field = default(System.TimeSpan?))
-        {
-            Field = field;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -26,22 +26,6 @@ namespace Fixtures.AdditionalProperties.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Pet class.
-        /// </summary>
-        /// <param name="additionalProperties">Unmatched properties from the
-        /// message are deserialized this collection</param>
-        public Pet(IDictionary<string, Feature> additionalProperties = default(IDictionary<string, Feature>), string name = default(string), int? birthday = default(int?), WithStringDictionary wsd = default(WithStringDictionary), WithUntypedDictionary wud = default(WithUntypedDictionary), WithTypedDictionary wtd = default(WithTypedDictionary))
-        {
-            AdditionalProperties = additionalProperties;
-            Name = name;
-            Birthday = birthday;
-            Wsd = wsd;
-            Wud = wud;
-            Wtd = wtd;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

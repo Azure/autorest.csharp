@@ -28,16 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPutAsyncNoHeaderInRetryHeadersInner class.
-        /// </summary>
-        public LROsPutAsyncNoHeaderInRetryHeadersInner(string azureAsyncOperation = default(string))
-        {
-            AzureAsyncOperation = azureAsyncOperation;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

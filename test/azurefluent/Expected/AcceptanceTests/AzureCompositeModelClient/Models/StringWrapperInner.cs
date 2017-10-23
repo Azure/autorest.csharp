@@ -24,17 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the StringWrapperInner class.
-        /// </summary>
-        public StringWrapperInner(string field = default(string), string empty = default(string), string nullProperty = default(string))
-        {
-            Field = field;
-            Empty = empty;
-            NullProperty = nullProperty;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -24,16 +24,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the FloatWrapper class.
-        /// </summary>
-        public FloatWrapper(double? field1 = default(double?), double? field2 = default(double?))
-        {
-            Field1 = field1;
-            Field2 = field2;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

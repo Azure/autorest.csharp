@@ -26,22 +26,6 @@ namespace Fixtures.PetstoreV2NoSync.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Order class.
-        /// </summary>
-        /// <param name="status">Order Status. Possible values include:
-        /// 'placed', 'approved', 'delivered'</param>
-        public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), System.DateTime? shipDate = default(System.DateTime?), string status = default(string), bool? complete = default(bool?))
-        {
-            Id = id;
-            PetId = petId;
-            Quantity = quantity;
-            ShipDate = shipDate;
-            Status = status;
-            Complete = complete;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

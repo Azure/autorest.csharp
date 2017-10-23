@@ -24,18 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the SampleResourceGroupInner class.
-        /// </summary>
-        /// <param name="name">resource group name 'testgroup101'</param>
-        /// <param name="location">resource group location 'West US'</param>
-        public SampleResourceGroupInner(string name = default(string), string location = default(string))
-        {
-            Name = name;
-            Location = location;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

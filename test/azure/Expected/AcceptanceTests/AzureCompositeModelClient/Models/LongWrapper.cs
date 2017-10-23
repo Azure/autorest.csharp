@@ -24,16 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the LongWrapper class.
-        /// </summary>
-        public LongWrapper(long? field1 = default(long?), long? field2 = default(long?))
-        {
-            Field1 = field1;
-            Field2 = field2;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

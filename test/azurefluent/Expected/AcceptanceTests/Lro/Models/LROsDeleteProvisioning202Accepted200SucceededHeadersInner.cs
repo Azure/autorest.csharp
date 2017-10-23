@@ -29,21 +29,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsDeleteProvisioning202Accepted200SucceededHeadersInner class.
-        /// </summary>
-        /// <param name="location">Location to poll for result status: will be
-        /// set to /lro/delete/provisioning/202/accepted/200/succeeded</param>
-        /// <param name="retryAfter">Number of milliseconds until the next poll
-        /// should be sent, will be set to zero</param>
-        public LROsDeleteProvisioning202Accepted200SucceededHeadersInner(string location = default(string), int? retryAfter = default(int?))
-        {
-            Location = location;
-            RetryAfter = retryAfter;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -28,21 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the SubProductInner class.
-        /// </summary>
-        /// <param name="provisioningStateValues">Possible values include:
-        /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
-        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-        /// 'OK'</param>
-        public SubProductInner(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
-            : base(id)
-        {
-            ProvisioningState = provisioningState;
-            ProvisioningStateValues = provisioningStateValues;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

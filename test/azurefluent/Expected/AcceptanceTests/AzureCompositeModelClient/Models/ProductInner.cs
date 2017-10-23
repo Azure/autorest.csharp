@@ -27,28 +27,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ProductInner class.
-        /// </summary>
-        /// <param name="productId">Unique identifier representing a specific
-        /// product for a given latitude &amp; longitude. For example, uberX in
-        /// San Francisco will have a different product_id than uberX in Los
-        /// Angeles.</param>
-        /// <param name="description">Description of product.</param>
-        /// <param name="displayName">Display name of product.</param>
-        /// <param name="capacity">Capacity of product. For example, 4
-        /// people.</param>
-        /// <param name="image">Image URL representing the product.</param>
-        public ProductInner(string productId = default(string), string description = default(string), string displayName = default(string), string capacity = default(string), string image = default(string))
-        {
-            ProductId = productId;
-            Description = description;
-            DisplayName = displayName;
-            Capacity = capacity;
-            Image = image;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

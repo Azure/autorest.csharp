@@ -11,8 +11,6 @@
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("goblin")]
@@ -29,10 +27,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
-            : base(length, birthday, species, siblings, age)
+        public Goblinshark(double length, System.DateTime birthday)
+            : base(length, birthday)
         {
-            Jawsize = jawsize;
             CustomInit();
         }
 

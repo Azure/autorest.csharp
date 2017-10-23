@@ -27,17 +27,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the HeaderResponseEnumHeaders class.
-        /// </summary>
-        /// <param name="value">response with header values "GREY" or null.
-        /// Possible values include: 'White', 'black', 'GREY'</param>
-        public HeaderResponseEnumHeaders(GreyscaleColors? value = default(GreyscaleColors?))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

@@ -24,21 +24,6 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the BurmeseCat class.
-        /// </summary>
-        /// <param name="id">Id.</param>
-        /// <param name="description">Description of a Animal.</param>
-        /// <param name="color">cat color</param>
-        /// <param name="length">cat length</param>
-        /// <param name="nickName">cat nick name</param>
-        public BurmeseCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?), int? nickName = default(int?))
-            : base(id, description, color, length)
-        {
-            NickName = nickName;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

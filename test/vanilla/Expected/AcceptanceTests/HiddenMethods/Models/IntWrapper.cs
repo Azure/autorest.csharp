@@ -20,16 +20,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the IntWrapper class.
-        /// </summary>
-        public IntWrapper(int? field1 = default(int?), int? field2 = default(int?))
-        {
-            Field1 = field1;
-            Field2 = field2;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

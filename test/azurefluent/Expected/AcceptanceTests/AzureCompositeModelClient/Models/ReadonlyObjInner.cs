@@ -24,16 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ReadonlyObjInner class.
-        /// </summary>
-        public ReadonlyObjInner(string id = default(string), int? size = default(int?))
-        {
-            Id = id;
-            Size = size;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

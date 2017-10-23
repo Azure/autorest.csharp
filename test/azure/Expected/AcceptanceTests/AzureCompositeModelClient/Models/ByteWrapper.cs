@@ -24,15 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ByteWrapper class.
-        /// </summary>
-        public ByteWrapper(byte[] field = default(byte[]))
-        {
-            Field = field;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

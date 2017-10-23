@@ -11,8 +11,6 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("sawshark")]
@@ -29,10 +27,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
-            : base(length, birthday, species, siblings, age)
+        public Sawshark(double length, System.DateTime birthday)
+            : base(length, birthday)
         {
-            Picture = picture;
             CustomInit();
         }
 

@@ -24,16 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ProductProperties class.
-        /// </summary>
-        public ProductProperties(int? id = default(int?), string name = default(string))
-        {
-            Id = id;
-            Name = name;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

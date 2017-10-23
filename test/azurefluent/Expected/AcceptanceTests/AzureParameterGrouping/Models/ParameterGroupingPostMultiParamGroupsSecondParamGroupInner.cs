@@ -28,18 +28,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// ParameterGroupingPostMultiParamGroupsSecondParamGroupInner class.
-        /// </summary>
-        /// <param name="queryTwo">Query parameter with default</param>
-        public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner(string headerTwo = default(string), int? queryTwo = default(int?))
-        {
-            HeaderTwo = headerTwo;
-            QueryTwo = queryTwo;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

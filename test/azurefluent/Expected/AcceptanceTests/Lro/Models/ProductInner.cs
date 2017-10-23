@@ -14,8 +14,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     [JsonTransformation]
@@ -26,21 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public ProductInner()
         {
-            CustomInit();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ProductInner class.
-        /// </summary>
-        /// <param name="provisioningStateValues">Possible values include:
-        /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
-        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-        /// 'OK'</param>
-        public ProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string provisioningState = default(string), string provisioningStateValues = default(string))
-            : base(location, id, name, type, tags)
-        {
-            ProvisioningState = provisioningState;
-            ProvisioningStateValues = provisioningStateValues;
             CustomInit();
         }
 

@@ -38,15 +38,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Angeles.</param>
         /// <param name="maxProductDisplayName">Display name of
         /// product.</param>
-        /// <param name="description">Description of product.</param>
-        /// <param name="genericValue">Generic URL value.</param>
-        /// <param name="odatavalue">URL value.</param>
-        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
-            : base(productId, description)
+        public SimpleProduct(string productId, string maxProductDisplayName)
+            : base(productId)
         {
             MaxProductDisplayName = maxProductDisplayName;
-            GenericValue = genericValue;
-            Odatavalue = odatavalue;
             CustomInit();
         }
         /// <summary>

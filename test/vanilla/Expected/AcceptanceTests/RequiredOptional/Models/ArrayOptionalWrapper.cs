@@ -26,15 +26,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the ArrayOptionalWrapper class.
-        /// </summary>
-        public ArrayOptionalWrapper(IList<string> value = default(IList<string>))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

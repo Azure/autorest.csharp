@@ -29,12 +29,10 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet(long id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
+        public Pet(long id, string name)
         {
             Id = id;
             Name = name;
-            Styles = styles;
-            Tag = tag;
             CustomInit();
         }
 

@@ -27,16 +27,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the WrappedProduct class.
-        /// </summary>
-        /// <param name="value">the product value</param>
-        public WrappedProduct(string value = default(string))
-        {
-            Value = value;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

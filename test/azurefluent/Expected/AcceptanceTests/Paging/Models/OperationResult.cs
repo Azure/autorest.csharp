@@ -24,19 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationResult class.
-        /// </summary>
-        /// <param name="status">The status of the request. Possible values
-        /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
-        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-        /// 'OK'</param>
-        public OperationResult(string status = default(string))
-        {
-            Status = status;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

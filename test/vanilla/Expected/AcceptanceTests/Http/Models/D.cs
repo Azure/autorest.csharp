@@ -24,15 +24,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the D class.
-        /// </summary>
-        public D(string httpStatusCode = default(string))
-        {
-            HttpStatusCode = httpStatusCode;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

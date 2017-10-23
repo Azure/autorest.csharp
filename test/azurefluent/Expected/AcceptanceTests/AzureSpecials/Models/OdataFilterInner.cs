@@ -24,16 +24,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the OdataFilterInner class.
-        /// </summary>
-        public OdataFilterInner(int? id = default(int?), string name = default(string))
-        {
-            Id = id;
-            Name = name;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();

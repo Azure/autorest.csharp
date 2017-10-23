@@ -24,16 +24,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationAllSync.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the Error class.
-        /// </summary>
-        public Error(int? status = default(int?), string message = default(string))
-        {
-            Status = status;
-            Message = message;
-            CustomInit();
-        }
-
-        /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
