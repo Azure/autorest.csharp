@@ -12,7 +12,7 @@
 
     <PropertyGroup>
         <PackageId>Microsoft.Azure.Management.@(serviceName).Fluent</PackageId>
-        <Version>1.1.3</Version>
+        <Version>@Model.ClientPackageVersion</Version>
         <AssemblyName>Microsoft.Azure.Management.@(serviceName).Fluent</AssemblyName>
         <RootNamespace>Microsoft.Azure.Management.@(serviceName).Fluent</RootNamespace>
         <AssemblyTitle>Microsoft Azure @(serviceName) Management Library</AssemblyTitle>
@@ -39,9 +39,10 @@
         <TargetFrameworks>net452;netstandard1.3</TargetFrameworks>
     </PropertyGroup>
 
+    @* The "Version=" needs to be inside a C# expression in order to prevent the compiled template from calling WriteAttributeValue which causes a build error. *@
     <ItemGroup>
-        <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.8" />
-        <PackageReference Include="Microsoft.Azure.Management.ResourceManager.Fluent" Version="1.1.3" />
+        <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" @("Version=\"" + @Model.ClientRuntimeVersion + "\"") />
+        <PackageReference Include="Microsoft.Azure.Management.ResourceManager.Fluent" @("Version=\"" + @Model.ClientPackageVersion + "\"") />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">

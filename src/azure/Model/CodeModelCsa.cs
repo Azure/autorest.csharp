@@ -57,5 +57,35 @@ namespace AutoRest.CSharp.Azure.Model
                 return serviceName;
             }
         }
+
+        [JsonIgnore]
+        public string ClientRuntimeVersion
+        {
+            get
+            {
+                var runtimeVersion = Settings.Instance.Host?.GetValue<string>("runtime-version").Result;
+                if (string.IsNullOrEmpty(runtimeVersion))
+                {
+                    return "{VERSION}";
+                }
+
+                return runtimeVersion;
+            }
+        }
+
+        [JsonIgnore]
+        public string ClientPackageVersion
+        {
+            get
+            {
+                var packageVersion = Settings.Instance.Host?.GetValue<string>("package-version").Result;
+                if (string.IsNullOrEmpty(packageVersion))
+                {
+                    return "{VERSION}";
+                }
+
+                return packageVersion;
+            }
+        }
     }
 }
