@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task EmptyDefaultResponseExceptionHandling()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // check for the expected class.
                 Assert.True(fileSystem.FileExists(@"ContainerServicesOperations.cs"));

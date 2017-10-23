@@ -25,7 +25,6 @@
     -->
  
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>AutoRest.CSharp</RootNamespace>
  
@@ -62,11 +61,11 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0-rc2" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.3.1" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
-    <PackageReference Include="autorest.common"  Version="2.0.26" />
+    <PackageReference Include="autorest.common" Version="2.2.18" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
   </ItemGroup>
 
@@ -74,28 +73,10 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-Perks.CodeGen" Version="1.0.16" />
-    <PackageReference Include="dotnet-Perks.CodeGen" Version="1.0.16">
+    <DotNetCliToolReference Include="dotnet-Perks.CodeGen" Version="2.0.1" />
+    <PackageReference Include="dotnet-Perks.CodeGen" Version="2.0.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="UpdateDepsJson" AfterTargets="GenerateBuildDependencyFile;Publish">
-    <Message Text="Fixing deps.json" Importance="high" />
-    <PropertyGroup>
-      <ResGenFix>$(Powershell)
-        $path = "$(BaseOutputPath)/netcoreapp2.0/$(TargetName).deps.json"
-        $content = (Get-Content "$path" -Raw )
-        $content = $content -replace '      "System.ComponentModel.Primitives/', '      "System.ComponentModel.Primitives.Nope/'
-        $content = $content -replace '      "System.Linq/', '      "System.Linq.Nope/'
-        $content = $content -replace '      "System.Net.Http/', '      "System.Net.Http.Nope/'
-        $content = $content -replace '      "System.Text.RegularExpressions/', '      "System.Text.RegularExpressions.Nope/'
-        $content = $content -replace '      "System.Threading.Thread/', '      "System.Threading.Thread.Nope/'
-        $content = $content -replace '      "System.Threading/', '      "System.Threading.Nope/'
-        $content = $content -replace '      "System.Xml.XDocument/', '      "System.Xml.XDocument.Nope/'
-        Set-Content -value $content -path $path
-      </ResGenFix>
-    </PropertyGroup>
-    <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
-  </Target>
 </Project>

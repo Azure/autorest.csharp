@@ -396,7 +396,6 @@ Import module.exports
 
 ###############################################
 # Global values
-process.env["autorest.home"] = path.normalize("#{os.tmpdir()}/autorest#{hashCode(basefolder)}")
 process.env.tmp = process.env.tmp or "#{basefolder}/tmp"
 
 package_json = require("#{basefolder}/package.json")
@@ -408,7 +407,6 @@ Import
   github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
-  autorest_home: process.env["autorest.home"]
   today: moment().format('YYYYMMDD')
   now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
