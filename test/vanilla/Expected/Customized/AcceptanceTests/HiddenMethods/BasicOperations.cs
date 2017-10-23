@@ -18,7 +18,7 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
     {
         public async Task PutValidAsync(string name, string color, int? id = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await PutValidWithHttpMessagesAsync(new Basic(id, name, color), customHeaders, cancellationToken);
+            await PutValidWithHttpMessagesAsync(new Basic { Id = id, Name = name, Color = color }, customHeaders, cancellationToken);
         }
     }
 }
