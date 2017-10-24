@@ -2,7 +2,7 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<CodeModelCs>
+@inherits TemplateCs<CodeModelCs>
 @Header("// ")
 @EmptyLine
 using System;
@@ -21,10 +21,8 @@ namespace @Settings.Namespace
 @EmptyLine
 @if (!string.IsNullOrWhiteSpace(Model.Documentation))
 {
-    @:/// <summary>
-    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    @:/// </summary>`
- }
+    @XmlDocSummary(Model.Documentation.EscapeXmlComment())
+}
     [Route("@Model.BaseUrl")]
     public partial class @(Model.Name+"Controller : Controller")
     {

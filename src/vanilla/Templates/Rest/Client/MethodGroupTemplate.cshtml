@@ -1,5 +1,5 @@
 ﻿@using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -11,32 +11,19 @@ namespace @Settings.Namespace
     @:using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    /// @(Model.TypeName) operations.
-    /// </summary>
+    @XmlDocSummary($"{Model.TypeName} operations.")
     public partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
     {
-        /// <summary>
-        /// Initializes a new instance of the @(Model.TypeName) class.
-        /// </summary>
-        /// <param name='client'>
-        /// Reference to the service client.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
-        /// </exception>
+        @XmlDocCtor(Model.TypeName)
+        @XmlDocParamRaw("client", $"Reference to the service client")
+        @XmlDocException("System.ArgumentNullException", "a required parameter is null")
         public @(Model.TypeName)(@Model.CodeModel.Name client)
         {
-            if (client == null) 
-            {
-                throw new System.ArgumentNullException("client");
-            }
+            @ParamNullCheck("client")
             this.Client = client;
         }
         @EmptyLine
-        /// <summary>
-        /// Gets a reference to the @Model.CodeModel.Name
-        /// </summary>
+        @XmlDocProp(false, $"a reference to the {Model.CodeModel.Name}")
         public @Model.CodeModel.Name Client { get; private set; }
         @EmptyLine
         @foreach (MethodCs method in Model.Methods)

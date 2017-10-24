@@ -1,51 +1,37 @@
 ﻿@using System.Linq
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CompositeTypeCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
-    /// </summary>
+    @XmlDocSummary($"Exception thrown for an invalid response with {Model.Name} information.")
     public partial class @Model.ExceptionTypeDefinitionName : Microsoft.Rest.RestException
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
+        @XmlDocProp(false, "information about the associated HTTP request")
         public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
 @EmptyLine
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
+        @XmlDocProp(false, "information about the associated HTTP response")
         public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
 @EmptyLine
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
+        @XmlDocProp(true, "the body object")
         public @Model.Name Body { get; set; }
 @EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
-        /// </summary>
+        @XmlDocCtor(Model.ExceptionTypeDefinitionName)
         public @(@Model.ExceptionTypeDefinitionName)()
         {
         }
 @EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
+        @XmlDocCtor(Model.ExceptionTypeDefinitionName)
+        @XmlDocParam("message", "exception message")
         public @(Model.ExceptionTypeDefinitionName)(string message)
             : this(message, null)
         {
         }
 @EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
+        @XmlDocCtor(Model.ExceptionTypeDefinitionName)
+        @XmlDocParam("message", "exception message")
+        @XmlDocParam("innerException", "inner exception")
         public @(Model.ExceptionTypeDefinitionName)(string message, System.Exception innerException)
             : base(message, innerException)
         {

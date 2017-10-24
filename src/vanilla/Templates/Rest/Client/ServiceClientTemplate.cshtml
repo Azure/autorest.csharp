@@ -2,7 +2,7 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<CodeModelCs>
+@inherits TemplateCs<CodeModelCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -14,23 +14,17 @@ namespace @Settings.Namespace
 @EmptyLine
     @if (!string.IsNullOrWhiteSpace(Model.Documentation))
     {
-    @:/// <summary>
-    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    @:/// </summary>
+    @XmlDocSummary(Model.Documentation.EscapeXmlComment())
     }
 
     public partial class @Model.Name : Microsoft.Rest.ServiceClient<@Model.Name>, I@(Model.Name)
     {
         @(Include(new ServiceClientBodyTemplate(), Model))
 
-        /// <summary>
-        /// An optional partial-method to perform custom initialization.
-        ///</summary> 
+        @XmlDocSummary("An optional partial-method to perform custom initialization.")
         partial void CustomInitialize();
 
-        /// <summary>
-        /// Initializes client properties.
-        /// </summary>
+        @XmlDocSummary("Initializes client properties.")
         private void Initialize()
         {
         @foreach (var operation in Model.AllOperations) 

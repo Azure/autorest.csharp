@@ -1,14 +1,12 @@
 ﻿@using System.Linq
 @using AutoRest.Core.Model
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.EnumTypeCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.EnumTypeCs>
 @Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
-    /// </summary>
+    @XmlDocSummary($"Defines values for {Model.Name}.")
     @if (!Model.ModelAsString)
     {
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -19,9 +17,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {
             if (value.Description != null)
             {<text>
-        /// <summary>
-        @WrapComment("/// ", value.Description)
-        /// </summary>
+        @XmlDocSummary(value.Description)
 </text>
         }
 @:        [System.Runtime.Serialization.EnumMember(Value = "@value.SerializedName")]
@@ -81,9 +77,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {
             if (t.Description != null)
             {<text>
-        /// <summary>
-        @WrapComment("/// ", t.Description)
-        /// </summary>
+        @XmlDocSummary(t.Description)
 </text>
             }
 @:        public const string @t.MemberName = "@t.SerializedName";

@@ -5,7 +5,7 @@
 @using AutoRest.CSharp
 @using AutoRest.CSharp.Model
 @using AutoRest.Extensions
-@inherits Template<global::AutoRest.CSharp.Model.CompositeTypeCs>
+@inherits TemplateCs<global::AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
@@ -15,15 +15,11 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 
 @if (!string.IsNullOrEmpty(Model.EffectiveDocumentation))
 {
-    @:/// <summary>
-    @:@WrapComment("/// ", Model.EffectiveDocumentation)
-    @:/// </summary>
+    @XmlDocSummary(Model.EffectiveDocumentation)
 }
 @if (!string.IsNullOrEmpty(Model.Summary) && !string.IsNullOrWhiteSpace(Model.Documentation))
 {
-    @:/// <remarks>
-    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    @:/// </remarks>
+    @XmlDocRemarks(Model.Documentation.EscapeXmlComment())
 }
 @if (Model.NeedsPolymorphicConverter)
 {
@@ -36,9 +32,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
-        /// <summary>
-        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
-        /// </summary>
+        @XmlDocCtor(Model.Name)
         public @(Model.Name)()
         {
 @foreach(var property in Model.ComposedProperties.OfType<PropertyCs>().Where(p => p.ModelType is CompositeType ct
@@ -53,9 +47,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @if (!string.IsNullOrEmpty(Model.ConstructorParameters))
 {
         @EmptyLine
-        @:/// <summary>
-        @:@WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
-        @:/// </summary>
+        @XmlDocCtor(Model.Name)
 foreach (var parameter in Model.ConstructorParametersDocumentation)
 {
         @:@WrapComment("/// ", parameter)
@@ -77,9 +69,7 @@ foreach (var property in Model.ConstructorProperties)
 
 @if (Model.ClassProperties.Any())
 {
-        @:/// <summary>
-        @:@WrapComment("/// ", ("Static constructor for " + Model.Name + " class.").EscapeXmlComment())
-        @:/// </summary>
+        @XmlDocSummary($"Static constructor for {Model.Name} class.".EscapeXmlComment())
         @:static @(Model.Name)()
         @:{
 foreach (var property in Model.ClassProperties)
@@ -90,22 +80,16 @@ foreach (var property in Model.ClassProperties)
         @:}
 }
         @EmptyLine
-        /// <summary>
-        /// An initialization method that performs custom operations like setting defaults
-        /// </summary>
+        @XmlDocSummary($"An initialization method that performs custom operations like setting defaults")
         partial void CustomInit();
         
         @EmptyLine
 @foreach (PropertyCs property in Model.InstanceProperties)
 {
-        @:/// <summary>
-        @:@WrapComment("/// ", property.GetFormattedPropertySummary())
-        @:/// </summary>
+        @XmlDocSummary(property.GetFormattedPropertySummary())
             if(!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
             { 
-        @:/// <remarks>
-        @:@WrapComment("/// ", property.Documentation)
-        @:/// </remarks>
+        @XmlDocRemarks(property.Documentation)
             }
 foreach (var conv in property.JsonConverters)
 {
@@ -125,9 +109,7 @@ else
 
 @foreach (var property in Model.ClassProperties)
 {
-        @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
-        @:/// </summary>
+        @XmlDocSummary(property.Documentation.EscapeXmlComment())
 foreach (var conv in property.JsonConverters)
 {
         @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
@@ -138,12 +120,8 @@ foreach (var conv in property.JsonConverters)
 }
 @if(@Model.ShouldValidateChain())
 {
-        @:/// <summary>
-        @:/// Validate the object.
-        @:/// </summary>
-        @:/// <exception cref="Microsoft.Rest.ValidationException">
-        @:/// Thrown if validation fails
-        @:/// </exception>
+        @XmlDocSummary("Validate the object.")
+        @XmlDocException("Microsoft.Rest.ValidationException", "validation fails")
         @:public @Model.MethodQualifier void Validate()
         @:{
 bool anythingToValidate = false;
@@ -175,9 +153,7 @@ if (!anythingToValidate)
 }
 
     @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
-        /// <summary>
-        /// Serializes the object to an XML node
-        /// </summary>
+        @XmlDocSummary("Serializes the object to an XML node.")
         internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {</text>
         foreach(var property in Model.InstanceProperties.Where(p => !p.WasFlattened())) {<text>
@@ -262,9 +238,7 @@ if (!anythingToValidate)
             return result;
         }
 
-        /// <summary>
-        /// Deserializes an XML node to an instance of @Model.Name
-        /// </summary>
+        @XmlDocSummary($"Deserializes an XML node to an instance of {Model.Name}.")
         internal static @Model.Name XmlDeserialize(string payload) 
         {
             // deserialize to xml and use the overload to do the work

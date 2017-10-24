@@ -6,53 +6,24 @@
 @using AutoRest.CSharp
 @using AutoRest.CSharp.Model
 @using AutoRest.Extensions
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodCs>
 
-@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
-    {
-@:/// <see href="@Model.ExternalDocsUrl" />
-    }
-@:/// </summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <remarks>
-@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-@:/// </remarks>
-}
+@XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
 @foreach (var parameter in Model.LocalParameters)
 {
-@:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
 }
-/// <param name='customHeaders'>
-/// Headers that will be added to request.
-/// </param>
-/// <param name='cancellationToken'>
-/// The cancellation token.
-/// </param>
-/// <exception cref="@(Model.OperationExceptionTypeString)">
-/// Thrown when the operation returned an invalid status code
-/// </exception>
+@XmlDocParamCustomHeaders()
+@XmlDocParamCancellationToken()
+@XmlDocException(Model.OperationExceptionTypeString, "the operation returned an invalid status code")
 @if (Model.Responses.Where(r => r.Value.Body != null).Any())
 {
-@:/// <exception cref="Microsoft.Rest.SerializationException">
-@:/// Thrown when unable to deserialize the response
-@:/// </exception>
+@XmlDocException("Microsoft.Rest.SerializationException", "unable to deserialize the response")
 }
 @if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
 {
-@:/// <exception cref="Microsoft.Rest.ValidationException">
-@:/// Thrown when a required parameter is null
-@:/// </exception>
-@:/// <exception cref="System.ArgumentNullException">
-@:/// Thrown when a required parameter is null
-@:/// </exception>
+@XmlDocException("Microsoft.Rest.ValidationException", "a required parameter is null")
+@XmlDocException("System.ArgumentNullException", "a required parameter is null")
     }
 /// <return>
 /// A response object containing the response body and response headers.
@@ -130,20 +101,14 @@ else
     {
         if (!parameter.IsNullable())
         {
-    @:if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
-    @:{
-    @:    _httpRequest.Headers.Remove("@(parameter.SerializedName)");
-    @:}
+    @:_httpRequest.Headers.Remove("@(parameter.SerializedName)");
     @:_httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
         }
         else
         {
     @:if (@(parameter.Name) != null)
     @:{
-    @:    if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
-    @:    {
-    @:        _httpRequest.Headers.Remove("@(parameter.SerializedName)");
-    @:    }
+    @:    _httpRequest.Headers.Remove("@(parameter.SerializedName)");
     @:    _httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
     @:}
         }
@@ -156,10 +121,7 @@ else
     @:    foreach (var _header in @(parameter.Name))
     @:    {
     @:        var key = "@(parameter.HeaderCollectionPrefix)" + _header.Key;
-    @:        if (_httpRequest.Headers.Contains(key))
-    @:        {
-    @:            _httpRequest.Headers.Remove(key);
-    @:        }
+    @:        _httpRequest.Headers.Remove(key);
     @:        _httpRequest.Headers.TryAddWithoutValidation(key, _header.Value);
     @:    }
     @:}
@@ -169,10 +131,7 @@ else
     {
         foreach(var _header in customHeaders)
         {
-            if (_httpRequest.Headers.Contains(_header.Key))
-            {
-                _httpRequest.Headers.Remove(_header.Key);
-            }
+            _httpRequest.Headers.Remove(_header.Key);
             _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
         }
     }
@@ -186,10 +145,7 @@ else
         {
             if (Model.RequestBody.IsRequired)
             {
-    @:if(@(Model.RequestBody.Name) == null)
-    @:{
-    @:  throw new System.ArgumentNullException("@(Model.RequestBody.Name)");
-    @:}
+    @ParamNullCheck(Model.RequestBody.Name)
             }
         <text>
     if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
@@ -243,18 +199,23 @@ else
             }
             else
             {
-                if (!Model.RequestBody.IsNullable()) {<text>
-    _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
-    _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
-    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");</text>
-                }
-                else {<text>
+                if (Model.RequestBody.IsNullable())
+                {
+<text>
     if(@(Model.RequestBody.Name) != null)
     {
+</text>
+                }
+<text>
         _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
         _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
         _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
-    }</text>
+</text>
+                if (Model.RequestBody.IsNullable())
+                {
+<text>
+    }
+</text>
                 }
             }
         }

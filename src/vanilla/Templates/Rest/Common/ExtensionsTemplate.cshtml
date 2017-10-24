@@ -1,6 +1,6 @@
 ﻿@using System.Text
 @using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -9,9 +9,7 @@ namespace @Settings.Namespace
     @:using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    /// Extension methods for @(Model.ExtensionTypeName).
-    /// </summary>
+    @XmlDocSummary($"Extension methods for {Model.ExtensionTypeName}.")
     public static partial class @(Model.ExtensionTypeName)Extensions
     {
         @foreach (MethodCs method in Model.Methods)
