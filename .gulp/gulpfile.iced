@@ -4,6 +4,7 @@ require './common.iced'
 # tasks required for this build 
 Tasks "dotnet"  # dotnet functions
 Tasks "regeneration"
+Tasks "publishing"
 
 # ==============================================================================
 # Settings
@@ -25,3 +26,25 @@ task 'test', "more", [], (done) ->
   # insert commands here to do other kinds of testing
   # echo "Testing More"
   done();
+
+# CI job
+task 'testci', "more", [], (done) ->
+  # install latest AutoRest
+  await autorest ["--latest"], defer code, stderr, stdout
+
+  ## TEST SUITE
+  global.verbose = true
+  await run "test", defer _
+
+  ## REGRESSION TEST
+  global.verbose = false
+  # regenerate
+  await run "regenerate", defer _
+  # diff ('add' first so 'diff' includes untracked files)
+  await  execute "git add -A", defer code, stderr, stdout
+  await  execute "git diff --staged -w", defer code, stderr, stdout
+  # eval
+  echo stderr
+  echo stdout
+  throw "Potentially unnoticed regression (see diff above)! Run `npm run regenerate`, then review and commit the changes." if stdout.length + stderr.length > 0
+  done() 

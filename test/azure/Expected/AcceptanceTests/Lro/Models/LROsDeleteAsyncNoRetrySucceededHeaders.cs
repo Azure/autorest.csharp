@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsLro;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -26,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public LROsDeleteAsyncNoRetrySucceededHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

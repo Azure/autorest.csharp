@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Shark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

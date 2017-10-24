@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public DurationWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

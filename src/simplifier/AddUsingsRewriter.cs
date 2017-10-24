@@ -33,9 +33,26 @@ namespace AutoRest.Simplify
             var u = _namespaces.Select(each => SyntaxFactory.UsingDirective(SyntaxFactory.ParseName($" {each}"))
                 .WithLeadingTrivia(_leadingTrivia)
                 .WithTrailingTrivia(_trailingTrivia)
-            ).ToArray();
+            );
+            
 
-            node = node.AddUsings(u);
+            if(node.Name!=null && node.Name.GetType()==typeof(QualifiedNameSyntax))
+            {
+                var currUsings = new List<string>();
+                var currNode = ((QualifiedNameSyntax)node.Name);
+                
+                while(true)
+                {
+                    currUsings.Add(currNode.ToString());
+                    if(currNode.Left ==null || currNode.Left.GetType()!=typeof(QualifiedNameSyntax))
+                    {
+                        break;
+                    }
+                    currNode = (QualifiedNameSyntax)currNode.Left;
+                }
+                u = u.Where(uName =>!currUsings.Contains(uName.Name.ToString()));
+            }
+            node = node.AddUsings(u.ToArray());
             node = node.WithUsings(Sort(node.Usings));
             return base.VisitNamespaceDeclaration(node);
         }

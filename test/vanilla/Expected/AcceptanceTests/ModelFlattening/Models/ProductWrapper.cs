@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using Fixtures.AcceptanceTestsModelFlattening;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -27,7 +26,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         public ProductWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

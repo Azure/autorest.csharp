@@ -48,6 +48,15 @@ namespace AutoRest.CSharp
             return base.GetEnumMemberName(name.Replace('/', '-'));
         }
 
+        public override string IsNameLegal(string desiredName, IIdentifier whoIsAsking)
+        {
+            if (whoIsAsking is Property && ReservedWords.Contains(desiredName, StringComparer.OrdinalIgnoreCase))
+            {   // ignore case in case of properties, since the property will be used with altered case in the model constructor => bad
+                return desiredName;
+            }
+            return base.IsNameLegal(desiredName, whoIsAsking);
+        }
+
         /// <summary>
         /// Returns true when the name comparison is a special case and should not 
         /// be used to determine name conflicts.

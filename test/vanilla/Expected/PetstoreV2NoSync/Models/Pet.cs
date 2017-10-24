@@ -10,7 +10,6 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
-    using Fixtures.PetstoreV2NoSync;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -26,7 +25,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

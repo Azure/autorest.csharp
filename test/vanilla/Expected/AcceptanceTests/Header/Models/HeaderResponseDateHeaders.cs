@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using Fixtures.AcceptanceTestsHeader;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -26,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseDateHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

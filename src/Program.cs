@@ -13,18 +13,14 @@ using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibili
 
 namespace AutoRest.CSharp
 {
-    public static class ExtensionsLoader
+    static class ExtensionsLoader
     {
-        public static IAnyPlugin GetPlugin(string name)
+        public static IAnyPlugin GetPlugin(string generator, bool azure, bool fluent)
         {
-            switch (name)
-            {
-                case "csharp": return new AutoRest.CSharp.PluginCs();
-                case "Azure.csharp": return new AutoRest.CSharp.Azure.PluginCsa();
-                case "Azure.csharp.Fluent": return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
-                case "Azure.jsonrpcclient": return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
-            }
-            throw new Exception("Unknown plugin: " + name);
+            if (generator == "jsonrpcclient") return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
+            if (fluent) return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
+            if (azure) return new AutoRest.CSharp.Azure.PluginCsa();
+            return new AutoRest.CSharp.PluginCs();
         }
     }
 
@@ -66,6 +62,16 @@ namespace AutoRest.CSharp
             }
         }
 
+        protected async Task WriteFiles(MemoryFileSystem fs)
+        {
+            var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
+            foreach (var outFile in outFiles)
+            {
+                WriteFile(outFile, fs.ReadAllText(outFile), null);
+            }
+
+        }
+
         protected override async Task<bool> ProcessInternal()
         {
             if (this.Plugin == "csharp-simplifier")
@@ -81,14 +87,8 @@ namespace AutoRest.CSharp
 
                 // simplify
                 new AutoRest.Simplify.CSharpSimplifier().Run(fs).ConfigureAwait(false).GetAwaiter().GetResult();
-
-                // write out files
-                var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, fs.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(fs);
+                
                 return true;
             }
             else
@@ -128,10 +128,9 @@ namespace AutoRest.CSharp
 
                 // process
                 var plugin = ExtensionsLoader.GetPlugin(
-                    (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
-                    this.Plugin +
-                    (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
-                    (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
+                    this.Plugin,
+                    await GetValue<bool?>("azure-arm") ?? false,
+                    await GetValue<bool?>("fluent") ?? false);
                 Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
                 
                 using (plugin.Activate())
@@ -150,13 +149,7 @@ namespace AutoRest.CSharp
                 }
 
                 // write out files
-                var outFS = Settings.Instance.FileSystemOutput;
-                var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, outFS.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(Settings.Instance.FileSystemOutput);
                 return true;
             }
         }

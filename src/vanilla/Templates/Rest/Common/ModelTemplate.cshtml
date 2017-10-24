@@ -13,14 +13,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     using System.Linq;
 @EmptyLine
 
-@if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))
+@if (!string.IsNullOrEmpty(Model.EffectiveDocumentation))
 {
     @:/// <summary>
-    @:@WrapComment("/// ", (string.IsNullOrEmpty(Model.Summary) ? Model.Documentation : Model.Summary).EscapeXmlComment())
-        if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
-        {
-    @:/// <see href="@Model.ExternalDocsUrl" />
-        }
+    @:@WrapComment("/// ", Model.EffectiveDocumentation)
     @:/// </summary>
 }
 @if (!string.IsNullOrEmpty(Model.Summary) && !string.IsNullOrWhiteSpace(Model.Documentation))
@@ -29,44 +25,30 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     @:/// </remarks>
 }
-
-    @if (Model.NeedsPolymorphicConverter)
-    {
+@if (Model.NeedsPolymorphicConverter)
+{
     @:[Newtonsoft.Json.JsonObject("@Model.SerializedName")]
-    }
-
-    @if (Model.NeedsTransformationConverter)
-    {
+}
+@if (Model.NeedsTransformationConverter)
+{
     @:[Microsoft.Rest.Serialization.JsonTransformation]
-    }
+}
 
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
-        @if (Model.Properties.Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
-        {
-<text>
         public @(Model.Name)()
         {
-            @foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
-                && !p.IsConstant
-                && p.IsRequired
-                && ((CompositeType)p.ModelType).ContainsConstantProperties))
-            {
+@foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType ct
+    && !p.IsConstant
+    && p.IsRequired
+    && ct.ContainsConstantProperties))
+{
             @:this.@(property.Name) = new @(property.ModelTypeName)();
-            }
+}
             CustomInit();
-        }
-</text>
-        }
-        else
-        {
-        @:public @(Model.Name)() 
-        @:{
-        @:  CustomInit();
-        @:}
         }
 
         @EmptyLine
@@ -76,55 +58,39 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:/// <summary>
         @:@WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         @:/// </summary>
-        foreach (var parameter in Model.ConstructorParametersDocumentation)
-        {
+foreach (var parameter in Model.ConstructorParametersDocumentation)
+{
         @:@WrapComment("/// ", parameter)
-        }
+}
         @:public @(Model.Name)(@Model.ConstructorParameters)
-            if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
-            {
+if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
+{
             @:@(Model.BaseConstructorCall)
-            }
+}
         @:{
 
-            foreach (var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
-                     && !p.IsConstant
-                     && p.IsRequired
-                     && ((CompositeType)p.ModelType).ContainsConstantProperties))
-            {
-            @:this.@(property.Name) = new @(property.ModelTypeName)();
-            }
-
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
-            {
-                var propName = CodeNamer.Instance.CamelCase(property.Name);
-                if (property.Name.Value.Equals(propName))
-                {
-            @:this.@(property.Name) = @propName;
-                }
-                else
-                {
-            @:this.@(property.Name) = @propName;
-                }
-            }
+foreach (var property in Model.InstanceProperties)
+{
+            @:this.@(property.Name) = @(CodeNamer.Instance.CamelCase(property.Name));
+}
         @:    CustomInit();
         @:}
         }
 
-        @if (Model.Properties.Any(p => p.IsConstant))
-        {
+@if (Model.ClassProperties.Any())
+{
         @:/// <summary>
         @:@WrapComment("/// ", ("Static constructor for " + Model.Name + " class.").EscapeXmlComment())
         @:/// </summary>
         @:static @(Model.Name)()
         @:{
-            foreach (var property in Model.Properties.Where(p => p.IsConstant))
-            {
+foreach (var property in Model.ClassProperties)
+{
             @:@(property.Name) = @(property.DefaultValue);
-            }
+}
 
         @:}
-        }
+}
         @EmptyLine
         /// <summary>
         /// An initialization method that performs custom operations like setting defaults
@@ -132,8 +98,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         partial void CustomInit();
         
         @EmptyLine
-        @foreach (PropertyCs property in Model.Properties.Where(p => !p.IsConstant))
-        {
+@foreach (PropertyCs property in Model.InstanceProperties)
+{
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
         @:/// </summary>
@@ -143,60 +109,35 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:@WrapComment("/// ", property.Documentation)
         @:/// </remarks>
             }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Date))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.Base64UrlJsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.UnixTimeJsonConverter))]
-            }
-
-            if (property.ModelType is DictionaryType && (property.ModelType as DictionaryType).SupportsAdditionalProperties)
-            {
+foreach (var conv in property.JsonConverters)
+{
+        @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
+}
+if (property.ModelType is DictionaryType && (property.ModelType as DictionaryType).SupportsAdditionalProperties)
+{
         @:[Newtonsoft.Json.JsonExtensionData]
-            }
-            else
-            {
+}
+else
+{
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
-            }
+}
         @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
-        }
+}
 
-        @foreach (var property in Model.Properties.Where(p => p.IsConstant))
-        {
+@foreach (var property in Model.ClassProperties)
+{
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Date))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(DateJsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(Base64UrlJsonConverter))]
-            }
-            if (property.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
-            {
-        @:[Newtonsoft.Json.JsonConverter(typeof(UnixTimeJsonConverter))]
-            }
+foreach (var conv in property.JsonConverters)
+{
+        @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
+}
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
         @:public static @property.ModelTypeName @property.Name { get; private set; }
         @EmptyLine
-        }
+}
 @if(@Model.ShouldValidateChain())
 {
         @:/// <summary>
@@ -207,34 +148,31 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:/// </exception>
         @:public @Model.MethodQualifier void Validate()
         @:{
-            bool anythingToValidate = false;
+bool anythingToValidate = false;
 
-            if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
-            {
-                anythingToValidate = true;
+if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
+{
+    anythingToValidate = true;
             @:base.Validate();
-            }
+}
 
-            foreach (PropertyCs property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
-            {
-                anythingToValidate = true;
+foreach (PropertyCs property in Model.InstanceProperties.Where(p => p.IsRequired && !p.IsReadOnly && p.IsNullable() ))
+{
+    anythingToValidate = true;
             @:if (this.@property.Name == null)
             @:{
                 @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@property.Name");
             @:}
-            @:
-            }
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant 
-                && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
-            {
-                anythingToValidate = true;
+}
+foreach (var property in Model.InstanceProperties.Where(p => p.Constraints.Any() || !(p.ModelType is PrimaryType)))
+{
+    anythingToValidate = true;
             @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
-            @:
-            }
-            if (!anythingToValidate)
-            {
+}
+if (!anythingToValidate)
+{
             @://Nothing to validate
-            }
+}
         @:}
 }
 
@@ -244,7 +182,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {</text>
-        foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+        foreach(var property in Model.InstanceProperties.Where(p => !p.WasFlattened())) {<text>
         @if (property.IsNullable()) {<text>
             if( null != @(property.Name) ) 
             {</text>}
@@ -338,14 +276,14 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
         {
             var result = new @(Model.Name)();
-        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
+        @if (Model.InstanceProperties.Any(p => !p.WasFlattened() && p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XAttribute attribute;</text>
         }
-        @*@if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
+        @*@if (Model.InstanceProperties.Any(p => !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XElement element;</text>
         }*@
 
-        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {
+        @foreach(var property in Model.InstanceProperties.Where(p => !p.WasFlattened())) {
             @if (property.XmlIsAttribute) {<text>
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {

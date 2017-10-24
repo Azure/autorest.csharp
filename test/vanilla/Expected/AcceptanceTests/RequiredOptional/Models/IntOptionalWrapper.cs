@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using Fixtures.AcceptanceTestsRequiredOptional;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </summary>
         public IntOptionalWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

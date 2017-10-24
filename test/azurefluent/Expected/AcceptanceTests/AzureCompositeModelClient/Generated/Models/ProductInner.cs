@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -26,7 +23,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public ProductInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

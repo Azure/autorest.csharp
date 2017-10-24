@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening.Models
 {
-    using Fixtures.AcceptanceTestsParameterFlattening;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -25,7 +24,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// </summary>
         public AvailabilitySetUpdateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

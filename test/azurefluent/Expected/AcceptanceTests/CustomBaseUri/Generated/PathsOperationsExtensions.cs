@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -29,9 +27,12 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void GetEmpty(this IPathsOperations operations)
+            /// <param name='accountName'>
+            /// Account Name
+            /// </param>
+            public static void GetEmpty(this IPathsOperations operations, string accountName)
             {
-                operations.GetEmptyAsync().GetAwaiter().GetResult();
+                operations.GetEmptyAsync(accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -40,12 +41,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='accountName'>
+            /// Account Name
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetEmptyAsync(this IPathsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetEmptyAsync(this IPathsOperations operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

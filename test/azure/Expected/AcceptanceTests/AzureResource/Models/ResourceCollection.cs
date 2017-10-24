@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureResource;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -24,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// </summary>
         public ResourceCollection()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

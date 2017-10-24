@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
-    using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

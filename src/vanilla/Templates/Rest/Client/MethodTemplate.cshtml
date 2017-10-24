@@ -79,25 +79,9 @@
         }
     }
 
-    @foreach (ParameterCs parameter in Model.Parameters)
+    @foreach (ParameterCs parameter in Model.Parameters.Where(p => p.IsConstant && !p.IsClientProperty))
     {
-        if (parameter.IsConstant && !parameter.IsClientProperty)
-        {
     @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
-        }
-
-        if (parameter.ModelType is CompositeType
-            && !parameter.IsConstant
-            && parameter.IsRequired
-            && !parameter.IsClientProperty
-            && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
-        {
-    @:if (@(parameter.Name) == null)
-    @:{
-    @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
-    @:}
-        }
-
     }
     @Model.BuildInputMappings()
     // Tracing

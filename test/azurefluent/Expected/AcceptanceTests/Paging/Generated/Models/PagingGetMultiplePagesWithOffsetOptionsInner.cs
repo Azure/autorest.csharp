@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsPaging;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -27,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
         /// </summary>
         public PagingGetMultiplePagesWithOffsetOptionsInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

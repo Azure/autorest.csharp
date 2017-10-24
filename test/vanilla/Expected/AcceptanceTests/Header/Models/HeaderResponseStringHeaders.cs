@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -25,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         public HeaderResponseStringHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using Fixtures.AcceptanceTestsValidation;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +23,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         public ChildProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

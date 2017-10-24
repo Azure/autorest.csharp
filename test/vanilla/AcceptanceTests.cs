@@ -2291,6 +2291,30 @@ namespace AutoRest.CSharp.Tests
             Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
         }
 
+        [Fact]
+        // Really, this test is more useful at compile time since this field is introduced by a partial and compilation
+        // will fail if the partials can't be merged.
+        public void SupportsPartialExceptionTest()
+        {
+            Assert.NotNull(ErrorException.StringFromPartial);
+        }
+
+        [Fact]
+        public async Task EnsureHiddenMethodsMissingTest()
+        {
+            // Confirm the method exists in body-complex, which hidden methods is based on
+            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperations).GetMethod("PutValidWithHttpMessagesAsync");
+            // Make sure it is missing for hidden methods
+            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
+            Assert.Null(missingMethod);
+
+            // Use the facade method
+            using (var client = new Fixtures.AcceptanceTestsHiddenMethods.AutoRestComplexTestService(Fixture.Uri))
+            {
+                await client.Basic.PutValidAsync("abc", CMYKColors.Magenta, 2);
+            }
+        }
+
         public void EnsureTestCoverage()
         {
             using (var client =

@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureSpecials;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -22,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public OdataFilter()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

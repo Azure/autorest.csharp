@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -28,7 +25,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         public FirstParameterGroupInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

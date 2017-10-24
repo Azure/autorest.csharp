@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -24,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Datetimerfc1123Wrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

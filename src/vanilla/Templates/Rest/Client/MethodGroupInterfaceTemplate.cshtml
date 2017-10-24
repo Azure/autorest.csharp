@@ -19,6 +19,11 @@ namespace @Settings.Namespace
     {
     @foreach(MethodCs method in Model.Methods)
     {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {
         @:/// <summary>

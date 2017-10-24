@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDate.Models
 {
-    using Fixtures.AcceptanceTestsBodyDate;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDate.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

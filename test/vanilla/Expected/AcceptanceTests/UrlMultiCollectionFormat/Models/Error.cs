@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 {
-    using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

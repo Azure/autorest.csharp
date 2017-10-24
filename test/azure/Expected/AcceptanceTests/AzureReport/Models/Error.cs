@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureReport;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -22,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

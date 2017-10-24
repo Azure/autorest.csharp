@@ -10,7 +10,6 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
-    using Fixtures.PetstoreV2;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -26,7 +25,7 @@ namespace Fixtures.PetstoreV2.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

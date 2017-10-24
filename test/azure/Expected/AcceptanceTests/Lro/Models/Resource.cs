@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsLro;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
@@ -26,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         public Resource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

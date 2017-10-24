@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -23,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

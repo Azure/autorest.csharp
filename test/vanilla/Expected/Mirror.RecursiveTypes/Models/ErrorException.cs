@@ -10,13 +10,12 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using Fixtures.MirrorRecursiveTypes;
     using Microsoft.Rest;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-    public class ErrorException : RestException
+    public partial class ErrorException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.

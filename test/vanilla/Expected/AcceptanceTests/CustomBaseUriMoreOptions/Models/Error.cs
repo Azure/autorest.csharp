@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
 {
-    using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

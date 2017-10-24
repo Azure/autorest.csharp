@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -23,7 +20,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// </summary>
         public SampleResourceGroupInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

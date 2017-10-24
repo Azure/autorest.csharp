@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -55,6 +53,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// Get a 200 to test a valid base uri
         /// </summary>
+        /// <param name='accountName'>
+        /// Account Name
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -64,11 +65,25 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (accountName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
+            }
+            if (Client.Host == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.Host");
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -76,12 +91,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("accountName", accountName);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri;
             var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "customuri";
+            _url = _url.Replace("{accountName}", accountName);
+            _url = _url.Replace("{host}", Client.Host);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

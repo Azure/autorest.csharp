@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -27,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public HeaderCustomNamedRequestIdHeadHeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

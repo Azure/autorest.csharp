@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using Fixtures.AcceptanceTestsBodyComplex;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -23,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </summary>
         public Datetimerfc1123Wrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

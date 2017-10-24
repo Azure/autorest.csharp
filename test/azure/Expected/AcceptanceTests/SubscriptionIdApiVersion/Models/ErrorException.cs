@@ -10,14 +10,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
     using Microsoft.Rest;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-    public class ErrorException : RestException
+    public partial class ErrorException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.

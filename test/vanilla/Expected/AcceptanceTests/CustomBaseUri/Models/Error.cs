@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
-    using Fixtures.AcceptanceTestsCustomBaseUri;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

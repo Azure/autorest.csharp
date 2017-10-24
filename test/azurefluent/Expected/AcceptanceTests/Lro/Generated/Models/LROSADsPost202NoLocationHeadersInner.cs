@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsLro;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -27,7 +24,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro.Models
         /// </summary>
         public LROSADsPost202NoLocationHeadersInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsPaging;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
@@ -29,7 +26,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging.Models
         /// </summary>
         public CustomParameterGroupInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

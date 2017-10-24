@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -28,6 +26,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// Get a 200 to test a valid base uri
         /// </summary>
+        /// <param name='accountName'>
+        /// Account Name
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -37,6 +38,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

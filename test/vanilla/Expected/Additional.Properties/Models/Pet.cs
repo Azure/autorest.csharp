@@ -10,7 +10,6 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using Fixtures.AdditionalProperties;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

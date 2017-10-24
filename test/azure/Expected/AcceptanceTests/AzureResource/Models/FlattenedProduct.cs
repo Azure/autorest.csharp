@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureResource;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -27,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// </summary>
         public FlattenedProduct()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using Fixtures.AcceptanceTestsBodyComplex;
 
     /// <summary>
     /// Defines values for CMYKColors.

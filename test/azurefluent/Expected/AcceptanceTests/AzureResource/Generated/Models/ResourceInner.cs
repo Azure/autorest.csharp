@@ -10,9 +10,6 @@
 
 namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureResource;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -29,7 +26,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
         /// </summary>
         public ResourceInner()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -25,7 +23,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public Goblinshark()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

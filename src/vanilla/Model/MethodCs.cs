@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Model
 
         public SyncMethodsGenerationMode SyncMethods { get; set; }
 
+        public bool ExcludeFromInterface { get; set; }
+
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates failure
         /// </summary>

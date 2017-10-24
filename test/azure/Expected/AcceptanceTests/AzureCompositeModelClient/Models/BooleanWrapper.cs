@@ -10,8 +10,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -22,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public BooleanWrapper()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

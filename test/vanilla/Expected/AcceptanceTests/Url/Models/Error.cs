@@ -10,7 +10,6 @@
 
 namespace Fixtures.AcceptanceTestsUrl.Models
 {
-    using Fixtures.AcceptanceTestsUrl;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AcceptanceTestsUrl.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
