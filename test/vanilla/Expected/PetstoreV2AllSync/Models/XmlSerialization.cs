@@ -6,13 +6,14 @@ namespace Fixtures.PetstoreV2AllSync
     using System.Xml.Linq;
     internal static class XmlSerialization
     {
-        internal delegate bool XmlRootDeserializer<T>( XElement root, out T result );
-        internal delegate bool XmlDeserializer<T>( XElement parent, string propertyName, out T result );
-        internal static XmlRootDeserializer<T> Root<T>( XmlDeserializer<T> deserializer ) =>
+        internal delegate bool XmlRootDeserializer<T>(XElement root, out T result);
+        internal delegate bool XmlDeserializer<T>(XElement parent, string propertyName, out T result);
+        internal static XmlRootDeserializer<T> Root<T>(XmlDeserializer<T> deserializer) =>
             (XElement root, out T result) => deserializer(new XElement("artificialRoot", root), root.Name.LocalName, out result);
-        private static XmlDeserializer<T> Unroot<T>( XmlRootDeserializer<T> deserializer )
+        private static XmlDeserializer<T> Unroot<T>(XmlRootDeserializer<T> deserializer)
         {
-            return (XElement parent, string propertyName, out T result) => {
+            return (XElement parent, string propertyName, out T result) =>
+            {
                 result = default(T);
                 var element = parent.Element(propertyName);
                 if (element == null)
@@ -22,8 +23,9 @@ namespace Fixtures.PetstoreV2AllSync
                 return deserializer(element, out result);
             };
         }
-        private static XmlRootDeserializer<T> ToRootDeserializer<T>( System.Func<XElement, T> unsafeDeserializer )
-            => (XElement root, out T result) => {
+        private static XmlRootDeserializer<T> ToRootDeserializer<T>(System.Func<XElement, T> unsafeDeserializer)
+            => (XElement root, out T result) =>
+            {
                 try
                 {
                     result = unsafeDeserializer(root);
@@ -33,23 +35,26 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     result = default(T);
                     return false;
-                }};
-        internal static XmlDeserializer<T> ToDeserializer<T>( System.Func<XElement, T> unsafeDeserializer )
+                }
+            };
+        internal static XmlDeserializer<T> ToDeserializer<T>(System.Func<XElement, T> unsafeDeserializer)
             => Unroot(ToRootDeserializer(unsafeDeserializer));
-        internal static XmlDeserializer<IList<T>> CreateListXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
+        internal static XmlDeserializer<IList<T>> CreateListXmlDeserializer<T>(XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
         {
             if (elementTagName != null)
             {
                 // create non-wrapped deserializer and forward
-                var slave = CreateListXmlDeserializer( elementDeserializer );
-                return (XElement parent, string propertyName, out IList<T> result) => {
+                var slave = CreateListXmlDeserializer(elementDeserializer);
+                return (XElement parent, string propertyName, out IList<T> result) =>
+                {
                     result = null;
                     var wrapper = parent.Element(propertyName);
                     return wrapper != null && slave(wrapper, elementTagName, out result);
                 };
             }
             var rootElementDeserializer = Root(elementDeserializer);
-            return (XElement parent, string propertyName, out IList<T> result) => {
+            return (XElement parent, string propertyName, out IList<T> result) =>
+            {
                 result = new List<T>();
                 foreach (var element in parent.Elements(propertyName))
                 {
@@ -63,9 +68,10 @@ namespace Fixtures.PetstoreV2AllSync
                 return true;
             };
         }
-        internal static XmlDeserializer<IDictionary<string, T>> CreateDictionaryXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer )
+        internal static XmlDeserializer<IDictionary<string, T>> CreateDictionaryXmlDeserializer<T>(XmlDeserializer<T> elementDeserializer)
         {
-            return (XElement parent, string propertyName, out IDictionary<string, T> result) => {
+            return (XElement parent, string propertyName, out IDictionary<string, T> result) =>
+            {
                 result = null;
                 var childElement = parent.Element(propertyName);
                 if (childElement == null)
