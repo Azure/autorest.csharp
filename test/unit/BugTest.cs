@@ -122,6 +122,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             Path.Combine(FRAMEWORK, "System.IO.dll"),
 
 
+            typeof(StreamReader).GetAssembly().Location,
             typeof(HttpClient).GetAssembly().Location,
             typeof(Object).GetAssembly().Location,
             typeof(Attribute).GetAssembly().Location,
