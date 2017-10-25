@@ -43,7 +43,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @WrapComment("/// ", "Static map to store allowed values for enums");
         @:///</summary>
         @EmptyLine
-        @:static @Model.ClassName()
+        @:static @(Model.ClassName)()
         @:{
             var initializers = Model.Values.SelectMany(enumVal=>enumVal.AllowedValues?.Select(allowedValue
                 =>"AllowedValues.Add("+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+");"));
