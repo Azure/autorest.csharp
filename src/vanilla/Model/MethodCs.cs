@@ -34,14 +34,8 @@ namespace AutoRest.CSharp.Model
             {
                 if (Responses.Any())
                 {
-                    List<string> predicates = new List<string>();
-                    foreach (var responseStatus in Responses.Keys)
-                    {
-                        predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                            "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
-                    }
-
-                    return string.Join(" && ", predicates);
+                    return string.Join(" && ", Responses.Keys.Select(
+                        responseStatus => $"(int)_statusCode != {GetStatusCodeReference(responseStatus)}"));
                 }
                 return "!_httpResponse.IsSuccessStatusCode";
             }
@@ -343,16 +337,16 @@ namespace AutoRest.CSharp.Model
                 if (pathParameter.ModelType is SequenceType)
                 {
                     builder.AppendLine(replaceString,
-                    variableName,
-                    urlPathName,
-                    pathParameter.GetFormattedReferenceValue(ClientReference));
+                        variableName,
+                        urlPathName,
+                        pathParameter.GetFormattedReferenceValue(ClientReference));
                 }
                 else
                 {
                     builder.AppendLine(replaceString,
-                    variableName,
-                    urlPathName,
-                    pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
+                        variableName,
+                        urlPathName,
+                        pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
                 }
             }
             if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))

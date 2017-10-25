@@ -40,7 +40,7 @@
         {
     @:if (@(parameter.Name) == null)
     @:{
-        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
+        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, nameof(@(parameter.Name)));
     @:}
 @:
         }
@@ -80,12 +80,12 @@ else
 if (Model.IsCustomBaseUri)
 {
     @:var _baseUrl = @(Model.ClientReference).BaseUri;
-    @:var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "@(Model.Url.TrimStart('/'))";
+    @:string _url = _baseUrl.TrimEnd('/') + "/" + "@(Model.Url.TrimStart('/'))";
 }
 else
 {
     @:var _baseUrl = @(Model.ClientReference).BaseUri.AbsoluteUri;
-    @:var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.TrimStart('/'))").ToString();
+    @:string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "@(Model.Url.TrimStart('/'))").ToString();
 }    
 }
     @(Model.BuildUrl("_url"))
@@ -99,17 +99,15 @@ else
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection && !p.IsContentTypeHeader))
     {
-        if (!parameter.IsNullable())
-        {
-    @:_httpRequest.Headers.Remove("@(parameter.SerializedName)");
-    @:_httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
-        }
-        else
+        if (parameter.IsNullable())
         {
     @:if (@(parameter.Name) != null)
     @:{
-    @:    _httpRequest.Headers.Remove("@(parameter.SerializedName)");
-    @:    _httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
+        }
+    @:_httpRequest.Headers.Remove("@(parameter.SerializedName)");
+    @:_httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
+        if (parameter.IsNullable())
+        {
     @:}
         }
     }
@@ -143,10 +141,6 @@ else
     {
         if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
         {
-            if (Model.RequestBody.IsRequired)
-            {
-    @ParamNullCheck(Model.RequestBody.Name)
-            }
         <text>
     if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
     {
@@ -159,7 +153,11 @@ else
         {
             if (Model.RequestContentType.StartsWith("application/xml"))
             {
-                if (!Model.RequestBody.IsNullable()) {
+                if (Model.RequestBody.IsNullable()) {
+    @:if(@(Model.RequestBody.Name) != null)
+    @:{
+                }
+
                     if (Model.RequestBody.ModelType is SequenceType && (Model.RequestBody.ModelType as SequenceType).ElementType is CompositeType)
                     { // for primitive sequences for now
     @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
@@ -175,25 +173,8 @@ else
                     }
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
     @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
-                }
-                else {
-    @:if(@(Model.RequestBody.Name) != null)
-    @:{
-                    if (Model.RequestBody.ModelType is SequenceType && (Model.RequestBody.ModelType as SequenceType).ElementType is CompositeType)
-                    { // for primitive sequences for now
-        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
-                    }
-                    else if (Model.RequestBody.ModelType is SequenceType)
-                    { // for primitive sequences for now
-        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
-                    }
-                    else
-                    {
-        @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ).ToString(); 
-        @:_requestContent = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{_requestContent}";
-                    }
-        @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
-        @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+
+                if (Model.RequestBody.IsNullable()) {
     @:}
                 }
             }

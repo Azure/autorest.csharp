@@ -1,7 +1,7 @@
 ﻿@using AutoRest.CSharp.Azure.Model
 @using AutoRest.Core.Utilities
 
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -28,10 +28,7 @@ namespace @Settings.Namespace
         /// </exception>
         internal @(Model.TypeName)(@Model.CodeModel.Name client)
         {
-            if (client == null) 
-            {
-                throw new System.ArgumentNullException("client");
-            }
+            @ParamNullCheck("client")
             this.Client = client;
         }
         @EmptyLine

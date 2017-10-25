@@ -1828,7 +1828,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/class/property").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/class/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
