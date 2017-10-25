@@ -80,7 +80,8 @@ defaultMappings = {
   'AcceptanceTests/Validation': 'validation.json',
   'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json',
   'AcceptanceTests/CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
-  'AcceptanceTests/ModelFlattening': 'model-flattening.json'
+  'AcceptanceTests/ModelFlattening': 'model-flattening.json',
+  'AcceptanceTests/PetStoreExtensibleEnums': 'extensible-enums-swagger.json'
 }
 
 defaultAzureMappings = {
@@ -104,7 +105,8 @@ azureCompositeMappings = {
   'AcceptanceTests/AzureCompositeModelClient': 'complex-model.json;body-complex.json'
 }
 
-swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+# swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+swaggerDir = "F:/artemp/rcm/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
   mappings = Object.assign({
@@ -285,6 +287,12 @@ task 'regenerate-cscomposite', '', (done) ->
     'flatteningThreshold': '1',
     'override-info.title': "Composite Bool Int",
     'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
+  },done
+  return null
+
+task 'regenerate-csextensibleenums', '', (done) ->
+  regenExpected {
+    'extensible-enum':true
   },done
   return null
 
