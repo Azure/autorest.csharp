@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "duration/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "duration/null").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -204,7 +204,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "duration/positiveduration").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "duration/positiveduration").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -313,7 +313,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "duration/positiveduration").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "duration/positiveduration").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -437,7 +437,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "duration/invalid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "duration/invalid").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -171,7 +171,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/putasync/retry/succeeded").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/customheader/putasync/retry/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -350,7 +350,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/put/201/creating/succeeded/200").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/customheader/put/201/creating/succeeded/200").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -530,7 +530,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/post/202/retry/200").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/customheader/post/202/retry/200").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -687,7 +687,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/postasync/retry/succeeded").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/customheader/postasync/retry/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

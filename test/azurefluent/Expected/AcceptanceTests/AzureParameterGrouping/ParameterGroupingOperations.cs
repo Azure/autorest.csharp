@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -76,7 +76,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
         {
             if (parameterGroupingPostRequiredParameters == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "parameterGroupingPostRequiredParameters");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(parameterGroupingPostRequiredParameters));
             }
             if (parameterGroupingPostRequiredParameters != null)
             {
@@ -118,7 +118,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postRequired/{path}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "parameterGrouping/postRequired/{path}").ToString();
             _url = _url.Replace("{path}", System.Uri.EscapeDataString(path));
             List<string> _queryParameters = new List<string>();
             if (query != null)
@@ -273,7 +273,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postOptional").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "parameterGrouping/postOptional").ToString();
             List<string> _queryParameters = new List<string>();
             if (query != null)
             {
@@ -439,7 +439,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postMultipleParameterGroups").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "parameterGrouping/postMultipleParameterGroups").ToString();
             List<string> _queryParameters = new List<string>();
             if (queryOne != null)
             {
@@ -599,7 +599,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/sharedParameterGroupObject").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "parameterGrouping/sharedParameterGroupObject").ToString();
             List<string> _queryParameters = new List<string>();
             if (queryOne != null)
             {

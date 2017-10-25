@@ -72,7 +72,7 @@ namespace Fixtures.AdditionalProperties
         {
             if (pet == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pet");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pet));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -87,7 +87,7 @@ namespace Fixtures.AdditionalProperties
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

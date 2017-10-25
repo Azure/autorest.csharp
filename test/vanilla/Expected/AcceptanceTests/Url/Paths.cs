@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/bool/true/{boolPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/bool/true/{boolPath}").ToString();
             _url = _url.Replace("{boolPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -186,7 +186,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/bool/false/{boolPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/bool/false/{boolPath}").ToString();
             _url = _url.Replace("{boolPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -292,7 +292,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/int/1000000/{intPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/int/1000000/{intPath}").ToString();
             _url = _url.Replace("{intPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -398,7 +398,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/int/-1000000/{intPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/int/-1000000/{intPath}").ToString();
             _url = _url.Replace("{intPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -504,7 +504,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/long/10000000000/{longPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/long/10000000000/{longPath}").ToString();
             _url = _url.Replace("{longPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -610,7 +610,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/long/-10000000000/{longPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/long/-10000000000/{longPath}").ToString();
             _url = _url.Replace("{longPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -716,7 +716,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/float/1.034E+20/{floatPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/float/1.034E+20/{floatPath}").ToString();
             _url = _url.Replace("{floatPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -822,7 +822,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/float/-1.034E-20/{floatPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/float/-1.034E-20/{floatPath}").ToString();
             _url = _url.Replace("{floatPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -928,7 +928,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/double/9999999.999/{doublePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/double/9999999.999/{doublePath}").ToString();
             _url = _url.Replace("{doublePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doublePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1034,7 +1034,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/double/-9999999.999/{doublePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/double/-9999999.999/{doublePath}").ToString();
             _url = _url.Replace("{doublePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doublePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1140,7 +1140,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/unicode/{stringPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/unicode/{stringPath}").ToString();
             _url = _url.Replace("{stringPath}", System.Uri.EscapeDataString(stringPath));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1246,7 +1246,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}").ToString();
             _url = _url.Replace("{stringPath}", System.Uri.EscapeDataString(stringPath));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1352,7 +1352,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/empty/{stringPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/empty/{stringPath}").ToString();
             _url = _url.Replace("{stringPath}", System.Uri.EscapeDataString(stringPath));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1455,7 +1455,7 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (stringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(stringPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1470,7 +1470,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/null/{stringPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/null/{stringPath}").ToString();
             _url = _url.Replace("{stringPath}", System.Uri.EscapeDataString(stringPath));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1578,7 +1578,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/enum/green%20color/{enumPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/enum/green%20color/{enumPath}").ToString();
             _url = _url.Replace("{enumPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1686,7 +1686,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/null/{enumPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/null/{enumPath}").ToString();
             _url = _url.Replace("{enumPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumPath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1789,7 +1789,7 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (bytePath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bytePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(bytePath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1804,7 +1804,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/multibyte/{bytePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/byte/multibyte/{bytePath}").ToString();
             _url = _url.Replace("{bytePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1910,7 +1910,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/empty/{bytePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/byte/empty/{bytePath}").ToString();
             _url = _url.Replace("{bytePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2013,7 +2013,7 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (bytePath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bytePath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(bytePath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2028,7 +2028,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/null/{bytePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/byte/null/{bytePath}").ToString();
             _url = _url.Replace("{bytePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2134,7 +2134,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/date/2012-01-01/{datePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/date/2012-01-01/{datePath}").ToString();
             _url = _url.Replace("{datePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2242,7 +2242,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/date/null/{datePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/date/null/{datePath}").ToString();
             _url = _url.Replace("{datePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2348,7 +2348,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}").ToString();
             _url = _url.Replace("{dateTimePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2456,7 +2456,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/datetime/null/{dateTimePath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/datetime/null/{dateTimePath}").ToString();
             _url = _url.Replace("{dateTimePath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimePath, Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2559,7 +2559,7 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (base64UrlPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "base64UrlPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(base64UrlPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2574,7 +2574,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/string/bG9yZW0/{base64UrlPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/string/bG9yZW0/{base64UrlPath}").ToString();
             _url = _url.Replace("{base64UrlPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(base64UrlPath, new Base64UrlJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2677,7 +2677,7 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (arrayPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "arrayPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(arrayPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2692,7 +2692,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}").ToString();
             _url = _url.Replace("{arrayPath}", System.Uri.EscapeDataString(string.Join(",", arrayPath)));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2800,7 +2800,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paths/int/1460505600/{unixTimeUrlPath}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paths/int/1460505600/{unixTimeUrlPath}").ToString();
             _url = _url.Replace("{unixTimeUrlPath}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(unixTimeUrlPath, new UnixTimeJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

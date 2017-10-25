@@ -38,7 +38,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -76,11 +76,11 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         {
             if (accountName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(accountName));
             }
             if (Client.Host == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.Host");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.Host));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -95,7 +95,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
             }
             // Construct URL
             var _baseUrl = Client.BaseUri;
-            var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "customuri";
+            string _url = _baseUrl.TrimEnd('/') + "/" + "customuri";
             _url = _url.Replace("{accountName}", accountName);
             _url = _url.Replace("{host}", Client.Host);
             List<string> _queryParameters = new List<string>();

@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -79,7 +79,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -214,7 +214,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/local/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/apiVersion/method/string/none/query/local/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -347,7 +347,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -480,7 +480,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {

@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/null").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -206,7 +206,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/null").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -318,7 +318,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/empty").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/empty").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -438,7 +438,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(stringBody));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -453,7 +453,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/empty").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/empty").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -565,7 +565,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/mbcs").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/mbcs").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -685,7 +685,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(stringBody));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -700,7 +700,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/mbcs").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/mbcs").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -813,7 +813,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/whitespace").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/whitespace").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -934,7 +934,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(stringBody));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -949,7 +949,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/whitespace").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/whitespace").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1061,7 +1061,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/notProvided").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/notProvided").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1185,7 +1185,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/base64Encoding").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/base64Encoding").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1309,7 +1309,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/base64UrlEncoding").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/base64UrlEncoding").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1428,7 +1428,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             if (stringBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "stringBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(stringBody));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1443,7 +1443,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/base64UrlEncoding").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/base64UrlEncoding").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1555,7 +1555,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "string/nullBase64UrlEncoding").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "string/nullBase64UrlEncoding").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/integer/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -203,7 +203,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/integer/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -318,7 +318,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/integer/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -450,7 +450,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/integer/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -563,7 +563,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/integer/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -685,7 +685,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/integer/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -791,7 +791,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(bodyParameter));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -806,7 +806,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/string/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -932,7 +932,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/string/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1040,7 +1040,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(value));
             }
             StringWrapper bodyParameter = new StringWrapper();
             if (value != null)
@@ -1060,7 +1060,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/string/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1192,7 +1192,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/string/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1300,7 +1300,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (headerParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(headerParameter));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1315,7 +1315,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/string/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1440,7 +1440,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/string/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1547,7 +1547,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(bodyParameter));
             }
             if (bodyParameter != null)
             {
@@ -1566,7 +1566,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/class/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/class/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1696,7 +1696,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/class/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/class/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1804,7 +1804,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(value));
             }
             if (value != null)
             {
@@ -1828,7 +1828,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/class/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/class/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1964,7 +1964,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/class/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/class/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2071,7 +2071,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (bodyParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "bodyParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(bodyParameter));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2086,7 +2086,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/array/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2212,7 +2212,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/parameter").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/array/parameter").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2320,7 +2320,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(value));
             }
             ArrayWrapper bodyParameter = new ArrayWrapper();
             if (value != null)
@@ -2340,7 +2340,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/array/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2472,7 +2472,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/property").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/array/property").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2580,7 +2580,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             if (headerParameter == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerParameter");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(headerParameter));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2595,7 +2595,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/requied/array/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2720,7 +2720,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/header").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "reqopt/optional/array/header").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

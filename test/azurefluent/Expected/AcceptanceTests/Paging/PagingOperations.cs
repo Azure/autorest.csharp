@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -80,7 +80,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/single").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/single").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -251,7 +251,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -437,7 +437,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/odata").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/odata").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -606,7 +606,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pagingGetMultiplePagesWithOffsetOptions");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
@@ -643,7 +643,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/withpath/{offset}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/withpath/{offset}").ToString();
             _url = _url.Replace("{offset}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(offset, Client.SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -813,7 +813,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/retryfirst").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/retryfirst").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -967,7 +967,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/retrysecond").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/retrysecond").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -1120,7 +1120,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/single/failure").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/single/failure").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -1273,7 +1273,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/failure").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/failure").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -1426,7 +1426,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/failureuri").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/failureuri").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -1581,11 +1581,11 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (apiVersion == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(apiVersion));
             }
             if (tenant == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "tenant");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(tenant));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1601,7 +1601,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/fragment/{tenant}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/fragment/{tenant}").ToString();
             _url = _url.Replace("{tenant}", System.Uri.EscapeDataString(tenant));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -1758,7 +1758,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (customParameterGroup == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "customParameterGroup");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(customParameterGroup));
             }
             if (customParameterGroup != null)
             {
@@ -1788,7 +1788,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/fragmentwithgrouping/{tenant}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/fragmentwithgrouping/{tenant}").ToString();
             _url = _url.Replace("{tenant}", System.Uri.EscapeDataString(tenant));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -1951,15 +1951,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (apiVersion == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(apiVersion));
             }
             if (tenant == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "tenant");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(tenant));
             }
             if (nextLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1976,7 +1976,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/fragment/{tenant}/{nextLink}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/fragment/{tenant}/{nextLink}").ToString();
             _url = _url.Replace("{tenant}", System.Uri.EscapeDataString(tenant));
             _url = _url.Replace("{nextLink}", nextLink);
             List<string> _queryParameters = new List<string>();
@@ -2137,11 +2137,11 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextLink));
             }
             if (customParameterGroup == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "customParameterGroup");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(customParameterGroup));
             }
             if (customParameterGroup != null)
             {
@@ -2172,7 +2172,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}").ToString();
             _url = _url.Replace("{nextLink}", nextLink);
             _url = _url.Replace("{tenant}", System.Uri.EscapeDataString(tenant));
             List<string> _queryParameters = new List<string>();
@@ -2330,7 +2330,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2502,7 +2502,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             int? maxresults = default(int?);
             if (pagingGetMultiplePagesOptions != null)
@@ -2702,7 +2702,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             int? maxresults = default(int?);
             if (pagingGetOdataMultiplePagesOptions != null)
@@ -2902,7 +2902,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             int? maxresults = default(int?);
             if (pagingGetMultiplePagesWithOffsetNextOptions != null)
@@ -3098,7 +3098,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3266,7 +3266,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3433,7 +3433,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3600,7 +3600,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3767,7 +3767,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsPaging
         {
             if (nextPageLink == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(nextPageLink));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;

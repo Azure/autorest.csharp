@@ -87,15 +87,15 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (localStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(localStringPath));
             }
             if (pathItemStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pathItemStringPath));
             }
             if (Client.GlobalStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.GlobalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.GlobalStringPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -113,7 +113,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
             _url = _url.Replace("{localStringPath}", System.Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", System.Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", System.Uri.EscapeDataString(Client.GlobalStringPath));
@@ -246,15 +246,15 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (localStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(localStringPath));
             }
             if (pathItemStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pathItemStringPath));
             }
             if (Client.GlobalStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.GlobalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.GlobalStringPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -272,7 +272,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
             _url = _url.Replace("{localStringPath}", System.Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", System.Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", System.Uri.EscapeDataString(Client.GlobalStringPath));
@@ -404,15 +404,15 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (localStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(localStringPath));
             }
             if (pathItemStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pathItemStringPath));
             }
             if (Client.GlobalStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.GlobalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.GlobalStringPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -430,7 +430,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
             _url = _url.Replace("{localStringPath}", System.Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", System.Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", System.Uri.EscapeDataString(Client.GlobalStringPath));
@@ -563,15 +563,15 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             if (localStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "localStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(localStringPath));
             }
             if (pathItemStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pathItemStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pathItemStringPath));
             }
             if (Client.GlobalStringPath == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.GlobalStringPath");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.GlobalStringPath));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -589,7 +589,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
             _url = _url.Replace("{localStringPath}", System.Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", System.Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", System.Uri.EscapeDataString(Client.GlobalStringPath));

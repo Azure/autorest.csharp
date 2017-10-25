@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -76,7 +76,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (unencodedPathParam == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(unencodedPathParam));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -218,7 +218,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (unencodedPathParam == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(unencodedPathParam));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -233,7 +233,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -363,7 +363,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -490,7 +490,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (q1 == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "q1");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(q1));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -505,7 +505,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/query/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/method/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -640,7 +640,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/query/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/method/query/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -770,7 +770,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (q1 == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "q1");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(q1));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -785,7 +785,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/path/query/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/path/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -918,7 +918,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {

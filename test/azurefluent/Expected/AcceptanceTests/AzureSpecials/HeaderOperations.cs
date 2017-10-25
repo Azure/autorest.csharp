@@ -38,7 +38,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -76,7 +76,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (fooClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fooClientRequestId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fooClientRequestId));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/customNamedRequestId").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/customNamedRequestId").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -236,7 +236,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (headerCustomNamedRequestIdParamGroupingParameters == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "headerCustomNamedRequestIdParamGroupingParameters");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(headerCustomNamedRequestIdParamGroupingParameters));
             }
             if (headerCustomNamedRequestIdParamGroupingParameters != null)
             {
@@ -260,7 +260,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/customNamedRequestIdParamGrouping").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/customNamedRequestIdParamGrouping").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -404,7 +404,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             if (fooClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fooClientRequestId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fooClientRequestId));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -419,7 +419,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/customNamedRequestIdHead").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/customNamedRequestIdHead").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

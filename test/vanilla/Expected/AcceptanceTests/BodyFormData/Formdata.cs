@@ -83,11 +83,11 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         {
             if (fileContent == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fileContent");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fileContent));
             }
             if (fileName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fileName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fileName));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -103,7 +103,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "formdata/stream/uploadfile").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "formdata/stream/uploadfile").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -234,7 +234,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         {
             if (fileContent == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fileContent");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fileContent));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -249,7 +249,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "formdata/stream/uploadfile").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "formdata/stream/uploadfile").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -269,10 +269,6 @@ namespace Fixtures.AcceptanceTestsBodyFormData
 
             // Serialize Request
             string _requestContent = null;
-            if (fileContent == null)
-            {
-                throw new System.ArgumentNullException(nameof(fileContent));
-            }
             if (fileContent != null && fileContent != Stream.Null)
             {
                 _httpRequest.Content = new StreamContent(fileContent);

@@ -85,23 +85,23 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         {
             if (vault == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "vault");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(vault));
             }
             if (secret == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "secret");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(secret));
             }
             if (Client.DnsSuffix == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.DnsSuffix");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.DnsSuffix));
             }
             if (keyName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "keyName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(keyName));
             }
             if (Client.SubscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.SubscriptionId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.SubscriptionId));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -119,7 +119,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             }
             // Construct URL
             var _baseUrl = Client.BaseUri;
-            var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "customuri/{subscriptionId}/{keyName}";
+            string _url = _baseUrl.TrimEnd('/') + "/" + "customuri/{subscriptionId}/{keyName}";
             _url = _url.Replace("{vault}", vault);
             _url = _url.Replace("{secret}", secret);
             _url = _url.Replace("{dnsSuffix}", Client.DnsSuffix);

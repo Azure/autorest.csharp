@@ -38,7 +38,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -80,7 +80,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/polymorphicrecursive/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "complex/polymorphicrecursive/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -276,7 +276,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             if (complexBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(complexBody));
             }
             if (complexBody != null)
             {
@@ -295,7 +295,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/polymorphicrecursive/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "complex/polymorphicrecursive/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

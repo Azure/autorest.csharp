@@ -308,7 +308,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             if (body != null)
             {
@@ -327,7 +327,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -463,7 +463,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             if (body != null)
             {
@@ -482,7 +482,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -597,7 +597,7 @@ namespace Fixtures.PetstoreV2
         {
             if (status == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "status");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(status));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -612,7 +612,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/findByStatus").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet/findByStatus").ToString();
             List<string> _queryParameters = new List<string>();
             if (status != null)
             {
@@ -757,7 +757,7 @@ namespace Fixtures.PetstoreV2
         {
             if (tags == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "tags");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(tags));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -772,7 +772,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/findByTags").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet/findByTags").ToString();
             List<string> _queryParameters = new List<string>();
             if (tags != null)
             {
@@ -922,7 +922,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1062,7 +1062,7 @@ namespace Fixtures.PetstoreV2
         {
             if (fileContent == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "fileContent");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(fileContent));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1080,7 +1080,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1218,7 +1218,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1334,7 +1334,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/inventory").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "store/inventory").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1467,7 +1467,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1482,7 +1482,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "store/order").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1624,7 +1624,7 @@ namespace Fixtures.PetstoreV2
         {
             if (orderId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(orderId));
             }
             if (orderId != null)
             {
@@ -1650,7 +1650,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "store/order/{orderId}").ToString();
             _url = _url.Replace("{orderId}", System.Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1785,7 +1785,7 @@ namespace Fixtures.PetstoreV2
         {
             if (orderId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(orderId));
             }
             if (orderId != null)
             {
@@ -1807,7 +1807,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "store/order/{orderId}").ToString();
             _url = _url.Replace("{orderId}", System.Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1914,7 +1914,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1929,7 +1929,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2038,7 +2038,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2053,7 +2053,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithArray").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/createWithArray").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2162,7 +2162,7 @@ namespace Fixtures.PetstoreV2
         {
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2177,7 +2177,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithList").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/createWithList").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2292,11 +2292,11 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "username");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(username));
             }
             if (password == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "password");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(password));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2312,7 +2312,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/login").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/login").ToString();
             List<string> _queryParameters = new List<string>();
             if (username != null)
             {
@@ -2469,7 +2469,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/logout").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/logout").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -2575,7 +2575,7 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "username");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(username));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2590,7 +2590,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2727,11 +2727,11 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "username");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(username));
             }
             if (body == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(body));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2747,7 +2747,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2860,7 +2860,7 @@ namespace Fixtures.PetstoreV2
         {
             if (username == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "username");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(username));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2875,7 +2875,7 @@ namespace Fixtures.PetstoreV2
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

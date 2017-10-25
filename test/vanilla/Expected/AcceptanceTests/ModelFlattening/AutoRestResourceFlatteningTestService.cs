@@ -182,7 +182,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/array").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/array").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -295,7 +295,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/array").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/array").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -422,7 +422,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/wrappedarray").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/wrappedarray").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -536,7 +536,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/wrappedarray").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/wrappedarray").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -662,7 +662,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/dictionary").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/dictionary").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -775,7 +775,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/dictionary").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/dictionary").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -901,7 +901,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/resourcecollection").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/resourcecollection").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1014,7 +1014,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/resourcecollection").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/resourcecollection").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1147,7 +1147,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/customFlattening").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/customFlattening").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1290,11 +1290,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             if (productId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "productId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(productId));
             }
             if (maxProductDisplayName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "maxProductDisplayName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(maxProductDisplayName));
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
             if (productId != null || description != null || maxProductDisplayName != null || genericValue != null || odatavalue != null)
@@ -1319,7 +1319,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/customFlattening").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/customFlattening").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1449,7 +1449,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             if (flattenParameterGroup == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "flattenParameterGroup");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(flattenParameterGroup));
             }
             if (flattenParameterGroup != null)
             {
@@ -1514,7 +1514,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "model-flatten/customFlattening/parametergrouping/{name}/").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "model-flatten/customFlattening/parametergrouping/{name}/").ToString();
             _url = _url.Replace("{name}", System.Uri.EscapeDataString(name));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

@@ -81,11 +81,11 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         {
             if (resourceGroupName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
             }
             if (avset == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "avset");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(avset));
             }
             if (avset != null)
             {
@@ -96,7 +96,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             }
             if (tags == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "tags");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(tags));
             }
             AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
             if (tags != null)
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterFlattening/{resourceGroupName}/{availabilitySetName}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "parameterFlattening/{resourceGroupName}/{availabilitySetName}").ToString();
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{availabilitySetName}", System.Uri.EscapeDataString(avset));
             // Create HTTP transport objects

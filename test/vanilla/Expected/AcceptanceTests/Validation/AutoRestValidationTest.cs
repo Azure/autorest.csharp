@@ -190,11 +190,11 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             if (SubscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.SubscriptionId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(SubscriptionId));
             }
             if (resourceGroupName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
             }
             if (resourceGroupName != null)
             {
@@ -225,7 +225,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             if (ApiVersion == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.ApiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(ApiVersion));
             }
             if (ApiVersion != null)
             {
@@ -248,7 +248,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "fakepath/{subscriptionId}/{resourceGroupName}/{id}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SubscriptionId));
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{id}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, SerializationSettings).Trim('"')));
@@ -388,11 +388,11 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             if (SubscriptionId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.SubscriptionId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(SubscriptionId));
             }
             if (resourceGroupName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
             }
             if (resourceGroupName != null)
             {
@@ -427,7 +427,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             if (ApiVersion == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.ApiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(ApiVersion));
             }
             if (ApiVersion != null)
             {
@@ -451,7 +451,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "fakepath/{subscriptionId}/{resourceGroupName}/{id}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SubscriptionId));
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{id}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, SerializationSettings).Trim('"')));
@@ -589,7 +589,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "validation/constantsInPath/{constantParam}/value").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "validation/constantsInPath/{constantParam}/value").ToString();
             _url = _url.Replace("{constantParam}", System.Uri.EscapeDataString(constantParam));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -697,7 +697,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "validation/constantsInPath/{constantParam}/value").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "validation/constantsInPath/{constantParam}/value").ToString();
             _url = _url.Replace("{constantParam}", System.Uri.EscapeDataString(constantParam));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

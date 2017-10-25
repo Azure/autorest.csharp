@@ -38,7 +38,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             if (client == null)
             {
-                throw new System.ArgumentNullException("client");
+                throw new System.ArgumentNullException(nameof(client));
             }
             Client = client;
         }
@@ -77,7 +77,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -208,7 +208,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             if (xMsClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "xMsClientRequestId");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(xMsClientRequestId));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -223,7 +223,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

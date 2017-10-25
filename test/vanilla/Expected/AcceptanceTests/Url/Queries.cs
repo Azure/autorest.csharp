@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/true").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/bool/true").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("boolQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -191,7 +191,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/false").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/bool/false").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("boolQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -304,7 +304,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/bool/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -418,7 +418,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/1000000").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/int/1000000").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("intQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -529,7 +529,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/-1000000").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/int/-1000000").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("intQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -642,7 +642,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/int/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -756,7 +756,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/10000000000").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/long/10000000000").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("longQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -867,7 +867,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/-10000000000").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/long/-10000000000").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("longQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -980,7 +980,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/long/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -1094,7 +1094,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/1.034E+20").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/float/1.034E+20").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("floatQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -1205,7 +1205,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/-1.034E-20").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/float/-1.034E-20").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("floatQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -1318,7 +1318,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/float/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1432,7 +1432,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/9999999.999").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/double/9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("doubleQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -1543,7 +1543,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/-9999999.999").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/double/-9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("doubleQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -1656,7 +1656,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/double/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1770,7 +1770,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/unicode/").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/string/unicode/").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1884,7 +1884,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1998,7 +1998,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/empty").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/string/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -2114,7 +2114,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/string/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -2230,7 +2230,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/green%20color").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/enum/green%20color").ToString();
             List<string> _queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2346,7 +2346,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/enum/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2462,7 +2462,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/multibyte").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/byte/multibyte").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2576,7 +2576,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/empty").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/byte/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2692,7 +2692,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/byte/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2806,7 +2806,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/2012-01-01").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/date/2012-01-01").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("dateQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -2919,7 +2919,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/date/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -3033,7 +3033,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
             List<string> _queryParameters = new List<string>();
             _queryParameters.Add(string.Format("dateTimeQuery={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
@@ -3146,7 +3146,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/datetime/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -3262,7 +3262,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/csv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3378,7 +3378,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/null").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/csv/string/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3494,7 +3494,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/empty").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/csv/string/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3610,7 +3610,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/ssv/string/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/ssv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3726,7 +3726,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/tsv/string/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/tsv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3842,7 +3842,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/pipes/string/valid").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "queries/array/pipes/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {

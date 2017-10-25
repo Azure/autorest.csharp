@@ -177,7 +177,7 @@ namespace Fixtures.MirrorSequences
         {
             if (pets == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "pets");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(pets));
             }
             if (pets != null)
             {
@@ -202,7 +202,7 @@ namespace Fixtures.MirrorSequences
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pets").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "pets").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -331,7 +331,7 @@ namespace Fixtures.MirrorSequences
         {
             if (petStyle == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(petStyle));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -346,7 +346,7 @@ namespace Fixtures.MirrorSequences
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "primitives").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -475,7 +475,7 @@ namespace Fixtures.MirrorSequences
         {
             if (petStyle == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "petStyle");
+                throw new ValidationException(ValidationRules.CannotBeNull, nameof(petStyle));
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -490,7 +490,7 @@ namespace Fixtures.MirrorSequences
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
+            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "primitives").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
