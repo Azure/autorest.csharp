@@ -62,6 +62,10 @@ namespace AutoRest.CSharp
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
             await Write(serviceClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+            
+            // LowLevel
+            await Write(new LowLevelTemplate { Model = codeModel }, $"{codeModel.Name}Operations{ImplementationFileExtension}");
+            await Write(new LowLevelInterfaceTemplate { Model = codeModel }, $"I{codeModel.Name}Operations{ImplementationFileExtension}");
 
             // operations
             foreach (MethodGroupCs methodGroup in codeModel.Operations)

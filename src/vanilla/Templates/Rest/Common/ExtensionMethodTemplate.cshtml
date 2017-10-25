@@ -6,6 +6,7 @@
 @using AutoRest.CSharp.Model
 @inherits TemplateCs<AutoRest.CSharp.Model.MethodCs>
 @{
+<<<<<<< HEAD
 if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
 {
     @XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
@@ -35,6 +36,8 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:}
 @EmptyLine
 }
+=======
+>>>>>>> separate LL and HL
 
 @XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
 @XmlDocParam("operations", "operations group for this extension method")
@@ -47,19 +50,19 @@ foreach (var parameter in Model.LocalParameters)
 {
 @:[System.Obsolete()]
 }
-@:@((Model as MethodCs).AccessModifier) static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
+@:@((Model as MethodCs).AccessModifier) static async @Model.TaskExtensionReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
 @:{
     if (Model.ReturnType.Body != null)
     {
         if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
-    @:var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:var _result = await operations.@(Model.SerializedName)(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:_result.Request.Dispose();
     @:return _result.Body;
         }
         else
         {
-    @:using (var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:using (var _result = await operations.@(Model.SerializedName)(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
     @:{
     @:    return _result.Body;
     @:}
@@ -67,35 +70,14 @@ foreach (var parameter in Model.LocalParameters)
     }
     else if (Model.ReturnType.Headers != null)
     {
-    @:using (var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:using (var _result = await operations.@(Model.SerializedName)(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
     @:{
     @:    return _result.Headers;
     @:}
     }
     else
     {
-    @:(await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
+    @:(await operations.@(Model.SerializedName)(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
     }
 @:}
-
-    if (Model.SyncMethods == SyncMethodsGenerationMode.All)
-    {
-@EmptyLine
-    @XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
-@XmlDocParam("operations", "operations group for this extension method")
-    foreach (var parameter in Model.LocalParameters)
-    {
-@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
-    }
-@XmlDocParamCustomHeaders()
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
-@:@((Model as MethodCs).AccessModifier) static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
-@:{
-@:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "System.Threading.CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
-@:}
-@:
-    }
 }

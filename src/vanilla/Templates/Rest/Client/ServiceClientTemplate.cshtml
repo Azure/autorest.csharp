@@ -88,13 +88,6 @@ namespace @Settings.Namespace
             @:DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
             }
     
-        }    
-    
-        @foreach (MethodCs method in Model.Methods.Where( m => m.Group.IsNullOrEmpty()))
-        {
-        @:@(Include(new MethodTemplate(), method))
-        @EmptyLine
-        @:
         }
     }
 }

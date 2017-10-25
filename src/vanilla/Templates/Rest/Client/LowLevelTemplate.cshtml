@@ -1,0 +1,47 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<CodeModelCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    public partial class @(Model.Name)Operations : I@(Model.Name)Operations
+    {
+        public @(Model.Name) Client { get; private set; }
+
+        public @(Model.Name)Operations(@(Model.Name) client)
+        {
+            this.Client = client;
+        }
+     
+    @foreach(MethodCs method in Model.Methods)
+    {
+        @:@(Include(new MethodTemplate(), method))
+    }
+
+@EmptyLine
+
+    @foreach(var operation in Model.AllOperations)
+    {
+        @foreach(MethodCs method in operation.Methods)
+        {
+            if (method.ExcludeFromInterface)
+            {
+                continue;
+            }
+
+            @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(operation.TypeName).@(method.Name)(@(method.GetAsyncMethodParameterDeclaration(true)))
+            @:{
+            @:    return @(method.SerializedName)(@(method.GetAsyncMethodInvocationArgs("null")));
+            @:}
+        }
+    }
+
+    }
+}
