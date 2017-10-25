@@ -2,7 +2,7 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<CodeModelCs>
+@inherits TemplateCs<CodeModelCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -11,14 +11,10 @@ namespace @Settings.Namespace
     @:using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    /// </summary>
+    @XmlDocSummary(Model.Documentation.EscapeXmlComment())
     public partial interface I@(Model.Name) : System.IDisposable
     {
-        /// <summary>
-        /// The base URI of the service.
-        /// </summary>
+        @XmlDocPropBaseUri()
         @if (!Model.IsCustomBaseUri)
         {
         @:System.Uri BaseUri { get; set; }
@@ -26,23 +22,17 @@ namespace @Settings.Namespace
         
         @EmptyLine
 
-        /// <summary>
-        /// Gets or sets json serialization settings.
-        /// </summary>
+        @XmlDocPropSerializationSettings()
         Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
         @EmptyLine
 
-        /// <summary>
-        /// Gets or sets json deserialization settings.
-        /// </summary>
+        @XmlDocPropDeserializationSettings()  
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
         @EmptyLine
 
         @foreach (var property in Model.Properties)
         {
-        @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
-        @:/// </summary>
+        @XmlDocSummary(property.Documentation.EscapeXmlComment())
         @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
         @EmptyLine
         }
@@ -50,9 +40,7 @@ namespace @Settings.Namespace
         @EmptyLine
     @foreach(var operation in Model.AllOperations)
     {
-        @:/// <summary>
-        @:/// Gets the I@(operation.TypeName).
-        @:/// </summary>
+        @XmlDocProp(false, $"the I{operation.TypeName}")
         @:I@(operation.TypeName) @(operation.NameForProperty) { get; }
         @EmptyLine
         @:
@@ -65,30 +53,13 @@ namespace @Settings.Namespace
             continue;
         }
 
-        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
-        {
-        @:/// <summary>
-        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
-        @:/// </summary>
-        }
-        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
-        {
-        @:/// <remarks>
-        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
-        @:/// </remarks>
-        }
+        @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
         foreach (var parameter in method.LocalParameters)
         {
-        @:/// <param name='@parameter.Name'>
-        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
-        @:/// </param>
+        @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
         }
-        @:/// <param name='customHeaders'>
-        @:/// The headers that will be added to request.
-        @:/// </param>
-        @:/// <param name='cancellationToken'>
-        @:/// The cancellation token.
-        @:/// </param>
+        @XmlDocParamCustomHeaders()
+        @XmlDocParamCancellationToken()
         @:System.Threading.Tasks.Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:

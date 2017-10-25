@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.Core;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
@@ -68,7 +69,11 @@ namespace AutoRest.Simplify
 
                     // tell roslyn to simplify where it can
                     newRoot = new SimplifyNamesRewriter().Visit(newRoot);
+
                     var doc = document.WithSyntaxRoot(newRoot);
+
+                    // auto-format
+                    doc = await Formatter.FormatAsync(doc);
 
                     // reduce the code 
                     var text = Simplifier.ReduceAsync(doc)

@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException($"serviceClient");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             var convertedTypes = new Dictionary<IModelType, CompositeType>();

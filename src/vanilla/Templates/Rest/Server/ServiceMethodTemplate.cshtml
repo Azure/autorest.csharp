@@ -5,26 +5,9 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp
 @using AutoRest.CSharp.Model
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodCs>
 
-@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
-    {
-@:/// <see href="@Model.ExternalDocsUrl" />
-    }
-@:/// </summary>
-}
-
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-    @:/// <remarks>
-        @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-        @:///
-    @:///</remarks>
-}
+@XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
 
 [@("Http" + @Model.HttpMethod)("@Model.Url")]
 @{ var methodSignature = "public " + Model.ReturnTypeString + " " + @Model.HttpMethod + "("; }
@@ -46,16 +29,13 @@
 {
     if (parameter.IsRequired && parameter.IsNullable())
     {
-    @:if (@(parameter.Name) == null)
-    @:{
-        @:throw new System.ArgumentNullException();
-    @:}
+    @ParamNullCheck(parameter.Name)
     @:
-}
+    }
     if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
     {
     @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
-}
+    }
 }
 @if (Model.HttpMethod == HttpMethod.Get)
 {
