@@ -43,10 +43,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @WrapComment("/// ", "Static map to store allowed values for enums");
         @:///</summary>
         @EmptyLine
-        @:AllowedValuesMap = new Dictionary<@underlyingType, @Model.ClassName>()
+        @:static @Model.ClassName()
         @:{
             var initializers = Model.Values.SelectMany(enumVal=>enumVal.AllowedValues?.Select(allowedValue
-                =>"{ "+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+"}"));
+                =>"AllowedValues.Add("+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+");"));
             @string.Join(", \n", initializers.ToArray());
         @:}
         
