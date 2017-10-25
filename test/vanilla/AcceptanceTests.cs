@@ -33,6 +33,8 @@ using Fixtures.AcceptanceTestsBodyString.Models;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
 using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
+using Fixtures.AcceptanceTestsExtensibleEnums;
+using Fixtures.AcceptanceTestsExtensibleEnums.Models;
 using Fixtures.AcceptanceTestsHeader;
 using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
@@ -411,6 +413,24 @@ namespace AutoRest.CSharp.Tests
                 Assert.Throws<SerializationException>(() => client.Date.GetInvalidDate());
                 Assert.Throws<SerializationException>(() => client.Date.GetOverflowDate());
                 Assert.Throws<SerializationException>(() => client.Date.GetUnderflowDate());
+            }
+        }
+
+        [Fact]
+        public void ExtensibleEnumsTest()
+        {
+            
+            using (var client = new PetStoreInc(Fixture.Uri))
+            {
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);
+
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("casper").DaysOfWeek, (DaysOfWeekExtensibleEnum)"Weekend");
+
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("scooby").IntEnum, IntEnum.Two);
+
             }
         }
 
@@ -2332,7 +2352,7 @@ namespace AutoRest.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 54;
+                int totalTests = report.Count - 56;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);

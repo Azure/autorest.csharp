@@ -325,7 +325,7 @@ task 'regenerate-csextensibleenums', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/vanilla',
     'inputBaseDir': swaggerDir,
-    'mappings': {'AcceptanceTests/PetStoreExtensibleEnums': 'extensible-enums-swagger.json'},
+    'mappings': {'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'},
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
