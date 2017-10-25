@@ -39,6 +39,9 @@ regenExpected = (opts,done) ->
     if (opts.flatteningThreshold)
       args.push("--csharp.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
+    if(opts.extensibleEnums)
+      args.push("--extensible-enums=true")
+
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
@@ -80,8 +83,7 @@ defaultMappings = {
   'AcceptanceTests/Validation': 'validation.json',
   'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json',
   'AcceptanceTests/CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
-  'AcceptanceTests/ModelFlattening': 'model-flattening.json',
-  'AcceptanceTests/PetStoreExtensibleEnums': 'extensible-enums-swagger.json'
+  'AcceptanceTests/ModelFlattening': 'model-flattening.json'
 }
 
 defaultAzureMappings = {
@@ -140,7 +142,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-csextensibleenums'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -292,7 +294,13 @@ task 'regenerate-cscomposite', '', (done) ->
 
 task 'regenerate-csextensibleenums', '', (done) ->
   regenExpected {
-    'extensible-enum':true
+    'outputBaseDir': 'test/vanilla',
+    'inputBaseDir': swaggerDir,
+    'mappings': {'AcceptanceTests/PetStoreExtensibleEnums': 'extensible-enums-swagger.json'},
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+    'extensibleEnums':true
   },done
   return null
 
