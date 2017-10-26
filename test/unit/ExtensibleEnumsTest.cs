@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Rest;
 using Xunit;
 using Xunit.Abstractions;
+using System.Diagnostics;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -29,12 +30,33 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task CheckGeneratesValidCSharp()
         {
             var settings = new Settings{
-                Namespace = "ExtensibleEnums"
+                Namespace = "ExtensibleEnums",
             };
             settings.CustomSettings.Add("ExtensibleEnums", true);
             
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
             {
+                                
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\currproc\currprocess.log"))
+                {
+                    file.WriteLine(Process.GetCurrentProcess().Id);
+                }
+
+                AutoRest.Core.Utilities.Debugger.Await();
+
+                foreach(var k in fileSystem.VirtualStore.Keys)
+                {
+                    if(string.IsNullOrEmpty(k) || k=="Models")
+                    {
+                        continue;
+                    }
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\currproc\"+k))
+                    {
+                        file.WriteLine(fileSystem.VirtualStore[k].ToString());
+                    }
+                }
+
+                
                 // if newlines and stuff aren't excaped properly, compilation will fail
                 var result = await Compile(fileSystem);
                 
@@ -46,8 +68,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 // filter the errors
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
                          
-                Assert.True(true);
-
                 Write(warnings, fileSystem);
                 Write(errors, fileSystem);
 
@@ -67,13 +87,13 @@ namespace AutoRest.CSharp.Unit.Tests
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
-                var extensibleEnumsModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "ExtensibleEnums.Models.Category");
+                var extensibleEnumsModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "ExtensibleEnums.Models.DaysOfWeekExtensibleEnum");
                 Assert.NotNull(extensibleEnumsModel);
 
-                var enumVals = extensibleEnumsModel.GetFields().Where(f=>f.IsPublic && f.IsStatic && f.DeclaringType.ToString() == "ExtensibleEnums.Models.Category");
-                Assert.Equal(enumVals.Count(), 4);
+                var enumVals = extensibleEnumsModel.GetFields().Where(f=>f.IsPublic && f.IsStatic && f.DeclaringType.ToString() == "ExtensibleEnums.Models.DaysOfWeekExtensibleEnum");
+                Assert.Equal(enumVals.Count(), 7);
                 Assert.True(Enumerable.SequenceEqual(enumVals.Select(val=>val.GetValue(null).ToString()), 
-                    new List<string>(){"HighAvailability", "Security", "Performance", "Cost" }));
+                    new List<string>(){"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }));
             }
             
         }

@@ -1,49 +1,83 @@
 ---
 swagger: '2.0'
 info:
-  version: '2017-04-19'
-  title: AdvisorManagementClient
-  description: REST APIs for Azure Advisor
-host: management.azure.com
+  version: '2016-07-07'
+  title: PetStore Inc
+  description: PetStore
+host: localhost
 schemes:
 - https
 paths:
-  "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}":
+  "/pet/extensibleenums/{petId}":
     get:
-      description: Obtains the details of a suppression.
-      operationId: Suppressions_Get
+      operationId: Pet_GetByPetId
       parameters:
-      - "$ref": "#/parameters/subscriptionIdParameter"
+      - "$ref": "#/parameters/petid"
       responses:
         '200':
-          description: OK. Successfully got suppression detail.
           schema:
-            "$ref": "#/definitions/SuppressionContract"
+            "$ref": "#/definitions/Pet"
       produces:
       - application/json
       consumes:
       - application/json
 definitions:
-  SuppressionContract:
-    description: The details of the snoozed or dismissed rule; for example, the duration,
-      name, and GUID associated with the rule.
-    type: object
+  Pet:
     properties:
-      category:
-        description: The category of the recommendation.
-        enum:
-        - HighAvailability
-        - Security
-        - Performance
-        - Cost
+      name:
         type: string
+        description: "name of the pet"
+      DaysOfWeek:
+        type: string
+        description: Type of Pet
+        enum:
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+        - Sunday
         x-ms-enum:
-          name: category
+          name: DaysOfWeekExtensibleEnum
           modelAsString: true
+        default: Friday
+      IntEnum:
+        type: string
+        description: ''
+        enum:
+        - '1'
+        - '2'
+        - '3'
+        readonly: true
+        x-ms-enum:
+          modelAsString: true
+          name: IntEnum
+          values:
+          - value: '1'
+            description: one
+            name: '1'
+            allowedValues:
+            - '1.1'
+            - '1.2'
+            - '1.3'
+          - value: '2'
+            description: two
+            name: '2'
+            allowedValues:
+            - '2.1'
+            - '2.2'
+          - value: '3'
+            description: three
+            name: '3'
+            allowedValues:
+            - '3.1'
+            - '3.3'
 parameters:
-  subscriptionIdParameter:
-    name: subscriptionId
+  petid:
+    name: petId
     in: path
-    description: The Azure subscription ID.
     required: true
     type: string
+    description: Pet id
+    x-ms-parameter-location: method

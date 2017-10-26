@@ -121,7 +121,7 @@ else
 {
         if(property.ModelType is EnumType && Settings.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.CustomSettings["ExtensibleEnums"])
         {
-        @:[JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@(((EnumType)property.ModelType).ClassName), @((((EnumType)property.ModelType).UnderlyingType==null)?"string":((EnumType)property.ModelType).UnderlyingType.ToString())>))]
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@(((EnumType)property.ModelType).ClassName), @((((EnumType)property.ModelType).UnderlyingType==null)?"string":((EnumType)property.ModelType).UnderlyingType.ToString())>))]
         }
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
 }
