@@ -52,6 +52,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// </summary>
         /// <returns>The value as a DaysOfWeekExtensibleEnum.</returns>
         public static DaysOfWeekExtensibleEnum Create(string value)
-            => _valueMap.GetOrAdd(value, (v) => new DaysOfWeekExtensibleEnum(v));
+            => value==null? null : _valueMap.GetOrAdd(value, (v) => new DaysOfWeekExtensibleEnum(v));
     }
 }

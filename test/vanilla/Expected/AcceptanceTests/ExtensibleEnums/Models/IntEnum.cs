@@ -52,6 +52,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// </summary>
         /// <returns>The value as a IntEnum.</returns>
         public static IntEnum Create(string value)
-            => _valueMap.GetOrAdd(value, (v) => new IntEnum(v));
+            => value==null? null : _valueMap.GetOrAdd(value, (v) => new IntEnum(v));
     }
 }

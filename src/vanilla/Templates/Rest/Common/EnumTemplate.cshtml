@@ -67,22 +67,24 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary> 
         /// <returns>The value as a @(Model.ClassName).</returns> </text>
         @:public static @Model.ClassName Create(@underlyingType value)
-        if(hasAllowedValues)
-        {
+        
         @:{ 
+            @:if(value == null)
+            @:{
+                @:return null;
+            @:}
+            @EmptyLine
+            if(hasAllowedValues)
+            {
             @:if(AllowedValuesMap.ContainsKey(value))
             @:{
                 @:return AllowedValuesMap[value];
             @:}
             @EmptyLine
+            }
             @:return _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
         @:}
         @EmptyLine
-        }
-        else
-        {
-            @:=> _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
-        }
         
     @:}
     }
