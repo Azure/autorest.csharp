@@ -46,8 +46,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:static @(Model.ClassName)()
         @:{
             var initializers = Model.Values.SelectMany(enumVal=>enumVal.AllowedValues?.Select(allowedValue
-                =>"AllowedValues.Add("+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+");"));
-            @string.Join(", \n", initializers.ToArray());
+                =>"AllowedValuesMap.Add("+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+")"));
+            @:@string.Join("; \n", initializers.ToArray());
         @:}
         
     }

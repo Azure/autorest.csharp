@@ -40,6 +40,19 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// </summary>
                 public static readonly IntEnum Three = "3";
 
+        ///<summary>
+/// Static map to store allowed values for enums        ///</summary>
+
+        static IntEnum()
+        {
+            AllowedValuesMap.Add("1.1", One);
+            AllowedValuesMap.Add("1.2", One);
+            AllowedValuesMap.Add("1.3", One);
+            AllowedValuesMap.Add("2.1", Two);
+            AllowedValuesMap.Add("2.2", Two);
+            AllowedValuesMap.Add("3.1", Three);
+            AllowedValuesMap.Add("3.3", Three);
+        }
 
         /// <summary>
         /// Defines ctor/explicit conversion from value type to IntEnum.
@@ -52,6 +65,19 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// </summary>
         /// <returns>The value as a IntEnum.</returns>
         public static IntEnum Create(string value)
-            => value==null? null : _valueMap.GetOrAdd(value, (v) => new IntEnum(v));
+        {
+            if(value == null)
+            {
+                return null;
+            }
+
+            if(AllowedValuesMap.ContainsKey(value))
+            {
+                return AllowedValuesMap[value];
+            }
+
+            return _valueMap.GetOrAdd(value, (v) => new IntEnum(v));
+        }
+
     }
 }

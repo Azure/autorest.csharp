@@ -42,6 +42,8 @@ regenExpected = (opts,done) ->
     if(opts.extensibleEnums)
       args.push("--extensible-enums=true")
 
+    args.push("--use=F:/artemp/rcm/autorest.modeler")
+
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
