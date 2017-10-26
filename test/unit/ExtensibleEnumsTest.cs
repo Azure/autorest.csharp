@@ -30,33 +30,13 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task CheckGeneratesValidCSharp()
         {
             var settings = new Settings{
-                Namespace = "ExtensibleEnums",
+                Namespace = "ExtensibleEnums"
             };
             settings.CustomSettings.Add("ExtensibleEnums", true);
             
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
             {
                                 
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\currproc\currprocess.log"))
-                {
-                    file.WriteLine(Process.GetCurrentProcess().Id);
-                }
-
-                AutoRest.Core.Utilities.Debugger.Await();
-
-                foreach(var k in fileSystem.VirtualStore.Keys)
-                {
-                    if(string.IsNullOrEmpty(k) || k=="Models")
-                    {
-                        continue;
-                    }
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\currproc\"+k))
-                    {
-                        file.WriteLine(fileSystem.VirtualStore[k].ToString());
-                    }
-                }
-
-                
                 // if newlines and stuff aren't excaped properly, compilation will fail
                 var result = await Compile(fileSystem);
                 
