@@ -39,6 +39,11 @@ regenExpected = (opts,done) ->
     if (opts.flatteningThreshold)
       args.push("--csharp.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
+    if(opts.extensibleEnums)
+      args.push("--extensible-enums=true")
+
+    args.push("--use=F:/artemp/rcm/autorest.modeler")
+
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
@@ -125,7 +130,8 @@ defaultConfigurationFiles = [
   'test/vanilla/Configurations/hidden-methods.md'
 ]
 
-swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+# swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+swaggerDir = "F:/artemp/rcm/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
   mappings = Object.assign({
@@ -159,7 +165,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-csextensibleenums'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -314,6 +320,18 @@ task 'regenerate-cscomposite', '', (done) ->
     'flatteningThreshold': '1',
     'override-info.title': "Composite Bool Int",
     'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
+  },done
+  return null
+
+task 'regenerate-csextensibleenums', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/vanilla',
+    'inputBaseDir': swaggerDir,
+    'mappings': {'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'},
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+    'extensibleEnums':true
   },done
   return null
 

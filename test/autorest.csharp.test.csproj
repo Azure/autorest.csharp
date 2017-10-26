@@ -21,10 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.10" />
+    <!--<PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />-->
+    <!--<PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.10" />-->
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime/ClientRuntime/Microsoft.Rest.ClientRuntime.csproj" /> -->
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime.Azure/ClientRuntime.Azure/Microsoft.Rest.ClientRuntime.Azure.csproj" /> -->
+    <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime\ClientRuntime\Microsoft.Rest.ClientRuntime.csproj" />
+    <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime.Azure\ClientRuntime.Azure\Microsoft.Rest.ClientRuntime.Azure.csproj" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.0.0" />
@@ -33,15 +35,17 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
     <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.3.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
   </ItemGroup>
  
   <ItemGroup>
     <Reference Include="autorest.modeler">
-      <HintPath>$(SolutionDir)\node_modules\@microsoft.azure\autorest.modeler\src\bin\netcoreapp2.0\autorest.modeler.dll</HintPath>
+      <HintPath>F:\artemp\rcm\autorest.modeler\src\bin\netcoreapp2.0\autorest.modeler.dll</HintPath>
     </Reference>
     <ProjectReference Include="$(SolutionDir)src/autorest.csharp.csproj" />
   </ItemGroup>

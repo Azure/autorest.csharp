@@ -117,6 +117,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             Path.Combine(FRAMEWORK, "System.Threading.Tasks.dll"),
             Path.Combine(FRAMEWORK, "System.Net.Primitives.dll"),
             Path.Combine(FRAMEWORK, "System.Collections.dll"),
+            Path.Combine(FRAMEWORK, "System.Collections.Concurrent.dll"),
             Path.Combine(FRAMEWORK, "System.Text.Encoding.dll"),
             Path.Combine(FRAMEWORK, "System.Text.RegularExpressions.dll"),
             Path.Combine(FRAMEWORK, "System.IO.dll"),

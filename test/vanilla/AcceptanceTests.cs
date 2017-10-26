@@ -33,6 +33,8 @@ using Fixtures.AcceptanceTestsBodyString.Models;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
 using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
+using Fixtures.AcceptanceTestsExtensibleEnums;
+using Fixtures.AcceptanceTestsExtensibleEnums.Models;
 using Fixtures.AcceptanceTestsHeader;
 using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
@@ -411,6 +413,24 @@ namespace AutoRest.CSharp.Tests
                 Assert.Throws<SerializationException>(() => client.Date.GetInvalidDate());
                 Assert.Throws<SerializationException>(() => client.Date.GetOverflowDate());
                 Assert.Throws<SerializationException>(() => client.Date.GetUnderflowDate());
+            }
+        }
+
+        [Fact]
+        public void ExtensibleEnumsTest()
+        {
+            
+            using (var client = new PetStoreInc(Fixture.Uri))
+            {
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);
+
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("casper").DaysOfWeek, (DaysOfWeekExtensibleEnum)"Weekend");
+
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("scooby").IntEnum, IntEnum.Two);
+
             }
         }
 

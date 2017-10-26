@@ -119,9 +119,20 @@ if (property.ModelType is DictionaryType && (property.ModelType as DictionaryTyp
 }
 else
 {
+        if(property.ModelType is EnumType && Settings.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.CustomSettings["ExtensibleEnums"])
+        {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@(((EnumType)property.ModelType).ClassName), @((((EnumType)property.ModelType).UnderlyingType==null)?"string":((EnumType)property.ModelType).UnderlyingType.ToString())>))]
+        }
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
 }
+        if(property.ModelType is EnumType && Settings.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.CustomSettings["ExtensibleEnums"])
+        {
+        @:public @(((EnumType)property.ModelType).ClassName) @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        }
+        else
+        {
         @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        }
         @EmptyLine
 }
 

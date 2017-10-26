@@ -9,7 +9,86 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
-    @if (!Model.ModelAsString)
+    @if(Settings.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.CustomSettings["ExtensibleEnums"])
+    {
+    var underlyingType = (Model.UnderlyingType == null)? "string" : Model.UnderlyingType.ToString();
+    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues!=null);
+    
+    @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.ClientRuntime.Serialization.ExtensibleEnumConverter<@Model.ClassName, @underlyingType>))]
+    @:public sealed class @Model.ClassName : Microsoft.Rest.ExtensibleEnum<@Model.ClassName, @underlyingType>
+    @:{
+        @:private @(Model.ClassName+"("+underlyingType+" value):base(value)")
+        @:{
+
+        @:}
+
+        @EmptyLine
+        @foreach (var t in Model.Values)
+        {
+            if (t.Description != null)
+            {<text>
+        /// <summary>
+        @WrapComment("/// ", t.Description)
+        /// </summary>
+        </text>
+        }
+        var initName = (underlyingType == "string" || (Model.UnderlyingType != null && Model.UnderlyingType.KnownPrimaryType == KnownPrimaryType.String)) ? "\""+t.SerializedName+"\"": t.SerializedName;
+        @:public static readonly @Model.ClassName @t.MemberName = @(initName);
+        @EmptyLine
+    }
+
+    if(hasAllowedValues)
+    {
+        @:///<summary>
+        @WrapComment("/// ", "Static map to store allowed values for enums");
+        @:///</summary>
+        @EmptyLine
+        @:static @(Model.ClassName)()
+        @:{
+            var initializers = Model.Values.SelectMany(enumVal=>enumVal.AllowedValues?.Select(allowedValue
+                =>"AllowedValuesMap.Add("+((underlyingType=="string")?"\""+allowedValue+"\"": allowedValue.ToString())+", "+@enumVal.MemberName+")"));
+            @:@string.Join("; \n", initializers.ToArray());
+        @:}
+        
+    }
+        @EmptyLine
+        <text>
+        /// <summary>
+        @WrapComment("/// ", "Defines ctor/explicit conversion from value type to "+Model.ClassName+".")
+        /// </summary>
+        /// <param name="value">string to convert.</param>
+        /// <returns>The value as a @(Model.ClassName).</returns> </text>
+        @:public static implicit operator @(Model.ClassName)(@underlyingType@((underlyingType=="string")?"":"?") value) => Create(value);
+        
+        @EmptyLine
+        <text>
+        /// <summary>
+        /// Create method used by deserializer to create instances of @Model.ClassName type
+        /// </summary> 
+        /// <returns>The value as a @(Model.ClassName).</returns> </text>
+        @:public static @Model.ClassName Create(@underlyingType@((underlyingType=="string")?"":"?") value)
+        
+        @:{ 
+            @:if(value == null)
+            @:{
+                @:return null;
+            @:}
+            @EmptyLine
+            if(hasAllowedValues)
+            {
+            @:if(AllowedValuesMap.ContainsKey(value))
+            @:{
+                @:return AllowedValuesMap[value];
+            @:}
+            @EmptyLine
+            }
+            @:return _valueMap.GetOrAdd(value, (v) => new @(Model.ClassName)(v));
+        @:}
+        @EmptyLine
+        
+    @:}
+    }
+    else if (!Model.ModelAsString)
     {
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     @:public enum @Model.ClassName

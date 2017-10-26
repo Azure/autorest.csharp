@@ -145,6 +145,67 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
+            /// Get complex types that are polymorphic, but not at the root of the
+            /// hierarchy; also have additional properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static SalmonInner GetComplicated(this IPolymorphismOperations operations)
+            {
+                return operations.GetComplicatedAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types that are polymorphic, but not at the root of the
+            /// hierarchy; also have additional properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SalmonInner> GetComplicatedAsync(this IPolymorphismOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetComplicatedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types that are polymorphic, but not at the root of the
+            /// hierarchy; also have additional properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            public static void PutComplicated(this IPolymorphismOperations operations, SalmonInner complexBody)
+            {
+                operations.PutComplicatedAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types that are polymorphic, but not at the root of the
+            /// hierarchy; also have additional properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutComplicatedAsync(this IPolymorphismOperations operations, SalmonInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutComplicatedWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Put complex types that are polymorphic, attempting to omit required
             /// 'birthday' field - the request should not be allowed from the client
             /// </summary>

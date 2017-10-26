@@ -67,6 +67,7 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
     <PackageReference Include="autorest.common" Version="2.2.27" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
+    <ProjectReference Include="F:\artemp\rcm\autorest.common\src\autorest.common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
