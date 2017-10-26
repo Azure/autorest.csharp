@@ -18,6 +18,7 @@ namespace Fixtures.PetstoreV2
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -350,7 +351,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -372,20 +373,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 405 && (int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -404,28 +403,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     Pet _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -505,7 +504,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -527,20 +526,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -660,20 +657,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -692,28 +687,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -820,20 +815,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -852,28 +845,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -962,20 +955,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -994,28 +985,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     Pet _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -1118,12 +1109,12 @@ namespace Fixtures.PetstoreV2
             }
             if (fileName != null)
             {
-                StringContent _fileName = new StringContent(fileName, System.Text.Encoding.UTF8);
+                StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
                 _multiPartContent.Add(_fileName, "fileName");
             }
             if (status != null)
             {
-                StringContent _status = new StringContent(status, System.Text.Encoding.UTF8);
+                StringContent _status = new StringContent(status, Encoding.UTF8);
                 _multiPartContent.Add(_status, "status");
             }
             _httpRequest.Content = _multiPartContent;
@@ -1146,20 +1137,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1263,20 +1252,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1373,20 +1360,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1405,28 +1390,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     IDictionary<string, int?> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -1505,7 +1490,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -1527,20 +1512,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1559,28 +1542,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     Order _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -1690,20 +1673,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1722,28 +1703,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     Order _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -1847,20 +1828,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1952,7 +1931,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -1974,20 +1953,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2076,7 +2053,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -2098,20 +2075,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2200,7 +2175,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -2222,20 +2197,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2364,20 +2337,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2396,28 +2367,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     string _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             try
@@ -2508,20 +2479,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2630,20 +2599,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2662,28 +2629,28 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
                     User _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => User.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => User.XmlDeserialize(e)))(System.Xml.Linq.XElement.Load(_responseContentTextReader), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }
                     else
                     {
-                        _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
+                        _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContentTextReader.ReadToEnd(), DeserializationSettings);
                     }
                 }
                 catch (JsonException ex)
                 {
+                    string message = _responseContentTextReader.ReadToEnd();
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", message, ex);
                 }
             }
             if (_shouldTrace)
@@ -2771,7 +2738,7 @@ namespace Fixtures.PetstoreV2
             if (body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
@@ -2793,20 +2760,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2915,20 +2880,18 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
+            Stream _responseContent = _httpResponse.Content != null
+                ? await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new MemoryStream();
+            Encoding _responseContentEncoding = _httpResponse.Content != null && _httpResponse.Content.Headers != null && _httpResponse.Content.Headers.ContentType != null && _httpResponse.Content.Headers.ContentType.CharSet != null
+                ? Encoding.GetEncoding(_httpResponse.Content.Headers.ContentType.CharSet)
+                : Encoding.UTF8;
+            System.IO.TextReader _responseContentTextReader = new System.IO.StreamReader(_responseContent, _responseContentEncoding);
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContentTextReader.ReadToEnd());
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
