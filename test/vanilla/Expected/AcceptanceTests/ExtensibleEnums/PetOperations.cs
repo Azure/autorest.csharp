@@ -93,7 +93,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/extensibleenums/{petId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "extensibleenums/pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(petId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
