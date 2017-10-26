@@ -58,7 +58,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         /// <param name="value">string to convert.</param>
         /// <returns>The value as a @(Model.ClassName).</returns> </text>
-        @:public static implicit operator @(Model.ClassName)(@underlyingType value) => Create(value);
+        @:public static implicit operator @(Model.ClassName)(@underlyingType@((underlyingType=="string")?"":"?") value) => Create(value);
         
         @EmptyLine
         <text>
@@ -66,7 +66,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// Create method used by deserializer to create instances of @Model.ClassName type
         /// </summary> 
         /// <returns>The value as a @(Model.ClassName).</returns> </text>
-        @:public static @Model.ClassName Create(@underlyingType value)
+        @:public static @Model.ClassName Create(@underlyingType@((underlyingType=="string")?"":"?") value)
         
         @:{ 
             @:if(value == null)
