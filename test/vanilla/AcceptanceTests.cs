@@ -2226,7 +2226,7 @@ namespace AutoRest.CSharp.Tests
                     GenericValue = "https://generic"
                 };
                 var resultProduct = client.PutSimpleProduct(simpleProduct);
-                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+                Assert.Equal(JsonConvert.SerializeObject(simpleProduct), JsonConvert.SerializeObject(resultProduct));
             }
         }
 
@@ -2245,7 +2245,7 @@ namespace AutoRest.CSharp.Tests
                 };
                 var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", null,
                     "http://foo");
-                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+                Assert.Equal(JsonConvert.SerializeObject(simpleProduct), JsonConvert.SerializeObject(resultProduct));
             }
         }
 
@@ -2271,7 +2271,7 @@ namespace AutoRest.CSharp.Tests
                     Name = "groupproduct"
                 };
                 var resultProduct = client.PutSimpleProductWithGrouping(flattenParameterGroup);
-                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+                Assert.Equal(JsonConvert.SerializeObject(simpleProduct), JsonConvert.SerializeObject(resultProduct));
             }
         }
 

@@ -1,0 +1,51 @@
+@using System.Globalization
+@using System.Linq;
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@using AutoRest.Extensions
+@inherits TemplateCs<AutoRest.CSharp.Model.CodeModelCs>
+
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    public partial class @Model.Name
+    {
+        internal async System.Threading.Tasks.Task ResponseMessageEnsureContentBuffering(System.Net.Http.HttpResponseMessage response)
+        {
+            // will cause it to be re-retrievable (no streamy "once it's consumed, it's gone")
+            await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        }
+        internal async System.Threading.Tasks.Task<System.Text.Encoding> ResponseMessageEncoding(System.Net.Http.HttpResponseMessage response)
+        {
+            return response.Content != null && response.Content.Headers != null && response.Content.Headers.ContentType != null && response.Content.Headers.ContentType.CharSet != null
+                ? System.Text.Encoding.GetEncoding(response.Content.Headers.ContentType.CharSet)
+                : System.Text.Encoding.UTF8;
+        }
+        internal async System.Threading.Tasks.Task<System.IO.Stream> ResponseMessageAsStream(System.Net.Http.HttpResponseMessage response)
+        {
+            return response.Content != null
+                ? await response.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                : new System.IO.MemoryStream();
+        }
+        internal async System.Threading.Tasks.Task<System.IO.TextReader> ResponseMessageAsTextReader(System.Net.Http.HttpResponseMessage response)
+        {
+            return new System.IO.StreamReader(await ResponseMessageAsStream(response), await ResponseMessageEncoding(response));
+        }
+        internal async System.Threading.Tasks.Task<string> ResponseMessageAsString(System.Net.Http.HttpResponseMessage response)
+        {
+            return (await ResponseMessageAsTextReader(response)).ReadToEnd();
+        }
+        internal async System.Threading.Tasks.Task<T> ResponseMessageAsJSON<T>(System.Net.Http.HttpResponseMessage response)
+        {
+            return Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(await ResponseMessageAsString(response), this.DeserializationSettings);
+        }
+        internal async System.Threading.Tasks.Task<T> ResponseMessageHeadersAsJSON<T>(System.Net.Http.HttpResponseMessage response)
+        {
+            return Microsoft.Rest.HttpExtensions.GetHeadersAsJson(response).ToObject<T>(Newtonsoft.Json.JsonSerializer.Create(this.DeserializationSettings));
+        }
+    }   
+}

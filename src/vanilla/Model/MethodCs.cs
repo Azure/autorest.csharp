@@ -261,48 +261,14 @@ namespace AutoRest.CSharp.Model
         /// </summary>
         /// <param name="serializationType"></param>
         /// <returns></returns>
-        public string GetSerializationSettingsReference(IModelType serializationType)
-        {
-            if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
-            {
-                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
-            }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-                return "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
-            }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
-            {
-                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
-            }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
-            {
-                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
-            }
-            return ClientReference + ".SerializationSettings";
-        }
+        public string GetSerializationSettingsReference(IModelType serializationType) => ClientReference + ".SerializationSettings";
 
         /// <summary>
         /// Returns deserialization settings reference.
         /// </summary>
         /// <param name="deserializationType"></param>
         /// <returns></returns>
-        public string GetDeserializationSettingsReference(IModelType deserializationType)
-        {
-            if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
-            {
-                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
-            }
-            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
-            {
-                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
-            }
-            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
-            {
-                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
-            }
-            return ClientReference + ".DeserializationSettings";
-        }
+        public string GetDeserializationSettingsReference(IModelType deserializationType) => ClientReference + ".DeserializationSettings";
 
         public string GetExtensionParameters(string methodParameters)
         {

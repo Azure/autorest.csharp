@@ -40,6 +40,10 @@ namespace AutoRest.CSharp.Azure
                 throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
             }
 
+            // Common code
+            var commonCodeTemplate = new CommonCodeTemplate { Model = codeModel };
+            await Write(commonCodeTemplate, $"CommonCode{ImplementationFileExtension}");
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate {Model = codeModel};
             await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");

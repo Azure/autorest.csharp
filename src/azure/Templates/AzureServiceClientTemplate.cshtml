@@ -96,7 +96,7 @@ namespace @Settings.Namespace
             @:DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
             }
 
-            DeserializationSettings.Converters.Add(new Microsoft.Rest.Azure.CloudErrorJsonConverter()); 
+            DeserializationSettings.Converters.Add(new Microsoft.Rest.Azure.CloudErrorJsonConverter());
         }    
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
