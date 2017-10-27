@@ -32,20 +32,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models/Enum4CustomName.cs"));
                 Assert.True(fileSystem.FileExists(@"Models/Enum5CustomName.cs"));
 
-                // check that (supposedly) overridden stuff doesn't exist.
-                foreach (var file in fileSystem.VirtualStore.Values)
-                {
-                    Assert.False(file.ToString().Contains("OVERRIDDEN"));
-                }
-
                 // enum 3-5 must have descriptions
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum3CustomName.cs").Contains("is cool"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("is cool"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("is cool"));
                 // enum 4-5 must have different name than value
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aValue"));
+                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aOVERRIDDEN"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aName"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aValue"));
+                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aOVERRIDDEN"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aName"));
 
                 var result = await Compile(fileSystem);
