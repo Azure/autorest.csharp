@@ -37,9 +37,9 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("is cool"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("is cool"));
                 // enum 4-5 must have different name than value
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aValue"));
+                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aOVERRIDE"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aName"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aValue"));
+                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aOVERRIDE"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aName"));
 
                 var result = await Compile(fileSystem);
