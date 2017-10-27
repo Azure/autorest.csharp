@@ -32,12 +32,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models/Enum4CustomName.cs"));
                 Assert.True(fileSystem.FileExists(@"Models/Enum5CustomName.cs"));
 
-                // check that (supposedly) overridden stuff doesn't exist.
-                foreach (var file in fileSystem.VirtualStore.Values)
-                {
-                    Assert.False(file.ToString().Contains("OVERRIDDEN"));
-                }
-
                 // enum 3-5 must have descriptions
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum3CustomName.cs").Contains("is cool"));
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("is cool"));
