@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 // small modification to the "host" portion to include the port and the '.'
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+                    client.Paths.WithHttpMessages().GetEmptyAsync("local").Result.Response.StatusCode);
             }
         }
 
@@ -227,13 +227,13 @@ namespace AutoRest.CSharp.Azure.Tests
                     }
                 };
 
-                Assert.NotNull(client.LROsCustomHeader.PutAsyncRetrySucceededWithHttpMessagesAsync(
+                Assert.NotNull(client.LROsCustomHeader.WithHttpMessages().PutAsyncRetrySucceededAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
-                Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithHttpMessagesAsync(
+                Assert.NotNull(client.LROsCustomHeader.WithHttpMessages().PostAsyncRetrySucceededAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
-                Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithHttpMessagesAsync(
+                Assert.NotNull(client.LROsCustomHeader.WithHttpMessages().Post202Retry200Async(
                                     new Product { Location = "West US" }, customHeaders).Result);
             }
         }
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.LRORetrys.Post202Retry200(new Product { Location = "West US" });
                 client.LRORetrys.PostAsyncRelativeRetrySucceeded(new Product { Location = "West US" });
 
-                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
+                Assert.NotNull(client.LROsCustomHeader.WithHttpMessages().Put201CreatingSucceeded200Async(
                                     new Product { Location = "West US" }, customHeaders).Result);
             }
         }
@@ -557,11 +557,11 @@ namespace AutoRest.CSharp.Azure.Tests
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 customHeaders["x-ms-client-request-id"] = new List<string> { validClientId };
-                var result1 = client.XMsClientRequestId.GetWithHttpMessagesAsync(customHeaders)
+                var result1 = client.XMsClientRequestId.WithHttpMessages().GetAsync(customHeaders)
                     .ConfigureAwait(true).GetAwaiter().GetResult();
                 Assert.Equal("123", result1.RequestId);
 
-                var result2 = client.XMsClientRequestId.ParamGetWithHttpMessagesAsync(validClientId)
+                var result2 = client.XMsClientRequestId.WithHttpMessages().ParamGetAsync(validClientId)
                     .ConfigureAwait(false).GetAwaiter().GetResult();
                 Assert.Equal("123", result2.RequestId);
             }
@@ -603,7 +603,7 @@ namespace AutoRest.CSharp.Azure.Tests
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
-                IAzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
+                IAzureOperationResponse response = client.Header.WithHttpMessages().CustomNamedRequestIdAsync(expectedRequestId).Result;
 
                 Assert.Equal("123", response.RequestId);
             }
@@ -622,7 +622,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 {
                     FooClientRequestId = expectedRequestId
                 };
-                IAzureOperationResponse response = client.Header.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(group).Result;
+                IAzureOperationResponse response = client.Header.WithHttpMessages().CustomNamedRequestIdParamGroupingAsync(group).Result;
 
                 Assert.Equal("123", response.RequestId);
             }
@@ -637,7 +637,7 @@ namespace AutoRest.CSharp.Azure.Tests
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
-                AzureOperationResponse<bool, HeaderCustomNamedRequestIdHeadHeaders> response = client.Header.CustomNamedRequestIdHeadWithHttpMessagesAsync(expectedRequestId).Result;
+                AzureOperationResponse<bool, HeaderCustomNamedRequestIdHeadHeaders> response = client.Header.WithHttpMessages().CustomNamedRequestIdHeadAsync(expectedRequestId).Result;
                 Assert.True(response.Body);
                 Assert.Equal("123", response.RequestId);
             }

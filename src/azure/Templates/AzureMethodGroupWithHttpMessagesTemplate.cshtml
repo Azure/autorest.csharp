@@ -15,7 +15,7 @@ namespace @Settings.Namespace
     /// <summary>
     /// @(Model.TypeName) operations.
     /// </summary>
-    internal partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
+    internal partial class @(Model.TypeName)WithHttpMessages : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)WithHttpMessages
     {
         /// <summary>
         /// Initializes a new instance of the @(Model.TypeName) class.
@@ -26,7 +26,7 @@ namespace @Settings.Namespace
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal @(Model.TypeName)(@Model.CodeModel.Name client)
+        internal @(Model.TypeName)WithHttpMessages(@Model.CodeModel.Name client)
         {
             @ParamNullCheck("client")
             this.Client = client;
@@ -39,7 +39,7 @@ namespace @Settings.Namespace
         @EmptyLine
         @foreach (var method in Model.Methods)
         {
-        @:@(Include(DependencyInjection.New<AzureMethodTemplate>(), (MethodCsa)method))
+        @:@(Include(DependencyInjection.New<AzureMethodWithHttpMessagesTemplate>(), (MethodCsa)method))
         @EmptyLine
         }
     }

@@ -5,7 +5,7 @@
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Azure.JsonRpcClient
 
-@inherits AutoRest.CSharp.azure.Templates.AzureMethodTemplate
+@inherits AutoRest.CSharp.azure.Templates.AzureMethodWithHttpMessagesTemplate
 
 @{
     var xns = "Microsoft.Rest.ClientRuntime.Test.Azure.";
@@ -70,7 +70,7 @@ static readonly @(infoType) @(Model.Name)_RequestInfo =
 }
 
 @EmptyLine
-public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(
+public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(
     @(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     var params_ = new @(xns)AzureParam[]

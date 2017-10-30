@@ -20,11 +20,16 @@ namespace @Settings.Namespace
         @XmlDocException("System.ArgumentNullException", "a required parameter is null")
         public @(Model.TypeName)(I@(Model.TypeName)WithHttpMessages operationsWithHttpMessages)
         {
-            @ParamNullCheck("operations")
+            @ParamNullCheck("operationsWithHttpMessages")
             this.OperationsWithHttpMessages = operationsWithHttpMessages;
         }
         @EmptyLine
         private I@(Model.TypeName)WithHttpMessages OperationsWithHttpMessages { get; set; }
+        @EmptyLine
+        public I@(Model.TypeName)WithHttpMessages WithHttpMessages()
+        {
+            return this.OperationsWithHttpMessages;
+        }
         @EmptyLine
         @foreach (MethodCs method in Model.Methods)
         {

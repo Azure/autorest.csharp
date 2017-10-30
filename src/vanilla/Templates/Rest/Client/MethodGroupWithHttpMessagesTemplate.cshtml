@@ -28,7 +28,7 @@ namespace @Settings.Namespace
         @EmptyLine
         @foreach (MethodCs method in Model.Methods)
         {
-        @:@(Include(new MethodTemplateWithHttpMessages(), method))
+        @:@(Include(new MethodWithHttpMessagesTemplate(), method))
         @EmptyLine
         }
     }

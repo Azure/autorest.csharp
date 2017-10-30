@@ -51,13 +51,13 @@ foreach (var parameter in Model.LocalParameters)
     {
         if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
-    @:var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:var _result = await OperationsWithHttpMessages.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:_result.Request.Dispose();
     @:return _result.Body;
         }
         else
         {
-    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
     @:{
     @:    return _result.Body;
     @:}
@@ -65,14 +65,14 @@ foreach (var parameter in Model.LocalParameters)
     }
     else if (Model.ReturnType.Headers != null)
     {
-    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
     @:{
     @:    return _result.Headers;
     @:}
     }
     else
     {
-    @:(await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
+    @:(await OperationsWithHttpMessages.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
     }
 @:}
 

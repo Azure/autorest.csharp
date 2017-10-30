@@ -16,42 +16,45 @@ namespace @Settings.Namespace
     @XmlDocSummary($"{Model.TypeName} operations.")
     public partial interface I@(Model.TypeName)
     {
-    @foreach(MethodCs method in Model.Methods)
-    {
-        if (method.ExcludeFromInterface)
-        {
-            continue;
-        }
+        I@(Model.TypeName)WithHttpMessages WithHttpMessages();
+        @EmptyLine
 
-        if (method.SyncMethods == SyncMethodsGenerationMode.All || method.SyncMethods == SyncMethodsGenerationMode.Essential)
+        @foreach(MethodCs method in Model.Methods)
         {
-            @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
-        @XmlDocParam("operations", "operations group for this extension method")
-            foreach (var parameter in method.LocalParameters)
+            if (method.ExcludeFromInterface)
             {
-        @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+                continue;
             }
-            @if (method.Deprecated)
+
+            if (method.SyncMethods == SyncMethodsGenerationMode.All || method.SyncMethods == SyncMethodsGenerationMode.Essential)
             {
-            @:[System.Obsolete()]
+@XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
+@XmlDocParam("operations", "operations group for this extension method")
+                foreach (var parameter in method.LocalParameters)
+                {
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+                }
+                @if (method.Deprecated)
+                {
+@:[System.Obsolete()]
+                }
+@:@(method.ReturnTypeString) @(method.Name)(@method.GetSyncMethodParameterDeclaration(false));
+@EmptyLine
             }
-            @:@(method.ReturnTypeString) @(method.Name)(@method.GetSyncMethodParameterDeclaration(false));
-            @EmptyLine
-        }
 
 @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
 @XmlDocParam("operations", "operations group for this extension method")
-foreach (var parameter in method.LocalParameters)
-{
+            foreach (var parameter in method.LocalParameters)
+            {
 @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
-}
+            }
 @XmlDocParamCancellationToken()
-@if (method.Deprecated)
-{
+            @if (method.Deprecated)
+            {
 @:[System.Obsolete()]
-}
+            }
 @:@(method.TaskExtensionReturnTypeString) @(method.Name)Async(@method.GetAsyncMethodParameterDeclaration());
 
-}
-}
+        }
+    }
 }

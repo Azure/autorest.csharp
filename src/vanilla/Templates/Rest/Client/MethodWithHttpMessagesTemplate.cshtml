@@ -32,7 +32,7 @@
 {
 @:[System.Obsolete()]
 }
-@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {

@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 {
                     // Operation
                     await Write(
-                        new AzureMethodGroupTemplate { Model = methodGroup },
+                        new MethodGroupTemplate { Model = methodGroup },
                         $"{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 }
 
                 // Operation
-                var operationsTemplate = new MethodGroupWithHttpMessagesTemplate { Model = methodGroup };
+                var operationsTemplate = new AzureMethodGroupWithHttpMessagesTemplate { Model = methodGroup };
                 await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
 
                 // Operation interface

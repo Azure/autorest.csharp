@@ -8,7 +8,7 @@
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include(new MethodTemplateWithHttpMessages(), (MethodCs)Model))
+@:@(Include(new MethodWithHttpMessagesTemplate(), (MethodCs)Model))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
@@ -45,10 +45,10 @@ foreach (var parameter in Model.LocalParameters)
 {
 @:[System.Obsolete()]
 }
-@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
     return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
@@ -89,10 +89,10 @@ foreach (var parameter in Model.LocalParameters)
 {
 @:[System.Obsolete()]
 }
-@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
     return await this.Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
