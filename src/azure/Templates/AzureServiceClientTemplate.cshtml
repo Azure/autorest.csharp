@@ -4,6 +4,7 @@
 @using AutoRest.CSharp.Azure.Model
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.vanilla.Templates.Rest.Client
+@using AutoRest.CSharp.vanilla.Templates.Rest.Common
 
 @inherits AutoRest.Core.Template<CodeModelCsa>
 @Header("// ")
@@ -35,9 +36,13 @@ namespace @Settings.Namespace
         /// </summary>
         private void Initialize()
         {
+        @if (Model.Methods.Any(m => m.Group.IsNullOrEmpty()))
+        {
+            @:this.OperationsWithHttpMessages = new @(Model.Name)WithHttpMessages(this);
+        }
         @foreach (var operation in Model.AllOperations) 
         {
-            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(new @(operation.TypeName)WithHttpMessages(this));
         }
 
         @if (Model.IsCustomBaseUri)
@@ -106,7 +111,7 @@ namespace @Settings.Namespace
             continue;
         }
 
-        @:@(Include(DependencyInjection.New<AzureMethodTemplate>(), (MethodCsa)method))
+        @:@(Include(new MethodTemplate(), method as MethodCs))
         @EmptyLine
         @:
         }

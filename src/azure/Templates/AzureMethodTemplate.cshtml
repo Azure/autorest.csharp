@@ -8,7 +8,7 @@
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include(new MethodTemplate(), (MethodCs)Model))
+@:@(Include(new MethodTemplateWithHttpMessages(), (MethodCs)Model))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
@@ -50,7 +50,7 @@ foreach (var parameter in Model.LocalParameters)
     // Send request
     @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+    return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
 </text>
 }
@@ -94,7 +94,7 @@ foreach (var parameter in Model.LocalParameters)
     // Send Request
     @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+    return await this.Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
 </text>
 }

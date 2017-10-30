@@ -97,13 +97,13 @@ public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @
         }
         else
         {
-        @:baseUri: new @(xns)AzureConstBaseUri(@(Model.ClientReference).BaseUri),
+        @:baseUri: new @(xns)AzureConstBaseUri(this.Client.BaseUri),
         }
         paramList: params_,
         customHeaders: customHeaders,
         cancellationToken: cancellationToken);
     return @(xns)ServiceClientEx.Call(
-        @(Model.ClientReference),
+        this.Client,
         operation_,
         @{
             var returnType = Model.ReturnType;

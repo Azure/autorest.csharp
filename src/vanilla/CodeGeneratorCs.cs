@@ -69,16 +69,23 @@ namespace AutoRest.CSharp
                 if (!methodGroup.Name.IsNullOrEmpty())
                 {
                     // Operation
-                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                    await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    await Write(
+                        new MethodGroupTemplate { Model = methodGroup },
+                        $"{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                    await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    await Write(
+                        new MethodGroupInterfaceTemplate { Model = methodGroup },
+                        $"I{methodGroup.TypeName}{ImplementationFileExtension}");
                 }
 
-                var operationExtensionsTemplate = new ExtensionsTemplate { Model = methodGroup };
-                await Write(operationExtensionsTemplate, $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                // Operation
+                var operationsTemplate = new MethodGroupWithHttpMessagesTemplate { Model = methodGroup };
+                await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
+
+                // Operation interface
+                var operationsInterfaceTemplate = new MethodGroupWithHttpMessagesInterfaceTemplate { Model = methodGroup };
+                await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
             }
 
             // Models

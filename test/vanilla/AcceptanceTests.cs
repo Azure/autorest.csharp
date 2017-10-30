@@ -2278,17 +2278,14 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void SyncMethodsValidation()
         {
-            var petstoreWithAllSyncMethods = typeof(SwaggerPetstoreV2Extensions);
-            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPet"));
-            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPetWithHttpMessages"));
+            Assert.NotNull(typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2).GetMethod("AddPet"));
+            Assert.NotNull(typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
 
-            var petstoreWithNoSyncMethods = typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2Extensions);
-            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPet"));
-            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPetWithHttpMessages"));
+            Assert.Null(typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2).GetMethod("AddPet"));
+            Assert.Null(typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
 
-            var petstoreWithEssentialSyncMethods = typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2Extensions);
-            Assert.NotNull(petstoreWithEssentialSyncMethods.GetMethod("AddPet"));
-            Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
+            Assert.NotNull(typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2).GetMethod("AddPet"));
+            Assert.Null(typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
         }
 
         [Fact]

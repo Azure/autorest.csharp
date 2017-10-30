@@ -48,23 +48,29 @@ namespace AutoRest.CSharp.Azure
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate {Model = codeModel};
             await Write(serviceClientInterfaceTemplate, "I" + codeModel.Name + ImplementationFileExtension);
 
-            // Operations
-            foreach (MethodGroupCs group in codeModel.Operations)
+            // operations
+            foreach (MethodGroupCs methodGroup in codeModel.Operations)
             {
-                if (!group.IsCodeModelMethodGroup)
+                if (!methodGroup.IsCodeModelMethodGroup)
                 {
                     // Operation
-                    var operationsTemplate = new AzureMethodGroupTemplate {Model = group};
-                    await Write(operationsTemplate, operationsTemplate.Model.TypeName + ImplementationFileExtension);
+                    await Write(
+                        new AzureMethodGroupTemplate { Model = methodGroup },
+                        $"{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate {Model = group};
-                    await Write(operationsInterfaceTemplate,
-                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    await Write(
+                        new MethodGroupInterfaceTemplate { Model = methodGroup },
+                        $"I{methodGroup.TypeName}{ImplementationFileExtension}");
                 }
-                var operationExtensionsTemplate = new ExtensionsTemplate {Model = group};
-                await Write(operationExtensionsTemplate,
-                    $"{group.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+
+                // Operation
+                var operationsTemplate = new MethodGroupWithHttpMessagesTemplate { Model = methodGroup };
+                await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
+
+                // Operation interface
+                var operationsInterfaceTemplate = new MethodGroupWithHttpMessagesInterfaceTemplate { Model = methodGroup };
+                await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
             }
 
             // Models
