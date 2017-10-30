@@ -1,0 +1,79 @@
+@using System.Text
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodCs>
+@{
+if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
+{
+    @XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
+    foreach (var parameter in Model.LocalParameters)
+    {
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+    }
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@:@((Model as MethodCs).AccessModifier) @Model.ReturnTypeString @(Model.Name)(@Model.GetSyncMethodParameterDeclaration(false))
+@:{
+    if (Model.ReturnType.Body != null)
+    {
+    @:return this.@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    }
+    else if (Model.ReturnType.Headers != null)
+    {
+    @:return this.@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    }
+    else
+    {
+    @:this.@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    }
+@:}
+@EmptyLine
+}
+
+@XmlDocHandleDescriptionSummaryExternalDocs(Model.Description, Model.Summary, Model.ExternalDocsUrl)
+foreach (var parameter in Model.LocalParameters)
+{
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+}
+@XmlDocParamCancellationToken()
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@:@((Model as MethodCs).AccessModifier) async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetAsyncMethodParameterDeclaration())
+@:{
+    if (Model.ReturnType.Body != null)
+    {
+        if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+        {
+    @:var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:_result.Request.Dispose();
+    @:return _result.Body;
+        }
+        else
+        {
+    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:{
+    @:    return _result.Body;
+    @:}
+        }
+    }
+    else if (Model.ReturnType.Headers != null)
+    {
+    @:using (var _result = await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:{
+    @:    return _result.Headers;
+    @:}
+    }
+    else
+    {
+    @:(await OperationsWithHttpMessages.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
+    }
+@:}
+
+}
