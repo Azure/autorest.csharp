@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,63 +17,67 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IHttpServerFailure
     {
+        IHttpServerFailureWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Return 501 status code - should be represented in the client as an error
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> Head501WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Error Head501();
+
         /// <summary>
         /// Return 501 status code - should be represented in the client as an error
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> Get501WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> Head501Async(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 501 status code - should be represented in the client as an error
+        /// </summary>
+        Error Get501();
+
+        /// <summary>
+        /// Return 501 status code - should be represented in the client as an error
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<Error> Get501Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> Post505WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Error Post505(bool? booleanValue = default(bool?));
+
         /// <summary>
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<Error> Post505Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 505 status code - should be represented in the client as an error
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
+        /// </param>
+        Error Delete505(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Return 505 status code - should be represented in the client as an error
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> Delete505WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> Delete505Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

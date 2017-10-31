@@ -8,9 +8,6 @@
 
 namespace Fixtures.InternalCtors
 {
-    using Microsoft.Rest;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -19,18 +16,19 @@ namespace Fixtures.InternalCtors
     /// </summary>
     public partial interface IPets
     {
+        IPetsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Gets a pet from the store
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get();
+
+        /// <summary>
+        /// Gets a pet from the store
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

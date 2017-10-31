@@ -141,8 +141,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </summary>
         private void Initialize()
         {
-            ImplicitModel = new ImplicitModel(this);
-            ExplicitModel = new ExplicitModel(this);
+            ImplicitModel = new ImplicitModel(new ImplicitModelWithHttpMessages(this));
+            ExplicitModel = new ExplicitModel(new ExplicitModelWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

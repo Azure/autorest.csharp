@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsUrl
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,513 +19,523 @@ namespace Fixtures.AcceptanceTestsUrl
     /// </summary>
     public partial interface IQueries
     {
+        IQueriesWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get true Boolean value on path
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetBooleanTrue();
+
+        /// <summary>
+        /// Get true Boolean value on path
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetBooleanTrueAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get false Boolean value on path
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetBooleanFalse();
+
+        /// <summary>
+        /// Get false Boolean value on path
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetBooleanFalseAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null Boolean value on query (query string should be absent)
         /// </summary>
         /// <param name='boolQuery'>
         /// null boolean value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetBooleanNull(bool? boolQuery = default(bool?));
+
+        /// <summary>
+        /// Get null Boolean value on query (query string should be absent)
+        /// </summary>
+        /// <param name='boolQuery'>
+        /// null boolean value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(bool? boolQuery = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetBooleanNullAsync(bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '1000000' integer value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetIntOneMillion();
+
+        /// <summary>
+        /// Get '1000000' integer value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetIntOneMillionAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '-1000000' integer value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetIntNegativeOneMillion();
+
+        /// <summary>
+        /// Get '-1000000' integer value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null integer value (no query parameter)
         /// </summary>
         /// <param name='intQuery'>
         /// null integer value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetIntNull(int? intQuery = default(int?));
+
+        /// <summary>
+        /// Get null integer value (no query parameter)
+        /// </summary>
+        /// <param name='intQuery'>
+        /// null integer value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetIntNullWithHttpMessagesAsync(int? intQuery = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetIntNullAsync(int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '10000000000' 64 bit integer value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetTenBillion();
+
+        /// <summary>
+        /// Get '10000000000' 64 bit integer value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetTenBillionAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '-10000000000' 64 bit integer value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetNegativeTenBillion();
+
+        /// <summary>
+        /// Get '-10000000000' 64 bit integer value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetNegativeTenBillionAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get 'null 64 bit integer value (no query param in uri)
         /// </summary>
         /// <param name='longQuery'>
         /// null 64 bit integer value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetLongNull(long? longQuery = default(long?));
+
+        /// <summary>
+        /// Get 'null 64 bit integer value (no query param in uri)
+        /// </summary>
+        /// <param name='longQuery'>
+        /// null 64 bit integer value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetLongNullWithHttpMessagesAsync(long? longQuery = default(long?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetLongNullAsync(long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '1.034E+20' numeric value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void FloatScientificPositive();
+
+        /// <summary>
+        /// Get '1.034E+20' numeric value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task FloatScientificPositiveAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '-1.034E-20' numeric value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void FloatScientificNegative();
+
+        /// <summary>
+        /// Get '-1.034E-20' numeric value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task FloatScientificNegativeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='floatQuery'>
         /// null numeric value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void FloatNull(double? floatQuery = default(double?));
+
+        /// <summary>
+        /// Get null numeric value (no query parameter)
+        /// </summary>
+        /// <param name='floatQuery'>
+        /// null numeric value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> FloatNullWithHttpMessagesAsync(double? floatQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task FloatNullAsync(double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '9999999.999' numeric value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void DoubleDecimalPositive();
+
+        /// <summary>
+        /// Get '9999999.999' numeric value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '-9999999.999' numeric value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void DoubleDecimalNegative();
+
+        /// <summary>
+        /// Get '-9999999.999' numeric value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='doubleQuery'>
         /// null numeric value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void DoubleNull(double? doubleQuery = default(double?));
+
+        /// <summary>
+        /// Get null numeric value (no query parameter)
+        /// </summary>
+        /// <param name='doubleQuery'>
+        /// null numeric value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DoubleNullWithHttpMessagesAsync(double? doubleQuery = default(double?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DoubleNullAsync(double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void StringUnicode();
+
+        /// <summary>
+        /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> StringUnicodeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task StringUnicodeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void StringUrlEncoded();
+
+        /// <summary>
+        /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> StringUrlEncodedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task StringUrlEncodedAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get ''
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void StringEmpty();
+
+        /// <summary>
+        /// Get ''
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> StringEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task StringEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null (no query parameter in url)
         /// </summary>
         /// <param name='stringQuery'>
         /// null string value
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void StringNull(string stringQuery = default(string));
+
+        /// <summary>
+        /// Get null (no query parameter in url)
+        /// </summary>
+        /// <param name='stringQuery'>
+        /// null string value
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task StringNullAsync(string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get using uri with query parameter 'green color'
         /// </summary>
         /// <param name='enumQuery'>
         /// 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void EnumValid(UriColor? enumQuery = default(UriColor?));
+
+        /// <summary>
+        /// Get using uri with query parameter 'green color'
+        /// </summary>
+        /// <param name='enumQuery'>
+        /// 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> EnumValidWithHttpMessagesAsync(UriColor? enumQuery = default(UriColor?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task EnumValidAsync(UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null (no query parameter in url)
         /// </summary>
         /// <param name='enumQuery'>
         /// null string value. Possible values include: 'red color', 'green color', 'blue color'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void EnumNull(UriColor? enumQuery = default(UriColor?));
+
+        /// <summary>
+        /// Get null (no query parameter in url)
+        /// </summary>
+        /// <param name='enumQuery'>
+        /// null string value. Possible values include: 'red color', 'green color', 'blue color'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> EnumNullWithHttpMessagesAsync(UriColor? enumQuery = default(UriColor?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task EnumNullAsync(UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </summary>
         /// <param name='byteQuery'>
         /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ByteMultiByte(byte[] byteQuery = default(byte[]));
+
+        /// <summary>
+        /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+        /// </summary>
+        /// <param name='byteQuery'>
+        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ByteMultiByteAsync(byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '' as byte array
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void ByteEmpty();
+
+        /// <summary>
+        /// Get '' as byte array
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> ByteEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ByteEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null as byte array (no query parameters in uri)
         /// </summary>
         /// <param name='byteQuery'>
         /// null as byte array (no query parameters in uri)
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ByteNull(byte[] byteQuery = default(byte[]));
+
+        /// <summary>
+        /// Get null as byte array (no query parameters in uri)
+        /// </summary>
+        /// <param name='byteQuery'>
+        /// null as byte array (no query parameters in uri)
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ByteNullAsync(byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '2012-01-01' as date
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void DateValid();
+
+        /// <summary>
+        /// Get '2012-01-01' as date
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DateValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null as date - this should result in no query parameters in uri
         /// </summary>
         /// <param name='dateQuery'>
         /// null as date (no query parameters in uri)
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void DateNull(System.DateTime? dateQuery = default(System.DateTime?));
+
+        /// <summary>
+        /// Get null as date - this should result in no query parameters in uri
+        /// </summary>
+        /// <param name='dateQuery'>
+        /// null as date (no query parameters in uri)
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DateNullWithHttpMessagesAsync(System.DateTime? dateQuery = default(System.DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DateNullAsync(System.DateTime? dateQuery = default(System.DateTime?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void DateTimeValid();
+
+        /// <summary>
+        /// Get '2012-01-01T01:01:01Z' as date-time
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DateTimeValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null as date-time, should result in no query parameters in uri
         /// </summary>
         /// <param name='dateTimeQuery'>
         /// null as date-time (no query parameters)
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void DateTimeNull(System.DateTime? dateTimeQuery = default(System.DateTime?));
+
+        /// <summary>
+        /// Get null as date-time, should result in no query parameters in uri
+        /// </summary>
+        /// <param name='dateTimeQuery'>
+        /// null as date-time (no query parameters)
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(System.DateTime? dateTimeQuery = default(System.DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task DateTimeNullAsync(System.DateTime? dateTimeQuery = default(System.DateTime?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringCsvValid(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringCsvValidAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a null array of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// a null array of string using the csv-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringCsvNull(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get a null array of string using the csv-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// a null array of string using the csv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringCsvNullAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an empty array [] of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an empty array [] of string using the csv-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringCsvEmpty(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an empty array [] of string using the csv-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an empty array [] of string using the csv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringCsvEmptyAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringSsvValid(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringSsvValidAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringTsvValid(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringTsvValidAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringPipesValid(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringPipesValidAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

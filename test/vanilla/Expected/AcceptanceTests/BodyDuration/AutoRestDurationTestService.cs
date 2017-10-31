@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// </summary>
         private void Initialize()
         {
-            Duration = new Duration(this);
+            Duration = new Duration(new DurationWithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

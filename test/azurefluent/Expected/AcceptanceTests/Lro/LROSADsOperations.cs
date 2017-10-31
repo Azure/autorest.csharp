@@ -11,42 +11,40 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
-    using System.Net;
-    using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
     /// LROSADsOperations operations.
     /// </summary>
-    internal partial class LROSADsOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILROSADsOperations
+    public partial class LROSADsOperations : ILROSADsOperations
     {
         /// <summary>
         /// Initializes a new instance of the LROSADsOperations class.
         /// </summary>
-        /// <param name='client'>
-        /// Reference to the service client.
+        /// <param name='operationsWithHttpMessages'>
+        /// Reference to the low level operations
         /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
+        /// <exception cref='System.ArgumentNullException'>
+        /// Thrown when a required parameter is null.
         /// </exception>
-        internal LROSADsOperations(AutoRestLongRunningOperationTestService client)
+        public LROSADsOperations(ILROSADsOperationsWithHttpMessages operationsWithHttpMessages)
         {
-            if (client == null)
+            if (operationsWithHttpMessages == null)
             {
-                throw new System.ArgumentNullException(nameof(client));
+                throw new System.ArgumentNullException(nameof(operationsWithHttpMessages));
             }
-            Client = client;
+            OperationsWithHttpMessages = operationsWithHttpMessages;
         }
 
-        /// <summary>
-        /// Gets a reference to the AutoRestLongRunningOperationTestService
-        /// </summary>
-        public AutoRestLongRunningOperationTestService Client { get; private set; }
+        private ILROSADsOperationsWithHttpMessages OperationsWithHttpMessages { get; set; }
+
+        public ILROSADsOperationsWithHttpMessages WithHttpMessages()
+        {
+            return OperationsWithHttpMessages;
+        }
 
         /// <summary>
         /// Long running put request, service returns a 400 to the initial request
@@ -54,17 +52,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public ProductInner PutNonRetry400(ProductInner product = default(ProductInner))
+        {
+            return PutNonRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 400 to the initial request
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductInner>> PutNonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutNonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Send Request
-            AzureOperationResponse<ProductInner> _response = await BeginPutNonRetry400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+            using (var _result = await OperationsWithHttpMessages.PutNonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
         }
 
         /// <summary>
@@ -73,17 +80,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner>> PutNonRetry201Creating400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public ProductInner PutNonRetry201Creating400(ProductInner product = default(ProductInner))
         {
-            // Send Request
-            AzureOperationResponse<ProductInner> _response = await BeginPutNonRetry201Creating400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+            return PutNonRetry201Creating400Async(product).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -92,17 +91,43 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> PutNonRetry201Creating400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.PutNonRetry201Creating400Async(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner PutNonRetry201Creating400InvalidJson(ProductInner product = default(ProductInner))
+        {
+            return PutNonRetry201Creating400InvalidJsonAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ProductInner>> PutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutNonRetry201Creating400InvalidJsonAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Send Request
-            AzureOperationResponse<ProductInner> _response = await BeginPutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+            using (var _result = await OperationsWithHttpMessages.PutNonRetry201Creating400InvalidJsonAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
         }
 
         /// <summary>
@@ -112,968 +137,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> PutAsyncRelativeRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public ProductInner PutAsyncRelativeRetry400(ProductInner product = default(ProductInner))
         {
-            // Send Request
-            AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner> _response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 400 with an error body
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteNonRetry400HeadersInner>> DeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDeleteNonRetry400HeadersInner> _response = await BeginDeleteNonRetry400WithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 with a location header
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDelete202NonRetry400HeadersInner>> Delete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDelete202NonRetry400HeadersInner> _response = await BeginDelete202NonRetry400WithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner>> DeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner> _response = await BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 400 with no error body
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostNonRetry400HeadersInner>> PostNonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPostNonRetry400HeadersInner> _response = await BeginPostNonRetry400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 with a location header
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202NonRetry400HeadersInner>> Post202NonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPost202NonRetry400HeadersInner> _response = await BeginPost202NonRetry400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetry400HeadersInner>> PostAsyncRelativeRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetry400HeadersInner> _response = await BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 201 to the initial request with no payload
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner>> PutError201NoProvisioningStatePayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner> _response = await BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner> _response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner> _response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 204 to the initial request, indicating success.
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse> Delete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationResponse _response = await BeginDelete204SucceededWithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>> DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner> _response = await BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request, without a location header.
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202NoLocationHeadersInner>> Post202NoLocationWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPost202NoLocationHeadersInner> _response = await BeginPost202NoLocationWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner> _response = await BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner>> Put200InvalidJsonWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner> _response = await BeginPut200InvalidJsonWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner> _response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send Request
-            AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner> _response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
-        /// 'Location' and 'Retry-After' headers
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner>> Delete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner> _response = await BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
-        /// Azure-AsyncOperation header is invalid
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>> DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner> _response = await BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>> DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner> _response = await BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After'
-        /// headers.
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeadersInner>> Post202RetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeadersInner> _response = await BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner> _response = await BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Send request
-            AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner> _response = await BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a 400 to the initial request
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner>> BeginPutNonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutNonRetry400", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/put/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 201)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 201)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutNonRetry201Creating400", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/put/201/creating/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 201)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 201)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
-        }
-
-        /// <summary>
-        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner>> BeginPutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutNonRetry201Creating400InvalidJson", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/put/201/creating/400/invalidjson").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 201)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 201)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+            return PutAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1083,610 +149,83 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutAsyncRelativeRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PutAsyncRelativeRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutAsyncRelativeRetry400", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/putasync/retry/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 400 with an error body
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDeleteNonRetry400HeadersInner DeleteNonRetry400()
+        {
+            return DeleteNonRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 400 with an error body
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteNonRetry400HeadersInner>> BeginDeleteNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDeleteNonRetry400HeadersInner> DeleteNonRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.DeleteNonRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDeleteNonRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/delete/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDeleteNonRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteNonRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 with a location header
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDelete202NonRetry400HeadersInner Delete202NonRetry400()
+        {
+            return Delete202NonRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 with a location header
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDelete202NonRetry400HeadersInner>> BeginDelete202NonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDelete202NonRetry400HeadersInner> Delete202NonRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Delete202NonRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDelete202NonRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/delete/202/retry/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDelete202NonRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202NonRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDeleteAsyncRelativeRetry400HeadersInner DeleteAsyncRelativeRetry400()
+        {
+            return DeleteAsyncRelativeRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner>> BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDeleteAsyncRelativeRetry400HeadersInner> DeleteAsyncRelativeRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.DeleteAsyncRelativeRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDeleteAsyncRelativeRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/deleteasync/retry/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -1695,153 +234,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPostNonRetry400HeadersInner PostNonRetry400(ProductInner product = default(ProductInner))
+        {
+            return PostNonRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 400 with no error body
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostNonRetry400HeadersInner>> BeginPostNonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPostNonRetry400HeadersInner> PostNonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PostNonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPostNonRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/post/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPostNonRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostNonRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -1850,153 +262,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPost202NonRetry400HeadersInner Post202NonRetry400(ProductInner product = default(ProductInner))
+        {
+            return Post202NonRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 with a location header
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202NonRetry400HeadersInner>> BeginPost202NonRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPost202NonRetry400HeadersInner> Post202NonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Post202NonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPost202NonRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/post/202/retry/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPost202NonRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NonRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -2006,153 +291,27 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPostAsyncRelativeRetry400HeadersInner PostAsyncRelativeRetry400(ProductInner product = default(ProductInner))
+        {
+            return PostAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetry400HeadersInner>> BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPostAsyncRelativeRetry400HeadersInner> PostAsyncRelativeRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PostAsyncRelativeRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPostAsyncRelativeRetry400", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/nonretryerror/postasync/retry/400").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetry400HeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetry400HeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -2161,179 +320,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public ProductInner PutError201NoProvisioningStatePayload(ProductInner product = default(ProductInner))
+        {
+            return PutError201NoProvisioningStatePayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 201 to the initial request with no payload
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutError201NoProvisioningStatePayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PutError201NoProvisioningStatePayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutError201NoProvisioningStatePayload", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/put/201/noprovisioningstatepayload").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 201)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 201)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -2343,174 +349,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public ProductInner PutAsyncRelativeRetryNoStatus(ProductInner product = default(ProductInner))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutAsyncRelativeRetryNoStatus", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/putasync/retry/nostatus").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+            return PutAsyncRelativeRetryNoStatusAsync(product).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -2520,452 +361,88 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> PutAsyncRelativeRetryNoStatusAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.PutAsyncRelativeRetryNoStatusAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner PutAsyncRelativeRetryNoStatusPayload(ProductInner product = default(ProductInner))
+        {
+            return PutAsyncRelativeRetryNoStatusPayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PutAsyncRelativeRetryNoStatusPayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutAsyncRelativeRetryNoStatusPayload", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/putasync/retry/nostatuspayload").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial request, indicating success.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public void Delete204Succeeded()
+        {
+            Delete204SucceededAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 204 to the initial request, indicating success.
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse> BeginDelete204SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Delete204SucceededAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDelete204Succeeded", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/delete/204/nolocation").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 204)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+            (await OperationsWithHttpMessages.Delete204SucceededAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner DeleteAsyncRelativeRetryNoStatus()
+        {
+            return DeleteAsyncRelativeRetryNoStatusAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>> BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner> DeleteAsyncRelativeRetryNoStatusAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.DeleteAsyncRelativeRetryNoStatusAsync(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDeleteAsyncRelativeRetryNoStatus", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/deleteasync/retry/nostatus").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -2974,153 +451,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPost202NoLocationHeadersInner Post202NoLocation(ProductInner product = default(ProductInner))
+        {
+            return Post202NoLocationAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, without a location header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202NoLocationHeadersInner>> BeginPost202NoLocationWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPost202NoLocationHeadersInner> Post202NoLocationAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Post202NoLocationAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPost202NoLocation", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/post/202/nolocation").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPost202NoLocationHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NoLocationHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -3130,153 +480,27 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner PostAsyncRelativeRetryNoPayload(ProductInner product = default(ProductInner))
+        {
+            return PostAsyncRelativeRetryNoPayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner> PostAsyncRelativeRetryNoPayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PostAsyncRelativeRetryNoPayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPostAsyncRelativeRetryNoPayload", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/postasync/retry/nopayload").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -3285,161 +509,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public ProductInner Put200InvalidJson(ProductInner product = default(ProductInner))
+        {
+            return Put200InvalidJsonAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner>> BeginPut200InvalidJsonWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> Put200InvalidJsonAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Put200InvalidJsonAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPut200InvalidJson", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/put/200/invalidjson").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 204)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -3449,174 +538,27 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public ProductInner PutAsyncRelativeRetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return PutAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PutAsyncRelativeRetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutAsyncRelativeRetryInvalidHeader", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/putasync/retry/invalidheader").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -3626,612 +568,99 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public ProductInner PutAsyncRelativeRetryInvalidJsonPolling(ProductInner product = default(ProductInner))
+        {
+            return PutAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ProductInner> PutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PutAsyncRelativeRetryInvalidJsonPollingAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPutAsyncRelativeRetryInvalidJsonPolling", tracingParameters);
+                return _result.Body;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/putasync/retry/invalidjsonpolling").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ProductInner>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
         /// 'Location' and 'Retry-After' headers
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDelete202RetryInvalidHeaderHeadersInner Delete202RetryInvalidHeader()
+        {
+            return Delete202RetryInvalidHeaderAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+        /// 'Location' and 'Retry-After' headers
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner>> BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDelete202RetryInvalidHeaderHeadersInner> Delete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Delete202RetryInvalidHeaderAsync(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDelete202RetryInvalidHeader", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/delete/202/retry/invalidheader").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202RetryInvalidHeaderHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
         /// Azure-AsyncOperation header is invalid
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner DeleteAsyncRelativeRetryInvalidHeader()
+        {
+            return DeleteAsyncRelativeRetryInvalidHeaderAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+        /// Azure-AsyncOperation header is invalid
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>> BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner> DeleteAsyncRelativeRetryInvalidHeaderAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.DeleteAsyncRelativeRetryInvalidHeaderAsync(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDeleteAsyncRelativeRetryInvalidHeader", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/deleteasync/retry/invalidheader").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner DeleteAsyncRelativeRetryInvalidJsonPolling()
+        {
+            return DeleteAsyncRelativeRetryInvalidJsonPollingAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>> BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginDeleteAsyncRelativeRetryInvalidJsonPolling", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/deleteasync/retry/invalidjsonpolling").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -4241,153 +670,27 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPost202RetryInvalidHeaderHeadersInner Post202RetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return Post202RetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After'
+        /// headers.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeadersInner>> BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPost202RetryInvalidHeaderHeadersInner> Post202RetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.Post202RetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPost202RetryInvalidHeader", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/post/202/retry/invalidheader").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202RetryInvalidHeaderHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -4397,153 +700,27 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner PostAsyncRelativeRetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return PostAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner> PostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PostAsyncRelativeRetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPostAsyncRelativeRetryInvalidHeader", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/postasync/retry/invalidheader").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
-            {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            try
-            {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -4553,153 +730,734 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner PostAsyncRelativeRetryInvalidJsonPolling(ProductInner product = default(ProductInner))
+        {
+            return PostAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner> PostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
+            using (var _result = await OperationsWithHttpMessages.PostAsyncRelativeRetryInvalidJsonPollingAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("product", product);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginPostAsyncRelativeRetryInvalidJsonPolling", tracingParameters);
+                return _result.Headers;
             }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "lro/error/postasync/retry/invalidjsonpolling").ToString();
-            List<string> _queryParameters = new List<string>();
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (Client.AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
-            }
+        }
 
+        /// <summary>
+        /// Long running put request, service returns a 400 to the initial request
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutNonRetry400(ProductInner product = default(ProductInner))
+        {
+            return BeginPutNonRetry400Async(product).GetAwaiter().GetResult();
+        }
 
-            if (customHeaders != null)
+        /// <summary>
+        /// Long running put request, service returns a 400 to the initial request
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutNonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutNonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
+                return _result.Body;
             }
+        }
 
-            // Serialize Request
-            string _requestContent = null;
-            if (product != null)
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutNonRetry201Creating400(ProductInner product = default(ProductInner))
+        {
+            return BeginPutNonRetry201Creating400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutNonRetry201Creating400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutNonRetry201Creating400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(product, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                return _result.Body;
             }
-            // Set Credentials
-            if (Client.Credentials != null)
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutNonRetry201Creating400InvalidJson(ProductInner product = default(ProductInner))
+        {
+            return BeginPutNonRetry201Creating400InvalidJsonAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutNonRetry201Creating400InvalidJsonAsync(product, null, cancellationToken).ConfigureAwait(false))
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
-            // Send Request
-            if (_shouldTrace)
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+        /// the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutAsyncRelativeRetry400(ProductInner product = default(ProductInner))
+        {
+            return BeginPutAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+        /// the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutAsyncRelativeRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutAsyncRelativeRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                return _result.Body;
             }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 400 with an error body
+        /// </summary>
+        public LROSADsDeleteNonRetry400HeadersInner BeginDeleteNonRetry400()
+        {
+            return BeginDeleteNonRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 400 with an error body
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDeleteNonRetry400HeadersInner> BeginDeleteNonRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDeleteNonRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                return _result.Headers;
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 202)
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 with a location header
+        /// </summary>
+        public LROSADsDelete202NonRetry400HeadersInner BeginDelete202NonRetry400()
+        {
+            return BeginDelete202NonRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 with a location header
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDelete202NonRetry400HeadersInner> BeginDelete202NonRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDelete202NonRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
+                return _result.Headers;
             }
-            // Create Result
-            var _result = new AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        public LROSADsDeleteAsyncRelativeRetry400HeadersInner BeginDeleteAsyncRelativeRetry400()
+        {
+            return BeginDeleteAsyncRelativeRetry400Async().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDeleteAsyncRelativeRetry400HeadersInner> BeginDeleteAsyncRelativeRetry400Async(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDeleteAsyncRelativeRetry400Async(null, cancellationToken).ConfigureAwait(false))
             {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                return _result.Headers;
             }
-            try
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 400 with no error body
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPostNonRetry400HeadersInner BeginPostNonRetry400(ProductInner product = default(ProductInner))
+        {
+            return BeginPostNonRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 400 with no error body
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPostNonRetry400HeadersInner> BeginPostNonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPostNonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
+                return _result.Headers;
             }
-            catch (JsonException ex)
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 with a location header
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPost202NonRetry400HeadersInner BeginPost202NonRetry400(ProductInner product = default(ProductInner))
+        {
+            return BeginPost202NonRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 with a location header
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPost202NonRetry400HeadersInner> BeginPost202NonRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPost202NonRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+                return _result.Headers;
             }
-            if (_shouldTrace)
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPostAsyncRelativeRetry400HeadersInner BeginPostAsyncRelativeRetry400(ProductInner product = default(ProductInner))
+        {
+            return BeginPostAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPostAsyncRelativeRetry400HeadersInner> BeginPostAsyncRelativeRetry400Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPostAsyncRelativeRetry400Async(product, null, cancellationToken).ConfigureAwait(false))
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                return _result.Headers;
             }
-            return _result;
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 201 to the initial request with no payload
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutError201NoProvisioningStatePayload(ProductInner product = default(ProductInner))
+        {
+            return BeginPutError201NoProvisioningStatePayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 201 to the initial request with no payload
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutError201NoProvisioningStatePayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutError201NoProvisioningStatePayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutAsyncRelativeRetryNoStatus(ProductInner product = default(ProductInner))
+        {
+            return BeginPutAsyncRelativeRetryNoStatusAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutAsyncRelativeRetryNoStatusAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutAsyncRelativeRetryNoStatusAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutAsyncRelativeRetryNoStatusPayload(ProductInner product = default(ProductInner))
+        {
+            return BeginPutAsyncRelativeRetryNoStatusPayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutAsyncRelativeRetryNoStatusPayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 204 to the initial request, indicating success.
+        /// </summary>
+        public void BeginDelete204Succeeded()
+        {
+            BeginDelete204SucceededAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 204 to the initial request, indicating success.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task BeginDelete204SucceededAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            (await OperationsWithHttpMessages.BeginDelete204SucceededAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        public LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner BeginDeleteAsyncRelativeRetryNoStatus()
+        {
+            return BeginDeleteAsyncRelativeRetryNoStatusAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner> BeginDeleteAsyncRelativeRetryNoStatusAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDeleteAsyncRelativeRetryNoStatusAsync(null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, without a location header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPost202NoLocationHeadersInner BeginPost202NoLocation(ProductInner product = default(ProductInner))
+        {
+            return BeginPost202NoLocationAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, without a location header.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPost202NoLocationHeadersInner> BeginPost202NoLocationAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPost202NoLocationAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner BeginPostAsyncRelativeRetryNoPayload(ProductInner product = default(ProductInner))
+        {
+            return BeginPostAsyncRelativeRetryNoPayloadAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner> BeginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPostAsyncRelativeRetryNoPayloadAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPut200InvalidJson(ProductInner product = default(ProductInner))
+        {
+            return BeginPut200InvalidJsonAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPut200InvalidJsonAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPut200InvalidJsonAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutAsyncRelativeRetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return BeginPutAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutAsyncRelativeRetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public ProductInner BeginPutAsyncRelativeRetryInvalidJsonPolling(ProductInner product = default(ProductInner))
+        {
+            return BeginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<ProductInner> BeginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPutAsyncRelativeRetryInvalidJsonPollingAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+        /// 'Location' and 'Retry-After' headers
+        /// </summary>
+        public LROSADsDelete202RetryInvalidHeaderHeadersInner BeginDelete202RetryInvalidHeader()
+        {
+            return BeginDelete202RetryInvalidHeaderAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
+        /// 'Location' and 'Retry-After' headers
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDelete202RetryInvalidHeaderHeadersInner> BeginDelete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDelete202RetryInvalidHeaderAsync(null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+        /// Azure-AsyncOperation header is invalid
+        /// </summary>
+        public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner BeginDeleteAsyncRelativeRetryInvalidHeader()
+        {
+            return BeginDeleteAsyncRelativeRetryInvalidHeaderAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
+        /// Azure-AsyncOperation header is invalid
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner> BeginDeleteAsyncRelativeRetryInvalidHeaderAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDeleteAsyncRelativeRetryInvalidHeaderAsync(null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner BeginDeleteAsyncRelativeRetryInvalidJsonPolling()
+        {
+            return BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+        /// Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner> BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After'
+        /// headers.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPost202RetryInvalidHeaderHeadersInner BeginPost202RetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return BeginPost202RetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After'
+        /// headers.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPost202RetryInvalidHeaderHeadersInner> BeginPost202RetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPost202RetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner BeginPostAsyncRelativeRetryInvalidHeader(ProductInner product = default(ProductInner))
+        {
+            return BeginPostAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner> BeginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPostAsyncRelativeRetryInvalidHeaderAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        public LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner BeginPostAsyncRelativeRetryInvalidJsonPolling(ProductInner product = default(ProductInner))
+        {
+            return BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner> BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await OperationsWithHttpMessages.BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Headers;
+            }
         }
 
     }

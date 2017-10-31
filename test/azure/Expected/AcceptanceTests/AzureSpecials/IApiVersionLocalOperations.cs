@@ -11,8 +11,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,69 +19,61 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface IApiVersionLocalOperations
     {
+        IApiVersionLocalOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetMethodLocalValid();
+
+        /// <summary>
+        /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodLocalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version = null to succeed
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value null, this should result in no serialized parameter
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetMethodLocalNull(string apiVersion = default(string));
+
+        /// <summary>
+        /// Get method with api-version modeled in the method.  pass in api-version = null to succeed
+        /// </summary>
+        /// <param name='apiVersion'>
+        /// This should appear as a method parameter, use value null, this should result in no serialized parameter
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodLocalNullWithHttpMessagesAsync(string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodLocalNullAsync(string apiVersion = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetPathLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void GetPathLocalValid();
+
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetPathLocalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+        /// </summary>
+        void GetSwaggerLocalValid();
+
+        /// <summary>
+        /// Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening
 {
-    using Microsoft.Rest;
     using Models;
     using Newtonsoft.Json;
     using System.Collections;
@@ -44,25 +43,42 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutArray(IList<Resource> resourceArray = default(IList<Resource>));
+
+        /// <summary>
+        /// Put External Resource as an Array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceArray'>
+        /// External Resource as an Array to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutArrayWithHttpMessagesAsync(IList<Resource> resourceArray = default(IList<Resource>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutArrayAsync(IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as an Array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        IList<FlattenedProduct> GetArray();
 
         /// <summary>
         /// Get External Resource as an Array
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<FlattenedProduct>>> GetArrayWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<FlattenedProduct>> GetArrayAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+        /// it's referenced in an array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceArray'>
+        /// External Resource as an Array to put
+        /// </param>
+        void PutWrappedArray(IList<WrappedProduct> resourceArray = default(IList<WrappedProduct>));
 
         /// <summary>
         /// No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
@@ -72,26 +88,34 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutWrappedArrayWithHttpMessagesAsync(IList<WrappedProduct> resourceArray = default(IList<WrappedProduct>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutWrappedArrayAsync(IList<WrappedProduct> resourceArray = default(IList<WrappedProduct>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+        /// it's referenced in an array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        IList<ProductWrapper> GetWrappedArray();
 
         /// <summary>
         /// No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
         /// it's referenced in an array
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<ProductWrapper>>> GetWrappedArrayWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<ProductWrapper>> GetWrappedArrayAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put External Resource as a Dictionary
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceDictionary'>
+        /// External Resource as a Dictionary to put
+        /// </param>
+        void PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>));
 
         /// <summary>
         /// Put External Resource as a Dictionary
@@ -100,25 +124,32 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutDictionaryWithHttpMessagesAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as a Dictionary
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        IDictionary<string, FlattenedProduct> GetDictionary();
 
         /// <summary>
         /// Get External Resource as a Dictionary
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put External Resource as a ResourceCollection
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceComplexObject'>
+        /// External Resource as a ResourceCollection to put
+        /// </param>
+        void PutResourceCollection(ResourceCollection resourceComplexObject = default(ResourceCollection));
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
@@ -127,25 +158,32 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutResourceCollectionAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as a ResourceCollection
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        ResourceCollection GetResourceCollection();
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<ResourceCollection>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ResourceCollection> GetResourceCollectionAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put Simple Product with client flattening true on the model
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='simpleBodyProduct'>
+        /// Simple body product to put
+        /// </param>
+        SimpleProduct PutSimpleProduct(SimpleProduct simpleBodyProduct = default(SimpleProduct));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -154,13 +192,31 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='simpleBodyProduct'>
         /// Simple body product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PutSimpleProductWithHttpMessagesAsync(SimpleProduct simpleBodyProduct = default(SimpleProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SimpleProduct> PutSimpleProductAsync(SimpleProduct simpleBodyProduct = default(SimpleProduct), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put Flattened Simple Product with client flattening true on the parameter
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='productId'>
+        /// Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San
+        /// Francisco will have a different product_id than uberX in Los Angeles.
+        /// </param>
+        /// <param name='maxProductDisplayName'>
+        /// Display name of product.
+        /// </param>
+        /// <param name='description'>
+        /// Description of product.
+        /// </param>
+        /// <param name='genericValue'>
+        /// Generic URL value.
+        /// </param>
+        /// <param name='odatavalue'>
+        /// URL value.
+        /// </param>
+        SimpleProduct PostFlattenedSimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string));
 
         /// <summary>
         /// Put Flattened Simple Product with client flattening true on the parameter
@@ -182,13 +238,18 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='odatavalue'>
         /// URL value.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SimpleProduct> PostFlattenedSimpleProductAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put Simple Product with client flattening true on the model
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='flattenParameterGroup'>
+        /// Additional parameters for the operation
+        /// </param>
+        SimpleProduct PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup);
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -197,13 +258,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='flattenParameterGroup'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PutSimpleProductWithGroupingWithHttpMessagesAsync(FlattenParameterGroup flattenParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<SimpleProduct> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

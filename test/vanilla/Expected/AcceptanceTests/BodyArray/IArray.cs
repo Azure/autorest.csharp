@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyArray
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,1088 +19,873 @@ namespace Fixtures.AcceptanceTestsBodyArray
     /// </summary>
     public partial interface IArray
     {
+        IArrayWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null array value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetNull();
+
+        /// <summary>
+        /// Get null array value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid array [1, 2, 3
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetInvalid();
+
+        /// <summary>
+        /// Get invalid array [1, 2, 3
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty array value []
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetEmpty();
+
+        /// <summary>
+        /// Get empty array value []
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value empty []
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutEmpty(IList<string> arrayBody);
+
+        /// <summary>
+        /// Set array value empty []
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IList<string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutEmptyAsync(IList<string> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean array value [true, false, false, true]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<bool?> GetBooleanTfft();
+
+        /// <summary>
+        /// Get boolean array value [true, false, false, true]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<bool?>>> GetBooleanTfftWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<bool?>> GetBooleanTfftAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value empty [true, false, false, true]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBooleanTfft(IList<bool?> arrayBody);
+
+        /// <summary>
+        /// Set array value empty [true, false, false, true]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutBooleanTfftWithHttpMessagesAsync(IList<bool?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBooleanTfftAsync(IList<bool?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean array value [true, null, false]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<bool?> GetBooleanInvalidNull();
+
+        /// <summary>
+        /// Get boolean array value [true, null, false]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<bool?>>> GetBooleanInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<bool?>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean array value [true, 'boolean', false]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<bool?> GetBooleanInvalidString();
+
+        /// <summary>
+        /// Get boolean array value [true, 'boolean', false]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<bool?>>> GetBooleanInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<bool?>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer array value [1, -1, 3, 300]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetIntegerValid();
+
+        /// <summary>
+        /// Get integer array value [1, -1, 3, 300]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetIntegerValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetIntegerValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value empty [1, -1, 3, 300]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutIntegerValid(IList<int?> arrayBody);
+
+        /// <summary>
+        /// Set array value empty [1, -1, 3, 300]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutIntegerValidWithHttpMessagesAsync(IList<int?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutIntegerValidAsync(IList<int?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer array value [1, null, 0]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetIntInvalidNull();
+
+        /// <summary>
+        /// Get integer array value [1, null, 0]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetIntInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer array value [1, 'integer', 0]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<int?> GetIntInvalidString();
+
+        /// <summary>
+        /// Get integer array value [1, 'integer', 0]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<int?>>> GetIntInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer array value [1, -1, 3, 300]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<long?> GetLongValid();
+
+        /// <summary>
+        /// Get integer array value [1, -1, 3, 300]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<long?>>> GetLongValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<long?>> GetLongValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value empty [1, -1, 3, 300]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLongValid(IList<long?> arrayBody);
+
+        /// <summary>
+        /// Set array value empty [1, -1, 3, 300]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutLongValidWithHttpMessagesAsync(IList<long?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLongValidAsync(IList<long?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get long array value [1, null, 0]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<long?> GetLongInvalidNull();
+
+        /// <summary>
+        /// Get long array value [1, null, 0]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<long?>>> GetLongInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<long?>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get long array value [1, 'integer', 0]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<long?> GetLongInvalidString();
+
+        /// <summary>
+        /// Get long array value [1, 'integer', 0]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<long?>>> GetLongInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<long?>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get float array value [0, -0.01, 1.2e20]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<double?> GetFloatValid();
+
+        /// <summary>
+        /// Get float array value [0, -0.01, 1.2e20]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetFloatValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<double?>> GetFloatValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value [0, -0.01, 1.2e20]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutFloatValidWithHttpMessagesAsync(IList<double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get float array value [0.0, null, -1.2e20]
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetFloatInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get boolean array value [1.0, 'number', 0.0]
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetFloatInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get float array value [0, -0.01, 1.2e20]
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetDoubleValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void PutFloatValid(IList<double?> arrayBody);
+
         /// <summary>
         /// Set array value [0, -0.01, 1.2e20]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDoubleValidWithHttpMessagesAsync(IList<double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutFloatValidAsync(IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get float array value [0.0, null, -1.2e20]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<double?> GetFloatInvalidNull();
+
+        /// <summary>
+        /// Get float array value [0.0, null, -1.2e20]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetDoubleInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<double?>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean array value [1.0, 'number', 0.0]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        IList<double?> GetFloatInvalidString();
+
+        /// <summary>
+        /// Get boolean array value [1.0, 'number', 0.0]
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IList<double?>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get float array value [0, -0.01, 1.2e20]
+        /// </summary>
+        IList<double?> GetDoubleValid();
+
+        /// <summary>
+        /// Get float array value [0, -0.01, 1.2e20]
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IList<double?>> GetDoubleValidAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set array value [0, -0.01, 1.2e20]
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        void PutDoubleValid(IList<double?> arrayBody);
+
+        /// <summary>
+        /// Set array value [0, -0.01, 1.2e20]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<double?>>> GetDoubleInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDoubleValidAsync(IList<double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get float array value [0.0, null, -1.2e20]
+        /// </summary>
+        IList<double?> GetDoubleInvalidNull();
+
+        /// <summary>
+        /// Get float array value [0.0, null, -1.2e20]
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IList<double?>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get boolean array value [1.0, 'number', 0.0]
+        /// </summary>
+        IList<double?> GetDoubleInvalidString();
+
+        /// <summary>
+        /// Get boolean array value [1.0, 'number', 0.0]
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IList<double?>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string array value ['foo1', 'foo2', 'foo3']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<string> GetStringValid();
+
+        /// <summary>
+        /// Get string array value ['foo1', 'foo2', 'foo3']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<string>>> GetStringValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<string>> GetStringValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value ['foo1', 'foo2', 'foo3']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutStringValid(IList<string> arrayBody);
+
+        /// <summary>
+        /// Set array value ['foo1', 'foo2', 'foo3']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutStringValidWithHttpMessagesAsync(IList<string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutStringValidAsync(IList<string> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string array value ['foo', null, 'foo2']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<string> GetStringWithNull();
+
+        /// <summary>
+        /// Get string array value ['foo', null, 'foo2']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<string>>> GetStringWithNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<string>> GetStringWithNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string array value ['foo', 123, 'foo2']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<string> GetStringWithInvalid();
+
+        /// <summary>
+        /// Get string array value ['foo', 123, 'foo2']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<string>>> GetStringWithInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<string>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
         /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.Guid?> GetUuidValid();
+
+        /// <summary>
+        /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.Guid?>>> GetUuidValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.Guid?>> GetUuidValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
         /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutUuidValid(IList<System.Guid?> arrayBody);
+
+        /// <summary>
+        /// Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutUuidValidWithHttpMessagesAsync(IList<System.Guid?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutUuidValidAsync(IList<System.Guid?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.Guid?> GetUuidInvalidChars();
+
+        /// <summary>
+        /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.Guid?>>> GetUuidInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.Guid?>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateValid();
+
+        /// <summary>
+        /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateValid(IList<System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateValidWithHttpMessagesAsync(IList<System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateValidAsync(IList<System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date array value ['2012-01-01', null, '1776-07-04']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateInvalidNull();
+
+        /// <summary>
+        /// Get date array value ['2012-01-01', null, '1776-07-04']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date array value ['2011-03-22', 'date']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateInvalidChars();
+
+        /// <summary>
+        /// Get date array value ['2011-03-22', 'date']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateTimeValid();
+
+        /// <summary>
+        /// Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateTimeValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTimeValid(IList<System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeValidWithHttpMessagesAsync(IList<System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeValidAsync(IList<System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date array value ['2000-12-01t00:00:01z', null]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateTimeInvalidNull();
+
+        /// <summary>
+        /// Get date array value ['2000-12-01t00:00:01z', null]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateTimeInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateTimeInvalidChars();
+
+        /// <summary>
+        /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateTimeInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
         /// 10:15:01 GMT']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.DateTime?> GetDateTimeRfc1123Valid();
+
+        /// <summary>
+        /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
+        /// 10:15:01 GMT']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.DateTime?>>> GetDateTimeRfc1123ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.DateTime?>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01
         /// GMT']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTimeRfc1123Valid(IList<System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01
+        /// GMT']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IList<System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeRfc1123ValidAsync(IList<System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<System.TimeSpan?> GetDurationValid();
+
+        /// <summary>
+        /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<System.TimeSpan?>>> GetDurationValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<System.TimeSpan?>> GetDurationValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDurationValid(IList<System.TimeSpan?> arrayBody);
+
+        /// <summary>
+        /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(IList<System.TimeSpan?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDurationValidAsync(IList<System.TimeSpan?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<byte[]> GetByteValid();
+
+        /// <summary>
+        /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<byte[]>>> GetByteValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<byte[]>> GetByteValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutByteValid(IList<byte[]> arrayBody);
+
+        /// <summary>
+        /// Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutByteValidWithHttpMessagesAsync(IList<byte[]> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutByteValidAsync(IList<byte[]> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<byte[]> GetByteInvalidNull();
+
+        /// <summary>
+        /// Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<byte[]>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url
         /// encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<byte[]> GetBase64Url();
+
+        /// <summary>
+        /// Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url
+        /// encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<byte[]>>> GetBase64UrlWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<byte[]>> GetBase64UrlAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get array of complex type null value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<Product> GetComplexNull();
+
+        /// <summary>
+        /// Get array of complex type null value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Product>>> GetComplexNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Product>> GetComplexNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty array of complex type []
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<Product> GetComplexEmpty();
+
+        /// <summary>
+        /// Get empty array of complex type []
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Product>>> GetComplexEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Product>> GetComplexEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<Product> GetComplexItemNull();
+
+        /// <summary>
+        /// Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Product>>> GetComplexItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Product>> GetComplexItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<Product> GetComplexItemEmpty();
+
+        /// <summary>
+        /// Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Product>>> GetComplexItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Product>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
         /// 'string': '6'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<Product> GetComplexValid();
+
+        /// <summary>
+        /// Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+        /// 'string': '6'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Product>>> GetComplexValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Product>> GetComplexValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer':
         /// 5, 'string': '6'}]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutComplexValid(IList<Product> arrayBody);
+
+        /// <summary>
+        /// Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer':
+        /// 5, 'string': '6'}]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutComplexValidWithHttpMessagesAsync(IList<Product> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutComplexValidAsync(IList<Product> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a null array
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IList<string>> GetArrayNull();
+
+        /// <summary>
+        /// Get a null array
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IList<string>>>> GetArrayNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IList<string>>> GetArrayNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an empty array []
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IList<string>> GetArrayEmpty();
+
+        /// <summary>
+        /// Get an empty array []
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IList<string>>>> GetArrayEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IList<string>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IList<string>> GetArrayItemNull();
+
+        /// <summary>
+        /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IList<string>>>> GetArrayItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IList<string>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IList<string>> GetArrayItemEmpty();
+
+        /// <summary>
+        /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IList<string>>>> GetArrayItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IList<string>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IList<string>> GetArrayValid();
+
+        /// <summary>
+        /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IList<string>>>> GetArrayValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IList<string>>> GetArrayValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutArrayValid(IList<IList<string>> arrayBody);
+
+        /// <summary>
+        /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutArrayValidWithHttpMessagesAsync(IList<IList<string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutArrayValidAsync(IList<IList<string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries with value null
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IDictionary<string, string>> GetDictionaryNull();
+
+        /// <summary>
+        /// Get an array of Dictionaries with value null
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IDictionary<string, string>>>> GetDictionaryNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDictionary<string, string>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IDictionary<string, string>> GetDictionaryEmpty();
+
+        /// <summary>
+        /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IDictionary<string, string>>>> GetDictionaryEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDictionary<string, string>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
         /// null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IDictionary<string, string>> GetDictionaryItemNull();
+
+        /// <summary>
+        /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+        /// null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IDictionary<string, string>>>> GetDictionaryItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDictionary<string, string>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {},
         /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IDictionary<string, string>> GetDictionaryItemEmpty();
+
+        /// <summary>
+        /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {},
+        /// {'7': 'seven', '8': 'eight', '9': 'nine'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IDictionary<string, string>>>> GetDictionaryItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDictionary<string, string>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
         /// {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IList<IDictionary<string, string>> GetDictionaryValid();
+
+        /// <summary>
+        /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+        /// {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<IDictionary<string, string>>>> GetDictionaryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDictionary<string, string>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
         /// {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDictionaryValid(IList<IDictionary<string, string>> arrayBody);
+
+        /// <summary>
+        /// Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+        /// {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDictionaryValidWithHttpMessagesAsync(IList<IDictionary<string, string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDictionaryValidAsync(IList<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

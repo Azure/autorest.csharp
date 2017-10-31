@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// </summary>
         private void Initialize()
         {
-            AvailabilitySets = new AvailabilitySets(this);
+            AvailabilitySets = new AvailabilitySets(new AvailabilitySetsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

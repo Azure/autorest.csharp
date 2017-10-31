@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyFormData
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -21,6 +18,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
     /// </summary>
     public partial interface IFormdata
     {
+        IFormdataWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Upload file
         /// </summary>
@@ -30,43 +29,38 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <param name='fileName'>
         /// File name to upload. Name has to be spelled exactly as written here.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Stream>> UploadFileWithHttpMessagesAsync(Stream fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Stream UploadFile(Stream fileContent, string fileName);
+
         /// <summary>
         /// Upload file
         /// </summary>
         /// <param name='fileContent'>
         /// File to upload.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='fileName'>
+        /// File name to upload. Name has to be spelled exactly as written here.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Stream>> UploadFileViaBodyWithHttpMessagesAsync(Stream fileContent, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Stream> UploadFileAsync(Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Upload file
+        /// </summary>
+        /// <param name='fileContent'>
+        /// File to upload.
+        /// </param>
+        Stream UploadFileViaBody(Stream fileContent);
+
+        /// <summary>
+        /// Upload file
+        /// </summary>
+        /// <param name='fileContent'>
+        /// File to upload.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<Stream> UploadFileViaBodyAsync(Stream fileContent, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

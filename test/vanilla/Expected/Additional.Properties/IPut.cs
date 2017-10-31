@@ -8,10 +8,7 @@
 
 namespace Fixtures.AdditionalProperties
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,21 +17,19 @@ namespace Fixtures.AdditionalProperties
     /// </summary>
     public partial interface IPut
     {
+        IPutWithHttpMessages WithHttpMessages();
+
         /// <param name='pet'>
         /// The pet JSON you want to post
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Pets(Pet pet);
+
+        /// <param name='pet'>
+        /// The pet JSON you want to post
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PetsWithHttpMessagesAsync(Pet pet, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PetsAsync(Pet pet, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

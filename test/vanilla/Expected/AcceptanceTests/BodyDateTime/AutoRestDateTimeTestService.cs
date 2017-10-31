@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// </summary>
         private void Initialize()
         {
-            Datetime = new Datetime(this);
+            Datetime = new Datetime(new DatetimeWithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

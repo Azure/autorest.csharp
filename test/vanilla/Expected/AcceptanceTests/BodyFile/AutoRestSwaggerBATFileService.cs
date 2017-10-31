@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// </summary>
         private void Initialize()
         {
-            Files = new Files(this);
+            Files = new Files(new FilesWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

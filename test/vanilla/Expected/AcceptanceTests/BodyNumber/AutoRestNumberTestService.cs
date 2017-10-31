@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// </summary>
         private void Initialize()
         {
-            Number = new Number(this);
+            Number = new Number(new NumberWithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

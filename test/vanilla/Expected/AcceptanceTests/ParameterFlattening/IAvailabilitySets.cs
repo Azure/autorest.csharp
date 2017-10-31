@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,6 +19,8 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
     /// </summary>
     public partial interface IAvailabilitySets
     {
+        IAvailabilitySetsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Updates the tags for an availability set.
         /// </summary>
@@ -32,18 +33,23 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <param name='tags'>
         /// A set of tags. A description about the set of tags.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Update(string resourceGroupName, string avset, IDictionary<string, string> tags);
+
+        /// <summary>
+        /// Updates the tags for an availability set.
+        /// </summary>
+        /// <param name='resourceGroupName'>
+        /// The name of the resource group.
+        /// </param>
+        /// <param name='avset'>
+        /// The name of the storage availability set.
+        /// </param>
+        /// <param name='tags'>
+        /// A set of tags. A description about the set of tags.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string avset, IDictionary<string, string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task UpdateAsync(string resourceGroupName, string avset, IDictionary<string, string> tags, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

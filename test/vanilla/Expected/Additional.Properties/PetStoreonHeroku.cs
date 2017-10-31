@@ -132,9 +132,9 @@ namespace Fixtures.AdditionalProperties
         /// </summary>
         private void Initialize()
         {
-            Get = new Get(this);
-            Post = new Post(this);
-            Put = new Put(this);
+            Get = new Get(new GetWithHttpMessages(this));
+            Post = new Post(new PostWithHttpMessages(this));
+            Put = new Put(new PutWithHttpMessages(this));
             BaseUri = new System.Uri("http://petstore-api.herokuapp.com/my/pet");
             SerializationSettings = new JsonSerializerSettings
             {

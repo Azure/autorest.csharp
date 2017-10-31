@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,69 +19,55 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface IApiVersionDefaultOperations
     {
+        IApiVersionDefaultOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void GetMethodGlobalValid();
+
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodGlobalNotProvidedValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodGlobalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetPathGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void GetMethodGlobalNotProvidedValid();
+
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetSwaggerGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// GET method with api-version modeled in global settings.
+        /// </summary>
+        void GetPathGlobalValid();
+
+        /// <summary>
+        /// GET method with api-version modeled in global settings.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task GetPathGlobalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// GET method with api-version modeled in global settings.
+        /// </summary>
+        void GetSwaggerGlobalValid();
+
+        /// <summary>
+        /// GET method with api-version modeled in global settings.
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task GetSwaggerGlobalValidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -66,6 +66,14 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+
+        private IAzureCompositeModelWithHttpMessages OperationsWithHttpMessages { get; set; }
+
+        public IAzureCompositeModelWithHttpMessages WithHttpMessages()
+        {
+            return OperationsWithHttpMessages;
+        }
+
         /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
@@ -307,14 +315,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         private void Initialize()
         {
-            Basic = new BasicOperations(this);
-            Primitive = new PrimitiveOperations(this);
-            Array = new ArrayOperations(this);
-            Dictionary = new DictionaryOperations(this);
-            Inheritance = new InheritanceOperations(this);
-            Polymorphism = new PolymorphismOperations(this);
-            Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
-            Readonlyproperty = new ReadonlypropertyOperations(this);
+            OperationsWithHttpMessages = new AzureCompositeModelWithHttpMessages(this);
+            Basic = new BasicOperations(new BasicOperationsWithHttpMessages(this));
+            Primitive = new PrimitiveOperations(new PrimitiveOperationsWithHttpMessages(this));
+            Array = new ArrayOperations(new ArrayOperationsWithHttpMessages(this));
+            Dictionary = new DictionaryOperations(new DictionaryOperationsWithHttpMessages(this));
+            Inheritance = new InheritanceOperations(new InheritanceOperationsWithHttpMessages(this));
+            Polymorphism = new PolymorphismOperations(new PolymorphismOperationsWithHttpMessages(this));
+            Polymorphicrecursive = new PolymorphicrecursiveOperations(new PolymorphicrecursiveOperationsWithHttpMessages(this));
+            Readonlyproperty = new ReadonlypropertyOperations(new ReadonlypropertyOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SubscriptionId = "123456";
             AcceptLanguage = "en-US";
@@ -360,168 +369,30 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='resourceGroupName'>
         /// Resource Group ID.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public CatalogArrayInner List(string resourceGroupName)
+        {
+            return ListAsync(resourceGroupName).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Product Types
+        /// </summary>
+        /// <remarks>
+        /// The Products endpoint returns information about the Uber products offered at a given location. The response
+        /// includes the display name and other details about each product, and lists the products in the proper display order.
+        /// </remarks>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <exception cref='System.ArgumentNullException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<CatalogArrayInner>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CatalogArrayInner> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (resourceGroupName == null)
+            using (var _result = await OperationsWithHttpMessages.ListAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
+                return _result.Body;
             }
-            string apiVersion = "2014-04-01-preview";
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("resourceGroupName", resourceGroupName);
-                tracingParameters.Add("apiVersion", apiVersion);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "List", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SubscriptionId));
-            _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
-            List<string> _queryParameters = new List<string>();
-            if (apiVersion != null)
-            {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
-            }
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (GenerateClientRequestId != null && GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<CatalogArrayInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CatalogArrayInner>(_responseContent, DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -539,185 +410,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='productDictionaryOfArray'>
         /// Dictionary of Array of product
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public CatalogDictionaryInner Create(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>))
+        {
+            return CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create products
+        /// </summary>
+        /// <remarks>
+        /// Resets products.
+        /// </remarks>
+        /// <param name='subscriptionId'>
+        /// Subscription ID.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
+        /// </param>
+        /// <param name='productDictionaryOfArray'>
+        /// Dictionary of Array of product
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <exception cref='System.ArgumentNullException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<CatalogDictionaryInner>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CatalogDictionaryInner> CreateAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (subscriptionId == null)
+            using (var _result = await OperationsWithHttpMessages.CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray, null, cancellationToken).ConfigureAwait(false))
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(subscriptionId));
+                return _result.Body;
             }
-            if (resourceGroupName == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
-            }
-            string apiVersion = "2014-04-01-preview";
-            CatalogDictionaryOfArray bodyParameter = new CatalogDictionaryOfArray();
-            if (productDictionaryOfArray != null)
-            {
-                bodyParameter.ProductDictionaryOfArray = productDictionaryOfArray;
-            }
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("subscriptionId", subscriptionId);
-                tracingParameters.Add("resourceGroupName", resourceGroupName);
-                tracingParameters.Add("apiVersion", apiVersion);
-                tracingParameters.Add("bodyParameter", bodyParameter);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(subscriptionId));
-            _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
-            List<string> _queryParameters = new List<string>();
-            if (apiVersion != null)
-            {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
-            }
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (GenerateClientRequestId != null && GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (bodyParameter != null)
-            {
-                _requestContent = SafeJsonConvert.SerializeObject(bodyParameter, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<CatalogDictionaryInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CatalogDictionaryInner>(_responseContent, DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
         /// <summary>
@@ -735,185 +456,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='productArrayOfDictionary'>
         /// Array of dictionary of products
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public CatalogArrayInner Update(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>))
+        {
+            return UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Update products
+        /// </summary>
+        /// <remarks>
+        /// Resets products.
+        /// </remarks>
+        /// <param name='subscriptionId'>
+        /// Subscription ID.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
+        /// </param>
+        /// <param name='productArrayOfDictionary'>
+        /// Array of dictionary of products
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <exception cref='System.ArgumentNullException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<AzureOperationResponse<CatalogArrayInner>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CatalogArrayInner> UpdateAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>), CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (subscriptionId == null)
+            using (var _result = await OperationsWithHttpMessages.UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary, null, cancellationToken).ConfigureAwait(false))
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(subscriptionId));
+                return _result.Body;
             }
-            if (resourceGroupName == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(resourceGroupName));
-            }
-            string apiVersion = "2014-04-01-preview";
-            CatalogArrayOfDictionary bodyParameter = new CatalogArrayOfDictionary();
-            if (productArrayOfDictionary != null)
-            {
-                bodyParameter.ProductArrayOfDictionary = productArrayOfDictionary;
-            }
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("subscriptionId", subscriptionId);
-                tracingParameters.Add("resourceGroupName", resourceGroupName);
-                tracingParameters.Add("apiVersion", apiVersion);
-                tracingParameters.Add("bodyParameter", bodyParameter);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = BaseUri.AbsoluteUri;
-            string _url = new System.Uri(new System.Uri(_baseUrl.TrimEnd('/') + "/"), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(subscriptionId));
-            _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
-            List<string> _queryParameters = new List<string>();
-            if (apiVersion != null)
-            {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
-            }
-            if (_queryParameters.Count > 0)
-            {
-                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-            if (GenerateClientRequestId != null && GenerateClientRequestId.Value)
-            {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
-            }
-            if (AcceptLanguage != null)
-            {
-                _httpRequest.Headers.Remove("accept-language");
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", AcceptLanguage);
-            }
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if (bodyParameter != null)
-            {
-                _requestContent = SafeJsonConvert.SerializeObject(bodyParameter, SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new AzureOperationResponse<CatalogArrayInner>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CatalogArrayInner>(_responseContent, DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
         }
 
     }

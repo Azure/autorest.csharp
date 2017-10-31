@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         private void Initialize()
         {
-            Header = new Header(this);
+            Header = new Header(new HeaderWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,22 +19,20 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
     /// </summary>
     public partial interface IPolymorphicrecursiveOperations
     {
+        IPolymorphicrecursiveOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get complex types that are polymorphic and have recursive references
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        FishInner GetValid();
+
+        /// <summary>
+        /// Get complex types that are polymorphic and have recursive references
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<FishInner>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<FishInner> GetValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references
         /// </summary>
@@ -95,18 +91,69 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// ]
         /// }
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutValid(FishInner complexBody);
+
+        /// <summary>
+        /// Put complex types that are polymorphic and have recursive references
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put a salmon that looks like this:
+        /// {
+        /// "fishtype": "salmon",
+        /// "species": "king",
+        /// "length": 1,
+        /// "age": 1,
+        /// "location": "alaska",
+        /// "iswild": true,
+        /// "siblings": [
+        /// {
+        /// "fishtype": "shark",
+        /// "species": "predator",
+        /// "length": 20,
+        /// "age": 6,
+        /// "siblings": [
+        /// {
+        /// "fishtype": "salmon",
+        /// "species": "coho",
+        /// "length": 2,
+        /// "age": 2,
+        /// "location": "atlantic",
+        /// "iswild": true,
+        /// "siblings": [
+        /// {
+        /// "fishtype": "shark",
+        /// "species": "predator",
+        /// "length": 20,
+        /// "age": 6
+        /// },
+        /// {
+        /// "fishtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
+        /// }
+        /// ]
+        /// },
+        /// {
+        /// "fishtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
+        /// }
+        /// ]
+        /// },
+        /// {
+        /// "fishtype": "sawshark",
+        /// "species": "dangerous",
+        /// "length": 10,
+        /// "age": 105
+        /// }
+        /// ]
+        /// }
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(FishInner complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutValidAsync(FishInner complexBody, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

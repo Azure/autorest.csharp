@@ -61,13 +61,14 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
         /// <summary>
         /// Get test coverage report
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetReport();
+
+        /// <summary>
+        /// Get test coverage report
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<IDictionary<string, int?>> GetReportAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         private void Initialize()
         {
-            Dictionary = new Dictionary(this);
+            Dictionary = new Dictionary(new DictionaryWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

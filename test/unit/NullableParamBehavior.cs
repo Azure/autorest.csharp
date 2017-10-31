@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                string generatedCodeFileName = "TestOperations.cs";
+                string generatedCodeFileName = "TestOperationsWithHttpMessages.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -63,9 +63,9 @@ namespace AutoRest.CSharp.Unit.Tests
                 // try to load the assembly
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
-                var testOperations = asm.ExportedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
+                var testOperations = asm.ExportedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperationsWithHttpMessages");
                 Assert.NotNull(testOperations);
-                var operation = testOperations.GetMethod("OpWithHttpMessagesAsync");
+                var operation = testOperations.GetMethod("OpAsync");
                 Assert.NotNull(operation);
                 var parameters = operation.GetParameters();
 
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                string generatedCodeFileName = "TestOperations.cs";
+                string generatedCodeFileName = "TestOperationsWithHttpMessages.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -155,9 +155,9 @@ namespace AutoRest.CSharp.Unit.Tests
                 // try to load the assembly
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
-                var testOperations = asm.DefinedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
+                var testOperations = asm.DefinedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperationsWithHttpMessages");
                 Assert.NotNull(testOperations);
-                var operation = testOperations.GetMethod("OpWithHttpMessagesAsync");
+                var operation = testOperations.GetMethod("OpAsync");
                 Assert.NotNull(operation);
                 var parameters = operation.GetParameters();
 

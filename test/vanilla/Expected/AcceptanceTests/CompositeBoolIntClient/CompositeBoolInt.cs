@@ -126,8 +126,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// </summary>
         private void Initialize()
         {
-            BoolModel = new BoolModel(this);
-            IntModel = new IntModel(this);
+            BoolModel = new BoolModel(new BoolModelWithHttpMessages(this));
+            IntModel = new IntModel(new IntModelWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

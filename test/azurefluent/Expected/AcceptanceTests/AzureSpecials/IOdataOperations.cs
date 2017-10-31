@@ -12,8 +12,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Azure.OData;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -22,21 +20,25 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface IOdataOperations
     {
+        IOdataOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'
         /// </summary>
         /// <param name='odataQuery'>
         /// OData parameters to apply to the operation.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetWithFilter(ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>));
+
+        /// <summary>
+        /// Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'
+        /// </summary>
+        /// <param name='odataQuery'>
+        /// OData parameters to apply to the operation.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetWithFilterAsync(ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

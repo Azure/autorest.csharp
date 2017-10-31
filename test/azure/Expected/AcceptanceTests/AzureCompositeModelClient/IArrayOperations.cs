@@ -21,83 +21,75 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
     /// </summary>
     public partial interface IArrayOperations
     {
+        IArrayOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get complex types with array property
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ArrayWrapper GetValid();
+
+        /// <summary>
+        /// Get complex types with array property
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ArrayWrapper>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ArrayWrapper> GetValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with array property
         /// </summary>
         /// <param name='array'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutValid(IList<string> array = default(IList<string>));
+
+        /// <summary>
+        /// Put complex types with array property
+        /// </summary>
+        /// <param name='array'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutValidAsync(IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with array property which is empty
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ArrayWrapper GetEmpty();
+
+        /// <summary>
+        /// Get complex types with array property which is empty
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ArrayWrapper>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ArrayWrapper> GetEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with array property which is empty
         /// </summary>
         /// <param name='array'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutEmpty(IList<string> array = default(IList<string>));
+
+        /// <summary>
+        /// Put complex types with array property which is empty
+        /// </summary>
+        /// <param name='array'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PutEmptyWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutEmptyAsync(IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with array property while server doesn't provide a response payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ArrayWrapper GetNotProvided();
+
+        /// <summary>
+        /// Get complex types with array property while server doesn't provide a response payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ArrayWrapper>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ArrayWrapper> GetNotProvidedAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -5,10 +5,7 @@
 
 namespace Fixtures.AcceptanceTestsHiddenMethods
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -17,382 +14,333 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
     /// </summary>
     public partial interface IPrimitive
     {
+        IPrimitiveWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get complex types with integer properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IntWrapper GetInt();
+
+        /// <summary>
+        /// Get complex types with integer properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IntWrapper>> GetIntWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IntWrapper> GetIntAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with integer properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put -1 and 2
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutInt(IntWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with integer properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put -1 and 2
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutIntWithHttpMessagesAsync(IntWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with long properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        LongWrapper GetLong();
+
+        /// <summary>
+        /// Get complex types with long properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<LongWrapper>> GetLongWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LongWrapper> GetLongAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with long properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put 1099511627775 and -999511627788
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLong(LongWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with long properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put 1099511627775 and -999511627788
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutLongWithHttpMessagesAsync(LongWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with float properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        FloatWrapper GetFloat();
+
+        /// <summary>
+        /// Get complex types with float properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<FloatWrapper>> GetFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<FloatWrapper> GetFloatAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with float properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put 1.05 and -0.003
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutFloat(FloatWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with float properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put 1.05 and -0.003
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutFloatWithHttpMessagesAsync(FloatWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with double properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        DoubleWrapper GetDouble();
+
+        /// <summary>
+        /// Get complex types with double properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<DoubleWrapper>> GetDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DoubleWrapper> GetDoubleAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with double properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDouble(DoubleWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with double properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDoubleWithHttpMessagesAsync(DoubleWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with bool properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        BooleanWrapper GetBool();
+
+        /// <summary>
+        /// Get complex types with bool properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<BooleanWrapper>> GetBoolWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<BooleanWrapper> GetBoolAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with bool properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put true and false
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBool(BooleanWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with bool properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put true and false
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutBoolWithHttpMessagesAsync(BooleanWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with string properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        StringWrapper GetString();
+
+        /// <summary>
+        /// Get complex types with string properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<StringWrapper>> GetStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<StringWrapper> GetStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with string properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put 'goodrequest', '', and null
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutString(StringWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with string properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put 'goodrequest', '', and null
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutStringWithHttpMessagesAsync(StringWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with date properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        DateWrapper GetDate();
+
+        /// <summary>
+        /// Get complex types with date properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<DateWrapper>> GetDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DateWrapper> GetDateAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with date properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put '0001-01-01' and '2016-02-29'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDate(DateWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with date properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put '0001-01-01' and '2016-02-29'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateWithHttpMessagesAsync(DateWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with datetime properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        DatetimeWrapper GetDateTime();
+
+        /// <summary>
+        /// Get complex types with datetime properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<DatetimeWrapper>> GetDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DatetimeWrapper> GetDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with datetime properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTime(DatetimeWrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with datetime properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeWithHttpMessagesAsync(DatetimeWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with datetimeRfc1123 properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Datetimerfc1123Wrapper GetDateTimeRfc1123();
+
+        /// <summary>
+        /// Get complex types with datetimeRfc1123 properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<Datetimerfc1123Wrapper>> GetDateTimeRfc1123WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with datetimeRfc1123 properties
         /// </summary>
         /// <param name='complexBody'>
         /// Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTimeRfc1123(Datetimerfc1123Wrapper complexBody);
+
+        /// <summary>
+        /// Put complex types with datetimeRfc1123 properties
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeRfc1123WithHttpMessagesAsync(Datetimerfc1123Wrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with duration properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        DurationWrapper GetDuration();
+
+        /// <summary>
+        /// Get complex types with duration properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<DurationWrapper>> GetDurationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DurationWrapper> GetDurationAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with duration properties
         /// </summary>
         /// <param name='field'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDuration(System.TimeSpan? field = default(System.TimeSpan?));
+
+        /// <summary>
+        /// Put complex types with duration properties
+        /// </summary>
+        /// <param name='field'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutDurationWithHttpMessagesAsync(System.TimeSpan? field = default(System.TimeSpan?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDurationAsync(System.TimeSpan? field = default(System.TimeSpan?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with byte properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ByteWrapper GetByte();
+
+        /// <summary>
+        /// Get complex types with byte properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<ByteWrapper>> GetByteWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ByteWrapper> GetByteAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types with byte properties
         /// </summary>
         /// <param name='field'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutByte(byte[] field = default(byte[]));
+
+        /// <summary>
+        /// Put complex types with byte properties
+        /// </summary>
+        /// <param name='field'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutByteAsync(byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

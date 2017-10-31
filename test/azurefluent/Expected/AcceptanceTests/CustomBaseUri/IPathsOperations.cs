@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,24 +19,25 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsCustomBaseUri
     /// </summary>
     public partial interface IPathsOperations
     {
+        IPathsOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get a 200 to test a valid base uri
         /// </summary>
         /// <param name='accountName'>
         /// Account Name
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetEmpty(string accountName);
+
+        /// <summary>
+        /// Get a 200 to test a valid base uri
+        /// </summary>
+        /// <param name='accountName'>
+        /// Account Name
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetEmptyAsync(string accountName, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

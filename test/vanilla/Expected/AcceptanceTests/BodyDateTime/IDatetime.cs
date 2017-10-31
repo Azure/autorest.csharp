@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTime
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,303 +17,259 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
     /// </summary>
     public partial interface IDatetime
     {
+        IDatetimeWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null datetime value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetNull();
+
+        /// <summary>
+        /// Get null datetime value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid datetime value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetInvalid();
+
+        /// <summary>
+        /// Get invalid datetime value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get overflow datetime value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetOverflow();
+
+        /// <summary>
+        /// Get overflow datetime value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetOverflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetOverflowAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get underflow datetime value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetUnderflow();
+
+        /// <summary>
+        /// Get underflow datetime value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetUnderflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetUnderflowAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutUtcMaxDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put max datetime value 9999-12-31T23:59:59.9999999Z
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutUtcMaxDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutUtcMaxDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31t23:59:59.9999999z
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetUtcLowercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value 9999-12-31t23:59:59.9999999z
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetUtcUppercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value 9999-12-31T23:59:59.9999999Z
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLocalPositiveOffsetMaxDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLocalPositiveOffsetMaxDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalPositiveOffsetLowercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalPositiveOffsetUppercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLocalNegativeOffsetMaxDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLocalNegativeOffsetMaxDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalNegativeOffsetUppercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalNegativeOffsetLowercaseMaxDateTime();
+
+        /// <summary>
+        /// Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00Z
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutUtcMinDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put min datetime value 0001-01-01T00:00:00Z
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutUtcMinDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutUtcMinDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00Z
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetUtcMinDateTime();
+
+        /// <summary>
+        /// Get min datetime value 0001-01-01T00:00:00Z
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetUtcMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00+14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLocalPositiveOffsetMinDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put min datetime value 0001-01-01T00:00:00+14:00
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLocalPositiveOffsetMinDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00+14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalPositiveOffsetMinDateTime();
+
+        /// <summary>
+        /// Get min datetime value 0001-01-01T00:00:00+14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00-14:00
         /// </summary>
         /// <param name='datetimeBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLocalNegativeOffsetMinDateTime(System.DateTime datetimeBody);
+
+        /// <summary>
+        /// Put min datetime value 0001-01-01T00:00:00-14:00
+        /// </summary>
+        /// <param name='datetimeBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(System.DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLocalNegativeOffsetMinDateTimeAsync(System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00-14:00
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.DateTime? GetLocalNegativeOffsetMinDateTime();
+
+        /// <summary>
+        /// Get min datetime value 0001-01-01T00:00:00-14:00
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<System.DateTime?>> GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.DateTime?> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

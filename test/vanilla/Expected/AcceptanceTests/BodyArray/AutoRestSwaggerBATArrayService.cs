@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </summary>
         private void Initialize()
         {
-            Array = new Array(this);
+            Array = new Array(new ArrayWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

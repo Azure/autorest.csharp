@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,6 +19,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
     /// </summary>
     public partial interface ILROsCustomHeaderOperations
     {
+        ILROsCustomHeaderOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
         /// running put request, service returns a 200 to the initial request, with an entity that contains
@@ -29,19 +29,20 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        ProductInner PutAsyncRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> PutAsyncRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ProductInner> PutAsyncRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
         /// running put request, service returns a 201 to the initial request, with an entity that contains
@@ -51,76 +52,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner>> Put201CreatingSucceeded200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-        /// running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
-        /// Polls return a 200 with a response body after success
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LROsCustomHeaderPost202Retry200HeadersInner>> Post202Retry200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-        /// running post request, service returns a 202 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> PostAsyncRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-        /// running put request, service returns a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        ProductInner Put201CreatingSucceeded200(ProductInner product = default(ProductInner));
+
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
         /// running put request, service returns a 201 to the initial request, with an entity that contains
@@ -130,19 +63,10 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner>> BeginPut201CreatingSucceeded200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ProductInner> Put201CreatingSucceeded200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
         /// running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
@@ -151,16 +75,20 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        LROsCustomHeaderPost202Retry200HeadersInner Post202Retry200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+        /// Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LROsCustomHeaderPost202Retry200HeadersInner>> BeginPost202Retry200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LROsCustomHeaderPost202Retry200HeadersInner> Post202Retry200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
         /// running post request, service returns a 202 to the initial request, with an entity that contains
@@ -169,15 +97,109 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        LROsCustomHeaderPostAsyncRetrySucceededHeadersInner PostAsyncRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> PostAsyncRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        ProductInner BeginPutAsyncRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running put request, service returns a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<ProductInner> BeginPutAsyncRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running put request, service returns a 201 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        ProductInner BeginPut201CreatingSucceeded200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running put request, service returns a 201 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<ProductInner> BeginPut201CreatingSucceeded200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+        /// Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        LROsCustomHeaderPost202Retry200HeadersInner BeginPost202Retry200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+        /// Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LROsCustomHeaderPost202Retry200HeadersInner> BeginPost202Retry200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        LROsCustomHeaderPostAsyncRetrySucceededHeadersInner BeginPostAsyncRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+        /// running post request, service returns a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> BeginPostAsyncRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

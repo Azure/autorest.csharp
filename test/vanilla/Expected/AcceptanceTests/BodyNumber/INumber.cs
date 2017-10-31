@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyNumber
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,379 +17,335 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     /// </summary>
     public partial interface INumber
     {
+        INumberWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null Number value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetNull();
+
+        /// <summary>
+        /// Get null Number value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid float Number value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetInvalidFloat();
+
+        /// <summary>
+        /// Get invalid float Number value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetInvalidFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetInvalidFloatAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid double Number value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetInvalidDouble();
+
+        /// <summary>
+        /// Get invalid double Number value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetInvalidDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetInvalidDoubleAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid decimal Number value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        decimal? GetInvalidDecimal();
+
+        /// <summary>
+        /// Get invalid decimal Number value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<decimal?>> GetInvalidDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<decimal?> GetInvalidDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big float value 3.402823e+20
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigFloat(double numberBody);
+
+        /// <summary>
+        /// Put big float value 3.402823e+20
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigFloatWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigFloatAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big float value 3.402823e+20
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetBigFloat();
+
+        /// <summary>
+        /// Get big float value 3.402823e+20
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetBigFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetBigFloatAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 2.5976931e+101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDouble(double numberBody);
+
+        /// <summary>
+        /// Put big double value 2.5976931e+101
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDoubleWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e+101
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetBigDouble();
+
+        /// <summary>
+        /// Get big double value 2.5976931e+101
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetBigDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetBigDoubleAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDoublePositiveDecimal(double numberBody);
+
+        /// <summary>
+        /// Put big double value 99999999.99
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDoublePositiveDecimalAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 99999999.99
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetBigDoublePositiveDecimal();
+
+        /// <summary>
+        /// Get big double value 99999999.99
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetBigDoublePositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDoubleNegativeDecimal(double numberBody);
+
+        /// <summary>
+        /// Put big double value -99999999.99
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDoubleNegativeDecimalAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value -99999999.99
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetBigDoubleNegativeDecimal();
+
+        /// <summary>
+        /// Get big double value -99999999.99
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetBigDoubleNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big decimal value 2.5976931e+101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDecimal(decimal numberBody);
+
+        /// <summary>
+        /// Put big decimal value 2.5976931e+101
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big decimal value 2.5976931e+101
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        decimal? GetBigDecimal();
+
+        /// <summary>
+        /// Get big decimal value 2.5976931e+101
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<decimal?>> GetBigDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<decimal?> GetBigDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big decimal value 99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDecimalPositiveDecimal(decimal numberBody);
+
+        /// <summary>
+        /// Put big decimal value 99999999.99
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDecimalPositiveDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDecimalPositiveDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big decimal value 99999999.99
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        decimal? GetBigDecimalPositiveDecimal();
+
+        /// <summary>
+        /// Get big decimal value 99999999.99
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<decimal?>> GetBigDecimalPositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<decimal?> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put big decimal value -99999999.99
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBigDecimalNegativeDecimal(decimal numberBody);
+
+        /// <summary>
+        /// Put big decimal value -99999999.99
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutBigDecimalNegativeDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBigDecimalNegativeDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big decimal value -99999999.99
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        decimal? GetBigDecimalNegativeDecimal();
+
+        /// <summary>
+        /// Get big decimal value -99999999.99
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<decimal?>> GetBigDecimalNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<decimal?> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small float value 3.402823e-20
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutSmallFloat(double numberBody);
+
+        /// <summary>
+        /// Put small float value 3.402823e-20
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutSmallFloatWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutSmallFloatAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 3.402823e-20
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetSmallFloat();
+
+        /// <summary>
+        /// Get big double value 3.402823e-20
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetSmallFloatWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetSmallFloatAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small double value 2.5976931e-101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutSmallDouble(double numberBody);
+
+        /// <summary>
+        /// Put small double value 2.5976931e-101
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutSmallDoubleWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 2.5976931e-101
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        double? GetSmallDouble();
+
+        /// <summary>
+        /// Get big double value 2.5976931e-101
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<double?>> GetSmallDoubleWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<double?> GetSmallDoubleAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put small decimal value 2.5976931e-101
         /// </summary>
         /// <param name='numberBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutSmallDecimal(decimal numberBody);
+
+        /// <summary>
+        /// Put small decimal value 2.5976931e-101
+        /// </summary>
+        /// <param name='numberBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutSmallDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get small decimal value 2.5976931e-101
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        decimal? GetSmallDecimal();
+
+        /// <summary>
+        /// Get small decimal value 2.5976931e-101
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<decimal?>> GetSmallDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<decimal?> GetSmallDecimalAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

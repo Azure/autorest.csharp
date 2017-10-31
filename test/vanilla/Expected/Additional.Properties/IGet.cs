@@ -8,7 +8,6 @@
 
 namespace Fixtures.AdditionalProperties
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,21 +19,19 @@ namespace Fixtures.AdditionalProperties
     /// </summary>
     public partial interface IGet
     {
+        IGetWithHttpMessages WithHttpMessages();
+
         /// <param name='limit'>
         /// number of pets to return
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        IList<Pet> Pets(int? limit = 11);
+
+        /// <param name='limit'>
+        /// number of pets to return
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<Pet>>> PetsWithHttpMessagesAsync(int? limit = 11, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Pet>> PetsAsync(int? limit = 11, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
