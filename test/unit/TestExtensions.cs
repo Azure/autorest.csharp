@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Unit.Tests
             }
 
             var modeler = new SwaggerModeler(Settings.Instance);
-            var swagger = Singleton<AutoRest.Modeler.Model.ServiceDefinition>.Instance = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
+            var swagger = SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input));
             var codeModel = modeler.Build(swagger);
 
             using (plugin.Activate())
