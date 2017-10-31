@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Azure
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                if (method.ReturnType.Body != null && convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
                     method.ReturnType = new Response(convertedTypes[method.ReturnType.Body],
                         method.ReturnType.Headers);
