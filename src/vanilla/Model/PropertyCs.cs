@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Whether the property is required from a code(r) point of view.
         /// </summary>
-        public bool IsEffectivelyRequired => IsRequired && (!UseDefaultInConstructor || DefaultValue == null) && !IsConstant;
+        public bool IsEffectivelyRequired => IsRequired && (!UseDefaultInConstructor || DefaultValue == null) && !IsConstant && !IsReadOnly;
 
         [JsonIgnore]
         public IEnumerable<string> JsonConverters
