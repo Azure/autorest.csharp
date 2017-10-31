@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Tests
             client2.ApiVersion = "abc";
             exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
             Assert.Equal(ValidationRules.Pattern, exception.Rule);
-            Assert.Equal("ApiVersion", exception.Target);
+            Assert.Equal("Client.ApiVersion", exception.Target);
         }
 
         [Fact]
@@ -2279,13 +2279,8 @@ namespace AutoRest.CSharp.Tests
         public void SyncMethodsValidation()
         {
             Assert.NotNull(typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2).GetMethod("AddPet"));
-            Assert.NotNull(typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
-
             Assert.Null(typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2).GetMethod("AddPet"));
-            Assert.Null(typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
-
             Assert.NotNull(typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2).GetMethod("AddPet"));
-            Assert.Null(typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2WithHttpMessages).GetMethod("AddPetWithHttpMessages"));
         }
 
         [Fact]
@@ -2300,9 +2295,9 @@ namespace AutoRest.CSharp.Tests
         public async Task EnsureHiddenMethodsMissingTest()
         {
             // Confirm the method exists in body-complex, which hidden methods is based on
-            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperations).GetMethod("PutValidAsync");
+            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperationsWithHttpMessages).GetMethod("PutValidAsync");
             // Make sure it is missing for hidden methods
-            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
+            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperationsWithHttpMessages).GetMethod(knownMethod.Name);
             Assert.Null(missingMethod);
 
             // Use the facade method

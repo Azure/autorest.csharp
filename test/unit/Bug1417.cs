@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
-                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -59,16 +59,16 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that parameter is of correct type
-                var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPI");
+                var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIWithHttpMessages");
                 Assert.NotNull(simpleApi);
-                var simpleApiMethod = simpleApi.GetMethod("TestMethodWithHttpMessagesAsync");
+                var simpleApiMethod = simpleApi.GetMethod("TestMethodAsync");
                 Assert.NotNull(simpleApiMethod);
                 var simpleApiMethodParam = simpleApiMethod.GetParameters().FirstOrDefault(param => param.Name == "query");
                 Assert.NotNull(simpleApiMethodParam);
                 Assert.Equal("System.String", simpleApiMethodParam.ParameterType.FullName);
 
                 var simpleApiExtensions =
-                    asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIExtensions");
+                    asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPI");
                 Assert.NotNull(simpleApiExtensions);
                 var simpleApiExtensionsMethod = simpleApiExtensions.GetMethod("TestMethod");
                 Assert.NotNull(simpleApiExtensionsMethod);

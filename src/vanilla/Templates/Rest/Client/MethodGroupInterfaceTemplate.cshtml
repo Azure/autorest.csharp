@@ -29,7 +29,6 @@ namespace @Settings.Namespace
             if (method.SyncMethods == SyncMethodsGenerationMode.All || method.SyncMethods == SyncMethodsGenerationMode.Essential)
             {
 @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
-@XmlDocParam("operations", "operations group for this extension method")
                 foreach (var parameter in method.LocalParameters)
                 {
 @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
@@ -43,7 +42,6 @@ namespace @Settings.Namespace
             }
 
 @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
-@XmlDocParam("operations", "operations group for this extension method")
             foreach (var parameter in method.LocalParameters)
             {
 @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())

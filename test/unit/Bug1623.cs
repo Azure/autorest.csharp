@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"Models\Page.cs"));
                 Assert.True(fileSystem.FileExists(@"IProductsOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"ProductsOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"ProductsOperations.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that parameter is of correct type
-                var ops = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ProductsOperationsExtensions");
+                var ops = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ProductsOperations");
                 Assert.NotNull(ops);
                 var opsMethod = ops.GetMethod("List");
                 Assert.NotNull(opsMethod);

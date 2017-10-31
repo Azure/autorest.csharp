@@ -17,6 +17,11 @@ namespace @Settings.Namespace
     {
     @foreach(MethodCs method in Model.Methods)
     {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
         @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
         foreach (var parameter in method.LocalParameters)
         {

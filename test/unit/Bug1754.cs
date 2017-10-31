@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"TestOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"TestOperations.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -62,14 +62,14 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 Assert.NotNull(asm);
 
                 // verify that parameter is of correct type
-                var testApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.TestOperationsExtensions");
+                var testApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.TestOperations");
                 Assert.NotNull(testApi);
                 var testApiMethod = testApi.GetMethod("PutAsync");
                 Assert.NotNull(testApiMethod);
                 
-                var codeText = fileSystem.ReadAllText(@"TestOperationsExtensions.cs");
+                var codeText = fileSystem.ReadAllText(@"TestOperations.cs");
                 // get hold of the async func
-                var methodSignature = "public static async System.Threading.Tasks.Task PutAsync(this ITestOperations operations, MyParam param = default(MyParam), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
+                var methodSignature = "public async System.Threading.Tasks.Task PutAsync(MyParam param = default(MyParam), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
                 var regex = new Regex(Regex.Escape(methodSignature) + @"[^}]+");
                 var match = regex.Match(codeText);
                 Assert.NotNull(match);

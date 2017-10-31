@@ -14,11 +14,11 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
     /// <summary>
     /// BasicOperations operations.
     /// </summary>
-    public partial class BasicOperations : IServiceOperations<AutoRestComplexTestService>, IBasicOperations
+    public partial class BasicOperations : IBasicOperations
     {
         public async Task PutValidAsync(string name, string color, int? id = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await PutValidWithHttpMessagesAsync(new Basic { Id = id, Name = name, Color = color }, customHeaders, cancellationToken);
+            await (WithHttpMessages() as BasicOperationsWithHttpMessages).PutValidAsync(new Basic { Id = id, Name = name, Color = color }, customHeaders, cancellationToken);
         }
     }
 }
