@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // is a CloudException object created?
                 Assert.True(codeText.Contains("new Microsoft.Rest.Azure.CloudException"));
                 // are we deserializing response into CloudError object?
-                Assert.True(codeText.Contains("Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>"));
+                Assert.True(codeText.Contains("ResponseMessageAsJSON<CloudError>"));
                 // are we setting the errorbody in exception?
                 Assert.True(codeText.Contains("ex.Body = _errorBody;"));
 

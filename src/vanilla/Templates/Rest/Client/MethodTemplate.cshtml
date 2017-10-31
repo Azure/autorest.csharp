@@ -269,14 +269,7 @@ else
     }
 
     cancellationToken.ThrowIfCancellationRequested();
-    @if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream) || Model.HttpMethod == HttpMethod.Head)
-    {
-    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-    }
-    else
-    {
-    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-    }
+    _httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
     if (_shouldTrace)
     {
         Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -284,7 +277,13 @@ else
 
     System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
     cancellationToken.ThrowIfCancellationRequested();
-    string _responseContent = null;
+
+    @if (!Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream) && Model.HttpMethod != HttpMethod.Head)
+    {<text>
+        // ARM retry logic expects consumable _httpResponse.Content, also we try to read the content as string in case of a JsonException
+        await @(Model.ClientReference).ResponseMessageEnsureContentBuffering(_httpResponse);
+</text>
+    }
 
     if (@(Model.FailureStatusCodePredicate))
     {
@@ -295,12 +294,11 @@ else
         @:{
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await @(Model.ClientReference).ResponseMessageAsStream(_httpResponse);
             }
             else
             {
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await @(Model.ClientReference).ResponseMessageAsJSON<@(Model.DefaultResponse.Body.AsNullableType())>(_httpResponse);
             }
             @:if (_errorBody != null)
             @:{
@@ -313,19 +311,9 @@ else
         @:    // Ignore the exception
         @:}
     }
-    else
-    {
-        //If not defined by default model, read content as string
-        @:if (_httpResponse.Content != null) {
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:}
-        @:else {
-            @:_responseContent = string.Empty;
-        @:}
-    }
 
         ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-        ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+        ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, await @(Model.ClientReference).ResponseMessageAsString(_httpResponse));
         @(Model.InitializeException)
         if (_shouldTrace)
         {
@@ -354,41 +342,41 @@ else
     {
         @if (responsePair.Value.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
-        @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        @:_result.Body = await @(Model.ClientReference).ResponseMessageAsStream(_httpResponse);
         }
         else
         {<text>
-        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         try
         {
             @if (Model.CodeModel.ShouldGenerateXmlSerialization)
             {<text>
             @responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType) _tmp_ = null;
             if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Load(await @(Model.ClientReference).ResponseMessageAsTextReader(_httpResponse)), out _tmp_))
             {
                 _result.Body = _tmp_;
             }
             else
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+                _result.Body = await @(Model.ClientReference).ResponseMessageAsJSON<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_httpResponse);
             }
 </text>
             }
             else
             {<text>
-            _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            _result.Body = await @(Model.ClientReference).ResponseMessageAsJSON<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_httpResponse);
 </text>
             }
         }
         catch (Newtonsoft.Json.JsonException ex)
         {
+            var _message = await @(Model.ClientReference).ResponseMessageAsString(_httpResponse);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+            throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _message, ex);
         }
 </text>
         }
@@ -400,38 +388,23 @@ else
     {
         if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
-    @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+    @:_result.Body = await @(Model.ClientReference).ResponseMessageAsStream(_httpResponse);
         }
         else
         {
-    @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:try
     @:{
-        if (Model.CodeModel.ShouldGenerateXmlSerialization)
-        {
-        @: @Model.DefaultResponse.Body.AsNullableType() _tmp_ = null;
-        @: if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-        @:     @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, Model.DefaultResponse.Body)))(System.Xml.Linq.XElement.Parse(_defaultResponseContent), out _tmp_))
-        @:{
-        @:   _result.Body = _tmp_;
-        @:} else 
-        @:{
-        @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
-        @:}
-        }
-        else
-        {
-        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
-        }
+        @:_result.Body = await @(Model.ClientReference).ResponseMessageAsJSON<@(Model.DefaultResponse.Body.AsNullableType())>(_httpResponse);
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
     @:{
+    @:    var _message = await @(Model.ClientReference).ResponseMessageAsString(_httpResponse);
     @:    _httpRequest.Dispose();
     @:    if (_httpResponse != null)
     @:    {
     @:        _httpResponse.Dispose();
     @:    }
-    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _message, ex);
     @:}
         }
     }
@@ -441,7 +414,7 @@ else
 
     @:try
     @:{
-        @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(Newtonsoft.Json.JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
+        @:_result.Headers = await @(Model.ClientReference).ResponseMessageHeadersAsJSON<@(Model.ReturnType.Headers.Name)>(_httpResponse);
         foreach (var property in (Model.ReturnType.Headers as CompositeType).Properties.OfType<PropertyCs>().Where(p => p.IsHeaderCollection))
         {
         @:_result.Headers.@(property.Name) = new @(property.ModelTypeName.Replace("IDictionary", "Dictionary"))();

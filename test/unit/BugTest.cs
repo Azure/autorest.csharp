@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Unit.Tests {
     using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
     public class BugTest {
-        internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591"};
+        internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591", "CS1998" };
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
 
         protected Assembly LoadAssembly(MemoryStream stream) {
@@ -122,6 +122,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             Path.Combine(FRAMEWORK, "System.IO.dll"),
 
 
+            typeof(StreamReader).GetAssembly().Location,
             typeof(HttpClient).GetAssembly().Location,
             typeof(Object).GetAssembly().Location,
             typeof(Attribute).GetAssembly().Location,
