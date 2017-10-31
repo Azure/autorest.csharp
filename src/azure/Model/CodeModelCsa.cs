@@ -64,12 +64,7 @@ namespace AutoRest.CSharp.Azure.Model
             get
             {
                 var runtimeVersion = Settings.Instance.Host?.GetValue<string>("runtime-version").Result;
-                if (string.IsNullOrEmpty(runtimeVersion))
-                {
-                    return "{VERSION}";
-                }
-
-                return runtimeVersion;
+                return runtimeVersion ?? "{VERSION}";
             }
         }
 
@@ -79,12 +74,7 @@ namespace AutoRest.CSharp.Azure.Model
             get
             {
                 var packageVersion = Settings.Instance.Host?.GetValue<string>("package-version").Result;
-                if (string.IsNullOrEmpty(packageVersion))
-                {
-                    return "{VERSION}";
-                }
-
-                return packageVersion;
+                return packageVersion ?? "{VERSION}";
             }
         }
     }
