@@ -10,23 +10,105 @@
 
 namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
 {
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Defines values for IntEnum.
     /// </summary>
-    public static class IntEnum
+    /// <summary>
+    /// Determine base value for a given allowed value if exists, else return
+    /// the value itself
+    /// </summary>
+    [JsonConverter(typeof(IntEnumConverter))]
+    public struct IntEnum : System.IEquatable<IntEnum>
     {
+        private IntEnum(string underlyingValue)
+        {
+            UnderlyingValue=underlyingValue;
+        }
+
         /// <summary>
         /// one
         /// </summary>
-        public const string One = "1";
+                public static readonly IntEnum One = "1";
+
         /// <summary>
         /// two
         /// </summary>
-        public const string Two = "2";
+                public static readonly IntEnum Two = "2";
+
         /// <summary>
         /// three
         /// </summary>
-        public const string Three = "3";
+                public static readonly IntEnum Three = "3";
+
+
+        /// <summary>
+        /// Determine base value for a given allowed value if exists, else
+        /// return the value itself
+        private static string GetBaseValueForAllowedValue(string value)
+        {
+            switch(value)
+            {
+                case "1.1":
+                case "1.2":
+                case "1.3":
+                    return "1";
+                case "2.1":
+                case "2.2":
+                    return "2";
+                case "3.1":
+                case "3.3":
+                    return "3";
+                default:
+                    return value;
+            }
+        }
+
+        /// <summary>
+        /// Underlying value of enum IntEnum
+        /// </summary>
+        private readonly string UnderlyingValue;
+
+        /// <summary>
+        /// Returns string representation for IntEnum
+        /// </summary>
+        public override string ToString() => UnderlyingValue.ToString();
+
+        /// <summary>
+        /// Compares enums of type IntEnum
+        /// </summary>
+        public bool Equals(IntEnum e) => GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue));
+
+        /// <summary>
+        /// Implicit operator to convert string to IntEnum
+        /// </summary>
+        public static implicit operator IntEnum(string value) => new IntEnum(value);
+
+        /// <summary>
+        /// Implicit operator to convert IntEnum to string
+        /// </summary>
+        public static implicit operator string(IntEnum e) => e.UnderlyingValue;
+
+        /// <summary>
+        /// Overriding == operator for enum IntEnum
+        /// </summary>
+        public static bool operator == (IntEnum e1, IntEnum e2) => e2.Equals(e1);
+
+        /// <summary>
+        /// Overriding != operator for enum IntEnum
+        /// </summary>
+        public static bool operator != (IntEnum e1, IntEnum e2) => !e2.Equals(e1);
+
+        /// <summary>
+        /// Overrides Equals operator for IntEnum
+        /// </summary>
+        public override bool Equals(object obj) => obj is IntEnum other && this.Equals(other);
+
+        /// <summary>
+        /// Returns for hashCode IntEnum
+        /// </summary>
+        public override int GetHashCode() => GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode();
+
     }
 }

@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// 'Sunday'</param>
         /// <param name="intEnum">Possible values include: '1', '2',
         /// '3'</param>
-        public Pet(string name = default(string), string daysOfWeek = default(string), string intEnum = default(string))
+        public Pet(string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?), IntEnum? intEnum = default(IntEnum?))
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
@@ -54,13 +54,13 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
         /// </summary>
         [JsonProperty(PropertyName = "DaysOfWeek")]
-        public string DaysOfWeek { get; set; }
+        public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
 
         /// <summary>
         /// Gets possible values include: '1', '2', '3'
         /// </summary>
         [JsonProperty(PropertyName = "IntEnum")]
-        public string IntEnum { get; private set; }
+        public IntEnum? IntEnum { get; private set; }
 
     }
 }

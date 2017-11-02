@@ -10,18 +10,82 @@
 
 namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
 {
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Defines values for DaysOfWeekExtensibleEnum.
     /// </summary>
-    public static class DaysOfWeekExtensibleEnum
+    /// <summary>
+    /// Determine base value for a given allowed value if exists, else return
+    /// the value itself
+    /// </summary>
+    [JsonConverter(typeof(DaysOfWeekExtensibleEnumConverter))]
+    public struct DaysOfWeekExtensibleEnum : System.IEquatable<DaysOfWeekExtensibleEnum>
     {
-        public const string Monday = "Monday";
-        public const string Tuesday = "Tuesday";
-        public const string Wednesday = "Wednesday";
-        public const string Thursday = "Thursday";
-        public const string Friday = "Friday";
-        public const string Saturday = "Saturday";
-        public const string Sunday = "Sunday";
+        private DaysOfWeekExtensibleEnum(string underlyingValue)
+        {
+            UnderlyingValue=underlyingValue;
+        }
+
+        public static readonly DaysOfWeekExtensibleEnum Monday = "Monday";
+
+        public static readonly DaysOfWeekExtensibleEnum Tuesday = "Tuesday";
+
+        public static readonly DaysOfWeekExtensibleEnum Wednesday = "Wednesday";
+
+        public static readonly DaysOfWeekExtensibleEnum Thursday = "Thursday";
+
+        public static readonly DaysOfWeekExtensibleEnum Friday = "Friday";
+
+        public static readonly DaysOfWeekExtensibleEnum Saturday = "Saturday";
+
+        public static readonly DaysOfWeekExtensibleEnum Sunday = "Sunday";
+
+
+        /// <summary>
+        /// Underlying value of enum DaysOfWeekExtensibleEnum
+        /// </summary>
+        private readonly string UnderlyingValue;
+
+        /// <summary>
+        /// Returns string representation for DaysOfWeekExtensibleEnum
+        /// </summary>
+        public override string ToString() => UnderlyingValue.ToString();
+
+        /// <summary>
+        /// Compares enums of type DaysOfWeekExtensibleEnum
+        /// </summary>
+        public bool Equals(DaysOfWeekExtensibleEnum e) => UnderlyingValue.Equals(e.UnderlyingValue);
+
+        /// <summary>
+        /// Implicit operator to convert string to DaysOfWeekExtensibleEnum
+        /// </summary>
+        public static implicit operator DaysOfWeekExtensibleEnum(string value) => new DaysOfWeekExtensibleEnum(value);
+
+        /// <summary>
+        /// Implicit operator to convert DaysOfWeekExtensibleEnum to string
+        /// </summary>
+        public static implicit operator string(DaysOfWeekExtensibleEnum e) => e.UnderlyingValue;
+
+        /// <summary>
+        /// Overriding == operator for enum DaysOfWeekExtensibleEnum
+        /// </summary>
+        public static bool operator == (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2) => e2.Equals(e1);
+
+        /// <summary>
+        /// Overriding != operator for enum DaysOfWeekExtensibleEnum
+        /// </summary>
+        public static bool operator != (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2) => !e2.Equals(e1);
+
+        /// <summary>
+        /// Overrides Equals operator for DaysOfWeekExtensibleEnum
+        /// </summary>
+        public override bool Equals(object obj) => obj is DaysOfWeekExtensibleEnum other && this.Equals(other);
+
+        /// <summary>
+        /// Returns for hashCode DaysOfWeekExtensibleEnum
+        /// </summary>
+        public override int GetHashCode() => UnderlyingValue.GetHashCode();
+
     }
 }

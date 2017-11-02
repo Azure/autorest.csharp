@@ -6,6 +6,8 @@
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
+    using System.Reflection;
+    @EmptyLine
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
@@ -17,13 +19,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         @WrapComment("/// ", "Returns if objectType can be converted to " + Model.Name + " by the converter.")
         /// </summary>
-        public override bool CanConvert(Type objectType) => typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        public override bool CanConvert(System.Type objectType) => typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Overrides ReadJson and converts token to " + Model.Name + ".")
         /// </summary>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
             {
