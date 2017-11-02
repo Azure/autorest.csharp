@@ -11,7 +11,7 @@ payload-flattening-threshold: 1
 clear-output-folder: true
 directive:
   - from: code-model-v1
-    where: $.operations[*].methods[?(@.serializedName == 'basic_putValid')]
+    where-operation: basic_putValid
     transform: >-
       $.hidden = true;
       $.excludeFromInterface = true;

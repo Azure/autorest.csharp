@@ -38,10 +38,10 @@ paths:
             name: Enum3CustomName
             modelAsString: false
             values:
-              - value: enum3a
+              - value: enum3aOVERRIDDEN
                 description: enum3a is cool.
-              - value: enum3b
-              - value: enum3c
+              - value: enum3bOVERRIDDEN
+              - value: enum3cOVERRIDDEN
                 description: enum3c is cool.
         - # x-ms-enum to override values and names
           name: enum4
@@ -55,13 +55,13 @@ paths:
             name: Enum4CustomName
             modelAsString: false
             values:
-              - value: enum4aValue
+              - value: enum4aOVERRIDDEN
                 description: enum4a is cool.
                 name: enum4aName
-              - value: enum4bValue
+              - value: enum4bOVERRIDDEN
                 description: enum4b is cool.
                 name: enum4bName
-              - value: enum4cValue
+              - value: enum4cOVERRIDDEN
                 name: enum4cName
         - # x-ms-enum to override values and names (modelled as string)
           name: enum5
@@ -75,13 +75,13 @@ paths:
             name: enum5CustomName
             modelAsString: true
             values:
-              - value: enum5aValue
+              - value: enum5aOVERRIDDEN
                 description: enum5a is cool.
                 name: enum5aName
-              - value: enum5bValue
+              - value: enum5bOVERRIDDEN
                 description: enum5b is cool.
                 name: enum5bName
-              - value: enum5cValue
+              - value: enum5cOVERRIDDEN
                 description: enum5c is cool.
                 name: enum5cName
       responses:
