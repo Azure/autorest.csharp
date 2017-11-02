@@ -13,6 +13,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
     using Newtonsoft.Json;
 
     using System.Reflection;
+
     /// <summary>
     /// Defines values for DaysOfWeekExtensibleEnum.
     /// </summary>
