@@ -102,6 +102,10 @@ namespace AutoRest.CSharp
                     var extensibleEnumTemplate = new ExtensibleEnumTemplate {Model = enumType};
                         await Write(extensibleEnumTemplate,Path.Combine(Settings.Instance.ModelsName,
                     $"{extensibleEnumTemplate.Model.Name}{ImplementationFileExtension}"));
+
+                    var extensibleEnumConverterTemplate = new ExtensibleEnumConverterTemplate {Model = enumType};
+                        await Write(extensibleEnumConverterTemplate,Path.Combine(Settings.Instance.ModelsName,
+                    $"{extensibleEnumConverterTemplate.Model.Name+"Converter"}{ImplementationFileExtension}"));
                 }
                 else 
                 {

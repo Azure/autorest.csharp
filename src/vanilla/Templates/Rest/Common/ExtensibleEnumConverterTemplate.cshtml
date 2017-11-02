@@ -1,0 +1,33 @@
+@using System.Linq
+@using AutoRest.Core.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.EnumTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
+    /// </summary>
+    @{var underlyingType = (Model.UnderlyingType?.ClassName == null)? "string" : Model.UnderlyingType.ClassName;}
+    
+    public sealed class @(Model.ClassName+"Converter") : Newtonsoft.Json.JsonConverter
+    {
+        @EmptyLine
+        public override bool CanConvert(Type objectType) => typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+
+        @EmptyLine
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+            return (@Model.ClassName)serializer.Deserialize<@underlyingType>(reader);
+        }
+
+        @EmptyLine
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => writer.WriteValue(value.ToString());
+        @EmptyLine
+    }
+}
