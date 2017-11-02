@@ -121,8 +121,8 @@ namespace AutoRest.CSharp
                 Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(codeModelT, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
                 Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
                 Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
-                Settings.Instance.CustomSettings["ExtensibleEnums"] = await GetValue<bool?>("extensible-enums") ?? false;
-                //Settings.Instance.CustomSettings["ExtensibleEnums"] = true;
+                //Settings.Instance.CustomSettings["ExtensibleEnums"] = await GetValue<bool?>("extensible-enums") ?? false;
+                Settings.Instance.CustomSettings["ExtensibleEnums"] = true;
                 int defaultMaximumCommentColumns = Settings.DefaultMaximumCommentColumns;
                 Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? defaultMaximumCommentColumns;
                 Settings.Instance.OutputFileName = await GetValue<string>("output-file");

@@ -97,8 +97,17 @@ namespace AutoRest.CSharp
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                if((Settings.Instance.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.Instance.CustomSettings["ExtensibleEnums"]))
+                {
+                    var extensibleEnumTemplate = new ExtensibleEnumTemplate {Model = enumType};
+                        await Write(extensibleEnumTemplate,Path.Combine(Settings.Instance.ModelsName,
+                    $"{extensibleEnumTemplate.Model.Name}{ImplementationFileExtension}"));
+                }
+                else 
+                {
+                    var enumTemplate = new EnumTemplate { Model = enumType };
+                    await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                }
             }
 
             // Exceptions

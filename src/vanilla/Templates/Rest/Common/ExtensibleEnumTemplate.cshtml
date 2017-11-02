@@ -1,0 +1,96 @@
+@using System.Linq
+@using AutoRest.Core.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.EnumTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
+    /// </summary>
+    @{var underlyingType = (Model.UnderlyingType?.ClassName == null)? "string" : Model.UnderlyingType.ClassName;
+    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues!=null);}
+    
+    [Newtonsoft.Json.JsonConverter(typeof(@(Model.ClassName + "Converter")))]
+    public struct @Model.ClassName : System.IEquatable<@Model.ClassName>
+    {
+        private @Model.ClassName@("("+underlyingType) underlyingValue)
+        {
+            UnderlyingValue=underlyingValue;
+        }
+    
+        @EmptyLine
+        @foreach (var t in Model.Values)
+        {
+            if (t.Description != null)
+            {
+        <text>
+        /// <summary>
+        @WrapComment("/// ", t.Description)
+        /// </summary>
+        </text>
+            }
+            var initName = (underlyingType == "string") ? "\""+t.SerializedName+"\"": t.SerializedName;
+        @:public static readonly @Model.ClassName @t.MemberName = @(initName);
+        @EmptyLine
+        }
+    }
+
+    @EmptyLine
+    private static @underlyingType GetBaseValueForAllowedValue(@underlyingType value)
+    {
+        @if(hasAllowedValues)
+        {
+        @:switch(value)
+        @:{
+            @foreach(var enumValue in Model.Values)
+            {
+                @if(enumValue.AllowedValues!=null)
+                {
+                @foreach(var allowedValue in enumValue.AllowedValues)
+                {
+            @:case @((underlyingType=="string")? "\""+allowedValue+"\"":allowedValue):
+                }
+                @:return @((underlyingType=="string")? "\""+enumValue.Name+"\"": enumValue.Name);
+                }
+            }
+            @:default:
+                @:return value;
+        @:}
+        }
+        else
+        {
+        @:return value;
+        }
+    }
+
+    @EmptyLine
+    private readonly @underlyingType UnderlyingValue;
+
+    @EmptyLine
+    public override string ToString() => UnderlyingValue.ToString();
+
+    @EmptyLine
+    public bool Equals(@Model.ClassName e) => GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue));
+
+    @EmptyLine
+    public static implicit operator @(Model.ClassName  +"("+ underlyingType +" value)") => new @(Model.ClassName+"(value)");
+
+    @EmptyLine
+    public static implicit operator string(@Model.ClassName e) => e.UnderlyingValue;
+
+    @EmptyLine
+    public static bool operator == (@Model.ClassName e1, @Model.ClassName e2) => e2.Equals(e1);
+
+    @EmptyLine
+    public static bool operator != (@Model.ClassName e1, @Model.ClassName e2) => !e2.Equals(e1);
+
+    @EmptyLine
+    public override bool Equals(object obj) => obj is @Model.ClassName other && this.Equals(other);
+        
+    @EmptyLine
+    public override int GetHashCode() => GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode();
+
+    @EmptyLine    
+}
