@@ -14,9 +14,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     public sealed class @(Model.ClassName+"Converter") : Newtonsoft.Json.JsonConverter
     {
         @EmptyLine
+        /// <summary>
+        @WrapComment("/// ", "Returns if objectType can be converted to " + Model.Name + " by the converter.")
+        /// </summary>
         public override bool CanConvert(Type objectType) => typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
 
         @EmptyLine
+        /// <summary>
+        @WrapComment("/// ", "Overrides ReadJson and converts token to " + Model.Name + ".")
+        /// </summary>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
@@ -27,6 +33,9 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         }
 
         @EmptyLine
+        /// <summary>
+        @WrapComment("/// ", "Overriding WriteJson for " + Model.Name + " for serialization.")
+        /// </summary>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => writer.WriteValue(value.ToString());
         @EmptyLine
     }
