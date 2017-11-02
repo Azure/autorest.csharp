@@ -46,6 +46,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Determine base value for a given allowed value if exists, else
         /// return the value itself
+        /// </summary>
         private static string GetBaseValueForAllowedValue(string value)
         {
             switch(value)
@@ -73,42 +74,66 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Returns string representation for IntEnum
         /// </summary>
-        public override string ToString() => UnderlyingValue.ToString();
+        public override string ToString()
+        {
+            return UnderlyingValue.ToString();
+        }
 
         /// <summary>
         /// Compares enums of type IntEnum
         /// </summary>
-        public bool Equals(IntEnum e) => GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue));
+        public bool Equals(IntEnum e)
+        {
+            return GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue));
+        }
 
         /// <summary>
         /// Implicit operator to convert string to IntEnum
         /// </summary>
-        public static implicit operator IntEnum(string value) => new IntEnum(value);
+        public static implicit operator IntEnum(string value)
+        {
+            return new IntEnum(value);
+        }
 
         /// <summary>
         /// Implicit operator to convert IntEnum to string
         /// </summary>
-        public static implicit operator string(IntEnum e) => e.UnderlyingValue;
+        public static implicit operator string(IntEnum e)
+        {
+            return e.UnderlyingValue;
+        }
 
         /// <summary>
         /// Overriding == operator for enum IntEnum
         /// </summary>
-        public static bool operator == (IntEnum e1, IntEnum e2) => e2.Equals(e1);
+        public static bool operator == (IntEnum e1, IntEnum e2)
+        {
+            return e2.Equals(e1);
+        }
 
         /// <summary>
         /// Overriding != operator for enum IntEnum
         /// </summary>
-        public static bool operator != (IntEnum e1, IntEnum e2) => !e2.Equals(e1);
+        public static bool operator != (IntEnum e1, IntEnum e2)
+        {
+            return !e2.Equals(e1);
+        }
 
         /// <summary>
         /// Overrides Equals operator for IntEnum
         /// </summary>
-        public override bool Equals(object obj) => obj is IntEnum other && this.Equals(other);
+        public override bool Equals(object obj)
+        {
+            return obj is IntEnum && Equals((IntEnum)obj);
+        }
 
         /// <summary>
         /// Returns for hashCode IntEnum
         /// </summary>
-        public override int GetHashCode() => GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode();
+        public override int GetHashCode()
+        {
+            return GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode();
+        }
 
     }
 }

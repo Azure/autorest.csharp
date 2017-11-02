@@ -23,14 +23,17 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Returns if objectType can be converted to IntEnum by the converter.
         /// </summary>
-        public override bool CanConvert(System.Type objectType) => typeof(IntEnum).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        public override bool CanConvert(System.Type objectType)
+        {
+            return typeof(IntEnum).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        }
 
         /// <summary>
         /// Overrides ReadJson and converts token to IntEnum.
         /// </summary>
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
+            if (reader.TokenType == Newtonsoft.Json.JsonToken.Null)
             {
                 return null;
             }
@@ -40,7 +43,10 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Overriding WriteJson for IntEnum for serialization.
         /// </summary>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => writer.WriteValue(value.ToString());
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.ToString());
+        }
 
     }
 }

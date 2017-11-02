@@ -19,15 +19,18 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         @WrapComment("/// ", "Returns if objectType can be converted to " + Model.Name + " by the converter.")
         /// </summary>
-        public override bool CanConvert(System.Type objectType) => typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        public override bool CanConvert(System.Type objectType) 
+        { 
+            return typeof(@Model.ClassName).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Overrides ReadJson and converts token to " + Model.Name + ".")
         /// </summary>
-        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(Newtonsoft.Json.JsonReader reader, System.Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
+            if (reader.TokenType == Newtonsoft.Json.JsonToken.Null)
             {
                 return null;
             }
@@ -38,7 +41,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         @WrapComment("/// ", "Overriding WriteJson for " + Model.Name + " for serialization.")
         /// </summary>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => writer.WriteValue(value.ToString());
+        public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) 
+        { 
+            writer.WriteValue(value.ToString());
+        }
         @EmptyLine
     }
 }

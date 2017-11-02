@@ -24,14 +24,17 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// Returns if objectType can be converted to DaysOfWeekExtensibleEnum
         /// by the converter.
         /// </summary>
-        public override bool CanConvert(System.Type objectType) => typeof(DaysOfWeekExtensibleEnum).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        public override bool CanConvert(System.Type objectType)
+        {
+            return typeof(DaysOfWeekExtensibleEnum).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+        }
 
         /// <summary>
         /// Overrides ReadJson and converts token to DaysOfWeekExtensibleEnum.
         /// </summary>
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
+            if (reader.TokenType == Newtonsoft.Json.JsonToken.Null)
             {
                 return null;
             }
@@ -42,7 +45,10 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// Overriding WriteJson for DaysOfWeekExtensibleEnum for
         /// serialization.
         /// </summary>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => writer.WriteValue(value.ToString());
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.ToString());
+        }
 
     }
 }

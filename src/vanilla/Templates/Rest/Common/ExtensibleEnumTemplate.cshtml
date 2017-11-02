@@ -45,7 +45,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:@EmptyLine
         @:/// <summary>
         @:@WrapComment("/// ", "Determine base value for a given allowed value if exists, else return the value itself")
-        /// </summary>
+        @:/// </summary>
         @:private static @underlyingType GetBaseValueForAllowedValue(@underlyingType value)
         @:{
             @:switch(value)
@@ -77,49 +77,73 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         @WrapComment("/// ", "Returns string representation for "+Model.ClassName)
         /// </summary>
-        public override string ToString() => UnderlyingValue.ToString();
+        public override string ToString()
+        { 
+            return UnderlyingValue.ToString(); 
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Compares enums of type "+Model.ClassName)
         /// </summary>
-        public bool Equals(@Model.ClassName e) => @((hasAllowedValues)? "GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue))" : "UnderlyingValue.Equals(e.UnderlyingValue)");
+        public bool Equals(@Model.ClassName e) 
+        {
+            return @((hasAllowedValues)? "GetBaseValueForAllowedValue(e.UnderlyingValue).Equals(GetBaseValueForAllowedValue(UnderlyingValue))" : "UnderlyingValue.Equals(e.UnderlyingValue)");
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Implicit operator to convert "+underlyingType+" to "+Model.ClassName)
         /// </summary>
-        public static implicit operator @(Model.ClassName  +"("+ underlyingType +" value)") => new @(Model.ClassName+"(value)");
+        public static implicit operator @(Model.ClassName  +"("+ underlyingType +" value)") 
+        {
+            return new @(Model.ClassName+"(value)");
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Implicit operator to convert "+Model.ClassName+" to "+underlyingType)
         /// </summary>
-        public static implicit operator string(@Model.ClassName e) => e.UnderlyingValue;
+        public static implicit operator string(@Model.ClassName e)
+        { 
+            return e.UnderlyingValue;
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Overriding == operator for enum "+Model.ClassName)
         /// </summary>
-        public static bool operator == (@Model.ClassName e1, @Model.ClassName e2) => e2.Equals(e1);
+        public static bool operator == (@Model.ClassName e1, @Model.ClassName e2) 
+        { 
+            return e2.Equals(e1); 
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Overriding != operator for enum "+Model.ClassName)
         /// </summary>
-        public static bool operator != (@Model.ClassName e1, @Model.ClassName e2) => !e2.Equals(e1);
+        public static bool operator != (@Model.ClassName e1, @Model.ClassName e2) 
+        { 
+            return !e2.Equals(e1); 
+        }
 
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Overrides Equals operator for "+Model.ClassName)
         /// </summary>
-        public override bool Equals(object obj) => obj is @Model.ClassName other && this.Equals(other);
+        public override bool Equals(object obj) 
+        {
+            return obj is @Model.ClassName && this.Equals((@Model.ClassName)obj);
+        }
             
         @EmptyLine
         /// <summary>
         @WrapComment("/// ", "Returns for hashCode "+Model.ClassName)
         /// </summary>
-        public override int GetHashCode() => @((hasAllowedValues)? "GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode()" :"UnderlyingValue.GetHashCode()");
+        public override int GetHashCode()
+        {
+            return @((hasAllowedValues)? "GetBaseValueForAllowedValue(UnderlyingValue).GetHashCode()" :"UnderlyingValue.GetHashCode()");
+        }
 
         @EmptyLine    
     }

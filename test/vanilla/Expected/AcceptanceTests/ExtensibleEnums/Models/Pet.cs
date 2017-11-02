@@ -26,12 +26,12 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
+        /// <param name="intEnum">Possible values include: '1', '2',
+        /// '3'</param>
         /// <param name="daysOfWeek">Type of Pet. Possible values include:
         /// 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
         /// 'Sunday'</param>
-        /// <param name="intEnum">Possible values include: '1', '2',
-        /// '3'</param>
-        public Pet(string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?), IntEnum? intEnum = default(IntEnum?))
+        public Pet(IntEnum intEnum, string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?))
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
@@ -57,10 +57,19 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
 
         /// <summary>
-        /// Gets possible values include: '1', '2', '3'
+        /// Gets or sets possible values include: '1', '2', '3'
         /// </summary>
         [JsonProperty(PropertyName = "IntEnum")]
-        public IntEnum? IntEnum { get; private set; }
+        public IntEnum IntEnum { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+        }
     }
 }

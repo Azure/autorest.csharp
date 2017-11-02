@@ -47,5 +47,31 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
                 }
             }
 
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='petParam'>
+            /// </param>
+            public static Pet AddPet(this IPetOperations operations, Pet petParam = default(Pet))
+            {
+                return operations.AddPetAsync(petParam).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='petParam'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Pet> AddPetAsync(this IPetOperations operations, Pet petParam = default(Pet), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddPetWithHttpMessagesAsync(petParam, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

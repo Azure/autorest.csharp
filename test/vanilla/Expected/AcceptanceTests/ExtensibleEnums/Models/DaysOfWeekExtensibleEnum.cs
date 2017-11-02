@@ -50,42 +50,66 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// Returns string representation for DaysOfWeekExtensibleEnum
         /// </summary>
-        public override string ToString() => UnderlyingValue.ToString();
+        public override string ToString()
+        {
+            return UnderlyingValue.ToString();
+        }
 
         /// <summary>
         /// Compares enums of type DaysOfWeekExtensibleEnum
         /// </summary>
-        public bool Equals(DaysOfWeekExtensibleEnum e) => UnderlyingValue.Equals(e.UnderlyingValue);
+        public bool Equals(DaysOfWeekExtensibleEnum e)
+        {
+            return UnderlyingValue.Equals(e.UnderlyingValue);
+        }
 
         /// <summary>
         /// Implicit operator to convert string to DaysOfWeekExtensibleEnum
         /// </summary>
-        public static implicit operator DaysOfWeekExtensibleEnum(string value) => new DaysOfWeekExtensibleEnum(value);
+        public static implicit operator DaysOfWeekExtensibleEnum(string value)
+        {
+            return new DaysOfWeekExtensibleEnum(value);
+        }
 
         /// <summary>
         /// Implicit operator to convert DaysOfWeekExtensibleEnum to string
         /// </summary>
-        public static implicit operator string(DaysOfWeekExtensibleEnum e) => e.UnderlyingValue;
+        public static implicit operator string(DaysOfWeekExtensibleEnum e)
+        {
+            return e.UnderlyingValue;
+        }
 
         /// <summary>
         /// Overriding == operator for enum DaysOfWeekExtensibleEnum
         /// </summary>
-        public static bool operator == (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2) => e2.Equals(e1);
+        public static bool operator == (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2)
+        {
+            return e2.Equals(e1);
+        }
 
         /// <summary>
         /// Overriding != operator for enum DaysOfWeekExtensibleEnum
         /// </summary>
-        public static bool operator != (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2) => !e2.Equals(e1);
+        public static bool operator != (DaysOfWeekExtensibleEnum e1, DaysOfWeekExtensibleEnum e2)
+        {
+            return !e2.Equals(e1);
+        }
 
         /// <summary>
         /// Overrides Equals operator for DaysOfWeekExtensibleEnum
         /// </summary>
-        public override bool Equals(object obj) => obj is DaysOfWeekExtensibleEnum other && this.Equals(other);
+        public override bool Equals(object obj)
+        {
+            return obj is DaysOfWeekExtensibleEnum && Equals((DaysOfWeekExtensibleEnum)obj);
+        }
 
         /// <summary>
         /// Returns for hashCode DaysOfWeekExtensibleEnum
         /// </summary>
-        public override int GetHashCode() => UnderlyingValue.GetHashCode();
+        public override int GetHashCode()
+        {
+            return UnderlyingValue.GetHashCode();
+        }
 
     }
 }
