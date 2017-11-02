@@ -39,9 +39,6 @@ regenExpected = (opts,done) ->
     if (opts.flatteningThreshold)
       args.push("--csharp.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
-    if(opts.extensibleEnums)
-      args.push("--extensible-enums=true")
-
     args.push("--use=F:/artemp/rcm/autorest.modeler")
 
     if (!!opts.nsPrefix)
@@ -331,7 +328,6 @@ task 'regenerate-csextensibleenums', '', (done) ->
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-    'extensibleEnums':true
   },done
   return null
 
