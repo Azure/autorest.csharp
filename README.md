@@ -17,11 +17,11 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "2.1.26" # keep in sync with package.json's dev dependency in order to have meaningful tests
+  "@microsoft.azure/autorest.modeler": "C:\\work\\oneautorest\\autorest.modeler" # keep in sync with package.json's dev dependency in order to have meaningful tests
 
 pipeline:
   csharp/modeler:
-    input: swagger-document/identity
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: csharp
   csharp/commonmarker:
@@ -62,7 +62,7 @@ output-artifact:
 ``` yaml
 pipeline:
   jsonrpcclient/modeler:
-    input: swagger-document/identity
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: jsonrpcclient
   jsonrpcclient/generate:

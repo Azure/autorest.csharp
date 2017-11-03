@@ -280,7 +280,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         private void Initialize()
         {
             Group = new GroupOperations(this);
-            BaseUri = new System.Uri("https://management.azure.com/");
+            BaseUri = new System.Uri("https://management.azure.com");
             ApiVersion = "2014-04-01-preview";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

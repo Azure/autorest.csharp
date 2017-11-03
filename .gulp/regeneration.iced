@@ -52,6 +52,10 @@ regenExpected = (opts,done) ->
     if (opts['override-info.description'])
       args.push("--override-info.description=#{opts['override-info.description']}")
 
+    if (argv.args)
+      for arg in argv.args.split(" ")
+        args.push(arg);
+
     autorest args,() =>
       instances--
       return done() if instances is 0
@@ -67,6 +71,10 @@ regenExpectedConfigurations = (opts,done) ->
     if (opts.tag)
       args.push("--tag=#{opts.tag}")
 
+    if (argv.args)
+      for arg in argv.args.split(" ")
+        args.push(arg);
+
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)
       # console.error(stderr)
@@ -76,7 +84,7 @@ regenExpectedConfigurations = (opts,done) ->
 defaultMappings = {
   'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
   'AcceptanceTests/BodyArray': 'body-array.json',
-  'AcceptanceTests/BodyBoolean': 'body-boolean.json',
+  'AcceptanceTests/BodyBoolean': 'body-boolean.quirks.json',
   'AcceptanceTests/BodyByte': 'body-byte.json',
   'AcceptanceTests/BodyComplex': 'body-complex.json',
   'AcceptanceTests/BodyDate': 'body-date.json',
@@ -87,10 +95,10 @@ defaultMappings = {
   'AcceptanceTests/BodyFile': 'body-file.json',
   'AcceptanceTests/BodyFormData': 'body-formdata.json',
   'AcceptanceTests/BodyInteger': 'body-integer.json',
-  'AcceptanceTests/BodyNumber': 'body-number.json',
-  'AcceptanceTests/BodyString': 'body-string.json',
+  'AcceptanceTests/BodyNumber': 'body-number.quirks.json',
+  'AcceptanceTests/BodyString': 'body-string.quirks.json',
   'AcceptanceTests/Header': 'header.json',
-  'AcceptanceTests/Http': 'httpInfrastructure.json',
+  'AcceptanceTests/Http': 'httpInfrastructure.quirks.json',
   'AcceptanceTests/Report': 'report.json',
   'AcceptanceTests/RequiredOptional': 'required-optional.json',
   'AcceptanceTests/Url': 'url.json',
@@ -114,7 +122,7 @@ defaultAzureMappings = {
 }
 
 compositeMappings = {
-  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.json;body-integer.json'
+  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.quirks.json;body-integer.json'
 }
 
 azureCompositeMappings = {
