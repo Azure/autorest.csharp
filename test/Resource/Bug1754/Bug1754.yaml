@@ -1,5 +1,6 @@
 ---
-swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
@@ -10,13 +11,10 @@ paths:
       responses:
         '200':
           description: OK
-    parameters:
-    - name: param
-      in: body
-      schema:
-        "$ref": "#/definitions/MyParam"
-definitions:
-  MyParam:
-    properties:
-      prop1:
-        type: string
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              properties:
+                prop1:
+                  type: string

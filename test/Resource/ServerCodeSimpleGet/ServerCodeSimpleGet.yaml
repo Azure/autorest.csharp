@@ -1,5 +1,6 @@
 ---
-swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   title: SimpleAPI
   description: very simple api
@@ -14,17 +15,19 @@ paths:
         name: id
         description: val to put
         required: true
-        type: integer
-      produces:
-      - application/json
+        schema:
+          type: integer
       responses:
         '200':
           description: some value added
-          schema:
-            "$ref": "#/definitions/SimpleModel"
-definitions:
-  SimpleModel:
-    description: simple value to add
-    properties:
-      value:
-        type: string
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SimpleModel"
+components:
+  schemas:
+    SimpleModel:
+      description: simple value to add
+      properties:
+        value:
+          type: string
