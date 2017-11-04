@@ -1,4 +1,5 @@
 ﻿@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.vanilla.Templates.Rest.Common
 @inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
@@ -12,22 +13,31 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     @XmlDocSummary($"{Model.TypeName} operations.")
-    public partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
+    public partial class @(Model.TypeName) : I@(Model.TypeName)
     {
         @XmlDocCtor(Model.TypeName)
-        @XmlDocParamRaw("client", $"Reference to the service client")
+        @XmlDocParamRaw("operationsWithHttpMessages", $"Reference to the low level operations")
         @XmlDocException("System.ArgumentNullException", "a required parameter is null")
-        public @(Model.TypeName)(@Model.CodeModel.Name client)
+        public @(Model.TypeName)(I@(Model.TypeName)WithHttpMessages operationsWithHttpMessages)
         {
-            @ParamNullCheck("client")
-            this.Client = client;
+            @ParamNullCheck("operationsWithHttpMessages")
+            this.OperationsWithHttpMessages = operationsWithHttpMessages;
         }
         @EmptyLine
-        @XmlDocProp(false, $"a reference to the {Model.CodeModel.Name}")
-        public @Model.CodeModel.Name Client { get; private set; }
+        private I@(Model.TypeName)WithHttpMessages OperationsWithHttpMessages { get; set; }
+        @EmptyLine
+        public I@(Model.TypeName)WithHttpMessages WithHttpMessages()
+        {
+            return this.OperationsWithHttpMessages;
+        }
         @EmptyLine
         @foreach (MethodCs method in Model.Methods)
         {
+            if (method.ExcludeFromInterface)
+            {
+                continue;
+            }
+
         @:@(Include(new MethodTemplate(), method))
         @EmptyLine
         }

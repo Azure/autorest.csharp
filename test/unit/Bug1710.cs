@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
             {
                 // check for the expected class.
                 Assert.True(fileSystem.FileExists(@"ISimpleAPI.cs"));
-                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 
-                var testApiExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIExtensions");
+                var testApiExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPI");
                 Assert.NotNull(testApiExtensions);
                 var testExtensionMethod = testApiExtensions.GetMethod("GetInt");
                 Assert.False(testExtensionMethod.ReturnType.IsNullableValueType());

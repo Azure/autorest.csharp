@@ -158,14 +158,14 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         /// </summary>
         private void Initialize()
         {
-            Basic = new BasicOperations(this);
-            Primitive = new Primitive(this);
-            Array = new Array(this);
-            Dictionary = new Dictionary(this);
-            Inheritance = new Inheritance(this);
-            Polymorphism = new Polymorphism(this);
-            Polymorphicrecursive = new Polymorphicrecursive(this);
-            Readonlyproperty = new Readonlyproperty(this);
+            Basic = new BasicOperations(new BasicOperationsWithHttpMessages(this));
+            Primitive = new Primitive(new PrimitiveWithHttpMessages(this));
+            Array = new Array(new ArrayWithHttpMessages(this));
+            Dictionary = new Dictionary(new DictionaryWithHttpMessages(this));
+            Inheritance = new Inheritance(new InheritanceWithHttpMessages(this));
+            Polymorphism = new Polymorphism(new PolymorphismWithHttpMessages(this));
+            Polymorphicrecursive = new Polymorphicrecursive(new PolymorphicrecursiveWithHttpMessages(this));
+            Readonlyproperty = new Readonlyproperty(new ReadonlypropertyWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings

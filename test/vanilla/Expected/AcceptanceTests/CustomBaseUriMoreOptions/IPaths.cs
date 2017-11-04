@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,6 +17,8 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
     /// </summary>
     public partial interface IPaths
     {
+        IPathsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get a 200 to test a valid base uri
         /// </summary>
@@ -35,18 +34,26 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <param name='keyVersion'>
         /// The key version. Default value 'v1'.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetEmpty(string vault, string secret, string keyName, string keyVersion = "v1");
+
+        /// <summary>
+        /// Get a 200 to test a valid base uri
+        /// </summary>
+        /// <param name='vault'>
+        /// The vault name, e.g. https://myvault
+        /// </param>
+        /// <param name='secret'>
+        /// Secret value.
+        /// </param>
+        /// <param name='keyName'>
+        /// The key name with value 'key1'.
+        /// </param>
+        /// <param name='keyVersion'>
+        /// The key version. Default value 'v1'.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string vault, string secret, string keyName, string keyVersion = "v1", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = "v1", CancellationToken cancellationToken = default(CancellationToken));
     }
 }

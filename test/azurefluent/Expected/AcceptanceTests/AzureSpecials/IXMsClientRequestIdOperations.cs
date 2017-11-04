@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,37 +19,37 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface IXMsClientRequestIdOperations
     {
+        IXMsClientRequestIdOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get();
+
+        /// <summary>
+        /// Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> GetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
         /// </summary>
         /// <param name='xMsClientRequestId'>
         /// This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ParamGet(string xMsClientRequestId);
+
+        /// <summary>
+        /// Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+        /// </summary>
+        /// <param name='xMsClientRequestId'>
+        /// This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> ParamGetWithHttpMessagesAsync(string xMsClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

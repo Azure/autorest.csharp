@@ -30,6 +30,18 @@ public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; pri
 @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
 @EmptyLine
 }
+
+@if (Model.Methods.Any(m => m.Group.IsNullOrEmpty()))
+{
+@EmptyLine
+@:private I@(Model.Name)WithHttpMessages OperationsWithHttpMessages { get; set; }
+@EmptyLine
+@:public I@(Model.Name)WithHttpMessages WithHttpMessages()
+@:{
+@:      return this.OperationsWithHttpMessages;
+@:}
+@EmptyLine
+}
         
 @foreach (var operation in Model.AllOperations) 
 {

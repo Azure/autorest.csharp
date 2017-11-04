@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,113 +17,107 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     /// </summary>
     public partial interface IImplicitModel
     {
+        IImplicitModelWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Test implicitly required path parameter
         /// </summary>
         /// <param name='pathParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error GetRequiredPath(string pathParameter);
+
+        /// <summary>
+        /// Test implicitly required path parameter
+        /// </summary>
+        /// <param name='pathParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> GetRequiredPathWithHttpMessagesAsync(string pathParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
         /// <param name='queryParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutOptionalQuery(string queryParameter = default(string));
+
+        /// <summary>
+        /// Test implicitly optional query parameter
+        /// </summary>
+        /// <param name='queryParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutOptionalQueryWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutOptionalQueryAsync(string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly optional header parameter
         /// </summary>
         /// <param name='queryParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutOptionalHeader(string queryParameter = default(string));
+
+        /// <summary>
+        /// Test implicitly optional header parameter
+        /// </summary>
+        /// <param name='queryParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutOptionalHeaderWithHttpMessagesAsync(string queryParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutOptionalHeaderAsync(string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly optional body parameter
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutOptionalBody(string bodyParameter = default(string));
+
+        /// <summary>
+        /// Test implicitly optional body parameter
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutOptionalBodyWithHttpMessagesAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutOptionalBodyAsync(string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly required path parameter
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Error GetRequiredGlobalPath();
+
+        /// <summary>
+        /// Test implicitly required path parameter
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> GetRequiredGlobalPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> GetRequiredGlobalPathAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly required query parameter
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Error GetRequiredGlobalQuery();
+
+        /// <summary>
+        /// Test implicitly required query parameter
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> GetRequiredGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> GetRequiredGlobalQueryAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Error GetOptionalGlobalQuery();
+
+        /// <summary>
+        /// Test implicitly optional query parameter
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> GetOptionalGlobalQueryAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

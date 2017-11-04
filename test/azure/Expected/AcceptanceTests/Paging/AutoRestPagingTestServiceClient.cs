@@ -265,7 +265,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         private void Initialize()
         {
-            Paging = new PagingOperations(this);
+            Paging = new PagingOperations(new PagingOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

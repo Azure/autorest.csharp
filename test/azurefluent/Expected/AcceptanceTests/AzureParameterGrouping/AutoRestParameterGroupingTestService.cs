@@ -265,7 +265,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
         /// </summary>
         private void Initialize()
         {
-            ParameterGrouping = new ParameterGroupingOperations(this);
+            ParameterGrouping = new ParameterGroupingOperations(new ParameterGroupingOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

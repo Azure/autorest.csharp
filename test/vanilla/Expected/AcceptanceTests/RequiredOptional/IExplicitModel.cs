@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,367 +19,375 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     /// </summary>
     public partial interface IExplicitModel
     {
+        IExplicitModelWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Test explicitly required integer. Please put null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredIntegerParameter(int bodyParameter);
+
+        /// <summary>
+        /// Test explicitly required integer. Please put null and the client library should throw before the request is sent.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredIntegerParameterWithHttpMessagesAsync(int bodyParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalIntegerParameter(int? bodyParameter = default(int?));
+
+        /// <summary>
+        /// Test explicitly optional integer. Please put null.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalIntegerParameterWithHttpMessagesAsync(int? bodyParameter = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalIntegerParameterAsync(int? bodyParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should
         /// throw before the request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredIntegerProperty(int value);
+
+        /// <summary>
+        /// Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should
+        /// throw before the request is sent.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredIntegerPropertyWithHttpMessagesAsync(int value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredIntegerPropertyAsync(int value, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalIntegerProperty(int? value = default(int?));
+
+        /// <summary>
+        /// Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalIntegerPropertyWithHttpMessagesAsync(int? value = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalIntegerPropertyAsync(int? value = default(int?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
         /// throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredIntegerHeader(int headerParameter);
+
+        /// <summary>
+        /// Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+        /// throw before the request is sent.
+        /// </summary>
+        /// <param name='headerParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredIntegerHeaderWithHttpMessagesAsync(int headerParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalIntegerHeader(int? headerParameter = default(int?));
+
+        /// <summary>
+        /// Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+        /// </summary>
+        /// <param name='headerParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalIntegerHeaderWithHttpMessagesAsync(int? headerParameter = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalIntegerHeaderAsync(int? headerParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required string. Please put null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredStringParameter(string bodyParameter);
+
+        /// <summary>
+        /// Test explicitly required string. Please put null and the client library should throw before the request is sent.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredStringParameterWithHttpMessagesAsync(string bodyParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredStringParameterAsync(string bodyParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional string. Please put null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalStringParameter(string bodyParameter = default(string));
+
+        /// <summary>
+        /// Test explicitly optional string. Please put null.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalStringParameterWithHttpMessagesAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalStringParameterAsync(string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
         /// should throw before the request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredStringProperty(string value);
+
+        /// <summary>
+        /// Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+        /// should throw before the request is sent.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredStringPropertyWithHttpMessagesAsync(string value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredStringPropertyAsync(string value, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalStringProperty(string value = default(string));
+
+        /// <summary>
+        /// Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalStringPropertyWithHttpMessagesAsync(string value = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalStringPropertyAsync(string value = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
         /// throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredStringHeader(string headerParameter);
+
+        /// <summary>
+        /// Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+        /// throw before the request is sent.
+        /// </summary>
+        /// <param name='headerParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredStringHeaderWithHttpMessagesAsync(string headerParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalStringHeader(string bodyParameter = default(string));
+
+        /// <summary>
+        /// Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalStringHeaderWithHttpMessagesAsync(string bodyParameter = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalStringHeaderAsync(string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required complex object. Please put null and the client library should throw before the request is
         /// sent.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredClassParameter(Product bodyParameter);
+
+        /// <summary>
+        /// Test explicitly required complex object. Please put null and the client library should throw before the request is
+        /// sent.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredClassParameterWithHttpMessagesAsync(Product bodyParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredClassParameterAsync(Product bodyParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional complex object. Please put null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalClassParameter(Product bodyParameter = default(Product));
+
+        /// <summary>
+        /// Test explicitly optional complex object. Please put null.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalClassParameterWithHttpMessagesAsync(Product bodyParameter = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalClassParameterAsync(Product bodyParameter = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
         /// library should throw before the request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredClassProperty(Product value);
+
+        /// <summary>
+        /// Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+        /// library should throw before the request is sent.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredClassPropertyWithHttpMessagesAsync(Product value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredClassPropertyAsync(Product value, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalClassProperty(Product value = default(Product));
+
+        /// <summary>
+        /// Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalClassPropertyWithHttpMessagesAsync(Product value = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalClassPropertyAsync(Product value = default(Product), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required array. Please put null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredArrayParameter(IList<string> bodyParameter);
+
+        /// <summary>
+        /// Test explicitly required array. Please put null and the client library should throw before the request is sent.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredArrayParameterWithHttpMessagesAsync(IList<string> bodyParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredArrayParameterAsync(IList<string> bodyParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional array. Please put null.
         /// </summary>
         /// <param name='bodyParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalArrayParameter(IList<string> bodyParameter = default(IList<string>));
+
+        /// <summary>
+        /// Test explicitly optional array. Please put null.
+        /// </summary>
+        /// <param name='bodyParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalArrayParameterWithHttpMessagesAsync(IList<string> bodyParameter = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalArrayParameterAsync(IList<string> bodyParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should
         /// throw before the request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredArrayProperty(IList<string> value);
+
+        /// <summary>
+        /// Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should
+        /// throw before the request is sent.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredArrayPropertyWithHttpMessagesAsync(IList<string> value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredArrayPropertyAsync(IList<string> value, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
         /// </summary>
         /// <param name='value'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalArrayProperty(IList<string> value = default(IList<string>));
+
+        /// <summary>
+        /// Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+        /// </summary>
+        /// <param name='value'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalArrayPropertyWithHttpMessagesAsync(IList<string> value = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalArrayPropertyAsync(IList<string> value = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
         /// throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Error PostRequiredArrayHeader(IList<string> headerParameter);
+
+        /// <summary>
+        /// Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+        /// throw before the request is sent.
+        /// </summary>
+        /// <param name='headerParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse<Error>> PostRequiredArrayHeaderWithHttpMessagesAsync(IList<string> headerParameter, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Error> PostRequiredArrayHeaderAsync(IList<string> headerParameter, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptionalArrayHeader(IList<string> headerParameter = default(IList<string>));
+
+        /// <summary>
+        /// Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+        /// </summary>
+        /// <param name='headerParameter'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PostOptionalArrayHeaderWithHttpMessagesAsync(IList<string> headerParameter = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalArrayHeaderAsync(IList<string> headerParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

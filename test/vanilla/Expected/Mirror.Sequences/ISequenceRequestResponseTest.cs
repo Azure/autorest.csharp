@@ -8,7 +8,6 @@
 
 namespace Fixtures.MirrorSequences
 {
-    using Microsoft.Rest;
     using Models;
     using Newtonsoft.Json;
     using System.Collections;
@@ -43,13 +42,25 @@ namespace Fixtures.MirrorSequences
         /// <param name='pets'>
         /// Pets to add to the store
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        IList<Pet> AddPet(IList<Pet> pets);
+
+        /// <summary>
+        /// Creates a new pet in the store.  Duplicates are allowed
+        /// </summary>
+        /// <param name='pets'>
+        /// Pets to add to the store
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<Pet>>> AddPetWithHttpMessagesAsync(IList<Pet> pets, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Pet>> AddPetAsync(IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Adds new pet stylesin the store.  Duplicates are allowed
+        /// </summary>
+        /// <param name='petStyle'>
+        /// Pet style to add to the store
+        /// </param>
+        IList<int?> AddPetStyles(IList<int?> petStyle);
 
         /// <summary>
         /// Adds new pet stylesin the store.  Duplicates are allowed
@@ -57,13 +68,17 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<int?>>> AddPetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<int?>> AddPetStylesAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Updates new pet stylesin the store.  Duplicates are allowed
+        /// </summary>
+        /// <param name='petStyle'>
+        /// Pet style to add to the store
+        /// </param>
+        IList<int?> UpdatePetStyles(IList<int?> petStyle);
 
         /// <summary>
         /// Updates new pet stylesin the store.  Duplicates are allowed
@@ -71,13 +86,9 @@ namespace Fixtures.MirrorSequences
         /// <param name='petStyle'>
         /// Pet style to add to the store
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<int?>>> UpdatePetStylesWithHttpMessagesAsync(IList<int?> petStyle, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<IList<int?>> UpdatePetStylesAsync(IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

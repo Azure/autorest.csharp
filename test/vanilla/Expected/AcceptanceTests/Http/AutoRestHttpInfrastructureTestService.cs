@@ -151,13 +151,13 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </summary>
         private void Initialize()
         {
-            HttpFailure = new HttpFailure(this);
-            HttpSuccess = new HttpSuccess(this);
-            HttpRedirects = new HttpRedirects(this);
-            HttpClientFailure = new HttpClientFailure(this);
-            HttpServerFailure = new HttpServerFailure(this);
-            HttpRetry = new HttpRetry(this);
-            MultipleResponses = new MultipleResponses(this);
+            HttpFailure = new HttpFailure(new HttpFailureWithHttpMessages(this));
+            HttpSuccess = new HttpSuccess(new HttpSuccessWithHttpMessages(this));
+            HttpRedirects = new HttpRedirects(new HttpRedirectsWithHttpMessages(this));
+            HttpClientFailure = new HttpClientFailure(new HttpClientFailureWithHttpMessages(this));
+            HttpServerFailure = new HttpServerFailure(new HttpServerFailureWithHttpMessages(this));
+            HttpRetry = new HttpRetry(new HttpRetryWithHttpMessages(this));
+            MultipleResponses = new MultipleResponses(new MultipleResponsesWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

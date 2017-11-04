@@ -8,11 +8,8 @@
 
 namespace Fixtures.MirrorPolymorphic
 {
-    using Microsoft.Rest;
     using Models;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -47,13 +44,21 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='animalCreateOrUpdateParameter'>
         /// An Animal
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        Animal CreateOrUpdatePolymorphicAnimals(Animal animalCreateOrUpdateParameter = default(Animal));
+
+        /// <summary>
+        /// Product Types
+        /// </summary>
+        /// <remarks>
+        /// The Products endpoint returns information about the Uber products offered at a given location. The response
+        /// includes the display name and other details about each product, and lists the products in the proper display order.
+        /// </remarks>
+        /// <param name='animalCreateOrUpdateParameter'>
+        /// An Animal
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(Animal animalCreateOrUpdateParameter = default(Animal), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync(Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

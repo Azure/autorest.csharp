@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,505 +17,417 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IMultipleResponses
     {
+        IMultipleResponsesWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model204NoModelDefaultError200Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model204NoModelDefaultError204Valid();
+
+        /// <summary>
+        /// Send a 204 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError204ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model204NoModelDefaultError201Invalid();
+
+        /// <summary>
+        /// Send a 201 response with valid payload: {'statusCode': '201'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError201InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with no payload:
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model204NoModelDefaultError202None();
+
+        /// <summary>
+        /// Send a 202 response with no payload:
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model204NoModelDefaultError400Valid();
+
+        /// <summary>
+        /// Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model201ModelDefaultError200Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model201ModelDefaultError201Valid();
+
+        /// <summary>
+        /// Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200Model201ModelDefaultError400Valid();
+
+        /// <summary>
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        object Get200ModelA201ModelC404ModelDDefaultError200Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<object> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'httpCode': '201'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        object Get200ModelA201ModelC404ModelDDefaultError201Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'httpCode': '201'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<object> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        object Get200ModelA201ModelC404ModelDDefaultError404Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<object> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        object Get200ModelA201ModelC404ModelDDefaultError400Valid();
+
+        /// <summary>
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<object> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultError202None();
+
+        /// <summary>
+        /// Send a 202 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultError202NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultError204None();
+
+        /// <summary>
+        /// Send a 204 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultError204NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultError400Valid();
+
+        /// <summary>
+        /// Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultError400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultNone202Invalid();
+
+        /// <summary>
+        /// Send a 202 response with an unexpected payload {'property': 'value'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone202InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultNone202InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultNone204None();
+
+        /// <summary>
+        /// Send a 204 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultNone204NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultNone400None();
+
+        /// <summary>
+        /// Send a 400 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultNone400NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get202None204NoneDefaultNone400Invalid();
+
+        /// <summary>
+        /// Send a 400 response with an unexpected payload {'property': 'value'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get202None204NoneDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get202None204NoneDefaultNone400InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A GetDefaultModelA200Valid();
+
+        /// <summary>
+        /// Send a 200 response with valid payload: {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='MyException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<A>> GetDefaultModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> GetDefaultModelA200ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A GetDefaultModelA200None();
+
+        /// <summary>
+        /// Send a 200 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='MyException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<A>> GetDefaultModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> GetDefaultModelA200NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A GetDefaultModelA400Valid();
+
+        /// <summary>
+        /// Send a 400 response with valid payload: {'statusCode': '400'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='MyException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<A>> GetDefaultModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> GetDefaultModelA400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A GetDefaultModelA400None();
+
+        /// <summary>
+        /// Send a 400 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='MyException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse<A>> GetDefaultModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> GetDefaultModelA400NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetDefaultNone200Invalid();
+
+        /// <summary>
+        /// Send a 200 response with invalid payload: {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetDefaultNone200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetDefaultNone200InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetDefaultNone200None();
+
+        /// <summary>
+        /// Send a 200 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetDefaultNone200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetDefaultNone200NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetDefaultNone400Invalid();
+
+        /// <summary>
+        /// Send a 400 response with valid payload: {'statusCode': '400'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetDefaultNone400InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void GetDefaultNone400None();
+
+        /// <summary>
+        /// Send a 400 response with no payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> GetDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetDefaultNone400NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
         /// for model A
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA200None();
+
+        /// <summary>
+        /// Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
+        /// for model A
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA200NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA200Valid();
+
+        /// <summary>
+        /// Send a 200 response with payload {'statusCode': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA200ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA200Invalid();
+
+        /// <summary>
+        /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA200InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error with no error model
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA400None();
+
+        /// <summary>
+        /// Send a 400 response with no payload client should treat as an http error with no error model
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA400NoneAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA400Valid();
+
+        /// <summary>
+        /// Send a 200 response with payload {'statusCode': '400'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA400ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA400Invalid();
+
+        /// <summary>
+        /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA400InvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        A Get200ModelA202Valid();
+
+        /// <summary>
+        /// Send a 202 response with payload {'statusCode': '202'}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<A>> Get200ModelA202ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<A> Get200ModelA202ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

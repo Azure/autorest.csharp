@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,6 +19,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
     /// </summary>
     public partial interface ILRORetrysOperations
     {
+        ILRORetrysOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
         /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
@@ -29,119 +29,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner>> Put201CreatingSucceeded200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-        /// contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
-        /// ProvisioningState=’Succeeded’
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
-        /// until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysDelete202Retry200HeadersInner>> Delete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated
-        /// in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> DeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
-        /// 'Retry-After' headers, Polls return a 200 with a response body after success
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysPost202Retry200HeadersInner>> Post202Retry200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='product'>
-        /// Product to put
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> PostAsyncRelativeRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        ProductInner Put201CreatingSucceeded200(ProductInner product = default(ProductInner));
+
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
         /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
@@ -150,19 +39,10 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner>> BeginPut201CreatingSucceeded200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ProductInner> Put201CreatingSucceeded200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -170,65 +50,63 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        ProductInner PutAsyncRelativeRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ProductInner> PutAsyncRelativeRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
         /// contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
         /// ProvisioningState=’Succeeded’
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ProductInner DeleteProvisioning202Accepted200Succeeded();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+        /// contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ProductInner> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
         /// until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        LRORetrysDelete202Retry200HeadersInner Delete202Retry200();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+        /// until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysDelete202Retry200HeadersInner>> BeginDelete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LRORetrysDelete202Retry200HeadersInner> Delete202Retry200Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated
         /// in the Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner DeleteAsyncRelativeRetrySucceeded();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated
+        /// in the Azure-AsyncOperation header for operation status
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> BeginDeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> DeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
         /// 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -236,16 +114,19 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        LRORetrysPost202Retry200HeadersInner Post202Retry200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+        /// 'Retry-After' headers, Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysPost202Retry200HeadersInner>> BeginPost202Retry200WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LRORetrysPost202Retry200HeadersInner> Post202Retry200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -253,15 +134,144 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <param name='product'>
         /// Product to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        LRORetrysPostAsyncRelativeRetrySucceededHeadersInner PostAsyncRelativeRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.Azure.CloudException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> BeginPostAsyncRelativeRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> PostAsyncRelativeRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        ProductInner BeginPut201CreatingSucceeded200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<ProductInner> BeginPut201CreatingSucceeded200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        ProductInner BeginPutAsyncRelativeRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<ProductInner> BeginPutAsyncRelativeRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+        /// contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        ProductInner BeginDeleteProvisioning202Accepted200Succeeded();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+        /// contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<ProductInner> BeginDeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+        /// until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        /// </summary>
+        LRORetrysDelete202Retry200HeadersInner BeginDelete202Retry200();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+        /// until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LRORetrysDelete202Retry200HeadersInner> BeginDelete202Retry200Async(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated
+        /// in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner BeginDeleteAsyncRelativeRetrySucceeded();
+
+        /// <summary>
+        /// Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated
+        /// in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> BeginDeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+        /// 'Retry-After' headers, Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        LRORetrysPost202Retry200HeadersInner BeginPost202Retry200(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+        /// 'Retry-After' headers, Polls return a 200 with a response body after success
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LRORetrysPost202Retry200HeadersInner> BeginPost202Retry200Async(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        LRORetrysPostAsyncRelativeRetrySucceededHeadersInner BeginPostAsyncRelativeRetrySucceeded(ProductInner product = default(ProductInner));
+
+        /// <summary>
+        /// Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> BeginPostAsyncRelativeRetrySucceededAsync(ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

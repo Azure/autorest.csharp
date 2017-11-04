@@ -141,9 +141,9 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         private void Initialize()
         {
-            Paths = new Paths(this);
-            Queries = new Queries(this);
-            PathItems = new PathItems(this);
+            Paths = new Paths(new PathsWithHttpMessages(this));
+            Queries = new Queries(new QueriesWithHttpMessages(this));
+            PathItems = new PathItems(new PathItemsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

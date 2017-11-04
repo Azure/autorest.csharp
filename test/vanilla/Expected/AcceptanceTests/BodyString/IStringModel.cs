@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyString
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,125 +17,112 @@ namespace Fixtures.AcceptanceTestsBodyString
     /// </summary>
     public partial interface IStringModel
     {
+        IStringModelWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null string value value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        string GetNull();
+
+        /// <summary>
+        /// Get null string value value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<string>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<string> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set string value null
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values include: ''
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutNull(string stringBody = default(string));
+
+        /// <summary>
+        /// Set string value null
+        /// </summary>
+        /// <param name='stringBody'>
+        /// Possible values include: ''
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutNullWithHttpMessagesAsync(string stringBody = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutNullAsync(string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty string value value ''
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        string GetEmpty();
+
+        /// <summary>
+        /// Get empty string value value ''
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<string>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<string> GetEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set string value empty ''
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values include: ''
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutEmpty(string stringBody);
+
+        /// <summary>
+        /// Set string value empty ''
+        /// </summary>
+        /// <param name='stringBody'>
+        /// Possible values include: ''
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(string stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutEmptyAsync(string stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        string GetMbcs();
+
+        /// <summary>
+        /// Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<string>> GetMbcsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<string> GetMbcsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutMbcs(string stringBody);
+
+        /// <summary>
+        /// Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+        /// </summary>
+        /// <param name='stringBody'>
+        /// Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutMbcsWithHttpMessagesAsync(string stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutMbcsAsync(string stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
         /// good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        string GetWhitespace();
+
+        /// <summary>
+        /// Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
+        /// good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<string>> GetWhitespaceWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<string> GetWhitespaceAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
         /// good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
@@ -146,100 +130,82 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <param name='stringBody'>
         /// Possible values include: '    Now is the time for all good men to come to the aid of their country    '
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutWhitespace(string stringBody);
+
+        /// <summary>
+        /// Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
+        /// good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+        /// </summary>
+        /// <param name='stringBody'>
+        /// Possible values include: '    Now is the time for all good men to come to the aid of their country    '
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutWhitespaceWithHttpMessagesAsync(string stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutWhitespaceAsync(string stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get String value when no string value is sent in response payload
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        string GetNotProvided();
+
+        /// <summary>
+        /// Get String value when no string value is sent in response payload
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<string>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<string> GetNotProvidedAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get value that is base64 encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetBase64Encoded();
+
+        /// <summary>
+        /// Get value that is base64 encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetBase64EncodedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetBase64EncodedAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get value that is base64url encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetBase64UrlEncoded();
+
+        /// <summary>
+        /// Get value that is base64url encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetBase64UrlEncodedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put value that is base64url encoded
         /// </summary>
         /// <param name='stringBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBase64UrlEncoded(byte[] stringBody);
+
+        /// <summary>
+        /// Put value that is base64url encoded
+        /// </summary>
+        /// <param name='stringBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutBase64UrlEncodedWithHttpMessagesAsync(byte[] stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get null value that is expected to be base64url encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetNullBase64UrlEncoded();
+
+        /// <summary>
+        /// Get null value that is expected to be base64url encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetNullBase64UrlEncodedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

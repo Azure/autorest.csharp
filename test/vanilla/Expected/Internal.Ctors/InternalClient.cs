@@ -120,7 +120,7 @@ namespace Fixtures.InternalCtors
         /// </summary>
         private void Initialize()
         {
-            Pets = new Pets(this);
+            Pets = new Pets(new PetsWithHttpMessages(this));
             BaseUri = new System.Uri("http://petstore.swagger.wordnik.com/api");
             SerializationSettings = new JsonSerializerSettings
             {

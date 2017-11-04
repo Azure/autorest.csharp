@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,61 +19,56 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IHttpRedirects
     {
+        IHttpRedirectsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Return 300 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead300Headers>> Head300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        HttpRedirectsHead300Headers Head300();
+
         /// <summary>
         /// Return 300 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IList<string>, HttpRedirectsGet300Headers>> Get300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsHead300Headers> Head300Async(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 300 status code and redirect to /http/success/200
+        /// </summary>
+        IList<string> Get300();
+
+        /// <summary>
+        /// Return 300 status code and redirect to /http/success/200
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IList<string>> Get300Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead301Headers>> Head301WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        HttpRedirectsHead301Headers Head301();
+
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet301Headers>> Get301WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsHead301Headers> Head301Async(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 301 status code and redirect to /http/success/200
+        /// </summary>
+        HttpRedirectsGet301Headers Get301();
+
+        /// <summary>
+        /// Return 301 status code and redirect to /http/success/200
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpRedirectsGet301Headers> Get301Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
         /// return the received 301 to the caller for evaluation
@@ -82,42 +76,43 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPut301Headers Put301(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+        /// return the received 301 to the caller for evaluation
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPut301Headers>> Put301WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPut301Headers> Put301Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead302Headers>> Head302WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        HttpRedirectsHead302Headers Head302();
+
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet302Headers>> Get302WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsHead302Headers> Head302Async(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 302 status code and redirect to /http/success/200
+        /// </summary>
+        HttpRedirectsGet302Headers Get302();
+
+        /// <summary>
+        /// Return 302 status code and redirect to /http/success/200
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpRedirectsGet302Headers> Get302Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should
         /// return the received 302 to the caller for evaluation
@@ -125,16 +120,19 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPatch302Headers Patch302(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should
+        /// return the received 302 to the caller for evaluation
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPatch302Headers>> Patch302WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPatch302Headers> Patch302Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
         /// ultimately returning a 200 status code
@@ -142,105 +140,114 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPost303Headers Post303(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+        /// ultimately returning a 200 status code
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPost303Headers>> Post303WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPost303Headers> Post303Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Redirect with 307, resulting in a 200 success
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        HttpRedirectsHead307Headers Head307();
+
+        /// <summary>
+        /// Redirect with 307, resulting in a 200 success
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead307Headers>> Head307WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsHead307Headers> Head307Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Redirect get with 307, resulting in a 200 success
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        HttpRedirectsGet307Headers Get307();
+
+        /// <summary>
+        /// Redirect get with 307, resulting in a 200 success
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet307Headers>> Get307WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsGet307Headers> Get307Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPut307Headers Put307(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put redirected with 307, resulting in a 200 after redirect
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPut307Headers>> Put307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPut307Headers> Put307Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Patch redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPatch307Headers Patch307(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Patch redirected with 307, resulting in a 200 after redirect
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPatch307Headers>> Patch307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPatch307Headers> Patch307Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsPost307Headers Post307(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post redirected with 307, resulting in a 200 after redirect
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPost307Headers>> Post307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsPost307Headers> Post307Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        HttpRedirectsDelete307Headers Delete307(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Delete redirected with 307, resulting in a 200 after redirect
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsDelete307Headers>> Delete307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpRedirectsDelete307Headers> Delete307Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
                 Assert.True(fileSystem.FileExists(@"IDeprecated.cs"));
                 Assert.True(fileSystem.FileExists(@"Deprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedWithHttpMessages.cs"));
                 Assert.True(fileSystem.FileExists(@"IApproved.cs"));
                 Assert.True(fileSystem.FileExists(@"Approved.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -64,29 +64,29 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operations are marked correctly
-                var deprecatedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IDeprecated");
+                var deprecatedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IDeprecatedWithHttpMessages");
                 Assert.NotNull(deprecatedInterface);
-                Assert.NotNull(deprecatedInterface.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(deprecatedInterface.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var deprecatedClass = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Deprecated");
+                var deprecatedClass = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedWithHttpMessages");
                 Assert.NotNull(deprecatedClass);
-                Assert.NotNull(deprecatedClass.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(deprecatedClass.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var deprecatedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedExtensions");
+                var deprecatedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Deprecated");
                 Assert.NotNull(deprecatedExtensions);
                 Assert.NotNull(deprecatedExtensions.GetMethod("Operation").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.NotNull(deprecatedExtensions.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
                 // verify the other operations are not marked as deprecated
-                var approvedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IApproved");
+                var approvedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IApprovedWithHttpMessages");
                 Assert.NotNull(approvedInterface);
-                Assert.Null(approvedInterface.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(approvedInterface.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var approvedClass = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Approved");
+                var approvedClass = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedWithHttpMessages");
                 Assert.NotNull(approvedClass);
-                Assert.Null(approvedClass.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(approvedClass.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedExtensions");
+                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Approved");
                 Assert.NotNull(approvedExtensions);
                 Assert.Null(approvedExtensions.GetMethod("Operation").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.Null(approvedExtensions.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
@@ -106,10 +106,10 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
                 Assert.True(fileSystem.FileExists(@"IDeprecatedOperations.cs"));
                 Assert.True(fileSystem.FileExists(@"DeprecatedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedOperationsWithHttpMessages.cs"));
                 Assert.True(fileSystem.FileExists(@"IApprovedOperations.cs"));
                 Assert.True(fileSystem.FileExists(@"ApprovedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedOperationsWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -143,29 +143,29 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operations are marked correctly
-                var deprecatedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IDeprecatedOperations");
+                var deprecatedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IDeprecatedOperationsWithHttpMessages");
                 Assert.NotNull(deprecatedInterface);
-                Assert.NotNull(deprecatedInterface.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(deprecatedInterface.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var deprecatedClass = asm.DefinedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedOperations");
+                var deprecatedClass = asm.DefinedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedOperationsWithHttpMessages");
                 Assert.NotNull(deprecatedClass);
-                Assert.NotNull(deprecatedClass.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(deprecatedClass.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var deprecatedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedOperationsExtensions");
+                var deprecatedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedOperations");
                 Assert.NotNull(deprecatedExtensions);
                 Assert.NotNull(deprecatedExtensions.GetMethod("Operation").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.NotNull(deprecatedExtensions.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
                 // verify the other operations are not marked as deprecated
-                var approvedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IApprovedOperations");
+                var approvedInterface = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.IApprovedOperationsWithHttpMessages");
                 Assert.NotNull(approvedInterface);
-                Assert.Null(approvedInterface.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(approvedInterface.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var approvedClass = asm.DefinedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedOperations");
+                var approvedClass = asm.DefinedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedOperationsWithHttpMessages");
                 Assert.NotNull(approvedClass);
-                Assert.Null(approvedClass.GetMethod("OperationWithHttpMessagesAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(approvedClass.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
-                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedOperationsExtensions");
+                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedOperations");
                 Assert.NotNull(approvedExtensions);
                 Assert.Null(approvedExtensions.GetMethod("Operation").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.Null(approvedExtensions.GetMethod("OperationAsync").GetCustomAttribute(typeof(System.ObsoleteAttribute)));

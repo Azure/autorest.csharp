@@ -65,25 +65,41 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutArray(IList<ResourceInner> resourceArray = default(IList<ResourceInner>));
+
+        /// <summary>
+        /// Put External Resource as an Array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceArray'>
+        /// External Resource as an Array to put
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PutArrayWithHttpMessagesAsync(IList<ResourceInner> resourceArray = default(IList<ResourceInner>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutArrayAsync(IList<ResourceInner> resourceArray = default(IList<ResourceInner>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as an Array
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        IList<FlattenedProductInner> GetArray();
 
         /// <summary>
         /// Get External Resource as an Array
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IList<FlattenedProductInner>>> GetArrayWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<FlattenedProductInner>> GetArrayAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put External Resource as a Dictionary
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceDictionary'>
+        /// External Resource as a Dictionary to put
+        /// </param>
+        void PutDictionary(IDictionary<string, FlattenedProductInner> resourceDictionary = default(IDictionary<string, FlattenedProductInner>));
 
         /// <summary>
         /// Put External Resource as a Dictionary
@@ -92,25 +108,32 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(IDictionary<string, FlattenedProductInner> resourceDictionary = default(IDictionary<string, FlattenedProductInner>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDictionaryAsync(IDictionary<string, FlattenedProductInner> resourceDictionary = default(IDictionary<string, FlattenedProductInner>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as a Dictionary
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        IDictionary<string, FlattenedProductInner> GetDictionary();
 
         /// <summary>
         /// Get External Resource as a Dictionary
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IDictionary<string, FlattenedProductInner>>> GetDictionaryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, FlattenedProductInner>> GetDictionaryAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put External Resource as a ResourceCollection
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        /// <param name='resourceComplexObject'>
+        /// External Resource as a ResourceCollection to put
+        /// </param>
+        void PutResourceCollection(ResourceCollectionInner resourceComplexObject = default(ResourceCollectionInner));
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
@@ -119,25 +142,23 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollectionInner resourceComplexObject = default(ResourceCollectionInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutResourceCollectionAsync(ResourceCollectionInner resourceComplexObject = default(ResourceCollectionInner), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get External Resource as a ResourceCollection
+        /// <see href='http://tempuri.org' />
+        /// </summary>
+        ResourceCollectionInner GetResourceCollection();
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
         /// <see href='http://tempuri.org' />
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<ResourceCollectionInner>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<ResourceCollectionInner> GetResourceCollectionAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

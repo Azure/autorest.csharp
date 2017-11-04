@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
     {
         public PluginCsa()
         {
-            Context.Add(new Factory<AzureMethodTemplate, AutoRest.CSharp.jsonrpc.Templates.AzureMethodTemplate>());
+            Context.Add(new Factory<AzureMethodWithHttpMessagesTemplate, AutoRest.CSharp.jsonrpc.Templates.AzureMethodWithHttpMessagesTemplate>());
         }
     }
 }

@@ -126,8 +126,8 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         private void Initialize()
         {
-            StringModel = new StringModel(this);
-            EnumModel = new EnumModel(this);
+            StringModel = new StringModel(new StringModelWithHttpMessages(this));
+            EnumModel = new EnumModel(new EnumModelWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

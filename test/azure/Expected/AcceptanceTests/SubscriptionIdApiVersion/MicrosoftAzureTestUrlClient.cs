@@ -275,7 +275,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// </summary>
         private void Initialize()
         {
-            Group = new GroupOperations(this);
+            Group = new GroupOperations(new GroupOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("https://management.azure.com/");
             ApiVersion = "2014-04-01-preview";
             AcceptLanguage = "en-US";

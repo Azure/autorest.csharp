@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationAllSync
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,68 +19,59 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationAllSync
     /// </summary>
     public partial interface IDurationOperations
     {
+        IDurationOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null duration value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.TimeSpan? GetNull();
+
+        /// <summary>
+        /// Get null duration value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<System.TimeSpan?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.TimeSpan?> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put a positive duration value
         /// </summary>
         /// <param name='durationBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutPositiveDuration(System.TimeSpan durationBody);
+
+        /// <summary>
+        /// Put a positive duration value
+        /// </summary>
+        /// <param name='durationBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PutPositiveDurationWithHttpMessagesAsync(System.TimeSpan durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutPositiveDurationAsync(System.TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a positive duration value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.TimeSpan? GetPositiveDuration();
+
+        /// <summary>
+        /// Get a positive duration value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<System.TimeSpan?>> GetPositiveDurationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.TimeSpan?> GetPositiveDurationAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an invalid duration value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        System.TimeSpan? GetInvalid();
+
+        /// <summary>
+        /// Get an invalid duration value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<AzureOperationResponse<System.TimeSpan?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<System.TimeSpan?> GetInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

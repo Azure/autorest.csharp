@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Model
         /// Generate a reference to the ServiceClient
         /// </summary>
         [JsonIgnore]
-        public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.Client";
+        public string ClientReference => "this.Client";
 
         /// <summary>
         /// Returns serialization settings reference.

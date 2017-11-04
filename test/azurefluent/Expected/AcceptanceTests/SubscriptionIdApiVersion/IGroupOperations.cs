@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,27 +19,25 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion
     /// </summary>
     public partial interface IGroupOperations
     {
+        IGroupOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Provides a resouce group with name 'testgroup101' and location 'West US'.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// Resource Group name 'testgroup101'.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        SampleResourceGroupInner GetSampleResourceGroup(string resourceGroupName);
+
+        /// <summary>
+        /// Provides a resouce group with name 'testgroup101' and location 'West US'.
+        /// </summary>
+        /// <param name='resourceGroupName'>
+        /// Resource Group name 'testgroup101'.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse<SampleResourceGroupInner>> GetSampleResourceGroupWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SampleResourceGroupInner> GetSampleResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

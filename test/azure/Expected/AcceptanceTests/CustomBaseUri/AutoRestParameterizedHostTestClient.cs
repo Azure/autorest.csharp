@@ -156,7 +156,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// </summary>
         private void Initialize()
         {
-            Paths = new PathsOperations(this);
+            Paths = new PathsOperations(new PathsOperationsWithHttpMessages(this));
             BaseUri = "http://{accountName}{host}";
             Host = "host";
             AcceptLanguage = "en-US";

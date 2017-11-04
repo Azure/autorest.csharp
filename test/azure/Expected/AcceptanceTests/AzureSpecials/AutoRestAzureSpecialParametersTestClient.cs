@@ -311,14 +311,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         private void Initialize()
         {
-            XMsClientRequestId = new XMsClientRequestIdOperations(this);
-            SubscriptionInCredentials = new SubscriptionInCredentialsOperations(this);
-            SubscriptionInMethod = new SubscriptionInMethodOperations(this);
-            ApiVersionDefault = new ApiVersionDefaultOperations(this);
-            ApiVersionLocal = new ApiVersionLocalOperations(this);
-            SkipUrlEncoding = new SkipUrlEncodingOperations(this);
-            Odata = new OdataOperations(this);
-            Header = new HeaderOperations(this);
+            XMsClientRequestId = new XMsClientRequestIdOperations(new XMsClientRequestIdOperationsWithHttpMessages(this));
+            SubscriptionInCredentials = new SubscriptionInCredentialsOperations(new SubscriptionInCredentialsOperationsWithHttpMessages(this));
+            SubscriptionInMethod = new SubscriptionInMethodOperations(new SubscriptionInMethodOperationsWithHttpMessages(this));
+            ApiVersionDefault = new ApiVersionDefaultOperations(new ApiVersionDefaultOperationsWithHttpMessages(this));
+            ApiVersionLocal = new ApiVersionLocalOperations(new ApiVersionLocalOperationsWithHttpMessages(this));
+            SkipUrlEncoding = new SkipUrlEncodingOperations(new SkipUrlEncodingOperationsWithHttpMessages(this));
+            Odata = new OdataOperations(new OdataOperationsWithHttpMessages(this));
+            Header = new HeaderOperations(new HeaderOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             ApiVersion = "2015-07-01-preview";
             AcceptLanguage = "en-US";

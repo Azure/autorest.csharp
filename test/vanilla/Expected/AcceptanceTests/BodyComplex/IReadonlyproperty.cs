@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,36 +17,35 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// </summary>
     public partial interface IReadonlyproperty
     {
+        IReadonlypropertyWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get complex types that have readonly properties
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        ReadonlyObj GetValid();
+
+        /// <summary>
+        /// Get complex types that have readonly properties
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<ReadonlyObj>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<ReadonlyObj> GetValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that have readonly properties
         /// </summary>
         /// <param name='size'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutValid(int? size = default(int?));
+
+        /// <summary>
+        /// Put complex types that have readonly properties
+        /// </summary>
+        /// <param name='size'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(int? size = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutValidAsync(int? size = default(int?), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

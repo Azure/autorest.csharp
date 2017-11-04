@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyByte
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,88 +17,73 @@ namespace Fixtures.AcceptanceTestsBodyByte
     /// </summary>
     public partial interface IByteModel
     {
+        IByteModelWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null byte value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetNull();
+
+        /// <summary>
+        /// Get null byte value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty byte value ''
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetEmpty();
+
+        /// <summary>
+        /// Get empty byte value ''
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetNonAscii();
+
+        /// <summary>
+        /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetNonAsciiWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetNonAsciiAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
         /// <param name='byteBody'>
         /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutNonAscii(byte[] byteBody);
+
+        /// <summary>
+        /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+        /// </summary>
+        /// <param name='byteBody'>
+        /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutNonAsciiWithHttpMessagesAsync(byte[] byteBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid byte value ':::SWAGGER::::'
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        byte[] GetInvalid();
+
+        /// <summary>
+        /// Get invalid byte value ':::SWAGGER::::'
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<byte[]>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<byte[]> GetInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -2,6 +2,7 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
+@using AutoRest.CSharp.vanilla.Templates.Rest.Common
 @inherits TemplateCs<CodeModelCs>
 @Header("// ")
 @EmptyLine
@@ -27,9 +28,13 @@ namespace @Settings.Namespace
         @XmlDocSummary("Initializes client properties.")
         private void Initialize()
         {
+        @if (Model.Methods.Any(m => m.Group.IsNullOrEmpty()))
+        {
+            @:this.OperationsWithHttpMessages = new @(Model.Name)WithHttpMessages(this);
+        }
         @foreach (var operation in Model.AllOperations) 
         {
-            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(new @(operation.TypeName)WithHttpMessages(this));
         }
 
         @if (Model.IsCustomBaseUri)
@@ -90,7 +95,7 @@ namespace @Settings.Namespace
     
         }    
     
-        @foreach (MethodCs method in Model.Methods.Where( m => m.Group.IsNullOrEmpty()))
+        @foreach (MethodCs method in Model.Methods.Where(m => m.Group.IsNullOrEmpty()))
         {
         @:@(Include(new MethodTemplate(), method))
         @EmptyLine

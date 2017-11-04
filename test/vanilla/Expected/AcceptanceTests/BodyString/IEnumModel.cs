@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyString
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,101 +17,97 @@ namespace Fixtures.AcceptanceTestsBodyString
     /// </summary>
     public partial interface IEnumModel
     {
+        IEnumModelWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Colors? GetNotExpandable();
+
+        /// <summary>
+        /// Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<Colors?>> GetNotExpandableWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Colors?> GetNotExpandableAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutNotExpandable(Colors stringBody);
+
+        /// <summary>
+        /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+        /// </summary>
+        /// <param name='stringBody'>
+        /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutNotExpandableWithHttpMessagesAsync(Colors stringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        Colors? GetReferenced();
+
+        /// <summary>
+        /// Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<Colors?>> GetReferencedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Colors?> GetReferencedAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         /// </summary>
         /// <param name='enumStringBody'>
         /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutReferenced(Colors enumStringBody);
+
+        /// <summary>
+        /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+        /// </summary>
+        /// <param name='enumStringBody'>
+        /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutReferencedWithHttpMessagesAsync(Colors enumStringBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get value 'green-color' from the constant.
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        RefColorConstant GetReferencedConstant();
+
+        /// <summary>
+        /// Get value 'green-color' from the constant.
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<RefColorConstant>> GetReferencedConstantWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<RefColorConstant> GetReferencedConstantAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Sends value 'green-color' from a constant
         /// </summary>
         /// <param name='field1'>
         /// Sample string.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutReferencedConstant(string field1 = default(string));
+
+        /// <summary>
+        /// Sends value 'green-color' from a constant
+        /// </summary>
+        /// <param name='field1'>
+        /// Sample string.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(string field1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutReferencedConstantAsync(string field1 = default(string), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

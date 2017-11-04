@@ -265,7 +265,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationAllSync
         /// </summary>
         private void Initialize()
         {
-            Duration = new DurationOperations(this);
+            Duration = new DurationOperations(new DurationOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

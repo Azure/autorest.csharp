@@ -11,8 +11,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,129 +19,121 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface ISkipUrlEncodingOperations
     {
+        ISkipUrlEncodingOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void GetMethodPathValid(string unencodedPathParam);
+
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetPathPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='unencodedPathParam'>
+        /// Unencoded path parameter with value 'path1/path2/path3'
+        /// </param>
+        void GetPathPathValid(string unencodedPathParam);
+
+        /// <summary>
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
+        /// </summary>
+        /// <param name='unencodedPathParam'>
+        /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetPathPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
+        /// </summary>
+        void GetSwaggerPathValid();
+
+        /// <summary>
+        /// Get method with unencoded path parameter with value 'path1/path2/path3'
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task GetSwaggerPathValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
         /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetMethodQueryValid(string q1);
+
+        /// <summary>
+        /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+        /// </summary>
+        /// <param name='q1'>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodQueryValidAsync(string q1, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value null
         /// </summary>
         /// <param name='q1'>
         /// Unencoded query parameter with value null
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetMethodQueryNull(string q1 = default(string));
+
+        /// <summary>
+        /// Get method with unencoded query parameter with value null
+        /// </summary>
+        /// <param name='q1'>
+        /// Unencoded query parameter with value null
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> GetMethodQueryNullWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetMethodQueryNullAsync(string q1 = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
         /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetPathQueryValidWithHttpMessagesAsync(string q1, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void GetPathQueryValid(string q1);
+
         /// <summary>
         /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='q1'>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetPathQueryValidAsync(string q1, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+        /// </summary>
+        void GetSwaggerQueryValid();
+
+        /// <summary>
+        /// Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task GetSwaggerQueryValidAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

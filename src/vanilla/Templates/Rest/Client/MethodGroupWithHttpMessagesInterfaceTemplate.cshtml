@@ -1,0 +1,48 @@
+@using System
+@using System.Linq;
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    @XmlDocSummary($"{Model.TypeName} operations.")
+    public partial interface I@(Model.TypeName)WithHttpMessages
+    {
+    @foreach(MethodCs method in Model.Methods)
+    {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
+        @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
+        foreach (var parameter in method.LocalParameters)
+        {
+        @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+        }
+        @XmlDocParamCustomHeaders()
+        @XmlDocParamCancellationToken()
+        @XmlDocException(method.OperationExceptionTypeString, "the operation returned an invalid status code")
+        @if (method.Responses.Where(r => r.Value.Body != null).Any())
+        {
+        @XmlDocException("Microsoft.Rest.SerializationException", "unable to deserialize the response")
+        }
+        @if (method.Parameters.Any(p => p.IsRequired && p.IsNullable()))
+        {
+        @XmlDocException("Microsoft.Rest.ValidationException", "a required parameter is null")
+        }
+        @if (method.Deprecated)
+        {
+        @:[System.Obsolete()]
+        }
+        @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(method.Name)Async(@(method.GetAsyncMethodParameterDeclaration(true)));
+    }
+    }
+}

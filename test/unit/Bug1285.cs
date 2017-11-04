@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedExtensions.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"Deprecated.cs"));
+                Assert.True(fileSystem.FileExists(@"Approved.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -63,12 +63,12 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operation is marked correctly
-                var deprecatedExtensions= asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.DeprecatedExtensions");
+                var deprecatedExtensions= asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Deprecated");
                 Assert.NotNull(deprecatedExtensions);
                 Assert.NotNull(deprecatedExtensions.GetMethod("Operation").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
                 // verify the other operations are not marked as deprecated
-                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ApprovedExtensions");
+                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Approved");
                 Assert.NotNull(approvedExtensions);
                 Assert.Null(approvedExtensions.GetMethod("Operation2").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.Null(approvedExtensions.GetMethod("Operation3").GetCustomAttribute(typeof(System.ObsoleteAttribute)));

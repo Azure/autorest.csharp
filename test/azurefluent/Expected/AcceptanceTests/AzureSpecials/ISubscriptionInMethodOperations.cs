@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,25 +19,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface ISubscriptionInMethodOperations
     {
+        ISubscriptionInMethodOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// This should appear as a method parameter, use value '1234-5678-9012-3456'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostMethodLocalValid(string subscriptionId);
+
+        /// <summary>
+        /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// This should appear as a method parameter, use value '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PostMethodLocalValidWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostMethodLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation
         /// should prevent you from making this call
@@ -47,56 +46,54 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// <param name='subscriptionId'>
         /// This should appear as a method parameter, use value null, client-side validation should prvenet the call
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostMethodLocalNull(string subscriptionId);
+
+        /// <summary>
+        /// POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation
+        /// should prevent you from making this call
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// This should appear as a method parameter, use value null, client-side validation should prvenet the call
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PostMethodLocalNullWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostMethodLocalNullAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// Should appear as a method parameter -use value '1234-5678-9012-3456'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostPathLocalValid(string subscriptionId);
+
+        /// <summary>
+        /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Should appear as a method parameter -use value '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PostPathLocalValidWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostPathLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostSwaggerLocalValid(string subscriptionId);
+
+        /// <summary>
+        /// POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PostSwaggerLocalValidWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostSwaggerLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

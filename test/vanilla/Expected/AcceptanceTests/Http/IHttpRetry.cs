@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,127 +17,139 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IHttpRetry
     {
+        IHttpRetryWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Return 408 status code, then 200 after retry
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Head408();
+
+        /// <summary>
+        /// Return 408 status code, then 200 after retry
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Head408WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Head408Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put500WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void Put500(bool? booleanValue = default(bool?));
+
         /// <summary>
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task Put500Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 500 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
+        /// </param>
+        void Patch500(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Return 500 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Patch500WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Patch500Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 502 status code, then 200 after retry
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Get502();
+
+        /// <summary>
+        /// Return 502 status code, then 200 after retry
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Get502WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Get502Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Post503WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void Post503(bool? booleanValue = default(bool?));
+
         /// <summary>
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task Post503Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 503 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
+        /// </param>
+        void Delete503(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Return 503 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Delete503WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Delete503Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put504WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void Put504(bool? booleanValue = default(bool?));
+
         /// <summary>
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task Put504Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Return 504 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
+        /// </param>
+        void Patch504(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Return 504 status code, then 200 after retry
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Patch504WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Patch504Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

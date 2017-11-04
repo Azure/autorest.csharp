@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,53 +19,61 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
     /// </summary>
     public partial interface IQueries
     {
+        IQueriesWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get a null array of string using the multi-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// a null array of string using the multi-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringMultiNull(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get a null array of string using the multi-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// a null array of string using the multi-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringMultiNullWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringMultiNullAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an empty array [] of string using the multi-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an empty array [] of string using the multi-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringMultiEmpty(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an empty array [] of string using the multi-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an empty array [] of string using the multi-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringMultiEmptyWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringMultiEmptyAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void ArrayStringMultiValid(IList<string> arrayQuery = default(IList<string>));
+
+        /// <summary>
+        /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format
+        /// </summary>
+        /// <param name='arrayQuery'>
+        /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> ArrayStringMultiValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task ArrayStringMultiValidAsync(IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

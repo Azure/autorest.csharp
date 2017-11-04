@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsUrl
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,6 +17,8 @@ namespace Fixtures.AcceptanceTestsUrl
     /// </summary>
     public partial interface IPathItems
     {
+        IPathItemsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
         /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
@@ -37,19 +36,29 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetAllWithValues(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string));
+
+        /// <summary>
+        /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+        /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+        /// pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
+        /// </summary>
+        /// <param name='localStringPath'>
+        /// should contain value 'localStringPath'
+        /// </param>
+        /// <param name='pathItemStringPath'>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value 'localStringQuery'
+        /// </param>
+        /// <param name='pathItemStringQuery'>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> GetAllWithValuesWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetAllWithValuesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
         /// localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
@@ -67,19 +76,29 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetGlobalQueryNull(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string));
+
+        /// <summary>
+        /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+        /// localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+        /// localStringQuery='localStringQuery'
+        /// </summary>
+        /// <param name='localStringPath'>
+        /// should contain value 'localStringPath'
+        /// </param>
+        /// <param name='pathItemStringPath'>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value 'localStringQuery'
+        /// </param>
+        /// <param name='pathItemStringQuery'>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> GetGlobalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetGlobalQueryNullAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
         /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
@@ -96,19 +115,28 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='pathItemStringQuery'>
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetGlobalAndLocalQueryNull(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string));
+
+        /// <summary>
+        /// send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+        /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+        /// </summary>
+        /// <param name='localStringPath'>
+        /// should contain value 'localStringPath'
+        /// </param>
+        /// <param name='pathItemStringPath'>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain null value
+        /// </param>
+        /// <param name='pathItemStringQuery'>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> GetGlobalAndLocalQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetGlobalAndLocalQueryNullAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
         /// localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
@@ -126,18 +154,28 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='pathItemStringQuery'>
         /// should contain value null
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void GetLocalPathItemQueryNull(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string));
+
+        /// <summary>
+        /// send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+        /// localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+        /// localStringQuery=null
+        /// </summary>
+        /// <param name='localStringPath'>
+        /// should contain value 'localStringPath'
+        /// </param>
+        /// <param name='pathItemStringPath'>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
+        /// <param name='localStringQuery'>
+        /// should contain value null
+        /// </param>
+        /// <param name='pathItemStringQuery'>
+        /// should contain value null
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> GetLocalPathItemQueryNullWithHttpMessagesAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetLocalPathItemQueryNullAsync(string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

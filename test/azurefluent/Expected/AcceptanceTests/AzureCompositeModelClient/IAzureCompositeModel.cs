@@ -113,13 +113,38 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='resourceGroupName'>
         /// Resource Group ID.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        CatalogArrayInner List(string resourceGroupName);
+
+        /// <summary>
+        /// Product Types
+        /// </summary>
+        /// <remarks>
+        /// The Products endpoint returns information about the Uber products offered at a given location. The response
+        /// includes the display name and other details about each product, and lists the products in the proper display order.
+        /// </remarks>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogArrayInner>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CatalogArrayInner> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Create products
+        /// </summary>
+        /// <remarks>
+        /// Resets products.
+        /// </remarks>
+        /// <param name='subscriptionId'>
+        /// Subscription ID.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
+        /// </param>
+        /// <param name='productDictionaryOfArray'>
+        /// Dictionary of Array of product
+        /// </param>
+        CatalogDictionaryInner Create(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>));
 
         /// <summary>
         /// Create products
@@ -136,13 +161,26 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='productDictionaryOfArray'>
         /// Dictionary of Array of product
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogDictionaryInner>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CatalogDictionaryInner> CreateAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<ProductInner>> productDictionaryOfArray = default(IDictionary<string, IList<ProductInner>>), CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Update products
+        /// </summary>
+        /// <remarks>
+        /// Resets products.
+        /// </remarks>
+        /// <param name='subscriptionId'>
+        /// Subscription ID.
+        /// </param>
+        /// <param name='resourceGroupName'>
+        /// Resource Group ID.
+        /// </param>
+        /// <param name='productArrayOfDictionary'>
+        /// Array of dictionary of products
+        /// </param>
+        CatalogArrayInner Update(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>));
 
         /// <summary>
         /// Update products
@@ -159,13 +197,9 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// <param name='productArrayOfDictionary'>
         /// Array of dictionary of products
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogArrayInner>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<CatalogArrayInner> UpdateAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

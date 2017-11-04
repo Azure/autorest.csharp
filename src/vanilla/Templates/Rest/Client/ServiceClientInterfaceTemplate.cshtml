@@ -45,25 +45,42 @@ namespace @Settings.Namespace
         @EmptyLine
         @:
     }
-     
-    @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
+
+
+    @foreach (MethodCs method in Model.Methods.Where(m => m.Group.IsNullOrEmpty()))
     {
         if (method.ExcludeFromInterface)
         {
             continue;
         }
 
-        @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
-        foreach (var parameter in method.LocalParameters)
-        {
-        @XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
-        }
-        @XmlDocParamCustomHeaders()
-        @XmlDocParamCancellationToken()
-        @:System.Threading.Tasks.Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
-        @EmptyLine
-        @:
+if (method.SyncMethods == SyncMethodsGenerationMode.All || method.SyncMethods == SyncMethodsGenerationMode.Essential)
+{
+    @XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
+    foreach (var parameter in method.LocalParameters)
+    {
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
     }
+@if (method.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@:@(method.ReturnTypeString) @(method.Name)(@method.GetSyncMethodParameterDeclaration(false));
+@EmptyLine
+}
 
+@XmlDocHandleDescriptionSummaryExternalDocs(method.Description, method.Summary, method.ExternalDocsUrl)
+foreach (var parameter in method.LocalParameters)
+{
+@XmlDocParamRaw(parameter.Name, parameter.Documentation.EscapeXmlComment())
+}
+@XmlDocParamCancellationToken()
+@if (method.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@:@(method.TaskExtensionReturnTypeString) @(method.Name)Async(@method.GetAsyncMethodParameterDeclaration());
+
+    }
     }
 }

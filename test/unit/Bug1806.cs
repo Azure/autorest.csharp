@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"ContainerServicesOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"ContainerServicesOperationsWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // now read from the file to ensure we have the try catch block as expected
-                var codeText = fileSystem.ReadAllText(@"ContainerServicesOperations.cs");
+                var codeText = fileSystem.ReadAllText(@"ContainerServicesOperationsWithHttpMessages.cs");
                 
                 Assert.NotEmpty(codeText);
                 // is a CloudException object created?

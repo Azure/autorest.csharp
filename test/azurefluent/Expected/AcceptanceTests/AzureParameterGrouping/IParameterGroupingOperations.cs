@@ -11,8 +11,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -21,41 +19,44 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
     /// </summary>
     public partial interface IParameterGroupingOperations
     {
+        IParameterGroupingOperationsWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Post a bunch of required parameters grouped
         /// </summary>
         /// <param name='parameterGroupingPostRequiredParameters'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters);
+
+        /// <summary>
+        /// Post a bunch of required parameters grouped
+        /// </summary>
+        /// <param name='parameterGroupingPostRequiredParameters'>
+        /// Additional parameters for the operation
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<AzureOperationResponse> PostRequiredWithHttpMessagesAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post a bunch of optional parameters grouped
         /// </summary>
         /// <param name='parameterGroupingPostOptionalParameters'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParametersInner));
+
+        /// <summary>
+        /// Post a bunch of optional parameters grouped
+        /// </summary>
+        /// <param name='parameterGroupingPostOptionalParameters'>
+        /// Additional parameters for the operation
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PostOptionalWithHttpMessagesAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParametersInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParametersInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post parameters from multiple different parameter groups
         /// </summary>
@@ -65,31 +66,38 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
         /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostMultiParamGroups(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroupInner));
+
+        /// <summary>
+        /// Post parameters from multiple different parameter groups
+        /// </summary>
+        /// <param name='firstParameterGroup'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
+        /// Additional parameters for the operation
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroupInner), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post parameters with a shared parameter group object
         /// </summary>
         /// <param name='firstParameterGroup'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PostSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner));
+
+        /// <summary>
+        /// Post parameters with a shared parameter group object
+        /// </summary>
+        /// <param name='firstParameterGroup'>
+        /// Additional parameters for the operation
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PostSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -1,0 +1,46 @@
+﻿@using AutoRest.CSharp.Azure.Model
+@using AutoRest.Core.Utilities
+
+@inherits TemplateCs<AutoRest.CSharp.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System.Linq;
+    using Microsoft.Rest;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.TypeName) operations.
+    /// </summary>
+    internal partial class @(Model.TypeName)WithHttpMessages : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)WithHttpMessages
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.TypeName) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        internal @(Model.TypeName)WithHttpMessages(@Model.CodeModel.Name client)
+        {
+            @ParamNullCheck("client")
+            this.Client = client;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @Model.CodeModel.Name
+        /// </summary>
+        public @Model.CodeModel.Name Client { get; private set; }
+        @EmptyLine
+        @foreach (var method in Model.Methods)
+        {
+        @:@(Include(DependencyInjection.New<AzureMethodWithHttpMessagesTemplate>(), (MethodCsa)method))
+        @EmptyLine
+        }
+    }
+}

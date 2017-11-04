@@ -86,7 +86,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// </summary>
         private void Initialize()
         {
-            Paths = new Paths(this);
+            Paths = new Paths(new PathsWithHttpMessages(this));
             BaseUri = "{vault}{secret}{dnsSuffix}";
             DnsSuffix = "host";
             SerializationSettings = new JsonSerializerSettings

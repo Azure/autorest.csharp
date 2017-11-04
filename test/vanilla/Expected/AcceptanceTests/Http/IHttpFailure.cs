@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,53 +17,43 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IHttpFailure
     {
+        IHttpFailureWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get empty error form server
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<bool?>> GetEmptyErrorWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        bool? GetEmptyError();
+
         /// <summary>
         /// Get empty error form server
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<bool?>> GetNoModelErrorWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool?> GetEmptyErrorAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get empty error form server
+        /// </summary>
+        bool? GetNoModelError();
+
+        /// <summary>
+        /// Get empty error form server
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<bool?> GetNoModelErrorAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty response from server
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        bool? GetNoModelEmpty();
+
+        /// <summary>
+        /// Get empty response from server
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='Microsoft.Rest.HttpOperationException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<bool?>> GetNoModelEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool?> GetNoModelEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

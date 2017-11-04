@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// </summary>
         private void Initialize()
         {
-            Paths = new Paths(this);
+            Paths = new Paths(new PathsWithHttpMessages(this));
             BaseUri = "http://{accountName}{host}";
             Host = "host";
             SerializationSettings = new JsonSerializerSettings

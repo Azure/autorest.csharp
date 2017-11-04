@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// </summary>
         private void Initialize()
         {
-            ByteModel = new ByteModel(this);
+            ByteModel = new ByteModel(new ByteModelWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// </summary>
         private void Initialize()
         {
-            BoolModel = new BoolModel(this);
+            BoolModel = new BoolModel(new BoolModelWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

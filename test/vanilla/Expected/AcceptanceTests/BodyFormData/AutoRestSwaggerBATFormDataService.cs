@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// </summary>
         private void Initialize()
         {
-            Formdata = new Formdata(this);
+            Formdata = new Formdata(new FormdataWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

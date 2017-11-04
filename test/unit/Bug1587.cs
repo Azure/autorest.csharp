@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"SimpleAPIClient.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIClientWithHttpMessages.cs"));
 
                 // compilation is key in this test, as `x-ms-long-running-operation: false`
                 // creates method that contains call to non-existent method.
@@ -60,14 +60,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that correct methods exist.
-                var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIClient");
+                var simpleApi = asm.DefinedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIClientWithHttpMessages");
                 Assert.NotNull(simpleApi);
-                Assert.NotNull(simpleApi.GetMethod("Lru0WithHttpMessagesAsync"));
-                Assert.NotNull(simpleApi.GetMethod("Lru1WithHttpMessagesAsync"));
-                Assert.NotNull(simpleApi.GetMethod("Lru2WithHttpMessagesAsync"));
-                Assert.Null(simpleApi.GetMethod("BeginLru0WithHttpMessagesAsync"));
-                Assert.NotNull(simpleApi.GetMethod("BeginLru1WithHttpMessagesAsync"));
-                Assert.Null(simpleApi.GetMethod("BeginLru2WithHttpMessagesAsync"));
+                Assert.NotNull(simpleApi.GetMethod("Lru0Async"));
+                Assert.NotNull(simpleApi.GetMethod("Lru1Async"));
+                Assert.NotNull(simpleApi.GetMethod("Lru2Async"));
+                Assert.Null(simpleApi.GetMethod("BeginLru0Async"));
+                Assert.NotNull(simpleApi.GetMethod("BeginLru1Async"));
+                Assert.Null(simpleApi.GetMethod("BeginLru2Async"));
             }
         }
     }

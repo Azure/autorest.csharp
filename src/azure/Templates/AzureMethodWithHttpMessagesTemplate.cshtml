@@ -1,0 +1,100 @@
+@using System
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.vanilla.Templates.Rest.Client
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
+
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include(new MethodWithHttpMessagesTemplate(), (MethodCs)Model))
+}
+else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+{
+if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrWhiteSpace(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
+{
+@:/// <see href="@Model.ExternalDocsUrl" />
+}
+@:/// </summary>
+}
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+}
+foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
+@:/// </param>
+}
+@:/// <param name='customHeaders'>
+@:/// The headers that will be added to request.
+@:/// </param>
+@:/// <param name='cancellationToken'>
+@:/// The cancellation token.
+@:/// </param>
+<text>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
+{
+    // Send request
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
+
+    return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+}
+</text>
+}
+else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
+{
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
+{
+@:/// <see href="@Model.ExternalDocsUrl" />
+}
+@:/// </summary>
+}
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+}
+foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
+@:/// </param>
+}
+@:/// <param name='customHeaders'>
+@:/// The headers that will be added to request.
+@:/// </param>
+@:/// <param name='cancellationToken'>
+@:/// The cancellation token.
+@:/// </param>
+<text>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
+{
+    // Send Request
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
+
+    return await this.Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+}
+</text>
+}

@@ -10,43 +10,40 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
 {
     using Microsoft.Rest;
     using Models;
-    using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Net;
-    using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
     /// Paths operations.
     /// </summary>
-    public partial class Paths : IServiceOperations<AutoRestParameterizedCustomHostTestClient>, IPaths
+    public partial class Paths : IPaths
     {
         /// <summary>
         /// Initializes a new instance of the Paths class.
         /// </summary>
-        /// <param name='client'>
-        /// Reference to the service client
+        /// <param name='operationsWithHttpMessages'>
+        /// Reference to the low level operations
         /// </param>
         /// <exception cref='System.ArgumentNullException'>
         /// Thrown when a required parameter is null.
         /// </exception>
-        public Paths(AutoRestParameterizedCustomHostTestClient client)
+        public Paths(IPathsWithHttpMessages operationsWithHttpMessages)
         {
-            if (client == null)
+            if (operationsWithHttpMessages == null)
             {
-                throw new System.ArgumentNullException(nameof(client));
+                throw new System.ArgumentNullException(nameof(operationsWithHttpMessages));
             }
-            Client = client;
+            OperationsWithHttpMessages = operationsWithHttpMessages;
         }
 
-        /// <summary>
-        /// Gets a reference to the AutoRestParameterizedCustomHostTestClient.
-        /// </summary>
-        public AutoRestParameterizedCustomHostTestClient Client { get; private set; }
+        private IPathsWithHttpMessages OperationsWithHttpMessages { get; set; }
+
+        public IPathsWithHttpMessages WithHttpMessages()
+        {
+            return OperationsWithHttpMessages;
+        }
 
         /// <summary>
         /// Get a 200 to test a valid base uri
@@ -63,148 +60,32 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <param name='keyVersion'>
         /// The key version. Default value 'v1'.
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        public void GetEmpty(string vault, string secret, string keyName, string keyVersion = "v1")
+        {
+            GetEmptyAsync(vault, secret, keyName, keyVersion).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Get a 200 to test a valid base uri
+        /// </summary>
+        /// <param name='vault'>
+        /// The vault name, e.g. https://myvault
+        /// </param>
+        /// <param name='secret'>
+        /// Secret value.
+        /// </param>
+        /// <param name='keyName'>
+        /// The key name with value 'key1'.
+        /// </param>
+        /// <param name='keyVersion'>
+        /// The key version. Default value 'v1'.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <exception cref='System.ArgumentNullException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string vault, string secret, string keyName, string keyVersion = "v1", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = "v1", CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (vault == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(vault));
-            }
-            if (secret == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(secret));
-            }
-            if (Client.DnsSuffix == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.DnsSuffix));
-            }
-            if (keyName == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(keyName));
-            }
-            if (Client.SubscriptionId == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, nameof(Client.SubscriptionId));
-            }
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("vault", vault);
-                tracingParameters.Add("secret", secret);
-                tracingParameters.Add("keyName", keyName);
-                tracingParameters.Add("keyVersion", keyVersion);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetEmpty", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri;
-            string _url = _baseUrl.TrimEnd('/') + "/" + "customuri/{subscriptionId}/{keyName}";
-            _url = _url.Replace("{vault}", vault);
-            _url = _url.Replace("{secret}", secret);
-            _url = _url.Replace("{dnsSuffix}", Client.DnsSuffix);
-            _url = _url.Replace("{keyName}", System.Uri.EscapeDataString(keyName));
-            _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
-            List<string> _queryParameters = new List<string>();
-            if (keyVersion != null)
-            {
-                _queryParameters.Add(string.Format("keyVersion={0}", System.Uri.EscapeDataString(keyVersion)));
-            }
-            if (_queryParameters.Count > 0)
-            {
-                _url += "?" + string.Join("&", _queryParameters);
-            }
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
-
-
-            if (customHeaders != null)
-            {
-                foreach (var _header in customHeaders)
-                {
-                    _httpRequest.Headers.Remove(_header.Key);
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+            (await OperationsWithHttpMessages.GetEmptyAsync(vault, secret, keyName, keyVersion, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
 
     }

@@ -264,7 +264,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </summary>
         private void Initialize()
         {
-            HttpSuccess = new HttpSuccessOperations(this);
+            HttpSuccess = new HttpSuccessOperations(new HttpSuccessOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

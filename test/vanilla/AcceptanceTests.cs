@@ -55,7 +55,7 @@ using Newtonsoft.Json;
 using Xunit;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using ErrorException = Fixtures.AcceptanceTestsHttp.Models.ErrorException;
-using SwaggerPetstoreV2Extensions = Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions;
+using SwaggerPetstoreV2Extensions = Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2;
 using System.Net.Http.Headers;
 using System.Reflection;
 
@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Tests
             client2.ApiVersion = "abc";
             exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
             Assert.Equal(ValidationRules.Pattern, exception.Rule);
-            Assert.Equal("ApiVersion", exception.Target);
+            Assert.Equal("Client.ApiVersion", exception.Target);
         }
 
         [Fact]
@@ -1386,12 +1386,12 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamInteger("negative", -2);
 
                 // POST response/prim/integer
-                var responseInteger = client.Header.ResponseIntegerWithHttpMessagesAsync("positive").Result;
+                var responseInteger = client.Header.WithHttpMessages().ResponseIntegerAsync("positive").Result;
                 Assert.Equal(1, int.Parse(responseInteger.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(1, responseInteger.Headers.Value);
 
-                responseInteger = client.Header.ResponseIntegerWithHttpMessagesAsync("negative").Result;
+                responseInteger = client.Header.WithHttpMessages().ResponseIntegerAsync("negative").Result;
                 Assert.Equal(-2, int.Parse(responseInteger.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(-2, responseInteger.Headers.Value);
@@ -1401,12 +1401,12 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamLong("negative", -2);
 
                 // POST response/prim/long
-                var responseLong = client.Header.ResponseLongWithHttpMessagesAsync("positive").Result;
+                var responseLong = client.Header.WithHttpMessages().ResponseLongAsync("positive").Result;
                 Assert.Equal(105, long.Parse(responseLong.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(105, responseLong.Headers.Value);
 
-                responseLong = client.Header.ResponseLongWithHttpMessagesAsync("negative").Result;
+                responseLong = client.Header.WithHttpMessages().ResponseLongAsync("negative").Result;
                 Assert.Equal(-2, long.Parse(responseLong.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(-2, responseLong.Headers.Value);
@@ -1416,13 +1416,13 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamFloat("negative", -3.0);
 
                 // POST response/prim/float
-                var responseFloat = client.Header.ResponseFloatWithHttpMessagesAsync("positive").Result;
+                var responseFloat = client.Header.WithHttpMessages().ResponseFloatAsync("positive").Result;
                 Assert.True(Math.Abs(0.07 -
                                      float.Parse(responseFloat.Response.Headers.GetValues("value").FirstOrDefault(),
                                          CultureInfo.InvariantCulture)) < 0.00001);
                 Assert.True(Math.Abs(0.07 - responseFloat.Headers.Value.Value) < 0.00001);
 
-                responseFloat = client.Header.ResponseFloatWithHttpMessagesAsync("negative").Result;
+                responseFloat = client.Header.WithHttpMessages().ResponseFloatAsync("negative").Result;
                 Assert.True(Math.Abs(-3 -
                                      float.Parse(responseFloat.Response.Headers.GetValues("value").FirstOrDefault(),
                                          CultureInfo.InvariantCulture)) < 0.00001);
@@ -1433,12 +1433,12 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamDouble("negative", -3.0);
 
                 // POST response/prim/double
-                var responseDouble = client.Header.ResponseDoubleWithHttpMessagesAsync("positive").Result;
+                var responseDouble = client.Header.WithHttpMessages().ResponseDoubleAsync("positive").Result;
                 Assert.Equal(7e120, double.Parse(responseDouble.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(7e120, responseDouble.Headers.Value);
 
-                responseDouble = client.Header.ResponseDoubleWithHttpMessagesAsync("negative").Result;
+                responseDouble = client.Header.WithHttpMessages().ResponseDoubleAsync("negative").Result;
                 Assert.Equal(-3, double.Parse(responseDouble.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
                 Assert.Equal(-3, responseDouble.Headers.Value);
@@ -1448,11 +1448,11 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamBool("false", false);
 
                 // POST response/prim/bool
-                var responseBool = client.Header.ResponseBoolWithHttpMessagesAsync("true").Result;
+                var responseBool = client.Header.WithHttpMessages().ResponseBoolAsync("true").Result;
                 Assert.Equal(true, bool.Parse(responseBool.Response.Headers.GetValues("value").FirstOrDefault()));
                 Assert.Equal(true, responseBool.Headers.Value);
 
-                responseBool = client.Header.ResponseBoolWithHttpMessagesAsync("false").Result;
+                responseBool = client.Header.WithHttpMessages().ResponseBoolAsync("false").Result;
                 Assert.Equal(false, bool.Parse(responseBool.Response.Headers.GetValues("value").FirstOrDefault()));
                 Assert.Equal(false, responseBool.Headers.Value);
 
@@ -1462,16 +1462,16 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamString("empty", "");
 
                 // POST response/prim/string
-                var responseString = client.Header.ResponseStringWithHttpMessagesAsync("valid").Result;
+                var responseString = client.Header.WithHttpMessages().ResponseStringAsync("valid").Result;
                 Assert.Equal("The quick brown fox jumps over the lazy dog",
                     responseString.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal("The quick brown fox jumps over the lazy dog", responseString.Headers.Value);
 
-                responseString = client.Header.ResponseStringWithHttpMessagesAsync("null").Result;
+                responseString = client.Header.WithHttpMessages().ResponseStringAsync("null").Result;
                 Assert.Equal("null", responseString.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal("null", responseString.Headers.Value);
 
-                responseString = client.Header.ResponseStringWithHttpMessagesAsync("empty").Result;
+                responseString = client.Header.WithHttpMessages().ResponseStringAsync("empty").Result;
                 Assert.Equal("", responseString.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal("", responseString.Headers.Value);
 
@@ -1480,11 +1480,11 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamEnum("null", null);
 
                 // POST response/prim/enum
-                var responseEnum = client.Header.ResponseEnumWithHttpMessagesAsync("valid").Result;
+                var responseEnum = client.Header.WithHttpMessages().ResponseEnumAsync("valid").Result;
                 Assert.Equal("GREY", responseEnum.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal(GreyscaleColors.GREY, responseEnum.Headers.Value);
 
-                responseEnum = client.Header.ResponseEnumWithHttpMessagesAsync("null").Result;
+                responseEnum = client.Header.WithHttpMessages().ResponseEnumAsync("null").Result;
 
                 Assert.Equal("", responseEnum.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal(null, responseEnum.Headers.Value);
@@ -1494,13 +1494,13 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamDate("min", DateTime.MinValue);
 
                 // POST response/prim/date
-                var responseDate = client.Header.ResponseDateWithHttpMessagesAsync("valid").Result;
+                var responseDate = client.Header.WithHttpMessages().ResponseDateAsync("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Local)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDate.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
                 Assert.Equal(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Local), responseDate.Headers.Value);
 
-                responseDate = client.Header.ResponseDateWithHttpMessagesAsync("min").Result;
+                responseDate = client.Header.WithHttpMessages().ResponseDateAsync("min").Result;
                 Assert.Equal(DateTime.MinValue,
                     JsonConvert.DeserializeObject<DateTime>(
                         "\"" + responseDate.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
@@ -1511,13 +1511,13 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamDatetime("min", DateTime.MinValue);
 
                 // POST response/prim/datetime
-                var responseDateTime = client.Header.ResponseDatetimeWithHttpMessagesAsync("valid").Result;
+                var responseDateTime = client.Header.WithHttpMessages().ResponseDatetimeAsync("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDateTime.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
                 Assert.Equal(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc), responseDateTime.Headers.Value);
 
-                responseDateTime = client.Header.ResponseDatetimeWithHttpMessagesAsync("min").Result;
+                responseDateTime = client.Header.WithHttpMessages().ResponseDatetimeAsync("min").Result;
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDateTime.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
@@ -1528,7 +1528,7 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamDatetimeRfc1123("min", DateTime.MinValue);
 
                 //POST response/prim/datetimerfc1123
-                var responseDateTimeRfc1123 = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("valid").Result;
+                var responseDateTimeRfc1123 = client.Header.WithHttpMessages().ResponseDatetimeRfc1123Async("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
@@ -1536,7 +1536,7 @@ namespace AutoRest.CSharp.Tests
                     responseDateTimeRfc1123.Headers.Value);
                 Assert.Equal(DateTimeKind.Utc, responseDateTimeRfc1123.Headers.Value.Value.Kind);
 
-                responseDateTimeRfc1123 = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
+                responseDateTimeRfc1123 = client.Header.WithHttpMessages().ResponseDatetimeRfc1123Async("min").Result;
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
@@ -1548,7 +1548,7 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));
 
                 // POST response/prim/duration
-                var responseDuration = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
+                var responseDuration = client.Header.WithHttpMessages().ResponseDurationAsync("valid").Result;
                 Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
                     JsonConvert.DeserializeObject<TimeSpan?>(
                         "\"" + responseDuration.Response.Headers.GetValues("value").FirstOrDefault() + "\"",
@@ -1560,7 +1560,7 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamByte("valid", Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
 
                 // POST response/prim/byte
-                var responseByte = client.Header.ResponseByteWithHttpMessagesAsync("valid").Result;
+                var responseByte = client.Header.WithHttpMessages().ResponseByteAsync("valid").Result;
                 Assert.Equal(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"),
                     JsonConvert.DeserializeObject<byte[]>(
                         "\"" + responseByte.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
@@ -1571,7 +1571,7 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamExistingKey("overwrite");
 
                 // POST response/existingkey
-                var responseExistingKey = client.Header.ResponseExistingKeyWithHttpMessagesAsync().Result;
+                var responseExistingKey = client.Header.WithHttpMessages().ResponseExistingKeyAsync().Result;
                 Assert.Equal("overwrite", responseExistingKey.Response.Headers.GetValues("User-Agent").FirstOrDefault());
                 Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
 
@@ -1579,7 +1579,7 @@ namespace AutoRest.CSharp.Tests
                 client.Header.ParamProtectedKey("text/html"); // Content-Type header ignored by default now (according to spec.)
 
                 // POST response/protectedkey
-                var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
+                var responseProtectedKey = client.Header.WithHttpMessages().ResponseProtectedKeyAsync().Result;
                 Assert.False(responseProtectedKey.Response.Headers.Any(header => header.Key == "Content-Type"));
 
                 var customHeader = new Dictionary<string, List<string>>
@@ -1590,7 +1590,7 @@ namespace AutoRest.CSharp.Tests
                 };
 
                 Assert.Equal(HttpStatusCode.OK,
-                    client.Header.CustomRequestIdWithHttpMessagesAsync(customHeader).Result.Response.StatusCode);
+                    client.Header.WithHttpMessages().CustomRequestIdAsync(customHeader).Result.Response.StatusCode);
             }
         }
 
@@ -1797,26 +1797,26 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head300WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head302WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get301WithHttpMessagesAsync());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Head300Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Get300Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Head302Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Head301Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Get301Async());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            //EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.Put301WithHttpMessagesAsync(true));
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
+            //EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.WithHttpMessages().Put301Async(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Get302Async());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            // EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+            // EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.WithHttpMessages().Patch302Async(true));
             //TODO, Fix this test on PORTABLE
-            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
+            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Post303Async(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Head307Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Get307Async());
             //TODO, 4042586: Support options operations in swagger modeler
-            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Options307WithHttpMessagesAsync());
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Put307WithHttpMessagesAsync(true));
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post307WithHttpMessagesAsync(true));
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Patch307WithHttpMessagesAsync(true));
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Delete307WithHttpMessagesAsync(true));
+            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Options307Async());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Put307Async(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Post307Async(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Patch307Async(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.WithHttpMessages().Delete307Async(true));
         }
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
@@ -1918,48 +1918,48 @@ namespace AutoRest.CSharp.Tests
             using (var client = new AutoRestRequiredOptionalTestService(Fixture.Uri))
             {
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ImplicitModel.PutOptionalQueryWithHttpMessagesAsync(null).Result.Response.StatusCode);
+                    client.ImplicitModel.WithHttpMessages().PutOptionalQueryAsync(null).Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ImplicitModel.PutOptionalBodyWithHttpMessagesAsync(null).Result.Response.StatusCode);
+                    client.ImplicitModel.WithHttpMessages().PutOptionalBodyAsync(null).Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ImplicitModel.PutOptionalHeaderWithHttpMessagesAsync(null).Result.Response.StatusCode);
+                    client.ImplicitModel.WithHttpMessages().PutOptionalHeaderAsync(null).Result.Response.StatusCode);
                 // This is wrong! Global parameters not working...
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ImplicitModel.GetOptionalGlobalQueryWithHttpMessagesAsync(null)
+                    client.ImplicitModel.WithHttpMessages().GetOptionalGlobalQueryAsync(null)
                         .Result.Response.StatusCode);
 
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalIntegerParameterWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalIntegerParameterAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalIntegerPropertyWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalIntegerPropertyAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalIntegerHeaderWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalIntegerHeaderAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalStringParameterWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalStringParameterAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalStringPropertyWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalStringPropertyAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalStringHeaderWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalStringHeaderAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalClassParameterWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalClassParameterAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalClassPropertyWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalClassPropertyAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalArrayParameterWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalArrayParameterAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalArrayPropertyWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalArrayPropertyAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalArrayHeaderWithHttpMessagesAsync(null)
+                    client.ExplicitModel.WithHttpMessages().PostOptionalArrayHeaderAsync(null)
                         .Result.Response.StatusCode);
             }
         }
@@ -1972,7 +1972,7 @@ namespace AutoRest.CSharp.Tests
                 // small modification to the "host" portion to include the port and the '.'
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+                    client.Paths.WithHttpMessages().GetEmptyAsync("local").Result.Response.StatusCode);
             }
         }
 
@@ -1985,7 +1985,7 @@ namespace AutoRest.CSharp.Tests
                 // small modification to the "host" portion to include the port and the '.'
                 client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", "host", Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
+                    client.Paths.WithHttpMessages().GetEmptyAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
             }
         }
 
@@ -2278,17 +2278,9 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void SyncMethodsValidation()
         {
-            var petstoreWithAllSyncMethods = typeof(SwaggerPetstoreV2Extensions);
-            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPet"));
-            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPetWithHttpMessages"));
-
-            var petstoreWithNoSyncMethods = typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2Extensions);
-            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPet"));
-            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPetWithHttpMessages"));
-
-            var petstoreWithEssentialSyncMethods = typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2Extensions);
-            Assert.NotNull(petstoreWithEssentialSyncMethods.GetMethod("AddPet"));
-            Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
+            Assert.NotNull(typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2).GetMethod("AddPet"));
+            Assert.Null(typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2).GetMethod("AddPet"));
+            Assert.NotNull(typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2).GetMethod("AddPet"));
         }
 
         [Fact]
@@ -2303,9 +2295,9 @@ namespace AutoRest.CSharp.Tests
         public async Task EnsureHiddenMethodsMissingTest()
         {
             // Confirm the method exists in body-complex, which hidden methods is based on
-            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperations).GetMethod("PutValidWithHttpMessagesAsync");
+            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperationsWithHttpMessages).GetMethod("PutValidAsync");
             // Make sure it is missing for hidden methods
-            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
+            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperationsWithHttpMessages).GetMethod(knownMethod.Name);
             Assert.Null(missingMethod);
 
             // Use the facade method

@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
                 Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponse.cs"));
                 Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponseModel.cs"));
                 Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponseModelModel.cs"));
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.Equal(typeof(bool?), cowbellResponseBoolProp.PropertyType);
 
                 // verify that signatures are correct
-                var simpleApiExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIExtensions");
+                var simpleApiExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPI");
                 Assert.NotNull(simpleApiExtensions);
                 var cowbellMethod0 = simpleApiExtensions.GetMethod("Cowbell");
                 var cowbellMethod1 = simpleApiExtensions.GetMethod("Cowbell1");

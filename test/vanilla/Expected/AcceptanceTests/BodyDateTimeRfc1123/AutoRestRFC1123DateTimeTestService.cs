@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         /// </summary>
         private void Initialize()
         {
-            Datetimerfc1123 = new Datetimerfc1123(this);
+            Datetimerfc1123 = new Datetimerfc1123(new Datetimerfc1123WithHttpMessages(this));
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -8,10 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using Microsoft.Rest;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -20,284 +17,307 @@ namespace Fixtures.AcceptanceTestsHttp
     /// </summary>
     public partial interface IHttpSuccess
     {
+        IHttpSuccessWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Return 200 status code if successful
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Head200();
+
+        /// <summary>
+        /// Return 200 status code if successful
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Head200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Head200Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get 200 success
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        bool? Get200();
+
+        /// <summary>
+        /// Get 200 success
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<bool?>> Get200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool?> Get200Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put boolean value true returning 200 success
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Put200(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put boolean value true returning 200 success
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put200WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Put200Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Patch true Boolean value in request returning 200
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Patch200(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Patch true Boolean value in request returning 200
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Patch200WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Patch200Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post bollean value true in request that returns a 200
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Post200(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post bollean value true in request that returns a 200
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Post200WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Post200Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete simple boolean value true returns 200
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Delete200(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Delete simple boolean value true returns 200
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Delete200WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Delete200Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put true Boolean value in request returns 201
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Put201(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put true Boolean value in request returns 201
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put201WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Put201Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post true Boolean value in request returns 201 (Created)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Post201(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post true Boolean value in request returns 201 (Created)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Post201WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Post201Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Put202(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put true Boolean value in request returns 202 (Accepted)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put202WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Put202Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Patch true Boolean value in request returns 202
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Patch202(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Patch true Boolean value in request returns 202
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Patch202WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Patch202Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Post202(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post true Boolean value in request returns 202 (Accepted)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Post202WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Post202Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete true Boolean value in request returns 202 (accepted)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Delete202(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Delete true Boolean value in request returns 202 (accepted)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Delete202WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Delete202Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 204 status code if successful
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Head204();
+
+        /// <summary>
+        /// Return 204 status code if successful
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Head204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Head204Async(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Put204(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Put true Boolean value in request returns 204 (no content)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Put204WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Put204Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Patch true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Patch204(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Patch true Boolean value in request returns 204 (no content)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Patch204WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Patch204Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Post204(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Post true Boolean value in request returns 204 (no content)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Post204WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Post204Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void Delete204(bool? booleanValue = default(bool?));
+
+        /// <summary>
+        /// Delete true Boolean value in request returns 204 (no content)
+        /// </summary>
+        /// <param name='booleanValue'>
+        /// Simple boolean value true
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Delete204WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Delete204Async(bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Return 404 status code
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        void Head404();
+
+        /// <summary>
+        /// Return 404 status code
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        Task<HttpOperationResponse> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task Head404Async(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

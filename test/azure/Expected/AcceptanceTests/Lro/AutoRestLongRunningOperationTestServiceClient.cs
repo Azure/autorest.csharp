@@ -280,10 +280,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         private void Initialize()
         {
-            LROs = new LROsOperations(this);
-            LRORetrys = new LRORetrysOperations(this);
-            LROSADs = new LROSADsOperations(this);
-            LROsCustomHeader = new LROsCustomHeaderOperations(this);
+            LROs = new LROsOperations(new LROsOperationsWithHttpMessages(this));
+            LRORetrys = new LRORetrysOperations(new LRORetrysOperationsWithHttpMessages(this));
+            LROSADs = new LROSADsOperations(new LROSADsOperationsWithHttpMessages(this));
+            LROsCustomHeader = new LROsCustomHeaderOperations(new LROsCustomHeaderOperationsWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

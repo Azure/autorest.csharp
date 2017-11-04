@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         /// </summary>
         private void Initialize()
         {
-            Queries = new Queries(this);
+            Queries = new Queries(new QueriesWithHttpMessages(this));
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

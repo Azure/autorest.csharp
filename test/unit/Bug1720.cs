@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that class with the expected name is present
-                var ops = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.JobDefinitionsOperationsExtensions");
+                var ops = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.JobDefinitionsOperations");
                 Assert.NotNull(ops);
 
                 // verify the method is there.

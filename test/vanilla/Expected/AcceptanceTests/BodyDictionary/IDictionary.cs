@@ -8,7 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsBodyDictionary
 {
-    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -20,1090 +19,877 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
     /// </summary>
     public partial interface IDictionary
     {
+        IDictionaryWithHttpMessages WithHttpMessages();
+
         /// <summary>
         /// Get null dictionary value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetNull();
+
+        /// <summary>
+        /// Get null dictionary value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, int?>> GetNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty dictionary value {}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetEmpty();
+
+        /// <summary>
+        /// Get empty dictionary value {}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, int?>> GetEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value empty {}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutEmpty(IDictionary<string, string> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value empty {}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get Dictionary with null value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetNullValue();
+
+        /// <summary>
+        /// Get Dictionary with null value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetNullValueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetNullValueAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get Dictionary with null key
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetNullKey();
+
+        /// <summary>
+        /// Get Dictionary with null key
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetNullKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetNullKeyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get Dictionary with key as empty string
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetEmptyStringKey();
+
+        /// <summary>
+        /// Get Dictionary with key as empty string
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetEmptyStringKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid Dictionary value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetInvalid();
+
+        /// <summary>
+        /// Get invalid Dictionary value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, bool?> GetBooleanTfft();
+
+        /// <summary>
+        /// Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanTfftWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, bool?>> GetBooleanTfftAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutBooleanTfft(IDictionary<string, bool?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutBooleanTfftWithHttpMessagesAsync(IDictionary<string, bool?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutBooleanTfftAsync(IDictionary<string, bool?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean dictionary value {"0": true, "1": null, "2": false }
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, bool?> GetBooleanInvalidNull();
+
+        /// <summary>
+        /// Get boolean dictionary value {"0": true, "1": null, "2": false }
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, bool?>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, bool?> GetBooleanInvalidString();
+
+        /// <summary>
+        /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, bool?>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetIntegerValid();
+
+        /// <summary>
+        /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntegerValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, int?>> GetIntegerValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutIntegerValid(IDictionary<string, int?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutIntegerValidWithHttpMessagesAsync(IDictionary<string, int?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutIntegerValidAsync(IDictionary<string, int?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetIntInvalidNull();
+
+        /// <summary>
+        /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, int?>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, int?> GetIntInvalidString();
+
+        /// <summary>
+        /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, int?>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, long?> GetLongValid();
+
+        /// <summary>
+        /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, long?>> GetLongValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutLongValid(IDictionary<string, long?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutLongValidWithHttpMessagesAsync(IDictionary<string, long?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutLongValidAsync(IDictionary<string, long?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get long dictionary value {"0": 1, "1": null, "2": 0}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, long?> GetLongInvalidNull();
+
+        /// <summary>
+        /// Get long dictionary value {"0": 1, "1": null, "2": 0}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, long?>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, long?> GetLongInvalidString();
+
+        /// <summary>
+        /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, long?>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, double?> GetFloatValid();
+
+        /// <summary>
+        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, double?>> GetFloatValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutFloatValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        void PutFloatValid(IDictionary<string, double?> arrayBody);
+
         /// <summary>
         /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDoubleValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutFloatValidAsync(IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, double?> GetFloatInvalidNull();
+
+        /// <summary>
+        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, double?>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        IDictionary<string, double?> GetFloatInvalidString();
+
+        /// <summary>
+        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IDictionary<string, double?>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// </summary>
+        IDictionary<string, double?> GetDoubleValid();
+
+        /// <summary>
+        /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IDictionary<string, double?>> GetDoubleValidAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        void PutDoubleValid(IDictionary<string, double?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDoubleValidAsync(IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        /// </summary>
+        IDictionary<string, double?> GetDoubleInvalidNull();
+
+        /// <summary>
+        /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IDictionary<string, double?>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        /// </summary>
+        IDictionary<string, double?> GetDoubleInvalidString();
+
+        /// <summary>
+        /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        /// </summary>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<IDictionary<string, double?>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetStringValid();
+
+        /// <summary>
+        /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetStringValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetStringValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutStringValid(IDictionary<string, string> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutStringValidWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetStringWithNull();
+
+        /// <summary>
+        /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetStringWithNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, string> GetStringWithInvalid();
+
+        /// <summary>
+        /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, string>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateValid();
+
+        /// <summary>
+        /// Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateValid(IDictionary<string, System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateValidWithHttpMessagesAsync(IDictionary<string, System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateValidAsync(IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateInvalidNull();
+
+        /// <summary>
+        /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateInvalidChars();
+
+        /// <summary>
+        /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
         /// "1492-10-12T10:15:01-08:00"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateTimeValid();
+
+        /// <summary>
+        /// Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+        /// "1492-10-12T10:15:01-08:00"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateTimeValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
         /// "1492-10-12T10:15:01-08:00"}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTimeValid(IDictionary<string, System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+        /// "1492-10-12T10:15:01-08:00"}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeValidWithHttpMessagesAsync(IDictionary<string, System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeValidAsync(IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateTimeInvalidNull();
+
+        /// <summary>
+        /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateTimeInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateTimeInvalidChars();
+
+        /// <summary>
+        /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateTimeInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT",
         /// "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.DateTime?> GetDateTimeRfc1123Valid();
+
+        /// <summary>
+        /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT",
+        /// "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.DateTime?>>> GetDateTimeRfc1123ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.DateTime?>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed,
         /// 12 Oct 1492 10:15:01 GMT"}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDateTimeRfc1123Valid(IDictionary<string, System.DateTime?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed,
+        /// 12 Oct 1492 10:15:01 GMT"}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IDictionary<string, System.DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDateTimeRfc1123ValidAsync(IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, System.TimeSpan?> GetDurationValid();
+
+        /// <summary>
+        /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, System.TimeSpan?>>> GetDurationValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, System.TimeSpan?>> GetDurationValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDurationValid(IDictionary<string, System.TimeSpan?> arrayBody);
+
+        /// <summary>
+        /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(IDictionary<string, System.TimeSpan?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDurationValidAsync(IDictionary<string, System.TimeSpan?> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded
         /// in base64
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, byte[]> GetByteValid();
+
+        /// <summary>
+        /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded
+        /// in base64
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, byte[]>> GetByteValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
         /// elementencoded in base 64
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutByteValid(IDictionary<string, byte[]> arrayBody);
+
+        /// <summary>
+        /// Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
+        /// elementencoded in base 64
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutByteValidWithHttpMessagesAsync(IDictionary<string, byte[]> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, byte[]> GetByteInvalidNull();
+
+        /// <summary>
+        /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, byte[]>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
         /// ipsum"}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, byte[]> GetBase64Url();
+
+        /// <summary>
+        /// Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+        /// ipsum"}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetBase64UrlWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, byte[]>> GetBase64UrlAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get dictionary of complex type null value
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, Widget> GetComplexNull();
+
+        /// <summary>
+        /// Get dictionary of complex type null value
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, Widget>> GetComplexNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get empty dictionary of complex type {}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, Widget> GetComplexEmpty();
+
+        /// <summary>
+        /// Get empty dictionary of complex type {}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, Widget>> GetComplexEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
         /// "string": "6"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, Widget> GetComplexItemNull();
+
+        /// <summary>
+        /// Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+        /// "string": "6"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, Widget>> GetComplexItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
         /// "string": "6"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, Widget> GetComplexItemEmpty();
+
+        /// <summary>
+        /// Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
+        /// "string": "6"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, Widget>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
         /// {"integer": 5, "string": "6"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, Widget> GetComplexValid();
+
+        /// <summary>
+        /// Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+        /// {"integer": 5, "string": "6"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, Widget>> GetComplexValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
         /// "4"}, "2": {"integer": 5, "string": "6"}}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutComplexValid(IDictionary<string, Widget> arrayBody);
+
+        /// <summary>
+        /// Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
+        /// "4"}, "2": {"integer": 5, "string": "6"}}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutComplexValidWithHttpMessagesAsync(IDictionary<string, Widget> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a null array
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IList<string>> GetArrayNull();
+
+        /// <summary>
+        /// Get a null array
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IList<string>>> GetArrayNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an empty dictionary {}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IList<string>> GetArrayEmpty();
+
+        /// <summary>
+        /// Get an empty dictionary {}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IList<string>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IList<string>> GetArrayItemNull();
+
+        /// <summary>
+        /// Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IList<string>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IList<string>> GetArrayItemEmpty();
+
+        /// <summary>
+        /// Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IList<string>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IList<string>> GetArrayValid();
+
+        /// <summary>
+        /// Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IList<string>>> GetArrayValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutArrayValid(IDictionary<string, IList<string>> arrayBody);
+
+        /// <summary>
+        /// Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutArrayValidWithHttpMessagesAsync(IDictionary<string, IList<string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries with value null
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IDictionary<string, string>> GetDictionaryNull();
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries with value null
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IDictionary<string, string>> GetDictionaryEmpty();
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
         /// "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IDictionary<string, string>> GetDictionaryItemNull();
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+        /// "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
         /// "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IDictionary<string, string>> GetDictionaryItemEmpty();
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+        /// "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
         /// "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
+        IDictionary<string, IDictionary<string, string>> GetDictionaryValid();
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+        /// "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// </summary>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.SerializationException'>
-        /// Thrown when unable to deserialize the response.
-        /// </exception>
-        Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
         /// "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        void PutDictionaryValid(IDictionary<string, IDictionary<string, string>> arrayBody);
+
+        /// <summary>
+        /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+        /// "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+        /// </summary>
+        /// <param name='arrayBody'>
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref='ErrorException'>
-        /// Thrown when the operation returned an invalid status code.
-        /// </exception>
-        /// <exception cref='Microsoft.Rest.ValidationException'>
-        /// Thrown when a required parameter is null.
-        /// </exception>
-        Task<HttpOperationResponse> PutDictionaryValidWithHttpMessagesAsync(IDictionary<string, IDictionary<string, string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task PutDictionaryValidAsync(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
