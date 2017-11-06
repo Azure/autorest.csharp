@@ -10,7 +10,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
     @{var underlyingType = (Model.UnderlyingType?.ClassName == null)? "string" : Model.UnderlyingType.ClassName;
-    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues!=null);}
+    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues.Any());}
     
     /// <summary>
     @WrapComment("/// ", "Determine base value for a given allowed value if exists, else return the value itself")
@@ -52,7 +52,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:{
                 @foreach(var enumValue in Model.Values)
                 {
-                    @if(enumValue.AllowedValues!=null)
+                    @if(enumValue.AllowedValues.Any())
                     {
                     @foreach(var allowedValue in enumValue.AllowedValues)
                     {
