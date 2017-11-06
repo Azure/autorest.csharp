@@ -39,8 +39,6 @@ regenExpected = (opts,done) ->
     if (opts.flatteningThreshold)
       args.push("--csharp.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
-    args.push("--use=F:/artemp/rcm/autorest.modeler")
-
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
@@ -127,8 +125,7 @@ defaultConfigurationFiles = [
   'test/vanilla/Configurations/hidden-methods.md'
 ]
 
-# swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
-swaggerDir = "F:/artemp/rcm/autorest.testserver/swagger"
+swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
   mappings = Object.assign({
