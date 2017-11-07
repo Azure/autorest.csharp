@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.Unit.Tests
             var settings = new Settings{
                 Namespace = "ExtensibleEnums"
             };
-            settings.CustomSettings.Add("ExtensibleEnums", true);
             
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
             {

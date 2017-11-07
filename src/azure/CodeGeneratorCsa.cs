@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Azure
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
-                if((Settings.Instance.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.Instance.CustomSettings["ExtensibleEnums"]))
+                if(enumType.ModelAsExtensible)
                 {
                     var extensibleEnumTemplate = new ExtensibleEnumTemplate {Model = enumType};
                         await Write(extensibleEnumTemplate,Path.Combine(Settings.Instance.ModelsName,

@@ -32,6 +32,8 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--csharp.fluent=true")
+
+    args.push("--use=F:/artemp/rcm/autorest.modeler")
     
     if (opts.syncMethods)
       args.push("--csharp.sync-methods=#{opts.syncMethods}")

@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Model
                         string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
                         
                         // we need some special signatures for extensible enums
-                        if(property.ModelType is EnumType && Settings.Instance.CustomSettings.ContainsKey("ExtensibleEnums") && (bool)Settings.Instance.CustomSettings["ExtensibleEnums"])
+                        if(property.ModelType is EnumType && (property.ModelType as EnumType).ModelAsExtensible)
                         {
                             // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
                             var enumProp = property.ModelType as EnumType;
