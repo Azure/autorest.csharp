@@ -17,7 +17,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "C:\\work\\oneautorest\\autorest.modeler" # keep in sync with package.json's dev dependency in order to have meaningful tests
+  "@microsoft.azure/autorest.modeler": "2.2.27" # keep in sync with package.json's dev dependency in order to have meaningful tests
 
 pipeline:
   csharp/modeler:
