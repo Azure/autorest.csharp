@@ -84,7 +84,7 @@ regenExpectedConfigurations = (opts,done) ->
 defaultMappings = {
   'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
   'AcceptanceTests/BodyArray': 'body-array.json',
-  'AcceptanceTests/BodyBoolean': 'body-boolean.quirks.json',
+  'AcceptanceTests/BodyBoolean': 'body-boolean.json',
   'AcceptanceTests/BodyByte': 'body-byte.json',
   'AcceptanceTests/BodyComplex': 'body-complex.json',
   'AcceptanceTests/BodyDate': 'body-date.json',
@@ -95,10 +95,10 @@ defaultMappings = {
   'AcceptanceTests/BodyFile': 'body-file.json',
   'AcceptanceTests/BodyFormData': 'body-formdata.json',
   'AcceptanceTests/BodyInteger': 'body-integer.json',
-  'AcceptanceTests/BodyNumber': 'body-number.quirks.json',
-  'AcceptanceTests/BodyString': 'body-string.quirks.json',
+  'AcceptanceTests/BodyNumber': 'body-number.json',
+  'AcceptanceTests/BodyString': 'body-string.json',
   'AcceptanceTests/Header': 'header.json',
-  'AcceptanceTests/Http': 'httpInfrastructure.quirks.json',
+  'AcceptanceTests/Http': 'httpInfrastructure.json',
   'AcceptanceTests/Report': 'report.json',
   'AcceptanceTests/RequiredOptional': 'required-optional.json',
   'AcceptanceTests/Url': 'url.json',
@@ -122,7 +122,7 @@ defaultAzureMappings = {
 }
 
 compositeMappings = {
-  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.quirks.json;body-integer.json'
+  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.json;body-integer.json'
 }
 
 azureCompositeMappings = {

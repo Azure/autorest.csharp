@@ -54,6 +54,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
+            /// Possible values include: ''
             /// </param>
             public static void PutNull(this IStringModel operations, string stringBody = default(string))
             {
@@ -67,6 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
+            /// Possible values include: ''
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -110,11 +112,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
-            public static void PutEmpty(this IStringModel operations, string stringBody)
+            public static void PutEmpty(this IStringModel operations)
             {
-                operations.PutEmptyAsync(stringBody).GetAwaiter().GetResult();
+                operations.PutEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -123,19 +123,17 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
             /// Get mbcs string value
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -147,7 +145,7 @@ namespace Fixtures.AcceptanceTestsBodyString
 
             /// <summary>
             /// Get mbcs string value
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -165,33 +163,29 @@ namespace Fixtures.AcceptanceTestsBodyString
 
             /// <summary>
             /// Set string value mbcs
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
-            public static void PutMbcs(this IStringModel operations, string stringBody)
+            public static void PutMbcs(this IStringModel operations)
             {
-                operations.PutMbcsAsync(stringBody).GetAwaiter().GetResult();
+                operations.PutMbcsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Set string value mbcs
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMbcsAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMbcsAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -234,11 +228,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
-            public static void PutWhitespace(this IStringModel operations, string stringBody)
+            public static void PutWhitespace(this IStringModel operations)
             {
-                operations.PutWhitespaceAsync(stringBody).GetAwaiter().GetResult();
+                operations.PutWhitespaceAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -249,14 +241,12 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutWhitespaceAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutWhitespaceAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
