@@ -35,7 +35,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         </text>
             }
             var initName = (underlyingType == "string") ? "\""+t.SerializedName+"\"": t.SerializedName;
-        @:public static readonly @Model.ClassName @t.MemberName = @(initName);
+            @:public static readonly @Model.ClassName @t.MemberName = @(initName);
         @EmptyLine
         }
     

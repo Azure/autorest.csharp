@@ -32,8 +32,6 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--csharp.fluent=true")
-
-    args.push("--use=F:/artemp/rcm/autorest.modeler")
     
     if (opts.syncMethods)
       args.push("--csharp.sync-methods=#{opts.syncMethods}")
@@ -161,7 +159,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-csextensibleenums'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -316,17 +314,6 @@ task 'regenerate-cscomposite', '', (done) ->
     'flatteningThreshold': '1',
     'override-info.title': "Composite Bool Int",
     'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
-  },done
-  return null
-
-task 'regenerate-csextensibleenums', '', (done) ->
-  regenExpected {
-    'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
-    'mappings': {'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'},
-    'outputDir': 'Expected',
-    'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
   },done
   return null
 
