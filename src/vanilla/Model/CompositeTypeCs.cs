@@ -161,27 +161,18 @@ namespace AutoRest.CSharp.Model
                         string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
                         
                         // we need some special signatures for extensible enums
-                        if(property.ModelType is EnumType && (property.ModelType as EnumType).ModelAsExtensible)
+                        var modelTypeName = 
+                            (property.ModelType is EnumType && (property.ModelType as EnumType).ModelAsExtensible)?
+                                 (property.ModelType as EnumType).ClassName : property.ModelTypeName;
+                        
+                        // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
+                        if (property.UseDefaultInConstructor && property.DefaultValue != null)
                         {
-                            // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
-                            var enumProp = property.ModelType as EnumType;
-                            if(property.UseDefaultInConstructor && property.DefaultValue!=null)
-                            {
-                                format = "{0} {1} = " + property.DefaultValue;
-                            }
-                            declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                                format, enumProp.ClassName, CodeNamer.Instance.CamelCase(property.Name)));
+                            format = "{0} {1} = " + property.DefaultValue;
                         }
-                        else
-                        {
-                            // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
-                            if (property.UseDefaultInConstructor && property.DefaultValue != null)
-                            {
-                                format = "{0} {1} = " + property.DefaultValue;
-                            }
-                            declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                                format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
-                        }
+                        declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                            format, modelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
+                        
                     }
 
                     return string.Join(", ", declarations);
