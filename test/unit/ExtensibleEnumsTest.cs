@@ -48,31 +48,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
                          
                 Write(warnings, fileSystem);
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\eetest\log.log")) {
-                    foreach (var err in errors) {
-                        file.WriteLine(err.ToString());
-                    }
-                    foreach (var w in warnings) {
-                        file.WriteLine(w.ToString());
-                    }
-
-                                    foreach(var f in fileSystem.VirtualStore.Keys)
-                {
-                    if(string.IsNullOrEmpty(f) || !f.EndsWith(".cs"))
-                    {
-                        continue;
-                    }
-                    var p = @"C:\Users\deshank\AppData\Local\Temp\eetest\"+f;
-                    file.WriteLine("trying to write to "+p);
-                using (System.IO.StreamWriter tfile = new System.IO.StreamWriter(p)) {
-                    
-                        tfile.WriteLine(fileSystem.VirtualStore[f].ToString());
-                    
-                }
-                }
-
-                }
-
                 Write(errors, fileSystem);
 
                 // use this to write out all the messages, even hidden ones.

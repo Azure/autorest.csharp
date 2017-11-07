@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <param name="daysOfWeek">Type of Pet. Possible values include:
         /// 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
         /// 'Sunday'</param>
-        public Pet(IntEnum intEnum, string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?))
+        public Pet(IntEnum intEnum, string name = default(string), DaysOfWeekExtensibleEnum daysOfWeek = default(DaysOfWeekExtensibleEnum))
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
