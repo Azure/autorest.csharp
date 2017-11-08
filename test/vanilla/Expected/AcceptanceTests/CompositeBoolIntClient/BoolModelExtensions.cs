@@ -53,11 +53,9 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolBody'>
-            /// </param>
-            public static void PutTrue(this IBoolModel operations, bool boolBody)
+            public static void PutTrue(this IBoolModel operations)
             {
-                operations.PutTrueAsync(boolBody).GetAwaiter().GetResult();
+                operations.PutTrueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -66,14 +64,12 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutTrueAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -110,11 +106,9 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolBody'>
-            /// </param>
-            public static void PutFalse(this IBoolModel operations, bool boolBody)
+            public static void PutFalse(this IBoolModel operations)
             {
-                operations.PutFalseAsync(boolBody).GetAwaiter().GetResult();
+                operations.PutFalseAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -123,14 +117,12 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutFalseAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutFalseAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

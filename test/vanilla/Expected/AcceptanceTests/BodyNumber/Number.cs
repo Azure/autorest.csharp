@@ -1039,8 +1039,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1053,8 +1051,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            double numberBody = 99999999.99;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1278,8 +1277,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1292,8 +1289,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            double numberBody = -99999999.99;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1756,8 +1754,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big decimal value 99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1770,8 +1766,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutBigDecimalPositiveDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutBigDecimalPositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            decimal numberBody = 99999999.99m;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1995,8 +1992,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big decimal value -99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2009,8 +2004,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutBigDecimalNegativeDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutBigDecimalNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            decimal numberBody = -99999999.99m;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

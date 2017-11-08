@@ -1,32 +1,35 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
   description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
 paths:
-  /operation:
+  "/operation":
     get:
       summary: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
       description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
       operationId: deprecated_operation
       deprecated: true
       responses:
-        200:
+        '200':
           description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
           type: integer
     parameters:
-      - name: latitude
-        in: query
-        description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
-        required: true
+    - name: latitude
+      in: query
+      description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
+      required: true
+      schema:
         type: number
         format: double
-definitions: 
-  descriptionTest:
-    description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
-    properties:
-      prop1:
-        description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
-        type: array
-        items:
-          type: string
+components:
+  schemas:
+    descriptionTest:
+      description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
+      properties:
+        prop1:
+          description: "\rpublic \rFunc<int> Injected;\na \r\nasd\n"
+          type: array
+          items:
+            type: string

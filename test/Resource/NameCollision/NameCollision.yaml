@@ -1,36 +1,37 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
 paths:
-  /operation:
+  "/operation":
     get:
       operationId: operation_get
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/HttpOperationResponse'
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/HttpOperationResponse"
     put:
       operationId: operation_put
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/Action'
-
-
-
-definitions:
-  HttpOperationResponse:
-    properties:
-      foo:
-        type: string
-        description: 'The foo property'
-
-  Action:
-    properties:
-      bar:
-        type: string
-        description: 'The bar property'
-
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/Action"
+components:
+  schemas:
+    HttpOperationResponse:
+      properties:
+        foo:
+          type: string
+          description: The foo property
+    Action:
+      properties:
+        bar:
+          type: string
+          description: The bar property

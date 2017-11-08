@@ -1,63 +1,70 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
-produces:
-  - application/json
-consumes:
-  - application/json
 paths:
-  /operation0:
+  "/operation0":
     post:
       operationId: cowbell
       responses:
-        200:
+        '200':
           description: OK
-          schema: # generates CowbellOKResponseModel
-            properties:
-              propResponse:
-                type: string
-      parameters:
-        - name: cowbellOKResponse
-          in: body
-          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel...
-            properties:
-              propParamInt:
-                type: integer
-  /operation1:
+          content:
+            application/json:
+              schema: # generates CowbellOKResponseModel
+                properties:
+                  propResponse:
+                    type: string
+      requestBody:
+        x-ms-requestBody-name: cowbellOKResponse
+        content:
+          application/json:
+            schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel...
+              properties:
+                propParamInt:
+                  type: integer
+      x-ms-requestBody-index: 0
+  "/operation1":
     post:
       operationId: cowbell
       responses:
-        200:
+        '200':
           description: OK
-      parameters:
-        - name: cowbellOKResponse
-          in: body
-          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel.....
-            properties:
-              propParamBool:
-                type: boolean
-  /operation2:
+      requestBody: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel.....
+        x-ms-requestBody-name: cowbellOKResponse
+        content:
+          application/json:
+            schema:
+              properties:
+                propParamBool:
+                  type: boolean
+      x-ms-requestBody-index: 0
+  "/operation2":
     post:
       operationId: cowbell
       responses:
-        200:
+        '200':
           description: OK
-      parameters:
-        - name: cowbellOKResponse
-          in: body
-          schema: # sanity check: should generate nothing
-            type: integer
-  /operation3:
+      requestBody:
+        x-ms-requestBody-name: cowbellOKResponse
+        content:
+          application/json:
+            schema: # sanity check: should generate nothing
+              type: integer
+      x-ms-requestBody-index: 0
+  "/operation3":
     post:
       operationId: cowbell
       responses:
-        200:
+        '200':
           description: OK
-      parameters:
-        - name: cowbellOKResponse
-          in: body
-          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel..... (hit!)
-            properties:
-              propParamBool:
-                type: boolean
+      requestBody: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel..... (hit!)
+        x-ms-requestBody-name: cowbellOKResponse
+        content:
+          application/json:
+            schema:
+              properties:
+                propParamBool:
+                  type: boolean
+      x-ms-requestBody-index: 0
