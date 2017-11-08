@@ -28,14 +28,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {
             if (t.Description != null)
             {
-        <text>
+                <text>
         /// <summary>
         @WrapComment("/// ", t.Description)
-        /// </summary>
-        </text>
+        /// </summary></text>
             }
             var initName = (underlyingType == "string") ? "\""+t.SerializedName+"\"": t.SerializedName;
-@:public static readonly @Model.ClassName @t.MemberName = @(initName);
+            <text>
+        public static readonly @Model.ClassName @t.MemberName = @(initName);
+        </text>
         @EmptyLine
         }
     
