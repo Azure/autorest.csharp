@@ -27,19 +27,19 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
             UnderlyingValue=underlyingValue;
         }
 
-        public static readonly DaysOfWeekExtensibleEnum Monday = "Monday";
+public static readonly DaysOfWeekExtensibleEnum Monday = "Monday";
 
-        public static readonly DaysOfWeekExtensibleEnum Tuesday = "Tuesday";
+public static readonly DaysOfWeekExtensibleEnum Tuesday = "Tuesday";
 
-        public static readonly DaysOfWeekExtensibleEnum Wednesday = "Wednesday";
+public static readonly DaysOfWeekExtensibleEnum Wednesday = "Wednesday";
 
-        public static readonly DaysOfWeekExtensibleEnum Thursday = "Thursday";
+public static readonly DaysOfWeekExtensibleEnum Thursday = "Thursday";
 
-        public static readonly DaysOfWeekExtensibleEnum Friday = "Friday";
+public static readonly DaysOfWeekExtensibleEnum Friday = "Friday";
 
-        public static readonly DaysOfWeekExtensibleEnum Saturday = "Saturday";
+public static readonly DaysOfWeekExtensibleEnum Saturday = "Saturday";
 
-        public static readonly DaysOfWeekExtensibleEnum Sunday = "Sunday";
+public static readonly DaysOfWeekExtensibleEnum Sunday = "Sunday";
 
 
         /// <summary>

@@ -30,17 +30,17 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <summary>
         /// one
         /// </summary>
-                public static readonly IntEnum One = "1";
+        public static readonly IntEnum One = "1";
 
         /// <summary>
         /// two
         /// </summary>
-                public static readonly IntEnum Two = "2";
+        public static readonly IntEnum Two = "2";
 
         /// <summary>
         /// three
         /// </summary>
-                public static readonly IntEnum Three = "3";
+        public static readonly IntEnum Three = "3";
 
 
         /// <summary>
