@@ -25,7 +25,7 @@ pipeline:
     output-artifact: code-model-v1
     scope: csharp
   csharp/commonmarker:
-    input: modeler
+    input: imodeler1
     output-artifact: code-model-v1
   csharp/cm/transform:
     input: commonmarker
@@ -67,7 +67,7 @@ pipeline:
     scope: jsonrpcclient
   jsonrpcclient/generate:
     plugin: jsonrpcclient
-    input: modeler
+    input: imodeler1
     output-artifact: source-file-jsonrpcclient
   jsonrpcclient/transform:
     input: generate
