@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Unit.Tests
                                 && !SuppressWarnings.Contains(each.Id)).ToArray();
 
                     // use this to dump the files to disk for examination
-                    fileSystem.SaveFilesToTemp($"{GetType().Name}");
+                    // fileSystem.SaveFilesToTemp($"{GetType().Name}");
 
                     // filter the errors
                     var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
@@ -68,19 +68,6 @@ namespace AutoRest.CSharp.Unit.Tests
                     // Load and reflect on the assembly
                     var asm = LoadAssembly(result.Output);
                     Assert.NotNull(asm);
-
-/*
-                    // Verify the server controller
-                    var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ValueController");
-                    Assert.NotNull(simpleApi);
-                    Assert.NotNull(simpleApi.GetMethod("Get"));
-                    Assert.Equal(simpleApi.GetMethod("Get").ReturnType.Name, "SimpleModel");
-                    Assert.NotEmpty(simpleApi.GetMethod("Get").CustomAttributes.Where(a => a.AttributeType.Name == "HttpGetAttribute"));
-
-                    // Verify the model
-                    var simpleModel = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.SimpleModel");
-                    Assert.NotNull(simpleModel);
-*/
                 }
             }
         }
