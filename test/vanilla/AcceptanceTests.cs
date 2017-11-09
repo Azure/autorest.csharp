@@ -435,6 +435,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(reqPet.IntEnum, respPet.IntEnum);
             }
         }
+        
 
         [Fact]
         public void DateTimeTests()
@@ -2354,7 +2355,7 @@ namespace AutoRest.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 55;
+                int totalTests = report.Count - 57;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);

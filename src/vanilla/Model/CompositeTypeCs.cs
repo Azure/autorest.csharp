@@ -159,20 +159,13 @@ namespace AutoRest.CSharp.Model
                     foreach (PropertyCs property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
                     {
                         string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                        
-                        // we need some special signatures for extensible enums
-                        var modelTypeName = 
-                            (property.ModelType is EnumType && (property.ModelType as EnumType).ModelAsExtensible)?
-                                 (property.ModelType as EnumType).ClassName : property.ModelTypeName;
-                        
                         // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
                         if (property.UseDefaultInConstructor && property.DefaultValue != null)
                         {
                             format = "{0} {1} = " + property.DefaultValue;
                         }
                         declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                            format, modelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
-                        
+                            format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
                     }
 
                     return string.Join(", ", declarations);

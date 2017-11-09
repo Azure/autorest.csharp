@@ -135,7 +135,7 @@ defaultConfigurationFiles = [
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
-task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
+task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums'], (done) ->
   mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
@@ -275,6 +275,17 @@ task 'regenerate-csazurefluentallsync', '', (done) ->
     'nsPrefix': 'Fixtures.Azure.Fluent',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
+  },done
+  return null
+
+task 'regenerate-csextensibleenums', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/vanilla',
+    'inputBaseDir': swaggerDir,
+    'mappings': {'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'},
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
   },done
   return null
 
