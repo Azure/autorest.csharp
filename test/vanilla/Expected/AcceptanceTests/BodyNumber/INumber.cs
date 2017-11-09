@@ -151,8 +151,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -162,7 +160,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoublePositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value 99999999.99
         /// </summary>
@@ -182,8 +180,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -193,7 +189,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(double numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDoubleNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big double value -99999999.99
         /// </summary>
@@ -244,8 +240,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big decimal value 99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -255,7 +249,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutBigDecimalPositiveDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDecimalPositiveDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big decimal value 99999999.99
         /// </summary>
@@ -275,8 +269,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <summary>
         /// Put big decimal value -99999999.99
         /// </summary>
-        /// <param name='numberBody'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -286,7 +278,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutBigDecimalNegativeDecimalWithHttpMessagesAsync(decimal numberBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutBigDecimalNegativeDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get big decimal value -99999999.99
         /// </summary>

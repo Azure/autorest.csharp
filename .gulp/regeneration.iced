@@ -52,6 +52,10 @@ regenExpected = (opts,done) ->
     if (opts['override-info.description'])
       args.push("--override-info.description=#{opts['override-info.description']}")
 
+    if (argv.args)
+      for arg in argv.args.split(" ")
+        args.push(arg);
+
     autorest args,() =>
       instances--
       return done() if instances is 0
@@ -66,6 +70,10 @@ regenExpectedConfigurations = (opts,done) ->
 
     if (opts.tag)
       args.push("--tag=#{opts.tag}")
+
+    if (argv.args)
+      for arg in argv.args.split(" ")
+        args.push(arg);
 
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)
@@ -308,7 +316,6 @@ task 'regenerate-cscomposite', '', (done) ->
     'outputBaseDir': 'test/vanilla',
     'inputBaseDir': swaggerDir,
     'mappings': compositeMappings,
-    'modeler' : 'CompositeSwagger',
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
@@ -322,7 +329,6 @@ task 'regenerate-csazurecomposite', '', (done) ->
     'outputBaseDir': 'test/azure',
     'inputBaseDir': swaggerDir,
     'mappings': azureCompositeMappings,
-    'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
     'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
@@ -338,7 +344,6 @@ task 'regenerate-csazurefluentcomposite', '', (done) ->
     'outputBaseDir': 'test/azurefluent',
     'inputBaseDir': swaggerDir,
     'mappings': azureCompositeMappings,
-    'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
     'azureArm': true,
     'fluent': true,

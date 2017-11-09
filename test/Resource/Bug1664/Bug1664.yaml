@@ -1,28 +1,29 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
-  # testing: The title doesn't contain 'Client'
   title: Simple API
-produces:
-  - application/json
 paths:
-  /operationInteger:
+  "/operationInteger":
     get:
       x-ms-pageable:
         nextLinkName: nextLink
       operationId: products_list
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ProductListResult'
-definitions:
-  ProductListResult:
-    type: object
-    properties:
-      value:
-        type: array
-        items:
-          type: integer
-      nextLink:
-        type: string
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProductListResult"
+components:
+  schemas:
+    ProductListResult:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: integer
+        nextLink:
+          type: string

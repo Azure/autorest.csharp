@@ -1,5 +1,5 @@
----
-swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: API with referenced form data
@@ -8,17 +8,19 @@ paths:
     post:
       description: test op
       operationId: testOperation
-      consumes:
-      - multipart/form-data
-      parameters:
-      - $ref: '#/parameters/ApiId'
       responses:
         '200':
           description: OK
-parameters:
-  ApiId:
-    in: formData
-    type: string
-    name: API_ID
-    required: true
-    x-ms-client-name: ApiId
+      requestBody:
+        x-ms-client-name: ApiId
+        x-ms-requestBody-name: ApiId
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                API_ID:
+                  type: string
+              required:
+              - API_ID
+      x-ms-requestBody-index: 0

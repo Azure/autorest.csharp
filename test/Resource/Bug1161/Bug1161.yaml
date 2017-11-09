@@ -1,39 +1,44 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
 paths:
-  /getday:
+  "/getday":
     get:
       operationId: getday
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/SomethingWithADay'
-  /:
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SomethingWithADay"
+  "/":
     get:
       operationId: myoperation
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/testObject'
- 
-  /getSchedule:
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/testObject"
+  "/getSchedule":
     get:
       operationId: getschedule
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/RecurrenceSchedule'
-  
-definitions:
-
-  DayOfWeek:
-    type: string
-    enum: 
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/RecurrenceSchedule"
+components:
+  schemas:
+    DayOfWeek:
+      type: string
+      enum:
       - Sunday
       - Monday
       - Tuesday
@@ -41,37 +46,33 @@ definitions:
       - Thursday
       - Friday
       - Saturday
-    x-ms-enum: 
-      name: DayOfWeek
-      modelAsString: false
-
-  SomethingWithADay:
-    type: object
-    properties: 
-      theDay : 
-        type: array
-        $ref: '#/definitions/DayOfWeek' 
-      anotherday: 
-        type: array
-        $ref: '#/definitions/DayOfWeek' 
-
-  testObject:
-    properties:
-      pattern:
-        type: string
-        default: '\w+'
-        description: 'A regular expression pattern to match token separators. Default is "\W+".'
-
-  RecurrenceSchedule:
-    type: object
-    properties: 
-      weekDays : 
-        type: array 
-        items: 
-          $ref: '#/definitions/DayOfWeek'
-      otherweekDays : 
-        type: array 
-        items: 
-          $ref: '#/definitions/DayOfWeek'
-
-      
+      x-ms-enum:
+        name: DayOfWeek
+        modelAsString: false
+    SomethingWithADay:
+      type: object
+      properties:
+        theDay:
+          type: array
+          "$ref": "#/components/schemas/DayOfWeek"
+        anotherday:
+          type: array
+          "$ref": "#/components/schemas/DayOfWeek"
+    testObject:
+      properties:
+        pattern:
+          type: string
+          default: "\\w+"
+          description: A regular expression pattern to match token separators. Default
+            is "\W+".
+    RecurrenceSchedule:
+      type: object
+      properties:
+        weekDays:
+          type: array
+          items:
+            "$ref": "#/components/schemas/DayOfWeek"
+        otherweekDays:
+          type: array
+          items:
+            "$ref": "#/components/schemas/DayOfWeek"

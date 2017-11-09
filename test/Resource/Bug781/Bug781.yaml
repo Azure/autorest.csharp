@@ -1,10 +1,9 @@
-﻿---
-swagger: '2.0'
+---
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
-produces:
-- application/json
 paths:
   "/operationInteger":
     put:
@@ -12,14 +11,16 @@ paths:
       parameters:
       - name: prodReq
         schema:
-          "$ref": "#/definitions/Product"
+          "$ref": "#/components/schemas/Product"
+          type: string
       responses:
         '200':
           description: OK
-definitions:
-  Product:
-    type: object
-    properties:
-      productId:
-        type: number
-        default: 100
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        productId:
+          type: number
+          default: 100
