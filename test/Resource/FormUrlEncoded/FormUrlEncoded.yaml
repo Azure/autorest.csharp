@@ -1,0 +1,41 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/someoperation":
+    put:
+      operationId: my_operation
+      requestBody:
+        content:
+           "application/x-www-form-urlencoded":
+             schema:
+              properties:
+                name: 
+                  description: this is the name parameter. 
+                  type: string
+                status:
+                  description: this is the status parameter
+                  type: string
+              required:
+                - status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MyResponse"
+
+components:
+  schemas:
+    MyResponse:
+      description: The response from the method.
+      required:
+      - _id
+      properties:
+        _id:
+          type: integer
+        name:
+          type: string
