@@ -25,6 +25,10 @@ namespace AutoRest.CSharp
     {
         protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.8";
 
+        protected string FolderModels => Settings.Instance.ModelsName;
+        protected string FolderInterfaces => "Interfaces";
+        protected string FolderOperations => "Operations";
+
         public override bool IsSingleFileGenerationSupported => true;
 
 
@@ -49,78 +53,92 @@ namespace AutoRest.CSharp
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+                await Write(modelTemplate, $"{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
         }
 
         protected virtual async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
-            // Service client
-            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            await GenerateServiceClient<ServiceClientTemplate>(codeModel);
+            await GenerateOperations<MethodGroupWithHttpMessagesTemplate>(codeModel.Operations);
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+            await GenerateEnums(codeModel.EnumTypes);
+            await GenerateExceptions(codeModel.ErrorTypes);
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                await GenerateXmlSerialization();
+            }
+        }
 
-            // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+        protected virtual async Task GenerateServiceClient<T>(CodeModelCs codeModel) where T : TemplateCs<CodeModelCs>, new()
+        {
+            await Write(new T { Model = codeModel }, $"{codeModel.Name}{ImplementationFileExtension}");
+            await Write(new ServiceClientInterfaceTemplate { Model = codeModel }, $"{FolderInterfaces}/I{codeModel.Name}{ImplementationFileExtension}");
+        }
 
-            // operations
-            foreach (MethodGroupCs methodGroup in codeModel.Operations)
+        protected virtual async Task GenerateOperations<T>(IEnumerable<MethodGroup> modelTypes) where T : TemplateCs<MethodGroupCs>, new()
+        {
+            foreach (MethodGroupCs methodGroup in modelTypes)
             {
                 if (!methodGroup.Name.IsNullOrEmpty())
                 {
                     // Operation
                     await Write(
                         new MethodGroupTemplate { Model = methodGroup },
-                        $"{methodGroup.TypeName}{ImplementationFileExtension}");
+                        $"{FolderOperations}/{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
                     await Write(
                         new MethodGroupInterfaceTemplate { Model = methodGroup },
-                        $"I{methodGroup.TypeName}{ImplementationFileExtension}");
+                        $"{FolderInterfaces}/I{methodGroup.TypeName}{ImplementationFileExtension}");
                 }
 
                 // Operation
-                var operationsTemplate = new MethodGroupWithHttpMessagesTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
+                var operationsTemplate = new T { Model = methodGroup };
+                await Write(operationsTemplate, $"{FolderOperations}/{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupWithHttpMessagesInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
+                await Write(operationsInterfaceTemplate, $"{FolderInterfaces}/I{operationsInterfaceTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
             }
+        }
 
-            // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
+        protected virtual async Task GenerateModels(IEnumerable<CompositeType> modelTypes)
+        {
+            foreach (CompositeTypeCs model in modelTypes)
             {
-                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
+                if (true == model.Extensions.Get<bool>(SwaggerExtensions.ExternalExtension))
                 {
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate{ Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+                await Write(new ModelTemplate{ Model = model },
+                    $"{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
+        }
 
-            // Enums
-            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
+        protected virtual async Task GenerateEnums(IEnumerable<EnumType> enumTypes)
+        {
+            foreach (EnumTypeCs enumType in enumTypes)
             {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                await Write(new EnumTemplate { Model = enumType },
+                    $"{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
             }
+        }
 
-            // Exceptions
-            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
+        protected virtual async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes)
+        {
+            foreach (CompositeTypeCs exceptionType in errorTypes)
             {
-                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(new ExceptionTemplate { Model = exceptionType },
+                    $"{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
-            
-            // Xml Serialization
-            if (codeModel.ShouldGenerateXmlSerialization)
-            {
-                var xmlSerializationTemplate = new XmlSerializationTemplate();
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
-            }
+        }
+
+        protected virtual async Task GenerateXmlSerialization()
+        {
+            await Write(new XmlSerializationTemplate(), 
+                $"{FolderModels}/{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)

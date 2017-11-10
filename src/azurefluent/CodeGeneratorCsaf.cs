@@ -30,97 +30,17 @@ namespace AutoRest.CSharp.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var codeModel = cm as CodeModelCsa;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
-            }
+            var codeModel = cm as CodeModelCsa ?? throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
 
-            // Service client
-            var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
-
-            // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, "I" + codeModel.Name + ImplementationFileExtension);
-
-            // operations
-            foreach (MethodGroupCs methodGroup in codeModel.Operations)
-            {
-                if (!methodGroup.Name.IsNullOrEmpty())
-                {
-                    // Operation
-                    await Write(
-                        new MethodGroupTemplate { Model = methodGroup },
-                        $"{methodGroup.TypeName}{ImplementationFileExtension}");
-
-                    // Operation interface
-                    await Write(
-                        new MethodGroupInterfaceTemplate { Model = methodGroup },
-                        $"I{methodGroup.TypeName}{ImplementationFileExtension}");
-                }
-
-                // Operation
-                var operationsTemplate = new AzureMethodGroupWithHttpMessagesTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
-
-                // Operation interface
-                var operationsInterfaceTemplate = new MethodGroupWithHttpMessagesInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}WithHttpMessages{ImplementationFileExtension}");
-            }
-
-            // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Concat(codeModel.HeaderTypes))
-            {
-                if (true == model.Extensions.Get<bool>(AzureExtensions.ExternalExtension))
-                {
-                    continue;
-                }
-                if (model.IsResource())
-                {
-                    continue;
-                }
-                var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName,
-                    $"{model.Name}{ImplementationFileExtension}"));
-            }
-
-            // Enums
-            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
-            {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName,
-                    $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
-            }
-
-            // Page class
-            foreach (var pageClass in codeModel.pageClasses)
-            {
-                var pageTemplate = new PageTemplate
-                {
-                    Model = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value)
-                };
-                await Write(pageTemplate, Path.Combine(Settings.Instance.ModelsName,
-                    $"{pageTemplate.Model.TypeDefinitionName}{ImplementationFileExtension}"));
-            }
-            // Exceptions
-            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
-            {
-                if (exceptionType.Name == "CloudError")
-                {
-                    continue;
-                }
-
-                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
-                     $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
-            }
-
-            // Xml Serialization
+            await GenerateServiceClient<AzureServiceClientTemplate>(codeModel);
+            await GenerateOperations<AzureMethodGroupWithHttpMessagesTemplate>(codeModel.Operations);
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes).Where(m => !m.IsResource()));
+            await GenerateEnums(codeModel.EnumTypes);
+            await GeneratePageClasses(codeModel.pageClasses);
+            await GenerateExceptions(codeModel.ErrorTypes);
             if (codeModel.ShouldGenerateXmlSerialization)
             {
-                var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+                await GenerateXmlSerialization();
             }
         }
     }
