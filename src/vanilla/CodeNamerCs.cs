@@ -100,10 +100,6 @@ namespace AutoRest.CSharp
                 }
                 if (primaryType != null)
                 {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Decimal)
-                    {
-                        return decimal.Parse(defaultValue).ToString() + "m";
-                    }
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
                     {
                         return double.Parse(defaultValue).ToString();
