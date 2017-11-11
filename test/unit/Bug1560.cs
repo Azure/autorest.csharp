@@ -27,13 +27,13 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"IDeprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"Deprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedWithHttpMessages.cs"));
-                Assert.True(fileSystem.FileExists(@"IApproved.cs"));
-                Assert.True(fileSystem.FileExists(@"Approved.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists("Models/ResultObject.cs"));
+                Assert.True(fileSystem.FileExists("Interfaces/IDeprecated.cs"));
+                Assert.True(fileSystem.FileExists("Operations/Deprecated.cs"));
+                Assert.True(fileSystem.FileExists("Operations/DeprecatedWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists("Interfaces/IApproved.cs"));
+                Assert.True(fileSystem.FileExists("Operations/Approved.cs"));
+                Assert.True(fileSystem.FileExists("Operations/ApprovedWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -103,13 +103,13 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"IDeprecatedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"DeprecatedOperationsWithHttpMessages.cs"));
-                Assert.True(fileSystem.FileExists(@"IApprovedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"ApprovedOperationsWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists("Models/ResultObject.cs"));
+                Assert.True(fileSystem.FileExists("Interfaces/IDeprecatedOperations.cs"));
+                Assert.True(fileSystem.FileExists("Operations/DeprecatedOperations.cs"));
+                Assert.True(fileSystem.FileExists("Operations/DeprecatedOperationsWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists("Interfaces/IApprovedOperations.cs"));
+                Assert.True(fileSystem.FileExists("Operations/ApprovedOperations.cs"));
+                Assert.True(fileSystem.FileExists("Operations/ApprovedOperationsWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 

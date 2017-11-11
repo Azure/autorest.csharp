@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"TestOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"Operations/TestOperations.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 var testApiMethod = testApi.GetMethod("PutAsync");
                 Assert.NotNull(testApiMethod);
                 
-                var codeText = fileSystem.ReadAllText(@"TestOperations.cs");
+                var codeText = fileSystem.ReadAllText("Operations/TestOperations.cs");
                 // get hold of the async func
                 var methodSignature = "public async System.Threading.Tasks.Task PutAsync(MyParam param = default(MyParam), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
                 var regex = new Regex(Regex.Escape(methodSignature) + @"[^}]+");

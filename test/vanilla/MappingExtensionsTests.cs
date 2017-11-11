@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Tests
                 CodeGeneratorCs generator = new CodeGeneratorCs();
 
                 generator.Generate(clientModel).GetAwaiter().GetResult();
-                string body = Settings.Instance.FileSystemOutput.ReadAllText(Path.Combine("PayloadWithHttpMessages.cs"));
+                string body = Settings.Instance.FileSystemOutput.ReadAllText(Path.Combine("Operations/PayloadWithHttpMessages.cs"));
                 Assert.True(body.ContainsMultiline(@"
                     MinProduct minProduct = new MinProduct();
                     if (baseProductId != null || baseProductDescription != null || maxProductReference != null)

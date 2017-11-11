@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
-                Assert.True(fileSystem.FileExists(@"SimpleAPIWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists(@"Operations/SimpleAPIWithHttpMessages.cs"));
 
                 var result = await Compile(fileSystem);
 

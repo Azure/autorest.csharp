@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"SimpleAPIClientWithHttpMessages.cs"));
+                Assert.True(fileSystem.FileExists(@"Operations/SimpleAPIClientWithHttpMessages.cs"));
 
                 // compilation is key in this test, as `x-ms-long-running-operation: false`
                 // creates method that contains call to non-existent method.

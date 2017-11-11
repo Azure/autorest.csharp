@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                string generatedCodeFileName = "TestOperationsWithHttpMessages.cs";
+                string generatedCodeFileName = "Operations/TestOperationsWithHttpMessages.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                string generatedCodeFileName = "TestOperationsWithHttpMessages.cs";
+                string generatedCodeFileName = "Operations/TestOperationsWithHttpMessages.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 

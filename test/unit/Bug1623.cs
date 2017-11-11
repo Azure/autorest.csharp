@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"Models\Page.cs"));
-                Assert.True(fileSystem.FileExists(@"IProductsOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"ProductsOperations.cs"));
+                Assert.True(fileSystem.FileExists("Models/Page.cs"));
+                Assert.True(fileSystem.FileExists("Interfaces/IProductsOperations.cs"));
+                Assert.True(fileSystem.FileExists("Operations/ProductsOperations.cs"));
 
                 var result = await Compile(fileSystem);
 

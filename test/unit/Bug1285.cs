@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"Deprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"Approved.cs"));
+                Assert.True(fileSystem.FileExists("Models/ResultObject.cs"));
+                Assert.True(fileSystem.FileExists("Operations/Deprecated.cs"));
+                Assert.True(fileSystem.FileExists("Operations/Approved.cs"));
 
                 var result = await Compile(fileSystem);
 

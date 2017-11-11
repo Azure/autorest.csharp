@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"ISimpleAPI.cs"));
+                Assert.True(fileSystem.FileExists(@"Interfaces/ISimpleAPI.cs"));
                 Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
 
                 var result = await Compile(fileSystem);
