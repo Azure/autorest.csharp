@@ -120,7 +120,7 @@ namespace Fixtures.MirrorRecursiveTypes
         /// </summary>
         private void Initialize()
         {
-            BaseUri = new System.Uri("https://management.azure.com/");
+            BaseUri = new System.Uri("https://management.azure.com");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

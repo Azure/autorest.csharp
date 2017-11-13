@@ -251,11 +251,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
-            public static void PutBigDoublePositiveDecimal(this INumber operations, double numberBody)
+            public static void PutBigDoublePositiveDecimal(this INumber operations)
             {
-                operations.PutBigDoublePositiveDecimalAsync(numberBody).GetAwaiter().GetResult();
+                operations.PutBigDoublePositiveDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -264,14 +262,12 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDoublePositiveDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDoublePositiveDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -308,11 +304,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
-            public static void PutBigDoubleNegativeDecimal(this INumber operations, double numberBody)
+            public static void PutBigDoubleNegativeDecimal(this INumber operations)
             {
-                operations.PutBigDoubleNegativeDecimalAsync(numberBody).GetAwaiter().GetResult();
+                operations.PutBigDoubleNegativeDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -321,14 +315,12 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDoubleNegativeDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDoubleNegativeDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -422,11 +414,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
-            public static void PutBigDecimalPositiveDecimal(this INumber operations, decimal numberBody)
+            public static void PutBigDecimalPositiveDecimal(this INumber operations)
             {
-                operations.PutBigDecimalPositiveDecimalAsync(numberBody).GetAwaiter().GetResult();
+                operations.PutBigDecimalPositiveDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -435,14 +425,12 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDecimalPositiveDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDecimalPositiveDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -479,11 +467,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
-            public static void PutBigDecimalNegativeDecimal(this INumber operations, decimal numberBody)
+            public static void PutBigDecimalNegativeDecimal(this INumber operations)
             {
-                operations.PutBigDecimalNegativeDecimalAsync(numberBody).GetAwaiter().GetResult();
+                operations.PutBigDecimalNegativeDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -492,14 +478,12 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='numberBody'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDecimalNegativeDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDecimalNegativeDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

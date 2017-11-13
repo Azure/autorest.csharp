@@ -16,6 +16,7 @@ using AutoRest.CSharp.vanilla.Templates.Rest.Client;
 using AutoRest.CSharp.vanilla.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
 using AutoRest.Core.Utilities;
+using AutoRest.CSharp.azurefluent.Templates;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
@@ -38,11 +39,11 @@ namespace AutoRest.CSharp.Azure.Fluent
 
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            await Write(serviceClientTemplate, $"Generated/{codeModel.Name}{ImplementationFileExtension}");
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, "I" + codeModel.Name + ImplementationFileExtension);
+            await Write(serviceClientInterfaceTemplate, $"Generated/I{codeModel.Name}{ImplementationFileExtension}");
 
             // Operations
             foreach (MethodGroupCs group in codeModel.Operations)
@@ -51,16 +52,16 @@ namespace AutoRest.CSharp.Azure.Fluent
                 {
                     // Operation
                     var operationsTemplate = new AzureMethodGroupTemplate { Model = group };
-                    await Write(operationsTemplate, operationsTemplate.Model.TypeName + ImplementationFileExtension);
+                    await Write(operationsTemplate, $"Generated/{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
                     var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = group };
                     await Write(operationsInterfaceTemplate,
-                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                        $"Generated/I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
                 }
                 var operationExtensionsTemplate = new ExtensionsTemplate { Model = group };
                 await Write(operationExtensionsTemplate,
-                    $"{group.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                    $"Generated/{group.ExtensionTypeName}Extensions{ImplementationFileExtension}");
             }
 
             // Models
@@ -75,7 +76,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                     continue;
                 }
                 var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName,
+                await Write(modelTemplate, Path.Combine("Generated", Settings.Instance.ModelsName,
                     $"{model.Name}{ImplementationFileExtension}"));
             }
 
@@ -83,7 +84,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName,
+                await Write(enumTemplate, Path.Combine("Generated", Settings.Instance.ModelsName,
                     $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
             }
 
@@ -94,7 +95,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 {
                     Model = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value)
                 };
-                await Write(pageTemplate, Path.Combine(Settings.Instance.ModelsName,
+                await Write(pageTemplate, Path.Combine("Generated", Settings.Instance.ModelsName,
                     $"{pageTemplate.Model.TypeDefinitionName}{ImplementationFileExtension}"));
             }
             // Exceptions
@@ -106,7 +107,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 }
 
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
+                await Write(exceptionTemplate, Path.Combine("Generated", Settings.Instance.ModelsName,
                      $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
 
@@ -114,7 +115,22 @@ namespace AutoRest.CSharp.Azure.Fluent
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+                await Write(xmlSerializationTemplate, Path.Combine("Generated", Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+            }
+
+            if (Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result == true)
+            {
+                await Write(
+                    new AzureServiceManagerTemplate { Model = codeModel },
+                    codeModel.ServiceName + "Manager" + ImplementationFileExtension);
+                
+                await Write(
+                    new AzureCsprojTemplate { Model = codeModel },
+                    $"Microsoft.Azure.Management.{codeModel.ServiceName}.Fluent.csproj");
+
+                await Write(
+                    new AzureAssemblyInfoTemplate { Model = codeModel },
+                    "Properties/AssemblyInfo.cs");
             }
         }
     }

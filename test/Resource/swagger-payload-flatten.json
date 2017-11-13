@@ -1,17 +1,15 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://management.azure.com/"
+    }
+  ],
   "info": {
     "title": "Microsoft Azure Redis Cache Management API",
     "description": "Some cool documentation.",
     "version": "2014-04-01-preview"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "basePath": "/",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}": {
       "post": {
@@ -24,29 +22,26 @@
             "in": "path",
             "description": "Subscription ID.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "resourceGroupName",
             "in": "path",
             "description": "Resource Group ID.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "apiVersion",
             "in": "path",
             "description": "API ID.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "max_product",
-            "in": "body",
-            "description": "Product with max properties",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/MaxProduct"
+              "type": "string"
             }
           }
         ],
@@ -56,29 +51,52 @@
         "responses": {
           "204": {
             "description": "A list of caches",
-            "examples": {
+            "content": {
               "application/json": {
-                "id": 9,
-                "category": {
-                  "name": "domestic"
-                },
-                "name": "monster",
-                "tags": [
-                  {
-                    "name": "for sale"
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 9,
+                      "category": {
+                        "name": "domestic"
+                      },
+                      "name": "monster",
+                      "tags": [
+                        {
+                          "name": "for sale"
+                        }
+                      ],
+                      "status": "alive"
+                    }
                   }
-                ],
-                "status": "alive"
+                }
               }
             }
           },
           "default": {
             "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
-        }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "max_product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaxProduct"
+              }
+            }
+          },
+          "description": "Product with max properties",
+          "required": true
+        },
+        "x-ms-requestBody-index": 3
       },
       "put": {
         "operationId": "Payload_MinProductFlattened",
@@ -90,29 +108,26 @@
             "in": "path",
             "description": "Subscription ID.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "resourceGroupName",
             "in": "path",
             "description": "Resource Group ID.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "apiVersion",
             "in": "path",
             "description": "API ID.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "min_product",
-            "in": "body",
-            "description": "Product with min properties",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/MinProduct"
+              "type": "string"
             }
           }
         ],
@@ -122,122 +137,159 @@
         "responses": {
           "204": {
             "description": "A list of caches",
-            "examples": {
+            "content": {
               "application/json": {
-                "id": 9,
-                "category": {
-                  "name": "domestic"
-                },
-                "name": "monster",
-                "tags": [
-                  {
-                    "name": "for sale"
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 9,
+                      "category": {
+                        "name": "domestic"
+                      },
+                      "name": "monster",
+                      "tags": [
+                        {
+                          "name": "for sale"
+                        }
+                      ],
+                      "status": "alive"
+                    }
                   }
-                ],
-                "status": "alive"
+                }
               }
             }
           },
           "default": {
             "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "min_product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MinProduct"
+              }
+            }
+          },
+          "description": "Product with min properties",
+          "required": true
+        },
+        "x-ms-requestBody-index": 3
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaseProduct": {
+        "description": "The product documentation.",
+        "required": [
+          "base_product_id"
+        ],
+        "properties": {
+          "base_product_id": {
+            "type": "string",
+            "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+          },
+          "base_product_description": {
+            "type": "string",
+            "description": "Description of product."
+          }
+        },
+        "example": {
+          "name": "Puma",
+          "id": 1
+        }
+      },
+      "MaxProduct": {
+        "description": "The product documentation.",
+        "required": [
+          "max_product_display_name",
+          "max_product_capacity"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseProduct"
+          }
+        ],
+        "properties": {
+          "max_product_display_name": {
+            "type": "string",
+            "description": "Display name of product."
+          },
+          "max_product_capacity": {
+            "type": "string",
+            "description": "Capacity of product. For example, 4 people."
+          },
+          "max_product_image": {
+            "type": "string",
+            "description": "Image URL representing the product."
+          }
+        },
+        "example": {
+          "name": "Puma",
+          "id": 1
+        }
+      },
+      "MinProduct": {
+        "description": "The product documentation.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseProduct"
+          }
+        ],
+        "properties": {
+          "max_product_reference": {
+            "description": "Reference to Max Product.",
+            "$ref": "#/components/schemas/MaxProduct"
+          }
+        },
+        "example": {
+          "display_name": "Puma",
+          "id": 1
+        }
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "BaseProduct": {
-      "description": "The product documentation.",
-      "required": [
-        "base_product_id"
-      ],
-      "properties": {
-        "base_product_id": {
-          "type": "string",
-          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
-        },
-        "base_product_description": {
-          "type": "string",
-          "description": "Description of product."
-        }
-      },
-      "example": {
-        "name": "Puma",
-        "id": 1
-      }
     },
-    "MaxProduct": {
-      "description": "The product documentation.",
-      "required": [
-        "max_product_display_name",
-        "max_product_capacity"
-      ],
-      "allOf": [ { "$ref": "#/definitions/BaseProduct" } ],
-      "properties": {
-        "max_product_display_name": {
-          "type": "string",
-          "description": "Display name of product."
-        },
-        "max_product_capacity": {
-          "type": "string",
-          "description": "Capacity of product. For example, 4 people."
-        },
-        "max_product_image": {
-          "type": "string",
-          "description": "Image URL representing the product."
-        }
-      },
-      "example": {
-        "name": "Puma",
-        "id": 1
-      }
-    },
-    "MinProduct": {
-      "description": "The product documentation.",
-      "allOf": [ { "$ref": "#/definitions/BaseProduct" } ],
-      "properties": {
-        "max_product_reference": {
-          "description": "Reference to Max Product.",
-          "$ref": "#/definitions/MaxProduct"
-        }
-      },
-      "example": {
-        "display_name": "Puma",
-        "id": 1
-      }
-    },
-    "Error": {
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
+    "parameters": {
+      "SubscriptionIdParamterer": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "Subscription ID.",
+        "required": true,
+        "schema": {
           "type": "string"
-        },
-        "fields": {
+        }
+      },
+      "ApiVersionParameter": {
+        "name": "apiVersion",
+        "in": "path",
+        "description": "API ID.",
+        "required": true,
+        "schema": {
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParamterer": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "apiVersion",
-      "in": "path",
-      "description": "API ID.",
-      "required": true,
-      "type": "string"
     }
   }
 }
