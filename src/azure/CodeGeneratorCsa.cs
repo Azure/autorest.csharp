@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Azure
             foreach (var pageClass in pageClasses)
             {
                 var page = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value);
-                await Write(new PageTemplate { Model = page }, $"{FolderModels}/{page.TypeDefinitionName}{ImplementationFileExtension}");
+                await Write(new PageTemplate { Model = page }, $"{GeneratedSourcesBaseFolder}{FolderModels}/{page.TypeDefinitionName}{ImplementationFileExtension}");
             }
         }
 
@@ -68,8 +68,8 @@ namespace AutoRest.CSharp.Azure
                 }
 
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
-                     $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate,
+                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
         }
     }
