@@ -21,11 +21,15 @@
 @:private async System.Threading.Tasks.Task Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse)
 if(Model.Responses[errorCode].Body==null)
 {
-    @:=> await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", @((int)errorCode)));
+@:{
+    @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", @((int)errorCode)));
+@:}
 }
 else
 {
-    @:=> await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetExceptionTypeName(Model.Responses[errorCode])), @(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", @((int)errorCode)), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+@:{
+    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetExceptionTypeName(Model.Responses[errorCode])), @(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", @((int)errorCode)), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+@:}
 }
 @EmptyLine
 }
@@ -37,25 +41,42 @@ else
 /// <exception cref="@(MethodCs.GetExceptionTypeName(Model.DefaultResponse))">
 /// Deserialize error body returned by the operation
 /// </exception>
-private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int _statusCode)
+private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @if(Model.DefaultResponse.Body==null)
 {
-    @:=> await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode));
+@:{
+    @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, statusCode);
+@:}
 }
 else
 {
-    @:=> await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetExceptionTypeName(Model.DefaultResponse)), @(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, string.Format("Operation returned status code: '{0}'", _statusCode), @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+@:{
+    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetExceptionTypeName(Model.DefaultResponse)), @(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+@:}
 }
 @EmptyLine
 
-  
+@EmptyLine
+/// <summary>
+/// Method that generates error message for status code
+/// </summary>
+private string GetErrorMessage(int statusCode)
+{
+    return string.Format("Operation returned status code: '{0}'", statusCode);
+}
+@EmptyLine
+
+
 @EmptyLine
 @if(Model.Responses.Values.Any(resp=>resp.Body == null))
 {
 @:/// <summary>
 @:/// Generate a clouderror object from the httpresponse received
 @:/// </summary>
-@:private Microsoft.Rest.Azure.CloudError GetDefaultErrorModel(string statusCode, string resultContent) => new Microsoft.Rest.Azure.CloudError() { Code = statusCode, Message = resultContent };
+@:private Microsoft.Rest.Azure.CloudError GetDefaultErrorModel(string statusCode, string resultContent) 
+@:{
+    @:return new Microsoft.Rest.Azure.CloudError() { Code = statusCode, Message = resultContent };
+@:}
 @:@EmptyLine
 
 @:/// <summary>
@@ -65,8 +86,9 @@ else
 @:/// <exception cref="HttpRestCloudException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async Task HandleErrorResponseWithoutBodyFor@(Model.Name)(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage)
+@:private async Task HandleErrorResponseWithoutBodyFor@(Model.Name)(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
 @:{
+    @:string errorMessage = GetErrorMessage(statusCode);
     @:string _responseContent = null;
     @:var ex = new HttpRestCloudException(errorMessage);
     
@@ -92,8 +114,9 @@ else
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
 @:/// </summary>
-@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, string errorMessage, JsonSerializerSettings deserializationSettings) where T : System.Exception, Microsoft.Rest.IHttpRestException<V>
+@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<T,V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings) where T : System.Exception, Microsoft.Rest.IHttpRestException<V>
 @:{
+    @:string errorMessage = GetErrorMessage(statusCode);
     @:string _responseContent = null;
     @:T ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
     @:if (_httpResponse.Content != null)
