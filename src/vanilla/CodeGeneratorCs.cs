@@ -25,6 +25,8 @@ namespace AutoRest.CSharp
     {
         protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.8";
 
+        protected virtual string GeneratedSourcesBaseFolder => "";
+
         protected string FolderModels => Settings.Instance.ModelsName;
 
         public override bool IsSingleFileGenerationSupported => true;
@@ -44,14 +46,14 @@ namespace AutoRest.CSharp
                     codeModel.Name = methodGrp;
                     // Service server
                     var serviceControllerTemplate = new AutoRest.CSharp.vanilla.Templates.Rest.Server.ServiceControllerTemplate { Model = codeModel };
-                    await Write(serviceControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+                    await Write(serviceControllerTemplate, $"{GeneratedSourcesBaseFolder}{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, $"{FolderModels}/{model.Name}{ImplementationFileExtension}");
+                await Write(modelTemplate, $"{GeneratedSourcesBaseFolder}{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
         }
 
@@ -70,8 +72,8 @@ namespace AutoRest.CSharp
 
         protected virtual async Task GenerateServiceClient<T>(CodeModelCs codeModel) where T : Template<CodeModelCs>, new()
         {
-            await Write(new T { Model = codeModel }, $"{codeModel.Name}{ImplementationFileExtension}");
-            await Write(new ServiceClientInterfaceTemplate { Model = codeModel }, $"I{codeModel.Name}{ImplementationFileExtension}");
+            await Write(new T { Model = codeModel }, $"{GeneratedSourcesBaseFolder}{codeModel.Name}{ImplementationFileExtension}");
+            await Write(new ServiceClientInterfaceTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}I{codeModel.Name}{ImplementationFileExtension}");
         }
 
         protected virtual async Task GenerateOperations<T>(IEnumerable<MethodGroup> modelTypes) where T : Template<MethodGroupCs>, new()
@@ -83,17 +85,17 @@ namespace AutoRest.CSharp
                     // Operation
                     await Write(
                         new T { Model = methodGroup },
-                        $"{methodGroup.TypeName}{ImplementationFileExtension}");
+                        $"{GeneratedSourcesBaseFolder}{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
                     await Write(
                         new MethodGroupInterfaceTemplate { Model = methodGroup },
-                        $"I{methodGroup.TypeName}{ImplementationFileExtension}");
+                        $"{GeneratedSourcesBaseFolder}I{methodGroup.TypeName}{ImplementationFileExtension}");
                 }
 
                 // Extensions
                 await Write(new ExtensionsTemplate { Model = methodGroup },
-                    $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                    $"{GeneratedSourcesBaseFolder}{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
             }
         }
 
@@ -107,7 +109,7 @@ namespace AutoRest.CSharp
                 }
 
                 await Write(new ModelTemplate{ Model = model },
-                    $"{FolderModels}/{model.Name}{ImplementationFileExtension}");
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
         }
 
@@ -116,7 +118,7 @@ namespace AutoRest.CSharp
             foreach (EnumTypeCs enumType in enumTypes)
             {
                 await Write(new EnumTemplate { Model = enumType },
-                    $"{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
             }
         }
 
@@ -125,14 +127,14 @@ namespace AutoRest.CSharp
             foreach (CompositeTypeCs exceptionType in errorTypes)
             {
                 await Write(new ExceptionTemplate { Model = exceptionType },
-                    $"{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
         }
 
         protected virtual async Task GenerateXmlSerialization()
         {
             await Write(new XmlSerializationTemplate(), 
-                $"{FolderModels}/{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
+                $"{GeneratedSourcesBaseFolder}{FolderModels}/{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)

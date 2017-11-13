@@ -16,12 +16,15 @@ using AutoRest.CSharp.vanilla.Templates.Rest.Client;
 using AutoRest.CSharp.vanilla.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
 using AutoRest.Core.Utilities;
+using AutoRest.CSharp.azurefluent.Templates;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
     public class CodeGeneratorCsaf : CodeGeneratorCsa
     {
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.2.0";
+
+        protected override string GeneratedSourcesBaseFolder => "Generated/";
 
         /// <summary>
         /// Generates C# code for service client.
@@ -41,6 +44,19 @@ namespace AutoRest.CSharp.Azure.Fluent
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 await GenerateXmlSerialization();
+            }
+            if (Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result == true)
+            {
+                await Write(
+                    new AzureServiceManagerTemplate { Model = codeModel },
+                    codeModel.ServiceName + "Manager" + ImplementationFileExtension);
+                
+                await Write(
+                    new AzureCsprojTemplate { Model = codeModel },
+                    $"Microsoft.Azure.Management.{codeModel.ServiceName}.Fluent.csproj");
+                 await Write(
+                    new AzureAssemblyInfoTemplate { Model = codeModel },
+                    "Properties/AssemblyInfo.cs");
             }
         }
     }
