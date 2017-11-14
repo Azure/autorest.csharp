@@ -1391,7 +1391,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact(Skip = "TEMP")]
+        [Fact]
         public void HeaderTests()
         {
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
@@ -1402,7 +1402,7 @@ namespace AutoRest.CSharp.Tests
 
                 // Check the UserAgent ProductInfoHeaderValue
                 ProductInfoHeaderValue defaultProduct = client.UserAgent.Where<ProductInfoHeaderValue>(c => c.Product.Name.Equals(this.GetType().FullName)).FirstOrDefault<ProductInfoHeaderValue>();
-                Assert.Equal("1.5.0.1", defaultProduct.Product.Version);
+                Assert.Equal("1.0.0.0", defaultProduct.Product.Version);
 
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
@@ -1599,7 +1599,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
 
                 // POST param/existingkey
-                client.Header.ParamProtectedKey("text/html"); // Content-Type header ignored by default now (according to spec.)
+                Assert.Throws<Fixtures.AcceptanceTestsHeader.Models.ErrorException>(() => client.Header.ParamProtectedKey("text/html")); // Content-Type header ignored by default now (according to spec.)
 
                 // POST response/protectedkey
                 var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
@@ -2355,7 +2355,7 @@ namespace AutoRest.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 57;
+                int totalTests = report.Count - 8;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);
