@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException($"serviceClient");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             var convertedTypes = new Dictionary<IModelType, CompositeType>();
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Azure
                     }
                 }
 
-                if (method.ReturnType.Body != null && convertedTypes.ContainsKey(method.ReturnType.Body))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
                     method.ReturnType = new Response(convertedTypes[method.ReturnType.Body],
                         method.ReturnType.Headers);
