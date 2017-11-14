@@ -16,6 +16,7 @@ using AutoRest.CSharp.vanilla.Templates.Rest.Client;
 using AutoRest.CSharp.vanilla.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Azure
 {
@@ -34,86 +35,32 @@ namespace AutoRest.CSharp.Azure
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var codeModel = cm as CodeModelCsa;
-            if (codeModel == null)
+            var codeModel = cm as CodeModelCsa ?? throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
+
+            await GenerateServiceClient<AzureServiceClientTemplate>(codeModel);
+            await GenerateOperations<AzureMethodGroupTemplate>(codeModel.Operations);
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+            await GenerateEnums(codeModel.EnumTypes);
+            await GeneratePageClasses(codeModel.pageClasses);
+            await GenerateExceptions(codeModel.ErrorTypes);
+            if (codeModel.ShouldGenerateXmlSerialization)
             {
-                throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
+                await GenerateXmlSerialization();
             }
+        }
 
-            // Service client
-            var serviceClientTemplate = new AzureServiceClientTemplate {Model = codeModel};
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
-
-            // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate {Model = codeModel};
-            await Write(serviceClientInterfaceTemplate, "I" + codeModel.Name + ImplementationFileExtension);
-
-            // Operations
-            foreach (MethodGroupCs group in codeModel.Operations)
+        protected virtual async Task GeneratePageClasses(IEnumerable<KeyValuePair<KeyValuePair<string, string>, string>> pageClasses)
+        {
+            foreach (var pageClass in pageClasses)
             {
-                if (!group.IsCodeModelMethodGroup)
-                {
-                    // Operation
-                    var operationsTemplate = new AzureMethodGroupTemplate {Model = group};
-                    await Write(operationsTemplate, operationsTemplate.Model.TypeName + ImplementationFileExtension);
-
-                    // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate {Model = group};
-                    await Write(operationsInterfaceTemplate,
-                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
-                }
-                var operationExtensionsTemplate = new ExtensionsTemplate {Model = group};
-                await Write(operationExtensionsTemplate,
-                    $"{group.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                var page = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value);
+                await Write(new PageTemplate { Model = page }, $"{GeneratedSourcesBaseFolder}{FolderModels}/{page.TypeDefinitionName}{ImplementationFileExtension}");
             }
+        }
 
-            // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Concat(codeModel.HeaderTypes))
-            {
-                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool) model.Extensions[AzureExtensions.ExternalExtension])
-                {
-                    continue;
-                }
-
-                var modelTemplate = new ModelTemplate {Model = model};
-                await Write(modelTemplate,Path.Combine(Settings.Instance.ModelsName,
-                    $"{model.Name}{ImplementationFileExtension}"));
-            }
-
-            // Enums
-            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
-            {
-                if(enumType.ModelAsExtensible)
-                {
-                    var extensibleEnumTemplate = new ExtensibleEnumTemplate {Model = enumType};
-                        await Write(extensibleEnumTemplate,Path.Combine(Settings.Instance.ModelsName,
-                    $"{extensibleEnumTemplate.Model.Name}{ImplementationFileExtension}"));
-
-                    var extensibleEnumConverterTemplate = new ExtensibleEnumConverterTemplate {Model = enumType};
-                        await Write(extensibleEnumConverterTemplate,Path.Combine(Settings.Instance.ModelsName,
-                    $"{extensibleEnumConverterTemplate.Model.Name+"Converter"}{ImplementationFileExtension}"));
-                }
-                else 
-                {
-                    var enumTemplate = new EnumTemplate {Model = enumType};
-                    await Write(enumTemplate,Path.Combine(Settings.Instance.ModelsName,
-                        $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
-                }
-            }
-
-            // Page class
-            foreach (var pageClass in codeModel.pageClasses)
-            {
-                var pageTemplate = new PageTemplate
-                {
-                    Model = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value)
-                };
-                await Write(pageTemplate, Path.Combine(Settings.Instance.ModelsName,
-                    $"{pageTemplate.Model.TypeDefinitionName}{ImplementationFileExtension}"));
-            }
-            // Exceptions
-            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
+        protected override async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes)
+        {
+            foreach (CompositeTypeCs exceptionType in errorTypes)
             {
                 if (exceptionType.Name == "CloudError")
                 {
@@ -121,15 +68,8 @@ namespace AutoRest.CSharp.Azure
                 }
 
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
-                     $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
-            }
-
-            // Xml Serialization
-            if (codeModel.ShouldGenerateXmlSerialization)
-            {
-                var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate,
+                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
         }
     }
