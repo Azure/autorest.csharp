@@ -35,11 +35,11 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 }
 
     @{
-        var baseClassSignatures = @(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "");
-        if(Model.IsErrorResponseModel)
+        var baseClassSignatures = (Model.BaseModelType != null)? " : " + Model.BaseModelType.Name : string.Empty;
+        if(Model.IsErrorResponseModel())
         {
-            baseClassS= strings.IsNullOrEmpty(baseClassS? ": " : ", ";
-            baseClassS= "Microssoft.Rest.IHttpRestErrorModel<"+Model.Name+">";
+            baseClassSignatures+= string.IsNullOrEmpty(baseClassSignatures)? ": " : ", ";
+            baseClassSignatures+= "Microsoft.Rest.IHttpRestErrorModel";
         }
     }
     public partial class @Model.Name@baseClassSignatures
@@ -323,23 +323,22 @@ if (!anythingToValidate)
         } 
     </text>}
 
-    @if(Model.IsErrorResponseModel)
+    @if(Model.IsErrorResponseModel())
     {
-    @EmptyLine
-    @:/// <summary>
-    @:/// Method that creates an exception of @(Model.Name+"Exception")
-    
-    @:/// </summary>
-    @:public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
-    @:{
-        @:var ex = new @(Model.Name)Exception()
+        @:/// <summary>
+        @:/// Method that creates an exception of @(Model.Name+"Exception")
+        @:/// </summary>
+        @:public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         @:{
-            @:Request = requestMessage,
-            @:Response = responseMessage
-        @:};
-        @:ex.SetErrorModel(this);
-        @:throw ex;
-    @:}
+            @:var ex = new @(Model.Name+"Exception()")
+            @:{
+                @:Request = requestMessage,
+                @:Response = responseMessage
+            @:};
+            @:ex.SetErrorModel(this);
+            @:throw ex;
+        @:}
     }
+    @EmptyLine
     }
 }
