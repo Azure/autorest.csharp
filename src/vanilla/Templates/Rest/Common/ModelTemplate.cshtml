@@ -34,7 +34,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:[Microsoft.Rest.Serialization.JsonTransformation]
 }
 
-    public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
+    @{
+        var baseClassSignatures = @(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "");
+        if(Model.IsErrorResponseModel)
+        {
+            baseClassS= strings.IsNullOrEmpty(baseClassS? ": " : ", ";
+            baseClassS= "Microssoft.Rest.IHttpRestErrorModel<"+Model.Name+">";
+        }
+    }
+    public partial class @Model.Name@baseClassSignatures
     {
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
@@ -314,6 +322,24 @@ if (!anythingToValidate)
             return result;
         } 
     </text>}
+
+    @if(Model.IsErrorResponseModel)
+    {
+    @EmptyLine
+    @:/// <summary>
+    @:/// Method that creates an exception of @(Model.Name+"Exception")
     
+    @:/// </summary>
+    @:public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+    @:{
+        @:var ex = new @(Model.Name)Exception()
+        @:{
+            @:Request = requestMessage,
+            @:Response = responseMessage
+        @:};
+        @:ex.SetErrorModel(this);
+        @:throw ex;
+    @:}
+    }
     }
 }

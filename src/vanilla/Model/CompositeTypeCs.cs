@@ -73,6 +73,8 @@ namespace AutoRest.CSharp.Model
             }
         }
 
+        public bool IsErrorResponseModel() => CodeModel.ErrorTypes.Select(errType=>errType.Name).Contains(Name);
+
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
         /// <summary>
