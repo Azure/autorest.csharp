@@ -21,8 +21,9 @@ regenExpected = (opts,done) ->
       "--enable-xml"
     ]
 
-    for swaggerFile in swaggerFiles
-      args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
+    #for swaggerFile in swaggerFiles
+    #  args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
+    args.push("--input-file=F:/artemp/rcm/autorest.testserver/swagger/xms-error-responses.json")
 
     if (opts.addCredentials)
       args.push("--csharp.add-credentials=true")
@@ -133,9 +134,10 @@ defaultConfigurationFiles = [
   'test/vanilla/Configurations/hidden-methods.md'
 ]
 
-swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+#swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+swaggerDir = "F:/artemp/rcm/autorest.testserver/swagger"
 
-task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
+task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csazure-xms-error-responses'], (done) ->
   mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
@@ -228,6 +230,20 @@ task 'regenerate-csallsync', '', (done) ->
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
+  },done
+  return null
+
+task 'regenerate-csazure-xms-error-responses', '', (done) ->
+  mappings = {
+    'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json',
+  }
+  regenExpected {
+    'outputBaseDir': 'test/vanilla',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
   },done
   return null
 
