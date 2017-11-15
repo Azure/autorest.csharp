@@ -25,6 +25,10 @@ namespace AutoRest.CSharp
     {
         protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.8";
 
+        protected virtual string GeneratedSourcesBaseFolder => "";
+
+        protected string FolderModels => Settings.Instance.ModelsName;
+
         public override bool IsSingleFileGenerationSupported => true;
 
 
@@ -42,78 +46,95 @@ namespace AutoRest.CSharp
                     codeModel.Name = methodGrp;
                     // Service server
                     var serviceControllerTemplate = new AutoRest.CSharp.vanilla.Templates.Rest.Server.ServiceControllerTemplate { Model = codeModel };
-                    await Write(serviceControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+                    await Write(serviceControllerTemplate, $"{GeneratedSourcesBaseFolder}{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+                await Write(modelTemplate, $"{GeneratedSourcesBaseFolder}{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
         }
 
         protected virtual async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
-            // Service client
-            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            await GenerateServiceClient<ServiceClientTemplate>(codeModel);
+            await GenerateOperations<MethodGroupTemplate>(codeModel.Operations);
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+            await GenerateEnums(codeModel.EnumTypes);
+            await GenerateExceptions(codeModel.ErrorTypes);
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                await GenerateXmlSerialization();
+            }
+        }
 
-            // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+        protected virtual async Task GenerateServiceClient<T>(CodeModelCs codeModel) where T : Template<CodeModelCs>, new()
+        {
+            await Write(new T { Model = codeModel }, $"{GeneratedSourcesBaseFolder}{codeModel.Name}{ImplementationFileExtension}");
+            await Write(new ServiceClientInterfaceTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}I{codeModel.Name}{ImplementationFileExtension}");
+        }
 
-            // operations
-            foreach (MethodGroupCs methodGroup in codeModel.Operations)
+        protected virtual async Task GenerateOperations<T>(IEnumerable<MethodGroup> modelTypes) where T : Template<MethodGroupCs>, new()
+        {
+            foreach (MethodGroupCs methodGroup in modelTypes)
             {
                 if (!methodGroup.Name.IsNullOrEmpty())
                 {
                     // Operation
-                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                    await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    await Write(
+                        new T { Model = methodGroup },
+                        $"{GeneratedSourcesBaseFolder}{methodGroup.TypeName}{ImplementationFileExtension}");
 
                     // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                    await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    await Write(
+                        new MethodGroupInterfaceTemplate { Model = methodGroup },
+                        $"{GeneratedSourcesBaseFolder}I{methodGroup.TypeName}{ImplementationFileExtension}");
                 }
 
-                var operationExtensionsTemplate = new ExtensionsTemplate { Model = methodGroup };
-                await Write(operationExtensionsTemplate, $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                // Extensions
+                await Write(new ExtensionsTemplate { Model = methodGroup },
+                    $"{GeneratedSourcesBaseFolder}{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
             }
+        }
 
-            // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
+        protected virtual async Task GenerateModels(IEnumerable<CompositeType> modelTypes)
+        {
+            foreach (CompositeTypeCs model in modelTypes)
             {
-                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
+                if (true == model.Extensions.Get<bool>(SwaggerExtensions.ExternalExtension))
                 {
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate{ Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+                await Write(new ModelTemplate{ Model = model },
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{model.Name}{ImplementationFileExtension}");
             }
+        }
 
-            // Enums
-            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
+        protected virtual async Task GenerateEnums(IEnumerable<EnumType> enumTypes)
+        {
+            foreach (EnumTypeCs enumType in enumTypes)
             {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                await Write(new EnumTemplate { Model = enumType },
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
             }
+        }
 
-            // Exceptions
-            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
+        protected virtual async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes)
+        {
+            foreach (CompositeTypeCs exceptionType in errorTypes)
             {
-                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(new ExceptionTemplate { Model = exceptionType },
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
-            
-            // Xml Serialization
-            if (codeModel.ShouldGenerateXmlSerialization)
-            {
-                var xmlSerializationTemplate = new XmlSerializationTemplate();
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
-            }
+        }
+
+        protected virtual async Task GenerateXmlSerialization()
+        {
+            await Write(new XmlSerializationTemplate(), 
+                $"{GeneratedSourcesBaseFolder}{FolderModels}/{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)
