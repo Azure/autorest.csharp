@@ -100,7 +100,7 @@ private string GetErrorMessage(int statusCode)
 @:{
     @:string errorMessage = GetErrorMessage(statusCode);
     @:string _responseContent = null;
-    @:var ex = new HttpRestCloudException(errorMessage);
+    @:var ex = new Microsoft.Rest.Azure.HttpRestCloudException(errorMessage);
     
     @:if (_httpResponse.Content != null)
     @:{
