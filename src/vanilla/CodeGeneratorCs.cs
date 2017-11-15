@@ -119,15 +119,14 @@ namespace AutoRest.CSharp
             {
                 if(enumType.ModelAsExtensible)
                 {
-                    await Write(new ExtensibleEnumTemplate {Model = enumType},
+                    await Write(new ExtensibleEnumTemplate { Model = enumType },
                         $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
-
-                    await Write(new ExtensibleEnumConverterTemplate {Model = enumType},
-                        $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name+"Converter"}{ImplementationFileExtension}");
+                    await Write(new ExtensibleEnumConverterTemplate { Model = enumType },
+                        $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name + "Converter"}{ImplementationFileExtension}");
                 }
                 else 
                 {
-                    await Write(new EnumTemplate { Model = enumType },
+                    await Write(new EnumTemplate { Model = enumType }, 
                         $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");
                 }
             }
