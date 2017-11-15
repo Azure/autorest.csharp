@@ -53,27 +53,8 @@ namespace AutoRest.CSharp.Azure
         {
             foreach (var pageClass in pageClasses)
             {
-<<<<<<< HEAD
-                if(enumType.ModelAsExtensible)
-                {
-                    var extensibleEnumTemplate = new ExtensibleEnumTemplate {Model = enumType};
-                        await Write(extensibleEnumTemplate,Path.Combine(Settings.Instance.ModelsName,
-                    $"{extensibleEnumTemplate.Model.Name}{ImplementationFileExtension}"));
-
-                    var extensibleEnumConverterTemplate = new ExtensibleEnumConverterTemplate {Model = enumType};
-                        await Write(extensibleEnumConverterTemplate,Path.Combine(Settings.Instance.ModelsName,
-                    $"{extensibleEnumConverterTemplate.Model.Name+"Converter"}{ImplementationFileExtension}"));
-                }
-                else 
-                {
-                    var enumTemplate = new EnumTemplate {Model = enumType};
-                    await Write(enumTemplate,Path.Combine(Settings.Instance.ModelsName,
-                        $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
-                }
-=======
                 var page = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value);
                 await Write(new PageTemplate { Model = page }, $"{GeneratedSourcesBaseFolder}{FolderModels}/{page.TypeDefinitionName}{ImplementationFileExtension}");
->>>>>>> b0015e3aea89b6e5af53dd2068b2266e5a628faf
             }
         }
 
