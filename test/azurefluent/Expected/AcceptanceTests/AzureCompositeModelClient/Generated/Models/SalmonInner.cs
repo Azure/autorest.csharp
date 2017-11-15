@@ -16,20 +16,20 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("salmon")]
-    public partial class Salmon : FishInner
+    public partial class SalmonInner : FishInner
     {
         /// <summary>
-        /// Initializes a new instance of the Salmon class.
+        /// Initializes a new instance of the SalmonInner class.
         /// </summary>
-        public Salmon()
+        public SalmonInner()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the Salmon class.
+        /// Initializes a new instance of the SalmonInner class.
         /// </summary>
-        public Salmon(double length, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), string location = default(string), bool? iswild = default(bool?))
+        public SalmonInner(double length, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), string location = default(string), bool? iswild = default(bool?))
             : base(length, species, siblings)
         {
             Location = location;
