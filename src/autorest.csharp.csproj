@@ -67,12 +67,20 @@
     <!--<PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />-->
     <PackageReference Include="autorest.common" Version="2.3.30" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
+    <!-->
     <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime\ClientRuntime\Microsoft.Rest.ClientRuntime.csproj" />
     <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime.Azure\ClientRuntime.Azure\Microsoft.Rest.ClientRuntime.Azure.csproj" />
+    <-->
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Reference Include="Microsoft.Rest.ClientRuntime">
+      <HintPath>F:\artemp\rcm\azure-sdk-for-net\src\sdkcommon\ClientRuntime\ClientRuntime\bin\Debug\netstandard1.4\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure">
+      <HintPath>F:\artemp\rcm\azure-sdk-for-net\src\sdkcommon\ClientRuntime.Azure\ClientRuntime.Azure\bin\Debug\netstandard1.4\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-Perks.CodeGen" Version="2.0.1" />
