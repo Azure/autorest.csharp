@@ -10,6 +10,7 @@
 
 namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -31,7 +32,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// <param name="daysOfWeek">Type of Pet. Possible values include:
         /// 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
         /// 'Sunday'</param>
-        public Pet(IntEnum intEnum, string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?))
+        public Pet(string intEnum, string name = default(string), DaysOfWeekExtensibleEnum? daysOfWeek = default(DaysOfWeekExtensibleEnum?))
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
@@ -60,16 +61,20 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
         /// Gets or sets possible values include: '1', '2', '3'
         /// </summary>
         [JsonProperty(PropertyName = "IntEnum")]
-        public IntEnum IntEnum { get; set; }
+        public string IntEnum { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (IntEnum == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "IntEnum");
+            }
         }
     }
 }

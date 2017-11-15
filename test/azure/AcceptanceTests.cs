@@ -10,8 +10,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
-using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
-using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
 using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
@@ -659,75 +657,5 @@ namespace AutoRest.CSharp.Azure.Tests
             }
         }
 
-        [Fact]
-        public void ParameterGroupingTests()
-        {
-            const int bodyParameter = 1234;
-            const string headerParameter = "header";
-            const int queryParameter = 21;
-            const string pathParameter = "path";
-
-            using (var client = new AutoRestParameterGroupingTestServiceClient(
-                Fixture.Uri,
-                new TokenCredentials(Guid.NewGuid().ToString())))
-            {
-                //Valid required parameters
-                ParameterGroupingPostRequiredParameters requiredParameters = new ParameterGroupingPostRequiredParameters(bodyParameter, pathParameter)
-                {
-                    CustomHeader = headerParameter,
-                    Query = queryParameter
-                };
-
-                client.ParameterGrouping.PostRequired(requiredParameters);
-
-                //Required parameters but null optional parameters
-                requiredParameters = new ParameterGroupingPostRequiredParameters(bodyParameter, pathParameter);
-
-                client.ParameterGrouping.PostRequired(requiredParameters);
-
-                //null required parameters
-                Assert.Throws<ValidationException>(() => client.ParameterGrouping.PostRequired(null));
-
-                //Valid optional parameters
-                ParameterGroupingPostOptionalParameters optionalParameters = new ParameterGroupingPostOptionalParameters()
-                {
-                    CustomHeader = headerParameter,
-                    Query = queryParameter
-                };
-
-                client.ParameterGrouping.PostOptional(optionalParameters);
-
-                //null optional paramters
-                client.ParameterGrouping.PostOptional(null);
-
-                //Multiple grouped parameters
-                FirstParameterGroup firstGroup = new FirstParameterGroup
-                {
-                    HeaderOne = headerParameter,
-                    QueryOne = queryParameter
-                };
-                var secondGroup = new ParameterGroupingPostMultiParamGroupsSecondParamGroup
-                {
-                    HeaderTwo = "header2",
-                    QueryTwo = 42
-                };
-
-                client.ParameterGrouping.PostMultiParamGroups(firstGroup, secondGroup);
-
-                //Multiple grouped parameters -- some optional parameters omitted
-                firstGroup = new FirstParameterGroup
-                {
-                    HeaderOne = headerParameter
-                };
-                secondGroup = new ParameterGroupingPostMultiParamGroupsSecondParamGroup
-                {
-                    QueryTwo = 42
-                };
-
-                client.ParameterGrouping.PostMultiParamGroups(firstGroup, secondGroup);
-
-                client.ParameterGrouping.PostSharedParameterGroupObject(firstGroup);
-            }
-        }
     }
 }
