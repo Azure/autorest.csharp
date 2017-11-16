@@ -57,11 +57,12 @@ components:
         name:
           type: string
           readOnly: true
-          description: Gets the Pet by id.
+          description: 'name of pet'
     NotFoundErrorBase:
       properties:
         reason:
           type: string
+          description: 'what really happened'
         whatNotFound:
           type: string
       allOf:
@@ -74,10 +75,12 @@ components:
       properties:
         someBaseProp:
           type: string
+          description: 'some defining property'
     LinkNotFound:
       properties:
         whatSubAddress:
           type: string
+          description: 'subaddress that could not be found'
       allOf:
         - $ref: '#/components/schemas/NotFoundErrorBase'
       x-ms-discriminator-value: InvalidResourceLink
@@ -85,9 +88,11 @@ components:
       properties:
         name:
           type: string
+          description: 'name of animal not found'
       allOf:
         - $ref: '#/components/schemas/NotFoundErrorBase'
     Animal:
       properties:
         aniType:
           type: string
+          description: 'animal type'
