@@ -487,11 +487,11 @@ namespace AutoRest.CSharp.Model
         {
             if (response.Body==null)
             {
-                return "Microsoft.Rest.HttpRestCloudException";
+                return "Microsoft.Rest.Azure.HttpRestCloudException";
             }
             if(response.Body is PrimaryTypeCs)
             {
-                return "Microsoft.Rest.HttpRestException<"+response.Body.ClassName+">";
+                return "T:Microsoft.Rest.HttpRestException";
             }
             return response.Body.ClassName+"Exception";
         }

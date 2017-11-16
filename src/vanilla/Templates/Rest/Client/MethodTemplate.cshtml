@@ -93,7 +93,7 @@ private string GetErrorMessage(int statusCode)
 @:/// Handle responses where error model is not defined
 @:/// Skips deserialization and sets the raw output in CloudError model
 @:/// </summary>
-@:/// <exception cref="HttpRestCloudException">
+@:/// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
@@ -125,7 +125,7 @@ private string GetErrorMessage(int statusCode)
 @:/// Handle responses where error model is a known primary type
 @:/// Creates a HttpRestException object and throws it
 @:/// </summary>
-@:/// <exception cref="HttpRestException">
+@:/// <exception cref="T:Microsoft.Rest.HttpRestException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
@@ -362,7 +362,6 @@ else
     @EmptyLine
 
     // Serialize Request
-    string _requestContent = null;
     @if (Model.RequestBody != null)
     {
         if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))

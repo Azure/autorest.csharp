@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     file.Write(fileSystem.VirtualStore["PetOperations.cs"]);
                     file.Write("\n");
-                    file.Write(fileSystem.VirtualStore["Models/NotFoundErrorBase.cs"]);
+                    file.Write(fileSystem.VirtualStore["Models/Pet.cs"]);
                     file.Write("\n");
                     foreach (var x in fileSystem.VirtualStore.Keys)
                     {

@@ -328,7 +328,7 @@ if (!anythingToValidate)
         @:/// <summary>
         @:/// Method that creates an exception of @(Model.Name+"Exception")
         @:/// </summary>
-        @:public void CreateAndThrowException(System.Net.Http.HttpRequestMessageWrapper requestMessage, System.Net.Http.HttpResponseMessageWrapper responseMessage)
+        @:public void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
         @:{
             @:var ex = new @(Model.Name+"Exception()")
             @:{
