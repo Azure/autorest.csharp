@@ -75,7 +75,18 @@ namespace AutoRest.CSharp.Model
 
         public bool IsErrorResponseModel() => CodeModel.ErrorTypes.Select(errType=>errType.Name).Contains(Name);
 
-        public bool IsPolymorphicErrorResponseModel() => !string.IsNullOrEmpty(BaseModelType?.PolymorphicDiscriminator);
+        public bool IsPolymorphicErrorResponseModel() {
+            var baseModelType = BaseModelType;
+            while(baseModelType!=null && baseModelType is CompositeType)
+            {
+                if(!string.IsNullOrEmpty(baseModelType.PolymorphicDiscriminator) && CodeModel.ErrorTypes.Contains(baseModelType))
+                {
+                    return true;
+                }
+                baseModelType = baseModelType.BaseModelType;
+            }
+            return false;
+        }
 
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
