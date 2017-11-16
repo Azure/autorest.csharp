@@ -34,19 +34,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models/AnimalNotFound.cs"));
                 Assert.True(fileSystem.FileExists(@"Models/NotFoundErrorBaseException.cs"));
 
-                using (System.IO.StreamWriter file = 
-                    new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\log.log"))
-                {
-                    file.Write(fileSystem.VirtualStore["PetOperations.cs"]);
-                    file.Write("\n");
-                    file.Write(fileSystem.VirtualStore["Models/Pet.cs"]);
-                    file.Write("\n");
-                    foreach (var x in fileSystem.VirtualStore.Keys)
-                    {
-                            file.WriteLine(x);
-                    }
-                }
-
                 var result = await Compile(fileSystem);
 
                 // filter the warnings
