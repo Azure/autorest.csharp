@@ -26,23 +26,13 @@ namespace AutoRest.CSharp.Unit.Tests
             // simplified test pattern for unit testing aspects of code generation
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
-                /* 
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"Models/Enum2CustomName.cs"));
-                Assert.True(fileSystem.FileExists(@"Models/Enum3CustomName.cs"));
-                Assert.True(fileSystem.FileExists(@"Models/Enum4CustomName.cs"));
-                Assert.True(fileSystem.FileExists(@"Models/Enum5CustomName.cs"));
-
-                // enum 3-5 must have descriptions
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum3CustomName.cs").Contains("is cool"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("is cool"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("is cool"));
-                // enum 4-5 must have different name than value
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aOVERRIDDEN"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum4CustomName.cs").Contains("4aName"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aOVERRIDDEN"));
-                Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aName"));
-                */
+                Assert.True(fileSystem.FileExists(@"Models/NotFoundErrorBase.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/BaseError.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/AnimalNotFound.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/LinkNotFoundException.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/AnimalNotFound.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/NotFoundErrorBaseException.cs"));
 
                 using (System.IO.StreamWriter file = 
                     new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\log.log"))
