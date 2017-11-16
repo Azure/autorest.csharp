@@ -44,6 +44,19 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.ReadAllText(@"Models/Enum5CustomName.cs").Contains("5aName"));
                 */
 
+                using (System.IO.StreamWriter file = 
+                    new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\log.log"))
+                {
+                    file.Write(fileSystem.VirtualStore["PetOperations.cs"]);
+                    file.Write("\n");
+                    file.Write(fileSystem.VirtualStore["Models/NotFoundErrorBase.cs"]);
+                    file.Write("\n");
+                    foreach (var x in fileSystem.VirtualStore.Keys)
+                    {
+                            file.WriteLine(x);
+                    }
+                }
+
                 var result = await Compile(fileSystem);
 
                 // filter the warnings

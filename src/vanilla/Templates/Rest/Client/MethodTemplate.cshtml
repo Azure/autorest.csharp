@@ -96,7 +96,7 @@ private string GetErrorMessage(int statusCode)
 @:/// <exception cref="HttpRestCloudException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async Task HandleErrorResponseWithoutBodyFor@(Model.Name)(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+@:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string errorMessage = GetErrorMessage(statusCode);
     @:string _responseContent = null;
@@ -128,7 +128,7 @@ private string GetErrorMessage(int statusCode)
 @:/// <exception cref="HttpRestException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async Task HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+@:private async System.Threading.Tasks.Task HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string _responseContent = null;
     @:var ex = new HttpRestException<T>(GetErrorMessage(statusCode));
@@ -162,7 +162,7 @@ private string GetErrorMessage(int statusCode)
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
 @:/// </summary>
-@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings) 
+@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings) 
     @:where V : Microsoft.Rest.IHttpRestErrorModel
 @:{
     @:string errorMessage = GetErrorMessage(statusCode);
@@ -531,7 +531,7 @@ else
     {
         try
         {
-            switch((((int)))_statusCode)
+            switch((int)_statusCode)
             {
                 @foreach(var errorCode in errorCodes)
                 {
@@ -540,7 +540,7 @@ else
                     @:break;
                 }
                 default:
-                    await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (((int)))_statusCode);
+                    await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
                     break;
             }
         }
