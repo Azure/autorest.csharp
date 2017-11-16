@@ -19,24 +19,27 @@
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
 @:private async System.Threading.Tasks.Task Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse)
+@:{
 if(Model.Responses[errorCode].Body==null)
 {
-@:{
+    if(!Model.IsAzureARMGenerator())
+    {
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<string>(_httpRequest, _httpResponse, @((int)errorCode)));
+    }
+    else
+    {
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, @((int)errorCode)));
-@:}
+    }
 }
 else if(Model.Responses[errorCode].Body is PrimaryTypeCs)
 {
-@:{
-    @:await HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
-@:}
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
 }
 else
 {
-@:{
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
-@:}
 }
+@:}
 @EmptyLine
 }
 
@@ -48,23 +51,23 @@ else
 /// Deserialize error body returned by the operation
 /// </exception>
 private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
+{
 @if(Model.DefaultResponse.Body==null)
 {
-@:{
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<string>(_httpRequest, _httpResponse, statusCode);
+}
+else if(Model.IsAzureARMGenerator() && Model.DefaultResponse.Body.Name=="CloudError")
+{
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, statusCode);
-@:}
 }
 else if(Model.DefaultResponse.Body is PrimaryTypeCs)
 {
-@:{
-    @:await HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
-@:}
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
 }
 else
 {
-@:{
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
-@:}
+}
 }
 @EmptyLine
 
@@ -78,7 +81,7 @@ private string GetErrorMessage(int statusCode)
 }
 
 @EmptyLine
-@if(Model.Responses.Values.Any(resp=>resp.Body == null))
+@if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body.Name=="CloudError"))
 {
 @:/// <summary>
 @:/// Generate a CloudError object from the HttpResponse received
@@ -119,7 +122,7 @@ private string GetErrorMessage(int statusCode)
 }
 @EmptyLine
 
-@if(Model.Responses.Values.Any(resp=>resp.Body != null && resp.Body is PrimaryTypeCs))
+@if(Model.Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || (!Model.IsAzureARMGenerator() && Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp))))
 {
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
@@ -128,7 +131,7 @@ private string GetErrorMessage(int statusCode)
 @:/// <exception cref="T:Microsoft.Rest.HttpRestException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
-@:private async System.Threading.Tasks.Task HandleErrorResponseWithPrimaryTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
+@:private async System.Threading.Tasks.Task HandleErrorResponseWithKnownTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string _responseContent = null;
     @:var ex = new HttpRestException<T>(GetErrorMessage(statusCode));
@@ -145,7 +148,12 @@ private string GetErrorMessage(int statusCode)
         @:{
             @:// Ignore the exception
         @:}
+    @:} 
+    @:else
+    @:{
+        @:_responseContent = string.Empty;
     @:}
+    @EmptyLine
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
     @:_httpRequest.Dispose();
@@ -157,7 +165,7 @@ private string GetErrorMessage(int statusCode)
 @:}
 }
 @EmptyLine
-@if(Model.Responses.Values.Any(resp=>resp.Body != null && resp.Body is CompositeTypeCs))
+@if(Model.Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)))
 {
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T

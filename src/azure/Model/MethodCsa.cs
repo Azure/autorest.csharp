@@ -47,42 +47,6 @@ namespace AutoRest.CSharp.Azure.Model
         }
 
         /// <summary>
-        /// Get the expression for exception initialization with message.
-        /// </summary>
-        public override string InitializeExceptionWithMessage
-        {
-            get
-            {
-                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
-                {
-                    return "ex = new Microsoft.Rest.Azure.CloudException(_errorBody.Message);";
-                }
-                return base.InitializeExceptionWithMessage;
-            }
-        }
-
-        /// <summary>
-        /// Get the expression for exception initialization.
-        /// </summary>
-        public override string InitializeException
-        {
-            get
-            {
-                if (OperationExceptionTypeString == "Microsoft.Rest.Azure.CloudException")
-                {
-                    IndentedStringBuilder sb = new IndentedStringBuilder();
-                    sb.AppendLine(base.InitializeExceptionWithMessage)
-                      .AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
-                      .AppendLine("{").Indent()
-                        .AppendLine("ex.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
-                      .AppendLine("}");
-                    return sb.ToString();
-                }
-                return base.InitializeExceptionWithMessage;
-            }
-        }
-
-        /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
         public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension) && true == Extensions[AzureExtensions.LongRunningExtension] as bool?;
@@ -103,6 +67,11 @@ namespace AutoRest.CSharp.Azure.Model
                 return null;
             }
         }
+
+        /// <summary>
+        /// Gets whether model is azure model or not
+        /// </summary>
+        public override bool IsAzureARMGenerator() => true;
 
         /// <summary>
         /// Returns AzureOperationResponse generic type declaration.

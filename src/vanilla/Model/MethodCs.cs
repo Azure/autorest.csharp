@@ -200,21 +200,16 @@ namespace AutoRest.CSharp.Model
                 }
                 else
                 {
-                    return "Microsoft.Rest.HttpOperationException";
+                    return "T:Microsoft.Rest.HttpRestException";
                 }
             }
         }
 
         /// <summary>
-        /// Get the expression for exception initialization with message.
+        /// Gets whether model is azure model or not
         /// </summary>
-        public virtual string InitializeExceptionWithMessage => string.Empty;
-
-        /// <summary>
-        /// Get the expression for exception initialization with message.
-        /// </summary>
-        public virtual string InitializeException => string.Empty;
-
+        public virtual bool IsAzureARMGenerator() => false;
+        
         /// <summary>
         /// Gets the expression for response body initialization.
         /// </summary>
