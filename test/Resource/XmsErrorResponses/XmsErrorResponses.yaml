@@ -6,7 +6,7 @@ info:
   description: Pets online.
 paths:
   '/Pets/{petId}/GetPet':
-    post:
+    get:
       operationId: Pet_GetPetById
       description: Gets pets by id.
       parameters:
