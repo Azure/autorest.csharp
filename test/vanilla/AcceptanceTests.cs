@@ -35,6 +35,8 @@ using Fixtures.AcceptanceTestsCustomBaseUri;
 using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
 using Fixtures.AcceptanceTestsExtensibleEnums;
 using Fixtures.AcceptanceTestsExtensibleEnums.Models;
+using Fixtures.AcceptanceTestsXmsErrorResponses;
+using Fixtures.AcceptanceTestsXmsErrorResponses.Models;
 using Fixtures.AcceptanceTestsHeader;
 using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
@@ -415,9 +417,101 @@ namespace AutoRest.CSharp.Tests
         }
 
         [Fact]
+        public void CustomExceptionsAndStatusCodesTests()
+        {
+            
+            using(var client = new Fixtures.AcceptanceTestsXmsErrorResponses.PetStoreInc(Fixture.Uri))
+            {
+                // basic polymorphic and base types testing
+
+                // Test 1: valid pet received
+                var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
+                Assert.Equal(p1.Name, "Tommy Tomson");
+                Assert.Equal(p1.AniType, "Dog");
+
+                // Test 2: invalid pet throws AnimalNotFoundException
+                try
+                {
+                    var p2 = client.Pet.GetPetByIdAsync("coyoteUgly").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is AnimalNotFoundException);
+                }
+
+                // Test 3: invalid pet throws LinkNotFoundException
+                try
+                {
+                    var p3 = client.Pet.GetPetByIdAsync("weirdAlYankovic").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is LinkNotFoundException);
+                }
+
+                // Test 4: invalid pet throws HttpRestException<int>
+                try
+                {
+                    var p4 = client.Pet.GetPetByIdAsync("alien123").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is HttpRestException<int>);
+                }
+
+                // Test 5: invalid pet throws HttpRestException<string>
+                try                
+                {
+                    var p5 = client.Pet.GetPetByIdAsync("ringo").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is HttpRestException<string>);
+                }
+
+                // Test 6: random invalid pet throws HttpRestException<string> 
+                try                
+                {
+                    var p6 = client.Pet.GetPetByIdAsync("foofoo").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is HttpRestException<string>);
+                }
+            
+            
+                // multi level polymorhpic inheritence testing
+
+                // test 1: valid action no exceptions
+                client.Pet.DoSomethingWithHttpMessagesAsync("stay").GetAwaiter().GetResult();
+
+                // test 2: invalid action throws PetSadErrorException
+                try
+                {
+                    client.Pet.DoSomethingWithHttpMessagesAsync("jump").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is PetSadErrorException);
+                }
+
+                // test 3: invalid action throws PetHungryOrThirstyErrorException
+                try
+                {
+                    client.Pet.DoSomethingWithHttpMessagesAsync("fetch").GetAwaiter().GetResult();
+                }
+                catch(Exception e)
+                {
+                    Assert.True(e is PetHungryOrThirstyErrorException);
+                }
+            }
+
+        }
+
+        [Fact]
         public void ExtensibleEnumsTest()
         {
-            using (var client = new PetStoreInc(Fixture.Uri))
+            using (var client = new Fixtures.AcceptanceTestsExtensibleEnums.PetStoreInc(Fixture.Uri))
             {
                 // Valid enums test
                 Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);

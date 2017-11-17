@@ -200,7 +200,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<object>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Pet>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petId == null)
             {
@@ -219,7 +219,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "Pets/{petId}/GetPet").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "errorStatusCodes/Pets/{petId}/GetPet").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(petId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -290,7 +290,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<Pet>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -408,7 +408,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<object>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<PetAction>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (whatAction == null)
             {
@@ -427,7 +427,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "Pets/doSomething/{whatAction}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "errorStatusCodes/Pets/doSomething/{whatAction}").ToString();
             _url = _url.Replace("{whatAction}", System.Uri.EscapeDataString(whatAction));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -492,7 +492,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<PetAction>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response

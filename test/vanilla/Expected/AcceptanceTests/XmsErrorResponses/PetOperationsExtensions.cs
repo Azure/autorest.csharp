@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetPetByIdAsync(this IPetOperations operations, string petId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Pet> GetPetByIdAsync(this IPetOperations operations, string petId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetPetByIdWithHttpMessagesAsync(petId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -51,7 +51,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> DoSomethingAsync(this IPetOperations operations, string whatAction, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<PetAction> DoSomethingAsync(this IPetOperations operations, string whatAction, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DoSomethingWithHttpMessagesAsync(whatAction, null, cancellationToken).ConfigureAwait(false))
                 {

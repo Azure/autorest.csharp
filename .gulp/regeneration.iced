@@ -21,8 +21,8 @@ regenExpected = (opts,done) ->
       "--enable-xml"
     ]
 
-    # for swaggerFile in swaggerFiles
-      #args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
+    for swaggerFile in swaggerFiles
+      args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
 
     args.push("--input-file=F:/artemp/rcm/autorest.testserver/swagger/xms-error-responses.json")
     

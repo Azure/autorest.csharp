@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         private void Initialize()
         {
             Pet = new PetOperations(this);
-            BaseUri = new System.Uri("");
+            BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
