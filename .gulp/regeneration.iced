@@ -236,20 +236,6 @@ task 'regenerate-csallsync', '', (done) ->
   },done
   return null
 
-task 'regenerate-csazure-xms-error-responses', '', (done) ->
-  mappings = {
-    'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json',
-  }
-  regenExpected {
-    'outputBaseDir': 'test/vanilla',
-    'mappings': mappings,
-    'outputDir': 'Expected',
-    'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1',
-    'syncMethods': 'none'
-  },done
-  return null
-
 task 'regenerate-csnosync', '', (done) ->
   mappings = {
     'PetstoreV2NoSync': 'test/vanilla/Swagger/swagger.2.0.example.v2.json',
@@ -307,6 +293,18 @@ task 'regenerate-csextensibleenums', '', (done) ->
     'flatteningThreshold': '1'
   },done
   return null
+
+  task 'regenerate-csazure-xms-error-responses', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/vanilla',
+    'mappings': {'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json'},
+    'inputBaseDir': swaggerDir,
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  },done
+  return null
+
 
 task 'regenerate-csazurenosync', '', (done) ->
   mappings = {
