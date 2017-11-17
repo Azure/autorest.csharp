@@ -75,9 +75,9 @@ else
 /// <summary>
 /// Method that generates error message for status code
 /// </summary>
-private string GetErrorMessage(int statusCode)
+private string GetErrorMessageFor@(Model.Name)(int statusCode)
 {
-    return string.Format("Operation returned status code: '{0}'", statusCode);
+    return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
 }
 
 @EmptyLine
@@ -101,7 +101,7 @@ private string GetErrorMessage(int statusCode)
 @:/// </exception>
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
-    @:string errorMessage = GetErrorMessage(statusCode);
+    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
     @:var ex = new Microsoft.Rest.Azure.HttpRestCloudException(errorMessage);
     
@@ -134,7 +134,7 @@ private string GetErrorMessage(int statusCode)
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithKnownTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string _responseContent = null;
-    @:var ex = new HttpRestException<T>(GetErrorMessage(statusCode));
+    @:var ex = new HttpRestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
     
     @:if (_httpResponse.Content != null)
     @:{
@@ -173,7 +173,7 @@ private string GetErrorMessage(int statusCode)
 @:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings) 
     @:where V : Microsoft.Rest.IHttpRestErrorModel
 @:{
-    @:string errorMessage = GetErrorMessage(statusCode);
+    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
     @:if (_httpResponse.Content != null)
     @:{
