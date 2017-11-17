@@ -122,7 +122,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 }
 @EmptyLine
 
-@if(Model.Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || (!Model.IsAzureARMGenerator() && Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp))))
+@if(Model.Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || 
+    (!Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body == null)))
 {
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
@@ -532,8 +533,7 @@ else
 
     System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
     cancellationToken.ThrowIfCancellationRequested();
-    string _responseContent = null;
-
+    
     if (@(Model.FailureStatusCodePredicate))
     {
         try
@@ -583,6 +583,7 @@ else
         }
         else
         {<text>
+        string _responseContent = null;
         _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         try
         {
