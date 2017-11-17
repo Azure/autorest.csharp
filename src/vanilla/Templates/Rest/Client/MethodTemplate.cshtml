@@ -84,15 +84,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body.Name=="CloudError"))
 {
 @:/// <summary>
-@:/// Generate a CloudError object from the HttpResponse received
-@:/// </summary>
-@:private Microsoft.Rest.Azure.CloudError GetDefaultErrorModel(string statusCode, string resultContent) 
-@:{
-    @:return new Microsoft.Rest.Azure.CloudError() { Code = statusCode, Message = resultContent };
-@:}
-@:@EmptyLine
-
-@:/// <summary>
 @:/// Handle responses where error model is not defined
 @:/// Skips deserialization and sets the raw output in CloudError model
 @:/// </summary>
@@ -109,7 +100,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:{
         @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:}
-    @:ex.SetErrorModel(GetDefaultErrorModel(_httpResponse.StatusCode.ToString(), _responseContent));
+    @:var defaultErrorModel = new Microsoft.Rest.Azure.CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+    @:ex.SetErrorModel(defaultErrorModel);
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
     @:_httpRequest.Dispose();
@@ -370,9 +362,11 @@ else
     }
     @EmptyLine
 
+
     // Serialize Request
     @if (Model.RequestBody != null)
     {
+    
         if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
         {
             if (Model.RequestBody.IsRequired)
@@ -392,6 +386,7 @@ else
         }
         else
         {
+    @:string _requestContent = null;
             if (Model.RequestContentType.StartsWith("application/xml"))
             {
                 if (!Model.RequestBody.IsNullable()) {

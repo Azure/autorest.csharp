@@ -488,6 +488,10 @@ namespace AutoRest.CSharp.Model
             {
                 return "T:Microsoft.Rest.HttpRestException";
             }
+            if(response.Body.Name == "CloudError")
+            {
+                return "Microsoft.Rest.Azure.HttpRestCloudException";
+            }
             return response.Body.ClassName+"Exception";
         }
 
