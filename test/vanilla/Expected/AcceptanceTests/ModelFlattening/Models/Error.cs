@@ -10,10 +10,11 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class Error
+    public partial class Error: IHttpRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the Error class.
@@ -54,5 +55,18 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         [JsonProperty(PropertyName = "parentError")]
         public Error ParentError { get; set; }
 
+        /// <summary>
+        /// Method that creates an exception of ErrorException
+        /// </summary>
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        {
+            var ex = new ErrorException()
+            {
+                Request = requestMessage,
+                Response = responseMessage
+            };
+            ex.SetErrorModel(this);
+            throw ex;
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">

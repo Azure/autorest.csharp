@@ -192,6 +192,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
         }
 
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginPut201CreatingSucceeded200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginPut201CreatingSucceeded200(int statusCode)
+        {
+            return string.Format("Operation BeginPut201CreatingSucceeded200 returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginPut201CreatingSucceeded200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginPut201CreatingSucceeded200(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
+
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial
         /// request, with an entity that contains ProvisioningState=’Creating’.  Polls
@@ -296,40 +347,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<ProductInner>();
@@ -342,6 +382,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -360,6 +401,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -381,6 +423,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginPutAsyncRelativeRetrySucceeded(int statusCode)
+        {
+            return string.Format("Operation BeginPutAsyncRelativeRetrySucceeded returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetrySucceeded(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 200 to the initial
@@ -486,40 +579,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<ProductInner,LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>();
@@ -532,6 +614,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -566,6 +649,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginDeleteProvisioning202Accepted200Succeeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginDeleteProvisioning202Accepted200Succeeded(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginDeleteProvisioning202Accepted200Succeeded(int statusCode)
+        {
+            return string.Format("Operation BeginDeleteProvisioning202Accepted200Succeeded returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginDeleteProvisioning202Accepted200Succeeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginDeleteProvisioning202Accepted200Succeeded(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the
@@ -641,7 +775,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -661,40 +794,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 202)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginDeleteProvisioning202Accepted200Succeeded(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<ProductInner,LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>();
@@ -707,6 +829,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -725,6 +848,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             // Deserialize Response
             if ((int)_statusCode == 202)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -759,6 +883,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginDelete202Retry200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginDelete202Retry200(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginDelete202Retry200(int statusCode)
+        {
+            return string.Format("Operation BeginDelete202Retry200 returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginDelete202Retry200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginDelete202Retry200(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
@@ -830,7 +1005,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -850,40 +1024,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginDelete202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LRORetrysDelete202Retry200HeadersInner>();
@@ -912,6 +1075,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginDeleteAsyncRelativeRetrySucceeded(int statusCode)
+        {
+            return string.Format("Operation BeginDeleteAsyncRelativeRetrySucceeded returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginDeleteAsyncRelativeRetrySucceeded(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
@@ -983,7 +1197,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1003,40 +1216,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>();
@@ -1065,6 +1267,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginPost202Retry200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginPost202Retry200(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginPost202Retry200(int statusCode)
+        {
+            return string.Format("Operation BeginPost202Retry200 returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginPost202Retry200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginPost202Retry200(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial
@@ -1166,40 +1419,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginPost202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LRORetrysPost202Retry200HeadersInner>();
@@ -1228,6 +1470,57 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForBeginPostAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForBeginPostAsyncRelativeRetrySucceeded(int statusCode)
+        {
+            return string.Format("Operation BeginPostAsyncRelativeRetrySucceeded returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForBeginPostAsyncRelativeRetrySucceeded(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial
@@ -1330,40 +1623,29 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForBeginPostAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>();

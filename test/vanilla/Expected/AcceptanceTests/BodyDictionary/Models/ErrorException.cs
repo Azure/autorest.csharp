@@ -15,22 +15,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-    public partial class ErrorException : RestException
+    public partial class ErrorException : HttpRestExceptionBase<Error>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public Error Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
@@ -57,5 +43,14 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
             : base(message, innerException)
         {
         }
+
+        /// <summary>
+        /// </summary>
+        public int? Status => Body.Status;
+
+        /// <summary>
+        /// </summary>
+        public string Message => Body.Message;
+
     }
 }

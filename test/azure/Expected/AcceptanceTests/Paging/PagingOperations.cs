@@ -50,6 +50,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         public AutoRestPagingTestServiceClient Client { get; private set; }
 
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetSinglePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetSinglePages(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetSinglePages(int statusCode)
+        {
+            return string.Format("Operation GetSinglePages returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetSinglePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetSinglePages(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
+
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink
         /// </summary>
@@ -121,7 +172,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -141,40 +191,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetSinglePages(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -187,6 +226,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -208,6 +248,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePages(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePages(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePages returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePages(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -322,7 +413,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -342,40 +432,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePages(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -388,6 +467,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -409,6 +489,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetOdataMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetOdataMultiplePages(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetOdataMultiplePages(int statusCode)
+        {
+            return string.Format("Operation GetOdataMultiplePages returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetOdataMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetOdataMultiplePages(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -524,7 +655,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -544,40 +674,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetOdataMultiplePages(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -590,6 +709,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -611,6 +731,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffset(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffset(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesWithOffset(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesWithOffset returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffset(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesWithOffset(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -746,7 +917,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -766,40 +936,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesWithOffset(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -812,6 +971,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -833,6 +993,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirst(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirst(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesRetryFirst(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesRetryFirst returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirst(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirst(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
@@ -906,7 +1117,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -926,40 +1136,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesRetryFirst(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -972,6 +1171,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -993,6 +1193,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecond(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecond(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesRetrySecond(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesRetrySecond returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecond(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecond(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -1067,7 +1318,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1087,40 +1337,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesRetrySecond(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1133,6 +1372,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1154,6 +1394,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetSinglePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetSinglePagesFailure(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetSinglePagesFailure(int statusCode)
+        {
+            return string.Format("Operation GetSinglePagesFailure returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetSinglePagesFailure(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives a 400 on the first call
@@ -1226,7 +1517,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1246,40 +1536,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetSinglePagesFailure(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1292,6 +1571,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1313,6 +1593,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailure(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFailure(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFailure returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFailure(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -1385,7 +1716,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1405,40 +1735,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFailure(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1451,6 +1770,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1472,6 +1792,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUri(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUri(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFailureUri(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFailureUri returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUri(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFailureUri(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives an invalid nextLink
@@ -1544,7 +1915,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1564,40 +1934,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFailureUri(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1610,6 +1969,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1631,6 +1991,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentNextLink(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFragmentNextLink(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFragmentNextLink returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFragmentNextLink(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -1730,7 +2141,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1750,40 +2160,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFragmentNextLink(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1796,6 +2195,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1817,6 +2217,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentWithGroupingNextLink(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFragmentWithGroupingNextLink(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFragmentWithGroupingNextLink returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentWithGroupingNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFragmentWithGroupingNextLink(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment with
@@ -1924,7 +2375,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1944,40 +2394,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -1990,6 +2429,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2011,6 +2451,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForNextFragment(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForNextFragment(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForNextFragment(int statusCode)
+        {
+            return string.Format("Operation NextFragment returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForNextFragment(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForNextFragment(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2119,7 +2610,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2139,40 +2629,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForNextFragment(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -2185,6 +2664,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2206,6 +2686,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForNextFragmentWithGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForNextFragmentWithGrouping(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForNextFragmentWithGrouping(int statusCode)
+        {
+            return string.Format("Operation NextFragmentWithGrouping returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForNextFragmentWithGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForNextFragmentWithGrouping(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2321,7 +2852,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2341,40 +2871,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForNextFragmentWithGrouping(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -2387,6 +2906,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2408,6 +2928,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetSinglePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetSinglePagesNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetSinglePagesNext(int statusCode)
+        {
+            return string.Format("Operation GetSinglePagesNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetSinglePagesNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink
@@ -2494,7 +3065,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2514,40 +3084,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetSinglePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -2560,6 +3119,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2581,6 +3141,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -2709,7 +3320,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2729,40 +3339,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -2775,6 +3374,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2796,6 +3396,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetOdataMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetOdataMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetOdataMultiplePagesNext(int statusCode)
+        {
+            return string.Format("Operation GetOdataMultiplePagesNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetOdataMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetOdataMultiplePagesNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -2925,7 +3576,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2945,40 +3595,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetOdataMultiplePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -2991,6 +3630,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3012,6 +3652,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffsetNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffsetNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesWithOffsetNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesWithOffsetNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffsetNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesWithOffsetNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -3140,7 +3831,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -3160,40 +3850,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesWithOffsetNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -3206,6 +3885,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3227,6 +3907,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirstNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirstNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesRetryFirstNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesRetryFirstNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirstNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirstNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
@@ -3314,7 +4045,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -3334,40 +4064,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesRetryFirstNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -3380,6 +4099,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3401,6 +4121,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecondNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecondNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesRetrySecondNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesRetrySecondNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecondNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecondNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -3489,7 +4260,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -3509,40 +4279,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesRetrySecondNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -3555,6 +4314,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3576,6 +4336,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetSinglePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetSinglePagesFailureNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetSinglePagesFailureNext(int statusCode)
+        {
+            return string.Format("Operation GetSinglePagesFailureNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetSinglePagesFailureNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives a 400 on the first call
@@ -3662,7 +4473,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -3682,40 +4492,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetSinglePagesFailureNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -3728,6 +4527,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3749,6 +4549,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFailureNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFailureNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFailureNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -3835,7 +4686,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -3855,40 +4705,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFailureNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -3901,6 +4740,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3922,6 +4762,57 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             return _result;
         }
+
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUriNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUriNext(_httpRequest, _httpResponse, statusCode);
+        }
+
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetMultiplePagesFailureUriNext(int statusCode)
+        {
+            return string.Format("Operation GetMultiplePagesFailureUriNext returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is not defined
+        /// Skips deserialization and sets the raw output in CloudError model
+        /// </summary>
+        /// <exception cref="HttpRestCloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUriNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string errorMessage = GetErrorMessageForGetMultiplePagesFailureUriNext(statusCode);
+            string _responseContent = null;
+            var ex = new HttpRestCloudException(errorMessage);
+            if (_httpResponse.Content != null)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            }
+            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
+            ex.SetErrorModel(defaultErrorModel);
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+
 
         /// <summary>
         /// A paging operation that receives an invalid nextLink
@@ -4008,7 +4899,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -4028,40 +4918,29 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex = new CloudException(_errorBody.Message);
-                        ex.Body = _errorBody;
+                        default:
+                            await HandleDefaultErrorResponseForGetMultiplePagesFailureUriNext(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                catch(RestException ex)
                 {
-                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<IPage<Product>>();
@@ -4074,6 +4953,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {

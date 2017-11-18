@@ -15,22 +15,8 @@ namespace Fixtures.MirrorPolymorphic.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
     /// </summary>
-    public partial class Error2Exception : RestException
+    public partial class Error2Exception : HttpRestExceptionBase<Error2>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public Error2 Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
@@ -57,5 +43,18 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(message, innerException)
         {
         }
+
+        /// <summary>
+        /// </summary>
+        public int? Code => Body.Code;
+
+        /// <summary>
+        /// </summary>
+        public string Message => Body.Message;
+
+        /// <summary>
+        /// </summary>
+        public string Fields => Body.Fields;
+
     }
 }

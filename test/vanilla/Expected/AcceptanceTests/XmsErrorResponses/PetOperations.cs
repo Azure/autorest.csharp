@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
     /// <summary>
     /// PetOperations operations.
     /// </summary>
-    public partial class PetOperations : IServiceOperations<PetStoreInc>, IPetOperations
+    public partial class PetOperations : IServiceOperations<AutoRestTestforxMsErrorResponseextensions>, IPetOperations
     {
         /// <summary>
         /// Initializes a new instance of the PetOperations class.
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public PetOperations(PetStoreInc client)
+        public PetOperations(AutoRestTestforxMsErrorResponseextensions client)
         {
             if (client == null)
             {
@@ -46,9 +46,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Gets a reference to the PetStoreInc
+        /// Gets a reference to the AutoRestTestforxMsErrorResponseextensions
         /// </summary>
-        public PetStoreInc Client { get; private set; }
+        public AutoRestTestforxMsErrorResponseextensions Client { get; private set; }
 
         /// <summary>
         /// Handle 400 errors
@@ -255,7 +255,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 202)
             {
                 try
@@ -296,6 +295,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -463,7 +463,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 try
@@ -498,6 +497,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {

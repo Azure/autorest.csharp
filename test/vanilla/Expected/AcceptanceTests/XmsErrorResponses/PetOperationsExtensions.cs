@@ -28,6 +28,20 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             /// <param name='petId'>
             /// pet id
             /// </param>
+            public static Pet GetPetById(this IPetOperations operations, string petId)
+            {
+                return operations.GetPetByIdAsync(petId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets pets by id.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='petId'>
+            /// pet id
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
@@ -37,6 +51,20 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Asks pet to do something
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='whatAction'>
+            /// what action the pet should do
+            /// </param>
+            public static PetAction DoSomething(this IPetOperations operations, string whatAction)
+            {
+                return operations.DoSomethingAsync(whatAction).GetAwaiter().GetResult();
             }
 
             /// <summary>

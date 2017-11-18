@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of PetSadErrorException
         /// </summary>
-        public new void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
             var ex = new PetSadErrorException()
             {

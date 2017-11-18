@@ -10,10 +10,11 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class B : A
+    public partial class B : A, IHttpRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the B class.
@@ -43,5 +44,18 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         [JsonProperty(PropertyName = "textStatusCode")]
         public string TextStatusCode { get; set; }
 
+        /// <summary>
+        /// Method that creates an exception of BException
+        /// </summary>
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        {
+            var ex = new BException()
+            {
+                Request = requestMessage,
+                Response = responseMessage
+            };
+            ex.SetErrorModel(this);
+            throw ex;
+        }
     }
 }

@@ -15,22 +15,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-    public partial class MyException : RestException
+    public partial class MyException : HttpRestExceptionBase<A>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public A Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MyException class.
@@ -57,5 +43,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
             : base(message, innerException)
         {
         }
+
+        /// <summary>
+        /// </summary>
+        public string StatusCode => Body.StatusCode;
+
     }
 }
