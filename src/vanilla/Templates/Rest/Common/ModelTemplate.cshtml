@@ -328,7 +328,7 @@ if (!anythingToValidate)
         @:/// <summary>
         @:/// Method that creates an exception of @(Model.Name+"Exception")
         @:/// </summary>
-        @:public @(Model.IsPolymorphicErrorResponseModel()? "new ":"")void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
+        @:public @(Model.IsPolymorphicErrorResponseModel()? "override ":"virtual ")void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
         @:{
             @:var ex = new @(Model.Name+"Exception()")
             @:{

@@ -23,8 +23,6 @@ regenExpected = (opts,done) ->
 
     for swaggerFile in swaggerFiles
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
-
-    args.push("--input-file=F:/artemp/rcm/autorest.testserver/swagger/xms-error-responses.json")
     
     args.push("--use=F:/artemp/rcm/autorest.modeler")
 
@@ -172,7 +170,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-csxms-error-responses'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -294,7 +292,19 @@ task 'regenerate-csextensibleenums', '', (done) ->
   },done
   return null
 
-  task 'regenerate-csazure-xms-error-responses', '', (done) ->
+task 'regenerate-csazure-xms-error-responses', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/azure',
+    'mappings': {'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json'},
+    'inputBaseDir': swaggerDir,
+    'outputDir': 'Expected',
+    'azureArm': true,
+    'nsPrefix': 'Fixtures.Azure',
+    'flatteningThreshold': '1'
+  },done
+  return null
+
+task 'regenerate-csxms-error-responses', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/vanilla',
     'mappings': {'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json'},
