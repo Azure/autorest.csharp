@@ -158,7 +158,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:}
 }
 @EmptyLine
-@if(Model.Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)))
+@if(Model.Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) 
+    || (!Model.IsAzureARMGenerator() && Model.DefaultResponse.Body is CompositeTypeCs))
 {
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
