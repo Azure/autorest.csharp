@@ -341,7 +341,7 @@ if (!anythingToValidate)
         }
         @:public @(methodSignaturePrefix)void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
         @:{
-            @:var ex = new @(Model.Name+"Exception()")
+            @:var ex = new @(Model.ExceptionTypeDefinitionName)
             @:{
                 @:Request = requestMessage,
                 @:Response = responseMessage

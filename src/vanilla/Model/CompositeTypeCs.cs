@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Model
                     var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
-                        return ext["name"].ToString();
+                        return ext["name"].ToString()+"Exception";
                     }
                 }
                 return Name + "Exception";

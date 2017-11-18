@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Model
                         var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (ext != null && ext["name"] != null)
                         {
-                            return ext["name"].ToString();
+                            return ext["name"].ToString() + "Exception";
                         }
                     }
                     return type.Name + "Exception";
@@ -492,7 +492,11 @@ namespace AutoRest.CSharp.Model
             {
                 return "Microsoft.Rest.Azure.HttpRestCloudException";
             }
-            return response.Body.ClassName+"Exception";
+            if(response.Body as CompositeTypeCs model)
+            {
+                model.ExceptionTypeDefinitionName
+            }
+            return response.Body.Name;
         }
 
         public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];

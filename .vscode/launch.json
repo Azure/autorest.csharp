@@ -8,7 +8,7 @@
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",
-      "processId": "11364"
+      "processId": "18016"
     }
   ]
 }
