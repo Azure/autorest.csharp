@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new BException()
+            var ex = new BException
             {
                 Request = requestMessage,
                 Response = responseMessage

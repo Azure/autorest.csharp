@@ -60,7 +60,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         /// </summary>
         public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new ErrorException()
+            var ex = new ErrorException
             {
                 Request = requestMessage,
                 Response = responseMessage

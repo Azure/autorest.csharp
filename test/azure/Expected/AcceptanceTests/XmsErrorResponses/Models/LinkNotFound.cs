@@ -50,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new LinkNotFoundException()
+            var ex = new LinkNotFoundException
             {
                 Request = requestMessage,
                 Response = responseMessage

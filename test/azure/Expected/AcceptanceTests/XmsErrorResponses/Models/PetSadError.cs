@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new PetSadErrorException()
+            var ex = new PetSadErrorException
             {
                 Request = requestMessage,
                 Response = responseMessage

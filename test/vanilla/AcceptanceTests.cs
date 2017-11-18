@@ -1839,12 +1839,10 @@ namespace AutoRest.CSharp.Tests
             Assert.Null(client.MultipleResponses.GetDefaultModelA200None());
             client.MultipleResponses.GetDefaultModelA200Valid();
             client.MultipleResponses.GetDefaultModelA200None();
-            /* these tests are just not right.....
-            EnsureThrowsWithErrorModel<A>(HttpStatusCode.BadRequest,
+            EnsureThrowsWithErrorModel<MyExceptionException>(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.GetDefaultModelA400Valid(), e => Assert.Equal("400", e.StatusCode));
-            EnsureThrowsWithErrorModel<A>(HttpStatusCode.BadRequest,
+            EnsureThrowsWithErrorModel<MyExceptionException>(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.GetDefaultModelA400None(), Assert.Null);
-                */
             client.MultipleResponses.GetDefaultNone200Invalid();
             client.MultipleResponses.GetDefaultNone200None();
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, client.MultipleResponses.GetDefaultNone400Invalid);
@@ -2524,15 +2522,15 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception.Body as T);
+                    errorValidator(exception as T);
                 }
             }
-            catch (MyException exception1)
+            catch (MyExceptionException exception1)
             {
                 Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception1.Body as T);
+                    errorValidator(exception1 as T);
                 }
             }
             catch (HttpOperationException exception2)
@@ -2540,7 +2538,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception2.Body as T);
+                    errorValidator(exception2 as T);
                 }
             }
         }

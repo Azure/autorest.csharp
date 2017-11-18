@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new AnimalNotFoundException()
+            var ex = new AnimalNotFoundException
             {
                 Request = requestMessage,
                 Response = responseMessage

@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new NotFoundErrorBaseException()
+            var ex = new NotFoundErrorBaseException
             {
                 Request = requestMessage,
                 Response = responseMessage

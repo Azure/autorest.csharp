@@ -492,9 +492,9 @@ namespace AutoRest.CSharp.Model
             {
                 return "Microsoft.Rest.Azure.HttpRestCloudException";
             }
-            if(response.Body as CompositeTypeCs model)
+            if(response.Body is CompositeTypeCs)
             {
-                model.ExceptionTypeDefinitionName
+                return (response.Body as CompositeTypeCs).ExceptionTypeDefinitionName;
             }
             return response.Body.Name;
         }

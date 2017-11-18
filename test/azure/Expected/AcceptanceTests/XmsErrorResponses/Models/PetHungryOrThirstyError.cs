@@ -54,7 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new PetHungryOrThirstyErrorException()
+            var ex = new PetHungryOrThirstyErrorException
             {
                 Request = requestMessage,
                 Response = responseMessage

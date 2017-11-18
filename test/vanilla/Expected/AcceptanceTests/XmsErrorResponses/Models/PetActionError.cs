@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// </summary>
         public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new PetActionErrorException()
+            var ex = new PetActionErrorException
             {
                 Request = requestMessage,
                 Response = responseMessage

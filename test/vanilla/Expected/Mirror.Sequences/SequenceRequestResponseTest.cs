@@ -357,12 +357,12 @@ namespace Fixtures.MirrorSequences
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="System.Collections.Generic.IList<ErrorModel>Exception">
+        /// <exception cref="System.Collections.Generic.IList<ErrorModel>">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForAddPetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseForAddPetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
+            //await HandleErrorResponseForAddPetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
 
@@ -523,12 +523,12 @@ namespace Fixtures.MirrorSequences
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="System.Collections.Generic.IList<ErrorModel>Exception">
+        /// <exception cref="System.Collections.Generic.IList<ErrorModel>">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdatePetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseForUpdatePetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
+            //await HandleErrorResponseForUpdatePetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
 

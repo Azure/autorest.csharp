@@ -60,7 +60,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new Error2Exception()
+            var ex = new Error2Exception
             {
                 Request = requestMessage,
                 Response = responseMessage
