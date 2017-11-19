@@ -102,6 +102,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Get complex types with dictionary property
         /// </summary>
@@ -302,6 +304,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
@@ -494,6 +498,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get complex types with dictionary property which is empty
@@ -695,6 +701,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
@@ -887,6 +895,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get complex types with dictionary property which is null
@@ -1087,6 +1097,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get complex types with dictionary property while server doesn't provide a

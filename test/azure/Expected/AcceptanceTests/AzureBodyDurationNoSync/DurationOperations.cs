@@ -102,6 +102,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationNoSync
             }
         }
 
+
+
         /// <summary>
         /// Get null duration value
         /// </summary>
@@ -302,6 +304,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationNoSync
             }
         }
 
+
+
         /// <summary>
         /// Put a positive duration value
         /// </summary>
@@ -486,6 +490,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationNoSync
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get a positive duration value
@@ -686,6 +692,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationNoSync
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get an invalid duration value

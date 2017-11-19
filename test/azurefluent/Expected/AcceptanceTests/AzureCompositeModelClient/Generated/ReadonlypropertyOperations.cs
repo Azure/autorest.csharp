@@ -102,6 +102,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Get complex types that have readonly properties
         /// </summary>
@@ -301,6 +303,8 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put complex types that have readonly properties

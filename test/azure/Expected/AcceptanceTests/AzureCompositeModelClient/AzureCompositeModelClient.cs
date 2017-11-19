@@ -407,6 +407,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Product Types
         /// </summary>
@@ -634,6 +636,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Create products
@@ -883,6 +887,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Update products

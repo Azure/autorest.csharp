@@ -102,6 +102,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Get complex types that are polymorphic and have recursive references
         /// </summary>
@@ -301,6 +303,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references

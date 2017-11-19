@@ -200,6 +200,8 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             }
         }
 
+
+
         /// <summary>
         /// Gets pets by id.
         /// </summary>
@@ -434,6 +436,8 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Asks pet to do something

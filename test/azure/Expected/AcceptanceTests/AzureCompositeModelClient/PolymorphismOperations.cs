@@ -102,6 +102,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Get complex types that are polymorphic
         /// </summary>
@@ -301,6 +303,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put complex types that are polymorphic
@@ -537,6 +541,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+
+
         /// <summary>
         /// Get complex types that are polymorphic, but not at the root of the
         /// hierarchy; also have additional properties
@@ -737,6 +743,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
@@ -940,6 +948,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
