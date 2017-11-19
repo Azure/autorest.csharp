@@ -205,13 +205,13 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:/// <summary>
 @:/// Handle IList of error responses
 @:/// </summary>
-@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<IList<V>, T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
+@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V,T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
     @:where V : Microsoft.Rest.IHttpRestErrorModel
-    @:where T : Microsoft.Rest.HttpRestExceptionBase
+    @:where T : Microsoft.Rest.HttpRestExceptionBase<V>
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
-    @: T ex = new T();
+    @:T ex = new T();
     @:if (_httpResponse.Content != null)
     @:{
         @:try
