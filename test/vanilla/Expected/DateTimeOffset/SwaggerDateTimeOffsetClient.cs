@@ -200,6 +200,8 @@ namespace Fixtures.DateTimeOffset
             }
         }
 
+
+
         /// <summary>
         /// Product Types
         /// </summary>
@@ -395,6 +397,8 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Product Types
@@ -592,6 +596,8 @@ namespace Fixtures.DateTimeOffset
             }
         }
 
+
+
         /// <summary>
         /// Product Types
         /// </summary>
@@ -787,6 +793,8 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Product Types

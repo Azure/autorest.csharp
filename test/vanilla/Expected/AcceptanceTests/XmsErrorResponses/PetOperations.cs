@@ -173,6 +173,8 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
         }
 
+
+
         /// <summary>
         /// Gets pets by id.
         /// </summary>
@@ -380,6 +382,8 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Asks pet to do something

@@ -217,5 +217,18 @@ namespace AutoRest.CSharp.Model
 
         public bool IsValueType => false;
 
+        [JsonIgnore]
+        public string ExceptionModelName
+        { 
+            get
+            {
+                if(IsSequenceTypeExceptionModel())
+                {
+                    string name = Name.ToString();
+                    return name.Substring(0, name.LastIndexOf("Exception")) + "ListException";
+                }
+                return Name;
+            }
+        }
     }
 }

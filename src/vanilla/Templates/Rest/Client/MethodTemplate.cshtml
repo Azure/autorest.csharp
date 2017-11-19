@@ -205,9 +205,9 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:/// <summary>
 @:/// Handle IList of error responses
 @:/// </summary>
-@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V,T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
+@:private async System.Threading.Tasks.Task HandleErrorResponseWithSequenceTypeFor@(Model.Name)<V,T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
     @:where V : Microsoft.Rest.IHttpRestErrorModel
-    @:where T : Microsoft.Rest.HttpRestExceptionBase<V>
+    @:where T : Microsoft.Rest.HttpRestExceptionBase<System.Collections.IList<V>>
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
@@ -217,7 +217,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:try
         @:{
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:var errorResponseModels = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<IList<V>>(_responseContent, deserializationSettings);
+            @:var errorResponseModels = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.IList<V>>(_responseContent, deserializationSettings);
             @:ex.SetErrorModel(errorResponseModels);
         @:}
         @:catch (Newtonsoft.Json.JsonException)

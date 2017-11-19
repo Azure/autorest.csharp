@@ -12,10 +12,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
+    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.ExceptionModelName + " information.")
     /// </summary>
     @{
-        var underlyingErrorModelType = Model.Name;
+        var underlyingErrorModelType = Model.ExceptionModelName;
         if(Model.IsSequenceTypeExceptionModel())
         {
             underlyingErrorModelType = "IList<"+underlyingErrorModelType+">";
@@ -83,7 +83,7 @@ else
         @:/// <summary>
         @:@WrapComment("/// ", "Returns list of deserialized error models")
         @:/// </summary>
-        @:public @("IList<"+Model.Name+">") ErrorModels => Body;
+        @:public @("System.Collections.IList<"+Model.ExceptionModelName+">") ErrorModels => Body;
 }
 
     }

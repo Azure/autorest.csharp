@@ -103,6 +103,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Get null Int value
         /// </summary>
@@ -275,6 +277,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get invalid Int value
@@ -449,6 +453,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Get overflow Int32 value
         /// </summary>
@@ -621,6 +627,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get underflow Int32 value
@@ -795,6 +803,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Get overflow Int64 value
         /// </summary>
@@ -967,6 +977,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get underflow Int64 value
@@ -1141,6 +1153,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Put max int32 value
         /// </summary>
@@ -1298,6 +1312,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Put max int64 value
@@ -1457,6 +1473,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Put min int32 value
         /// </summary>
@@ -1615,6 +1633,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Put min int64 value
         /// </summary>
@@ -1772,6 +1792,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get datetime encoded as Unix time value
@@ -1946,6 +1968,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Put datetime encoded as Unix time
         /// </summary>
@@ -2103,6 +2127,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get invalid Unix time value
@@ -2276,6 +2302,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get null Unix time value

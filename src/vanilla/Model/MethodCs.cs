@@ -520,7 +520,7 @@ namespace AutoRest.CSharp.Model
             if(sequenceTypeBody.ElementType is PrimaryTypeCs)
             {
                 var errorModelType = sequenceTypeBody.ElementType as PrimaryTypeCs;
-                return "IList<"+errorModelType+">, Microsoft.Rest.HttpRestException<"+errorModelType+">";
+                return errorModelType+", Microsoft.Rest.HttpRestException<"+errorModelType+">";
             }
             else
             {

@@ -102,6 +102,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Get true Boolean value
         /// </summary>
@@ -275,6 +277,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Set Boolean value true
         /// </summary>
@@ -431,6 +435,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get false Boolean value
@@ -605,6 +611,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
         }
 
+
+
         /// <summary>
         /// Set Boolean value false
         /// </summary>
@@ -761,6 +769,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get null Boolean value
@@ -934,6 +944,8 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Get invalid Boolean value

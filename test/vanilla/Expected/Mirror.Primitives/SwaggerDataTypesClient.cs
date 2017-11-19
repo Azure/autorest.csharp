@@ -200,6 +200,8 @@ namespace Fixtures.MirrorPrimitives
             }
         }
 
+
+
         /// <summary>
         /// Product Types
         /// </summary>
@@ -395,6 +397,8 @@ namespace Fixtures.MirrorPrimitives
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Product Types
@@ -592,6 +596,8 @@ namespace Fixtures.MirrorPrimitives
             }
         }
 
+
+
         /// <summary>
         /// Product Types
         /// </summary>
@@ -787,6 +793,8 @@ namespace Fixtures.MirrorPrimitives
                 _httpResponse.Dispose();
             }
         }
+
+
 
         /// <summary>
         /// Product Types
