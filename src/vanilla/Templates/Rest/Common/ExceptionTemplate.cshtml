@@ -14,7 +14,14 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-    @{var baseModelType = "Microsoft.Rest.HttpRestExceptionBase<"+Model.Name+">";}
+    @{
+        var underlyingErrorModelType = Model.Name;
+        if(Model.IsSequenceTypeExceptionModel())
+        {
+            underlyingErrorModelType = "IList<"+underlyingErrorModelType+">";
+        }
+        var baseModelType = "Microsoft.Rest.HttpRestExceptionBase<"+underlyingErrorModelType+">";
+    }
     public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
     {
 @EmptyLine
@@ -54,8 +61,9 @@ props = props.Union((modelType as CompositeTypeCs).InstanceProperties);
 modelType=modelType.BaseModelType;
 }
 }
-
-@foreach (PropertyCs property in props)
+@if(!Model.IsSequenceTypeExceptionModel())
+{
+foreach (PropertyCs property in props)
 {
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
@@ -68,6 +76,14 @@ modelType=modelType.BaseModelType;
             }
         @:public @property.ModelTypeName @property.Name => Body.@property.Name;
         @EmptyLine
+}
+}
+else
+{
+        @:/// <summary>
+        @:@WrapComment("/// ", "Returns list of deserialized error models")
+        @:/// </summary>
+        @:public @("IList<"+Model.Name+">") ErrorModels => Body;
 }
 
     }

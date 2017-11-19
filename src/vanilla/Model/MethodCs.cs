@@ -500,5 +500,34 @@ namespace AutoRest.CSharp.Model
         }
 
         public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
+
+        public virtual bool IsErrorResponseWithErrorModel() => 
+            Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||
+                (DefaultResponse.Body is CompositeTypeCs);
+                     
+        public virtual bool IsErrorResponseWithKnownType() =>
+            Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || 
+                ((Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || 
+                    DefaultResponse.Body == null));
+
+        public bool HasErrorResponseWithSequenceType() => 
+            Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is SequenceTypeCs) ||
+                DefaultResponse.Body is SequenceTypeCs;
+
+        public static string GetErrorModelExceptionPairForSequenceType(Response response)
+        {
+            var sequenceTypeBody = response.Body as SequenceTypeCs;
+            if(sequenceTypeBody.ElementType is PrimaryTypeCs)
+            {
+                var errorModelType = sequenceTypeBody.ElementType as PrimaryTypeCs;
+                return "<IList<"+errorModelType+">, Microsoft.Rest.HttpRestException<"+errorModelType+">>";
+            }
+            else
+            {
+                var errorModelType = sequenceTypeBody.ElementType as CompositeTypeCs;
+                return "<"+sequenceTypeBody.Name+", "+errorModelType.ExceptionTypeDefinitionName+">";
+            }
+
+        }
     }
 }

@@ -35,6 +35,10 @@ else if(Model.Responses[errorCode].Body is PrimaryTypeCs)
 {
     @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
 }
+else if(Model.Responses[errorCode].Body is SequenceTypeCs)
+{
+    @:await HandleErrorResponseWithSequenceTypeFor@(Model.Name)<@(MethodCs.GetErrorModelExceptionPairForSequenceType(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, statusCode);
+}
 else
 {
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
@@ -59,6 +63,10 @@ private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.N
 else if(Model.IsAzureARMGenerator() && Model.DefaultResponse.Body.Name=="CloudError")
 {
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, statusCode);
+}
+else if(Model.DefaultResponse.Body is SequenceTypeCs)
+{
+    @:await HandleErrorResponseWithSequenceTypeFor@(Model.Name)<@(MethodCs.GetErrorModelExceptionPairForSequenceType(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
 }
 else if(Model.DefaultResponse.Body is PrimaryTypeCs)
 {
@@ -114,8 +122,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 }
 @EmptyLine
 
-@if(Model.Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || 
-    (!Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body == null)))
+@if(Model.IsErrorResponseWithKnownType())
 {
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
@@ -158,9 +165,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:}
 }
 @EmptyLine
-@if(Model.Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) 
-    || (Model.DefaultResponse.Body is CompositeTypeCs &&
-       (!Model.IsAzureARMGenerator() || (Model.IsAzureARMGenerator() && Model.DefaultResponse.Body.Name!="CloudError"))))
+@if(Model.IsErrorResponseWithErrorModel())
 {
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -190,6 +195,46 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:{
         @:_httpResponse.Dispose();
     @:}
+@:}
+}
+@EmptyLine
+
+@EmptyLine
+@if(Model.HasErrorResponseWithSequenceType())
+{
+@:/// <summary>
+@:/// Handle IList of error responses
+@:/// </summary>
+@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<IList<V>, T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
+    @:where V : Microsoft.Rest.IHttpRestErrorModel
+    @:where T : Microsoft.Rest.HttpRestExceptionBase
+@:{
+    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
+    @:string _responseContent = null;
+    @: T ex = new T();
+    @:if (_httpResponse.Content != null)
+    @:{
+        @:try
+        @:{
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            @:var errorResponseModels = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<IList<V>>(_responseContent, deserializationSettings);
+            @:ex.SetErrorModel(errorResponseModels);
+        @:}
+        @:catch (Newtonsoft.Json.JsonException)
+        @:{
+            @:// Ignore the exception
+        @:}
+    @:}
+    @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+    @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+    @:ex.Message = errorMessage;
+
+    @:_httpRequest.Dispose();
+    @:if (_httpResponse != null)
+    @:{
+        @:_httpResponse.Dispose();
+    @:}
+    @:throw ex;
 @:}
 }
 @EmptyLine

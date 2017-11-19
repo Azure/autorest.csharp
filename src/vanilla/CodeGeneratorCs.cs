@@ -138,6 +138,8 @@ namespace AutoRest.CSharp
             {
                 await Write(new ExceptionTemplate { Model = exceptionType },
                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
+                
+                GenerateSequenceTypeExceptionModel(exceptionType);
             }
         }
 
@@ -340,6 +342,18 @@ namespace AutoRest.CSharp
                 result.AppendLine("}");
             }
             return result.ToString();
+        }
+
+        protected async Task GenerateSequenceTypeExceptionModel(CompositeTypeCs exceptionType)
+        {
+            if(exceptionType.IsSequenceTypeExceptionModel())
+            {
+                var exceptionName = exceptionType.ExceptionTypeDefinitionName;
+                exceptionName = exceptionName.Substring(0, exceptionName.LastIndexOf("Exception")) + "ListException";
+                var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
+                await Write(exceptionTemplate, 
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionName}{ImplementationFileExtension}");
+            }
         }
     }
 }

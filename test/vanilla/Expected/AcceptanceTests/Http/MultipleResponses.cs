@@ -2854,6 +2854,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet202None204NoneDefaultNone202Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
@@ -3015,6 +3043,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet202None204NoneDefaultNone204None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 204 response with no payload
@@ -3176,6 +3232,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet202None204NoneDefaultNone400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -3337,6 +3421,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet202None204NoneDefaultNone400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
@@ -4158,6 +4270,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetDefaultNone200Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetDefaultNone200Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
@@ -4319,6 +4459,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetDefaultNone200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetDefaultNone200None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with no payload
@@ -4480,6 +4648,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetDefaultNone400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetDefaultNone400Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
@@ -4641,6 +4837,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetDefaultNone400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetDefaultNone400None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -4802,6 +5026,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA200None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client
@@ -4986,6 +5238,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA200Valid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
@@ -5169,6 +5449,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA200Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA200Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
@@ -5352,6 +5660,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA400None(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error
@@ -5536,6 +5872,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA400Valid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
@@ -5719,6 +6083,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA400Invalid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -5902,6 +6294,34 @@ namespace Fixtures.AcceptanceTestsHttp
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGet200ModelA202Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGet200ModelA202Valid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}

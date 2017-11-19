@@ -724,6 +724,34 @@ namespace Fixtures.AcceptanceTestsValidation
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetWithConstantInPath<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetWithConstantInPath(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -885,6 +913,34 @@ namespace Fixtures.AcceptanceTestsValidation
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostWithConstantInBody<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostWithConstantInBody(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <param name='body'>
         /// </param>

@@ -215,6 +215,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForAddPet<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForAddPet(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Add a new pet to the store
@@ -432,6 +460,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForUpdatePet<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForUpdatePet(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Update an existing pet
@@ -618,6 +674,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForFindPetsByStatus<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForFindPetsByStatus(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Finds Pets by status
@@ -836,6 +920,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForFindPetsByTags<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForFindPetsByTags(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Finds Pets by tags
@@ -1055,6 +1167,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetPetById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetPetById(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Find pet by Id
@@ -1255,6 +1395,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForUpdatePetWithForm<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForUpdatePetWithForm(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Updates a pet in the store with form data
@@ -1469,6 +1637,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForDeletePet<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForDeletePet(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Deletes a pet
@@ -1646,6 +1842,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetInventory<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetInventory(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Returns pet inventories by status
@@ -1841,6 +2065,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPlaceOrder<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPlaceOrder(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Place an order for a pet
@@ -2054,6 +2306,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetOrderById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetOrderById(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Find purchase order by Id
@@ -2276,6 +2556,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForDeleteOrder<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForDeleteOrder(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Delete purchase order by Id
@@ -2463,6 +2771,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForCreateUser<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForCreateUser(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Create user
@@ -2648,6 +2984,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForCreateUsersWithArrayInput<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForCreateUsersWithArrayInput(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Creates list of users with given input array
@@ -2830,6 +3194,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForCreateUsersWithListInput<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForCreateUsersWithListInput(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Creates list of users with given input array
@@ -3012,6 +3404,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForLoginUser<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForLoginUser(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Logs user into the system
@@ -3252,6 +3672,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForLogoutUser<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForLogoutUser(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Logs out current logged in user session
@@ -3413,6 +3861,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetUserByName<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetUserByName(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Get user by user name
@@ -3620,6 +4096,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForUpdateUser<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForUpdateUser(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Updated user
@@ -3814,6 +4318,34 @@ namespace Fixtures.PetstoreV2NoSync
             throw ex;
         }
 
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForDeleteUser<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForDeleteUser(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
         /// <summary>
         /// Delete user
