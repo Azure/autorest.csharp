@@ -101,6 +101,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         {
             return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it

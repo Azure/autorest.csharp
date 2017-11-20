@@ -130,6 +130,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             throw ex;
         }
 
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it

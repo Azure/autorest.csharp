@@ -70,8 +70,6 @@ namespace AutoRest.CSharp.Azure
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
                 await Write(exceptionTemplate,
                      $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
-
-                base.GenerateSequenceTypeExceptionModel(exceptionType);
             }
         }
     }

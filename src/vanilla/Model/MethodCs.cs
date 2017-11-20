@@ -504,38 +504,12 @@ namespace AutoRest.CSharp.Model
         public virtual bool IsErrorResponseWithErrorModel() => 
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||
                 (DefaultResponse.Body is CompositeTypeCs);
+
+        public virtual bool IsErrorResponseWithKnownType() => 
+            Responses.Values.Any(resp=> !(resp.Body is CompositeTypeCs) && MethodCs.IsErrorResponse(resp)) ||
+                !(DefaultResponse.Body is CompositeTypeCs);
+
+        public virtual bool HandleAzureArmDefaultErrorResponse() => false;
                      
-        public bool IsErrorResponseWithKnownType()
-        {
-            var errorResponseModels = Responses.Values.Where(resp=>MethodCs.IsErrorResponse(resp)).Select(resp=>resp.Body);
-            if(errorResponseModels.Any(m=>!(m is CompositeTypeCs || m is SequenceTypeCs)))
-            {
-                return true;
-            }
-            if(!(DefaultResponse.Body is CompositeTypeCs || DefaultResponse.Body is SequenceTypeCs))
-            {
-                return true;
-            }
-            return false;
-        }
-        
-
-        public bool HasErrorResponseWithSequenceType() => 
-            Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is SequenceTypeCs) ||
-                DefaultResponse.Body is SequenceTypeCs;
-
-        public static string GetErrorModelExceptionPairForSequenceType(Response response)
-        {
-            var sequenceTypeBody = response.Body as SequenceTypeCs;
-            if(sequenceTypeBody.ElementType is CompositeTypeCs)
-            {
-                var errorModelType = sequenceTypeBody.ElementType as CompositeTypeCs;
-                return errorModelType.Name+", "+errorModelType.GetListExceptionModelName();
-            }
-            else
-            {
-                return sequenceTypeBody.ElementType.Name+", Microsoft.Rest.HttpRestException<System.Collections.Generic.IList<"+sequenceTypeBody.ElementType.Name+">>";                
-            }
-        }
     }
 }

@@ -357,7 +357,7 @@ namespace Fixtures.MirrorSequences
         /// </exception>
         private async Task HandleDefaultErrorResponseForAddPetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithSequenceTypeForAddPetStyles<ErrorModel, ErrorModelListException>(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseWithKnownTypeForAddPetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode);
         }
 
         /// <summary>
@@ -367,30 +367,35 @@ namespace Fixtures.MirrorSequences
         {
             return string.Format("Operation AddPetStyles returned status code: '{0}'", statusCode);
         }
-
         /// <summary>
-        /// Handle IList of error responses
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
         /// </summary>
-        private async Task HandleErrorResponseWithSequenceTypeForAddPetStyles<V,T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-            where T : HttpRestExceptionBase<IList<V>>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForAddPetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            string errorMessage = GetErrorMessageForAddPetStyles(statusCode);
             string _responseContent = null;
-            T ex = System.Activator.CreateInstance(typeof(T), errorMessage);
+            var ex = new HttpRestException<T>(GetErrorMessageForAddPetStyles(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModels = SafeJsonConvert.DeserializeObject<IList<V>>(_responseContent, deserializationSettings);
-                    ex.SetErrorModel(errorResponseModels);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
             }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
@@ -400,7 +405,6 @@ namespace Fixtures.MirrorSequences
             }
             throw ex;
         }
-
         /// <summary>
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
@@ -551,7 +555,7 @@ namespace Fixtures.MirrorSequences
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdatePetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithSequenceTypeForUpdatePetStyles<ErrorModel, ErrorModelListException>(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseWithKnownTypeForUpdatePetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode);
         }
 
         /// <summary>
@@ -561,30 +565,35 @@ namespace Fixtures.MirrorSequences
         {
             return string.Format("Operation UpdatePetStyles returned status code: '{0}'", statusCode);
         }
-
         /// <summary>
-        /// Handle IList of error responses
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
         /// </summary>
-        private async Task HandleErrorResponseWithSequenceTypeForUpdatePetStyles<V,T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-            where T : HttpRestExceptionBase<IList<V>>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForUpdatePetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            string errorMessage = GetErrorMessageForUpdatePetStyles(statusCode);
             string _responseContent = null;
-            T ex = System.Activator.CreateInstance(typeof(T), errorMessage);
+            var ex = new HttpRestException<T>(GetErrorMessageForUpdatePetStyles(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModels = SafeJsonConvert.DeserializeObject<IList<V>>(_responseContent, deserializationSettings);
-                    ex.SetErrorModel(errorResponseModels);
+                    var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
             }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
@@ -594,7 +603,6 @@ namespace Fixtures.MirrorSequences
             }
             throw ex;
         }
-
         /// <summary>
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>

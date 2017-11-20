@@ -145,6 +145,10 @@ namespace AutoRest.CSharp.Azure.Model
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) || 
                 (DefaultResponse.Body is CompositeTypeCs && DefaultResponse.Body.Name!="CloudError");
 
+        public override bool IsErrorResponseWithKnownType() => 
+            Responses.Values.Any(resp=> !(resp.Body is CompositeTypeCs) && MethodCs.IsErrorResponse(resp)) ||
+                !(DefaultResponse.Body is CompositeTypeCs);
+
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
@@ -301,5 +305,7 @@ namespace AutoRest.CSharp.Azure.Model
                     pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
             }
         }
+
+        public override bool HandleAzureArmDefaultErrorResponse() => (Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || DefaultResponse.Body?.Name=="CloudError");
     }
 }

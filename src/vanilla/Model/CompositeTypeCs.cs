@@ -57,20 +57,6 @@ namespace AutoRest.CSharp.Model
         public string BaseConstructorCall => _constructorModel.BaseCall;
 
         [JsonIgnore]
-        public bool IsSequenceTypeExceptionModel = false;
-
-        // Check if any error response of sequence type has an underlying error model of this type
-        public bool IsElementOfSequenceTypeExceptionModel()
-        {
-            var errorModelsListExceptions = 
-                CodeModel.Methods.SelectMany(m=>m.Responses.Values).Where(r=>MethodCs.IsErrorResponse(r) && r.Body is SequenceTypeCs)
-                .Select(r=>r.Body as SequenceTypeCs).Union(CodeModel.Methods.Where(m=>m.DefaultResponse.Body is SequenceTypeCs)
-                    .Select(m=>m.DefaultResponse.Body as SequenceTypeCs));
-            
-            return errorModelsListExceptions.Any(s=>s.ElementType.Name == Name);
-        }
-
-        [JsonIgnore]
         public virtual string ExceptionTypeDefinitionName
         {
             get
@@ -219,20 +205,5 @@ namespace AutoRest.CSharp.Model
         }
 
         public bool IsValueType => false;
-
-        public string GetListExceptionModelName()
-        {
-            string name = ExceptionTypeDefinitionName.ToString();
-            return name.Substring(0, name.LastIndexOf("Exception")) + "ListException";
-        } 
-
-        [JsonIgnore]
-        public string ExceptionModelName
-        { 
-            get
-            {
-                return (IsSequenceTypeExceptionModel)? GetListExceptionModelName() : ExceptionTypeDefinitionName;
-            }
-        }
     }
 }

@@ -31,10 +31,6 @@ if(Model.Responses[errorCode].Body==null)
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, @((int)errorCode)));
     }
 }
-else if(Model.Responses[errorCode].Body is SequenceTypeCs)
-{
-    @:await HandleErrorResponseWithSequenceTypeFor@(Model.Name)<@(MethodCs.GetErrorModelExceptionPairForSequenceType(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, statusCode);
-}
 else if(Model.Responses[errorCode].Body is CompositeTypeCs)
 {
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
@@ -63,17 +59,13 @@ else if(Model.IsAzureARMGenerator() && Model.DefaultResponse.Body.Name=="CloudEr
 {
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, statusCode);
 }
-else if(Model.DefaultResponse.Body is SequenceTypeCs)
+else if(Model.DefaultResponse.Body is CompositeTypeCs)
 {
-    @:await HandleErrorResponseWithSequenceTypeFor@(Model.Name)<@(MethodCs.GetErrorModelExceptionPairForSequenceType(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
-}
-else if(Model.DefaultResponse.Body is PrimaryTypeCs)
-{
-    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
+    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
 }
 else
 {
-    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
 }
 }
 
@@ -86,7 +78,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
 }
 
-@if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body?.Name=="CloudError"))
+@if(Model.HandleAzureArmDefaultErrorResponse())
 {
 @EmptyLine
 @:/// <summary>
@@ -117,12 +109,12 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
-@EmptyLine
 }
 
 
 @if(Model.IsErrorResponseWithKnownType())
 {
+@EmptyLine
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
 @:/// Creates a HttpRestException object and throws it
@@ -196,46 +188,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:_httpResponse.Dispose();
     @:}
 @:}
-@EmptyLine
-}
-
-@if(Model.HasErrorResponseWithSequenceType())
-{
-@EmptyLine
-@:/// <summary>
-@:/// Handle IList of error responses
-@:/// </summary>
-@:private async System.Threading.Tasks.Task HandleErrorResponseWithSequenceTypeFor@(Model.Name)<V,T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings)
-    @:where V : Microsoft.Rest.IHttpRestErrorModel
-    @:where T : Microsoft.Rest.HttpRestExceptionBase<System.Collections.Generic.IList<V>>
-@:{
-    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
-    @:string _responseContent = null;
-    @:T ex = System.Activator.CreateInstance(typeof(T), errorMessage);
-    @:if (_httpResponse.Content != null)
-    @:{
-        @:try
-        @:{
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:var errorResponseModels = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IList<V>>(_responseContent, deserializationSettings);
-            @:ex.SetErrorModel(errorResponseModels);
-        @:}
-        @:catch (Newtonsoft.Json.JsonException)
-        @:{
-            @:// Ignore the exception
-        @:}
-    @:}
-    @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-    @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-
-    @:_httpRequest.Dispose();
-    @:if (_httpResponse != null)
-    @:{
-        @:_httpResponse.Dispose();
-    @:}
-    @:throw ex;
-@:}
-@EmptyLine
 }
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))

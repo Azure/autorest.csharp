@@ -138,8 +138,6 @@ namespace AutoRest.CSharp
             {
                 await Write(new ExceptionTemplate { Model = exceptionType },
                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
-                
-                GenerateSequenceTypeExceptionModel(exceptionType);
             }
         }
 
@@ -344,18 +342,5 @@ namespace AutoRest.CSharp
             return result.ToString();
         }
 
-        protected async Task GenerateSequenceTypeExceptionModel(CompositeTypeCs exceptionType)
-        {
-            if(exceptionType.IsElementOfSequenceTypeExceptionModel())
-            {
-                // just for the sake of generating the exceptionlist model, set this property
-                // reset it once done (since we do not want to create object copies for this)
-                exceptionType.IsSequenceTypeExceptionModel = true;
-                var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
-                await Write(exceptionTemplate, 
-                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionModelName}{ImplementationFileExtension}");
-                exceptionType.IsSequenceTypeExceptionModel = false;
-            }
-        }
     }
 }
