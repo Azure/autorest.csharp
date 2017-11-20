@@ -31,17 +31,17 @@ if(Model.Responses[errorCode].Body==null)
     @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, @((int)errorCode)));
     }
 }
-else if(Model.Responses[errorCode].Body is PrimaryTypeCs)
-{
-    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
-}
 else if(Model.Responses[errorCode].Body is SequenceTypeCs)
 {
     @:await HandleErrorResponseWithSequenceTypeFor@(Model.Name)<@(MethodCs.GetErrorModelExceptionPairForSequenceType(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, statusCode);
 }
-else
+else if(Model.Responses[errorCode].Body is CompositeTypeCs)
 {
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+}
+else
+{
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
 }
 @:}
 @EmptyLine
@@ -89,7 +89,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 }
 
 @EmptyLine
-@if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body.Name=="CloudError"))
+@if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body?.Name=="CloudError"))
 {
 @:/// <summary>
 @:/// Handle responses where error model is not defined

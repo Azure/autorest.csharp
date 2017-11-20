@@ -145,9 +145,6 @@ namespace AutoRest.CSharp.Azure.Model
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) || 
                 (DefaultResponse.Body is CompositeTypeCs && DefaultResponse.Body.Name!="CloudError");
 
-
-        public override bool IsErrorResponseWithKnownType() => base.IsErrorResponseWithKnownType();
-        
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>

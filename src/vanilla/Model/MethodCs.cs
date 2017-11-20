@@ -505,10 +505,20 @@ namespace AutoRest.CSharp.Model
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||
                 (DefaultResponse.Body is CompositeTypeCs);
                      
-        public virtual bool IsErrorResponseWithKnownType() =>
-            Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is PrimaryTypeCs) || 
-                ((Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || 
-                    DefaultResponse.Body == null));
+        public bool IsErrorResponseWithKnownType()
+        {
+            var errorResponseModels = Responses.Values.Where(resp=>MethodCs.IsErrorResponse(resp)).Select(resp=>resp.Body);
+            if(errorResponseModels.Any(m=>!(m is CompositeTypeCs || m is SequenceTypeCs)))
+            {
+                return true;
+            }
+            if(!(DefaultResponse.Body is CompositeTypeCs || DefaultResponse.Body is SequenceTypeCs))
+            {
+                return true;
+            }
+            return false;
+        }
+        
 
         public bool HasErrorResponseWithSequenceType() => 
             Responses.Values.Any(resp=>MethodCs.IsErrorResponse(resp) && resp.Body is SequenceTypeCs) ||
