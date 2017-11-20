@@ -224,7 +224,7 @@ namespace AutoRest.CSharp.Model
             {
                 if(IsSequenceTypeExceptionModel())
                 {
-                    string name = Name.ToString();
+                    string name = ExceptionTypeDefinitionName.ToString();
                     return name.Substring(0, name.LastIndexOf("Exception")) + "ListException";
                 }
                 return Name;
