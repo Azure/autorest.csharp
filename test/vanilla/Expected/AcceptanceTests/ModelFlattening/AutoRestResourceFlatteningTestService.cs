@@ -150,7 +150,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             CustomInitialize();
             DeserializationSettings.Converters.Add(new TransformationJsonConverter());
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -162,7 +161,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -170,8 +168,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -313,7 +309,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -325,7 +320,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForGetArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -333,8 +327,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation GetArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -487,7 +479,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -499,7 +490,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutWrappedArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -507,8 +497,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutWrappedArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -651,7 +639,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -663,7 +650,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForGetWrappedArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -671,8 +657,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation GetWrappedArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -826,7 +810,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -838,7 +821,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutDictionary<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -846,8 +828,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutDictionary returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -989,7 +969,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1001,7 +980,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForGetDictionary<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1009,8 +987,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation GetDictionary returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1163,7 +1139,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1175,7 +1150,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutResourceCollection<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1183,8 +1157,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutResourceCollection returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1326,7 +1298,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1338,7 +1309,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForGetResourceCollection<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1346,8 +1316,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation GetResourceCollection returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1500,7 +1468,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1512,7 +1479,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutSimpleProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1520,8 +1486,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutSimpleProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1689,7 +1653,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1701,7 +1664,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPostFlattenedSimpleProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1709,8 +1671,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PostFlattenedSimpleProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1912,7 +1872,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1924,7 +1883,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             await HandleErrorResponseForPutSimpleProductWithGrouping<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1932,8 +1890,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         {
             return string.Format("Operation PutSimpleProductWithGrouping returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

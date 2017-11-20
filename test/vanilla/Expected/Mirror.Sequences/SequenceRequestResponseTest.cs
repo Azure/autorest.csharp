@@ -149,7 +149,6 @@ namespace Fixtures.MirrorSequences
             };
             CustomInitialize();
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -161,7 +160,6 @@ namespace Fixtures.MirrorSequences
             await HandleErrorResponseForAddPet<ErrorModel>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -169,8 +167,6 @@ namespace Fixtures.MirrorSequences
         {
             return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -353,7 +349,6 @@ namespace Fixtures.MirrorSequences
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -362,9 +357,8 @@ namespace Fixtures.MirrorSequences
         /// </exception>
         private async Task HandleDefaultErrorResponseForAddPetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-           // await HandleErrorResponseForAddPetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
+            await HandleErrorResponseWithSequenceTypeForAddPetStyles<IList<ErrorModel>, ErrorModelException>(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -374,35 +368,38 @@ namespace Fixtures.MirrorSequences
             return string.Format("Operation AddPetStyles returned status code: '{0}'", statusCode);
         }
 
-
-
         /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// Handle IList of error responses
         /// </summary>
-        private async Task HandleErrorResponseForAddPetStyles<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+        private async Task HandleErrorResponseWithSequenceTypeForAddPetStyles<V,T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
             where V : IHttpRestErrorModel
+            where T : HttpRestExceptionBase<System.Collections.IList<V>>
         {
             string errorMessage = GetErrorMessageForAddPetStyles(statusCode);
             string _responseContent = null;
+            T ex = new T();
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    var errorResponseModels = SafeJsonConvert.DeserializeObject<System.Collections.IList<V>>(_responseContent, deserializationSettings);
+                    ex.SetErrorModel(errorResponseModels);
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            ex.Message = errorMessage;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
+            throw ex;
         }
 
         /// <summary>
@@ -547,7 +544,6 @@ namespace Fixtures.MirrorSequences
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -556,9 +552,8 @@ namespace Fixtures.MirrorSequences
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdatePetStyles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-           // await HandleErrorResponseForUpdatePetStyles<IList<ErrorModel>>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
+            await HandleErrorResponseWithSequenceTypeForUpdatePetStyles<IList<ErrorModel>, ErrorModelException>(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -568,35 +563,38 @@ namespace Fixtures.MirrorSequences
             return string.Format("Operation UpdatePetStyles returned status code: '{0}'", statusCode);
         }
 
-
-
         /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// Handle IList of error responses
         /// </summary>
-        private async Task HandleErrorResponseForUpdatePetStyles<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+        private async Task HandleErrorResponseWithSequenceTypeForUpdatePetStyles<V,T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
             where V : IHttpRestErrorModel
+            where T : HttpRestExceptionBase<System.Collections.IList<V>>
         {
             string errorMessage = GetErrorMessageForUpdatePetStyles(statusCode);
             string _responseContent = null;
+            T ex = new T();
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    var errorResponseModels = SafeJsonConvert.DeserializeObject<System.Collections.IList<V>>(_responseContent, deserializationSettings);
+                    ex.SetErrorModel(errorResponseModels);
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            ex.Message = errorMessage;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
+            throw ex;
         }
 
         /// <summary>

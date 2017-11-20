@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public AzureCompositeModelClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetInt<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetInt returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with integer properties
@@ -252,7 +246,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -264,7 +257,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutInt<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -272,8 +264,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutInt returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -303,8 +293,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with integer properties
@@ -453,7 +441,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -465,7 +452,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -473,8 +459,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -504,8 +488,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with long properties
@@ -655,7 +637,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -667,7 +648,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -675,8 +655,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -706,8 +684,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with long properties
@@ -856,7 +832,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -868,7 +843,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -876,8 +850,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -907,8 +879,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with float properties
@@ -1058,7 +1028,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1070,7 +1039,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1078,8 +1046,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1109,8 +1075,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with float properties
@@ -1259,7 +1223,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1271,7 +1234,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1279,8 +1241,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1310,8 +1270,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with double properties
@@ -1461,7 +1419,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1473,7 +1430,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1481,8 +1437,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1512,8 +1466,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with double properties
@@ -1663,7 +1615,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1675,7 +1626,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1683,8 +1633,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1714,8 +1662,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with bool properties
@@ -1865,7 +1811,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1877,7 +1822,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1885,8 +1829,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1916,8 +1858,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with bool properties
@@ -2066,7 +2006,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2078,7 +2017,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2086,8 +2024,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2117,8 +2053,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with string properties
@@ -2268,7 +2202,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2280,7 +2213,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2288,8 +2220,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2319,8 +2249,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with string properties
@@ -2469,7 +2397,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2481,7 +2408,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2489,8 +2415,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2520,8 +2444,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with date properties
@@ -2671,7 +2593,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2683,7 +2604,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2691,8 +2611,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2722,8 +2640,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with date properties
@@ -2872,7 +2788,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2884,7 +2799,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2892,8 +2806,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2923,8 +2835,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with datetime properties
@@ -3074,7 +2984,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3086,7 +2995,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3094,8 +3002,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3125,8 +3031,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with datetime properties
@@ -3275,7 +3179,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3287,7 +3190,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetDateTimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3295,8 +3197,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetDateTimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3326,8 +3226,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with datetimeRfc1123 properties
@@ -3477,7 +3375,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3489,7 +3386,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutDateTimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3497,8 +3393,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutDateTimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3528,8 +3422,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with datetimeRfc1123 properties
@@ -3679,7 +3571,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3691,7 +3582,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3699,8 +3589,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3730,8 +3618,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with duration properties
@@ -3881,7 +3767,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3893,7 +3778,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3901,8 +3785,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3932,8 +3814,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with duration properties
@@ -4076,7 +3956,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4088,7 +3967,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4096,8 +3974,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4127,8 +4003,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types with byte properties
@@ -4278,7 +4152,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4290,7 +4163,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4298,8 +4170,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4329,8 +4199,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types with byte properties

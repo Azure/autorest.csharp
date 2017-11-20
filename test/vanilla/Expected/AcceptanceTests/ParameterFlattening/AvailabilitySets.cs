@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// </summary>
         public AutoRestParameterFlattening Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             await HandleErrorResponseWithKnownTypeForUpdate<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         {
             return string.Format("Operation Update returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -110,36 +106,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForUpdate<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForUpdate(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Updates the tags for an availability set.
         /// </summary>

@@ -46,7 +46,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         /// </summary>
         public AutoRestComplexTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -58,7 +57,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -66,8 +64,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -219,7 +215,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -231,7 +226,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -239,8 +233,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -400,7 +392,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -412,7 +403,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -420,8 +410,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -573,7 +561,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -585,7 +572,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -593,8 +579,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -746,7 +730,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -758,7 +741,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -766,8 +748,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -919,7 +899,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -931,7 +910,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetNotProvided<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -939,8 +917,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetNotProvided returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

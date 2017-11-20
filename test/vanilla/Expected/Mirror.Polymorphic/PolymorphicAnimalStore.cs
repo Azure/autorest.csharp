@@ -150,7 +150,6 @@ namespace Fixtures.MirrorPolymorphic
             DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<Animal>("dtype"));
             CustomInitialize();
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -162,7 +161,6 @@ namespace Fixtures.MirrorPolymorphic
             await HandleErrorResponseForCreateOrUpdatePolymorphicAnimals<Error2>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -170,8 +168,6 @@ namespace Fixtures.MirrorPolymorphic
         {
             return string.Format("Operation CreateOrUpdatePolymorphicAnimals returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -201,8 +197,6 @@ namespace Fixtures.MirrorPolymorphic
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types

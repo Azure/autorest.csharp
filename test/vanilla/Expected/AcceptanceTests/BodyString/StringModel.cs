@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         public AutoRestSwaggerBATService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -386,7 +378,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -398,7 +389,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -406,8 +396,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -559,7 +547,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -571,7 +558,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -579,8 +565,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -719,7 +703,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -731,7 +714,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetMbcs<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -739,8 +721,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetMbcs returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -893,7 +873,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -905,7 +884,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutMbcs<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -913,8 +891,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutMbcs returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1054,7 +1030,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1066,7 +1041,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetWhitespace<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1074,8 +1048,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetWhitespace returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1229,7 +1201,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1241,7 +1212,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutWhitespace<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1249,8 +1219,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutWhitespace returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1391,7 +1359,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1403,7 +1370,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetNotProvided<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1411,8 +1377,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetNotProvided returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1564,7 +1528,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1576,7 +1539,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetBase64Encoded<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1584,8 +1546,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetBase64Encoded returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1737,7 +1697,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1749,7 +1708,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetBase64UrlEncoded<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1757,8 +1715,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetBase64UrlEncoded returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1910,7 +1866,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1922,7 +1877,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutBase64UrlEncoded<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1930,8 +1884,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutBase64UrlEncoded returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2081,7 +2033,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2093,7 +2044,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetNullBase64UrlEncoded<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2101,8 +2051,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetNullBase64UrlEncoded returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public AzureCompositeModelClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
@@ -252,7 +246,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -264,7 +257,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -272,8 +264,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -303,8 +293,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -459,7 +447,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -471,7 +458,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -479,8 +465,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -510,8 +494,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get a basic complex type that is invalid for the local strong type
@@ -661,7 +643,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -673,7 +654,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -681,8 +661,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -712,8 +690,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get a basic complex type that is empty
@@ -863,7 +839,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -875,7 +850,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -883,8 +857,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -914,8 +886,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get a basic complex type whose properties are null
@@ -1065,7 +1035,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1077,7 +1046,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetNotProvided<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1085,8 +1053,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetNotProvided returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1116,8 +1082,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get a basic complex type while the server doesn't provide a response

@@ -46,7 +46,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         /// </summary>
         public AutoRestComplexTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -58,7 +57,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetInt<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -66,8 +64,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetInt returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -219,7 +215,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -231,7 +226,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutInt<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -239,8 +233,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutInt returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -391,7 +383,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -403,7 +394,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -411,8 +401,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -564,7 +552,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -576,7 +563,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -584,8 +570,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -736,7 +720,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -748,7 +731,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -756,8 +738,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -909,7 +889,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -921,7 +900,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -929,8 +907,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1081,7 +1057,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1093,7 +1068,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1101,8 +1075,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1254,7 +1226,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1266,7 +1237,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1274,8 +1244,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1427,7 +1395,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1439,7 +1406,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1447,8 +1413,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1600,7 +1564,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1612,7 +1575,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1620,8 +1582,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1772,7 +1732,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1784,7 +1743,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1792,8 +1750,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1945,7 +1901,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1957,7 +1912,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1965,8 +1919,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2117,7 +2069,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2129,7 +2080,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2137,8 +2087,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2290,7 +2238,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2302,7 +2249,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2310,8 +2256,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2462,7 +2406,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2474,7 +2417,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2482,8 +2424,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2635,7 +2575,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2647,7 +2586,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2655,8 +2593,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2807,7 +2743,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2819,7 +2754,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetDateTimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2827,8 +2761,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetDateTimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2980,7 +2912,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2992,7 +2923,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutDateTimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3000,8 +2930,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutDateTimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3153,7 +3081,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3165,7 +3092,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3173,8 +3099,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3326,7 +3250,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3338,7 +3261,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3346,8 +3268,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3492,7 +3412,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3504,7 +3423,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForGetByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3512,8 +3430,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation GetByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3665,7 +3581,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3677,7 +3592,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             await HandleErrorResponseForPutByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3685,8 +3599,6 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
         {
             return string.Format("Operation PutByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

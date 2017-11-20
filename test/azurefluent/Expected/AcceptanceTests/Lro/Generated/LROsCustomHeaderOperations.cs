@@ -141,7 +141,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -152,7 +151,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPutAsyncRetrySucceeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -189,8 +187,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -368,7 +364,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -379,7 +374,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -416,8 +410,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -601,7 +593,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -612,7 +603,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPost202Retry200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -649,8 +639,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -805,7 +793,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -816,7 +803,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPostAsyncRetrySucceeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -853,8 +839,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required

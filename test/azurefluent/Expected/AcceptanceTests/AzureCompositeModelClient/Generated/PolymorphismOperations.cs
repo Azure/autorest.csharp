@@ -50,7 +50,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public AzureCompositeModel Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types that are polymorphic
@@ -252,7 +246,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -264,7 +257,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -272,8 +264,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -303,8 +293,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types that are polymorphic
@@ -489,7 +477,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -501,7 +488,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -509,8 +495,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetComplicated returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -540,8 +524,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types that are polymorphic, but not at the root of the
@@ -692,7 +674,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -704,7 +685,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -712,8 +692,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutComplicated returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -743,8 +721,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
@@ -897,7 +873,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -909,7 +884,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutValidMissingRequired<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -917,8 +891,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutValidMissingRequired returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -948,8 +920,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required

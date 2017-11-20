@@ -355,7 +355,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             CustomInitialize();
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -367,7 +366,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForList<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -375,8 +373,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation List returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -406,8 +402,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types
@@ -585,7 +579,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -597,7 +590,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForCreate<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -605,8 +597,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation Create returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -636,8 +626,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Create products
@@ -836,7 +824,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -848,7 +835,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForUpdate<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -856,8 +842,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation Update returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -887,8 +871,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Update products

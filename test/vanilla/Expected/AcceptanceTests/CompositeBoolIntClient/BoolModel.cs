@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// </summary>
         public CompositeBoolInt Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetTrue<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetTrue returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get true Boolean value
@@ -225,7 +219,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -237,7 +230,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutTrue<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -245,8 +237,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutTrue returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -276,8 +266,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Set Boolean value true
@@ -384,7 +372,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -396,7 +383,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetFalse<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -404,8 +390,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetFalse returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -435,8 +419,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get false Boolean value
@@ -559,7 +541,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -571,7 +552,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutFalse<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -579,8 +559,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutFalse returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -610,8 +588,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Set Boolean value false
@@ -718,7 +694,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -730,7 +705,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -738,8 +712,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -769,8 +741,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get null Boolean value
@@ -893,7 +863,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -905,7 +874,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -913,8 +881,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -944,8 +910,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get invalid Boolean value

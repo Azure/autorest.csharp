@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         /// </summary>
         public AutoRestIntegerTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -397,7 +389,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -409,7 +400,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetOverflowInt32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -417,8 +407,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetOverflowInt32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -570,7 +558,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -582,7 +569,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetUnderflowInt32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -590,8 +576,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetUnderflowInt32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -743,7 +727,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -755,7 +738,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetOverflowInt64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -763,8 +745,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetOverflowInt64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -916,7 +896,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -928,7 +907,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetUnderflowInt64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -936,8 +914,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetUnderflowInt64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1089,7 +1065,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1101,7 +1076,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForPutMax32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1109,8 +1083,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation PutMax32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1247,7 +1219,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1259,7 +1230,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForPutMax64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1267,8 +1237,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation PutMax64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1405,7 +1373,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1417,7 +1384,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForPutMin32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1425,8 +1391,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation PutMin32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1563,7 +1527,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1575,7 +1538,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForPutMin64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1583,8 +1545,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation PutMin64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1721,7 +1681,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1733,7 +1692,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1741,8 +1699,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1894,7 +1850,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1906,7 +1861,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForPutUnixTimeDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1914,8 +1868,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation PutUnixTimeDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2052,7 +2004,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2064,7 +2015,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetInvalidUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2072,8 +2022,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetInvalidUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2225,7 +2173,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2237,7 +2184,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             await HandleErrorResponseForGetNullUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2245,8 +2191,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         {
             return string.Format("Operation GetNullUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

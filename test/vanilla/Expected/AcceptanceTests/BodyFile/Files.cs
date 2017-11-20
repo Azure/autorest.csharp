@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// </summary>
         public AutoRestSwaggerBATFileService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
             await HandleErrorResponseForGetFile<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
         {
             return string.Format("Operation GetFile returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -209,7 +205,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -221,7 +216,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
             await HandleErrorResponseForGetFileLarge<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -229,8 +223,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
         {
             return string.Format("Operation GetFileLarge returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -368,7 +360,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -380,7 +371,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
             await HandleErrorResponseForGetEmptyFile<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -388,8 +378,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
         {
             return string.Format("Operation GetEmptyFile returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

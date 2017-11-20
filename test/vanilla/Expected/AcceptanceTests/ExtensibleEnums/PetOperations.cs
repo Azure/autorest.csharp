@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         /// </summary>
         public PetStoreInc Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             await HandleErrorResponseWithKnownTypeForGetByPetId<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         {
             return string.Format("Operation GetByPetId returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -110,10 +106,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             }
             throw ex;
         }
-
-
-
-
         /// <param name='petId'>
         /// Pet id
         /// </param>
@@ -247,7 +239,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -259,7 +250,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             await HandleErrorResponseWithKnownTypeForAddPet<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -267,8 +257,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         {
             return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -307,10 +295,6 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
             }
             throw ex;
         }
-
-
-
-
         /// <param name='petParam'>
         /// </param>
         /// <param name='customHeaders'>

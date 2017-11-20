@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         public AutoRestUrlTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetBooleanTrue<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetBooleanTrue returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -210,7 +206,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -222,7 +217,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetBooleanFalse<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -230,8 +224,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetBooleanFalse returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -369,7 +361,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -381,7 +372,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetBooleanNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -389,8 +379,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetBooleanNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -533,7 +521,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -545,7 +532,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetIntOneMillion<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -553,8 +539,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetIntOneMillion returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -692,7 +676,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -704,7 +687,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetIntNegativeOneMillion<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -712,8 +694,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetIntNegativeOneMillion returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -851,7 +831,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -863,7 +842,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetIntNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -871,8 +849,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetIntNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1015,7 +991,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1027,7 +1002,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetTenBillion<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1035,8 +1009,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetTenBillion returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1174,7 +1146,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1186,7 +1157,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetNegativeTenBillion<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1194,8 +1164,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetNegativeTenBillion returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1333,7 +1301,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1345,7 +1312,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetLongNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1353,8 +1319,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetLongNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1497,7 +1461,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1509,7 +1472,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForFloatScientificPositive<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1517,8 +1479,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation FloatScientificPositive returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1656,7 +1616,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1668,7 +1627,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForFloatScientificNegative<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1676,8 +1634,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation FloatScientificNegative returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1815,7 +1771,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1827,7 +1782,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForFloatNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1835,8 +1789,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation FloatNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1979,7 +1931,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1991,7 +1942,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDoubleDecimalPositive<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1999,8 +1949,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DoubleDecimalPositive returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2138,7 +2086,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2150,7 +2097,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDoubleDecimalNegative<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2158,8 +2104,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DoubleDecimalNegative returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2297,7 +2241,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2309,7 +2252,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDoubleNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2317,8 +2259,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DoubleNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2461,7 +2401,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2473,7 +2412,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForStringUnicode<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2481,8 +2419,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation StringUnicode returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2623,7 +2559,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2635,7 +2570,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForStringUrlEncoded<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2643,8 +2577,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation StringUrlEncoded returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2785,7 +2717,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2797,7 +2728,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForStringEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2805,8 +2735,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation StringEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2947,7 +2875,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2959,7 +2886,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForStringNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2967,8 +2893,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation StringNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3111,7 +3035,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3123,7 +3046,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForEnumValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3131,8 +3053,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation EnumValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3276,7 +3196,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3288,7 +3207,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForEnumNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3296,8 +3214,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation EnumNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3441,7 +3357,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3453,7 +3368,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForByteMultiByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3461,8 +3375,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ByteMultiByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3605,7 +3517,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3617,7 +3528,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForByteEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3625,8 +3535,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ByteEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3767,7 +3675,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3779,7 +3686,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForByteNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3787,8 +3693,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ByteNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3931,7 +3835,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3943,7 +3846,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDateValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3951,8 +3853,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DateValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4090,7 +3990,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4102,7 +4001,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDateNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4110,8 +4008,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DateNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4254,7 +4150,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4266,7 +4161,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDateTimeValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4274,8 +4168,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DateTimeValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4413,7 +4305,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4425,7 +4316,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForDateTimeNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4433,8 +4323,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation DateTimeNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4577,7 +4465,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4589,7 +4476,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringCsvValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4597,8 +4483,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringCsvValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4743,7 +4627,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4755,7 +4638,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringCsvNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4763,8 +4645,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringCsvNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4907,7 +4787,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4919,7 +4798,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringCsvEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4927,8 +4805,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringCsvEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5071,7 +4947,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5083,7 +4958,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringSsvValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5091,8 +4965,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringSsvValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5237,7 +5109,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5249,7 +5120,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringTsvValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5257,8 +5127,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringTsvValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5403,7 +5271,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5415,7 +5282,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForArrayStringPipesValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5423,8 +5289,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation ArrayStringPipesValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

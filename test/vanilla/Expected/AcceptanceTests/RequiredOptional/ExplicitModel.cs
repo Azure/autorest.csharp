@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </summary>
         public AutoRestRequiredOptionalTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredIntegerParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalIntegerParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -384,7 +376,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -396,7 +387,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -404,8 +394,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredIntegerProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -563,7 +551,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -575,7 +562,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -583,8 +569,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalIntegerProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -731,7 +715,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -743,7 +726,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -751,8 +733,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredIntegerHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -905,7 +885,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -917,7 +896,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -925,8 +903,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalIntegerHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1068,7 +1044,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1080,7 +1055,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1088,8 +1062,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredStringParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1254,7 +1226,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1266,7 +1237,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1274,8 +1244,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalStringParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1415,7 +1383,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1427,7 +1394,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1435,8 +1401,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredStringProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1607,7 +1571,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1619,7 +1582,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1627,8 +1589,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalStringProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1775,7 +1735,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1787,7 +1746,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1795,8 +1753,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredStringHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1962,7 +1918,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1974,7 +1929,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1982,8 +1936,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalStringHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2125,7 +2077,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2137,7 +2088,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2145,8 +2095,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredClassParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2315,7 +2263,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2327,7 +2274,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2335,8 +2281,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalClassParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2480,7 +2424,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2492,7 +2435,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2500,8 +2442,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredClassProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2676,7 +2616,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2688,7 +2627,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2696,8 +2634,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalClassProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2848,7 +2784,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2860,7 +2795,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2868,8 +2802,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredArrayParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3034,7 +2966,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3046,7 +2977,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3054,8 +2984,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalArrayParameter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3195,7 +3123,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3207,7 +3134,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3215,8 +3141,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredArrayProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3387,7 +3311,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3399,7 +3322,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3407,8 +3329,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalArrayProperty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3555,7 +3475,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3567,7 +3486,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostRequiredArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3575,8 +3493,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostRequiredArrayHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3742,7 +3658,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3754,7 +3669,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPostOptionalArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3762,8 +3676,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PostOptionalArrayHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

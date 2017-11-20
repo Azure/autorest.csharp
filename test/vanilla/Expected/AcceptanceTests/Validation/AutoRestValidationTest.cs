@@ -159,7 +159,6 @@ namespace Fixtures.AcceptanceTestsValidation
             };
             CustomInitialize();
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -171,7 +170,6 @@ namespace Fixtures.AcceptanceTestsValidation
             await HandleErrorResponseForValidationOfMethodParameters<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -179,8 +177,6 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation ValidationOfMethodParameters returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -404,7 +400,6 @@ namespace Fixtures.AcceptanceTestsValidation
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -416,7 +411,6 @@ namespace Fixtures.AcceptanceTestsValidation
             await HandleErrorResponseForValidationOfBody<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -424,8 +418,6 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation ValidationOfBody returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -663,7 +655,6 @@ namespace Fixtures.AcceptanceTestsValidation
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -675,7 +666,6 @@ namespace Fixtures.AcceptanceTestsValidation
             await HandleErrorResponseWithKnownTypeForGetWithConstantInPath<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -683,8 +673,6 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation GetWithConstantInPath returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -723,36 +711,6 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetWithConstantInPath<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetWithConstantInPath(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -852,7 +810,6 @@ namespace Fixtures.AcceptanceTestsValidation
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -864,7 +821,6 @@ namespace Fixtures.AcceptanceTestsValidation
             await HandleErrorResponseWithKnownTypeForPostWithConstantInBody<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -872,8 +828,6 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation PostWithConstantInBody returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -912,36 +866,6 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForPostWithConstantInBody<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForPostWithConstantInBody(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>

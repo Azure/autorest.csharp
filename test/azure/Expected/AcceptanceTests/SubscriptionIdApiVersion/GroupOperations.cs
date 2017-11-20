@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// </summary>
         public MicrosoftAzureTestUrlClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             await HandleErrorResponseForGetSampleResourceGroup<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         {
             return string.Format("Operation GetSampleResourceGroup returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

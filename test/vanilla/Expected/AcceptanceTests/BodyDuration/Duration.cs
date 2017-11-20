@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// </summary>
         public AutoRestDurationTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             await HandleErrorResponseForPutPositiveDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         {
             return string.Format("Operation PutPositiveDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -381,7 +373,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -393,7 +384,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             await HandleErrorResponseForGetPositiveDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -401,8 +391,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         {
             return string.Format("Operation GetPositiveDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -554,7 +542,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -566,7 +553,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -574,8 +560,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

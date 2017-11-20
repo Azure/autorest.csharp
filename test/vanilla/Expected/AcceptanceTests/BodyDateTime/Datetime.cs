@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// </summary>
         public AutoRestDateTimeTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -396,7 +388,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -408,7 +399,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetOverflow<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -416,8 +406,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetOverflow returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -569,7 +557,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -581,7 +568,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetUnderflow<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -589,8 +575,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetUnderflow returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -742,7 +726,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -754,7 +737,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutUtcMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -762,8 +744,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutUtcMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -900,7 +880,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -912,7 +891,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetUtcLowercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -920,8 +898,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetUtcLowercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1073,7 +1049,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1085,7 +1060,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetUtcUppercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1093,8 +1067,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetUtcUppercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1246,7 +1218,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1258,7 +1229,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutLocalPositiveOffsetMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1266,8 +1236,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutLocalPositiveOffsetMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1405,7 +1373,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1417,7 +1384,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalPositiveOffsetLowercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1425,8 +1391,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalPositiveOffsetLowercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1579,7 +1543,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1591,7 +1554,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalPositiveOffsetUppercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1599,8 +1561,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalPositiveOffsetUppercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1753,7 +1713,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1765,7 +1724,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutLocalNegativeOffsetMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1773,8 +1731,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutLocalNegativeOffsetMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1912,7 +1868,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1924,7 +1879,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalNegativeOffsetUppercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1932,8 +1886,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalNegativeOffsetUppercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2086,7 +2038,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2098,7 +2049,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalNegativeOffsetLowercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2106,8 +2056,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalNegativeOffsetLowercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2260,7 +2208,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2272,7 +2219,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutUtcMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2280,8 +2226,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutUtcMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2418,7 +2362,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2430,7 +2373,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetUtcMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2438,8 +2380,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetUtcMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2591,7 +2531,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2603,7 +2542,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutLocalPositiveOffsetMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2611,8 +2549,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutLocalPositiveOffsetMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2749,7 +2685,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2761,7 +2696,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalPositiveOffsetMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2769,8 +2703,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalPositiveOffsetMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2922,7 +2854,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2934,7 +2865,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForPutLocalNegativeOffsetMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2942,8 +2872,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation PutLocalNegativeOffsetMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3080,7 +3008,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3092,7 +3019,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             await HandleErrorResponseForGetLocalNegativeOffsetMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3100,8 +3026,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         {
             return string.Format("Operation GetLocalNegativeOffsetMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

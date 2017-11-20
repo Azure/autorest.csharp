@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         public AutoRestSwaggerBATdictionaryService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -397,7 +389,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -409,7 +400,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -417,8 +407,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -568,7 +556,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -580,7 +567,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetNullValue<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -588,8 +574,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetNullValue returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -741,7 +725,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -753,7 +736,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetNullKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -761,8 +743,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetNullKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -914,7 +894,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -926,7 +905,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetEmptyStringKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -934,8 +912,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetEmptyStringKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1087,7 +1063,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1099,7 +1074,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1107,8 +1081,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1260,7 +1232,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1272,7 +1243,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetBooleanTfft<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1280,8 +1250,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetBooleanTfft returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1434,7 +1402,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1446,7 +1413,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutBooleanTfft<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1454,8 +1420,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutBooleanTfft returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1605,7 +1569,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1617,7 +1580,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetBooleanInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1625,8 +1587,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetBooleanInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1778,7 +1738,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1790,7 +1749,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetBooleanInvalidString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1798,8 +1756,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetBooleanInvalidString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1951,7 +1907,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1963,7 +1918,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetIntegerValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1971,8 +1925,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetIntegerValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2124,7 +2076,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2136,7 +2087,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutIntegerValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2144,8 +2094,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutIntegerValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2295,7 +2243,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2307,7 +2254,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetIntInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2315,8 +2261,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetIntInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2468,7 +2412,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2480,7 +2423,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetIntInvalidString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2488,8 +2430,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetIntInvalidString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2641,7 +2581,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2653,7 +2592,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetLongValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2661,8 +2599,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetLongValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2814,7 +2750,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2826,7 +2761,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutLongValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2834,8 +2768,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutLongValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2985,7 +2917,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2997,7 +2928,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetLongInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3005,8 +2935,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetLongInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3158,7 +3086,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3170,7 +3097,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetLongInvalidString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3178,8 +3104,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetLongInvalidString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3331,7 +3255,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3343,7 +3266,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetFloatValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3351,8 +3273,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetFloatValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3504,7 +3424,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3516,7 +3435,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutFloatValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3524,8 +3442,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutFloatValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3675,7 +3591,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3687,7 +3602,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetFloatInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3695,8 +3609,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetFloatInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3848,7 +3760,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3860,7 +3771,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetFloatInvalidString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3868,8 +3778,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetFloatInvalidString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4021,7 +3929,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4033,7 +3940,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDoubleValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4041,8 +3947,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDoubleValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4194,7 +4098,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4206,7 +4109,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDoubleValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4214,8 +4116,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDoubleValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4365,7 +4265,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4377,7 +4276,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDoubleInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4385,8 +4283,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDoubleInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4538,7 +4434,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4550,7 +4445,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDoubleInvalidString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4558,8 +4452,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDoubleInvalidString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4711,7 +4603,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4723,7 +4614,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetStringValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4731,8 +4621,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetStringValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4884,7 +4772,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4896,7 +4783,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutStringValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4904,8 +4790,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutStringValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5055,7 +4939,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5067,7 +4950,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetStringWithNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5075,8 +4957,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetStringWithNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5228,7 +5108,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5240,7 +5119,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetStringWithInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5248,8 +5126,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetStringWithInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5401,7 +5277,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5413,7 +5288,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5421,8 +5295,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5575,7 +5447,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5587,7 +5458,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDateValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5595,8 +5465,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDateValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5747,7 +5615,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5759,7 +5626,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5767,8 +5633,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5920,7 +5784,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5932,7 +5795,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateInvalidChars<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5940,8 +5802,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateInvalidChars returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6093,7 +5953,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6105,7 +5964,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateTimeValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6113,8 +5971,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateTimeValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6267,7 +6123,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6279,7 +6134,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDateTimeValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6287,8 +6141,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDateTimeValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6439,7 +6291,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6451,7 +6302,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateTimeInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6459,8 +6309,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateTimeInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6612,7 +6460,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6624,7 +6471,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateTimeInvalidChars<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6632,8 +6478,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateTimeInvalidChars returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6785,7 +6629,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6797,7 +6640,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDateTimeRfc1123Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6805,8 +6647,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDateTimeRfc1123Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -6960,7 +6800,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6972,7 +6811,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDateTimeRfc1123Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6980,8 +6818,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDateTimeRfc1123Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7132,7 +6968,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -7144,7 +6979,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDurationValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -7152,8 +6986,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDurationValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7306,7 +7138,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -7318,7 +7149,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDurationValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -7326,8 +7156,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDurationValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7477,7 +7305,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -7489,7 +7316,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetByteValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -7497,8 +7323,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetByteValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7651,7 +7475,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -7663,7 +7486,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutByteValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -7671,8 +7493,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutByteValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7823,7 +7643,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -7835,7 +7654,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetByteInvalidNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -7843,8 +7661,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetByteInvalidNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -7997,7 +7813,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8009,7 +7824,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetBase64Url<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8017,8 +7831,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetBase64Url returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -8171,7 +7983,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8183,7 +7994,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetComplexNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8191,8 +8001,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetComplexNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -8344,7 +8152,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8356,7 +8163,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetComplexEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8364,8 +8170,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetComplexEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -8517,7 +8321,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8529,7 +8332,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetComplexItemNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8537,8 +8339,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetComplexItemNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -8691,7 +8491,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8703,7 +8502,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetComplexItemEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8711,8 +8509,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetComplexItemEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -8865,7 +8661,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -8877,7 +8672,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetComplexValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -8885,8 +8679,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetComplexValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9039,7 +8831,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9051,7 +8842,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutComplexValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9059,8 +8849,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutComplexValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9212,7 +9000,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9224,7 +9011,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetArrayNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9232,8 +9018,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetArrayNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9385,7 +9169,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9397,7 +9180,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetArrayEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9405,8 +9187,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetArrayEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9558,7 +9338,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9570,7 +9349,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetArrayItemNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9578,8 +9356,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetArrayItemNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9732,7 +9508,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9744,7 +9519,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetArrayItemEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9752,8 +9526,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetArrayItemEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -9906,7 +9678,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -9918,7 +9689,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetArrayValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -9926,8 +9696,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetArrayValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10080,7 +9848,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10092,7 +9859,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutArrayValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10100,8 +9866,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutArrayValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10252,7 +10016,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10264,7 +10027,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDictionaryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10272,8 +10034,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDictionaryNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10425,7 +10185,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10437,7 +10196,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDictionaryEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10445,8 +10203,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDictionaryEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10599,7 +10355,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10611,7 +10366,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDictionaryItemNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10619,8 +10373,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDictionaryItemNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10774,7 +10526,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10786,7 +10537,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDictionaryItemEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10794,8 +10544,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDictionaryItemEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -10949,7 +10697,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -10961,7 +10708,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForGetDictionaryValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -10969,8 +10715,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation GetDictionaryValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -11124,7 +10868,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -11136,7 +10879,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             await HandleErrorResponseForPutDictionaryValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -11144,8 +10886,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         {
             return string.Format("Operation PutDictionaryValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

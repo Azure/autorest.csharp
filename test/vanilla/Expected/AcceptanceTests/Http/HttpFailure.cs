@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </summary>
         public AutoRestHttpInfrastructureTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGetEmptyError<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetEmptyError returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetNoModelError<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetNoModelError returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -283,36 +275,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetNoModelError<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetNoModelError(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Get empty error form server
         /// </summary>
@@ -434,7 +396,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -446,7 +407,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetNoModelEmpty<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -454,8 +414,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetNoModelEmpty returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -494,36 +452,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetNoModelEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetNoModelEmpty(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Get empty response from server
         /// </summary>

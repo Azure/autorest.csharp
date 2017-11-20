@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         public AutoRestUrlTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetAllWithValues<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetAllWithValues returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -259,7 +255,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -271,7 +266,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetGlobalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -279,8 +273,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetGlobalQueryNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -467,7 +459,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -479,7 +470,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetGlobalAndLocalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -487,8 +477,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetGlobalAndLocalQueryNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -675,7 +663,6 @@ namespace Fixtures.AcceptanceTestsUrl
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -687,7 +674,6 @@ namespace Fixtures.AcceptanceTestsUrl
             await HandleErrorResponseForGetLocalPathItemQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -695,8 +681,6 @@ namespace Fixtures.AcceptanceTestsUrl
         {
             return string.Format("Operation GetLocalPathItemQueryNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

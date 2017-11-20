@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public AzureCompositeModelClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get complex types that are polymorphic and have recursive references
@@ -252,7 +246,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -264,7 +257,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -272,8 +264,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
         {
             return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -303,8 +293,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references

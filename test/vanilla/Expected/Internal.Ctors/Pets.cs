@@ -49,7 +49,6 @@ namespace Fixtures.InternalCtors
         /// </summary>
         public InternalClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -61,7 +60,6 @@ namespace Fixtures.InternalCtors
             await HandleErrorResponseWithKnownTypeForGet<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -69,8 +67,6 @@ namespace Fixtures.InternalCtors
         {
             return string.Format("Operation Get returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -109,10 +105,6 @@ namespace Fixtures.InternalCtors
             }
             throw ex;
         }
-
-
-
-
         /// <summary>
         /// Gets a pet from the store
         /// </summary>

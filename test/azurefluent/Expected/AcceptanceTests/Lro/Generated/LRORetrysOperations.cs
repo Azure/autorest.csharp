@@ -192,7 +192,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -203,7 +202,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -240,8 +238,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial
@@ -424,7 +420,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -435,7 +430,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -472,8 +466,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 200 to the initial
@@ -650,7 +642,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -661,7 +652,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginDeleteProvisioning202Accepted200Succeeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -698,8 +688,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the
@@ -884,7 +872,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -895,7 +882,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginDelete202Retry200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -932,8 +918,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
@@ -1076,7 +1060,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1087,7 +1070,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1124,8 +1106,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
@@ -1268,7 +1248,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1279,7 +1258,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPost202Retry200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1316,8 +1294,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial
@@ -1471,7 +1447,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1482,7 +1457,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         {
             await HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetrySucceeded(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1519,8 +1493,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial

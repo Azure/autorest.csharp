@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </summary>
         public AutoRestRequiredOptionalTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForGetRequiredPath<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation GetRequiredPath returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -229,7 +225,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -241,7 +236,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPutOptionalQuery<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -249,8 +243,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PutOptionalQuery returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -392,7 +384,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -404,7 +395,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPutOptionalHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -412,8 +402,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PutOptionalHeader returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -554,7 +542,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -566,7 +553,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForPutOptionalBody<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -574,8 +560,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation PutOptionalBody returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -715,7 +699,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -727,7 +710,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForGetRequiredGlobalPath<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -735,8 +717,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation GetRequiredGlobalPath returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -891,7 +871,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -903,7 +882,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForGetRequiredGlobalQuery<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -911,8 +889,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation GetRequiredGlobalQuery returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1075,7 +1051,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1087,7 +1062,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             await HandleErrorResponseForGetOptionalGlobalQuery<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1095,8 +1069,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             return string.Format("Operation GetOptionalGlobalQuery returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

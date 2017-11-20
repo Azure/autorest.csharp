@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </summary>
         public AutoRestHttpInfrastructureTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForHead300<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Head300 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -214,7 +210,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -226,7 +221,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet300<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -234,8 +228,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get300 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -400,7 +392,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -412,7 +403,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForHead301<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -420,8 +410,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Head301 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -564,7 +552,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -576,7 +563,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet301<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -584,8 +570,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get301 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -728,7 +712,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -740,7 +723,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPut301<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -748,8 +730,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Put301 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -905,7 +885,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -917,7 +896,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForHead302<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -925,8 +903,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Head302 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1069,7 +1045,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1081,7 +1056,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet302<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1089,8 +1063,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get302 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1233,7 +1205,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1245,7 +1216,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPatch302<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1253,8 +1223,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Patch302 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1410,7 +1378,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1422,7 +1389,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPost303<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1430,8 +1396,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Post303 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1587,7 +1551,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1599,7 +1562,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForHead307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1607,8 +1569,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Head307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1751,7 +1711,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1763,7 +1722,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1771,8 +1729,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1915,7 +1871,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1927,7 +1882,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPut307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1935,8 +1889,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Put307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2090,7 +2042,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2102,7 +2053,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPatch307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2110,8 +2060,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Patch307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2265,7 +2213,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2277,7 +2224,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForPost307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2285,8 +2231,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Post307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2440,7 +2384,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2452,7 +2395,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForDelete307<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2460,8 +2402,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Delete307 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

@@ -50,7 +50,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// </summary>
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostMethodGlobalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostMethodGlobalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -240,7 +236,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -252,7 +247,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostMethodGlobalNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -260,8 +254,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostMethodGlobalNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -431,7 +423,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -443,7 +434,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostMethodGlobalNotProvidedValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -451,8 +441,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostMethodGlobalNotProvidedValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -629,7 +617,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -641,7 +628,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostPathGlobalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -649,8 +635,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostPathGlobalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -819,7 +803,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -831,7 +814,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostSwaggerGlobalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -839,8 +821,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostSwaggerGlobalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

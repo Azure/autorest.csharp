@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         /// </summary>
         public AutoRestUrlMutliCollectionFormatTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             await HandleErrorResponseForArrayStringMultiNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         {
             return string.Format("Operation ArrayStringMultiNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             await HandleErrorResponseForArrayStringMultiEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         {
             return string.Format("Operation ArrayStringMultiEmpty returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -398,7 +390,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -410,7 +401,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             await HandleErrorResponseForArrayStringMultiValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -418,8 +408,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         {
             return string.Format("Operation ArrayStringMultiValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

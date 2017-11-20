@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </summary>
         public AutoRestHttpInfrastructureTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model204NoModelDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model204NoModelDefaultError200Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model204NoModelDefaultError204Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model204NoModelDefaultError204Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -396,7 +388,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -408,7 +399,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model204NoModelDefaultError201Invalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -416,8 +406,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model204NoModelDefaultError201Invalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -569,7 +557,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -581,7 +568,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model204NoModelDefaultError202None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -589,8 +575,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model204NoModelDefaultError202None returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -742,7 +726,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -754,7 +737,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model204NoModelDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -762,8 +744,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model204NoModelDefaultError400Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -916,7 +896,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -928,7 +907,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model201ModelDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -936,8 +914,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model201ModelDefaultError200Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1108,7 +1084,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1120,7 +1095,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model201ModelDefaultError201Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1128,8 +1102,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model201ModelDefaultError201Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1301,7 +1273,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1313,7 +1284,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200Model201ModelDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1321,8 +1291,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200Model201ModelDefaultError400Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1494,7 +1462,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1506,7 +1473,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1514,8 +1480,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError200Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1705,7 +1669,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1717,7 +1680,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1725,8 +1687,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError201Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1916,7 +1876,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1928,7 +1887,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1936,8 +1894,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError404Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2127,7 +2083,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2139,7 +2094,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2147,8 +2101,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError400Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2339,7 +2291,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2351,7 +2302,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet202None204NoneDefaultError202None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2359,8 +2309,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultError202None returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2490,7 +2438,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2502,7 +2449,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet202None204NoneDefaultError204None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2510,8 +2456,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultError204None returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2641,7 +2585,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2653,7 +2596,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGet202None204NoneDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2661,8 +2603,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultError400Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2793,7 +2733,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2805,7 +2744,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone202Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2813,8 +2751,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone202Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2853,36 +2789,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet202None204NoneDefaultNone202Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
         /// </summary>
@@ -2982,7 +2888,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2994,7 +2899,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone204None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3002,8 +2906,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone204None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3042,36 +2944,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet202None204NoneDefaultNone204None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -3171,7 +3043,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3183,7 +3054,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3191,8 +3061,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone400None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3231,36 +3099,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet202None204NoneDefaultNone400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -3360,7 +3198,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3372,7 +3209,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3380,8 +3216,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone400Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3420,36 +3254,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet202None204NoneDefaultNone400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
         /// </summary>
@@ -3549,7 +3353,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3561,7 +3364,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGetDefaultModelA200Valid<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3569,8 +3371,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultModelA200Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3714,7 +3514,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3726,7 +3525,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGetDefaultModelA200None<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3734,8 +3532,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultModelA200None returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3879,7 +3675,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3891,7 +3686,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGetDefaultModelA400Valid<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3899,8 +3693,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultModelA400Valid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4044,7 +3836,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4056,7 +3847,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseForGetDefaultModelA400None<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4064,8 +3854,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultModelA400None returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4209,7 +3997,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4221,7 +4008,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetDefaultNone200Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4229,8 +4015,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone200Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4269,36 +4053,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetDefaultNone200Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetDefaultNone200Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
@@ -4398,7 +4152,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4410,7 +4163,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetDefaultNone200None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4418,8 +4170,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone200None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4458,36 +4208,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetDefaultNone200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetDefaultNone200None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
@@ -4587,7 +4307,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4599,7 +4318,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetDefaultNone400Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4607,8 +4325,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone400Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4647,36 +4363,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetDefaultNone400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetDefaultNone400Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
@@ -4776,7 +4462,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4788,7 +4473,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGetDefaultNone400None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4796,8 +4480,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone400None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4836,36 +4518,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetDefaultNone400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetDefaultNone400None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -4965,7 +4617,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4977,7 +4628,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA200None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4985,8 +4635,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5025,36 +4673,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA200None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client
         /// should return a null object of thde type for model A
@@ -5177,7 +4795,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5189,7 +4806,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA200Valid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5197,8 +4813,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200Valid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5237,36 +4851,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA200Valid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
@@ -5388,7 +4972,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5400,7 +4983,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA200Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5408,8 +4990,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5448,36 +5028,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA200Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA200Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
         /// </summary>
@@ -5599,7 +5149,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5611,7 +5160,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA400None<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5619,8 +5167,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400None returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5659,36 +5205,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA400None(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error
         /// with no error model
@@ -5811,7 +5327,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5823,7 +5338,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA400Valid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5831,8 +5345,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400Valid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5871,36 +5383,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA400Valid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
@@ -6022,7 +5504,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6034,7 +5515,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA400Invalid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6042,8 +5522,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400Invalid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -6082,36 +5560,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA400Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA400Invalid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
         /// </summary>
@@ -6233,7 +5681,6 @@ namespace Fixtures.AcceptanceTestsHttp
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -6245,7 +5692,6 @@ namespace Fixtures.AcceptanceTestsHttp
             await HandleErrorResponseWithKnownTypeForGet200ModelA202Valid<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -6253,8 +5699,6 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA202Valid returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -6293,36 +5737,6 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGet200ModelA202Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGet200ModelA202Valid(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>

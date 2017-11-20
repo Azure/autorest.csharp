@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         public AutoRestPagingTestServiceClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -61,7 +60,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetSinglePages(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -98,8 +96,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink
@@ -249,7 +245,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -260,7 +255,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePages(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -297,8 +291,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -490,7 +482,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -501,7 +492,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetOdataMultiplePages(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -538,8 +528,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -732,7 +720,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -743,7 +730,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffset(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -780,8 +766,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -994,7 +978,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1005,7 +988,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirst(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1042,8 +1024,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
@@ -1194,7 +1174,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1205,7 +1184,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecond(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1242,8 +1220,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -1395,7 +1371,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1406,7 +1381,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetSinglePagesFailure(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1443,8 +1417,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the first call
@@ -1594,7 +1566,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1605,7 +1576,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFailure(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1642,8 +1612,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -1793,7 +1761,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1804,7 +1771,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUri(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -1841,8 +1807,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives an invalid nextLink
@@ -1992,7 +1956,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2003,7 +1966,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentNextLink(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -2040,8 +2002,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2218,7 +2178,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2229,7 +2188,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentWithGroupingNextLink(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -2266,8 +2224,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment with
@@ -2452,7 +2408,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2463,7 +2418,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForNextFragment(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -2500,8 +2454,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2687,7 +2639,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2698,7 +2649,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForNextFragmentWithGrouping(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -2735,8 +2685,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2929,7 +2877,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2940,7 +2887,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetSinglePagesNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -2977,8 +2923,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink
@@ -3142,7 +3086,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3153,7 +3096,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -3190,8 +3132,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -3397,7 +3337,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3408,7 +3347,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetOdataMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -3445,8 +3383,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -3653,7 +3589,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3664,7 +3599,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffsetNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -3701,8 +3635,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -3908,7 +3840,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3919,7 +3850,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirstNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -3956,8 +3886,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
@@ -4122,7 +4050,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4133,7 +4060,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecondNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -4170,8 +4096,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -4337,7 +4261,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4348,7 +4271,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetSinglePagesFailureNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -4385,8 +4307,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the first call
@@ -4550,7 +4470,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4561,7 +4480,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -4598,8 +4516,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -4763,7 +4679,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4774,7 +4689,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         {
             await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUriNext(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -4811,8 +4725,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// A paging operation that receives an invalid nextLink

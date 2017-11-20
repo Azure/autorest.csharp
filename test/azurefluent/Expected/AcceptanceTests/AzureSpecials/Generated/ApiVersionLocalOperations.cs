@@ -50,7 +50,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// </summary>
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetMethodLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetMethodLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -235,7 +231,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -247,7 +242,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetMethodLocalNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -255,8 +249,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetMethodLocalNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -423,7 +415,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -435,7 +426,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetPathLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -443,8 +433,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetPathLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -608,7 +596,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -620,7 +607,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetSwaggerLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -628,8 +614,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetSwaggerLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

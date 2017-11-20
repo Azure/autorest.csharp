@@ -300,7 +300,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             DeserializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -312,7 +311,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForPutArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -320,8 +318,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation PutArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -490,7 +486,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -502,7 +497,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForGetArray<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -510,8 +504,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation GetArray returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -691,7 +683,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -703,7 +694,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForPutDictionary<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -711,8 +701,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation PutDictionary returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -881,7 +869,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -893,7 +880,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForGetDictionary<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -901,8 +887,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation GetDictionary returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1082,7 +1066,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1094,7 +1077,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForPutResourceCollection<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1102,8 +1084,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation PutResourceCollection returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1272,7 +1252,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1284,7 +1263,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
             await HandleErrorResponseForGetResourceCollection<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1292,8 +1270,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource
         {
             return string.Format("Operation GetResourceCollection returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

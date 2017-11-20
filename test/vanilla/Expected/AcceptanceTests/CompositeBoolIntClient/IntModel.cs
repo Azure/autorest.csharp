@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// </summary>
         public CompositeBoolInt Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -102,8 +98,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get null Int value
@@ -226,7 +220,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -238,7 +231,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -246,8 +238,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -277,8 +267,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get invalid Int value
@@ -401,7 +389,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -413,7 +400,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetOverflowInt32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -421,8 +407,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetOverflowInt32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -452,8 +436,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get overflow Int32 value
@@ -576,7 +558,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -588,7 +569,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetUnderflowInt32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -596,8 +576,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetUnderflowInt32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -627,8 +605,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get underflow Int32 value
@@ -751,7 +727,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -763,7 +738,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetOverflowInt64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -771,8 +745,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetOverflowInt64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -802,8 +774,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get overflow Int64 value
@@ -926,7 +896,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -938,7 +907,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetUnderflowInt64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -946,8 +914,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetUnderflowInt64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -977,8 +943,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get underflow Int64 value
@@ -1101,7 +1065,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1113,7 +1076,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutMax32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1121,8 +1083,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutMax32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1152,8 +1112,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put max int32 value
@@ -1261,7 +1219,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1273,7 +1230,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutMax64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1281,8 +1237,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutMax64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1312,8 +1266,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put max int64 value
@@ -1421,7 +1373,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1433,7 +1384,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutMin32<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1441,8 +1391,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutMin32 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1472,8 +1420,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put min int32 value
@@ -1581,7 +1527,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1593,7 +1538,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutMin64<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1601,8 +1545,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutMin64 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1632,8 +1574,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put min int64 value
@@ -1741,7 +1681,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1753,7 +1692,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1761,8 +1699,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1792,8 +1728,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get datetime encoded as Unix time value
@@ -1916,7 +1850,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1928,7 +1861,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForPutUnixTimeDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1936,8 +1868,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation PutUnixTimeDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1967,8 +1897,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put datetime encoded as Unix time
@@ -2076,7 +2004,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2088,7 +2015,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetInvalidUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2096,8 +2022,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetInvalidUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2127,8 +2051,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get invalid Unix time value
@@ -2251,7 +2173,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2263,7 +2184,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             await HandleErrorResponseForGetNullUnixTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2271,8 +2191,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             return string.Format("Operation GetNullUnixTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2302,8 +2220,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get null Unix time value

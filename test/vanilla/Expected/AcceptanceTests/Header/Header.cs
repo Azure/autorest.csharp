@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         public AutoRestSwaggerBATHeaderService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamExistingKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamExistingKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseExistingKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseExistingKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -388,7 +380,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -400,7 +391,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamProtectedKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -408,8 +398,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamProtectedKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -553,7 +541,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -565,7 +552,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseProtectedKey<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -573,8 +559,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseProtectedKey returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -717,7 +701,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -729,7 +712,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamInteger<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -737,8 +719,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamInteger returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -900,7 +880,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -912,7 +891,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseInteger<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -920,8 +898,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseInteger returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1086,7 +1062,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1098,7 +1073,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1106,8 +1080,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1269,7 +1241,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1281,7 +1252,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseLong<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1289,8 +1259,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseLong returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1455,7 +1423,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1467,7 +1434,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1475,8 +1441,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1638,7 +1602,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1650,7 +1613,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1658,8 +1620,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1824,7 +1784,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1836,7 +1795,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1844,8 +1802,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2007,7 +1963,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2019,7 +1974,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2027,8 +1981,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2193,7 +2145,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2205,7 +2156,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2213,8 +2163,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2376,7 +2324,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2388,7 +2335,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseBool<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2396,8 +2342,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseBool returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2562,7 +2506,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2574,7 +2517,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2582,8 +2524,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2751,7 +2691,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2763,7 +2702,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseString<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2771,8 +2709,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseString returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2939,7 +2875,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2951,7 +2886,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2959,8 +2893,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3122,7 +3054,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3134,7 +3065,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseDate<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3142,8 +3072,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseDate returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3308,7 +3236,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3320,7 +3247,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamDatetime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3328,8 +3254,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamDatetime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3493,7 +3417,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3505,7 +3428,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseDatetime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3513,8 +3435,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseDatetime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3680,7 +3600,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3692,7 +3611,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamDatetimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3700,8 +3618,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamDatetimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -3868,7 +3784,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -3880,7 +3795,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseDatetimeRfc1123<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -3888,8 +3802,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseDatetimeRfc1123 returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4055,7 +3967,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4067,7 +3978,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4075,8 +3985,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4238,7 +4146,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4250,7 +4157,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4258,8 +4164,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4424,7 +4328,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4436,7 +4339,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4444,8 +4346,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4614,7 +4514,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4626,7 +4525,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseByte<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4634,8 +4532,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseByte returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4800,7 +4696,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -4812,7 +4707,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForParamEnum<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -4820,8 +4714,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ParamEnum returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -4988,7 +4880,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5000,7 +4891,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForResponseEnum<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5008,8 +4898,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation ResponseEnum returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -5175,7 +5063,6 @@ namespace Fixtures.AcceptanceTestsHeader
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -5187,7 +5074,6 @@ namespace Fixtures.AcceptanceTestsHeader
             await HandleErrorResponseForCustomRequestId<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -5195,8 +5081,6 @@ namespace Fixtures.AcceptanceTestsHeader
         {
             return string.Format("Operation CustomRequestId returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

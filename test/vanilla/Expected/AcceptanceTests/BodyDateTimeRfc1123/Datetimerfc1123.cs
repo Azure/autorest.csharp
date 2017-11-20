@@ -51,7 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         /// </summary>
         public AutoRestRFC1123DateTimeTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -397,7 +389,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -409,7 +400,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetOverflow<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -417,8 +407,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetOverflow returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -570,7 +558,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -582,7 +569,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetUnderflow<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -590,8 +576,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetUnderflow returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -743,7 +727,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -755,7 +738,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForPutUtcMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -763,8 +745,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation PutUtcMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -901,7 +881,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -913,7 +892,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetUtcLowercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -921,8 +899,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetUtcLowercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1074,7 +1050,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1086,7 +1061,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetUtcUppercaseMaxDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1094,8 +1068,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetUtcUppercaseMaxDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1247,7 +1219,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1259,7 +1230,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForPutUtcMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1267,8 +1237,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation PutUtcMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1405,7 +1373,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1417,7 +1384,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             await HandleErrorResponseForGetUtcMinDateTime<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1425,8 +1391,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         {
             return string.Format("Operation GetUtcMinDateTime returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

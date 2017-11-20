@@ -50,7 +50,6 @@ namespace Fixtures.AdditionalProperties
         /// </summary>
         public PetStoreonHeroku Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AdditionalProperties
             await HandleErrorResponseWithKnownTypeForPets<string>(_httpRequest, _httpResponse, statusCode);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AdditionalProperties
         {
             return string.Format("Operation Pets returned status code: '{0}'", statusCode);
         }
-
-
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -110,10 +106,6 @@ namespace Fixtures.AdditionalProperties
             }
             throw ex;
         }
-
-
-
-
         /// <param name='pet'>
         /// The pet JSON you want to post
         /// </param>

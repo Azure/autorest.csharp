@@ -148,7 +148,6 @@ namespace Fixtures.AcceptanceTestsReport
             };
             CustomInitialize();
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -160,7 +159,6 @@ namespace Fixtures.AcceptanceTestsReport
             await HandleErrorResponseForGetReport<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -168,8 +166,6 @@ namespace Fixtures.AcceptanceTestsReport
         {
             return string.Format("Operation GetReport returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

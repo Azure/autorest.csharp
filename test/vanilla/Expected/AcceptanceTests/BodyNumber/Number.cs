@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// </summary>
         public AutoRestNumberTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetInvalidFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetInvalidFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -396,7 +388,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -408,7 +399,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetInvalidDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -416,8 +406,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetInvalidDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -569,7 +557,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -581,7 +568,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutBigFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -589,8 +575,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutBigFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -727,7 +711,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -739,7 +722,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetBigFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -747,8 +729,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetBigFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -900,7 +880,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -912,7 +891,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutBigDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -920,8 +898,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutBigDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1058,7 +1034,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1070,7 +1045,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetBigDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1078,8 +1052,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetBigDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1231,7 +1203,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1243,7 +1214,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutBigDoublePositiveDecimal<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1251,8 +1221,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutBigDoublePositiveDecimal returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1388,7 +1356,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1400,7 +1367,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetBigDoublePositiveDecimal<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1408,8 +1374,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetBigDoublePositiveDecimal returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1561,7 +1525,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1573,7 +1536,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutBigDoubleNegativeDecimal<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1581,8 +1543,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutBigDoubleNegativeDecimal returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1718,7 +1678,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1730,7 +1689,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetBigDoubleNegativeDecimal<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1738,8 +1696,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetBigDoubleNegativeDecimal returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1891,7 +1847,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1903,7 +1858,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutSmallFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1911,8 +1865,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutSmallFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2049,7 +2001,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2061,7 +2012,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetSmallFloat<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2069,8 +2019,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetSmallFloat returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2222,7 +2170,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2234,7 +2181,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForPutSmallDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2242,8 +2188,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation PutSmallDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -2380,7 +2324,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -2392,7 +2335,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             await HandleErrorResponseForGetSmallDouble<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -2400,8 +2342,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         {
             return string.Format("Operation GetSmallDouble returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

@@ -148,7 +148,6 @@ namespace Fixtures.DateTimeOffset
             };
             CustomInitialize();
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -160,7 +159,6 @@ namespace Fixtures.DateTimeOffset
             await HandleErrorResponseForGetProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -168,8 +166,6 @@ namespace Fixtures.DateTimeOffset
         {
             return string.Format("Operation GetProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -199,8 +195,6 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types
@@ -346,7 +340,6 @@ namespace Fixtures.DateTimeOffset
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -358,7 +351,6 @@ namespace Fixtures.DateTimeOffset
             await HandleErrorResponseForPutProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -366,8 +358,6 @@ namespace Fixtures.DateTimeOffset
         {
             return string.Format("Operation PutProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -397,8 +387,6 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types
@@ -544,7 +532,6 @@ namespace Fixtures.DateTimeOffset
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -556,7 +543,6 @@ namespace Fixtures.DateTimeOffset
             await HandleErrorResponseForPostProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -564,8 +550,6 @@ namespace Fixtures.DateTimeOffset
         {
             return string.Format("Operation PostProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -595,8 +579,6 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types
@@ -742,7 +724,6 @@ namespace Fixtures.DateTimeOffset
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -754,7 +735,6 @@ namespace Fixtures.DateTimeOffset
             await HandleErrorResponseForPatchProduct<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -762,8 +742,6 @@ namespace Fixtures.DateTimeOffset
         {
             return string.Format("Operation PatchProduct returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -793,8 +771,6 @@ namespace Fixtures.DateTimeOffset
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Product Types

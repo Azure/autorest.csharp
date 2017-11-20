@@ -50,7 +50,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// </summary>
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetMethodPathValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetMethodPathValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -243,7 +239,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -255,7 +250,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetPathPathValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -263,8 +257,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetPathPathValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -436,7 +428,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -448,7 +439,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetSwaggerPathValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -456,8 +446,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetSwaggerPathValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -617,7 +605,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -629,7 +616,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetMethodQueryValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -637,8 +623,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetMethodQueryValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -814,7 +798,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -826,7 +809,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetMethodQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -834,8 +816,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetMethodQueryNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1000,7 +980,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1012,7 +991,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetPathQueryValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1020,8 +998,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetPathQueryValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -1197,7 +1173,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -1209,7 +1184,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetSwaggerQueryValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -1217,8 +1191,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetSwaggerQueryValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

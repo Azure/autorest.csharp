@@ -83,7 +83,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             await HandleErrorResponseWithKnownTypeForGetPetById<int>(_httpRequest, _httpResponse, 501);
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -94,7 +93,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         {
             await HandleErrorResponseWithoutBodyForGetPetById(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -199,8 +197,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Gets pets by id.
@@ -385,7 +381,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, 500, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -397,7 +392,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -405,8 +399,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         {
             return string.Format("Operation DoSomething returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -436,8 +428,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Asks pet to do something

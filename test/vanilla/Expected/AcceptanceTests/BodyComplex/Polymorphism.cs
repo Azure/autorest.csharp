@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         public AutoRestComplexTestService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         {
             return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -223,7 +219,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -235,7 +230,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -243,8 +237,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         {
             return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -431,7 +423,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -443,7 +434,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             await HandleErrorResponseForGetComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -451,8 +441,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         {
             return string.Format("Operation GetComplicated returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -605,7 +593,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -617,7 +604,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             await HandleErrorResponseForPutComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -625,8 +611,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         {
             return string.Format("Operation PutComplicated returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -781,7 +765,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -793,7 +776,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             await HandleErrorResponseForPutValidMissingRequired<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -801,8 +783,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         {
             return string.Format("Operation PutValidMissingRequired returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

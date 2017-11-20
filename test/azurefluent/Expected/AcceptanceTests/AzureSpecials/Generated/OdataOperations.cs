@@ -51,7 +51,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// </summary>
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -63,7 +62,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForGetWithFilter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -71,8 +69,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation GetWithFilter returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

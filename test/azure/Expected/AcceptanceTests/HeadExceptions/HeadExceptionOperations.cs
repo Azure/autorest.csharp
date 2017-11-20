@@ -49,7 +49,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// </summary>
         public AutoRestHeadExceptionTestServiceClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -60,7 +59,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         {
             await HandleErrorResponseWithoutBodyForHead200(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -97,8 +95,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Return 200 status code if successful
@@ -226,7 +222,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -237,7 +232,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         {
             await HandleErrorResponseWithoutBodyForHead204(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -274,8 +268,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Return 204 status code if successful
@@ -403,7 +395,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -414,7 +405,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         {
             await HandleErrorResponseWithoutBodyForHead404(_httpRequest, _httpResponse, statusCode);
         }
-
 
         /// <summary>
         /// Method that generates error message for status code
@@ -451,8 +441,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             }
             throw ex;
         }
-
-
 
         /// <summary>
         /// Return 404 status code if successful

@@ -50,7 +50,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         public AutoRestSwaggerBATService Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetNotExpandable<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetNotExpandable returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -224,7 +220,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -236,7 +231,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutNotExpandable<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -244,8 +238,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutNotExpandable returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -384,7 +376,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -396,7 +387,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetReferenced<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -404,8 +394,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetReferenced returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -558,7 +546,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -570,7 +557,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutReferenced<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -578,8 +564,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutReferenced returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -718,7 +702,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -730,7 +713,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForGetReferencedConstant<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -738,8 +720,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation GetReferencedConstant returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -891,7 +871,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -903,7 +882,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             await HandleErrorResponseForPutReferencedConstant<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -911,8 +889,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             return string.Format("Operation PutReferencedConstant returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

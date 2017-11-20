@@ -298,7 +298,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
             CustomInitialize();
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
         }
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -310,7 +309,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
             await HandleErrorResponseForGetReport<Error>(_httpRequest, _httpResponse, statusCode, DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -318,8 +316,6 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
         {
             return string.Format("Operation GetReport returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

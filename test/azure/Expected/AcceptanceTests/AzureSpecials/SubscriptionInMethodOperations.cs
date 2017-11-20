@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostMethodLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostMethodLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -244,7 +240,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -256,7 +251,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostMethodLocalNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -264,8 +258,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostMethodLocalNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -440,7 +432,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -452,7 +443,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostPathLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -460,8 +450,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostPathLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -634,7 +622,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -646,7 +633,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             await HandleErrorResponseForPostSwaggerLocalValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -654,8 +640,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         {
             return string.Format("Operation PostSwaggerLocalValid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T

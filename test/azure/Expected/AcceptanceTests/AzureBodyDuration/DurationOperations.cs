@@ -50,7 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         /// </summary>
         public AutoRestDurationTestServiceClient Client { get; private set; }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -62,7 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             await HandleErrorResponseForGetNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -70,8 +68,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         {
             return string.Format("Operation GetNull returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -101,8 +97,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get null duration value
@@ -252,7 +246,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -264,7 +257,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             await HandleErrorResponseForPutPositiveDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -272,8 +264,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         {
             return string.Format("Operation PutPositiveDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -303,8 +293,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Put a positive duration value
@@ -439,7 +427,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -451,7 +438,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             await HandleErrorResponseForGetPositiveDuration<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -459,8 +445,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         {
             return string.Format("Operation GetPositiveDuration returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -490,8 +474,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get a positive duration value
@@ -641,7 +623,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             return _result;
         }
 
-
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
@@ -653,7 +634,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             await HandleErrorResponseForGetInvalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
-
         /// <summary>
         /// Method that generates error message for status code
         /// </summary>
@@ -661,8 +641,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         {
             return string.Format("Operation GetInvalid returned status code: '{0}'", statusCode);
         }
-
-
 
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
@@ -692,8 +670,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 _httpResponse.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Get an invalid duration value
