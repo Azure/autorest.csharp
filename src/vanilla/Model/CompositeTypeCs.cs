@@ -56,8 +56,11 @@ namespace AutoRest.CSharp.Model
         [JsonIgnore]
         public string BaseConstructorCall => _constructorModel.BaseCall;
 
+        [JsonIgnore]
+        public bool IsSequenceTypeException = false;
+
         // Check if any error response of sequence type has an underlying error model of this type
-        public bool IsSequenceTypeExceptionModel()
+        public bool IsElementOfSequenceTypeExceptionModel()
         {
             var errorModelsListExceptions = 
                 CodeModel.Methods.SelectMany(m=>m.Responses.Values).Where(r=>MethodCs.IsErrorResponse(r) && r.Body is SequenceTypeCs)

@@ -346,11 +346,12 @@ namespace AutoRest.CSharp
 
         protected async Task GenerateSequenceTypeExceptionModel(CompositeTypeCs exceptionType)
         {
-            if(exceptionType.IsSequenceTypeExceptionModel())
+            if(exceptionType.IsElementOfSequenceTypeExceptionModel())
             {
                 var exceptionName = exceptionType.ExceptionTypeDefinitionName;
                 exceptionName = exceptionName.Substring(0, exceptionName.LastIndexOf("Exception")) + "ListException";
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
+                exceptionTemplate.IsSequenceTypeExceptionModel = true;
                 await Write(exceptionTemplate, 
                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionName}{ImplementationFileExtension}");
             }

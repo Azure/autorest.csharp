@@ -11,13 +11,11 @@
 namespace Fixtures.MirrorSequences.Models
 {
     using Microsoft.Rest;
-    using System.Collections;
 
     /// <summary>
-    /// Exception thrown for an invalid response with ErrorModelListException
-    /// information.
+    /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public partial class ErrorModelException : HttpRestExceptionBase<IList<ErrorModelListException>>
+    public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
     {
 
         /// <summary>
@@ -47,8 +45,12 @@ namespace Fixtures.MirrorSequences.Models
         }
 
         /// <summary>
-        /// Returns list of deserialized error models
         /// </summary>
-        public System.Collections.IList<ErrorModelListException> ErrorModels => Body;
+        public int Code => Body.Code;
+
+        /// <summary>
+        /// </summary>
+        public string Message => Body.Message;
+
     }
 }
