@@ -47,7 +47,6 @@ else
 @EmptyLine
 }
 
-@EmptyLine
 /// <summary>
 /// Handle other unhandled status codes
 /// </summary>
@@ -77,7 +76,6 @@ else
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
 }
 }
-@EmptyLine
 
 @EmptyLine
 /// <summary>
@@ -88,9 +86,9 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
 }
 
-@EmptyLine
 @if(Model.IsAzureARMGenerator() && (Model.Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || Model.DefaultResponse.Body?.Name=="CloudError"))
 {
+@EmptyLine
 @:/// <summary>
 @:/// Handle responses where error model is not defined
 @:/// Skips deserialization and sets the raw output in CloudError model
@@ -119,8 +117,9 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
-}
 @EmptyLine
+}
+
 
 @if(Model.IsErrorResponseWithKnownType())
 {
@@ -164,9 +163,10 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:throw ex;
 @:}
 }
-@EmptyLine
+
 @if(Model.IsErrorResponseWithErrorModel())
 {
+@EmptyLine
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
 @:/// </summary>
@@ -196,12 +196,12 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:_httpResponse.Dispose();
     @:}
 @:}
+@EmptyLine
 }
-@EmptyLine
 
-@EmptyLine
 @if(Model.HasErrorResponseWithSequenceType())
 {
+@EmptyLine
 @:/// <summary>
 @:/// Handle IList of error responses
 @:/// </summary>
@@ -236,8 +236,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
-}
 @EmptyLine
+}
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {
