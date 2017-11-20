@@ -12,41 +12,41 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.ExceptionModelName + " information.")
+    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
     @{
-        var underlyingErrorModelType = Model.ExceptionModelName;
-        if(Model.IsSequenceTypeExceptionModel())
+        var underlyingErrorModelType = Model.Name;
+        if(Model.IsSequenceTypeExceptionModel)
         {
-            underlyingErrorModelType = "IList<"+underlyingErrorModelType+">";
+            underlyingErrorModelType = "System.Collections.Generic.IList<"+underlyingErrorModelType+">";
         }
         var baseModelType = "Microsoft.Rest.HttpRestExceptionBase<"+underlyingErrorModelType+">";
     }
-    public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
+    public partial class @Model.ExceptionModelName : @baseModelType
     {
 @EmptyLine
         /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// Initializes a new instance of the @Model.ExceptionModelName class.
         /// </summary>
-        public @(@Model.ExceptionTypeDefinitionName)()
+        public @(@Model.ExceptionModelName)()
         {
         }
 @EmptyLine
         /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// Initializes a new instance of the @Model.ExceptionModelName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public @(Model.ExceptionTypeDefinitionName)(string message)
+        public @(Model.ExceptionModelName)(string message)
             : this(message, null)
         {
         }
 @EmptyLine
         /// <summary>
-        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// Initializes a new instance of the @Model.ExceptionModelName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
-        public @(Model.ExceptionTypeDefinitionName)(string message, System.Exception innerException)
+        public @(Model.ExceptionModelName)(string message, System.Exception innerException)
             : base(message, innerException)
         {
         }
@@ -61,7 +61,7 @@ props = props.Union((modelType as CompositeTypeCs).InstanceProperties);
 modelType=modelType.BaseModelType;
 }
 }
-@if(!Model.IsSequenceTypeExceptionModel())
+@if(!Model.IsSequenceTypeExceptionModel)
 {
 foreach (PropertyCs property in props)
 {
@@ -83,7 +83,7 @@ else
         @:/// <summary>
         @:@WrapComment("/// ", "Returns list of deserialized error models")
         @:/// </summary>
-        @:public @("System.Collections.IList<"+Model.ExceptionModelName+">") ErrorModels => Body;
+        @:public @("System.Collections.Generic.IList<"+Model.Name+">") ErrorModels => Body;
 }
 
     }

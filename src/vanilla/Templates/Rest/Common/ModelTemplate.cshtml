@@ -323,7 +323,7 @@ if (!anythingToValidate)
         } 
     </text>}
 
-    @if(Model.IsErrorResponseModel())
+    @if(Model.IsErrorResponseModel() || Model.IsElementOfSequenceTypeExceptionModel())
     {
         @:/// <summary>
         @:/// Method that creates an exception of @(Model.Name+"Exception")

@@ -348,12 +348,13 @@ namespace AutoRest.CSharp
         {
             if(exceptionType.IsElementOfSequenceTypeExceptionModel())
             {
-                var exceptionName = exceptionType.ExceptionTypeDefinitionName;
-                exceptionName = exceptionName.Substring(0, exceptionName.LastIndexOf("Exception")) + "ListException";
+                // just for the sake of generating the exceptionlist model, set this property
+                // reset it once done (since we do not want to create object copies for this)
+                exceptionType.IsSequenceTypeExceptionModel = true;
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
-                exceptionTemplate.IsSequenceTypeExceptionModel = true;
                 await Write(exceptionTemplate, 
-                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionName}{ImplementationFileExtension}");
+                    $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionModelName}{ImplementationFileExtension}");
+                exceptionType.IsSequenceTypeExceptionModel = false;
             }
         }
     }

@@ -527,17 +527,15 @@ namespace AutoRest.CSharp.Model
         public static string GetErrorModelExceptionPairForSequenceType(Response response)
         {
             var sequenceTypeBody = response.Body as SequenceTypeCs;
-            if(sequenceTypeBody.ElementType is PrimaryTypeCs)
+            if(sequenceTypeBody.ElementType is CompositeTypeCs)
             {
-                var errorModelType = sequenceTypeBody.ElementType as PrimaryTypeCs;
-                return errorModelType+", Microsoft.Rest.HttpRestException<"+errorModelType+">";
+                var errorModelType = sequenceTypeBody.ElementType as CompositeTypeCs;
+                return sequenceTypeBody.Name+", "+errorModelType.ExceptionModelName;
             }
             else
             {
-                var errorModelType = sequenceTypeBody.ElementType as CompositeTypeCs;
-                return sequenceTypeBody.Name+", "+errorModelType.ExceptionTypeDefinitionName;
+                return sequenceTypeBody.ElementType.Name+", Microsoft.Rest.HttpRestException<System.Collections.Generic.IList<"+sequenceTypeBody.ElementType.Name+">>";                
             }
-
         }
     }
 }
