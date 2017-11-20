@@ -211,7 +211,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
-    @:T ex = new T();
+    @:T ex = System.Activator.CreateInstance(typeof(T), errorMessage);
     @:if (_httpResponse.Content != null)
     @:{
         @:try
@@ -227,7 +227,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @:ex.Message = errorMessage;
 
     @:_httpRequest.Dispose();
     @:if (_httpResponse != null)

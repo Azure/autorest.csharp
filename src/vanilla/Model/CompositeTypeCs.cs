@@ -220,17 +220,18 @@ namespace AutoRest.CSharp.Model
 
         public bool IsValueType => false;
 
+        public string GetListExceptionModelName()
+        {
+            string name = ExceptionTypeDefinitionName.ToString();
+            return name.Substring(0, name.LastIndexOf("Exception")) + "ListException";
+        } 
+
         [JsonIgnore]
         public string ExceptionModelName
         { 
             get
             {
-                if(IsSequenceTypeExceptionModel)
-                {
-                    string name = ExceptionTypeDefinitionName.ToString();
-                    return name.Substring(0, name.LastIndexOf("Exception")) + "ListException";
-                }
-                return ExceptionTypeDefinitionName;
+                return (IsSequenceTypeExceptionModel)? GetListExceptionModelName() : ExceptionTypeDefinitionName;
             }
         }
     }

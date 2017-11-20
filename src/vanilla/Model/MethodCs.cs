@@ -530,7 +530,7 @@ namespace AutoRest.CSharp.Model
             if(sequenceTypeBody.ElementType is CompositeTypeCs)
             {
                 var errorModelType = sequenceTypeBody.ElementType as CompositeTypeCs;
-                return sequenceTypeBody.Name+", "+errorModelType.ExceptionModelName;
+                return errorModelType.Name+", "+errorModelType.GetListExceptionModelName();
             }
             else
             {

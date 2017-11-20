@@ -15,22 +15,8 @@ namespace Fixtures.MirrorSequences.Models
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public partial class ErrorModelException : RestException
+    public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public ErrorModel Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ErrorModelException class.
@@ -57,5 +43,14 @@ namespace Fixtures.MirrorSequences.Models
             : base(message, innerException)
         {
         }
+
+        /// <summary>
+        /// </summary>
+        public int Code => Body.Code;
+
+        /// <summary>
+        /// </summary>
+        public string Message => Body.Message;
+
     }
 }
