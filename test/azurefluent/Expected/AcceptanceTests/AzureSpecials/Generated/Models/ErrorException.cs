@@ -54,7 +54,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
 
         /// <summary>
         /// </summary>
-        public string Message => Body.Message;
+        public new string Message => Body.Message;
 
     }
 }

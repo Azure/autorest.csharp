@@ -50,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration.Models
 
         /// <summary>
         /// </summary>
-        public string Message => Body.Message;
+        public new string Message => Body.Message;
 
     }
 }

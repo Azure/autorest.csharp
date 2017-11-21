@@ -50,7 +50,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion.Models
 
         /// <summary>
         /// </summary>
-        public string Message => Body.Message;
+        public new string Message => Body.Message;
 
     }
 }

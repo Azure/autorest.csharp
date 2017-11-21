@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean.Models
 
         /// <summary>
         /// </summary>
-        public string Message => Body.Message;
+        public new string Message => Body.Message;
 
     }
 }

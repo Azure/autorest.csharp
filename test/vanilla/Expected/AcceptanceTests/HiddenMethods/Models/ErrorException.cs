@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsHiddenMethods.Models
 
         /// <summary>
         /// </summary>
-        public string Message => Body.Message;
+        public new string Message => Body.Message;
 
     }
 }
