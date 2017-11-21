@@ -510,6 +510,8 @@ namespace AutoRest.CSharp.Model
                 !(DefaultResponse.Body is CompositeTypeCs);
 
         public virtual bool HandleAzureArmDefaultErrorResponse() => false;
+
+        public virtual string GetRequestIdString() => string.Empty;
                      
     }
 }

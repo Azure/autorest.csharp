@@ -123,6 +123,10 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
+            if (_httpResponse.Headers.Contains("x-ms-request-id"))
+            {
+                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();

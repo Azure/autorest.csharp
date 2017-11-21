@@ -430,82 +430,32 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(p1.AniType, "Dog");
 
                 // Test 2: invalid pet throws AnimalNotFoundException
-                try
-                {
-                    var p2 = client.Pet.GetPetByIdAsync("coyoteUgly").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is AnimalNotFoundException);
-                }
-
+                Assert.Throws<AnimalNotFoundException>(()=>client.Pet.GetPetById("coyoteUgly"));
+                
                 // Test 3: invalid pet throws LinkNotFoundException
-                try
-                {
-                    var p3 = client.Pet.GetPetByIdAsync("weirdAlYankovic").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is LinkNotFoundException);
-                }
-
+                Assert.Throws<LinkNotFoundException>(()=>client.Pet.GetPetById("weirdAlYankovic"));
+                
                 // Test 4: invalid pet throws HttpRestException<int>
-                try
-                {
-                    var p4 = client.Pet.GetPetByIdAsync("alien123").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is HttpRestException<int>);
-                }
-
+                Assert.Throws<HttpRestException<int>>(()=>client.Pet.GetPetById("alien123"));
+                
                 // Test 5: invalid pet throws HttpRestException<string>
-                try                
-                {
-                    var p5 = client.Pet.GetPetByIdAsync("ringo").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is HttpRestException<string>);
-                }
+                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("ringo"));
 
                 // Test 6: random invalid pet throws HttpRestException<string> 
-                try                
-                {
-                    var p6 = client.Pet.GetPetByIdAsync("foofoo").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is HttpRestException<string>);
-                }
-            
-            
+                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("foofoo"));
+                
                 // multi level polymorhpic inheritence testing
 
                 // test 1: valid action no exceptions
-                client.Pet.DoSomethingWithHttpMessagesAsync("stay").GetAwaiter().GetResult();
+                client.Pet.DoSomething("stay");
 
                 // test 2: invalid action throws PetSadErrorException
-                try
-                {
-                    client.Pet.DoSomethingWithHttpMessagesAsync("jump").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is PetSadErrorException);
-                }
-
+                Assert.Throws<PetSadErrorException>(()=>client.Pet.DoSomething("jump"));
+                
                 // test 3: invalid action throws PetHungryOrThirstyErrorException
-                try
-                {
-                    client.Pet.DoSomethingWithHttpMessagesAsync("fetch").GetAwaiter().GetResult();
-                }
-                catch(Exception e)
-                {
-                    Assert.True(e is PetHungryOrThirstyErrorException);
-                }
+                Assert.Throws<PetHungryOrThirstyErrorException>(()=>client.Pet.DoSomething("fetch"));
+                
             }
-
         }
 
         [Fact]

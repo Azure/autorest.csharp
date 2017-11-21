@@ -307,5 +307,8 @@ namespace AutoRest.CSharp.Azure.Model
         }
 
         public override bool HandleAzureArmDefaultErrorResponse() => (Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || DefaultResponse.Body?.Name=="CloudError");
+
+        public override string GetRequestIdString() => this.RequestIdString; 
+        
     }
 }
