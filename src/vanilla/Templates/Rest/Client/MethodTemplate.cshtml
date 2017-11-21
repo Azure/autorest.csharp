@@ -85,28 +85,34 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:/// Handle responses where error model is not defined
 @:/// Skips deserialization and sets the raw output in CloudError model
 @:/// </summary>
-@:/// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+@:/// <exception cref="Microsoft.Rest.Azure.CloudException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
-    @:string _responseContent = null;
-    @:var ex = new Microsoft.Rest.Azure.HttpRestCloudException(errorMessage);
-    
+    @:var ex = new Microsoft.Rest.Azure.CloudException(errorMessage);
     @:if (_httpResponse.Content != null)
     @:{
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        @:try
+        @:{
+    
+            @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+            @:ex.SetErrorModel(errorResponseModel);
+        @:}
+        @:catch (Newtonsoft.Json.JsonException)
+        @:{
+            @:// Ignore the exception
+        @:}
     @:}
-    @:var defaultErrorModel = new Microsoft.Rest.Azure.CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-    @:ex.SetErrorModel(defaultErrorModel);
+    @EmptyLine
+    @:if (_httpResponse.Headers.Contains("@(Model.GetRequestIdString())"))
+    @:{
+        @:ex.RequestId = _httpResponse.Headers.GetValues("@(Model.GetRequestIdString())").FirstOrDefault();    
+    @:}
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
     @:_httpRequest.Dispose();
-    @:if (_httpResponse.Headers.Contains("@(Model.GetRequestIdString())"))
-    @:{
-        @:ex.RequestId = _httpResponse.Headers.GetValues("@(Model.GetRequestIdString())").FirstOrDefault();
-    @:}
     @:if (_httpResponse != null)
     @:{
         @:_httpResponse.Dispose();

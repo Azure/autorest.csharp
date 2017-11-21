@@ -1835,9 +1835,10 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestClientErrorStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            /* 
+             
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Head400());
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Get400());
+            /* 
             //TODO, 4042586: Support options operations in swagger modeler
             //EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Options400());
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Put400(true));
