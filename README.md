@@ -107,13 +107,13 @@ help-content:
     - key: add-credentials
       description: include a credential property and constructor parameter supporting different authentication behaviors
     - key: override-client-name
-      description: overrides the name of the client class (usually derived from the $.info.title)
+      description: overrides the name of the client class (usually derived from $.info.title)
       type: string
     - key: use-internal-constructors
       description: generate constructors with internal instead of public visibility (useful for convenience layers)
     - key: sync-methods
       description: 'determines amount of synchronous wrappers to generate; default: essential'
-      type: '""essential"" | ""all"" | ""none""'
+      type: '"essential" | "all" | "none"'
     - key: use-datetimeoffset
       description: use DateTimeOffset instead of DateTime to model date/time types
     - key: client-side-validation
@@ -126,5 +126,5 @@ help-content:
       description: generate all code into the specified, single file (instead of the usual folder structure)
       type: string
     - key: sample-generation
-      description: generate sample code from x-ms-examples
+      description: generate sample code from x-ms-examples (experimental)
 ```
