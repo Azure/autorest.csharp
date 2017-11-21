@@ -237,6 +237,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetNoModelError returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -275,6 +276,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Get empty error form server
         /// </summary>
@@ -414,6 +416,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetNoModelEmpty returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -452,6 +455,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Get empty response from server
         /// </summary>

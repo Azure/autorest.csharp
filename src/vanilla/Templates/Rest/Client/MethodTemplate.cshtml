@@ -68,8 +68,8 @@ else
     @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
 }
 }
-
 @EmptyLine
+
 /// <summary>
 /// Method that generates error message for status code
 /// </summary>
@@ -77,10 +77,10 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 {
     return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
 }
+@EmptyLine
 
 @if(Model.HandleAzureArmDefaultErrorResponse())
 {
-@EmptyLine
 @:/// <summary>
 @:/// Handle responses where error model is not defined
 @:/// Skips deserialization and sets the raw output in CloudError model
@@ -109,12 +109,11 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
+@EmptyLine
 }
-
 
 @if(Model.IsErrorResponseWithKnownType())
 {
-@EmptyLine
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
 @:/// Creates a HttpRestException object and throws it
@@ -154,11 +153,11 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
+@EmptyLine
 }
 
 @if(Model.IsErrorResponseWithErrorModel())
 {
-@EmptyLine
 @:/// <summary>
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
 @:/// </summary>
@@ -188,6 +187,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:_httpResponse.Dispose();
     @:}
 @:}
+@EmptyLine
 }
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))

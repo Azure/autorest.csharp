@@ -68,6 +68,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         {
             return string.Format("Operation Update returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -106,6 +107,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             }
             throw ex;
         }
+
         /// <summary>
         /// Updates the tags for an availability set.
         /// </summary>

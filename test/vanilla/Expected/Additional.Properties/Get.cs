@@ -68,6 +68,7 @@ namespace Fixtures.AdditionalProperties
         {
             return string.Format("Operation Pets returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -106,6 +107,7 @@ namespace Fixtures.AdditionalProperties
             }
             throw ex;
         }
+
         /// <param name='limit'>
         /// number of pets to return
         /// </param>

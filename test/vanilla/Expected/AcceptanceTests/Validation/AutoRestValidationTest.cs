@@ -673,6 +673,7 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation GetWithConstantInPath returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -711,6 +712,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             throw ex;
         }
+
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -828,6 +830,7 @@ namespace Fixtures.AcceptanceTestsValidation
         {
             return string.Format("Operation PostWithConstantInBody returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -866,6 +869,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             throw ex;
         }
+
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>

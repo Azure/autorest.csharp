@@ -299,6 +299,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -337,6 +338,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Add a new pet to the store
         /// </summary>
@@ -516,6 +518,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation UpdatePet returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -554,6 +557,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Update an existing pet
         /// </summary>
@@ -702,6 +706,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation FindPetsByStatus returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -740,6 +745,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Finds Pets by status
         /// </summary>
@@ -920,6 +926,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation FindPetsByTags returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -958,6 +965,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Finds Pets by tags
         /// </summary>
@@ -1139,6 +1147,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -1177,6 +1186,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Find pet by Id
         /// </summary>
@@ -1339,6 +1349,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation UpdatePetWithForm returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -1377,6 +1388,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Updates a pet in the store with form data
         /// </summary>
@@ -1553,6 +1565,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation DeletePet returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -1591,6 +1604,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Deletes a pet
         /// </summary>
@@ -1730,6 +1744,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation GetInventory returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -1768,6 +1783,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Returns pet inventories by status
         /// </summary>
@@ -1925,6 +1941,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation PlaceOrder returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -1963,6 +1980,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Place an order for a pet
         /// </summary>
@@ -2138,6 +2156,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation GetOrderById returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2176,6 +2195,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Find purchase order by Id
         /// </summary>
@@ -2360,6 +2380,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation DeleteOrder returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2398,6 +2419,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Delete purchase order by Id
         /// </summary>
@@ -2547,6 +2569,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation CreateUser returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2585,6 +2608,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Create user
         /// </summary>
@@ -2732,6 +2756,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation CreateUsersWithArrayInput returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2770,6 +2795,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Creates list of users with given input array
         /// </summary>
@@ -2914,6 +2940,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation CreateUsersWithListInput returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2952,6 +2979,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Creates list of users with given input array
         /// </summary>
@@ -3096,6 +3124,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation LoginUser returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3134,6 +3163,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Logs user into the system
         /// </summary>
@@ -3336,6 +3366,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation LogoutUser returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3374,6 +3405,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Logs out current logged in user session
         /// </summary>
@@ -3497,6 +3529,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation GetUserByName returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3535,6 +3568,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Get user by user name
         /// </summary>
@@ -3704,6 +3738,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation UpdateUser returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3742,6 +3777,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Updated user
         /// </summary>
@@ -3898,6 +3934,7 @@ namespace Fixtures.PetstoreV2
         {
             return string.Format("Operation DeleteUser returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3936,6 +3973,7 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
+
         /// <summary>
         /// Delete user
         /// </summary>

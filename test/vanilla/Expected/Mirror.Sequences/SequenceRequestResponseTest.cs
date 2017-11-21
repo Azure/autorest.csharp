@@ -367,6 +367,7 @@ namespace Fixtures.MirrorSequences
         {
             return string.Format("Operation AddPetStyles returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -405,6 +406,7 @@ namespace Fixtures.MirrorSequences
             }
             throw ex;
         }
+
         /// <summary>
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
@@ -565,6 +567,7 @@ namespace Fixtures.MirrorSequences
         {
             return string.Format("Operation UpdatePetStyles returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -603,6 +606,7 @@ namespace Fixtures.MirrorSequences
             }
             throw ex;
         }
+
         /// <summary>
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>

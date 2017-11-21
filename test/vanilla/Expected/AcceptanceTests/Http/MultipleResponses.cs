@@ -2751,6 +2751,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone202Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2789,6 +2790,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
         /// </summary>
@@ -2906,6 +2908,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone204None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -2944,6 +2947,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -3061,6 +3065,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone400None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3099,6 +3104,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -3216,6 +3222,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get202None204NoneDefaultNone400Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -3254,6 +3261,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
         /// </summary>
@@ -4015,6 +4023,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone200Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4053,6 +4062,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
@@ -4170,6 +4180,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone200None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4208,6 +4219,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
@@ -4325,6 +4337,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone400Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4363,6 +4376,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
@@ -4480,6 +4494,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation GetDefaultNone400None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4518,6 +4533,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -4635,6 +4651,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4673,6 +4690,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client
         /// should return a null object of thde type for model A
@@ -4813,6 +4831,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200Valid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -4851,6 +4870,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
@@ -4990,6 +5010,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA200Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5028,6 +5049,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
         /// </summary>
@@ -5167,6 +5189,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400None returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5205,6 +5228,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error
         /// with no error model
@@ -5345,6 +5369,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400Valid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5383,6 +5408,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
@@ -5522,6 +5548,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA400Invalid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5560,6 +5587,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
         /// </summary>
@@ -5699,6 +5727,7 @@ namespace Fixtures.AcceptanceTestsHttp
         {
             return string.Format("Operation Get200ModelA202Valid returned status code: '{0}'", statusCode);
         }
+
         /// <summary>
         /// Handle responses where error model is a known primary type
         /// Creates a HttpRestException object and throws it
@@ -5737,6 +5766,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             throw ex;
         }
+
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>
