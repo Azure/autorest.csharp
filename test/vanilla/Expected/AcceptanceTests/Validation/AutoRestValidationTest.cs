@@ -658,7 +658,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetWithConstantInPath(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -815,7 +815,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForPostWithConstantInBody(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

@@ -2736,7 +2736,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone202Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2893,7 +2893,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone204None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3050,7 +3050,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3207,7 +3207,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4008,7 +4008,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultNone200Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4165,7 +4165,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultNone200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4322,7 +4322,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultNone400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4479,7 +4479,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultNone400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4636,7 +4636,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4816,7 +4816,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4995,7 +4995,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA200Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5174,7 +5174,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5354,7 +5354,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5533,7 +5533,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5712,7 +5712,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet200ModelA202Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

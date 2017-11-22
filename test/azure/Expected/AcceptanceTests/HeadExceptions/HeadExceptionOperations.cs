@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForHead200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -237,7 +237,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForHead204(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -422,7 +422,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForHead404(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

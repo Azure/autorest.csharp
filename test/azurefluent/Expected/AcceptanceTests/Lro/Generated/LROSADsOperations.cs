@@ -556,7 +556,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -793,7 +793,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutNonRetry201Creating400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1031,7 +1031,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutNonRetry201Creating400InvalidJson(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1269,7 +1269,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1502,7 +1502,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDeleteNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1700,7 +1700,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDelete202NonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1898,7 +1898,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2098,7 +2098,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2307,7 +2307,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPost202NonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2516,7 +2516,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2727,7 +2727,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutError201NoProvisioningStatePayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2965,7 +2965,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryNoStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3198,7 +3198,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryNoStatusPayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3431,7 +3431,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDelete204Succeeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3617,7 +3617,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryNoStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3817,7 +3817,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPost202NoLocation(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4027,7 +4027,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryNoPayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4238,7 +4238,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPut200InvalidJson(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4457,7 +4457,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4690,7 +4690,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4923,7 +4923,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDelete202RetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5122,7 +5122,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5321,7 +5321,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5521,7 +5521,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPost202RetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5731,7 +5731,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -5942,7 +5942,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

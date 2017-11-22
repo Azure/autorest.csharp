@@ -144,7 +144,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPutAsyncRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -379,7 +379,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPut201CreatingSucceeded200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -620,7 +620,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPost202Retry200(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -832,7 +832,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForBeginPostAsyncRetrySucceeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

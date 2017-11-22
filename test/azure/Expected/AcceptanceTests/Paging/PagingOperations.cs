@@ -53,7 +53,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -260,7 +260,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -509,7 +509,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetOdataMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -759,7 +759,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffset(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1029,7 +1029,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirst(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1237,7 +1237,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecond(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1446,7 +1446,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1653,7 +1653,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1860,7 +1860,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUri(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2067,7 +2067,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2301,7 +2301,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2543,7 +2543,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForNextFragment(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2786,7 +2786,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForNextFragmentWithGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3036,7 +3036,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3257,7 +3257,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3520,7 +3520,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetOdataMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3784,7 +3784,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffsetNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4047,7 +4047,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirstNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4269,7 +4269,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecondNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4492,7 +4492,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4713,7 +4713,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -4934,7 +4934,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUriNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

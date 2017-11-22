@@ -157,7 +157,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForAddPet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -370,7 +370,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdatePet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -552,7 +552,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForFindPetsByStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -766,7 +766,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForFindPetsByTags(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -981,7 +981,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1177,7 +1177,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdatePetWithForm(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1387,7 +1387,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForDeletePet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1560,7 +1560,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetInventory(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1751,7 +1751,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForPlaceOrder(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -1960,7 +1960,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetOrderById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2178,7 +2178,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForDeleteOrder(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2361,7 +2361,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForCreateUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2542,7 +2542,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForCreateUsersWithArrayInput(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2720,7 +2720,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForCreateUsersWithListInput(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -2898,7 +2898,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForLoginUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3134,7 +3134,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForLogoutUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3291,7 +3291,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetUserByName(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3494,7 +3494,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForUpdateUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3684,7 +3684,7 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForDeleteUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

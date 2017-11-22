@@ -53,7 +53,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

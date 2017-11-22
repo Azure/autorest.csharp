@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetByPetId(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -244,7 +244,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.HttpRestCloudException">
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForAddPet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)

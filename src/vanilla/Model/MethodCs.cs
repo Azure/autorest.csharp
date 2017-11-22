@@ -482,7 +482,7 @@ namespace AutoRest.CSharp.Model
         {
             if (response.Body==null)
             {
-                return "Microsoft.Rest.Azure.HttpRestCloudException";
+                return "Microsoft.Rest.Azure.CloudException";
             }
             if(response.Body is PrimaryTypeCs)
             {
@@ -490,7 +490,7 @@ namespace AutoRest.CSharp.Model
             }
             if(response.Body.Name == "CloudError")
             {
-                return "Microsoft.Rest.Azure.HttpRestCloudException";
+                return "Microsoft.Rest.Azure.CloudException";
             }
             if(response.Body is CompositeTypeCs)
             {
