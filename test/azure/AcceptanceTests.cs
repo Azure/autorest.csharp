@@ -271,7 +271,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroSadPathTests()
         {
-            /* 
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -374,7 +373,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 exception = Assert.Throws<CloudException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
             }
-            */
         }
 
         [Fact]
