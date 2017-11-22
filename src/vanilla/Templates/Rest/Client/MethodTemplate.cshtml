@@ -91,12 +91,13 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
+    @:string _responseContent = null;
     @:var ex = new Microsoft.Rest.Azure.CloudException(errorMessage);
     @:if (_httpResponse.Content != null)
     @:{
         @:try
         @:{
-    
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
             @:ex.SetErrorModel(errorResponseModel);
         @:}

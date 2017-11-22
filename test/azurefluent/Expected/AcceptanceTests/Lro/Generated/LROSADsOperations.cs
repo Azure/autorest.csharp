@@ -576,27 +576,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutNonRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -805,27 +813,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutNonRetry201Creating400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutNonRetry201Creating400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -1035,27 +1051,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutNonRetry201Creating400InvalidJson(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutNonRetry201Creating400InvalidJson(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -1265,27 +1289,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -1490,27 +1522,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDeleteNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDeleteNonRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -1680,27 +1720,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDelete202NonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDelete202NonRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -1870,27 +1918,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRelativeRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -2062,27 +2118,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPostNonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPostNonRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -2263,27 +2327,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPost202NonRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPost202NonRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -2464,27 +2536,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetry400(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRelativeRetry400(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -2667,27 +2747,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutError201NoProvisioningStatePayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutError201NoProvisioningStatePayload(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -2897,27 +2985,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetryNoStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetryNoStatus(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -3122,27 +3218,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetryNoStatusPayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetryNoStatusPayload(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -3347,27 +3451,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDelete204Succeeded(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDelete204Succeeded(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -3525,27 +3637,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetryNoStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRelativeRetryNoStatus(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -3717,27 +3837,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPost202NoLocation(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPost202NoLocation(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -3919,27 +4047,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetryNoPayload(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRelativeRetryNoPayload(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -4122,27 +4258,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPut200InvalidJson(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPut200InvalidJson(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -4333,27 +4477,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetryInvalidHeader(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -4558,27 +4710,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPutAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRelativeRetryInvalidJsonPolling(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -4783,27 +4943,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDelete202RetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDelete202RetryInvalidHeader(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -4974,27 +5142,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRelativeRetryInvalidHeader(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -5165,27 +5341,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginDeleteAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRelativeRetryInvalidJsonPolling(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -5357,27 +5541,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPost202RetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPost202RetryInvalidHeader(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -5559,27 +5751,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetryInvalidHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRelativeRetryInvalidHeader(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
@@ -5762,27 +5962,35 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
         /// Handle responses where error model is not defined
         /// Skips deserialization and sets the raw output in CloudError model
         /// </summary>
-        /// <exception cref="HttpRestCloudException">
+        /// <exception cref="CloudException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithoutBodyForBeginPostAsyncRelativeRetryInvalidJsonPolling(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRelativeRetryInvalidJsonPolling(statusCode);
             string _responseContent = null;
-            var ex = new HttpRestCloudException(errorMessage);
+            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
             }
-            var defaultErrorModel = new CloudError() { Code = _httpResponse.StatusCode.ToString(), Message = _responseContent };
-            ex.SetErrorModel(defaultErrorModel);
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
+
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
