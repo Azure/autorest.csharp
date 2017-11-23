@@ -58,7 +58,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         /// </exception>
         private async Task HandleDefaultErrorResponseForGet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGet(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGet<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -70,43 +70,41 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGet<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -275,6 +273,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();

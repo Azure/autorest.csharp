@@ -58,7 +58,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetSinglePages(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetSinglePages<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -70,43 +70,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetSinglePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetSinglePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePages(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -265,7 +263,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePages(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePages<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -277,43 +275,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePages(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -514,7 +510,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetOdataMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetOdataMultiplePages(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetOdataMultiplePages<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -526,43 +522,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetOdataMultiplePages(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetOdataMultiplePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetOdataMultiplePages(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -764,7 +758,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffset(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffset(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesWithOffset<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -776,43 +770,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffset(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesWithOffset<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesWithOffset(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -1034,7 +1026,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirst(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirst(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesRetryFirst<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -1046,43 +1038,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirst(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesRetryFirst<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirst(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -1242,7 +1232,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecond(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecond(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesRetrySecond<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -1254,43 +1244,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecond(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesRetrySecond<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecond(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -1451,7 +1439,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetSinglePagesFailure(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetSinglePagesFailure<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -1463,43 +1451,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetSinglePagesFailure<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesFailure(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -1658,7 +1644,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailure(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFailure<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -1670,43 +1656,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailure(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFailure<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailure(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -1865,7 +1849,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUri(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUri(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFailureUri<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -1877,43 +1861,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUri(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFailureUri<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureUri(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -2072,7 +2054,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentNextLink(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFragmentNextLink<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -2084,43 +2066,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFragmentNextLink<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFragmentNextLink(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -2306,7 +2286,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentWithGroupingNextLink(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -2318,43 +2298,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFragmentWithGroupingNextLink(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFragmentWithGroupingNextLink(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -2548,7 +2526,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForNextFragment(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForNextFragment(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForNextFragment<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -2560,43 +2538,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForNextFragment(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForNextFragment<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForNextFragment(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -2791,7 +2767,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForNextFragmentWithGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForNextFragmentWithGrouping(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForNextFragmentWithGrouping<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -2803,43 +2779,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForNextFragmentWithGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForNextFragmentWithGrouping<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForNextFragmentWithGrouping(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -3041,7 +3015,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetSinglePagesNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetSinglePagesNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -3053,43 +3027,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetSinglePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -3262,7 +3234,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -3274,43 +3246,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -3525,7 +3495,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetOdataMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetOdataMultiplePagesNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetOdataMultiplePagesNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -3537,43 +3507,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetOdataMultiplePagesNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetOdataMultiplePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetOdataMultiplePagesNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -3789,7 +3757,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesWithOffsetNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffsetNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesWithOffsetNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -3801,43 +3769,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesWithOffsetNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesWithOffsetNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesWithOffsetNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -4052,7 +4018,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetryFirstNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirstNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesRetryFirstNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -4064,43 +4030,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetryFirstNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesRetryFirstNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirstNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -4274,7 +4238,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesRetrySecondNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecondNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesRetrySecondNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -4286,43 +4250,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesRetrySecondNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesRetrySecondNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecondNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -4497,7 +4459,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetSinglePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetSinglePagesFailureNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetSinglePagesFailureNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -4509,43 +4471,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetSinglePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetSinglePagesFailureNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesFailureNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -4718,7 +4678,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFailureNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -4730,43 +4690,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFailureNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>
@@ -4939,7 +4897,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetMultiplePagesFailureUriNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUriNext(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetMultiplePagesFailureUriNext<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -4951,43 +4909,41 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetMultiplePagesFailureUriNext(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        private async Task HandleErrorResponseForGetMultiplePagesFailureUriNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureUriNext(statusCode);
             string _responseContent = null;
-            var ex = new CloudException(errorMessage);
             if (_httpResponse.Content != null)
             {
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
                 _httpResponse.Dispose();
             }
-            throw ex;
         }
 
         /// <summary>

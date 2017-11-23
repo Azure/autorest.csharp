@@ -91,7 +91,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
-            await HandleErrorResponseWithoutBodyForGetPetById(_httpRequest, _httpResponse, statusCode);
+            await HandleErrorResponseForGetPetById<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
         }
 
         /// <summary>
@@ -100,46 +100,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         private string GetErrorMessageForGetPetById(int statusCode)
         {
             return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle responses where error model is not defined
-        /// Skips deserialization and sets the raw output in CloudError model
-        /// </summary>
-        /// <exception cref="CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithoutBodyForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            string errorMessage = GetErrorMessageForGetPetById(statusCode);
-            string _responseContent = null;
-            var ex = new CloudException(errorMessage);
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-
-            if (_httpResponse.Headers.Contains("x-ms-request-id"))
-            {
-                ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-            throw ex;
         }
 
         /// <summary>
@@ -201,6 +161,15 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();
@@ -432,6 +401,15 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();

@@ -90,6 +90,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("foo-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
             _httpRequest.Dispose();
             if (_httpResponse != null)
@@ -299,6 +308,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("foo-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();
@@ -518,6 +536,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("foo-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();

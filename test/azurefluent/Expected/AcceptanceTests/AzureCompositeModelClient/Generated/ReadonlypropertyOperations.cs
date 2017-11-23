@@ -90,6 +90,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 {
                     // Ignore the exception
                 }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
+                }
             }
             _httpRequest.Dispose();
             if (_httpResponse != null)
@@ -285,6 +294,15 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw;
                 }
             }
             _httpRequest.Dispose();
