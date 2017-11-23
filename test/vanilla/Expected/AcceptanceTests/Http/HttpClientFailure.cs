@@ -83,6 +83,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    using (System.IO.StreamWriter file = 
+            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\tlog.log"))
+        {
+            file.WriteLine("req is "+_httpRequest.Content.AsString());
+            file.WriteLine("string read was "+_responseContent);
+        }
                     errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
                                                                new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
