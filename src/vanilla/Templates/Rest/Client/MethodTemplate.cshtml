@@ -55,10 +55,6 @@ private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.N
 {
     @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<string>(_httpRequest, _httpResponse, statusCode);
 }
-else if(Model.IsAzureARMGenerator() && Model.DefaultResponse.Body.Name=="CloudError")
-{
-    @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, statusCode);
-}
 else if(Model.DefaultResponse.Body is CompositeTypeCs)
 {
     @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
@@ -78,50 +74,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
 }
 @EmptyLine
-
-@if(Model.HandleAzureArmDefaultErrorResponse())
-{
-@:/// <summary>
-@:/// Handle responses where error model is not defined
-@:/// Skips deserialization and sets the raw output in CloudError model
-@:/// </summary>
-@:/// <exception cref="Microsoft.Rest.Azure.CloudException">
-@:/// Deserialize error body returned by the operation
-@:/// </exception>
-@:private async System.Threading.Tasks.Task HandleErrorResponseWithoutBodyFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
-@:{
-    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
-    @:string _responseContent = null;
-    @:var ex = new Microsoft.Rest.Azure.CloudException(errorMessage);
-    @:if (_httpResponse.Content != null)
-    @:{
-        @:try
-        @:{
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent);
-            @:ex.SetErrorModel(errorResponseModel);
-        @:}
-        @:catch (Newtonsoft.Json.JsonException)
-        @:{
-            @:// Ignore the exception
-        @:}
-    @:}
-    @EmptyLine
-    @:if (_httpResponse.Headers.Contains("@(Model.GetRequestIdString())"))
-    @:{
-        @:ex.RequestId = _httpResponse.Headers.GetValues("@(Model.GetRequestIdString())").FirstOrDefault();    
-    @:}
-    @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-    @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @:_httpRequest.Dispose();
-    @:if (_httpResponse != null)
-    @:{
-        @:_httpResponse.Dispose();
-    @:}
-    @:throw ex;
-@:}
-@EmptyLine
-}
 
 @if(Model.IsErrorResponseWithKnownType())
 {
@@ -190,6 +142,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:{
             @:// Ignore the exception
         @:}
+        @:@(Model.SetRequestIdForException())
     @:}
     
     @:_httpRequest.Dispose();

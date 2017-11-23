@@ -141,14 +141,6 @@ namespace AutoRest.CSharp.Azure.Model
             }
         }
 
-        public override bool IsErrorResponseWithErrorModel() =>
-            Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) || 
-                (DefaultResponse.Body is CompositeTypeCs && DefaultResponse.Body.Name!="CloudError");
-
-        public override bool IsErrorResponseWithKnownType() => 
-            Responses.Values.Any(resp=> !(resp.Body is CompositeTypeCs) && MethodCs.IsErrorResponse(resp)) ||
-                !(DefaultResponse.Body is CompositeTypeCs);
-
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
@@ -306,9 +298,19 @@ namespace AutoRest.CSharp.Azure.Model
             }
         }
 
-        public override bool HandleAzureArmDefaultErrorResponse() => (Responses.Values.Any(resp=>resp.Body == null && MethodCs.IsErrorResponse(resp)) || DefaultResponse.Body?.Name=="CloudError");
-
-        public override string GetRequestIdString() => this.RequestIdString; 
-        
+        public override string SetRequestIdForException() 
+        { 
+            var sb = new IndentedStringBuilder();
+            sb.AppendLine("catch(Microsoft.Rest.RestException ex)")
+              .AppendLine("{").Indent()
+              .AppendLine("\\\\ set the request id to exception")
+              .AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
+              .AppendLine("{").Indent()
+              .AppendLine("ex.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
+              .AppendLine("}").Outdent()
+              .AppendLine("throw;").Outdent()
+              .AppendLine("}").Outdent()
+            return sb.ToString();
+        }
     }
 }

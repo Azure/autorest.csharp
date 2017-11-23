@@ -501,17 +501,15 @@ namespace AutoRest.CSharp.Model
 
         public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
 
-        public virtual bool IsErrorResponseWithErrorModel() => 
+        public bool IsErrorResponseWithErrorModel() => 
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||
                 (DefaultResponse.Body is CompositeTypeCs);
 
-        public virtual bool IsErrorResponseWithKnownType() => 
+        public bool IsErrorResponseWithKnownType() => 
             Responses.Values.Any(resp=> !(resp.Body is CompositeTypeCs) && MethodCs.IsErrorResponse(resp)) ||
                 !(DefaultResponse.Body is CompositeTypeCs);
 
-        public virtual bool HandleAzureArmDefaultErrorResponse() => false;
-
-        public virtual string GetRequestIdString() => string.Empty;
+        public virtual string SetRequestIdForException() => string.Empty;
                      
     }
 }
