@@ -1,0 +1,59 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://localhost/'
+info:
+  version: '2016-07-07'
+  title: Deprecated
+  description: Deprecated stuff mixed with non-deprecated stuff (having "yes" or "no" in it's name, respectively)
+paths:
+  '/path/no':
+    get:
+      operationId: Path_No
+      parameters:
+        - name: arg
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  '/path/yes':
+    get:
+      deprecated: true
+      operationId: Path_Yes
+      parameters:
+        - name: arg
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    PetNo:
+      properties:
+        name:
+          type: string
+          description: name of the pet
+    PetYes:
+      deprecated: true
+      properties:
+        name:
+          type: string
+          description: name of the pet
+    Pet:
+      properties:
+        nameNo:
+          type: string
+          description: name of the pet
+        nameYes:
+          deprecated: true
+          type: string
+          description: name of the pet
+    ChildPet:
+      properties:
+        parentNo:
+          $ref: "#/components/schemas/PetNo"
+        parentYes:
+          $ref: "#/components/schemas/PetYes"
