@@ -131,7 +131,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         {
             BoolModel = new BoolModel(this);
             IntModel = new IntModel(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

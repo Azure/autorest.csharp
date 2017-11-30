@@ -270,7 +270,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         private void Initialize()
         {
             Paging = new PagingOperations(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;

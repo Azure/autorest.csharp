@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         private void Initialize()
         {
             AvailabilitySets = new AvailabilitySets(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsExtensibleEnums
         private void Initialize()
         {
             Pet = new PetOperations(this);
-            BaseUri = new System.Uri("https://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
