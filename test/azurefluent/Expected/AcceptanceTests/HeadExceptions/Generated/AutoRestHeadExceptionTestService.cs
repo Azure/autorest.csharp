@@ -269,7 +269,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsHeadExceptions
         private void Initialize()
         {
             HeadException = new HeadExceptionOperations(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;

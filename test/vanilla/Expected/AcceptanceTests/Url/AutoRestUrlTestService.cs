@@ -146,7 +146,7 @@ namespace Fixtures.AcceptanceTestsUrl
             Paths = new Paths(this);
             Queries = new Queries(this);
             PathItems = new PathItems(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

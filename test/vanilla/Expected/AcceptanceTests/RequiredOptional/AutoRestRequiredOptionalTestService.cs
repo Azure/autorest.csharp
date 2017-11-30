@@ -145,7 +145,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         {
             ImplicitModel = new ImplicitModel(this);
             ExplicitModel = new ExplicitModel(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

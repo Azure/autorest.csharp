@@ -320,7 +320,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
             Polymorphism = new PolymorphismOperations(this);
             Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
             Readonlyproperty = new ReadonlypropertyOperations(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SubscriptionId = "123456";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

@@ -130,7 +130,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         {
             StringModel = new StringModel(this);
             EnumModel = new EnumModel(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
