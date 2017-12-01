@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
@@ -57,7 +58,31 @@ namespace AutoRest.CSharp.Unit.Tests
                 // Should also succeed.
                 Assert.True(result.Succeeded);
 
+                // try to load the assembly
+                var asm = LoadAssembly(result.Output);
+                Assert.NotNull(asm);
+
+
+                // VALIDATE
                 
+                // - method
+                var approvedExtensions = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.PathExtensions");
+                Assert.Null(approvedExtensions.GetMethod("No").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(approvedExtensions.GetMethod("Yes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+
+                // - class
+                Assert.Null(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.PetNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.PetYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+
+                // - property
+                var pet = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Pet");
+                Assert.Null(pet.GetProperty("NameNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(pet.GetProperty("NameYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+
+                // - property via type
+                var pet2 = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.ChildPet");
+                Assert.Null(pet2.GetProperty("NameNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(pet2.GetProperty("NameYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
             }
         }
     }
