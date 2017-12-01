@@ -33,7 +33,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
     @:[Microsoft.Rest.Serialization.JsonTransformation]
 }
-
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>
