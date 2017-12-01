@@ -33,7 +33,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
     @:[Microsoft.Rest.Serialization.JsonTransformation]
 }
-
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>
@@ -121,6 +124,10 @@ else
 {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
 }
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
         @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
 }
@@ -135,6 +142,10 @@ foreach (var conv in property.JsonConverters)
         @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
 }
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
         @:public static @property.ModelTypeName @property.Name { get; private set; }
         @EmptyLine
 }

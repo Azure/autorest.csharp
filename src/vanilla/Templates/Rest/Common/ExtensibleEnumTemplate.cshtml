@@ -16,6 +16,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @WrapComment("/// ", "Determine base value for a given allowed value if exists, else return the value itself")
     /// </summary>
     [Newtonsoft.Json.JsonConverter(typeof(@(Model.ClassName + "Converter")))]
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
     public struct @Model.ClassName : System.IEquatable<@Model.ClassName>
     {
         private @Model.ClassName@("("+underlyingType) underlyingValue)
