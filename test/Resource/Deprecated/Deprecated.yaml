@@ -52,8 +52,62 @@ components:
           type: string
           description: name of the pet
     ChildPet:
+      description: |-
+        Properties should not inherit deprecatedness of types (type could be swapped out but property stays the same).
+        Note that service teams will get a warning at the property in the generated C# SDK, but that's exactly what you want -- bother the service team in that case, not the user.
       properties:
         parentNo:
           $ref: "#/components/schemas/PetNo"
         parentYes:
           $ref: "#/components/schemas/PetYes"
+    Enum1No:
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsString: false
+        name: Enum1No
+    Enum1Yes:
+      deprecated: true
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsString: false
+        name: Enum1Yes
+    Enum2No:
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsString: true
+        name: Enum2No
+    Enum2Yes:
+      deprecated: true
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsString: true
+        name: Enum2Yes
+    Enum3No:
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsExtensible: true
+        name: Enum3No
+    Enum3Yes:
+      deprecated: true
+      type: string
+      enum:
+        - a
+        - b
+      x-ms-enum:
+        modelAsExtensible: true
+        name: Enum3Yes

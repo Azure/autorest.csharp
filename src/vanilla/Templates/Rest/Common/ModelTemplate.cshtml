@@ -124,6 +124,10 @@ else
 {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
 }
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
         @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
 }
@@ -138,6 +142,10 @@ foreach (var conv in property.JsonConverters)
         @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
 }
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
         @:public static @property.ModelTypeName @property.Name { get; private set; }
         @EmptyLine
 }

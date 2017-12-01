@@ -35,6 +35,12 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(fileSystem.FileExists(@"Models/PetYes.cs"));
                 Assert.True(fileSystem.FileExists(@"Models/Pet.cs"));
                 Assert.True(fileSystem.FileExists(@"Models/ChildPet.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum1No.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum1Yes.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum2No.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum2Yes.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum3No.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Enum3Yes.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -49,8 +55,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 Write(warnings, fileSystem);
                 Write(errors, fileSystem);
 
-                // Don't proceed unless we have zero Warnings.
-                Assert.Empty(warnings);
+                // Don't proceed unless we have zero Warnings (except "obsolete" stuff).
+                Assert.Empty(warnings.Where(x => !x.GetMessage().Contains("obsolete")));
 
                 // Don't proceed unless we have zero Errors.
                 Assert.Empty(errors);
@@ -74,6 +80,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.Null(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.PetNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
                 Assert.NotNull(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.PetYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
 
+                // - enums
+                Assert.Null(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum1No").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum1Yes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum2No").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum2Yes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum3No").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.NotNull(asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Enum3Yes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+
                 // - property
                 var pet = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Pet");
                 Assert.Null(pet.GetProperty("NameNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
@@ -81,8 +95,8 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 // - property via type
                 var pet2 = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.ChildPet");
-                Assert.Null(pet2.GetProperty("NameNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
-                Assert.NotNull(pet2.GetProperty("NameYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(pet2.GetProperty("ParentNo").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
+                Assert.Null(pet2.GetProperty("ParentYes").GetCustomAttribute(typeof(System.ObsoleteAttribute)));
             }
         }
     }

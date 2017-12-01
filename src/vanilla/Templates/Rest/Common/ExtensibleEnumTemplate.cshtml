@@ -18,7 +18,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     [Newtonsoft.Json.JsonConverter(typeof(@(Model.ClassName + "Converter")))]
 @if (Model.Deprecated)
 {
-    [System.Obsolete()]
+    @:[System.Obsolete()]
 }
     public struct @Model.ClassName : System.IEquatable<@Model.ClassName>
     {
