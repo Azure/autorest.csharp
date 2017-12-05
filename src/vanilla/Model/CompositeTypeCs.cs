@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Model
             get
             {
                 var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
-                    Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
+                    Enumerable.Empty<InheritedPropertyInfo>()).ToList();
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
                 return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
