@@ -175,9 +175,9 @@ namespace AutoRest.CSharp.Tests
                     ReturnType = new Response(customObjectType, null)
                 }));
 
-                Assert.Equal("Methodnamewithlotsofspaces", codeModel.Methods[0].Name);
-                Assert.Equal("GroupwithlotsofWeirdCharacters", codeModel.Methods[0].Group);
-                Assert.Equal("Abc", codeModel.Methods[0].ReturnType.Body.Name);
+                Assert.Equal("Methodnamewithlotsofspaces", codeModel.Methods.First().Name);
+                Assert.Equal("GroupwithlotsofWeirdCharacters", codeModel.Methods.First().Group);
+                Assert.Equal("Abc", codeModel.Methods.First().ReturnType.Body.Name);
             }
         }
 
@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Tests
 
                     Assert.Equal("AzureAlwaysRocksClient", codeModel.Name);
                     Assert.Equal("AzureAlwaysRocksOperations", codeModel.Operations.First().TypeName);
-                    Assert.Equal("AzureAlwaysRocksMethod", codeModel.Methods[0].Name);
+                    Assert.Equal("AzureAlwaysRocksMethod", codeModel.Methods.First().Name);
                     Assert.Equal("AzureAlwaysRocks", codeModel.ModelTypes.First(m => m.Name == "AzureAlwaysRocks").Name);
                 }
             }
@@ -253,9 +253,9 @@ namespace AutoRest.CSharp.Tests
 
                         Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);
                         Assert.Equal("System.Collections.Generic.IList<GreetingsModel>",
-                            codeModel.Methods[0].ReturnType.Body.Name);
+                            codeModel.Methods.ElementAt(0).ReturnType.Body.Name);
                         Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>",
-                            codeModel.Methods[1].ReturnType.Body.Name);
+                            codeModel.Methods.ElementAt(1).ReturnType.Body.Name);
                     }
                 }
             }

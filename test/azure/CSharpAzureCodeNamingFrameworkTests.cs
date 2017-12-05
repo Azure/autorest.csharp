@@ -29,23 +29,24 @@ namespace AutoRest.CSharp.Azure.Tests
                     codeModel = plugin.Serializer.Load(codeModel);
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
-                    Assert.Equal(7, codeModel.Methods.Count);
-                    Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "GetSinglePage"));
-                    Assert.Equal(0, codeModel.Methods.Count(m => m.Name == "GetSinglePageNext"));
-                    Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "PutSinglePage"));
-                    Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "PutSinglePageSpecialNext"));
+                    var methods = codeModel.Methods.ToList();
+                    Assert.Equal(7, methods.Count);
+                    Assert.Equal(1, methods.Count(m => m.Name == "GetSinglePage"));
+                    Assert.Equal(0, methods.Count(m => m.Name == "GetSinglePageNext"));
+                    Assert.Equal(1, methods.Count(m => m.Name == "PutSinglePage"));
+                    Assert.Equal(1, methods.Count(m => m.Name == "PutSinglePageSpecialNext"));
 
-                    Assert.Equal("Page<Product>", codeModel.Methods[0].ReturnType.Body.Name);
-                    Assert.Equal("object", codeModel.Methods[1].ReturnType.Body.Name.ToLowerInvariant());
-                    Assert.Equal("Page1<Product>", codeModel.Methods[1].Responses.ElementAt(0).Value.Body.Name);
+                    Assert.Equal("Page<Product>", methods[0].ReturnType.Body.Name);
+                    Assert.Equal("object", methods[1].ReturnType.Body.Name.ToLowerInvariant());
+                    Assert.Equal("Page1<Product>", methods[1].Responses.ElementAt(0).Value.Body.Name);
                     Assert.Equal("string",
-                        codeModel.Methods[1].Responses.ElementAt(1).Value.Body.Name.ToLowerInvariant());
-                    Assert.Equal("object", codeModel.Methods[2].ReturnType.Body.Name.ToLowerInvariant());
-                    Assert.Equal("Page1<Product>", codeModel.Methods[2].Responses.ElementAt(0).Value.Body.Name);
-                    Assert.Equal("Page1<Product>", codeModel.Methods[2].Responses.ElementAt(1).Value.Body.Name);
-                    Assert.Equal("object", codeModel.Methods[3].ReturnType.Body.Name.ToLowerInvariant());
-                    Assert.Equal("Page1<Product>", codeModel.Methods[3].Responses.ElementAt(0).Value.Body.Name);
-                    Assert.Equal("Page1<ProductChild>", codeModel.Methods[3].Responses.ElementAt(1).Value.Body.Name);
+                        methods[1].Responses.ElementAt(1).Value.Body.Name.ToLowerInvariant());
+                    Assert.Equal("object", methods[2].ReturnType.Body.Name.ToLowerInvariant());
+                    Assert.Equal("Page1<Product>", methods[2].Responses.ElementAt(0).Value.Body.Name);
+                    Assert.Equal("Page1<Product>", methods[2].Responses.ElementAt(1).Value.Body.Name);
+                    Assert.Equal("object", methods[3].ReturnType.Body.Name.ToLowerInvariant());
+                    Assert.Equal("Page1<Product>", methods[3].Responses.ElementAt(0).Value.Body.Name);
+                    Assert.Equal("Page1<ProductChild>", methods[3].Responses.ElementAt(1).Value.Body.Name);
                     Assert.Equal(5, codeModel.ModelTypes.Count);
                     Assert.False(
                         codeModel.ModelTypes.Any(t => t.Name.EqualsIgnoreCase("ProducResult")));
