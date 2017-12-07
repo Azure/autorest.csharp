@@ -174,7 +174,6 @@
         ,
         "Doggy":
         {
-            "id": "Dog",
             "allOf": [
             {
                 "$ref":  "#/definitions/Animal"
@@ -192,7 +191,6 @@
         ,
         "Horsey":
         {
-            "id": "Horse",
             "allOf": [
             {
                 "$ref": "#/definitions/Animal"

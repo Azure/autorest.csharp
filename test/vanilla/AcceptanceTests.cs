@@ -2436,7 +2436,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception.Body as T);
                 }
             }
-            catch (MyException exception1)
+            catch (AException exception1)
             {
                 Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
                 if (errorValidator != null)

@@ -2500,7 +2500,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2559,7 +2559,7 @@ namespace Fixtures.AcceptanceTestsHttp
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new MyException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2620,7 +2620,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2679,7 +2679,7 @@ namespace Fixtures.AcceptanceTestsHttp
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new MyException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2740,7 +2740,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2799,7 +2799,7 @@ namespace Fixtures.AcceptanceTestsHttp
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new MyException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2860,7 +2860,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2919,7 +2919,7 @@ namespace Fixtures.AcceptanceTestsHttp
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new MyException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
