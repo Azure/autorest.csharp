@@ -960,7 +960,7 @@ namespace Fixtures.PetstoreV2NoSync
             MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
-                 StreamContent _fileContent = new StreamContent(fileContent);
+                StreamContent _fileContent = new StreamContent(fileContent);
                 _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 FileStream _fileContentAsFileStream = fileContent as FileStream;
                 if (_fileContentAsFileStream != null)

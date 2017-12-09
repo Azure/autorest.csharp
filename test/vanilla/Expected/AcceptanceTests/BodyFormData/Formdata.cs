@@ -131,7 +131,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
-                 StreamContent _fileContent = new StreamContent(fileContent);
+                StreamContent _fileContent = new StreamContent(fileContent);
                 _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 FileStream _fileContentAsFileStream = fileContent as FileStream;
                 if (_fileContentAsFileStream != null)
@@ -283,8 +283,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             }
             if (fileContent != null && fileContent != Stream.Null)
             {
-              _httpRequest.Content = new StreamContent(fileContent);
-              _httpRequest.Content.Headers.ContentType =MediaTypeHeaderValue.Parse("application/octet-stream");
+                _httpRequest.Content = new StreamContent(fileContent);
+                _httpRequest.Content.Headers.ContentType =MediaTypeHeaderValue.Parse("application/octet-stream");
             }
             // Send Request
             if (_shouldTrace)
