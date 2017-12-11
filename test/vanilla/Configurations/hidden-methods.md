@@ -13,5 +13,4 @@ directive:
     transform: >-
       $.hidden = true;
       $.excludeFromInterface = true;
-namespace: Fixtures.AcceptanceTestsHiddenMethods
 ```

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Fixtures.Azure.AcceptanceTestsPaging.Models;
+using Fixtures.Azure.Paging.Models;
 using Xunit;
 using Newtonsoft.Json;
 using Microsoft.Rest.Serialization;

@@ -68,6 +68,7 @@ regenExpectedConfigurations = (configFiles,done) ->
     args = [
       "test/vanilla/Configurations/#{configFiles[key]}",
       "--csharp",
+      "--namespace=Fixtures.#{key}",
       # "--clear-output-folder"
     ]
 
