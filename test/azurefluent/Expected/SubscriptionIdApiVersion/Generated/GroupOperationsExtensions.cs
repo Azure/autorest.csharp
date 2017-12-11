@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion
+namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsHeadExceptions
+namespace Fixtures.Azure.Fluent.HeadExceptions
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

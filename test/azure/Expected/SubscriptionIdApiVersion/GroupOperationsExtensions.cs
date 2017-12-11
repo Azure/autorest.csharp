@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
+namespace Fixtures.Azure.SubscriptionIdApiVersion
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

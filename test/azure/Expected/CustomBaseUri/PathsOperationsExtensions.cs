@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
+namespace Fixtures.Azure.CustomBaseUri
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

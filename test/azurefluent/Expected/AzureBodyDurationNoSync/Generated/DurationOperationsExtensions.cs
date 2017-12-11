@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync
+namespace Fixtures.Azure.Fluent.AzureBodyDurationNoSync
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureBodyDurationNoSync.Models
+namespace Fixtures.Azure.AzureBodyDurationNoSync.Models
 {
     using Newtonsoft.Json;
     using System.Linq;

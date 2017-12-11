@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsLro
+namespace Fixtures.Azure.Fluent.Lro
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsPaging.Models
+namespace Fixtures.Azure.Paging.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;

@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsPaging
+namespace Fixtures.Azure.Paging
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

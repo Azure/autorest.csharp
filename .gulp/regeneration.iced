@@ -43,7 +43,7 @@ regenExpected = (opts,done) ->
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
       else
-        args.push("--csharp.namespace=#{[opts.nsPrefix, "AcceptanceTests" + key.replace(/\/|\./, '')].join('.')}")
+        args.push("--csharp.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
 
     if (opts['override-info.version'])
       args.push("--override-info.version=#{opts['override-info.version']}")

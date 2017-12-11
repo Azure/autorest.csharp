@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
+namespace Fixtures.Azure.AzureSpecials.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;

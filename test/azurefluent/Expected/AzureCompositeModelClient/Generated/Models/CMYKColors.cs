@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureCompositeModelClient.Models
+namespace Fixtures.Azure.Fluent.AzureCompositeModelClient.Models
 {
 
     /// <summary>

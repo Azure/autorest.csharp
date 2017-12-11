@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
+namespace Fixtures.Azure.Fluent.AzureSpecials.Models
 {
     using Newtonsoft.Json;
     using System.Linq;

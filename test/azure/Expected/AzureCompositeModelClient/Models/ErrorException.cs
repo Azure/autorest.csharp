@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
+namespace Fixtures.Azure.AzureCompositeModelClient.Models
 {
     using Microsoft.Rest;
 

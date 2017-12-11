@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsExtensibleEnums.Models
+namespace Fixtures.ExtensibleEnums.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;

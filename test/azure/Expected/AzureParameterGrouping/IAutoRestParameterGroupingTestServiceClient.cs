@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
+namespace Fixtures.Azure.AzureParameterGrouping
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

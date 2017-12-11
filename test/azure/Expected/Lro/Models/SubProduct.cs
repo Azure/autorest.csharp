@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsLro.Models
+namespace Fixtures.Azure.Lro.Models
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;

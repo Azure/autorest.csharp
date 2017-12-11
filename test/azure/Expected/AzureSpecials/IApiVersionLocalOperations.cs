@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
+namespace Fixtures.Azure.AzureSpecials
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

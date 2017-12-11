@@ -8,7 +8,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping.Models
+namespace Fixtures.Azure.Fluent.AzureParameterGrouping.Models
 {
     using Newtonsoft.Json;
     using System.Linq;
