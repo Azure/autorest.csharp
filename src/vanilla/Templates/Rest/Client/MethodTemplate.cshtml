@@ -66,13 +66,13 @@
     @switch (Model.Flavor)
     {
         case MethodFlavor.RestCall:
-            @(Include(new MethodBodyTemplateRestCall(), Model))
+    @:@(Include(new MethodBodyTemplateRestCall(), Model))
             break;
         case MethodFlavor.ForwardTo:
-            @(Include(new MethodBodyTemplateForwardTo(), Model))
+    @:@(Include(new MethodBodyTemplateForwardTo(), Model))
             break;
         case MethodFlavor.Implementation:
-            @(Model.Implementation)
+    @:@(Model.GetImplementation("csharp"))
             break;
         default:
             throw new System.NotImplementedException();

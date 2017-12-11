@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Tiny
+namespace Fixtures.Components
 {
     using Models;
     using Newtonsoft.Json;

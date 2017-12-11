@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsHiddenMethods
+namespace Fixtures.HiddenMethods
 {
     using Models;
     using System.Collections;

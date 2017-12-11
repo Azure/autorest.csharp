@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsHiddenMethods.Models
+namespace Fixtures.HiddenMethods.Models
 {
     using Newtonsoft.Json;
     using System.Collections;

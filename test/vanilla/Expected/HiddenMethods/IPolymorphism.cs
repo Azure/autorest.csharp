@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsHiddenMethods
+namespace Fixtures.HiddenMethods
 {
     using Microsoft.Rest;
     using Models;

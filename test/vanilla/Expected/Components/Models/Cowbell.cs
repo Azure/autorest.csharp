@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Tiny.Models
+namespace Fixtures.Components.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
