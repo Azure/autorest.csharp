@@ -43,7 +43,7 @@ regenExpected = (opts,done) ->
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
         args.push("--csharp.namespace=#{optsMappingsValue[1]}")
       else
-        args.push("--csharp.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
+        args.push("--csharp.namespace=#{[opts.nsPrefix, "AcceptanceTests" + key.replace(/\/|\./, '')].join('.')}")
 
     if (opts['override-info.version'])
       args.push("--override-info.version=#{opts['override-info.version']}")
@@ -60,16 +60,18 @@ regenExpected = (opts,done) ->
       instances--
       return done() if instances is 0
 
-regenExpectedConfigurations = (opts,done) ->
-  instances = opts.configFiles.length
+regenExpectedConfigurations = (configFiles,done) ->
+  keys = Object.getOwnPropertyNames(configFiles)
+  instances = keys.length
 
-  for configFile in opts.configFiles
+  for key in keys
     args = [
-      configFile
+      "test/vanilla/Configurations/#{configFiles[key]}",
+      "--csharp",
+      # "--clear-output-folder"
     ]
 
-    if (opts.tag)
-      args.push("--tag=#{opts.tag}")
+    args.push("--output-folder=../../../test/vanilla/Expected/#{key}")
 
     if (argv.args)
       for arg in argv.args.split(" ")
@@ -82,64 +84,65 @@ regenExpectedConfigurations = (opts,done) ->
       return done() if instances is 0 
 
 defaultMappings = {
-  'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
-  'AcceptanceTests/BodyArray': 'body-array.json',
-  'AcceptanceTests/BodyBoolean': 'body-boolean.json',
-  'AcceptanceTests/BodyByte': 'body-byte.json',
-  'AcceptanceTests/BodyComplex': 'body-complex.json',
-  'AcceptanceTests/BodyDate': 'body-date.json',
-  'AcceptanceTests/BodyDateTime': 'body-datetime.json',
-  'AcceptanceTests/BodyDateTimeRfc1123': 'body-datetime-rfc1123.json',
-  'AcceptanceTests/BodyDuration': 'body-duration.json',
-  'AcceptanceTests/BodyDictionary': 'body-dictionary.json',
-  'AcceptanceTests/BodyFile': 'body-file.json',
-  'AcceptanceTests/BodyFormData': 'body-formdata.json',
-  'AcceptanceTests/BodyInteger': 'body-integer.json',
-  'AcceptanceTests/BodyNumber': 'body-number.json',
-  'AcceptanceTests/BodyString': 'body-string.json',
-  'AcceptanceTests/Header': 'header.json',
-  'AcceptanceTests/Http': 'httpInfrastructure.json',
-  'AcceptanceTests/Report': 'report.json',
-  'AcceptanceTests/RequiredOptional': 'required-optional.json',
-  'AcceptanceTests/Url': 'url.json',
-  'AcceptanceTests/Validation': 'validation.json',
-  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json',
-  'AcceptanceTests/CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
-  'AcceptanceTests/ModelFlattening': 'model-flattening.json'
+  'ParameterFlattening': 'parameter-flattening.json',
+  'BodyArray': 'body-array.json',
+  'BodyBoolean': 'body-boolean.json',
+  'BodyByte': 'body-byte.json',
+  'BodyComplex': 'body-complex.json',
+  'BodyDate': 'body-date.json',
+  'BodyDateTime': 'body-datetime.json',
+  'BodyDateTimeRfc1123': 'body-datetime-rfc1123.json',
+  'BodyDuration': 'body-duration.json',
+  'BodyDictionary': 'body-dictionary.json',
+  'BodyFile': 'body-file.json',
+  'BodyFormData': 'body-formdata.json',
+  'BodyInteger': 'body-integer.json',
+  'BodyNumber': 'body-number.json',
+  'BodyString': 'body-string.json',
+  'Header': 'header.json',
+  'Http': 'httpInfrastructure.json',
+  'Report': 'report.json',
+  'RequiredOptional': 'required-optional.json',
+  'Url': 'url.json',
+  'Validation': 'validation.json',
+  'CustomBaseUri': 'custom-baseUrl.json',
+  'CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
+  'ModelFlattening': 'model-flattening.json'
 }
 
 defaultAzureMappings = {
-  'AcceptanceTests/Lro': 'lro.json',
-  'AcceptanceTests/Paging': 'paging.json',
-  'AcceptanceTests/AzureReport': 'azure-report.json',
-  'AcceptanceTests/AzureParameterGrouping': 'azure-parameter-grouping.json',
-  'AcceptanceTests/AzureResource': 'azure-resource.json',
-  'AcceptanceTests/Head': 'head.json',
-  'AcceptanceTests/HeadExceptions': 'head-exceptions.json',
-  'AcceptanceTests/SubscriptionIdApiVersion': 'subscriptionId-apiVersion.json',
-  'AcceptanceTests/AzureSpecials': 'azure-special-properties.json',
-  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json'
+  'Lro': 'lro.json',
+  'Paging': 'paging.json',
+  'AzureReport': 'azure-report.json',
+  'AzureParameterGrouping': 'azure-parameter-grouping.json',
+  'AzureResource': 'azure-resource.json',
+  'Head': 'head.json',
+  'HeadExceptions': 'head-exceptions.json',
+  'SubscriptionIdApiVersion': 'subscriptionId-apiVersion.json',
+  'AzureSpecials': 'azure-special-properties.json',
+  'CustomBaseUri': 'custom-baseUrl.json'
 }
 
 compositeMappings = {
-  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.json;body-integer.json'
+  'CompositeBoolIntClient': 'body-boolean.json;body-integer.json'
 }
 
 azureCompositeMappings = {
-  'AcceptanceTests/AzureCompositeModelClient': 'complex-model.json;body-complex.json'
+  'AzureCompositeModelClient': 'complex-model.json;body-complex.json'
 }
 
-defaultConfigurationFiles = [
-  'test/vanilla/Configurations/hidden-methods.md'
-]
+configurationFiles = {
+  'HiddenMethods': 'hidden-methods.md',
+  'Components': 'components.md'
+}
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums'], (done) ->
   mappings = Object.assign({
-    'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
+    'AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
-  mappings['AcceptanceTests/AzureResource'] = 'azure-resource-x.json'
+  mappings['AzureResource'] = 'azure-resource-x.json'
   regenExpected {
     'outputBaseDir': 'test/azure',
     'inputBaseDir': swaggerDir,
@@ -153,7 +156,7 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
 
 task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'], (done) ->
   mappings = Object.assign({
-    'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
+    'AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
     'outputBaseDir': 'test/azurefluent',
@@ -167,7 +170,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-cs-config'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -188,19 +191,15 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
     regenExpected {
       'outputBaseDir': 'test/vanilla',
       'inputBaseDir': swaggerDir,
-      'mappings': Object.assign({ 'AcceptanceTests/UrlMultiCollectionFormat': 'url-multi-collectionFormat.json' }, defaultMappings),
+      'mappings': Object.assign({ 'UrlMultiCollectionFormat': 'url-multi-collectionFormat.json' }, defaultMappings),
       'outputDir': 'Expected',
       'nsPrefix': 'Fixtures',
       'flatteningThreshold': '1'
-    }, () ->
-      regenExpectedConfigurations {
-        configFiles: defaultConfigurationFiles,
-        tag: 'vanilla'
-      },done
+    }, done
   return null
 
 task 'regenerate-cs-config', '', [], (done) ->
-  regenExpectedConfigurations defaultConfigurationFiles, done
+  regenExpectedConfigurations configurationFiles, done
   return null
 
 task 'regenerate-cswithcreds', '', (done) ->
@@ -247,7 +246,7 @@ task 'regenerate-csnosync', '', (done) ->
 
 task 'regenerate-csazureallsync', '', (done) ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
+    'AzureBodyDurationAllSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'test/azure',
@@ -263,7 +262,7 @@ task 'regenerate-csazureallsync', '', (done) ->
 
 task 'regenerate-csazurefluentallsync', '', (done) ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
+    'AzureBodyDurationAllSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'test/azurefluent',
@@ -282,7 +281,7 @@ task 'regenerate-csextensibleenums', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/vanilla',
     'inputBaseDir': swaggerDir,
-    'mappings': {'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'},
+    'mappings': {'ExtensibleEnums': 'extensible-enums-swagger.json'},
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
@@ -291,7 +290,7 @@ task 'regenerate-csextensibleenums', '', (done) ->
 
 task 'regenerate-csazurenosync', '', (done) ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
+    'AzureBodyDurationNoSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'test/azure',
@@ -307,7 +306,7 @@ task 'regenerate-csazurenosync', '', (done) ->
 
 task 'regenerate-csazurefluentnosync', '', (done) ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
+    'AzureBodyDurationNoSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'test/azurefluent',
