@@ -63,5 +63,18 @@
 }
 @(Model.AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @(Include(new MethodBodyTemplateRestCall(), Model))
+    @switch (Model.Flavor)
+    {
+        case MethodFlavor.RestCall:
+            @(Include(new MethodBodyTemplateRestCall(), Model))
+            break;
+        case MethodFlavor.ForwardTo:
+            @(Include(new MethodBodyTemplateForwardTo(), Model))
+            break;
+        case MethodFlavor.Implementation:
+            @(Model.Implementation)
+            break;
+        default:
+            throw new System.NotImplementedException();
+    }
 }
