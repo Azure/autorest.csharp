@@ -76,5 +76,166 @@ namespace Fixtures.Components
                 (await operations.AddWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void GetImplementationAgnostic(this ICowbellOperations operations)
+            {
+                operations.GetImplementationAgnosticAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetImplementationAgnosticAsync(this ICowbellOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetImplementationAgnosticWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void GetImplementationSpecific(this ICowbellOperations operations)
+            {
+                operations.GetImplementationSpecificAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetImplementationSpecificAsync(this ICowbellOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetImplementationSpecificWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='id'>
+            /// </param>
+            public static void GetForwardTo(this ICowbellOperations operations, long id)
+            {
+                operations.GetForwardToAsync(id).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='id'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetForwardToAsync(this ICowbellOperations operations, long id, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetForwardToWithHttpMessagesAsync(id, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void GetForwardToCustomArgs1(this ICowbellOperations operations)
+            {
+                operations.GetForwardToCustomArgs1Async().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetForwardToCustomArgs1Async(this ICowbellOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetForwardToCustomArgs1WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='id'>
+            /// </param>
+            public static void GetForwardToCustomArgs2(this ICowbellOperations operations, string name, long id)
+            {
+                operations.GetForwardToCustomArgs2Async(name, id).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='id'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetForwardToCustomArgs2Async(this ICowbellOperations operations, string name, long id, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetForwardToCustomArgs2WithHttpMessagesAsync(name, id, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='idx'>
+            /// </param>
+            public static void GetForwardToCustomArgs3(this ICowbellOperations operations, string name, long idx)
+            {
+                operations.GetForwardToCustomArgs3Async(name, idx).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='idx'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetForwardToCustomArgs3Async(this ICowbellOperations operations, string name, long idx, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetForwardToCustomArgs3WithHttpMessagesAsync(name, idx, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='idx'>
+            /// </param>
+            public static void GetForwardToCustomArgs4(this ICowbellOperations operations, string name, long idx)
+            {
+                operations.GetForwardToCustomArgs4Async(name, idx).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='idx'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetForwardToCustomArgs4Async(this ICowbellOperations operations, string name, long idx, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.GetForwardToCustomArgs4WithHttpMessagesAsync(name, idx, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
     }
 }
