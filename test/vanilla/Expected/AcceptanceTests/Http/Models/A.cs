@@ -48,7 +48,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new MyExceptionException
+            var ex = new AException
             {
                 Request = requestMessage,
                 Response = responseMessage

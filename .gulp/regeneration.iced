@@ -25,6 +25,7 @@ regenExpected = (opts,done) ->
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
     
     args.push("--use=F:/artemp/rcm/autorest.modeler")
+    args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
 
     if (opts.addCredentials)
       args.push("--csharp.add-credentials=true")
@@ -76,6 +77,9 @@ regenExpectedConfigurations = (opts,done) ->
     if (argv.args)
       for arg in argv.args.split(" ")
         args.push(arg);
+    
+    args.push("--use=F:/artemp/rcm/autorest.modeler")
+    args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
 
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)
@@ -136,7 +140,7 @@ defaultConfigurationFiles = [
 ]
 
 #swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
-swaggerDir = "F:/artemp/rcm/autorest.testserver/swagger"
+swaggerDir = "F:/artemp/rcm/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums', 'regenerate-csazure-xms-error-responses'], (done) ->
   mappings = Object.assign({

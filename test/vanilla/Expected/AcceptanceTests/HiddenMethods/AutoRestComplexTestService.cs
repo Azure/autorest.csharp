@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsHiddenMethods
             Polymorphism = new Polymorphism(this);
             Polymorphicrecursive = new Polymorphicrecursive(this);
             Readonlyproperty = new Readonlyproperty(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings
             {

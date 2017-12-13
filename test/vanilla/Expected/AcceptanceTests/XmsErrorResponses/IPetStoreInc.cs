@@ -14,9 +14,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
     using Newtonsoft.Json;
 
     /// <summary>
-    /// AutoRest Test for x-ms-error-response extensions
+    /// Pets online.
     /// </summary>
-    public partial interface IAutoRestTestforxMsErrorResponseextensions : System.IDisposable
+    public partial interface IPetStoreInc : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.

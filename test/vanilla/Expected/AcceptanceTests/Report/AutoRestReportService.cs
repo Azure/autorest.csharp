@@ -120,7 +120,7 @@ namespace Fixtures.AcceptanceTestsReport
         /// </summary>
         private void Initialize()
         {
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -199,6 +199,11 @@ namespace Fixtures.AcceptanceTestsReport
         /// <summary>
         /// Get test coverage report
         /// </summary>
+        /// <param name='qualifier'>
+        /// If specified, qualifies the generated report further (e.g. '2.7' vs '3.5'
+        /// in for Python). The only effect is, that generators that run all tests
+        /// several times, can distinguish the generated reports.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -214,7 +219,7 @@ namespace Fixtures.AcceptanceTestsReport
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(string qualifier = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -223,12 +228,22 @@ namespace Fixtures.AcceptanceTestsReport
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("qualifier", qualifier);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetReport", tracingParameters);
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "report").ToString();
+            List<string> _queryParameters = new List<string>();
+            if (qualifier != null)
+            {
+                _queryParameters.Add(string.Format("qualifier={0}", System.Uri.EscapeDataString(qualifier)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

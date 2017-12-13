@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         private void Initialize()
         {
             Formdata = new Formdata(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

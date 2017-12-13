@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
         private void Initialize()
         {
             Date = new Date(this);
-            BaseUri = new System.Uri("https://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

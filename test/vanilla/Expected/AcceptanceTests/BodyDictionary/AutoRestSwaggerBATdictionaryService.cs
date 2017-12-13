@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         private void Initialize()
         {
             Dictionary = new Dictionary(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

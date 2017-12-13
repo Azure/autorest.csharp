@@ -3364,7 +3364,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultModelA200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3418,7 +3418,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3525,7 +3525,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultModelA200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3579,7 +3579,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3686,7 +3686,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultModelA400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3740,7 +3740,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3847,7 +3847,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <summary>
         /// Handle other unhandled status codes
         /// </summary>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleDefaultErrorResponseForGetDefaultModelA400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
@@ -3901,7 +3901,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="MyExceptionException">
+        /// <exception cref="AException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>

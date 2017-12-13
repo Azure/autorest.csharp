@@ -15,31 +15,31 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-    public partial class MyExceptionException : HttpRestExceptionBase<A>
+    public partial class AException : HttpRestExceptionBase<A>
     {
 
         /// <summary>
-        /// Initializes a new instance of the MyExceptionException class.
+        /// Initializes a new instance of the AException class.
         /// </summary>
-        public MyExceptionException()
+        public AException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the MyExceptionException class.
+        /// Initializes a new instance of the AException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public MyExceptionException(string message)
+        public AException(string message)
             : this(message, null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the MyExceptionException class.
+        /// Initializes a new instance of the AException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
-        public MyExceptionException(string message, System.Exception innerException)
+        public AException(string message, System.Exception innerException)
             : base(message, innerException)
         {
         }
