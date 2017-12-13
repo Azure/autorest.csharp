@@ -309,6 +309,23 @@ namespace Fixtures.Components
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
+        public async Task<HttpOperationResponse> EmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> GetImplementationAgnosticWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // language agnostic stub implementation:

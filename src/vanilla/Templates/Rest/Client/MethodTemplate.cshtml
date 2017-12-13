@@ -72,7 +72,7 @@
     @:@(Include(new MethodBodyTemplateForwardTo(), Model))
             break;
         case MethodFlavor.Implementation:
-    @:@(Model.GetImplementation("csharp"))
+    @:@(Model.GetImplementation("csharp") ?? "throw new System.NotImplementedException();")
             break;
         default:
             throw new System.NotImplementedException();

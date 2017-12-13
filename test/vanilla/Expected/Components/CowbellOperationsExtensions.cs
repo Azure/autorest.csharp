@@ -79,6 +79,25 @@ namespace Fixtures.Components
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            public static void Empty(this ICowbellOperations operations)
+            {
+                operations.EmptyAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task EmptyAsync(this ICowbellOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.EmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
             public static void GetImplementationAgnostic(this ICowbellOperations operations)
             {
                 operations.GetImplementationAgnosticAsync().GetAwaiter().GetResult();

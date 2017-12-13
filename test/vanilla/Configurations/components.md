@@ -7,7 +7,37 @@
 ``` yaml
 input-file: ../Swagger/tiny.yaml
 components:
+  schemas:
+    Cowtown: # new type
+      properties:
+        name:
+          type: string
+        population:
+          description: Number of cows in this town.
+          type: integer
+    Cowbell: # extending type
+      description: New description.
+      properties:
+        patentNumber:
+          description: deprecated property, do not use anymore
+          type: integer
+        nname:
+          description: old typo, please do not use anymore
+          type: string
+          forward-to: name
+        awesomeness:
+          type: string
+          implementation: |-
+            get { return "language agnostic"; } set { /*nop*/ }
+        coolness:
+          type: integer
+          implementation:
+            csharp: |-
+              get { return 42; /* "language specific"*/ } set { /*nop*/ }
+            ruby: |-
+              how does ruby work?
   operations:
+  - operationId: Cowbell_Empty
   - operationId: Cowbell_GetImplementationAgnostic
     implementation: |-
       // language agnostic stub implementation:

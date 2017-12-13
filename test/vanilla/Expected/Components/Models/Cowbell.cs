@@ -11,7 +11,7 @@ namespace Fixtures.Components.Models
     using System.Linq;
 
     /// <summary>
-    /// A cowbell.
+    /// New description.
     /// </summary>
     public partial class Cowbell
     {
@@ -26,8 +26,15 @@ namespace Fixtures.Components.Models
         /// <summary>
         /// Initializes a new instance of the Cowbell class.
         /// </summary>
-        public Cowbell(string name, long? id = default(long?))
+        /// <param name="patentNumber">deprecated property, do not use
+        /// anymore</param>
+        /// <param name="nname">old typo, please do not use anymore</param>
+        public Cowbell(string name, int? patentNumber = default(int?), string nname = default(string), string awesomeness = default(string), int? coolness = default(int?), long? id = default(long?))
         {
+            PatentNumber = patentNumber;
+            Nname = nname;
+            Awesomeness = awesomeness;
+            Coolness = coolness;
             Id = id;
             Name = name;
             CustomInit();
@@ -37,6 +44,41 @@ namespace Fixtures.Components.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets deprecated property, do not use anymore
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        public int? PatentNumber
+        {
+            get { throw new System.NotImplementedException(); } set { throw new System.NotImplementedException(); }
+        }
+
+        /// <summary>
+        /// Gets or sets old typo, please do not use anymore
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        public string Nname
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+
+        /// <summary>
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        public string Awesomeness
+        {
+            get { return "language agnostic"; } set { /*nop*/ }
+        }
+
+        /// <summary>
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore]
+        public int? Coolness
+        {
+            get { return 42; /* "language specific"*/ } set { /*nop*/ }
+        }
 
         /// <summary>
         /// </summary>
