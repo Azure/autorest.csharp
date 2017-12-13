@@ -140,7 +140,7 @@ string _requestContent = null;
 if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
 {
     _httpRequest.Content = new System.Net.Http.StreamContent(@(Model.RequestBody.Name));
-    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(@(Model.LocalParameters.Any(p => p.IsContentTypeHeader) ? $"{Model.LocalParameters.First(p => p.IsContentTypeHeader).Name.Value}.ToSerializedValue()" : $"\"{Model.RequestContentType}\""));
+    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(@(((Func<Parameter, string>)(p => p != null ? (p.Name.Value + ((p.ModelType as EnumType)?.ModelAsString == false ? ".ToSerializedValue()" : "")) : $"\"{Model.RequestContentType}\"" ))(Model.LocalParameters.FirstOrDefault(p => p.IsContentTypeHeader))));
 }
     </text>
     }

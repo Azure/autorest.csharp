@@ -124,7 +124,7 @@ namespace Fixtures.ContentTypeHeader
             if (text != null && text != Stream.Null)
             {
                 _httpRequest.Content = new StreamContent(text);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(contentType.ToSerializedValue());
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(contentType);
             }
             // Send Request
             if (_shouldTrace)
@@ -248,7 +248,7 @@ namespace Fixtures.ContentTypeHeader
             if (text != null && text != Stream.Null)
             {
                 _httpRequest.Content = new StreamContent(text);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(contentType.ToSerializedValue());
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(contentType);
             }
             // Send Request
             if (_shouldTrace)

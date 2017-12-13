@@ -496,7 +496,7 @@ namespace Fixtures.ContentTypeHeader
             if (image != null && image != Stream.Null)
             {
                 _httpRequest.Content = new StreamContent(image);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType.ToSerializedValue());
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType);
             }
             // Send Request
             if (_shouldTrace)
