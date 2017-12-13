@@ -48,5 +48,10 @@ namespace AutoRest.CSharp.Model
                 base.ModelType = value;
             }
         }
+
+        public string ActualDefaultValue
+            => !string.IsNullOrEmpty(DefaultValue) && ModelType is PrimaryType
+            ? DefaultValue.Value
+            : $"default({ModelTypeName})";
     }
 }

@@ -13,41 +13,41 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Tests.Utilities;
-using Fixtures.AcceptanceTestsBodyArray;
-using Fixtures.AcceptanceTestsBodyBoolean;
-using Fixtures.AcceptanceTestsBodyByte;
-using Fixtures.AcceptanceTestsBodyComplex;
-using Fixtures.AcceptanceTestsBodyComplex.Models;
-using Fixtures.AcceptanceTestsBodyDate;
-using Fixtures.AcceptanceTestsBodyDateTime;
-using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
-using Fixtures.AcceptanceTestsBodyDictionary;
-using Fixtures.AcceptanceTestsBodyDictionary.Models;
-using Fixtures.AcceptanceTestsBodyDuration;
-using Fixtures.AcceptanceTestsBodyFile;
-using Fixtures.AcceptanceTestsBodyFormData;
-using Fixtures.AcceptanceTestsBodyInteger;
-using Fixtures.AcceptanceTestsBodyNumber;
-using Fixtures.AcceptanceTestsBodyString;
-using Fixtures.AcceptanceTestsBodyString.Models;
-using Fixtures.AcceptanceTestsCompositeBoolIntClient;
-using Fixtures.AcceptanceTestsCustomBaseUri;
-using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
-using Fixtures.AcceptanceTestsExtensibleEnums;
-using Fixtures.AcceptanceTestsExtensibleEnums.Models;
-using Fixtures.AcceptanceTestsHeader;
-using Fixtures.AcceptanceTestsHeader.Models;
-using Fixtures.AcceptanceTestsHttp;
-using Fixtures.AcceptanceTestsHttp.Models;
-using Fixtures.AcceptanceTestsModelFlattening;
-using Fixtures.AcceptanceTestsModelFlattening.Models;
-using Fixtures.AcceptanceTestsReport;
-using Fixtures.AcceptanceTestsRequiredOptional;
-using Fixtures.AcceptanceTestsUrl;
-using Fixtures.AcceptanceTestsUrl.Models;
-using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
-using Fixtures.AcceptanceTestsValidation;
-using Fixtures.AcceptanceTestsValidation.Models;
+using Fixtures.BodyArray;
+using Fixtures.BodyBoolean;
+using Fixtures.BodyByte;
+using Fixtures.BodyComplex;
+using Fixtures.BodyComplex.Models;
+using Fixtures.BodyDate;
+using Fixtures.BodyDateTime;
+using Fixtures.BodyDateTimeRfc1123;
+using Fixtures.BodyDictionary;
+using Fixtures.BodyDictionary.Models;
+using Fixtures.BodyDuration;
+using Fixtures.BodyFile;
+using Fixtures.BodyFormData;
+using Fixtures.BodyInteger;
+using Fixtures.BodyNumber;
+using Fixtures.BodyString;
+using Fixtures.BodyString.Models;
+using Fixtures.CompositeBoolIntClient;
+using Fixtures.CustomBaseUri;
+using Fixtures.CustomBaseUriMoreOptions;
+using Fixtures.ExtensibleEnums;
+using Fixtures.ExtensibleEnums.Models;
+using Fixtures.Header;
+using Fixtures.Header.Models;
+using Fixtures.Http;
+using Fixtures.Http.Models;
+using Fixtures.ModelFlattening;
+using Fixtures.ModelFlattening.Models;
+using Fixtures.Report;
+using Fixtures.RequiredOptional;
+using Fixtures.Url;
+using Fixtures.Url.Models;
+using Fixtures.UrlMultiCollectionFormat;
+using Fixtures.Validation;
+using Fixtures.Validation.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -55,8 +55,8 @@ using Microsoft.Rest;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Xunit;
-using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
-using ErrorException = Fixtures.AcceptanceTestsHttp.Models.ErrorException;
+using Error = Fixtures.Http.Models.Error;
+using ErrorException = Fixtures.Http.Models.ErrorException;
 using SwaggerPetstoreV2Extensions = Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -429,7 +429,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.True(client.Pet.GetByPetId("scooby").IntEnum == IntEnum.Two);
 
                 // Roundtripping enums test
-                var reqPet = new Fixtures.AcceptanceTestsExtensibleEnums.Models.Pet(IntEnum.Three, "Retriever", DaysOfWeekExtensibleEnum.Friday);
+                var reqPet = new Fixtures.ExtensibleEnums.Models.Pet(IntEnum.Three, "Retriever", DaysOfWeekExtensibleEnum.Friday);
                 var respPet = client.Pet.AddPet(reqPet);
                 Assert.Equal(reqPet.DaysOfWeek, respPet.DaysOfWeek);
                 Assert.Equal(reqPet.IntEnum, respPet.IntEnum);
@@ -562,22 +562,22 @@ namespace AutoRest.CSharp.Tests
                     new ByteArrayEqualityComparer()));
                 bytesResult = client.Array.GetByteInvalidNull();
                 Assert.True(new List<byte[]> {bytes4, null}.SequenceEqual(bytesResult, new ByteArrayEqualityComparer()));
-                var testProduct1 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct1 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 1,
                     StringProperty = "2"
                 };
-                var testProduct2 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct2 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 3,
                     StringProperty = "4"
                 };
-                var testProduct3 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct3 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 5,
                     StringProperty = "6"
                 };
-                var testList1 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var testList1 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
                     testProduct2,
@@ -607,17 +607,17 @@ namespace AutoRest.CSharp.Tests
                     new DictionaryEqualityComparer<string>()));
                 Assert.Null(client.Array.GetComplexNull());
                 Assert.Empty(client.Array.GetComplexEmpty());
-                var productList2 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var productList2 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
                     null,
                     testProduct3
                 };
                 Assert.True(productList2.SequenceEqual(client.Array.GetComplexItemNull(), new ProductEqualityComparer()));
-                var productList3 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var productList3 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
-                    new Fixtures.AcceptanceTestsBodyArray.Models.Product(),
+                    new Fixtures.BodyArray.Models.Product(),
                     testProduct3
                 };
                 var emptyComplex = client.Array.GetComplexItemEmpty();
@@ -1599,7 +1599,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
 
                 // POST param/existingkey
-                Assert.Throws<Fixtures.AcceptanceTestsHeader.Models.ErrorException>(() => client.Header.ParamProtectedKey("text/html")); // Content-Type header ignored by default now (according to spec.)
+                Assert.Throws<Fixtures.Header.Models.ErrorException>(() => client.Header.ParamProtectedKey("text/html")); // Content-Type header ignored by default now (according to spec.)
 
                 // POST response/protectedkey
                 var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
@@ -2335,13 +2335,13 @@ namespace AutoRest.CSharp.Tests
         public async Task EnsureHiddenMethodsMissingTest()
         {
             // Confirm the method exists in body-complex, which hidden methods is based on
-            var knownMethod = typeof(Fixtures.AcceptanceTestsBodyComplex.IBasicOperations).GetMethod("PutValidWithHttpMessagesAsync");
+            var knownMethod = typeof(Fixtures.BodyComplex.IBasicOperations).GetMethod("PutValidWithHttpMessagesAsync");
             // Make sure it is missing for hidden methods
-            var missingMethod = typeof(Fixtures.AcceptanceTestsHiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
+            var missingMethod = typeof(Fixtures.HiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
             Assert.Null(missingMethod);
 
             // Use the facade method
-            using (var client = new Fixtures.AcceptanceTestsHiddenMethods.AutoRestComplexTestService(Fixture.Uri))
+            using (var client = new Fixtures.HiddenMethods.AutoRestComplexTestService(Fixture.Uri))
             {
                 await client.Basic.PutValidAsync("abc", CMYKColors.Magenta, 2);
             }

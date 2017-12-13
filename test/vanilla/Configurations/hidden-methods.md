@@ -5,20 +5,12 @@
 ## Configuration
 
 ``` yaml
-base-folder: ../../../
-input-file: node_modules/@microsoft.azure/autorest.testserver/swagger/body-complex.json
+input-file: ../../../node_modules/@microsoft.azure/autorest.testserver/swagger/body-complex.json
 payload-flattening-threshold: 1
-clear-output-folder: true
 directive:
   - from: code-model-v1
     where-operation: basic_putValid
     transform: >-
       $.hidden = true;
       $.excludeFromInterface = true;
-```
-
-``` yaml $(tag) == 'vanilla'
-output-folder: test/vanilla/Expected/AcceptanceTests/HiddenMethods/
-csharp:
-    namespace: Fixtures.AcceptanceTestsHiddenMethods
 ```
