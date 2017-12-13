@@ -63,16 +63,19 @@ regenExpected = (opts,done) ->
 regenExpectedConfigurations = (configFiles,done) ->
   keys = Object.getOwnPropertyNames(configFiles)
   instances = keys.length
-
   for key in keys
     args = [
       "test/vanilla/Configurations/#{configFiles[key]}",
       "--csharp",
+      # "--debug",
+      # "--verbose",
+      # "--output-artifact=openapi-document.yaml",
+      # "--output-artifact=code-model-v1.yaml",
       "--namespace=Fixtures.#{key}",
-      # "--clear-output-folder"
+      "--clear-output-folder"
     ]
 
-    args.push("--output-folder=$(base-folder)/../../../../test/vanilla/Expected/#{key}")
+    args.push("--output-folder=$(base-folder)/../../../test/vanilla/Expected/#{key}")
 
     if (argv.args)
       for arg in argv.args.split(" ")
