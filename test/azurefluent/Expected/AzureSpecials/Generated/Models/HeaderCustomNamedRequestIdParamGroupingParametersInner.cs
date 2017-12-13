@@ -47,7 +47,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials.Models
         /// <summary>
         /// Gets or sets the fooRequestId
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public string FooClientRequestId { get; set; }
 
         /// <summary>

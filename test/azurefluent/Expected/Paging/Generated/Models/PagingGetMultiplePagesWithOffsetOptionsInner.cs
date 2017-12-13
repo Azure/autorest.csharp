@@ -54,20 +54,20 @@ namespace Fixtures.Azure.Fluent.Paging.Models
         /// Gets or sets sets the maximum number of items to return in the
         /// response.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public int? Maxresults { get; set; }
 
         /// <summary>
         /// Gets or sets offset of return value
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public int Offset { get; set; }
 
         /// <summary>
         /// Gets or sets sets the maximum time that the server can spend
         /// processing the request, in seconds. The default is 30 seconds.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public int? Timeout { get; set; }
 
         /// <summary>

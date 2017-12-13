@@ -49,13 +49,13 @@ namespace Fixtures.Azure.Fluent.Paging.Models
         /// <summary>
         /// Gets or sets sets the api version to use.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public string ApiVersion { get; set; }
 
         /// <summary>
         /// Gets or sets sets the tenant to use.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonIgnore]
         public string Tenant { get; set; }
 
         /// <summary>

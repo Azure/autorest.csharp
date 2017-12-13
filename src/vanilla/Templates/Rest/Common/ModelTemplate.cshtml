@@ -145,10 +145,18 @@ switch (property.Flavor)
         @:}
         break;
     case PropertyFlavor.Implementation:
+        var impl = property.GetImplementation("csharp");
+        if (impl == null)
+        {
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        }
+        else
+        {
         @:public @property.ModelTypeName @property.Name
         @:{ 
-        @:    @(property.GetImplementation("csharp") ?? "get { throw new System.NotImplementedException(); } set { throw new System.NotImplementedException(); }")
+        @:@impl
         @:}
+        }
         break;
     case PropertyFlavor.AdditionalProperties:
     case PropertyFlavor.Regular:
