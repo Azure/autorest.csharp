@@ -72,7 +72,7 @@ regenExpectedConfigurations = (configFiles,done) ->
       # "--clear-output-folder"
     ]
 
-    args.push("--output-folder=../../../test/vanilla/Expected/#{key}")
+    args.push("--output-folder=$(base-folder)/../../../../test/vanilla/Expected/#{key}")
 
     if (argv.args)
       for arg in argv.args.split(" ")
