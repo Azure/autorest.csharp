@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
     /// <summary>
     /// PetOperations operations.
     /// </summary>
-    internal partial class PetOperations : IServiceOperations<AutoRestTestforxMsErrorResponseextensionsClient>, IPetOperations
+    internal partial class PetOperations : IServiceOperations<XMSErrorResponseExtensionsClient>, IPetOperations
     {
         /// <summary>
         /// Initializes a new instance of the PetOperations class.
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal PetOperations(AutoRestTestforxMsErrorResponseextensionsClient client)
+        internal PetOperations(XMSErrorResponseExtensionsClient client)
         {
             if (client == null)
             {
@@ -46,9 +46,9 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestTestforxMsErrorResponseextensionsClient
+        /// Gets a reference to the XMSErrorResponseExtensionsClient
         /// </summary>
-        public AutoRestTestforxMsErrorResponseextensionsClient Client { get; private set; }
+        public XMSErrorResponseExtensionsClient Client { get; private set; }
 
         /// <summary>
         /// Handle 400 errors

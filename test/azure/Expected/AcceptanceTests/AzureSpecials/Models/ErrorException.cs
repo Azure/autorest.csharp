@@ -50,10 +50,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
         /// <summary>
         /// </summary>
-        public int? ConstantId => Body.ConstantId;
-
-        /// <summary>
-        /// </summary>
         public new string Message => Body.Message;
 
     }

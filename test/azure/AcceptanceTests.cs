@@ -654,7 +654,7 @@ namespace AutoRest.CSharp.Azure.Tests
         {
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";   
-            using(var client = new AutoRestTestforxMsErrorResponseextensionsClient(Fixture.Uri, new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+            using(var client = new XMSErrorResponseExtensionsClient(Fixture.Uri, new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 // basic polymorphic and base types testing
 

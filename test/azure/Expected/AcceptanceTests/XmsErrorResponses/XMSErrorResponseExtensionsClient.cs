@@ -22,9 +22,9 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
     using System.Net.Http;
 
     /// <summary>
-    /// AutoRest Test for x-ms-error-response extensions
+    /// XMS Error Response Extensions
     /// </summary>
-    public partial class AutoRestTestforxMsErrorResponseextensionsClient : ServiceClient<AutoRestTestforxMsErrorResponseextensionsClient>, IAutoRestTestforxMsErrorResponseextensionsClient, IAzureClient
+    public partial class XMSErrorResponseExtensionsClient : ServiceClient<XMSErrorResponseExtensionsClient>, IXMSErrorResponseExtensionsClient, IAzureClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -69,18 +69,18 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         public virtual IPetOperations Pet { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected AutoRestTestforxMsErrorResponseextensionsClient(params DelegatingHandler[] handlers) : base(handlers)
+        protected XMSErrorResponseExtensionsClient(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -88,13 +88,13 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected AutoRestTestforxMsErrorResponseextensionsClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected XMSErrorResponseExtensionsClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -105,7 +105,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected AutoRestTestforxMsErrorResponseextensionsClient(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        protected XMSErrorResponseExtensionsClient(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -115,7 +115,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -129,7 +129,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected AutoRestTestforxMsErrorResponseextensionsClient(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        protected XMSErrorResponseExtensionsClient(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -139,7 +139,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
@@ -150,7 +150,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestTestforxMsErrorResponseextensionsClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public XMSErrorResponseExtensionsClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -164,7 +164,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
@@ -178,7 +178,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestTestforxMsErrorResponseextensionsClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public XMSErrorResponseExtensionsClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -192,7 +192,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -206,7 +206,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestTestforxMsErrorResponseextensionsClient(System.Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public XMSErrorResponseExtensionsClient(System.Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -225,7 +225,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestTestforxMsErrorResponseextensionsClient class.
+        /// Initializes a new instance of the XMSErrorResponseExtensionsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -242,7 +242,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestTestforxMsErrorResponseextensionsClient(System.Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public XMSErrorResponseExtensionsClient(System.Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

@@ -16,9 +16,9 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
     using Newtonsoft.Json;
 
     /// <summary>
-    /// AutoRest Test for x-ms-error-response extensions
+    /// XMS Error Response Extensions
     /// </summary>
-    public partial interface IAutoRestTestforxMsErrorResponseextensionsClient : System.IDisposable
+    public partial interface IXMSErrorResponseExtensionsClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.

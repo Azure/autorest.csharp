@@ -269,7 +269,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsHead
         private void Initialize()
         {
             HttpSuccess = new HttpSuccessOperations(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;

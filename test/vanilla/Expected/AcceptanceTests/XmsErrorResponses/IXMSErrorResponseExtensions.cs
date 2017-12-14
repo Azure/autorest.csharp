@@ -14,9 +14,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Pets online.
+    /// XMS Error Response Extensions
     /// </summary>
-    public partial interface IPetStoreInc : System.IDisposable
+    public partial interface IXMSErrorResponseExtensions : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.

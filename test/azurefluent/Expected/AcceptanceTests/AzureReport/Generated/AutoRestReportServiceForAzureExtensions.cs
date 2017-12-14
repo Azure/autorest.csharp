@@ -29,9 +29,14 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
+            /// <param name='qualifier'>
+            /// If specified, qualifies the generated report further (e.g. '2.7' vs '3.5'
+            /// in for Python). The only effect is, that generators that run all tests
+            /// several times, can distinguish the generated reports.
+            /// </param>
+            public static IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations, string qualifier = default(string))
             {
-                return operations.GetReportAsync().GetAwaiter().GetResult();
+                return operations.GetReportAsync(qualifier).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -40,12 +45,17 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureReport
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='qualifier'>
+            /// If specified, qualifies the generated report further (e.g. '2.7' vs '3.5'
+            /// in for Python). The only effect is, that generators that run all tests
+            /// several times, can distinguish the generated reports.
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, string qualifier = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetReportWithHttpMessagesAsync(qualifier, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

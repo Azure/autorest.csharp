@@ -586,12 +586,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    using (System.IO.StreamWriter file = 
-            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\out2"))
-        {
-            file.WriteLine("status code is {0}", statusCode);
-            file.WriteLine(_responseContent);
-        }
                     errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
                                                                new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }

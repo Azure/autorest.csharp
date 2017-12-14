@@ -20,9 +20,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
     using System.Net.Http;
 
     /// <summary>
-    /// Pets online.
+    /// XMS Error Response Extensions
     /// </summary>
-    public partial class PetStoreInc : ServiceClient<PetStoreInc>, IPetStoreInc
+    public partial class XMSErrorResponseExtensions : ServiceClient<XMSErrorResponseExtensions>, IXMSErrorResponseExtensions
     {
         /// <summary>
         /// The base URI of the service.
@@ -45,18 +45,18 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         public virtual IPetOperations Pet { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the PetStoreInc class.
+        /// Initializes a new instance of the XMSErrorResponseExtensions class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public PetStoreInc(params DelegatingHandler[] handlers) : base(handlers)
+        public XMSErrorResponseExtensions(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the PetStoreInc class.
+        /// Initializes a new instance of the XMSErrorResponseExtensions class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -64,13 +64,13 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public PetStoreInc(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public XMSErrorResponseExtensions(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the PetStoreInc class.
+        /// Initializes a new instance of the XMSErrorResponseExtensions class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public PetStoreInc(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        public XMSErrorResponseExtensions(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -91,7 +91,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Initializes a new instance of the PetStoreInc class.
+        /// Initializes a new instance of the XMSErrorResponseExtensions class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -105,7 +105,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public PetStoreInc(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public XMSErrorResponseExtensions(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

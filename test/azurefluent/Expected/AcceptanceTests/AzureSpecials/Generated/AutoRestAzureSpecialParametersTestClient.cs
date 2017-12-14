@@ -324,7 +324,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials
             SkipUrlEncoding = new SkipUrlEncodingOperations(this);
             Odata = new OdataOperations(this);
             Header = new HeaderOperations(this);
-            BaseUri = new System.Uri("http://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             ApiVersion = "2015-07-01-preview";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

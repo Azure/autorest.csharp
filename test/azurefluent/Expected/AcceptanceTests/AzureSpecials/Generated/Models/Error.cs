@@ -27,12 +27,18 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), int? constantId = default(int?), string message = default(string))
+        public Error(int? status = default(int?), string message = default(string))
         {
             Status = status;
-            ConstantId = constantId;
             Message = message;
             CustomInit();
+        }
+        /// <summary>
+        /// Static constructor for Error class.
+        /// </summary>
+        static Error()
+        {
+            ConstantId = 1;
         }
 
         /// <summary>
@@ -47,13 +53,13 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureSpecials.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "constantId")]
-        public int? ConstantId { get; set; }
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [JsonProperty(PropertyName = "constantId")]
+        public static int ConstantId { get; private set; }
 
         /// <summary>
         /// Method that creates an exception of ErrorException

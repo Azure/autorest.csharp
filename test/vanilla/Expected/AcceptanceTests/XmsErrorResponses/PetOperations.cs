@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
     /// <summary>
     /// PetOperations operations.
     /// </summary>
-    public partial class PetOperations : IServiceOperations<PetStoreInc>, IPetOperations
+    public partial class PetOperations : IServiceOperations<XMSErrorResponseExtensions>, IPetOperations
     {
         /// <summary>
         /// Initializes a new instance of the PetOperations class.
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public PetOperations(PetStoreInc client)
+        public PetOperations(XMSErrorResponseExtensions client)
         {
             if (client == null)
             {
@@ -46,9 +46,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
         }
 
         /// <summary>
-        /// Gets a reference to the PetStoreInc
+        /// Gets a reference to the XMSErrorResponseExtensions
         /// </summary>
-        public PetStoreInc Client { get; private set; }
+        public XMSErrorResponseExtensions Client { get; private set; }
 
         /// <summary>
         /// Handle 400 errors

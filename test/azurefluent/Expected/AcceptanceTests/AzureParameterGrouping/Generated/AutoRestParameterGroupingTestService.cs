@@ -270,7 +270,7 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureParameterGrouping
         private void Initialize()
         {
             ParameterGrouping = new ParameterGroupingOperations(this);
-            BaseUri = new System.Uri("https://localhost");
+            BaseUri = new System.Uri("http://localhost:3000");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;
