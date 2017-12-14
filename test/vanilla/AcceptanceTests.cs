@@ -1906,7 +1906,7 @@ namespace AutoRest.CSharp.Tests
             client.HttpSuccess.Patch200(true);
             client.HttpSuccess.Delete200(true);
             //TODO, 4042586: Support options operations in swagger modeler
-            Assert.True(client.HttpSuccess.Options200();
+            Assert.True(client.HttpSuccess.Options200());
             client.HttpSuccess.Put201(true);
             client.HttpSuccess.Post201(true);
             client.HttpSuccess.Put202(true);
