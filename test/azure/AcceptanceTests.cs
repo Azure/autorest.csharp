@@ -278,14 +278,12 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
-                /* 
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
 
                 Assert.Contains("Operation BeginPutNonRetry400 returned status code: '400'", exception.Message, StringComparison.Ordinal);
-                */
-                var exception =
+                exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 
