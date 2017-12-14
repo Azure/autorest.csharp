@@ -205,5 +205,6 @@ namespace AutoRest.CSharp.Model
         }
 
         public bool IsValueType => false;
+        
     }
 }

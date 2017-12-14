@@ -150,8 +150,6 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
-                
-                // ClientRuntime still handles the exceptions for LRO operations, this should be made consistent
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put201CreatingFailed200(new Product { Location = "West US" }));
@@ -281,7 +279,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
-
                 Assert.Contains("Operation BeginPutNonRetry400 returned status code: '400'", exception.Message, StringComparison.Ordinal);
                 exception =
                     Assert.Throws<CloudException>(

@@ -332,7 +332,7 @@ namespace AutoRest.CSharp
             var returnTypeName = method.ReturnType.Body?.Name ?? method.ReturnType.Headers?.Name;
             returnTypeName = returnTypeName?.ToCamelCase();
 
-            result.AppendLine($"{(returnTypeName == null ? "" : $"var {returnTypeName} = ")}await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async(" +
+            result.AppendLine($"{(returnTypeName == null ? "" : $"var {returnTypeName} = ")}await {method.MethodReference}Async(" +
                 $"{string.Join(", ", paramaters.Select(param => "\n    " + param))});");
 
             if (isolateSnippet)
@@ -341,6 +341,5 @@ namespace AutoRest.CSharp
             }
             return result.ToString();
         }
-
     }
 }
