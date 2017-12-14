@@ -50,6 +50,8 @@ using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
 using Fixtures.AcceptanceTestsValidation;
 using Fixtures.AcceptanceTestsValidation.Models;
+using Fixtures.AcceptanceTestsXmsErrorResponses;
+using Fixtures.AcceptanceTestsXmsErrorResponses.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -416,50 +418,6 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        /* 
-        [Fact]
-        public void CustomExceptionsAndStatusCodesTests()
-        {
-            
-            using(var client = new Fixtures.AcceptanceTestsXmsErrorResponses.AutoRestTestforxMsErrorResponseextensions(Fixture.Uri))
-            {
-                // basic polymorphic and base types testing
-
-                // Test 1: valid pet received
-                var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
-                Assert.Equal(p1.Name, "Tommy Tomson");
-                Assert.Equal(p1.AniType, "Dog");
-
-                // Test 2: invalid pet throws AnimalNotFoundException
-                Assert.Throws<AnimalNotFoundException>(()=>client.Pet.GetPetById("coyoteUgly"));
-                
-                // Test 3: invalid pet throws LinkNotFoundException
-                Assert.Throws<LinkNotFoundException>(()=>client.Pet.GetPetById("weirdAlYankovic"));
-                
-                // Test 4: invalid pet throws HttpRestException<int>
-                Assert.Throws<HttpRestException<int>>(()=>client.Pet.GetPetById("alien123"));
-                
-                // Test 5: invalid pet throws HttpRestException<string>
-                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("ringo"));
-
-                // Test 6: random invalid pet throws HttpRestException<string> 
-                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("foofoo"));
-                
-                // multi level polymorhpic inheritence testing
-
-                // test 1: valid action no exceptions
-                client.Pet.DoSomething("stay");
-
-                // test 2: invalid action throws PetSadErrorException
-                Assert.Throws<PetSadErrorException>(()=>client.Pet.DoSomething("jump"));
-                
-                // test 3: invalid action throws PetHungryOrThirstyErrorException
-                Assert.Throws<PetHungryOrThirstyErrorException>(()=>client.Pet.DoSomething("fetch"));
-                
-            }
-        }
-        */
-
         [Fact]
         public void ExtensibleEnumsTest()
         {
@@ -482,6 +440,47 @@ namespace AutoRest.CSharp.Tests
             }
         }
         
+        [Fact]
+        public void CustomExceptionsAndStatusCodesTests()
+        {
+            
+            using(var client = new Fixtures.AcceptanceTestsXmsErrorResponses.PetStoreInc(Fixture.Uri))
+            {
+                // basic polymorphic and base types testing
+
+                // Test 1: valid pet received
+                var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
+                Assert.Equal(p1.Name, "Tommy Tomson");
+                Assert.Equal(p1.AniType, "Dog");
+
+                // Test 2: invalid pet throws AnimalNotFoundException
+                Assert.ThrowsAsync<AnimalNotFoundException>(()=>client.Pet.GetPetByIdAsync("coyoteUgly"));
+                
+                // Test 3: invalid pet throws LinkNotFoundException
+                Assert.ThrowsAsync<LinkNotFoundException>(()=>client.Pet.GetPetByIdAsync("weirdAlYankovic"));
+                
+                // Test 4: invalid pet throws HttpRestException<int>
+                Assert.ThrowsAsync<HttpRestException<int>>(()=>client.Pet.GetPetByIdAsync("alien123"));
+                
+                // Test 5: invalid pet throws HttpRestException<string>
+                Assert.ThrowsAsync<HttpRestException<string>>(()=>client.Pet.GetPetByIdAsync("ringo"));
+
+                // Test 6: random invalid pet throws HttpRestException<string> 
+                Assert.ThrowsAsync<HttpRestException<string>>(()=>client.Pet.GetPetByIdAsync("foofoo"));
+                
+                // multi level polymorhpic inheritence testing
+
+                // test 1: valid action no exceptions
+                client.Pet.DoSomething("stay");
+
+                // test 2: invalid action throws PetSadErrorException
+                Assert.ThrowsAsync<PetSadErrorException>(()=>client.Pet.DoSomethingAsync("jump"));
+                
+                // test 3: invalid action throws PetHungryOrThirstyErrorException
+                Assert.ThrowsAsync<PetHungryOrThirstyErrorException>(()=>client.Pet.DoSomethingAsync("fetch"));
+                
+            }
+        }
 
         [Fact]
         public void DateTimeTests()
@@ -1070,7 +1069,7 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestBasicDictionaryParsing(AutoRestSwaggerBATdictionaryService client)
         {
-// GET empty
+            // GET empty
             Assert.Empty(client.Dictionary.GetEmpty());
             // PUT empty
             client.Dictionary.PutEmpty(new Dictionary<string, string>());
@@ -1811,7 +1810,6 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestServerErrorStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            /* 
             EnsureThrowsWithStatusCode(HttpStatusCode.NotImplemented, () => client.HttpServerFailure.Head501());
             EnsureThrowsWithStatusCode(HttpStatusCode.NotImplemented, () => client.HttpServerFailure.Get501());
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported,
@@ -1824,24 +1822,21 @@ namespace AutoRest.CSharp.Tests
             client.HttpRetry.Get502();
             client.HttpRetry.Put500(true);
             //TODO, 4042586: Support options operations in swagger modeler
-            //client.HttpRetry.Options429();
+            client.HttpRetry.Options429();
             client.HttpRetry.Patch500(true);
             client.HttpRetry.Post503(true);
             client.HttpRetry.Delete503(true);
             client.HttpRetry.Put504(true);
             client.HttpRetry.Patch504(true);
-            */
         }
 
         private static void TestClientErrorStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-
-            /* 
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Head400());
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Get400());
              
             //TODO, 4042586: Support options operations in swagger modeler
-            //EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Options400());
+            EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Options400());
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Put400(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Patch400(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, () => client.HttpClientFailure.Post400(true));
@@ -1849,7 +1844,7 @@ namespace AutoRest.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.Unauthorized, () => client.HttpClientFailure.Head401());
             EnsureThrowsWithStatusCode(HttpStatusCode.PaymentRequired, () => client.HttpClientFailure.Get402());
             //TODO, 4042586: Support options operations in swagger modeler
-            //EnsureThrowsWithStatusCode(HttpStatusCode.Forbidden, () => client.HttpClientFailure.Options403());
+            EnsureThrowsWithStatusCode(HttpStatusCode.Forbidden, () => client.HttpClientFailure.Options403());
             EnsureThrowsWithStatusCode(HttpStatusCode.Forbidden, () => client.HttpClientFailure.Get403());
             EnsureThrowsWithStatusCode(HttpStatusCode.NotFound, () => client.HttpClientFailure.Put404(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.MethodNotAllowed, () => client.HttpClientFailure.Patch405(true));
@@ -1858,7 +1853,7 @@ namespace AutoRest.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.Gone, () => client.HttpClientFailure.Head410());
             EnsureThrowsWithStatusCode(HttpStatusCode.LengthRequired, () => client.HttpClientFailure.Get411());
             //TODO, 4042586: Support options operations in swagger modeler
-            //EnsureThrowsWithStatusCode(HttpStatusCode.PreconditionFailed, () => client.HttpClientFailure.Options412());
+            EnsureThrowsWithStatusCode(HttpStatusCode.PreconditionFailed, () => client.HttpClientFailure.Options412());
             EnsureThrowsWithStatusCode(HttpStatusCode.PreconditionFailed, () => client.HttpClientFailure.Get412());
             EnsureThrowsWithStatusCode(HttpStatusCode.RequestEntityTooLarge, () => client.HttpClientFailure.Put413(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.RequestUriTooLong, () => client.HttpClientFailure.Patch414(true));
@@ -1867,7 +1862,6 @@ namespace AutoRest.CSharp.Tests
                 () => client.HttpClientFailure.Get416());
             EnsureThrowsWithStatusCode(HttpStatusCode.ExpectationFailed, () => client.HttpClientFailure.Delete417(true));
             EnsureThrowsWithStatusCode((HttpStatusCode) 429, () => client.HttpClientFailure.Head429());
-            */
         }
 
         private static void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
@@ -1878,16 +1872,16 @@ namespace AutoRest.CSharp.Tests
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get301WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            //EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.Put301WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.Put301WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            // EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
             //TODO, Fix this test on PORTABLE
-            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
-            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Options307WithHttpMessagesAsync());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Options307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Put307WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post307WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Patch307WithHttpMessagesAsync(true));
@@ -1897,7 +1891,7 @@ namespace AutoRest.CSharp.Tests
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
             var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
-            //Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
+            Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
 
             var ex2 = Assert.Throws<HttpRestException<string>>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
@@ -1912,7 +1906,7 @@ namespace AutoRest.CSharp.Tests
             client.HttpSuccess.Patch200(true);
             client.HttpSuccess.Delete200(true);
             //TODO, 4042586: Support options operations in swagger modeler
-            //Assert.True(client.HttpSuccess.Options200();
+            Assert.True(client.HttpSuccess.Options200();
             client.HttpSuccess.Put201(true);
             client.HttpSuccess.Post201(true);
             client.HttpSuccess.Put202(true);
@@ -2407,7 +2401,7 @@ namespace AutoRest.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 78;
+                int totalTests = report.Count - 71;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);

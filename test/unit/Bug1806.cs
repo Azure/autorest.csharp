@@ -58,10 +58,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 var codeText = fileSystem.ReadAllText(@"ContainerServicesOperations.cs");
                 
                 Assert.NotEmpty(codeText);
-                // is a CloudException object created?
-                Assert.True(codeText.Contains("new Microsoft.Rest.Azure.CloudException"));
-                // are we deserializing response into CloudError object?
-                Assert.True(codeText.Contains("DeserializeObject<CloudError>"));
 
             }
         }
