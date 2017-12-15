@@ -142,12 +142,34 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:}
             @:else
             @:{
-                @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage);
+                if(!Model.IsAzureARMGenerator())
+                {
+                @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage,
+                    @:new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                    @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                else 
+                {
+                @:throw new Microsoft.Rest.Azure.CloudException(errorMessage,
+                    @:new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                    @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
             @:}
         @:}
         @:catch (Newtonsoft.Json.JsonException)
         @:{
-            @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage);
+            if(!Model.IsAzureARMGenerator())
+            {
+            @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage,
+                @:new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            }
+            else 
+            {
+            @:throw new Microsoft.Rest.Azure.CloudException(errorMessage,
+                @:new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            }
         @:}
         @:@(Model.SetRequestIdForException())
     @:}

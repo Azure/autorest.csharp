@@ -301,11 +301,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 exception =
                     Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
                 Assert.Null(exception.Body);
-                            using (System.IO.StreamWriter file = 
-            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\out2.log", true))
-        {
-            file.WriteLine(exception.Body.Message);
-        }
+         
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
@@ -611,7 +607,7 @@ namespace AutoRest.CSharp.Azure.Tests
             { SubscriptionId = validSubscription })
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
-                var exception = Assert.Throws<HttpRestException<CloudError>>(() => client.XMsClientRequestId.Get());
+                var exception = Assert.Throws<CloudException>(() => client.XMsClientRequestId.Get());
                 Assert.Equal("123", exception.RequestId);
             }
         }
@@ -669,12 +665,11 @@ namespace AutoRest.CSharp.Azure.Tests
         public void CustomExceptionsAndStatusCodesTests()
         {
             const string validSubscription = "1234-5678-9012-3456";
-            const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";   
             using(var client = new XMSErrorResponseExtensionsClient(Fixture.Uri, new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 // basic polymorphic and base types testing
 
-                /*
+                
                 // Test 1: valid pet received
                 var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
                 Assert.Equal(p1.Name, "Tommy Tomson");
@@ -691,18 +686,9 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 // Test 5: invalid pet throws HttpRestException<string>
                 Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("ringo"));
-                */
-
-                try
-                {
-                    client.Pet.GetPetById("foofoo");
-                }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine(e.ToString());
-                }
+                
                 // Test 6: random invalid pet throws HttpRestException<string> 
-                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("foofoo"));
+                Assert.Throws<CloudException>(()=>client.Pet.GetPetById("foofoo"));
                 
                 // multi level polymorhpic inheritence testing
 
