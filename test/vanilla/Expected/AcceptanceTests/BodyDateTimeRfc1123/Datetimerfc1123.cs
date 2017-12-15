@@ -84,12 +84,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -253,12 +260,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -422,12 +436,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -591,12 +612,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -760,12 +788,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -914,12 +949,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -1083,12 +1125,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -1252,12 +1301,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();
@@ -1406,12 +1462,19 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
             }
             _httpRequest.Dispose();

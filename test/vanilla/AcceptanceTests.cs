@@ -50,8 +50,6 @@ using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
 using Fixtures.AcceptanceTestsValidation;
 using Fixtures.AcceptanceTestsValidation.Models;
-using Fixtures.AcceptanceTestsXmsErrorResponses;
-using Fixtures.AcceptanceTestsXmsErrorResponses.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -2401,7 +2399,7 @@ namespace AutoRest.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 71;
+                int totalTests = report.Count - 104;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);

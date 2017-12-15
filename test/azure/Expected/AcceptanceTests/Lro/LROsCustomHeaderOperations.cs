@@ -174,12 +174,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -407,12 +414,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -646,12 +660,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -856,12 +877,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                               new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                    else
+                    {
+                        throw new RestException(errorMessage);
+                    }
                 }
                 catch (JsonException)
                 {
-                    // Ignore the exception
+                    throw new RestException(errorMessage);
                 }
                 catch(RestException ex)
                 {

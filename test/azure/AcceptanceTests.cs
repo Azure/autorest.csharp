@@ -271,25 +271,41 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroSadPathTests()
         {
+            /* 
+            using (System.IO.StreamWriter file = 
+            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\out2.log", true))
+        {
+            file.WriteLine(System.Diagnostics.Process.GetCurrentProcess().Id);
+        }
+        
+            System.Diagnostics.Debugger.Launch();
+            */
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
+                
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
-                Assert.Contains("Operation BeginPutNonRetry400 returned status code: '400'", exception.Message, StringComparison.Ordinal);
+
+                Assert.Contains("Expected bad request message", exception.Message, StringComparison.Ordinal);
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 
-                Assert.Equal("Error from the server", exception.Body.Message);
+                Assert.Equal("Error from the server", exception.Message);
                 Assert.NotNull(exception.Request);
                 Assert.NotNull(exception.Response);
                 exception =
                     Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
                 Assert.Null(exception.Body);
+                            using (System.IO.StreamWriter file = 
+            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\out2.log", true))
+        {
+            file.WriteLine(exception.Body.Message);
+        }
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
