@@ -86,16 +86,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -298,16 +298,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -515,16 +515,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -727,16 +727,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -939,16 +939,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
@@ -1151,16 +1151,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                    new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException(errorMessage);
+                        throw new HttpRestException<V>(errorMessage);
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException(errorMessage);
+                    throw new HttpRestException<V>(errorMessage);
                 }
                 catch(RestException ex)
                 {
