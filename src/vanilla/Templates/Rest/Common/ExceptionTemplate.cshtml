@@ -67,9 +67,14 @@ modelType=modelType.BaseModelType;
         @:@WrapComment("/// ", property.Documentation)
         @:/// </remarks>
             }
-        string overridePrefix = (property.Name == "Message")? "new " : string.Empty;
-
-        @:public @overridePrefix@property.ModelTypeName @property.Name => Body.@property.Name;
+        if(property.Name == "Message")
+        {
+        @:public new string Message => (string.IsNullOrEmpty(Body?.Message))? Message: Body.Message;
+        }
+        else
+        {
+        @:public @property.ModelTypeName @property.Name => Body.@property.Name;
+        }
         @EmptyLine
 }
     }

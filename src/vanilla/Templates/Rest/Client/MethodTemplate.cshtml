@@ -138,16 +138,16 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:if(errorResponseModel!=null)
             @:{
                 @:errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                            @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                             @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
             @:}
             @:else
             @:{
-                @:throw new Microsoft.Rest.RestException(errorMessage);
+                @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage);
             @:}
         @:}
         @:catch (Newtonsoft.Json.JsonException)
         @:{
-            @:throw new Microsoft.Rest.RestException(errorMessage);
+            @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage);
         @:}
         @:@(Model.SetRequestIdForException())
     @:}
