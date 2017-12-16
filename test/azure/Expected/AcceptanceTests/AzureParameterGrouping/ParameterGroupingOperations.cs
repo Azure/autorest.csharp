@@ -86,16 +86,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage);
+                        throw new CloudException(errorMessage,
+                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage);
+                    throw new CloudException(errorMessage,
+                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch(RestException ex)
                 {
@@ -334,16 +338,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage);
+                        throw new CloudException(errorMessage,
+                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage);
+                    throw new CloudException(errorMessage,
+                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch(RestException ex)
                 {
@@ -551,16 +559,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage);
+                        throw new CloudException(errorMessage,
+                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage);
+                    throw new CloudException(errorMessage,
+                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch(RestException ex)
                 {
@@ -795,16 +807,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                     if(errorResponseModel!=null)
                     {
                         errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                     new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage);
+                        throw new CloudException(errorMessage,
+                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage);
+                    throw new CloudException(errorMessage,
+                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch(RestException ex)
                 {

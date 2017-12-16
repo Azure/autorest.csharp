@@ -69,7 +69,7 @@ modelType=modelType.BaseModelType;
             }
         if(property.Name == "Message")
         {
-        @:public new string Message => (string.IsNullOrEmpty(Body?.Message))? Message: Body.Message;
+        @:public new string Message => (string.IsNullOrEmpty(Body?.Message))? base.Message: Body.Message;
         }
         else
         {
