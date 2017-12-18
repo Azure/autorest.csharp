@@ -1888,9 +1888,9 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
-            Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
-
+            //var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
+            //Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
+            client.HttpFailure.GetEmptyError();
             var ex2 = Assert.Throws<HttpRestException<string>>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
 

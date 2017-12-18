@@ -86,21 +86,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new CloudException(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 catch(RestException ex)
                 {
@@ -109,7 +104,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                     {
                         ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
                     }
-                    throw;
+                    throw ex;
                 }
             }
             _httpRequest.Dispose();

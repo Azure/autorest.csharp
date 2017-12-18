@@ -85,21 +85,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -256,21 +251,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -449,21 +439,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -620,21 +605,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -791,21 +771,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -975,21 +950,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1146,21 +1116,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1317,21 +1282,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1501,21 +1461,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1685,21 +1640,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1856,21 +1806,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2027,21 +1972,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2209,21 +2149,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2391,21 +2326,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2573,21 +2503,16 @@ namespace Fixtures.AcceptanceTestsHttp
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                   new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage,
-                                                                      new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                      new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage,
-                                                                  new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                                                  new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();

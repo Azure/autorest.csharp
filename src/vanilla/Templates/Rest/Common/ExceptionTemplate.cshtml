@@ -63,42 +63,42 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:/// </summary>
         if (!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
         {
-            @:/// <remarks>
-            @:@WrapComment("/// ", property.Documentation)
-            @:/// </remarks>
+        @:/// <remarks>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </remarks>
         }
 
         if (property.Name == "Message")
         {
-            @:public override string Message
+        @:public override string Message
+        @:{
+            @:get
             @:{
-                @:get
-                @:{
-                    @:return (string.IsNullOrEmpty(Body?.Message))? base.Message : Body.Message;
-                @:}
+                @:return (string.IsNullOrEmpty(Body?.Message))? base.Message : Body.Message;
             @:}
+        @:}
         }
         else
         {
             if (property.IsNullable())
             {
-            @:public @property.ModelTypeName @property.Name
+        @:public @property.ModelTypeName @property.Name
+        @:{
+            @:get
             @:{
-                @:get
-                @:{
-                    @:return Body?.@property.Name;
-                @:}
+                @:return Body?.@property.Name;
             @:}
+        @:}
             }
             else
             {
-            @:public @property.ModelTypeName @property.Name 
-            @:{
-                @:get
-                @:{ 
-                    @:return Body?.@property.Name ?? default(@property.ModelTypeName);
-                @:}
+        @:public @property.ModelTypeName @property.Name 
+        @:{
+            @:get
+            @:{ 
+                @:return Body?.@property.Name ?? default(@property.ModelTypeName);
             @:}
+        @:}
             }
         }
         @EmptyLine
