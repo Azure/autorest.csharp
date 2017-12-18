@@ -148,33 +148,27 @@ namespace AutoRest.CSharp.Azure.Tests
             {
                 client.LongRunningOperationRetryTimeout = 0;
 
+                
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
-
                 /*
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put201CreatingFailed200(new Product { Location = "West US" }));
 
-                Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
+                Assert.Contains("Long running operation failed with status 'Failed'.", exception.Message, StringComparison.Ordinal);
+                */
+                
                 Assert.Equal("Succeeded",
                     client.LROs.Put200UpdatingSucceeded204(new Product { Location = "West US" }).ProvisioningState);
-
-            */
-
-                try
-                {
-                    client.LROs.Put201CreatingFailed200(new Product { Location = "West US" });
-                }
-                catch (CloudException ex)
-                {
-                    System.Console.WriteLine(ex.Message);
-                }
-
+                
+                /*
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put200Acceptedcanceled200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
+                */
+
                 Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct().ProvisioningState).ProvisioningState);
@@ -189,7 +183,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     client.LROs.PutAsyncRetrySucceeded(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded",
                     client.LROs.PutAsyncNoRetrySucceeded(new Product { Location = "West US" }).ProvisioningState);
-                exception =
+                var exception =
                     Assert.Throws<CloudException>(() => client.LROs.PutAsyncRetryFailed(new Product { Location = "West US" }));
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 exception =
@@ -251,6 +245,7 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
+
             }
         }
 
@@ -290,7 +285,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
-                
+                /*
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
@@ -388,6 +383,10 @@ namespace AutoRest.CSharp.Azure.Tests
                     StringComparison.Ordinal);
                 exception = Assert.Throws<CloudException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
+                */
+                var exception =
+    Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
+                Assert.Null(exception.Body);
             }
         }
 
