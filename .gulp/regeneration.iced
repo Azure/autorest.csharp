@@ -137,7 +137,7 @@ azureCompositeMappings = {
 
 configurationFiles = {
   'HiddenMethods': 'hidden-methods.md',
-  #'Components': 'components.md',
+  'Components': 'components.md',
   'ContentTypeHeader': 'content-type-header.md'
 }
 
