@@ -18,43 +18,61 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     public partial class ErrorException : HttpRestExceptionBase<Error>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the ErrorException class.
+    /// <summary>
+    /// Initializes a new instance of the ErrorException class.
+    /// </summary>
+    public ErrorException()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the ErrorException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public ErrorException(string message)
+    : this(message, null)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the ErrorException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public ErrorException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+            /// <summary>
         /// </summary>
-        public ErrorException()
-        {
-        }
+            public int? Status
+            {
+                get
+                {
+                    return Body?.Status;
+                }
+            }
 
         /// <summary>
-        /// Initializes a new instance of the ErrorException class.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public ErrorException(string message)
-            : this(message, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ErrorException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public ErrorException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            public override string Message
+            {
+                get
+                {
+                    return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                }
+            }
 
         /// <summary>
         /// </summary>
-        public int? Status => Body.Status;
-
-        /// <summary>
-        /// </summary>
-        public new string Message => string.IsNullOrEmpty(Body?.Message)? Message: Body.Message;
-
-        /// <summary>
-        /// </summary>
-        public Error ParentError => Body.ParentError;
+            public Error ParentError
+            {
+                get
+                {
+                    return Body?.ParentError;
+                }
+            }
 
     }
-}
+    }

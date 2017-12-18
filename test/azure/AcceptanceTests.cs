@@ -150,6 +150,8 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
+
+                /*
                 var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put201CreatingFailed200(new Product { Location = "West US" }));
@@ -157,7 +159,19 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 Assert.Equal("Succeeded",
                     client.LROs.Put200UpdatingSucceeded204(new Product { Location = "West US" }).ProvisioningState);
-                exception =
+
+            */
+
+                try
+                {
+                    client.LROs.Put201CreatingFailed200(new Product { Location = "West US" });
+                }
+                catch (CloudException ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
+
+                var exception =
                     Assert.Throws<CloudException>(
                         () => client.LROs.Put200Acceptedcanceled200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
@@ -271,15 +285,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroSadPathTests()
         {
-            /* 
-            using (System.IO.StreamWriter file = 
-            new System.IO.StreamWriter(@"C:\Users\deshank\AppData\Local\Temp\out2.log", true))
-        {
-            file.WriteLine(System.Diagnostics.Process.GetCurrentProcess().Id);
-        }
-        
-            System.Diagnostics.Debugger.Launch();
-            */
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))

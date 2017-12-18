@@ -19,39 +19,51 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     public partial class NotFoundErrorBaseException : HttpRestExceptionBase<NotFoundErrorBase>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the NotFoundErrorBaseException class.
+    /// <summary>
+    /// Initializes a new instance of the NotFoundErrorBaseException class.
+    /// </summary>
+    public NotFoundErrorBaseException()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the NotFoundErrorBaseException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public NotFoundErrorBaseException(string message)
+    : this(message, null)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the NotFoundErrorBaseException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public NotFoundErrorBaseException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+            /// <summary>
         /// </summary>
-        public NotFoundErrorBaseException()
-        {
-        }
+            public string Reason
+            {
+                get
+                {
+                    return Body?.Reason;
+                }
+            }
 
         /// <summary>
-        /// Initializes a new instance of the NotFoundErrorBaseException class.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public NotFoundErrorBaseException(string message)
-            : this(message, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the NotFoundErrorBaseException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public NotFoundErrorBaseException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        public string Reason => Body.Reason;
-
-        /// <summary>
-        /// </summary>
-        public string SomeBaseProp => Body.SomeBaseProp;
+            public string SomeBaseProp
+            {
+                get
+                {
+                    return Body?.SomeBaseProp;
+                }
+            }
 
     }
-}
+    }

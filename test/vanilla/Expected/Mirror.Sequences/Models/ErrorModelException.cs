@@ -18,39 +18,51 @@ namespace Fixtures.MirrorSequences.Models
     public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the ErrorModelException class.
+    /// <summary>
+    /// Initializes a new instance of the ErrorModelException class.
+    /// </summary>
+    public ErrorModelException()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the ErrorModelException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public ErrorModelException(string message)
+    : this(message, null)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the ErrorModelException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public ErrorModelException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+            /// <summary>
         /// </summary>
-        public ErrorModelException()
-        {
-        }
+            public int Code
+            {
+                get
+                {
+                    return Body?.Code ?? default(int);
+                }
+            }
 
         /// <summary>
-        /// Initializes a new instance of the ErrorModelException class.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public ErrorModelException(string message)
-            : this(message, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ErrorModelException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public ErrorModelException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        public int Code => Body.Code;
-
-        /// <summary>
-        /// </summary>
-        public new string Message => string.IsNullOrEmpty(Body?.Message)? Message: Body.Message;
+            public override string Message
+            {
+                get
+                {
+                    return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                }
+            }
 
     }
-}
+    }

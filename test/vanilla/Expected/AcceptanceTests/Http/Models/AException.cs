@@ -18,35 +18,41 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     public partial class AException : HttpRestExceptionBase<A>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the AException class.
-        /// </summary>
-        public AException()
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the AException class.
+    /// </summary>
+    public AException()
+    {
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the AException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        public AException(string message)
-            : this(message, null)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the AException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public AException(string message)
+    : this(message, null)
+    {
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the AException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public AException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the AException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public AException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
 
-        /// <summary>
+            /// <summary>
         /// </summary>
-        public string StatusCode => Body.StatusCode;
+            public string StatusCode
+            {
+                get
+                {
+                    return Body?.StatusCode;
+                }
+            }
 
     }
-}
+    }

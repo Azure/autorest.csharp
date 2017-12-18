@@ -19,46 +19,64 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     public partial class PetHungryOrThirstyErrorException : HttpRestExceptionBase<PetHungryOrThirstyError>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-        /// </summary>
-        public PetHungryOrThirstyErrorException()
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+    /// </summary>
+    public PetHungryOrThirstyErrorException()
+    {
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        public PetHungryOrThirstyErrorException(string message)
-            : this(message, null)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public PetHungryOrThirstyErrorException(string message)
+    : this(message, null)
+    {
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public PetHungryOrThirstyErrorException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public PetHungryOrThirstyErrorException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
 
-        /// <summary>
+            /// <summary>
         /// Gets or sets is the pet hungry or thirsty or both
         /// </summary>
-        public string HungryOrThirsty => Body.HungryOrThirsty;
+            public string HungryOrThirsty
+            {
+                get
+                {
+                    return Body?.HungryOrThirsty;
+                }
+            }
 
         /// <summary>
         /// Gets or sets why is the pet sad
         /// </summary>
-        public string Reason => Body.Reason;
+            public string Reason
+            {
+                get
+                {
+                    return Body?.Reason;
+                }
+            }
 
         /// <summary>
         /// Gets or sets the error message
         /// </summary>
-        public string ErrorMessage => Body.ErrorMessage;
+            public string ErrorMessage
+            {
+                get
+                {
+                    return Body?.ErrorMessage;
+                }
+            }
 
     }
-}
+    }

@@ -18,39 +18,51 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     public partial class BException : HttpRestExceptionBase<B>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the BException class.
+    /// <summary>
+    /// Initializes a new instance of the BException class.
+    /// </summary>
+    public BException()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the BException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public BException(string message)
+    : this(message, null)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the BException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public BException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+            /// <summary>
         /// </summary>
-        public BException()
-        {
-        }
+            public string TextStatusCode
+            {
+                get
+                {
+                    return Body?.TextStatusCode;
+                }
+            }
 
         /// <summary>
-        /// Initializes a new instance of the BException class.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public BException(string message)
-            : this(message, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the BException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public BException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        public string TextStatusCode => Body.TextStatusCode;
-
-        /// <summary>
-        /// </summary>
-        public string StatusCode => Body.StatusCode;
+            public string StatusCode
+            {
+                get
+                {
+                    return Body?.StatusCode;
+                }
+            }
 
     }
-}
+    }

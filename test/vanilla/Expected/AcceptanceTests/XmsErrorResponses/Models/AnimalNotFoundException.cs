@@ -19,43 +19,61 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     public partial class AnimalNotFoundException : HttpRestExceptionBase<AnimalNotFound>
     {
 
-        /// <summary>
-        /// Initializes a new instance of the AnimalNotFoundException class.
+    /// <summary>
+    /// Initializes a new instance of the AnimalNotFoundException class.
+    /// </summary>
+    public AnimalNotFoundException()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the AnimalNotFoundException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    public AnimalNotFoundException(string message)
+    : this(message, null)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the AnimalNotFoundException class.
+    /// </summary>
+    /// <param name="message">The exception message.</param>
+    /// <param name="innerException">Inner exception.</param>
+    public AnimalNotFoundException(string message, System.Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+            /// <summary>
         /// </summary>
-        public AnimalNotFoundException()
-        {
-        }
+            public string Name
+            {
+                get
+                {
+                    return Body?.Name;
+                }
+            }
 
         /// <summary>
-        /// Initializes a new instance of the AnimalNotFoundException class.
         /// </summary>
-        /// <param name="message">The exception message.</param>
-        public AnimalNotFoundException(string message)
-            : this(message, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AnimalNotFoundException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="innerException">Inner exception.</param>
-        public AnimalNotFoundException(string message, System.Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            public string Reason
+            {
+                get
+                {
+                    return Body?.Reason;
+                }
+            }
 
         /// <summary>
         /// </summary>
-        public string Name => Body.Name;
-
-        /// <summary>
-        /// </summary>
-        public string Reason => Body.Reason;
-
-        /// <summary>
-        /// </summary>
-        public string SomeBaseProp => Body.SomeBaseProp;
+            public string SomeBaseProp
+            {
+                get
+                {
+                    return Body?.SomeBaseProp;
+                }
+            }
 
     }
-}
+    }

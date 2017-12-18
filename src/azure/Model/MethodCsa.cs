@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.Azure.Model
               .AppendLine("{").Indent()
               .AppendLine("ex.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
               .AppendLine("}")
-              .AppendLine("throw;").Outdent()
+              .AppendLine("throw ex;").Outdent()
               .AppendLine("}").Outdent();
             return sb.ToString();
         }
