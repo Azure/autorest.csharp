@@ -46,23 +46,23 @@ namespace Fixtures.MirrorSequences.Models
 
             /// <summary>
         /// </summary>
-            public int Code
+        public int Code
+        {
+            get
             {
-                get
-                {
-                    return Body?.Code ?? default(int);
-                }
+                return Body?.Code ?? default(int);
             }
+        }
 
         /// <summary>
         /// </summary>
-            public override string Message
+        public override string Message
+        {
+            get
             {
-                get
-                {
-                    return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
-                }
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
+        }
 
     }
     }

@@ -47,24 +47,24 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
             /// <summary>
         /// Gets or sets why is the pet sad
         /// </summary>
-            public string Reason
+        public string Reason
+        {
+            get
             {
-                get
-                {
-                    return Body?.Reason;
-                }
+                return Body?.Reason;
             }
+        }
 
         /// <summary>
         /// Gets or sets the error message
         /// </summary>
-            public string ErrorMessage
+        public string ErrorMessage
+        {
+            get
             {
-                get
-                {
-                    return Body?.ErrorMessage;
-                }
+                return Body?.ErrorMessage;
             }
+        }
 
     }
     }

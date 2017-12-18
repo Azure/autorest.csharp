@@ -46,23 +46,23 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
             /// <summary>
         /// </summary>
-            public string TextStatusCode
+        public string TextStatusCode
+        {
+            get
             {
-                get
-                {
-                    return Body?.TextStatusCode;
-                }
+                return Body?.TextStatusCode;
             }
+        }
 
         /// <summary>
         /// </summary>
-            public string StatusCode
+        public string StatusCode
+        {
+            get
             {
-                get
-                {
-                    return Body?.StatusCode;
-                }
+                return Body?.StatusCode;
             }
+        }
 
     }
     }

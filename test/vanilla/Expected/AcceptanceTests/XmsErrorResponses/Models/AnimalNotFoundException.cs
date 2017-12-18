@@ -47,33 +47,33 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
 
             /// <summary>
         /// </summary>
-            public string Name
+        public string Name
+        {
+            get
             {
-                get
-                {
-                    return Body?.Name;
-                }
+                return Body?.Name;
             }
+        }
 
         /// <summary>
         /// </summary>
-            public string Reason
+        public string Reason
+        {
+            get
             {
-                get
-                {
-                    return Body?.Reason;
-                }
+                return Body?.Reason;
             }
+        }
 
         /// <summary>
         /// </summary>
-            public string SomeBaseProp
+        public string SomeBaseProp
+        {
+            get
             {
-                get
-                {
-                    return Body?.SomeBaseProp;
-                }
+                return Body?.SomeBaseProp;
             }
+        }
 
     }
     }

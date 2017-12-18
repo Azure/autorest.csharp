@@ -46,23 +46,23 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDuration.Models
 
             /// <summary>
         /// </summary>
-            public int? Status
+        public int? Status
+        {
+            get
             {
-                get
-                {
-                    return Body?.Status;
-                }
+                return Body?.Status;
             }
+        }
 
         /// <summary>
         /// </summary>
-            public override string Message
+        public override string Message
+        {
+            get
             {
-                get
-                {
-                    return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
-                }
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
+        }
 
     }
     }

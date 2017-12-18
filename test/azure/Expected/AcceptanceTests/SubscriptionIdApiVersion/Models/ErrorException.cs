@@ -46,23 +46,23 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 
             /// <summary>
         /// </summary>
-            public int? Code
+        public int? Code
+        {
+            get
             {
-                get
-                {
-                    return Body?.Code;
-                }
+                return Body?.Code;
             }
+        }
 
         /// <summary>
         /// </summary>
-            public override string Message
+        public override string Message
+        {
+            get
             {
-                get
-                {
-                    return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
-                }
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
+        }
 
     }
     }

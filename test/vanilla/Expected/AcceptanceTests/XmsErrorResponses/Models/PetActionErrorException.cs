@@ -48,13 +48,13 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
             /// <summary>
         /// Gets or sets the error message
         /// </summary>
-            public string ErrorMessage
+        public string ErrorMessage
+        {
+            get
             {
-                get
-                {
-                    return Body?.ErrorMessage;
-                }
+                return Body?.ErrorMessage;
             }
+        }
 
     }
     }
