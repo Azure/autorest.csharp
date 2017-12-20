@@ -88,7 +88,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:{
     @:string _responseContent = null;
     @:var ex = new HttpRestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
-    
+
     @:if (_httpResponse.Content != null)
     @:{
         @:try

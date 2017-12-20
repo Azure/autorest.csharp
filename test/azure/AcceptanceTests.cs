@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     StringComparison.Ordinal);
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
                 exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
-                Assert.Contains("Long running operation failed with status 'Failed'", exception.Message,
+                Assert.Contains("Internal Server Error", exception.Message,
                     StringComparison.Ordinal);
                 Assert.NotNull(exception.Body);
                 var error = exception.Body;
