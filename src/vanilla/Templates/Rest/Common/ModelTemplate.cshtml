@@ -34,14 +34,18 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:[Microsoft.Rest.Serialization.JsonTransformation]
 }
 
-    @{
-        var baseClassSignatures = (Model.BaseModelType != null)? " : " + Model.BaseModelType.Name : string.Empty;
-        if(Model.IsErrorResponseModel())
-        {
-            baseClassSignatures+= string.IsNullOrEmpty(baseClassSignatures)? ": " : ", ";
-            baseClassSignatures+= "Microsoft.Rest.IHttpRestErrorModel";
-        }
+@{
+    var baseClassSignatures = (Model.BaseModelType != null)? " : " + Model.BaseModelType.Name : string.Empty;
+    if(Model.IsErrorResponseModel())
+    {
+        baseClassSignatures+= string.IsNullOrEmpty(baseClassSignatures)? ": " : ", ";
+        baseClassSignatures+= "Microsoft.Rest.IHttpRestErrorModel";
     }
+}
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
     public partial class @Model.Name@baseClassSignatures
     {
         /// <summary>
@@ -121,15 +125,55 @@ foreach (var conv in property.JsonConverters)
 {
         @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
 }
-if (property.ModelType is DictionaryType && (property.ModelType as DictionaryType).SupportsAdditionalProperties)
+switch (property.Flavor)
 {
+    case PropertyFlavor.AdditionalProperties:
         @:[Newtonsoft.Json.JsonExtensionData]
-}
-else
-{
+        break;
+    case PropertyFlavor.ForwardTo:
+    case PropertyFlavor.Implementation:
+        @:[Newtonsoft.Json.JsonIgnore]
+        break;
+    case PropertyFlavor.Regular:
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+        break;
+    default:
+        throw new System.NotImplementedException();
 }
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
+switch (property.Flavor)
+{
+    case PropertyFlavor.ForwardTo:
+        @:public @property.ModelTypeName @property.Name
+        @:{ 
+        @:    get { return this.@(property.ForwardTo.Name); }
+        @:    set { this.@(property.ForwardTo.Name) = value; }
+        @:}
+        break;
+    case PropertyFlavor.Implementation:
+        var impl = property.GetImplementation("csharp");
+        if (impl == null)
+        {
         @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        }
+        else
+        {
+        @:public @property.ModelTypeName @property.Name
+        @:{ 
+        @:@impl
+        @:}
+        }
+        break;
+    case PropertyFlavor.AdditionalProperties:
+    case PropertyFlavor.Regular:
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        break;
+    default:
+        throw new System.NotImplementedException();
+}
         @EmptyLine
 }
 
@@ -143,6 +187,10 @@ foreach (var conv in property.JsonConverters)
         @:[Newtonsoft.Json.JsonConverter(typeof(@conv))]
 }
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+if (property.Deprecated)
+{
+        @:[System.Obsolete()]
+}
         @:public static @property.ModelTypeName @property.Name { get; private set; }
         @EmptyLine
 }

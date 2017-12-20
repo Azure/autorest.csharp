@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fixtures.AcceptanceTestsBodyArray.Models;
-using Fixtures.AcceptanceTestsBodyDictionary.Models;
+using Fixtures.BodyArray.Models;
+using Fixtures.BodyDictionary.Models;
 
 namespace AutoRest.CSharp.Tests.Utilities
 {

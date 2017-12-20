@@ -67,7 +67,12 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.3.1" />
     <!--<PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />-->
     <!--<PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />-->
-    <PackageReference Include="autorest.common" Version="2.3.30" />
+    <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" />
+<!-->
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
+    <PackageReference Include="autorest.common" Version="2.4.36" />
+<-->
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
     <!-->
     <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime\ClientRuntime\Microsoft.Rest.ClientRuntime.csproj" />

@@ -1,4 +1,4 @@
-namespace Fixtures.AcceptanceTestsHttp.Models
+namespace Fixtures.Http.Models
 {
     using Microsoft.Rest;
 

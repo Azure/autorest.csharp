@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 var settings = new Settings
                 {
                     FileSystemInput = fileSystem,
-                    OutputDirectory = "",
                     Namespace = "Test"
                     ,PayloadFlatteningThreshold=3
                 };

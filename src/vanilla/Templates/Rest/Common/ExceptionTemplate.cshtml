@@ -17,6 +17,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @{
     var baseModelType = "Microsoft.Rest.HttpRestExceptionBase<" + Model.Name + ">";
 }
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
     public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
     {
     @EmptyLine
