@@ -8,6 +8,172 @@
 @using AutoRest.Extensions
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
 
+@{ var errorCodes = Model.Responses.Keys.Where(key=> MethodCs.IsErrorResponse(Model.Responses[key])); }
+
+@foreach (var errorCode in errorCodes)
+{
+@:/// <summary>
+@:/// Handle @((int)errorCode) errors
+@:/// </summary>
+@:/// <exception cref="@(MethodCs.GetExceptionTypeName(Model.Responses[errorCode]))">
+@:/// Deserialize error body returned by the operation
+@:/// </exception>
+@:private async System.Threading.Tasks.Task Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse)
+@:{
+if(Model.Responses[errorCode].Body==null)
+{
+    if(!Model.IsAzureARMGenerator())
+    {
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<string>(_httpRequest, _httpResponse, @((int)errorCode)));
+    }
+    else
+    {
+    @:await HandleErrorResponseWithoutBodyFor@(Model.Name)(_httpRequest, _httpResponse, @((int)errorCode)));
+    }
+}
+else if(Model.Responses[errorCode].Body is CompositeTypeCs)
+{
+    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode), @(Model.GetDeserializationSettingsReference(Model.Responses[errorCode].Body)));
+}
+else
+{
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.Responses[errorCode]))>(_httpRequest, _httpResponse, @((int)errorCode));
+}
+@:}
+@EmptyLine
+}
+
+/// <summary>
+/// Handle other unhandled status codes
+/// </summary>
+/// <exception cref="@(MethodCs.GetExceptionTypeName(Model.DefaultResponse))">
+/// Deserialize error body returned by the operation
+/// </exception>
+private async System.Threading.Tasks.Task HandleDefaultErrorResponseFor@(Model.Name)(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
+{
+@if(Model.DefaultResponse.Body==null)
+{
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<string>(_httpRequest, _httpResponse, statusCode);
+}
+else if(Model.DefaultResponse.Body is CompositeTypeCs)
+{
+    @:await HandleErrorResponseFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+}
+else
+{
+    @:await HandleErrorResponseWithKnownTypeFor@(Model.Name)<@(MethodCs.GetResponseTypeName(Model.DefaultResponse))>(_httpRequest, _httpResponse, statusCode);
+}
+}
+@EmptyLine
+
+/// <summary>
+/// Method that generates error message for status code
+/// </summary>
+private string GetErrorMessageFor@(Model.Name)(int statusCode)
+{
+    return string.Format("Operation @(Model.Name) returned status code: '{0}'", statusCode);
+}
+@EmptyLine
+
+@if(Model.IsErrorResponseWithKnownType())
+{
+@:/// <summary>
+@:/// Handle responses where error model is a known primary type
+@:/// Creates a HttpRestException object and throws it
+@:/// </summary>
+@:/// <exception cref="T:Microsoft.Rest.HttpRestException">
+@:/// Deserialize error body returned by the operation
+@:/// </exception>
+@:private async System.Threading.Tasks.Task HandleErrorResponseWithKnownTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
+@:{
+    @:string _responseContent = null;
+    @:var ex = new HttpRestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
+
+    @:if (_httpResponse.Content != null)
+    @:{
+        @:try
+        @:{
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+            @:ex.SetErrorModel(errorResponseModel);
+        @:}
+        @:catch (Newtonsoft.Json.JsonException)
+        @:{
+            @:// Ignore the exception
+        @:}
+    @:} 
+    @:else
+    @:{
+        @:_responseContent = string.Empty;
+    @:}
+    @EmptyLine
+    @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+    @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+    @:_httpRequest.Dispose();
+    @:if (_httpResponse != null)
+    @:{
+        @:_httpResponse.Dispose();
+    @:}
+    @:throw ex;
+@:}
+@EmptyLine
+}
+
+@if(Model.IsErrorResponseWithErrorModel())
+{
+@:/// <summary>
+@:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
+@:/// </summary>
+@:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings) 
+    @:where V : Microsoft.Rest.IHttpRestErrorModel
+@:{
+    @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
+    @:string _responseContent = null;
+    @:if (_httpResponse.Content != null)
+    @:{
+        @:try
+        @:{
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+            @:if(errorResponseModel!=null)
+            @:{
+                @:errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            @:}
+            @:else
+            @:{
+                if(!Model.IsAzureARMGenerator())
+                {
+                @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                else 
+                {
+                @:throw new Microsoft.Rest.Azure.CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+            @:}
+        @:}
+        @:catch (Newtonsoft.Json.JsonException)
+        @:{
+            if(!Model.IsAzureARMGenerator())
+            {
+            @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            }
+            else 
+            {
+            @:throw new Microsoft.Rest.Azure.CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            }
+        @:}
+        @:@(Model.SetRequestIdForException())
+    @:}
+    
+    @:_httpRequest.Dispose();
+    @:if (_httpResponse != null)
+    @:{
+        @:_httpResponse.Dispose();
+    @:}
+@:}
+@EmptyLine
+}
+
 @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
 {
     if (parameter.IsRequired && parameter.IsNullable())
@@ -123,8 +289,6 @@ if (customHeaders != null)
 }
 @EmptyLine
 
-// Serialize Request
-string _requestContent = null;
 @if (Model.RequestBody != null)
 {
     if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
@@ -146,6 +310,7 @@ if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.
     }
     else
     {
+        @:string _requestContent = null;
         if (Model.RequestContentType.StartsWith("application/xml"))
         {
             if (!Model.RequestBody.IsNullable()) {
@@ -287,60 +452,36 @@ if (_shouldTrace)
 
 System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
 cancellationToken.ThrowIfCancellationRequested();
-string _responseContent = null;
 
 if (@(Model.FailureStatusCodePredicate))
 {
-    var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-@if (Model.DefaultResponse.Body != null)
-{
-    @:try
-    @:{
-        if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
-        {
-        @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-        }
-        else
-        {
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
-        }
-        @:if (_errorBody != null)
-        @:{
-            @:@(Model.InitializeExceptionWithMessage)
-            @:ex.Body = _errorBody;
-        @:}
-    @:}
-    @:catch (Newtonsoft.Json.JsonException)
-    @:{
-    @:    // Ignore the exception
-    @:}
-}
-else
-{
-    //If not defined by default model, read content as string
-    @:if (_httpResponse.Content != null) {
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-    @:}
-    @:else {
-        @:_responseContent = string.Empty;
-    @:}
-}
-
-    ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-    ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @(Model.InitializeException)
-    if (_shouldTrace)
+    try
     {
-        Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+        switch((int)_statusCode)
+        {
+            @foreach(var errorCode in errorCodes)
+            {
+               @:case @((int)errorCode):
+                   @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
+                   @:break;
+            }
+                default:
+                   await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
+                   break;
+        }
     }
-
-    _httpRequest.Dispose();
-    if (_httpResponse != null)
+    catch (Newtonsoft.Json.JsonException)
     {
-        _httpResponse.Dispose();
+        // Ignore the exception
     }
-    throw ex;
+    catch(RestException ex)
+    {
+        if (_shouldTrace)
+        {
+            Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+        }
+        throw ex;
+    }
 }
 
 // Create Result
@@ -349,7 +490,7 @@ _result.Request = _httpRequest;
 _result.Response = _httpResponse;
 @(Model.InitializeResponseBody)
 
-@foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
+@foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null && !MethodCs.IsErrorResponse(r.Value)))
 {
 <text>
 // Deserialize Response
@@ -361,6 +502,7 @@ if ((int)_statusCode == @MethodCs.GetStatusCodeReference(responsePair.Key))
     }
     else
     {<text>
+    string _responseContent = null;
     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     try
     {
