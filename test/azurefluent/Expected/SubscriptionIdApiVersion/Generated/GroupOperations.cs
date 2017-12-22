@@ -51,69 +51,6 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
         public MicrosoftAzureTestUrl Client { get; private set; }
 
         /// <summary>
-        /// Handle other unhandled status codes
-        /// </summary>
-        /// <exception cref="ErrorException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleDefaultErrorResponseForGetSampleResourceGroup(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            await HandleErrorResponseForGetSampleResourceGroup<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-        }
-
-        /// <summary>
-        /// Method that generates error message for status code
-        /// </summary>
-        private string GetErrorMessageForGetSampleResourceGroup(int statusCode)
-        {
-            return string.Format("Operation GetSampleResourceGroup returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForGetSampleResourceGroup<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForGetSampleResourceGroup(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    if(errorResponseModel!=null)
-                    {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                    else
-                    {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                }
-                catch (JsonException)
-                {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch(RestException ex)
-                {
-                    // set the request id to exception
-                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                    {
-                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                    }
-                    throw ex;
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
-        /// <summary>
         /// Provides a resouce group with name 'testgroup101' and location 'West US'.
         /// </summary>
         /// <param name='resourceGroupName'>
@@ -212,6 +149,7 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
             }
 
             // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -231,29 +169,35 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    switch(_statusCode)
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        default:
-                            await HandleDefaultErrorResponseForGetSampleResourceGroup(_httpRequest, _httpResponse, (int)_statusCode);
-                            break;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
                 {
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<SampleResourceGroupInner>();
@@ -266,7 +210,6 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {

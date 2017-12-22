@@ -51,69 +51,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         public AutoRestAzureSpecialParametersTestClient Client { get; private set; }
 
         /// <summary>
-        /// Handle other unhandled status codes
-        /// </summary>
-        /// <exception cref="ErrorException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleDefaultErrorResponseForCustomNamedRequestId(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            await HandleErrorResponseForCustomNamedRequestId<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-        }
-
-        /// <summary>
-        /// Method that generates error message for status code
-        /// </summary>
-        private string GetErrorMessageForCustomNamedRequestId(int statusCode)
-        {
-            return string.Format("Operation CustomNamedRequestId returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForCustomNamedRequestId<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForCustomNamedRequestId(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    if(errorResponseModel!=null)
-                    {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                    else
-                    {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                }
-                catch (JsonException)
-                {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch(RestException ex)
-                {
-                    // set the request id to exception
-                    if (_httpResponse.Headers.Contains("foo-request-id"))
-                    {
-                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
-                    }
-                    throw ex;
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-        }
-
-        /// <summary>
         /// Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
         /// header of the request
         /// </summary>
@@ -204,6 +141,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
 
             // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -223,29 +161,35 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    switch(_statusCode)
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        default:
-                            await HandleDefaultErrorResponseForCustomNamedRequestId(_httpRequest, _httpResponse, (int)_statusCode);
-                            break;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
                 {
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeadersInner>();
@@ -273,69 +217,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
-        }
-
-        /// <summary>
-        /// Handle other unhandled status codes
-        /// </summary>
-        /// <exception cref="ErrorException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleDefaultErrorResponseForCustomNamedRequestIdParamGrouping(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            await HandleErrorResponseForCustomNamedRequestIdParamGrouping<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-        }
-
-        /// <summary>
-        /// Method that generates error message for status code
-        /// </summary>
-        private string GetErrorMessageForCustomNamedRequestIdParamGrouping(int statusCode)
-        {
-            return string.Format("Operation CustomNamedRequestIdParamGrouping returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForCustomNamedRequestIdParamGrouping<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForCustomNamedRequestIdParamGrouping(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    if(errorResponseModel!=null)
-                    {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                    else
-                    {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                }
-                catch (JsonException)
-                {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch(RestException ex)
-                {
-                    // set the request id to exception
-                    if (_httpResponse.Headers.Contains("foo-request-id"))
-                    {
-                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
-                    }
-                    throw ex;
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
         }
 
         /// <summary>
@@ -438,6 +319,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
 
             // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -457,29 +339,35 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    switch(_statusCode)
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        default:
-                            await HandleDefaultErrorResponseForCustomNamedRequestIdParamGrouping(_httpRequest, _httpResponse, (int)_statusCode);
-                            break;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
                 {
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner>();
@@ -507,69 +395,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
-        }
-
-        /// <summary>
-        /// Handle other unhandled status codes
-        /// </summary>
-        /// <exception cref="ErrorException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleDefaultErrorResponseForCustomNamedRequestIdHead(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            await HandleErrorResponseForCustomNamedRequestIdHead<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-        }
-
-        /// <summary>
-        /// Method that generates error message for status code
-        /// </summary>
-        private string GetErrorMessageForCustomNamedRequestIdHead(int statusCode)
-        {
-            return string.Format("Operation CustomNamedRequestIdHead returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-        /// </summary>
-        private async Task HandleErrorResponseForCustomNamedRequestIdHead<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
-        {
-            string errorMessage = GetErrorMessageForCustomNamedRequestIdHead(statusCode);
-            string _responseContent = null;
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                    if(errorResponseModel!=null)
-                    {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                    else
-                    {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                    }
-                }
-                catch (JsonException)
-                {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                }
-                catch(RestException ex)
-                {
-                    // set the request id to exception
-                    if (_httpResponse.Headers.Contains("foo-request-id"))
-                    {
-                        ex.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
-                    }
-                    throw ex;
-                }
-            }
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
         }
 
         /// <summary>
@@ -663,6 +488,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
 
             // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -682,29 +508,35 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 404)
             {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    switch(_statusCode)
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        default:
-                            await HandleDefaultErrorResponseForCustomNamedRequestIdHead(_httpRequest, _httpResponse, (int)_statusCode);
-                            break;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
                 {
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
             // Create Result
             var _result = new AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeadersInner>();

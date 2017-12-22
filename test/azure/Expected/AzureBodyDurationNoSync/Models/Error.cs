@@ -10,11 +10,10 @@
 
 namespace Fixtures.Azure.AzureBodyDurationNoSync.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class Error: IHttpRestErrorModel
+    public partial class Error
     {
         /// <summary>
         /// Initializes a new instance of the Error class.
@@ -49,18 +48,5 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync.Models
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
-        /// <summary>
-        /// Method that creates an exception of ErrorException
-        /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
-        {
-            var ex = new ErrorException
-            {
-                Request = requestMessage,
-                Response = responseMessage
-            };
-            ex.SetErrorModel(this);
-            throw ex;
-        }
     }
 }

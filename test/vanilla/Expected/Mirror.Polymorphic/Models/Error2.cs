@@ -10,11 +10,10 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class Error2: IHttpRestErrorModel
+    public partial class Error2
     {
         /// <summary>
         /// Initializes a new instance of the Error2 class.
@@ -55,18 +54,5 @@ namespace Fixtures.MirrorPolymorphic.Models
         [JsonProperty(PropertyName = "fields")]
         public string Fields { get; set; }
 
-        /// <summary>
-        /// Method that creates an exception of Error2Exception
-        /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
-        {
-            var ex = new Error2Exception
-            {
-                Request = requestMessage,
-                Response = responseMessage
-            };
-            ex.SetErrorModel(this);
-            throw ex;
-        }
     }
 }

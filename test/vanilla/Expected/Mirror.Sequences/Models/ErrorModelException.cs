@@ -15,54 +15,47 @@ namespace Fixtures.MirrorSequences.Models
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
+    public partial class ErrorModelException : RestException
     {
-
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    public ErrorModelException()
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public ErrorModelException(string message)
-    : this(message, null)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public ErrorModelException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
-
-            /// <summary>
+        /// <summary>
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public int Code
+        public HttpRequestMessageWrapper Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessageWrapper Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public ErrorModel Body { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
+        /// </summary>
+        public ErrorModelException()
         {
-            get
-            {
-                return Body?.Code ?? default(int);
-            }
         }
 
         /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
         /// </summary>
-        public override string Message
+        /// <param name="message">The exception message.</param>
+        public ErrorModelException(string message)
+            : this(message, null)
         {
-            get
-            {
-                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
-            }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public ErrorModelException(string message, System.Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
-    }
+}

@@ -11,7 +11,6 @@
 namespace Fixtures.InternalCtors
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -50,64 +49,6 @@ namespace Fixtures.InternalCtors
         public InternalClient Client { get; private set; }
 
         /// <summary>
-        /// Handle other unhandled status codes
-        /// </summary>
-        /// <exception cref="Microsoft.Rest.Azure.CloudException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleDefaultErrorResponseForGet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            await HandleErrorResponseWithKnownTypeForGet<string>(_httpRequest, _httpResponse, statusCode);
-        }
-
-        /// <summary>
-        /// Method that generates error message for status code
-        /// </summary>
-        private string GetErrorMessageForGet(int statusCode)
-        {
-            return string.Format("Operation Get returned status code: '{0}'", statusCode);
-        }
-
-        /// <summary>
-        /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
-        /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
-        /// Deserialize error body returned by the operation
-        /// </exception>
-        private async Task HandleErrorResponseWithKnownTypeForGet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-        {
-            string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet(statusCode));
-            if (_httpResponse.Content != null)
-            {
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-            }
-            else
-            {
-                _responseContent = string.Empty;
-            }
-
-            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            _httpRequest.Dispose();
-            if (_httpResponse != null)
-            {
-                _httpResponse.Dispose();
-            }
-            throw ex;
-        }
-
-        /// <summary>
         /// Gets a pet from the store
         /// </summary>
         /// <param name='customHeaders'>
@@ -116,7 +57,7 @@ namespace Fixtures.InternalCtors
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -158,6 +99,7 @@ namespace Fixtures.InternalCtors
             }
 
             // Serialize Request
+            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -171,29 +113,28 @@ namespace Fixtures.InternalCtors
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                try
-                {
-                    switch(_statusCode)
-                    {
-                        default:
-                            await HandleDefaultErrorResponseForGet(_httpRequest, _httpResponse, (int)_statusCode);
-                            break;
-                    }
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
-                catch(RestException ex)
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
                 {
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
