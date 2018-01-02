@@ -18,31 +18,31 @@ namespace Fixtures.Http.Models
     public partial class BException : HttpRestExceptionBase<B>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the BException class.
-    /// </summary>
-    public BException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the BException class.
+        /// </summary>
+        public BException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the BException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public BException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the BException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public BException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the BException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public BException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the BException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public BException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -65,4 +65,4 @@ namespace Fixtures.Http.Models
         }
 
     }
-    }
+}

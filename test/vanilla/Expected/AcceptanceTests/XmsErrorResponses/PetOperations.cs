@@ -131,12 +131,21 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)_statusCode != 200 && (int)_statusCode != 202 && (int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 501)
+            if ((int)_statusCode != 200 && (int)_statusCode != 202)
             {
                 try
                 {
-                    switch(_statusCode)
+                    switch((int)_statusCode)
                     {
+                           case 400:
+                               await Handle400ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                               break;
+                           case 404:
+                               await Handle404ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                               break;
+                           case 501:
+                               await Handle501ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                               break;
                             default:
                                await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
                                break;
@@ -178,69 +187,45 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                     throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
-            // Deserialize Response
-            if ((int)_statusCode == 400)
-            {
-                string _responseContent = null;
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 404)
-            {
-                string _responseContent = null;
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<NotFoundErrorBase>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 501)
-            {
-                string _responseContent = null;
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<int?>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
+            /// <summary>
+            /// Handle 400 errors
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task Handle400ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+            {
+                await HandleErrorResponseWithKnownTypeForGetPetById<string>(_httpRequest, _httpResponse, 400);
+            }
+
+            /// <summary>
+            /// Handle 404 errors
+            /// </summary>
+            /// <exception cref="NotFoundErrorBaseException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task Handle404ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+            {
+                await HandleErrorResponseForGetPetById<NotFoundErrorBase>(_httpRequest, _httpResponse, 404, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Handle 501 errors
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task Handle501ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+            {
+                await HandleErrorResponseWithKnownTypeForGetPetById<int>(_httpRequest, _httpResponse, 501);
+            }
+
             /// <summary>
             /// Handle other unhandled status codes
             /// </summary>
@@ -297,6 +282,41 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                     _httpResponse.Dispose();
                 }
                 throw ex;
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetPetById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetPetById(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
             }
 
 
@@ -381,12 +401,15 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)_statusCode != 200 && (int)_statusCode != 500)
+            if ((int)_statusCode != 200)
             {
                 try
                 {
-                    switch(_statusCode)
+                    switch((int)_statusCode)
                     {
+                           case 500:
+                               await Handle500ErrorResponseForDoSomething(_httpRequest, _httpResponse);
+                               break;
                             default:
                                await HandleDefaultErrorResponseForDoSomething(_httpRequest, _httpResponse, (int)_statusCode);
                                break;
@@ -428,31 +451,23 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                     throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
-            // Deserialize Response
-            if ((int)_statusCode == 500)
-            {
-                string _responseContent = null;
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<PetActionError>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
+            /// <summary>
+            /// Handle 500 errors
+            /// </summary>
+            /// <exception cref="PetActionErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task Handle500ErrorResponseForDoSomething(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+            {
+                await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, 500, Client.DeserializationSettings);
+            }
+
             /// <summary>
             /// Handle other unhandled status codes
             /// </summary>

@@ -18,31 +18,31 @@ namespace Fixtures.MirrorSequences.Models
     public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    public ErrorModelException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
+        /// </summary>
+        public ErrorModelException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public ErrorModelException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public ErrorModelException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorModelException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public ErrorModelException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorModelException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public ErrorModelException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -65,4 +65,4 @@ namespace Fixtures.MirrorSequences.Models
         }
 
     }
-    }
+}

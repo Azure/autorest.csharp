@@ -18,31 +18,31 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     public partial class PetSadErrorException : HttpRestExceptionBase<PetSadError>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the PetSadErrorException class.
-    /// </summary>
-    public PetSadErrorException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetSadErrorException class.
+        /// </summary>
+        public PetSadErrorException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetSadErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public PetSadErrorException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetSadErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public PetSadErrorException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetSadErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public PetSadErrorException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetSadErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public PetSadErrorException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// Gets or sets why is the pet sad
@@ -67,4 +67,4 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}

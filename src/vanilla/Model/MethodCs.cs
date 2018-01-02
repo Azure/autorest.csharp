@@ -35,7 +35,8 @@ namespace AutoRest.CSharp.Model
                 if (Responses.Any())
                 {
                     List<string> predicates = new List<string>();
-                    foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Responses[key].Extensions["x-ms-error-response"])))
+                    //foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Responses[key].Extensions["x-ms-error-response"])))
+                    foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-error-response") && (bool)Responses[key].Extensions["x-error-response"])))
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
                         "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
@@ -500,7 +501,8 @@ namespace AutoRest.CSharp.Model
             return response.Body.Name;
         }
 
-        public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
+        //public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
+        public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-error-response") && (bool)response.Extensions["x-error-response"];
 
         public bool IsErrorResponseWithErrorModel() => 
             Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||

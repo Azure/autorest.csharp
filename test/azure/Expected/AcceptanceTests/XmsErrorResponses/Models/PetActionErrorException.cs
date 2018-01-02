@@ -19,31 +19,31 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     public partial class PetActionErrorException : HttpRestExceptionBase<PetActionError>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the PetActionErrorException class.
-    /// </summary>
-    public PetActionErrorException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetActionErrorException class.
+        /// </summary>
+        public PetActionErrorException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetActionErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public PetActionErrorException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetActionErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public PetActionErrorException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetActionErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public PetActionErrorException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetActionErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public PetActionErrorException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// Gets or sets the error message
@@ -57,4 +57,4 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}

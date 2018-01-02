@@ -19,31 +19,31 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     public partial class PetHungryOrThirstyErrorException : HttpRestExceptionBase<PetHungryOrThirstyError>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-    /// </summary>
-    public PetHungryOrThirstyErrorException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+        /// </summary>
+        public PetHungryOrThirstyErrorException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public PetHungryOrThirstyErrorException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public PetHungryOrThirstyErrorException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public PetHungryOrThirstyErrorException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the PetHungryOrThirstyErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public PetHungryOrThirstyErrorException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// Gets or sets is the pet hungry or thirsty or both
@@ -79,4 +79,4 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}

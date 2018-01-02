@@ -18,31 +18,31 @@ namespace Fixtures.Azure.Fluent.AzureBodyDuration.Models
     public partial class ErrorException : HttpRestExceptionBase<Error>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorException class.
-    /// </summary>
-    public ErrorException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorException class.
+        /// </summary>
+        public ErrorException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public ErrorException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public ErrorException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the ErrorException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public ErrorException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the ErrorException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public ErrorException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -65,4 +65,4 @@ namespace Fixtures.Azure.Fluent.AzureBodyDuration.Models
         }
 
     }
-    }
+}

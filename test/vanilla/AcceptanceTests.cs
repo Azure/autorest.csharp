@@ -48,8 +48,8 @@ using Fixtures.Url.Models;
 using Fixtures.UrlMultiCollectionFormat;
 using Fixtures.Validation;
 using Fixtures.Validation.Models;
-using Fixtures.XmsErrorResponses;
-using Fixtures.XmsErrorResponses.Models;
+using Fixtures.AcceptanceTestsXmsErrorResponses;
+using Fixtures.AcceptanceTestsXmsErrorResponses.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -419,7 +419,7 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void ExtensibleEnumsTest()
         {
-            using (var client = new Fixtures.AcceptanceTestsExtensibleEnums.PetStoreInc(Fixture.Uri))
+            using (var client = new Fixtures.ExtensibleEnums.PetStoreInc(Fixture.Uri))
             {
                 // Valid enums test
                 Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);

@@ -18,31 +18,31 @@ namespace Fixtures.MirrorPolymorphic.Models
     public partial class Error2Exception : HttpRestExceptionBase<Error2>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the Error2Exception class.
-    /// </summary>
-    public Error2Exception()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the Error2Exception class.
+        /// </summary>
+        public Error2Exception()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the Error2Exception class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public Error2Exception(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the Error2Exception class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public Error2Exception(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the Error2Exception class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public Error2Exception(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the Error2Exception class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public Error2Exception(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -75,4 +75,4 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
     }
-    }
+}

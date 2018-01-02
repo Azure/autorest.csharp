@@ -19,31 +19,31 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     public partial class AnimalNotFoundException : HttpRestExceptionBase<AnimalNotFound>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the AnimalNotFoundException class.
-    /// </summary>
-    public AnimalNotFoundException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the AnimalNotFoundException class.
+        /// </summary>
+        public AnimalNotFoundException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the AnimalNotFoundException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public AnimalNotFoundException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the AnimalNotFoundException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public AnimalNotFoundException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the AnimalNotFoundException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public AnimalNotFoundException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the AnimalNotFoundException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public AnimalNotFoundException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -76,4 +76,4 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}

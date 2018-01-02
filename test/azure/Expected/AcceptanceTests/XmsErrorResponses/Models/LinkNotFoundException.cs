@@ -18,31 +18,31 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     public partial class LinkNotFoundException : HttpRestExceptionBase<LinkNotFound>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the LinkNotFoundException class.
-    /// </summary>
-    public LinkNotFoundException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the LinkNotFoundException class.
+        /// </summary>
+        public LinkNotFoundException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the LinkNotFoundException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public LinkNotFoundException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the LinkNotFoundException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public LinkNotFoundException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the LinkNotFoundException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public LinkNotFoundException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the LinkNotFoundException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public LinkNotFoundException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -75,4 +75,4 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}

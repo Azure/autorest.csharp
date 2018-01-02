@@ -63,7 +63,7 @@ namespace AutoRest.CSharp
             await GenerateOperations<MethodGroupTemplate>(codeModel.Operations);
             await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
             await GenerateEnums(codeModel.EnumTypes);
-            await GenerateExceptions(codeModel.ErrorTypes);
+            await GenerateExceptions(codeModel.ErrorTypes, codeModel.ModelTypes.Union(codeModel.HeaderTypes));
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 await GenerateXmlSerialization();
@@ -132,12 +132,18 @@ namespace AutoRest.CSharp
             }
         }
 
-        protected virtual async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes)
+        protected virtual async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes, IEnumerable<CompositeType> existingModelTypes)
         {
             foreach (CompositeTypeCs exceptionType in errorTypes)
             {
                 await Write(new ExceptionTemplate { Model = exceptionType },
                     $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
+                
+                if(!existingModelTypes.Contains(exceptionType))
+                {
+                    await Write(new ModelTemplate{ Model = exceptionType },
+                        $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.Name}{ImplementationFileExtension}");
+                }
             }
         }
 

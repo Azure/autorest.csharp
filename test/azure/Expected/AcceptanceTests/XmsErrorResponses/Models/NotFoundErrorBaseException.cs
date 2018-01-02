@@ -19,31 +19,31 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     public partial class NotFoundErrorBaseException : HttpRestExceptionBase<NotFoundErrorBase>
     {
 
-    /// <summary>
-    /// Initializes a new instance of the NotFoundErrorBaseException class.
-    /// </summary>
-    public NotFoundErrorBaseException()
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the NotFoundErrorBaseException class.
+        /// </summary>
+        public NotFoundErrorBaseException()
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the NotFoundErrorBaseException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public NotFoundErrorBaseException(string message)
-    : this(message, null)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the NotFoundErrorBaseException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public NotFoundErrorBaseException(string message)
+        : this(message, null)
+        {
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the NotFoundErrorBaseException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public NotFoundErrorBaseException(string message, System.Exception innerException)
-    : base(message, innerException)
-    {
-    }
+        /// <summary>
+        /// Initializes a new instance of the NotFoundErrorBaseException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public NotFoundErrorBaseException(string message, System.Exception innerException)
+        : base(message, innerException)
+        {
+        }
 
             /// <summary>
         /// </summary>
@@ -66,4 +66,4 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         }
 
     }
-    }
+}
