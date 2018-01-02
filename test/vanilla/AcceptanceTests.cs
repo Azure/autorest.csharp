@@ -1898,7 +1898,7 @@ namespace AutoRest.CSharp.Tests
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
             var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
-            Assert.Equal("Exception of type 'Fixtures.AcceptanceTestsHttp.Models.ErrorException' was thrown.", ex.Message);
+            Assert.Equal("Exception of type 'Fixtures.Http.Models.ErrorException' was thrown.", ex.Message);
             
             var ex2 = Assert.Throws<HttpRestException<string>>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
