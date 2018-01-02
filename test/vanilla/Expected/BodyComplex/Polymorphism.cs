@@ -103,8 +103,6 @@ namespace Fixtures.BodyComplex
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -118,35 +116,29 @@ namespace Fixtures.BodyComplex
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<Fish>();
@@ -155,6 +147,7 @@ namespace Fixtures.BodyComplex
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -176,6 +169,60 @@ namespace Fixtures.BodyComplex
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetValid(int statusCode)
+            {
+                return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetValid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Put complex types that are polymorphic
@@ -277,8 +324,7 @@ namespace Fixtures.BodyComplex
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(complexBody != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
@@ -298,35 +344,29 @@ namespace Fixtures.BodyComplex
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -338,6 +378,60 @@ namespace Fixtures.BodyComplex
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForPutValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForPutValid(int statusCode)
+            {
+                return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForPutValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForPutValid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Get complex types that are polymorphic, but not at the root of the
@@ -393,8 +487,6 @@ namespace Fixtures.BodyComplex
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -408,35 +500,29 @@ namespace Fixtures.BodyComplex
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetComplicated(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<Salmon>();
@@ -445,6 +531,7 @@ namespace Fixtures.BodyComplex
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -466,6 +553,60 @@ namespace Fixtures.BodyComplex
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetComplicated(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetComplicated(int statusCode)
+            {
+                return string.Format("Operation GetComplicated returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetComplicated<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetComplicated(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
@@ -535,8 +676,7 @@ namespace Fixtures.BodyComplex
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(complexBody != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
@@ -556,35 +696,29 @@ namespace Fixtures.BodyComplex
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForPutComplicated(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -596,156 +730,60 @@ namespace Fixtures.BodyComplex
             }
             return _result;
         }
-
-        /// <summary>
-        /// Put complex types that are polymorphic, omitting the discriminator
-        /// </summary>
-        /// <param name='complexBody'>
-        /// </param>
-        /// <param name='customHeaders'>
-        /// Headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="ErrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        /// <return>
-        /// A response object containing the response body and response headers.
-        /// </return>
-        public async Task<HttpOperationResponse<Salmon>> PutMissingDiscriminatorWithHttpMessagesAsync(Salmon complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            if (complexBody == null)
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForPutComplicated(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                await HandleErrorResponseForPutComplicated<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
             }
-            if (complexBody != null)
-            {
-                complexBody.Validate();
-            }
-            // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
-            string _invocationId = null;
-            if (_shouldTrace)
-            {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("complexBody", complexBody);
-                tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "PutMissingDiscriminator", tracingParameters);
-            }
-            // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/polymorphism/missingdiscriminator").ToString();
-            // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
-            // Set Headers
 
-
-            if (customHeaders != null)
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForPutComplicated(int statusCode)
             {
-                foreach(var _header in customHeaders)
+                return string.Format("Operation PutComplicated returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForPutComplicated<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForPutComplicated(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    try
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                }
-            }
-
-            // Serialize Request
-            string _requestContent = null;
-            if(complexBody != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    catch (JsonException)
                     {
-                        ex.Body = _errorBody;
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
                 {
                     _httpResponse.Dispose();
                 }
-                throw ex;
             }
-            // Create Result
-            var _result = new HttpOperationResponse<Salmon>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Salmon>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
-        }
+
 
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
@@ -842,8 +880,7 @@ namespace Fixtures.BodyComplex
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(complexBody != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
@@ -863,35 +900,29 @@ namespace Fixtures.BodyComplex
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForPutValidMissingRequired(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -903,6 +934,60 @@ namespace Fixtures.BodyComplex
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForPutValidMissingRequired(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForPutValidMissingRequired<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForPutValidMissingRequired(int statusCode)
+            {
+                return string.Format("Operation PutValidMissingRequired returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForPutValidMissingRequired<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForPutValidMissingRequired(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
     }
 }

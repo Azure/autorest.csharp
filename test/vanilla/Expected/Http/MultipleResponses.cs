@@ -103,8 +103,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -118,35 +116,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -155,6 +147,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -176,6 +169,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model204NoModelDefaultError200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model204NoModelDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model204NoModelDefaultError200Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model204NoModelDefaultError200Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model204NoModelDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError200Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 204 response with no payload
@@ -230,8 +277,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -245,35 +290,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError204Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -282,6 +321,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -303,6 +343,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model204NoModelDefaultError204Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model204NoModelDefaultError204Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model204NoModelDefaultError204Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model204NoModelDefaultError204Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model204NoModelDefaultError204Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError204Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201'}
@@ -357,8 +451,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -372,35 +464,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError201Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -409,6 +495,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -430,6 +517,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model204NoModelDefaultError201Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model204NoModelDefaultError201Invalid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model204NoModelDefaultError201Invalid(int statusCode)
+            {
+                return string.Format("Operation Get200Model204NoModelDefaultError201Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model204NoModelDefaultError201Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError201Invalid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 202 response with no payload:
@@ -484,8 +625,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -499,35 +638,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError202None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -536,6 +669,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -557,6 +691,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model204NoModelDefaultError202None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model204NoModelDefaultError202None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model204NoModelDefaultError202None(int statusCode)
+            {
+                return string.Format("Operation Get200Model204NoModelDefaultError202None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model204NoModelDefaultError202None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError202None(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid error payload: {'status': 400, 'message':
@@ -612,8 +800,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -627,35 +813,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -664,6 +844,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -685,6 +866,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model204NoModelDefaultError400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model204NoModelDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model204NoModelDefaultError400Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model204NoModelDefaultError400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model204NoModelDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError400Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -739,8 +974,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -754,35 +987,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model201ModelDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -791,6 +1018,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -809,6 +1037,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -830,6 +1059,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model201ModelDefaultError200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model201ModelDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model201ModelDefaultError200Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model201ModelDefaultError200Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model201ModelDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError200Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201',
@@ -885,8 +1168,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -900,35 +1181,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model201ModelDefaultError201Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -937,6 +1212,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -955,6 +1231,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -976,6 +1253,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model201ModelDefaultError201Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model201ModelDefaultError201Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model201ModelDefaultError201Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model201ModelDefaultError201Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model201ModelDefaultError201Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError201Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -1031,8 +1362,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1046,35 +1375,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200Model201ModelDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -1083,6 +1406,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1101,6 +1425,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1122,6 +1447,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200Model201ModelDefaultError400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200Model201ModelDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200Model201ModelDefaultError400Valid(int statusCode)
+            {
+                return string.Format("Operation Get200Model201ModelDefaultError400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200Model201ModelDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError400Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1176,8 +1555,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1191,35 +1568,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1228,6 +1599,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1246,6 +1618,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1264,6 +1637,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 404)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1285,6 +1659,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError200Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError200Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError200Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with valid payload: {'httpCode': '201'}
@@ -1339,8 +1767,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1354,35 +1780,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1391,6 +1811,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1409,6 +1830,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1427,6 +1849,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 404)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1448,6 +1871,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError201Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError201Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError201Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
@@ -1502,8 +1979,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1517,35 +1992,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1554,6 +2023,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1572,6 +2042,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1590,6 +2061,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 404)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1611,6 +2083,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError404Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError404Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError404Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -1666,8 +2192,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1681,35 +2205,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1718,6 +2236,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1736,6 +2255,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 201)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1754,6 +2274,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 404)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1775,6 +2296,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError400Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA201ModelC404ModelDDefaultError400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError400Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 202 response with no payload
@@ -1826,8 +2401,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1841,35 +2414,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultError202None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1881,6 +2448,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultError202None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet202None204NoneDefaultError202None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultError202None(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultError202None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet202None204NoneDefaultError202None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet202None204NoneDefaultError202None(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 204 response with no payload
@@ -1932,8 +2553,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1947,35 +2566,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultError204None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1987,6 +2600,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultError204None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet202None204NoneDefaultError204None<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultError204None(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultError204None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet202None204NoneDefaultError204None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet202None204NoneDefaultError204None(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -2039,8 +2706,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2054,35 +2719,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2094,6 +2753,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="ErrorException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultError400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGet202None204NoneDefaultError400Valid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultError400Valid(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultError400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGet202None204NoneDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGet202None204NoneDefaultError400Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
@@ -2104,7 +2817,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2145,8 +2858,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2160,28 +2871,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultNone202Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2193,6 +2905,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone202Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone202Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultNone202Invalid(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultNone202Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone202Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 204 response with no payload
@@ -2203,7 +2973,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2244,8 +3014,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2259,28 +3027,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultNone204None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2292,6 +3061,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone204None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone204None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultNone204None(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultNone204None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone204None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -2302,7 +3129,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2343,8 +3170,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2358,28 +3183,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultNone400None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2391,6 +3217,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultNone400None(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultNone400None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
@@ -2401,7 +3285,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2442,8 +3326,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2457,28 +3339,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet202None204NoneDefaultNone400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2490,6 +3373,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet202None204NoneDefaultNone400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet202None204NoneDefaultNone400Invalid(int statusCode)
+            {
+                return string.Format("Operation Get202None204NoneDefaultNone400Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -2541,8 +3482,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2556,35 +3495,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultModelA200Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -2610,6 +3543,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="AException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultModelA200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetDefaultModelA200Valid<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultModelA200Valid(int statusCode)
+            {
+                return string.Format("Operation GetDefaultModelA200Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetDefaultModelA200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetDefaultModelA200Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with no payload
@@ -2661,8 +3648,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2676,35 +3661,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultModelA200None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -2730,6 +3709,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="AException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultModelA200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetDefaultModelA200None<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultModelA200None(int statusCode)
+            {
+                return string.Format("Operation GetDefaultModelA200None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetDefaultModelA200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetDefaultModelA200None(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
@@ -2781,8 +3814,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2796,35 +3827,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultModelA400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -2850,6 +3875,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="AException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultModelA400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetDefaultModelA400Valid<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultModelA400Valid(int statusCode)
+            {
+                return string.Format("Operation GetDefaultModelA400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetDefaultModelA400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetDefaultModelA400Valid(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -2901,8 +3980,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2916,35 +3993,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new AException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    switch(_statusCode)
                     {
-                        ex.Body = _errorBody;
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultModelA400None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                catch(RestException ex)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -2970,6 +4041,60 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="AException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultModelA400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseForGetDefaultModelA400None<A>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultModelA400None(int statusCode)
+            {
+                return string.Format("Operation GetDefaultModelA400None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+            /// </summary>
+            private async Task HandleErrorResponseForGetDefaultModelA400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+                where V : IHttpRestErrorModel
+            {
+                string errorMessage = GetErrorMessageForGetDefaultModelA400None(statusCode);
+                string _responseContent = null;
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                        if(errorResponseModel!=null)
+                        {
+                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                        else
+                        {
+                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    }
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+            }
+
 
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
@@ -2980,7 +4105,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3021,8 +4146,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3036,28 +4159,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultNone200Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -3069,6 +4193,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultNone200Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetDefaultNone200Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultNone200Invalid(int statusCode)
+            {
+                return string.Format("Operation GetDefaultNone200Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone200Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with no payload
@@ -3079,7 +4261,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3120,8 +4302,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3135,28 +4315,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultNone200None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -3168,6 +4349,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultNone200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetDefaultNone200None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultNone200None(int statusCode)
+            {
+                return string.Format("Operation GetDefaultNone200None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone200None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
@@ -3178,7 +4417,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3219,8 +4458,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3234,28 +4471,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultNone400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -3267,6 +4505,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultNone400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetDefaultNone400Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultNone400Invalid(int statusCode)
+            {
+                return string.Format("Operation GetDefaultNone400Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone400Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -3277,7 +4573,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3318,8 +4614,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3333,28 +4627,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetDefaultNone400None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -3366,6 +4661,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetDefaultNone400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetDefaultNone400None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetDefaultNone400None(int statusCode)
+            {
+                return string.Format("Operation GetDefaultNone400None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone400None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client
@@ -3377,7 +4730,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3421,8 +4774,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3436,28 +4787,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA200None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -3466,6 +4818,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3487,6 +4840,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA200None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA200None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA200None(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA200None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
@@ -3497,7 +4908,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3541,8 +4952,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3556,28 +4965,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA200Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -3586,6 +4996,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3607,6 +5018,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA200Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA200Valid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA200Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA200Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200Valid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
@@ -3617,7 +5086,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3661,8 +5130,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3676,28 +5143,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA200Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -3706,6 +5174,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3727,6 +5196,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA200Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA200Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA200Invalid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA200Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error
@@ -3738,7 +5265,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3782,8 +5309,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3797,28 +5322,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA400None(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -3827,6 +5353,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3848,6 +5375,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA400None(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA400None<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA400None(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA400None returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400None(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
@@ -3858,7 +5443,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3902,8 +5487,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -3917,28 +5500,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA400Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -3947,6 +5531,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -3968,6 +5553,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA400Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA400Valid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA400Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA400Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400Valid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -3978,7 +5621,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -4022,8 +5665,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -4037,28 +5678,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -4067,6 +5709,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -4088,6 +5731,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA400Invalid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA400Invalid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA400Invalid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA400Invalid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400Invalid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
@@ -4098,7 +5799,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -4142,8 +5843,6 @@ namespace Fixtures.Http
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -4157,28 +5856,29 @@ namespace Fixtures.Http
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGet200ModelA202Valid(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<A>();
@@ -4187,6 +5887,7 @@ namespace Fixtures.Http
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -4208,6 +5909,64 @@ namespace Fixtures.Http
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGet200ModelA202Valid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGet200ModelA202Valid<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGet200ModelA202Valid(int statusCode)
+            {
+                return string.Format("Operation Get200ModelA202Valid returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGet200ModelA202Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA202Valid(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
     }
 }

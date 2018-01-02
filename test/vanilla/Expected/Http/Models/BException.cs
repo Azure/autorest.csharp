@@ -8,59 +8,59 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AzureBodyDuration.Models
+namespace Fixtures.Http.Models
 {
     using Microsoft.Rest;
 
     /// <summary>
-    /// Exception thrown for an invalid response with Error information.
+    /// Exception thrown for an invalid response with B information.
     /// </summary>
-    public partial class ErrorException : HttpRestExceptionBase<Error>
+    public partial class BException : HttpRestExceptionBase<B>
     {
 
     /// <summary>
-    /// Initializes a new instance of the ErrorException class.
+    /// Initializes a new instance of the BException class.
     /// </summary>
-    public ErrorException()
+    public BException()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the ErrorException class.
+    /// Initializes a new instance of the BException class.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public ErrorException(string message)
+    public BException(string message)
     : this(message, null)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the ErrorException class.
+    /// Initializes a new instance of the BException class.
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="innerException">Inner exception.</param>
-    public ErrorException(string message, System.Exception innerException)
+    public BException(string message, System.Exception innerException)
     : base(message, innerException)
     {
     }
 
             /// <summary>
         /// </summary>
-        public int? Status
+        public string TextStatusCode
         {
             get
             {
-                return Body?.Status;
+                return Body?.TextStatusCode;
             }
         }
 
         /// <summary>
         /// </summary>
-        public override string Message
+        public string StatusCode
         {
             get
             {
-                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                return Body?.StatusCode;
             }
         }
 

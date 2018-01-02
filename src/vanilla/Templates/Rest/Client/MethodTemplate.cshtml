@@ -78,3 +78,8 @@
             throw new System.NotImplementedException();
     }
 }
+
+@if(Model.Flavor == MethodFlavor.RestCall)
+{
+    @:@(Include(new ErrorHandlingTemplateRestCall(), Model))
+}

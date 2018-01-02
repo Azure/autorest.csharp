@@ -511,6 +511,8 @@ namespace AutoRest.CSharp.Model
                 !(DefaultResponse.Body is CompositeTypeCs);
 
         public virtual string SetRequestIdForException() => string.Empty;
+
+        public IEnumerable<HttpStatusCode> GetErrorResponseStatusCodes() => Responses.Keys.Where(key=> MethodCs.IsErrorResponse(Responses[key]));
                      
     }
 }

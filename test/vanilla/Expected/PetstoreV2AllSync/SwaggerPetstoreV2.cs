@@ -166,7 +166,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -225,8 +225,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -246,28 +245,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 405)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<Pet>();
@@ -276,6 +276,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -306,6 +307,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForAddPet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForAddPet<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForAddPet(int statusCode)
+            {
+                return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForAddPet(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Update an existing pet
@@ -319,7 +378,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -375,8 +434,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -396,28 +454,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForUpdatePet(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -429,6 +488,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForUpdatePet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForUpdatePet<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForUpdatePet(int statusCode)
+            {
+                return string.Format("Operation UpdatePet returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForUpdatePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForUpdatePet(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Finds Pets by status
@@ -445,7 +562,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -509,8 +626,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -524,28 +639,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForFindPetsByStatus(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<Pet>>();
@@ -554,6 +670,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -584,6 +701,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForFindPetsByStatus(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForFindPetsByStatus<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForFindPetsByStatus(int statusCode)
+            {
+                return string.Format("Operation FindPetsByStatus returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForFindPetsByStatus<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForFindPetsByStatus(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Finds Pets by tags
@@ -601,7 +776,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -665,8 +840,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -680,28 +853,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForFindPetsByTags(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<Pet>>();
@@ -710,6 +884,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -740,6 +915,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForFindPetsByTags(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForFindPetsByTags<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForFindPetsByTags(int statusCode)
+            {
+                return string.Format("Operation FindPetsByTags returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForFindPetsByTags<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForFindPetsByTags(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Find pet by Id
@@ -756,7 +989,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -802,8 +1035,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -817,28 +1048,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<Pet>();
@@ -847,6 +1079,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -877,6 +1110,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetPetById<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetPetById(int statusCode)
+            {
+                return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetPetById(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Updates a pet in the store with form data
@@ -899,7 +1190,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -955,8 +1246,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
@@ -996,28 +1285,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 405)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForUpdatePetWithForm(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1029,6 +1319,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForUpdatePetWithForm(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForUpdatePetWithForm<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForUpdatePetWithForm(int statusCode)
+            {
+                return string.Format("Operation UpdatePetWithForm returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForUpdatePetWithForm<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForUpdatePetWithForm(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Deletes a pet
@@ -1044,7 +1392,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -1096,8 +1444,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1111,28 +1457,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForDeletePet(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1144,6 +1491,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForDeletePet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForDeletePet<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForDeletePet(int statusCode)
+            {
+                return string.Format("Operation DeletePet returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForDeletePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForDeletePet(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Returns pet inventories by status
@@ -1157,7 +1562,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1201,8 +1606,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1216,28 +1619,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetInventory(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<IDictionary<string, int?>>();
@@ -1246,6 +1650,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1276,6 +1681,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetInventory(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetInventory<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetInventory(int statusCode)
+            {
+                return string.Format("Operation GetInventory returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetInventory<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetInventory(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Place an order for a pet
@@ -1289,7 +1752,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1344,8 +1807,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -1365,28 +1827,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForPlaceOrder(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<Order>();
@@ -1395,6 +1858,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1425,6 +1889,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForPlaceOrder(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForPlaceOrder<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForPlaceOrder(int statusCode)
+            {
+                return string.Format("Operation PlaceOrder returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForPlaceOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForPlaceOrder(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Find purchase order by Id
@@ -1442,7 +1964,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1509,8 +2031,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1524,28 +2044,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetOrderById(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<Order>();
@@ -1554,6 +2075,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1584,6 +2106,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetOrderById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetOrderById<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetOrderById(int statusCode)
+            {
+                return string.Format("Operation GetOrderById returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetOrderById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetOrderById(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Delete purchase order by Id
@@ -1601,7 +2181,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -1661,8 +2241,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -1676,28 +2254,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForDeleteOrder(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1709,6 +2288,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForDeleteOrder(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForDeleteOrder<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForDeleteOrder(int statusCode)
+            {
+                return string.Format("Operation DeleteOrder returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForDeleteOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForDeleteOrder(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Create user
@@ -1725,7 +2362,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -1777,8 +2414,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -1798,28 +2434,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForCreateUser(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1831,6 +2468,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForCreateUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForCreateUser<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForCreateUser(int statusCode)
+            {
+                return string.Format("Operation CreateUser returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForCreateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForCreateUser(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Creates list of users with given input array
@@ -1844,7 +2539,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -1896,8 +2591,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -1917,28 +2611,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForCreateUsersWithArrayInput(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1950,6 +2645,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForCreateUsersWithArrayInput(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForCreateUsersWithArrayInput<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForCreateUsersWithArrayInput(int statusCode)
+            {
+                return string.Format("Operation CreateUsersWithArrayInput returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithArrayInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForCreateUsersWithArrayInput(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Creates list of users with given input array
@@ -1963,7 +2716,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2015,8 +2768,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -2036,28 +2788,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForCreateUsersWithListInput(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2069,6 +2822,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForCreateUsersWithListInput(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForCreateUsersWithListInput<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForCreateUsersWithListInput(int statusCode)
+            {
+                return string.Format("Operation CreateUsersWithListInput returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithListInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForCreateUsersWithListInput(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Logs user into the system
@@ -2085,7 +2896,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -2158,8 +2969,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2173,28 +2982,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForLoginUser(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<string,LoginUserHeaders>();
@@ -2203,6 +3013,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2246,6 +3057,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForLoginUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForLoginUser<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForLoginUser(int statusCode)
+            {
+                return string.Format("Operation LoginUser returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForLoginUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForLoginUser(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Logs out current logged in user session
@@ -2256,7 +3125,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -2297,8 +3166,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2312,28 +3179,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForLogoutUser(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2345,6 +3213,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForLogoutUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForLogoutUser<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForLogoutUser(int statusCode)
+            {
+                return string.Format("Operation LogoutUser returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForLogoutUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForLogoutUser(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Get user by user name
@@ -2358,7 +3284,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -2414,8 +3340,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2429,28 +3353,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForGetUserByName(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse<User>();
@@ -2459,6 +3384,7 @@ namespace Fixtures.PetstoreV2AllSync
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2489,6 +3415,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForGetUserByName(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForGetUserByName<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForGetUserByName(int statusCode)
+            {
+                return string.Format("Operation GetUserByName returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForGetUserByName<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForGetUserByName(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Updated user
@@ -2508,7 +3492,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2566,8 +3550,7 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
+                    string _requestContent = null;
             if(body != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
@@ -2587,28 +3570,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForUpdateUser(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2620,6 +3604,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForUpdateUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForUpdateUser<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForUpdateUser(int statusCode)
+            {
+                return string.Format("Operation UpdateUser returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForUpdateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForUpdateUser(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
         /// <summary>
         /// Delete user
@@ -2636,7 +3678,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2689,8 +3731,6 @@ namespace Fixtures.PetstoreV2AllSync
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -2704,28 +3744,29 @@ namespace Fixtures.PetstoreV2AllSync
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    switch(_statusCode)
+                    {
+                            default:
+                               await HandleDefaultErrorResponseForDeleteUser(_httpRequest, _httpResponse, (int)_statusCode);
+                               break;
+                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    // Ignore the exception
                 }
-                throw ex;
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -2737,6 +3778,64 @@ namespace Fixtures.PetstoreV2AllSync
             }
             return _result;
         }
+            /// <summary>
+            /// Handle other unhandled status codes
+            /// </summary>
+            /// <exception cref="Microsoft.Rest.Azure.CloudException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleDefaultErrorResponseForDeleteUser(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                await HandleErrorResponseWithKnownTypeForDeleteUser<string>(_httpRequest, _httpResponse, statusCode);
+            }
+
+            /// <summary>
+            /// Method that generates error message for status code
+            /// </summary>
+            private string GetErrorMessageForDeleteUser(int statusCode)
+            {
+                return string.Format("Operation DeleteUser returned status code: '{0}'", statusCode);
+            }
+
+            /// <summary>
+            /// Handle responses where error model is a known primary type
+            /// Creates a HttpRestException object and throws it
+            /// </summary>
+            /// <exception cref="T:Microsoft.Rest.HttpRestException">
+            /// Deserialize error body returned by the operation
+            /// </exception>
+            private async Task HandleErrorResponseWithKnownTypeForDeleteUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+            {
+                string _responseContent = null;
+                var ex = new HttpRestException<T>(GetErrorMessageForDeleteUser(statusCode));
+                if (_httpResponse.Content != null)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                        ex.SetErrorModel(errorResponseModel);
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                }
+                else
+                {
+                    _responseContent = string.Empty;
+                }
+
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+
 
     }
 }
