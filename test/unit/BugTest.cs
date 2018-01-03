@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected static string FRAMEWORK { 
             get {
                 if (string.IsNullOrEmpty(_framework ) ) {
-                    _framework = Path.Combine( Shared, "2.0.0");
+                    _framework = System.IO.Path.GetDirectoryName(typeof(System.IO.File).GetTypeInfo().Assembly.Location);
                 }
                 return _framework;
             }
