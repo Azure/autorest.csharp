@@ -617,7 +617,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 IAzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
-
                 Assert.Equal("123", response.RequestId);
             }
         }
