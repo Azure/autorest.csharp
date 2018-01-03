@@ -476,7 +476,6 @@ namespace AutoRest.CSharp.Azure.Tests
         
         public void EnsureTestCoverage()
         {
-            /*
             using (var client =
                 new AutoRestReportServiceForAzureClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -498,7 +497,6 @@ namespace AutoRest.CSharp.Azure.Tests
                     Assert.Equal(totalTests, executedTests);
                 }
             }
-            */
         }
 
         [Fact]
