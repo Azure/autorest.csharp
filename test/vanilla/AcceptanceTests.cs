@@ -1880,11 +1880,11 @@ namespace AutoRest.CSharp.Tests
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get301WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            // EnsureStatusCode(HttpStatusCode.MovedPermanently, () => clientNoRedirect.HttpRedirects.Put301WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.MovedPermanently, () => clientNoRedirect.HttpRedirects.Put301WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            // EnsureStatusCode(HttpStatusCode.Found, () => clientNoRedirect.HttpRedirects.Patch302WithHttpMessagesAsync(true));
-            // EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.Found, () => clientNoRedirect.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
@@ -2387,13 +2387,12 @@ namespace AutoRest.CSharp.Tests
             // Use the facade method
             using (var client = new Fixtures.HiddenMethods.AutoRestComplexTestService(Fixture.Uri))
             {
-                //await client.Basic.PutValidAsync("abc", CMYKColors.Magenta, 2);
+                //await client.Basic.PutValidAsync(new Basic(2, "abc", CMYKColors.Magenta));
             }
         }
 
         public void EnsureTestCoverage()
         {
-            /*
             using (var client =
                 new AutoRestReportService(Fixture.Uri))
             {
@@ -2413,9 +2412,8 @@ namespace AutoRest.CSharp.Tests
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "MISSING: {0}", item));
                 }
-                // Assert.Equal(report.Count, report.Values.Count(v => v > 0));
+                Assert.Equal(report.Count, report.Values.Count(v => v > 0));
             }
-            */
         }
 
         private static void EnsureStatusCode(HttpStatusCode expectedStatusCode,
