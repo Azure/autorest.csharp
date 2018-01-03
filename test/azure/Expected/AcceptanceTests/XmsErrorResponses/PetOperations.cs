@@ -160,18 +160,18 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 {
                     switch((int)_statusCode)
                     {
-                           case 400:
-                               await Handle400ErrorResponseForGetPetById(_httpRequest, _httpResponse);
-                               break;
-                           case 404:
-                               await Handle404ErrorResponseForGetPetById(_httpRequest, _httpResponse);
-                               break;
-                           case 501:
-                               await Handle501ErrorResponseForGetPetById(_httpRequest, _httpResponse);
-                               break;
-                            default:
-                               await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
+                        case 400:
+                            await Handle400ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                            break;
+                        case 404:
+                            await Handle404ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                            break;
+                        case 501:
+                            await Handle501ErrorResponseForGetPetById(_httpRequest, _httpResponse);
+                            break;
+                        default:
+                            await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
@@ -220,140 +220,141 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             }
             return _result;
         }
-            /// <summary>
-            /// Handle 400 errors
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task Handle400ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
-            {
-                await HandleErrorResponseWithKnownTypeForGetPetById<string>(_httpRequest, _httpResponse, 400);
-            }
 
-            /// <summary>
-            /// Handle 404 errors
-            /// </summary>
-            /// <exception cref="NotFoundErrorBaseException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task Handle404ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
-            {
-                await HandleErrorResponseForGetPetById<NotFoundErrorBase>(_httpRequest, _httpResponse, 404, Client.DeserializationSettings);
-            }
+        /// <summary>
+        /// Handle 400 errors
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task Handle400ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+        {
+            await HandleErrorResponseWithKnownTypeForGetPetById<string>(_httpRequest, _httpResponse, 400);
+        }
 
-            /// <summary>
-            /// Handle 501 errors
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task Handle501ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
-            {
-                await HandleErrorResponseWithKnownTypeForGetPetById<int>(_httpRequest, _httpResponse, 501);
-            }
+        /// <summary>
+        /// Handle 404 errors
+        /// </summary>
+        /// <exception cref="NotFoundErrorBaseException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task Handle404ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+        {
+            await HandleErrorResponseForGetPetById<NotFoundErrorBase>(_httpRequest, _httpResponse, 404, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="CloudException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetPetById<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
+        /// <summary>
+        /// Handle 501 errors
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task Handle501ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+        {
+            await HandleErrorResponseWithKnownTypeForGetPetById<int>(_httpRequest, _httpResponse, 501);
+        }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetPetById(int statusCode)
-            {
-                return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetPetById<CloudError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle responses where error model is a known primary type
-            /// Creates a HttpRestException object and throws it
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetPetById(int statusCode)
+        {
+            return string.Format("Operation GetPetById returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new HttpRestException<T>(GetErrorMessageForGetPetById(statusCode));
+            if (_httpResponse.Content != null)
             {
-                string _responseContent = null;
-                var ex = new HttpRestException<T>(GetErrorMessageForGetPetById(statusCode));
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                        ex.SetErrorModel(errorResponseModel);
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
                 }
-                else
+                catch (JsonException)
                 {
-                    _responseContent = string.Empty;
+                    // Ignore the exception
                 }
-
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
+            }
+            else
+            {
+                _responseContent = string.Empty;
             }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetPetById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
             {
-                string errorMessage = GetErrorMessageForGetPetById(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetPetById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetPetById(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -466,12 +467,12 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 {
                     switch((int)_statusCode)
                     {
-                           case 500:
-                               await Handle500ErrorResponseForDoSomething(_httpRequest, _httpResponse);
-                               break;
-                            default:
-                               await HandleDefaultErrorResponseForDoSomething(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
+                        case 500:
+                            await Handle500ErrorResponseForDoSomething(_httpRequest, _httpResponse);
+                            break;
+                        default:
+                            await HandleDefaultErrorResponseForDoSomething(_httpRequest, _httpResponse, (int)_statusCode);
+                            break;
                     }
                 }
                 catch (JsonException)
@@ -520,79 +521,80 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             }
             return _result;
         }
-            /// <summary>
-            /// Handle 500 errors
-            /// </summary>
-            /// <exception cref="PetActionErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task Handle500ErrorResponseForDoSomething(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
-            {
-                await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, 500, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="PetActionErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForDoSomething(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
+        /// <summary>
+        /// Handle 500 errors
+        /// </summary>
+        /// <exception cref="PetActionErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task Handle500ErrorResponseForDoSomething(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+        {
+            await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, 500, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForDoSomething(int statusCode)
-            {
-                return string.Format("Operation DoSomething returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="PetActionErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForDoSomething(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForDoSomething<PetActionError>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForDoSomething<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForDoSomething(int statusCode)
+        {
+            return string.Format("Operation DoSomething returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForDoSomething<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForDoSomething(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForDoSomething(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
     }

@@ -104,7 +104,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
@@ -125,12 +125,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -169,59 +164,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredIntegerParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredIntegerParameter(int statusCode)
-            {
-                return string.Format("Operation PostRequiredIntegerParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredIntegerParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredIntegerParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredIntegerParameter(int statusCode)
+        {
+            return string.Format("Operation PostRequiredIntegerParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredIntegerParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredIntegerParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredIntegerParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -277,7 +273,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -301,12 +297,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -331,59 +322,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalIntegerParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalIntegerParameter(int statusCode)
-            {
-                return string.Format("Operation PostOptionalIntegerParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalIntegerParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalIntegerParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalIntegerParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalIntegerParameter(int statusCode)
+        {
+            return string.Format("Operation PostOptionalIntegerParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalIntegerParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalIntegerParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalIntegerParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -443,7 +435,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -467,12 +459,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -511,59 +498,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredIntegerProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredIntegerProperty(int statusCode)
-            {
-                return string.Format("Operation PostRequiredIntegerProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredIntegerProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredIntegerProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredIntegerProperty(int statusCode)
+        {
+            return string.Format("Operation PostRequiredIntegerProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredIntegerProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredIntegerProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredIntegerProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -626,7 +614,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -650,12 +638,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -680,59 +663,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalIntegerProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalIntegerProperty(int statusCode)
-            {
-                return string.Format("Operation PostOptionalIntegerProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalIntegerProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalIntegerProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalIntegerProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalIntegerProperty(int statusCode)
+        {
+            return string.Format("Operation PostOptionalIntegerProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalIntegerProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalIntegerProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalIntegerProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -811,12 +795,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -855,59 +834,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredIntegerHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredIntegerHeader(int statusCode)
-            {
-                return string.Format("Operation PostRequiredIntegerHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredIntegerHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredIntegerHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredIntegerHeader(int statusCode)
+        {
+            return string.Format("Operation PostRequiredIntegerHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredIntegerHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredIntegerHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredIntegerHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -989,12 +969,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1019,59 +994,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalIntegerHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalIntegerHeader(int statusCode)
-            {
-                return string.Format("Operation PostOptionalIntegerHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalIntegerHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalIntegerHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalIntegerHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalIntegerHeader(int statusCode)
+        {
+            return string.Format("Operation PostOptionalIntegerHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalIntegerHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalIntegerHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalIntegerHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -1138,7 +1114,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -1162,12 +1138,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1206,59 +1177,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredStringParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredStringParameter(int statusCode)
-            {
-                return string.Format("Operation PostRequiredStringParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredStringParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredStringParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredStringParameter(int statusCode)
+        {
+            return string.Format("Operation PostRequiredStringParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredStringParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredStringParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredStringParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -1314,7 +1286,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -1338,12 +1310,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1368,59 +1335,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalStringParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalStringParameter(int statusCode)
-            {
-                return string.Format("Operation PostOptionalStringParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalStringParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalStringParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalStringParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalStringParameter(int statusCode)
+        {
+            return string.Format("Operation PostOptionalStringParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalStringParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalStringParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalStringParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -1493,7 +1461,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -1517,12 +1485,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1561,59 +1524,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredStringProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredStringProperty(int statusCode)
-            {
-                return string.Format("Operation PostRequiredStringProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredStringProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredStringProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredStringProperty(int statusCode)
+        {
+            return string.Format("Operation PostRequiredStringProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredStringProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredStringProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredStringProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -1676,7 +1640,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -1700,12 +1664,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1730,59 +1689,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalStringProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalStringProperty(int statusCode)
-            {
-                return string.Format("Operation PostOptionalStringProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalStringProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalStringProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalStringProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalStringProperty(int statusCode)
+        {
+            return string.Format("Operation PostOptionalStringProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalStringProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalStringProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalStringProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -1874,12 +1834,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1918,59 +1873,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredStringHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredStringHeader(int statusCode)
-            {
-                return string.Format("Operation PostRequiredStringHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredStringHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredStringHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredStringHeader(int statusCode)
+        {
+            return string.Format("Operation PostRequiredStringHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredStringHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredStringHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredStringHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2052,12 +2008,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2082,59 +2033,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalStringHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalStringHeader(int statusCode)
-            {
-                return string.Format("Operation PostOptionalStringHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalStringHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalStringHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalStringHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalStringHeader(int statusCode)
+        {
+            return string.Format("Operation PostOptionalStringHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalStringHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalStringHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalStringHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2205,7 +2157,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -2229,12 +2181,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2273,59 +2220,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredClassParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredClassParameter(int statusCode)
-            {
-                return string.Format("Operation PostRequiredClassParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredClassParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredClassParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredClassParameter(int statusCode)
+        {
+            return string.Format("Operation PostRequiredClassParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredClassParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredClassParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredClassParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2385,7 +2333,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -2409,12 +2357,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2439,59 +2382,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalClassParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalClassParameter(int statusCode)
-            {
-                return string.Format("Operation PostOptionalClassParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalClassParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalClassParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalClassParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalClassParameter(int statusCode)
+        {
+            return string.Format("Operation PostOptionalClassParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalClassParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalClassParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalClassParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2568,7 +2512,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -2592,12 +2536,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2636,59 +2575,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredClassProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredClassProperty(int statusCode)
-            {
-                return string.Format("Operation PostRequiredClassProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredClassProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredClassProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredClassProperty(int statusCode)
+        {
+            return string.Format("Operation PostRequiredClassProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredClassProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredClassProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredClassProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2755,7 +2695,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -2779,12 +2719,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2809,59 +2744,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalClassProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalClassProperty(int statusCode)
-            {
-                return string.Format("Operation PostOptionalClassProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalClassProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalClassProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalClassProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalClassProperty(int statusCode)
+        {
+            return string.Format("Operation PostOptionalClassProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalClassProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalClassProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalClassProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -2928,7 +2864,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -2952,12 +2888,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -2996,59 +2927,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredArrayParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredArrayParameter(int statusCode)
-            {
-                return string.Format("Operation PostRequiredArrayParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredArrayParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredArrayParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredArrayParameter(int statusCode)
+        {
+            return string.Format("Operation PostRequiredArrayParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredArrayParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredArrayParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredArrayParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -3104,7 +3036,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -3128,12 +3060,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -3158,59 +3085,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalArrayParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalArrayParameter(int statusCode)
-            {
-                return string.Format("Operation PostOptionalArrayParameter returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalArrayParameter(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalArrayParameter<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalArrayParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalArrayParameter(int statusCode)
+        {
+            return string.Format("Operation PostOptionalArrayParameter returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalArrayParameter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalArrayParameter(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalArrayParameter(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -3283,7 +3211,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -3307,12 +3235,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -3351,59 +3274,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredArrayProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredArrayProperty(int statusCode)
-            {
-                return string.Format("Operation PostRequiredArrayProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredArrayProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredArrayProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredArrayProperty(int statusCode)
+        {
+            return string.Format("Operation PostRequiredArrayProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredArrayProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredArrayProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredArrayProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -3466,7 +3390,7 @@ namespace Fixtures.RequiredOptional
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(bodyParameter != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(bodyParameter, Client.SerializationSettings);
@@ -3490,12 +3414,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -3520,59 +3439,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalArrayProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalArrayProperty(int statusCode)
-            {
-                return string.Format("Operation PostOptionalArrayProperty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalArrayProperty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalArrayProperty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalArrayProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalArrayProperty(int statusCode)
+        {
+            return string.Format("Operation PostOptionalArrayProperty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalArrayProperty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalArrayProperty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalArrayProperty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -3664,12 +3584,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostRequiredArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostRequiredArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -3708,59 +3623,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostRequiredArrayHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostRequiredArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostRequiredArrayHeader(int statusCode)
-            {
-                return string.Format("Operation PostRequiredArrayHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostRequiredArrayHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostRequiredArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostRequiredArrayHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostRequiredArrayHeader(int statusCode)
+        {
+            return string.Format("Operation PostRequiredArrayHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostRequiredArrayHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostRequiredArrayHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostRequiredArrayHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -3842,12 +3758,7 @@ namespace Fixtures.RequiredOptional
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPostOptionalArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPostOptionalArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -3872,59 +3783,60 @@ namespace Fixtures.RequiredOptional
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPostOptionalArrayHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPostOptionalArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPostOptionalArrayHeader(int statusCode)
-            {
-                return string.Format("Operation PostOptionalArrayHeader returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPostOptionalArrayHeader(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPostOptionalArrayHeader<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPostOptionalArrayHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPostOptionalArrayHeader(int statusCode)
+        {
+            return string.Format("Operation PostOptionalArrayHeader returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPostOptionalArrayHeader<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPostOptionalArrayHeader(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPostOptionalArrayHeader(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
     }

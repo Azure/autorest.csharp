@@ -143,12 +143,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -196,68 +191,69 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetValid(int statusCode)
-            {
-                return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetValid(int statusCode)
+        {
+            return string.Format("Operation GetValid returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetValid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetValid(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -335,7 +331,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(complexBody != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
@@ -365,12 +361,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -399,68 +390,69 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPutValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPutValid(int statusCode)
-            {
-                return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPutValid(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPutValid<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPutValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPutValid(int statusCode)
+        {
+            return string.Format("Operation PutValid returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPutValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPutValid(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPutValid(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -556,12 +548,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -609,68 +596,69 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetEmpty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetEmpty(int statusCode)
-            {
-                return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetEmpty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetEmpty(int statusCode)
+        {
+            return string.Format("Operation GetEmpty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetEmpty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetEmpty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -748,7 +736,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(complexBody != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, Client.SerializationSettings);
@@ -778,12 +766,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -812,68 +795,69 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForPutEmpty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForPutEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForPutEmpty(int statusCode)
-            {
-                return string.Format("Operation PutEmpty returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForPutEmpty(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForPutEmpty<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForPutEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForPutEmpty(int statusCode)
+        {
+            return string.Format("Operation PutEmpty returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForPutEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForPutEmpty(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForPutEmpty(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -970,12 +954,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -1023,68 +1002,69 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetNotProvided(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetNotProvided<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetNotProvided(int statusCode)
-            {
-                return string.Format("Operation GetNotProvided returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetNotProvided(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetNotProvided<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetNotProvided<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetNotProvided(int statusCode)
+        {
+            return string.Format("Operation GetNotProvided returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetNotProvided<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetNotProvided(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetNotProvided(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch(RestException ex)
-                    {
-                        // set the request id to exception
-                        if (_httpResponse.Headers.Contains("x-ms-request-id"))
-                        {
-                            ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-                        }
-                        throw ex;
-                    }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                }
+                catch(RestException ex)
+                {
+                    // set the request id to exception
+                    if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                    {
+                        ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                    }
+                    throw ex;
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
     }

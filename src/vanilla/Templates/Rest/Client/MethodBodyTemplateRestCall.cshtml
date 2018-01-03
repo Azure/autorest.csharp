@@ -144,7 +144,7 @@ if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.
     }
     else
     {
-        @:string _requestContent = null;
+@:string _requestContent = null;
         if (Model.RequestContentType.StartsWith("application/xml"))
         {
             if (!Model.RequestBody.IsNullable()) {
@@ -291,17 +291,24 @@ if (@(Model.FailureStatusCodePredicate))
 {
     try
     {
-        switch((int)_statusCode)
+        @if(Model.GetErrorResponseStatusCodes().Any())
         {
-            @foreach(var errorCode in Model.GetErrorResponseStatusCodes())
+        @:switch((int)_statusCode)
+        @:{
+            foreach(var errorCode in Model.GetErrorResponseStatusCodes())
             {
-               @:case @((int)errorCode):
-                   @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
-                   @:break;
+            @:case @((int)errorCode):
+                @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
+                @:break;
             }
-                default:
-                   await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
-                   break;
+            @:default:
+                @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
+                @:break;
+        @:}
+        }
+        else
+        {
+        @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
         }
     }
     catch (Newtonsoft.Json.JsonException)
@@ -335,8 +342,7 @@ if ((int)_statusCode == @MethodCs.GetStatusCodeReference(responsePair.Key))
     @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
     else
-    {<text>
-    string _responseContent = null;
+    {<text>    string _responseContent = null;
     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     try
     {

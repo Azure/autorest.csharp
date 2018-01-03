@@ -175,12 +175,7 @@ namespace Fixtures.Url
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetAllWithValues(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetAllWithValues(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -205,59 +200,60 @@ namespace Fixtures.Url
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetAllWithValues(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetAllWithValues<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetAllWithValues(int statusCode)
-            {
-                return string.Format("Operation GetAllWithValues returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetAllWithValues(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetAllWithValues<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetAllWithValues<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetAllWithValues(int statusCode)
+        {
+            return string.Format("Operation GetAllWithValues returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetAllWithValues<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetAllWithValues(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetAllWithValues(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -384,12 +380,7 @@ namespace Fixtures.Url
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetGlobalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetGlobalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -414,59 +405,60 @@ namespace Fixtures.Url
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetGlobalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetGlobalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetGlobalQueryNull(int statusCode)
-            {
-                return string.Format("Operation GetGlobalQueryNull returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetGlobalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetGlobalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetGlobalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetGlobalQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetGlobalQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetGlobalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetGlobalQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetGlobalQueryNull(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -593,12 +585,7 @@ namespace Fixtures.Url
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -623,59 +610,60 @@ namespace Fixtures.Url
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetGlobalAndLocalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetGlobalAndLocalQueryNull(int statusCode)
-            {
-                return string.Format("Operation GetGlobalAndLocalQueryNull returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetGlobalAndLocalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetGlobalAndLocalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetGlobalAndLocalQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetGlobalAndLocalQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetGlobalAndLocalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetGlobalAndLocalQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetGlobalAndLocalQueryNull(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
         /// <summary>
@@ -802,12 +790,7 @@ namespace Fixtures.Url
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetLocalPathItemQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetLocalPathItemQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -832,59 +815,60 @@ namespace Fixtures.Url
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="ErrorException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetLocalPathItemQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                await HandleErrorResponseForGetLocalPathItemQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
-            }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetLocalPathItemQueryNull(int statusCode)
-            {
-                return string.Format("Operation GetLocalPathItemQueryNull returned status code: '{0}'", statusCode);
-            }
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetLocalPathItemQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetLocalPathItemQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
 
-            /// <summary>
-            /// Handle error responses, deserialize errors of types V and throw exceptions of type T
-            /// </summary>
-            private async Task HandleErrorResponseForGetLocalPathItemQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-                where V : IHttpRestErrorModel
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetLocalPathItemQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetLocalPathItemQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetLocalPathItemQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IHttpRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetLocalPathItemQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
             {
-                string errorMessage = GetErrorMessageForGetLocalPathItemQueryNull(statusCode);
-                string _responseContent = null;
-                if (_httpResponse.Content != null)
+                try
                 {
-                    try
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
                     {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-                        if(errorResponseModel!=null)
-                        {
-                            errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
-                        else
-                        {
-                            throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
-                        }
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
-                    catch (JsonException)
+                    else
                     {
                         throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch (JsonException)
                 {
-                    _httpResponse.Dispose();
+                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+        }
 
 
     }

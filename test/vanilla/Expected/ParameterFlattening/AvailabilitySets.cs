@@ -144,7 +144,7 @@ namespace Fixtures.ParameterFlattening
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(tags1 != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(tags1, Client.SerializationSettings);
@@ -168,12 +168,7 @@ namespace Fixtures.ParameterFlattening
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForUpdate(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForUpdate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -198,63 +193,64 @@ namespace Fixtures.ParameterFlattening
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="Microsoft.Rest.Azure.CloudException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForUpdate(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForUpdate(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForUpdate<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForUpdate(int statusCode)
+        {
+            return string.Format("Operation Update returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForUpdate<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new HttpRestException<T>(GetErrorMessageForUpdate(statusCode));
+            if (_httpResponse.Content != null)
             {
-                await HandleErrorResponseWithKnownTypeForUpdate<string>(_httpRequest, _httpResponse, statusCode);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
             }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForUpdate(int statusCode)
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
             {
-                return string.Format("Operation Update returned status code: '{0}'", statusCode);
+                _httpResponse.Dispose();
             }
-
-            /// <summary>
-            /// Handle responses where error model is a known primary type
-            /// Creates a HttpRestException object and throws it
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleErrorResponseWithKnownTypeForUpdate<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                string _responseContent = null;
-                var ex = new HttpRestException<T>(GetErrorMessageForUpdate(statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                        ex.SetErrorModel(errorResponseModel);
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
-
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
+            throw ex;
+        }
 
 
     }

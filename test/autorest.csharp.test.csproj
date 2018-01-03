@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" >
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <VersionPrefix>1.0.0</VersionPrefix>
     <GenerateFullPaths>true</GenerateFullPaths>
@@ -9,7 +9,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <Target Name="Nuke" AfterTargets="clean" >
+  <Target Name="Nuke" AfterTargets="clean">
     <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
     <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
   </Target>
@@ -42,6 +42,9 @@
   </ItemGroup>
  
   <ItemGroup>
+    <Reference Include="autorest.common">
+      <HintPath>..\..\autorest.common\src\bin\netstandard2.0\autorest.common.dll</HintPath>
+    </Reference>
     <Reference Include="autorest.modeler">
       <HintPath>$(SolutionDir)\node_modules\@microsoft.azure\autorest.modeler\src\bin\netcoreapp2.0\autorest.modeler.dll</HintPath>
       <!-- <HintPath>C:\work\oneautorest\autorest.modeler\src\bin\netcoreapp2.0\autorest.modeler.dll</HintPath> -->

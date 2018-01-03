@@ -132,12 +132,7 @@ namespace Fixtures.ExtensibleEnums
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForGetByPetId(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForGetByPetId(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -181,63 +176,64 @@ namespace Fixtures.ExtensibleEnums
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="Microsoft.Rest.Azure.CloudException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForGetByPetId(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetByPetId(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetByPetId<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetByPetId(int statusCode)
+        {
+            return string.Format("Operation GetByPetId returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetByPetId<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new HttpRestException<T>(GetErrorMessageForGetByPetId(statusCode));
+            if (_httpResponse.Content != null)
             {
-                await HandleErrorResponseWithKnownTypeForGetByPetId<string>(_httpRequest, _httpResponse, statusCode);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
             }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForGetByPetId(int statusCode)
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
             {
-                return string.Format("Operation GetByPetId returned status code: '{0}'", statusCode);
+                _httpResponse.Dispose();
             }
-
-            /// <summary>
-            /// Handle responses where error model is a known primary type
-            /// Creates a HttpRestException object and throws it
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleErrorResponseWithKnownTypeForGetByPetId<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                string _responseContent = null;
-                var ex = new HttpRestException<T>(GetErrorMessageForGetByPetId(statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                        ex.SetErrorModel(errorResponseModel);
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
-
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
+            throw ex;
+        }
 
 
         /// <param name='petParam'>
@@ -297,7 +293,7 @@ namespace Fixtures.ExtensibleEnums
                 }
             }
 
-                    string _requestContent = null;
+            string _requestContent = null;
             if(petParam != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(petParam, Client.SerializationSettings);
@@ -321,12 +317,7 @@ namespace Fixtures.ExtensibleEnums
             {
                 try
                 {
-                    switch(_statusCode)
-                    {
-                            default:
-                               await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
-                               break;
-                    }
+                    await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
                 catch (JsonException)
                 {
@@ -370,63 +361,64 @@ namespace Fixtures.ExtensibleEnums
             }
             return _result;
         }
-            /// <summary>
-            /// Handle other unhandled status codes
-            /// </summary>
-            /// <exception cref="Microsoft.Rest.Azure.CloudException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleDefaultErrorResponseForAddPet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForAddPet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForAddPet<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForAddPet(int statusCode)
+        {
+            return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a HttpRestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new HttpRestException<T>(GetErrorMessageForAddPet(statusCode));
+            if (_httpResponse.Content != null)
             {
-                await HandleErrorResponseWithKnownTypeForAddPet<string>(_httpRequest, _httpResponse, statusCode);
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.SetErrorModel(errorResponseModel);
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
             }
 
-            /// <summary>
-            /// Method that generates error message for status code
-            /// </summary>
-            private string GetErrorMessageForAddPet(int statusCode)
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
             {
-                return string.Format("Operation AddPet returned status code: '{0}'", statusCode);
+                _httpResponse.Dispose();
             }
-
-            /// <summary>
-            /// Handle responses where error model is a known primary type
-            /// Creates a HttpRestException object and throws it
-            /// </summary>
-            /// <exception cref="T:Microsoft.Rest.HttpRestException">
-            /// Deserialize error body returned by the operation
-            /// </exception>
-            private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
-            {
-                string _responseContent = null;
-                var ex = new HttpRestException<T>(GetErrorMessageForAddPet(statusCode));
-                if (_httpResponse.Content != null)
-                {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                        ex.SetErrorModel(errorResponseModel);
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                }
-                else
-                {
-                    _responseContent = string.Empty;
-                }
-
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
+            throw ex;
+        }
 
 
     }
