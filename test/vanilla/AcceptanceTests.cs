@@ -1751,8 +1751,8 @@ namespace AutoRest.CSharp.Tests
             Assert.Equal<string>("200", client.MultipleResponses.Get200Model204NoModelDefaultError200Valid().StatusCode);
             EnsureThrowsWithStatusCode(HttpStatusCode.Created,
                 () => client.MultipleResponses.Get200Model204NoModelDefaultError201Invalid());
-            // EnsureThrowsWithStatusCode(HttpStatusCode.Accepted,
-            //    () => client.MultipleResponses.Get200Model204NoModelDefaultError202None());
+            EnsureThrowsWithStatusCode(HttpStatusCode.Accepted,
+                () => client.MultipleResponses.Get200Model204NoModelDefaultError202None());
             Assert.Null(client.MultipleResponses.Get200Model204NoModelDefaultError204Valid());
             EnsureThrowsWithStatusCodeAndError(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.Get200Model204NoModelDefaultError400Valid(), "client error");

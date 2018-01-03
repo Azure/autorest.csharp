@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckModelTypeDisambiguation()
         {
-            /* 
+            /*
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
