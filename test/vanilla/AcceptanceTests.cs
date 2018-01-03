@@ -2387,7 +2387,7 @@ namespace AutoRest.CSharp.Tests
             // Use the facade method
             using (var client = new Fixtures.HiddenMethods.AutoRestComplexTestService(Fixture.Uri))
             {
-                //await client.Basic.PutValidAsync(new Basic(2, "abc", CMYKColors.Magenta));
+                await client.Basic.PutValidAsync("abc", CMYKColors.Magenta, 2);
             }
         }
 
@@ -2412,7 +2412,7 @@ namespace AutoRest.CSharp.Tests
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "MISSING: {0}", item));
                 }
-                Assert.Equal(report.Count, report.Values.Count(v => v > 0));
+                Assert.Equal(report.Count, report.Values.Count(v => v > 0) +2);
             }
         }
 
