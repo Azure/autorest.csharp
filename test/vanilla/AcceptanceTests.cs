@@ -2368,7 +2368,6 @@ namespace AutoRest.CSharp.Tests
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "MISSING: {0}", item));
                 }
-                // Assert.Equal(report.Count, report.Values.Count(v => v > 0));
             }
         }
 
