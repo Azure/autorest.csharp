@@ -14,7 +14,7 @@ namespace Fixtures.MirrorPolymorphic.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class Error2: IHttpRestErrorModel
+    public partial class Error2: IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the Error2 class.

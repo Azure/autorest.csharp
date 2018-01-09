@@ -207,7 +207,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetWithFilter<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetWithFilter(statusCode);
             string _responseContent = null;

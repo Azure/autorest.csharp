@@ -215,7 +215,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetValid(statusCode);
             string _responseContent = null;
@@ -414,7 +414,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPutValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPutValid(statusCode);
             string _responseContent = null;
@@ -620,7 +620,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetEmpty(statusCode);
             string _responseContent = null;
@@ -819,7 +819,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPutEmpty<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPutEmpty(statusCode);
             string _responseContent = null;
@@ -1025,7 +1025,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetNull(statusCode);
             string _responseContent = null;
@@ -1232,7 +1232,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetNotProvided<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetNotProvided(statusCode);
             string _responseContent = null;

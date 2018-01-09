@@ -180,7 +180,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead400(statusCode);
             string _responseContent = null;
@@ -196,12 +196,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -342,7 +342,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet400(statusCode);
             string _responseContent = null;
@@ -358,12 +358,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -515,7 +515,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPut400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPut400(statusCode);
             string _responseContent = null;
@@ -531,12 +531,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -688,7 +688,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPatch400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPatch400(statusCode);
             string _responseContent = null;
@@ -704,12 +704,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -861,7 +861,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPost400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPost400(statusCode);
             string _responseContent = null;
@@ -877,12 +877,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1034,7 +1034,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForDelete400<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForDelete400(statusCode);
             string _responseContent = null;
@@ -1050,12 +1050,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1196,7 +1196,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead401<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead401(statusCode);
             string _responseContent = null;
@@ -1212,12 +1212,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1358,7 +1358,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet402<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet402(statusCode);
             string _responseContent = null;
@@ -1374,12 +1374,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1520,7 +1520,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet403<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet403(statusCode);
             string _responseContent = null;
@@ -1536,12 +1536,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1693,7 +1693,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPut404<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPut404(statusCode);
             string _responseContent = null;
@@ -1709,12 +1709,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1866,7 +1866,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPatch405<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPatch405(statusCode);
             string _responseContent = null;
@@ -1882,12 +1882,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2039,7 +2039,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPost406<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPost406(statusCode);
             string _responseContent = null;
@@ -2055,12 +2055,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2212,7 +2212,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForDelete407<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForDelete407(statusCode);
             string _responseContent = null;
@@ -2228,12 +2228,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2385,7 +2385,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPut409<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPut409(statusCode);
             string _responseContent = null;
@@ -2401,12 +2401,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2547,7 +2547,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead410<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead410(statusCode);
             string _responseContent = null;
@@ -2563,12 +2563,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2709,7 +2709,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet411<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet411(statusCode);
             string _responseContent = null;
@@ -2725,12 +2725,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2871,7 +2871,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet412<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet412(statusCode);
             string _responseContent = null;
@@ -2887,12 +2887,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3044,7 +3044,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPut413<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPut413(statusCode);
             string _responseContent = null;
@@ -3060,12 +3060,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3217,7 +3217,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPatch414<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPatch414(statusCode);
             string _responseContent = null;
@@ -3233,12 +3233,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3390,7 +3390,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPost415<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPost415(statusCode);
             string _responseContent = null;
@@ -3406,12 +3406,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3552,7 +3552,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet416<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet416(statusCode);
             string _responseContent = null;
@@ -3568,12 +3568,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3725,7 +3725,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForDelete417<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForDelete417(statusCode);
             string _responseContent = null;
@@ -3741,12 +3741,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3887,7 +3887,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead429<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead429(statusCode);
             string _responseContent = null;
@@ -3903,12 +3903,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();

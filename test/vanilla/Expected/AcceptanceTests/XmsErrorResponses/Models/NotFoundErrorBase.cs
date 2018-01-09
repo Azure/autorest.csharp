@@ -14,7 +14,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class NotFoundErrorBase : BaseError, IHttpRestErrorModel
+    public partial class NotFoundErrorBase : BaseError, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the NotFoundErrorBase class.

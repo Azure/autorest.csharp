@@ -14,7 +14,7 @@ namespace Fixtures.MirrorSequences.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class ErrorModel: IHttpRestErrorModel
+    public partial class ErrorModel: IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.

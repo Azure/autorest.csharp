@@ -324,15 +324,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForAddPet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -501,15 +501,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForUpdatePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForUpdatePet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePet(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -710,15 +710,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForFindPetsByStatus<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForFindPetsByStatus(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForFindPetsByStatus(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -920,15 +920,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForFindPetsByTags<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForFindPetsByTags(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForFindPetsByTags(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -1111,15 +1111,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetPetById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -1316,15 +1316,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForUpdatePetWithForm<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForUpdatePetWithForm(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePetWithForm(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -1484,15 +1484,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForDeletePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForDeletePet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeletePet(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -1670,15 +1670,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetInventory<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetInventory(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetInventory(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -1874,15 +1874,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForPlaceOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForPlaceOrder(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForPlaceOrder(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -2087,15 +2087,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetOrderById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetOrderById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetOrderById(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -2265,15 +2265,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForDeleteOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForDeleteOrder(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteOrder(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -2441,15 +2441,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForCreateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForCreateUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUser(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -2614,15 +2614,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithArrayInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForCreateUsersWithArrayInput(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithArrayInput(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -2787,15 +2787,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithListInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForCreateUsersWithListInput(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithListInput(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3018,15 +3018,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForLoginUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForLoginUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForLoginUser(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3170,15 +3170,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForLogoutUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForLogoutUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForLogoutUser(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3368,15 +3368,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetUserByName<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetUserByName(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetUserByName(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3553,15 +3553,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForUpdateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForUpdateUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateUser(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3723,15 +3723,15 @@ namespace Fixtures.PetstoreV2NoSync
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForDeleteUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForDeleteUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteUser(statusCode));
             if (_httpResponse.Content != null)
             {
                 try

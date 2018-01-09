@@ -192,7 +192,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead200(statusCode);
             string _responseContent = null;
@@ -376,7 +376,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead204<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead204(statusCode);
             string _responseContent = null;
@@ -560,7 +560,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForHead404<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForHead404(statusCode);
             string _responseContent = null;

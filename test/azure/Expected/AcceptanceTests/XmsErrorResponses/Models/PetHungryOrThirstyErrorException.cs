@@ -16,7 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     /// Exception thrown for an invalid response with PetHungryOrThirstyError
     /// information.
     /// </summary>
-    public partial class PetHungryOrThirstyErrorException : HttpRestExceptionBase<PetHungryOrThirstyError>
+    public partial class PetHungryOrThirstyErrorException : Microsoft.Rest.RestExceptionBase<PetHungryOrThirstyError>
     {
 
         /// <summary>

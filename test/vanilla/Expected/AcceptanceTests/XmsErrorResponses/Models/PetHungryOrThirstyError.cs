@@ -14,7 +14,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class PetHungryOrThirstyError : PetSadError, IHttpRestErrorModel
+    public partial class PetHungryOrThirstyError : PetSadError, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the PetHungryOrThirstyError class.

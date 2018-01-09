@@ -275,15 +275,15 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetPetById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -316,7 +316,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetPetById<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetPetById(statusCode);
             string _responseContent = null;
@@ -556,7 +556,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForDoSomething<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForDoSomething(statusCode);
             string _responseContent = null;

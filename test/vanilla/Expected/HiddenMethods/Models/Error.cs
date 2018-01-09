@@ -10,7 +10,7 @@ namespace Fixtures.HiddenMethods.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class Error: IHttpRestErrorModel
+    public partial class Error: IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the Error class.

@@ -188,7 +188,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model204NoModelDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError200Valid(statusCode);
             string _responseContent = null;
@@ -204,12 +204,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -358,7 +358,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model204NoModelDefaultError204Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError204Valid(statusCode);
             string _responseContent = null;
@@ -374,12 +374,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -528,7 +528,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model204NoModelDefaultError201Invalid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError201Invalid(statusCode);
             string _responseContent = null;
@@ -544,12 +544,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -698,7 +698,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model204NoModelDefaultError202None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError202None(statusCode);
             string _responseContent = null;
@@ -714,12 +714,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -869,7 +869,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model204NoModelDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model204NoModelDefaultError400Valid(statusCode);
             string _responseContent = null;
@@ -885,12 +885,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1058,7 +1058,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model201ModelDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError200Valid(statusCode);
             string _responseContent = null;
@@ -1074,12 +1074,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1248,7 +1248,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model201ModelDefaultError201Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError201Valid(statusCode);
             string _responseContent = null;
@@ -1264,12 +1264,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1438,7 +1438,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200Model201ModelDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200Model201ModelDefaultError400Valid(statusCode);
             string _responseContent = null;
@@ -1454,12 +1454,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1646,7 +1646,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError200Valid(statusCode);
             string _responseContent = null;
@@ -1662,12 +1662,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -1854,7 +1854,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError201Valid(statusCode);
             string _responseContent = null;
@@ -1870,12 +1870,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2062,7 +2062,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError404Valid(statusCode);
             string _responseContent = null;
@@ -2078,12 +2078,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2271,7 +2271,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet200ModelA201ModelC404ModelDDefaultError400Valid(statusCode);
             string _responseContent = null;
@@ -2287,12 +2287,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2419,7 +2419,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet202None204NoneDefaultError202None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet202None204NoneDefaultError202None(statusCode);
             string _responseContent = null;
@@ -2435,12 +2435,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2567,7 +2567,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet202None204NoneDefaultError204None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet202None204NoneDefaultError204None(statusCode);
             string _responseContent = null;
@@ -2583,12 +2583,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2716,7 +2716,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGet202None204NoneDefaultError400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGet202None204NoneDefaultError400Valid(statusCode);
             string _responseContent = null;
@@ -2732,12 +2732,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -2862,15 +2862,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone202Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3014,15 +3014,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone204None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3166,15 +3166,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3318,15 +3318,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -3486,7 +3486,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetDefaultModelA200Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetDefaultModelA200Valid(statusCode);
             string _responseContent = null;
@@ -3502,12 +3502,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3648,7 +3648,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetDefaultModelA200None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetDefaultModelA200None(statusCode);
             string _responseContent = null;
@@ -3664,12 +3664,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3810,7 +3810,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetDefaultModelA400Valid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetDefaultModelA400Valid(statusCode);
             string _responseContent = null;
@@ -3826,12 +3826,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -3972,7 +3972,7 @@ namespace Fixtures.Http
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetDefaultModelA400None<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetDefaultModelA400None(statusCode);
             string _responseContent = null;
@@ -3988,12 +3988,12 @@ namespace Fixtures.Http
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -4118,15 +4118,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone200Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -4270,15 +4270,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone200None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -4422,15 +4422,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -4574,15 +4574,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetDefaultNone400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -4749,15 +4749,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -4923,15 +4923,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Valid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -5097,15 +5097,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA200Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -5272,15 +5272,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400None(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -5446,15 +5446,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Valid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -5620,15 +5620,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Invalid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -5794,15 +5794,15 @@ namespace Fixtures.Http
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA202Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGet200ModelA202Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA202Valid(statusCode));
             if (_httpResponse.Content != null)
             {
                 try

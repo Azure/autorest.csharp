@@ -198,15 +198,15 @@ namespace Fixtures.ExtensibleEnums
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForGetByPetId<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForGetByPetId(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetByPetId(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -383,15 +383,15 @@ namespace Fixtures.ExtensibleEnums
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForAddPet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode));
             if (_httpResponse.Content != null)
             {
                 try

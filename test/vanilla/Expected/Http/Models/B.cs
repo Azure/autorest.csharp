@@ -14,7 +14,7 @@ namespace Fixtures.Http.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class B : A, IHttpRestErrorModel
+    public partial class B : A, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the B class.

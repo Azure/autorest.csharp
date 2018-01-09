@@ -318,7 +318,7 @@ namespace Fixtures.MirrorSequences
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForAddPet<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForAddPet(statusCode);
             string _responseContent = null;
@@ -334,12 +334,12 @@ namespace Fixtures.MirrorSequences
                     }
                     else
                     {
-                        throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -507,15 +507,15 @@ namespace Fixtures.MirrorSequences
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForAddPetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForAddPetStyles(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPetStyles(statusCode));
             if (_httpResponse.Content != null)
             {
                 try
@@ -702,15 +702,15 @@ namespace Fixtures.MirrorSequences
 
         /// <summary>
         /// Handle responses where error model is a known primary type
-        /// Creates a HttpRestException object and throws it
+        /// Creates a RestException object and throws it
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task HandleErrorResponseWithKnownTypeForUpdatePetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new HttpRestException<T>(GetErrorMessageForUpdatePetStyles(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePetStyles(statusCode));
             if (_httpResponse.Content != null)
             {
                 try

@@ -207,7 +207,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMethodGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMethodGlobalValid(statusCode);
             string _responseContent = null;
@@ -405,7 +405,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMethodGlobalNotProvidedValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMethodGlobalNotProvidedValid(statusCode);
             string _responseContent = null;
@@ -603,7 +603,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetPathGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetPathGlobalValid(statusCode);
             string _responseContent = null;
@@ -801,7 +801,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSwaggerGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSwaggerGlobalValid(statusCode);
             string _responseContent = null;

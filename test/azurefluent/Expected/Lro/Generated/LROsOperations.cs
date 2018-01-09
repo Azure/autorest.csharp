@@ -936,7 +936,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut200Succeeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut200Succeeded(statusCode);
             string _responseContent = null;
@@ -1154,7 +1154,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut200SucceededNoState<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut200SucceededNoState(statusCode);
             string _responseContent = null;
@@ -1373,7 +1373,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut202Retry200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut202Retry200(statusCode);
             string _responseContent = null;
@@ -1612,7 +1612,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut201CreatingSucceeded200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut201CreatingSucceeded200(statusCode);
             string _responseContent = null;
@@ -1832,7 +1832,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut200UpdatingSucceeded204<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut200UpdatingSucceeded204(statusCode);
             string _responseContent = null;
@@ -2071,7 +2071,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut201CreatingFailed200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut201CreatingFailed200(statusCode);
             string _responseContent = null;
@@ -2291,7 +2291,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPut200Acceptedcanceled200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPut200Acceptedcanceled200(statusCode);
             string _responseContent = null;
@@ -2523,7 +2523,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutNoHeaderInRetry<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutNoHeaderInRetry(statusCode);
             string _responseContent = null;
@@ -2755,7 +2755,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -2987,7 +2987,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncNoRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncNoRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -3219,7 +3219,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncRetryFailed<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncRetryFailed(statusCode);
             string _responseContent = null;
@@ -3451,7 +3451,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncNoRetrycanceled<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncNoRetrycanceled(statusCode);
             string _responseContent = null;
@@ -3683,7 +3683,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncNoHeaderInRetry<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncNoHeaderInRetry(statusCode);
             string _responseContent = null;
@@ -3900,7 +3900,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutNonResource<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutNonResource(statusCode);
             string _responseContent = null;
@@ -4117,7 +4117,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncNonResource<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncNonResource(statusCode);
             string _responseContent = null;
@@ -4339,7 +4339,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutSubResource<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutSubResource(statusCode);
             string _responseContent = null;
@@ -4561,7 +4561,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPutAsyncSubResource<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPutAsyncSubResource(statusCode);
             string _responseContent = null;
@@ -4802,7 +4802,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteProvisioning202Accepted200Succeeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteProvisioning202Accepted200Succeeded(statusCode);
             string _responseContent = null;
@@ -5043,7 +5043,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteProvisioning202DeletingFailed200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteProvisioning202DeletingFailed200(statusCode);
             string _responseContent = null;
@@ -5284,7 +5284,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteProvisioning202Deletingcanceled200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteProvisioning202Deletingcanceled200(statusCode);
             string _responseContent = null;
@@ -5468,7 +5468,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDelete204Succeeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDelete204Succeeded(statusCode);
             string _responseContent = null;
@@ -5689,7 +5689,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDelete202Retry200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDelete202Retry200(statusCode);
             string _responseContent = null;
@@ -5910,7 +5910,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDelete202NoRetry204<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDelete202NoRetry204(statusCode);
             string _responseContent = null;
@@ -6109,7 +6109,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteNoHeaderInRetry<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteNoHeaderInRetry(statusCode);
             string _responseContent = null;
@@ -6308,7 +6308,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteAsyncNoHeaderInRetry<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncNoHeaderInRetry(statusCode);
             string _responseContent = null;
@@ -6507,7 +6507,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteAsyncRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -6706,7 +6706,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteAsyncNoRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncNoRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -6905,7 +6905,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteAsyncRetryFailed<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRetryFailed(statusCode);
             string _responseContent = null;
@@ -7104,7 +7104,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginDeleteAsyncRetrycanceled<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginDeleteAsyncRetrycanceled(statusCode);
             string _responseContent = null;
@@ -7331,7 +7331,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPost200WithPayload<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPost200WithPayload(statusCode);
             string _responseContent = null;
@@ -7541,7 +7541,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPost202Retry200<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPost202Retry200(statusCode);
             string _responseContent = null;
@@ -7772,7 +7772,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPost202NoRetry204<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPost202NoRetry204(statusCode);
             string _responseContent = null;
@@ -8004,7 +8004,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPostAsyncRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -8236,7 +8236,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPostAsyncNoRetrySucceeded<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncNoRetrySucceeded(statusCode);
             string _responseContent = null;
@@ -8446,7 +8446,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPostAsyncRetryFailed<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRetryFailed(statusCode);
             string _responseContent = null;
@@ -8656,7 +8656,7 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForBeginPostAsyncRetrycanceled<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForBeginPostAsyncRetrycanceled(statusCode);
             string _responseContent = null;

@@ -229,7 +229,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForCustomNamedRequestId<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForCustomNamedRequestId(statusCode);
             string _responseContent = null;
@@ -458,7 +458,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForCustomNamedRequestIdParamGrouping<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForCustomNamedRequestIdParamGrouping(statusCode);
             string _responseContent = null;
@@ -679,7 +679,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForCustomNamedRequestIdHead<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForCustomNamedRequestIdHead(statusCode);
             string _responseContent = null;

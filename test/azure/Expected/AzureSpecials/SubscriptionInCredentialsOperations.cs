@@ -205,7 +205,7 @@ namespace Fixtures.Azure.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPostMethodGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPostMethodGlobalValid(statusCode);
             string _responseContent = null;
@@ -402,7 +402,7 @@ namespace Fixtures.Azure.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPostMethodGlobalNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPostMethodGlobalNull(statusCode);
             string _responseContent = null;
@@ -606,7 +606,7 @@ namespace Fixtures.Azure.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPostMethodGlobalNotProvidedValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPostMethodGlobalNotProvidedValid(statusCode);
             string _responseContent = null;
@@ -802,7 +802,7 @@ namespace Fixtures.Azure.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPostPathGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPostPathGlobalValid(statusCode);
             string _responseContent = null;
@@ -998,7 +998,7 @@ namespace Fixtures.Azure.AzureSpecials
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForPostSwaggerGlobalValid<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForPostSwaggerGlobalValid(statusCode);
             string _responseContent = null;

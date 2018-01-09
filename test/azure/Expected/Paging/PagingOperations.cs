@@ -215,7 +215,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSinglePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePages(statusCode);
             string _responseContent = null;
@@ -463,7 +463,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePages(statusCode);
             string _responseContent = null;
@@ -712,7 +712,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetOdataMultiplePages<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetOdataMultiplePages(statusCode);
             string _responseContent = null;
@@ -981,7 +981,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesWithOffset<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesWithOffset(statusCode);
             string _responseContent = null;
@@ -1188,7 +1188,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesRetryFirst<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirst(statusCode);
             string _responseContent = null;
@@ -1396,7 +1396,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesRetrySecond<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecond(statusCode);
             string _responseContent = null;
@@ -1602,7 +1602,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSinglePagesFailure<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesFailure(statusCode);
             string _responseContent = null;
@@ -1808,7 +1808,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFailure<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailure(statusCode);
             string _responseContent = null;
@@ -2014,7 +2014,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFailureUri<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureUri(statusCode);
             string _responseContent = null;
@@ -2247,7 +2247,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFragmentNextLink<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFragmentNextLink(statusCode);
             string _responseContent = null;
@@ -2488,7 +2488,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFragmentWithGroupingNextLink(statusCode);
             string _responseContent = null;
@@ -2730,7 +2730,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForNextFragment<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForNextFragment(statusCode);
             string _responseContent = null;
@@ -2979,7 +2979,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForNextFragmentWithGrouping<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForNextFragmentWithGrouping(statusCode);
             string _responseContent = null;
@@ -3199,7 +3199,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSinglePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesNext(statusCode);
             string _responseContent = null;
@@ -3461,7 +3461,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesNext(statusCode);
             string _responseContent = null;
@@ -3724,7 +3724,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetOdataMultiplePagesNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetOdataMultiplePagesNext(statusCode);
             string _responseContent = null;
@@ -3986,7 +3986,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesWithOffsetNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesWithOffsetNext(statusCode);
             string _responseContent = null;
@@ -4207,7 +4207,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesRetryFirstNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetryFirstNext(statusCode);
             string _responseContent = null;
@@ -4429,7 +4429,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesRetrySecondNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesRetrySecondNext(statusCode);
             string _responseContent = null;
@@ -4649,7 +4649,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSinglePagesFailureNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSinglePagesFailureNext(statusCode);
             string _responseContent = null;
@@ -4869,7 +4869,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFailureNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureNext(statusCode);
             string _responseContent = null;
@@ -5089,7 +5089,7 @@ namespace Fixtures.Azure.Paging
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetMultiplePagesFailureUriNext<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetMultiplePagesFailureUriNext(statusCode);
             string _responseContent = null;

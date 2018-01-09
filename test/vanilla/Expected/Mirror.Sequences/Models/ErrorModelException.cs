@@ -15,7 +15,7 @@ namespace Fixtures.MirrorSequences.Models
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public partial class ErrorModelException : HttpRestExceptionBase<ErrorModel>
+    public partial class ErrorModelException : Microsoft.Rest.RestExceptionBase<ErrorModel>
     {
 
         /// <summary>

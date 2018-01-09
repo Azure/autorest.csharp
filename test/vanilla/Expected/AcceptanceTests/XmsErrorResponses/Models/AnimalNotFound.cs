@@ -14,7 +14,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class AnimalNotFound : NotFoundErrorBase, IHttpRestErrorModel
+    public partial class AnimalNotFound : NotFoundErrorBase, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the AnimalNotFound class.

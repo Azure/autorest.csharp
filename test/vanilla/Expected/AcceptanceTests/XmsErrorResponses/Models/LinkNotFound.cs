@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("InvalidResourceLink")]
-    public partial class LinkNotFound : NotFoundErrorBase, IHttpRestErrorModel
+    public partial class LinkNotFound : NotFoundErrorBase, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the LinkNotFound class.

@@ -14,7 +14,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class PetSadError : PetActionError, IHttpRestErrorModel
+    public partial class PetSadError : PetActionError, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the PetSadError class.

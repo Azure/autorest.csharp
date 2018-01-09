@@ -243,7 +243,7 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
         private async Task HandleErrorResponseForGetSampleResourceGroup<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
-            where V : IHttpRestErrorModel
+            where V : IRestErrorModel
         {
             string errorMessage = GetErrorMessageForGetSampleResourceGroup(statusCode);
             string _responseContent = null;
