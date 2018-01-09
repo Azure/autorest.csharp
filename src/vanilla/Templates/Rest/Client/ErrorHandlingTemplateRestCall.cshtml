@@ -79,15 +79,15 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 {
 @:/// <summary>
 @:/// Handle responses where error model is a known primary type
-@:/// Creates a HttpRestException object and throws it
+@:/// Creates a RestException object and throws it
 @:/// </summary>
-@:/// <exception cref="T:Microsoft.Rest.HttpRestException">
+@:/// <exception cref="T:Microsoft.Rest.RestException">
 @:/// Deserialize error body returned by the operation
 @:/// </exception>
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithKnownTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string _responseContent = null;
-    @:var ex = new HttpRestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
+    @:var ex = new RestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
 
     @:if (_httpResponse.Content != null)
     @:{
@@ -125,7 +125,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:/// Handle error responses, deserialize errors of types V and throw exceptions of type T
 @:/// </summary>
 @:private async System.Threading.Tasks.Task HandleErrorResponseFor@(Model.Name)<V>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode, Newtonsoft.Json.JsonSerializerSettings deserializationSettings) 
-    @:where V : Microsoft.Rest.IHttpRestErrorModel
+    @:where V : Microsoft.Rest.IRestErrorModel
 @:{
     @:string errorMessage = GetErrorMessageFor@(Model.Name)(statusCode);
     @:string _responseContent = null;
@@ -143,7 +143,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:{
                 if(!Model.IsAzureARMGenerator())
                 {
-                @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 else 
                 {
@@ -155,7 +155,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:{
             if(!Model.IsAzureARMGenerator())
             {
-            @:throw new Microsoft.Rest.HttpRestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
             }
             else 
             {

@@ -39,7 +39,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     if(Model.IsErrorResponseModel())
     {
         baseClassSignatures+= string.IsNullOrEmpty(baseClassSignatures)? ": " : ", ";
-        baseClassSignatures+= "Microsoft.Rest.IHttpRestErrorModel";
+        baseClassSignatures+= "Microsoft.Rest.IRestErrorModel";
     }
 }
 @if (Model.Deprecated)
