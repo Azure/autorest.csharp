@@ -457,14 +457,14 @@ namespace AutoRest.CSharp.Tests
                 // Test 3: invalid pet throws LinkNotFoundException
                 Assert.ThrowsAsync<LinkNotFoundException>(()=>client.Pet.GetPetByIdAsync("weirdAlYankovic"));
                 
-                // Test 4: invalid pet throws HttpRestException<int>
-                Assert.ThrowsAsync<HttpRestException<int>>(()=>client.Pet.GetPetByIdAsync("alien123"));
+                // Test 4: invalid pet throws RestException<int>
+                Assert.ThrowsAsync<RestException<int>>(()=>client.Pet.GetPetByIdAsync("alien123"));
                 
-                // Test 5: invalid pet throws HttpRestException<string>
-                Assert.ThrowsAsync<HttpRestException<string>>(()=>client.Pet.GetPetByIdAsync("ringo"));
+                // Test 5: invalid pet throws RestException<string>
+                Assert.ThrowsAsync<RestException<string>>(()=>client.Pet.GetPetByIdAsync("ringo"));
 
-                // Test 6: random invalid pet throws HttpRestException<string> 
-                Assert.ThrowsAsync<HttpRestException<string>>(()=>client.Pet.GetPetByIdAsync("foofoo"));
+                // Test 6: random invalid pet throws RestException<string> 
+                Assert.ThrowsAsync<RestException<string>>(()=>client.Pet.GetPetByIdAsync("foofoo"));
                 
                 // multi level polymorhpic inheritence testing
 
@@ -1790,7 +1790,7 @@ namespace AutoRest.CSharp.Tests
             client.MultipleResponses.GetDefaultModelA200None();
             EnsureThrowsWithErrorModel<AException>(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.GetDefaultModelA400Valid(), e => Assert.Equal("400", e.StatusCode));
-            EnsureThrowsWithErrorModel<HttpRestException<A>>(HttpStatusCode.BadRequest,
+            EnsureThrowsWithErrorModel<RestException<A>>(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.GetDefaultModelA400None());
             client.MultipleResponses.GetDefaultNone200Invalid();
             client.MultipleResponses.GetDefaultNone200None();
@@ -1900,10 +1900,10 @@ namespace AutoRest.CSharp.Tests
             var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Exception of type 'Fixtures.Http.Models.ErrorException' was thrown.", ex.Message);
             
-            var ex2 = Assert.Throws<HttpRestException<string>>(() => client.HttpFailure.GetNoModelError());
+            var ex2 = Assert.Throws<RestException<string>>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
 
-            var ex3 = Assert.Throws<HttpRestException<string>>(() => client.HttpFailure.GetNoModelEmpty());
+            var ex3 = Assert.Throws<RestException<string>>(() => client.HttpFailure.GetNoModelEmpty());
             Assert.Equal(string.Empty, ex3.Response.Content);
 
             client.HttpSuccess.Head200();
@@ -2496,7 +2496,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception2 as T);
                 }
             }
-            catch (HttpRestException<string> exception3)
+            catch (RestException<string> exception3)
             {
                 Assert.Equal(expectedStatusCode, exception3.Response.StatusCode);
                 if (errorValidator != null)
@@ -2504,7 +2504,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception3 as T);
                 }
             }
-            catch (HttpRestException<A> exception5)
+            catch (RestException<A> exception5)
             {
                 Assert.Equal(expectedStatusCode, exception5.Response.StatusCode);
                 if (errorValidator != null)
@@ -2512,7 +2512,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception5 as T);
                 }
             }
-            catch (HttpRestException<Error> exception6)
+            catch (RestException<Error> exception6)
             {
                 Assert.Equal(expectedStatusCode, exception6.Response.StatusCode);
                 if (errorValidator != null)
@@ -2520,7 +2520,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception6 as T);
                 }
             }
-            catch (HttpRestException<T> exception4)
+            catch (RestException<T> exception4)
             {
                 Assert.Equal(expectedStatusCode, exception4.Response.StatusCode);
                 if (errorValidator != null)

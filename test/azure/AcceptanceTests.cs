@@ -673,13 +673,13 @@ namespace AutoRest.CSharp.Azure.Tests
                 // Test 3: invalid pet throws LinkNotFoundException
                 Assert.Throws<LinkNotFoundException>(()=>client.Pet.GetPetById("weirdAlYankovic"));
                 
-                // Test 4: invalid pet throws HttpRestException<int>
-                Assert.Throws<HttpRestException<int>>(()=>client.Pet.GetPetById("alien123"));
+                // Test 4: invalid pet throws RestException<int>
+                Assert.Throws<RestException<int>>(()=>client.Pet.GetPetById("alien123"));
 
-                // Test 5: invalid pet throws HttpRestException<string>
-                Assert.Throws<HttpRestException<string>>(()=>client.Pet.GetPetById("ringo"));
+                // Test 5: invalid pet throws RestException<string>
+                Assert.Throws<RestException<string>>(()=>client.Pet.GetPetById("ringo"));
                 
-                // Test 6: random invalid pet throws HttpRestException<string> 
+                // Test 6: random invalid pet throws RestException<string> 
                 Assert.Throws<CloudException>(()=>client.Pet.GetPetById("foofoo"));
                 
                 // multi level polymorhpic inheritence testing
