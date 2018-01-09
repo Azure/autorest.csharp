@@ -52,12 +52,13 @@ namespace Fixtures.BodyDictionary.Models
         /// <summary>
         /// Method that creates an exception of ErrorException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
         {
             var ex = new ErrorException
             {
                 Request = requestMessage,
-                Response = responseMessage
+                Response = responseMessage,
+                ResponseStatusCode = statusCode
             };
             ex.SetErrorModel(this);
             throw ex;

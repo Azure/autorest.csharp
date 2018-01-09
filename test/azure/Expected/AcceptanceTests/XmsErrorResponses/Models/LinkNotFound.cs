@@ -48,12 +48,13 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of LinkNotFoundException
         /// </summary>
-        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
         {
             var ex = new LinkNotFoundException
             {
                 Request = requestMessage,
-                Response = responseMessage
+                Response = responseMessage,
+                ResponseStatusCode = statusCode
             };
             ex.SetErrorModel(this);
             throw ex;

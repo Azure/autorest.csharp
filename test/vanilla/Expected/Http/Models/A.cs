@@ -46,12 +46,13 @@ namespace Fixtures.Http.Models
         /// <summary>
         /// Method that creates an exception of AException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
         {
             var ex = new AException
             {
                 Request = requestMessage,
-                Response = responseMessage
+                Response = responseMessage,
+                ResponseStatusCode = statusCode
             };
             ex.SetErrorModel(this);
             throw ex;

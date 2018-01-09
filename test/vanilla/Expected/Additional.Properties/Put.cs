@@ -211,6 +211,7 @@ namespace Fixtures.AdditionalProperties
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
