@@ -301,7 +301,7 @@ namespace AutoRest.CSharp.Azure.Model
         public override string SetRequestIdForException() 
         { 
             var sb = new IndentedStringBuilder();
-            sb.AppendLine("catch(Microsoft.Rest.RestException ex)")
+            sb.AppendLine("catch(Microsoft.Rest.Azure.CloudException ex)")
               .AppendLine("{").Indent()
               .AppendLine("// set the request id to exception")
               .AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)

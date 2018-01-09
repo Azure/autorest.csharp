@@ -15,7 +15,7 @@ namespace Fixtures.Http.Models
     /// <summary>
     /// Exception thrown for an invalid response with B information.
     /// </summary>
-    public partial class BException : Microsoft.Rest.RestExceptionBase<B>
+    public partial class BException : RestException<B>
     {
 
         /// <summary>

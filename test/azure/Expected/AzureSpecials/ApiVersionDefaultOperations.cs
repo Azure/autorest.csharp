@@ -230,7 +230,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
-                catch(RestException ex)
+                catch(CloudException ex)
                 {
                     // set the request id to exception
                     if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -428,7 +428,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
-                catch(RestException ex)
+                catch(CloudException ex)
                 {
                     // set the request id to exception
                     if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -626,7 +626,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
-                catch(RestException ex)
+                catch(CloudException ex)
                 {
                     // set the request id to exception
                     if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -824,7 +824,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
-                catch(RestException ex)
+                catch(CloudException ex)
                 {
                     // set the request id to exception
                     if (_httpResponse.Headers.Contains("x-ms-request-id"))

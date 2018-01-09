@@ -15,7 +15,7 @@ namespace Fixtures.Http.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-    public partial class AException : Microsoft.Rest.RestExceptionBase<A>
+    public partial class AException : RestException<A>
     {
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Fixtures.BodyFile.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-    public partial class ErrorException : Microsoft.Rest.RestExceptionBase<Error>
+    public partial class ErrorException : RestException<Error>
     {
 
         /// <summary>

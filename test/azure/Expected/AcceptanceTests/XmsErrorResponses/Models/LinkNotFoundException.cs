@@ -15,7 +15,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     /// <summary>
     /// Exception thrown for an invalid response with LinkNotFound information.
     /// </summary>
-    public partial class LinkNotFoundException : Microsoft.Rest.RestExceptionBase<LinkNotFound>
+    public partial class LinkNotFoundException : RestException<LinkNotFound>
     {
 
         /// <summary>

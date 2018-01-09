@@ -16,7 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     /// Exception thrown for an invalid response with NotFoundErrorBase
     /// information.
     /// </summary>
-    public partial class NotFoundErrorBaseException : Microsoft.Rest.RestExceptionBase<NotFoundErrorBase>
+    public partial class NotFoundErrorBaseException : RestException<NotFoundErrorBase>
     {
 
         /// <summary>

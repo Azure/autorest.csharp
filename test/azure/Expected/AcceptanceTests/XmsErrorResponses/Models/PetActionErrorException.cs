@@ -16,7 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     /// Exception thrown for an invalid response with PetActionError
     /// information.
     /// </summary>
-    public partial class PetActionErrorException : Microsoft.Rest.RestExceptionBase<PetActionError>
+    public partial class PetActionErrorException : RestException<PetActionError>
     {
 
         /// <summary>

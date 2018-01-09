@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     /// <summary>
     /// Exception thrown for an invalid response with PetSadError information.
     /// </summary>
-    public partial class PetSadErrorException : Microsoft.Rest.RestExceptionBase<PetSadError>
+    public partial class PetSadErrorException : RestException<PetSadError>
     {
 
         /// <summary>

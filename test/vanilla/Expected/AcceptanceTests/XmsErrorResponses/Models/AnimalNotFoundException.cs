@@ -16,7 +16,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
     /// Exception thrown for an invalid response with AnimalNotFound
     /// information.
     /// </summary>
-    public partial class AnimalNotFoundException : Microsoft.Rest.RestExceptionBase<AnimalNotFound>
+    public partial class AnimalNotFoundException : RestException<AnimalNotFound>
     {
 
         /// <summary>

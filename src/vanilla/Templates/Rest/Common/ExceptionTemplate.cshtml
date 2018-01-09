@@ -15,7 +15,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
 @{
-    var baseModelType = "Microsoft.Rest.RestExceptionBase<" + Model.Name + ">";
+    var baseModelType = "Microsoft.Rest.RestException<" + Model.Name + ">";
 }
 @if (Model.Deprecated)
 {
