@@ -102,7 +102,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:ex.SetErrorModel(defaultErrorModel);
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @:ex.StatusCode = statusCode;
+    @:ex.ResponseStatusCode = statusCode;
     @:_httpRequest.Dispose();
     @:if (_httpResponse.Headers.Contains("@(Model.GetRequestIdString())"))
     @:{
@@ -151,7 +151,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @EmptyLine
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @:ex.StatusCode = statusCode;
+    @:ex.ResponseStatusCode = statusCode;
     @:_httpRequest.Dispose();
     @:if (_httpResponse != null)
     @:{
@@ -178,7 +178,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:{
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
-            @:errorResponseModel.StatusCode = statusCode;
+            @:errorResponseModel.ResponseStatusCode = statusCode;
             @:errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
                                                        @:new HttpResponseMessageWrapper(_httpResponse, _responseContent));
         @:}
