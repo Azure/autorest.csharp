@@ -58,15 +58,14 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Method that creates an exception of Error2Exception
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
             var ex = new Error2Exception
             {
                 Request = requestMessage,
-                Response = responseMessage,
-                ResponseStatusCode = statusCode
+                Response = responseMessage
             };
-            ex.SetErrorModel(this);
+            ex.ErrorBody = this;
             throw ex;
         }
     }

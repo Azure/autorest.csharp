@@ -50,7 +50,7 @@ namespace Fixtures.Http.Models
         {
             get
             {
-                return Body?.StatusCode;
+                return ErrorBody?.StatusCode;
             }
         }
 

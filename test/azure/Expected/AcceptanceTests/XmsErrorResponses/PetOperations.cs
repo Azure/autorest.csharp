@@ -224,7 +224,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <summary>
         /// Handle 400 errors
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task Handle400ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
@@ -246,7 +246,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         /// <summary>
         /// Handle 501 errors
         /// </summary>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Deserialize error body returned by the operation
         /// </exception>
         private async Task Handle501ErrorResponseForGetPetById(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
@@ -290,7 +290,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -304,7 +304,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -329,16 +328,24 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        throw new CloudException(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        };
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {
@@ -569,16 +576,24 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        throw new CloudException(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        };
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {

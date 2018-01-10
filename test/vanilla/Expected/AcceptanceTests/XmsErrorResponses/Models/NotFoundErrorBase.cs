@@ -47,15 +47,14 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of NotFoundErrorBaseException
         /// </summary>
-        public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
+        public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
             var ex = new NotFoundErrorBaseException
             {
                 Request = requestMessage,
-                Response = responseMessage,
-                ResponseStatusCode = statusCode
+                Response = responseMessage
             };
-            ex.SetErrorModel(this);
+            ex.ErrorBody = this;
             throw ex;
         }
     }

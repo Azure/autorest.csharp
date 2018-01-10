@@ -50,7 +50,7 @@ namespace Fixtures.MirrorPrimitives.Models
         {
             get
             {
-                return Body?.Code;
+                return ErrorBody?.Code;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.MirrorPrimitives.Models
         {
             get
             {
-                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Fixtures.MirrorPrimitives.Models
         {
             get
             {
-                return Body?.Fields;
+                return ErrorBody?.Fields;
             }
         }
 

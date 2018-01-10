@@ -78,7 +78,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             @:get
             @:{
-                @:return (string.IsNullOrEmpty(Body?.Message))? base.Message : Body.Message;
+                @:return (string.IsNullOrEmpty(ErrorBody?.Message))? base.Message : ErrorBody.Message;
             @:}
         @:}
         }
@@ -90,7 +90,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             @:get
             @:{
-                @:return Body?.@property.Name;
+                @:return ErrorBody?.@property.Name;
             @:}
         @:}
             }
@@ -100,7 +100,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             @:get
             @:{ 
-                @:return Body?.@property.Name ?? default(@property.ModelTypeName);
+                @:return ErrorBody?.@property.Name ?? default(@property.ModelTypeName);
             @:}
         @:}
             }

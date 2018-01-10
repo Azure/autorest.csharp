@@ -50,7 +50,7 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion.Models
         {
             get
             {
-                return Body?.Code;
+                return ErrorBody?.Code;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.Azure.Fluent.SubscriptionIdApiVersion.Models
         {
             get
             {
-                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
             }
         }
 

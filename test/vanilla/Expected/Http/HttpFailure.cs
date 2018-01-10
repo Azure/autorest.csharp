@@ -200,16 +200,16 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
-                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                        throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -229,7 +229,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -371,7 +371,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -385,7 +385,6 @@ namespace Fixtures.Http
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -404,7 +403,7 @@ namespace Fixtures.Http
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -546,7 +545,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -560,7 +559,6 @@ namespace Fixtures.Http
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {

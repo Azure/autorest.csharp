@@ -50,7 +50,7 @@ namespace Fixtures.BodyDateTime.Models
         {
             get
             {
-                return Body?.Status;
+                return ErrorBody?.Status;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.BodyDateTime.Models
         {
             get
             {
-                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
+                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
             }
         }
 

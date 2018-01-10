@@ -166,7 +166,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -339,7 +339,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -353,7 +353,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -375,7 +374,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -517,7 +516,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -531,7 +530,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -556,7 +554,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -727,7 +725,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -741,7 +739,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -767,7 +764,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -938,7 +935,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -952,7 +949,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -977,7 +973,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1130,7 +1126,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1144,7 +1140,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -1175,7 +1170,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -1336,7 +1331,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1350,7 +1345,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -1374,7 +1368,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -1505,7 +1499,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1519,7 +1513,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -1541,7 +1534,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1692,7 +1685,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1706,7 +1699,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -1728,7 +1720,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1897,7 +1889,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1911,7 +1903,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -1937,7 +1928,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -2111,7 +2102,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2125,7 +2116,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -2151,7 +2141,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2290,7 +2280,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2304,7 +2294,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -2329,7 +2318,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2467,7 +2456,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2481,7 +2470,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -2503,7 +2491,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2641,7 +2629,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2655,7 +2643,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -2677,7 +2664,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -2815,7 +2802,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2829,7 +2816,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -2854,7 +2840,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3047,7 +3033,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3061,7 +3047,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -3080,7 +3065,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -3200,7 +3185,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3214,7 +3199,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -3236,7 +3220,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -3399,7 +3383,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3413,7 +3397,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -3441,7 +3424,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -3585,7 +3568,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3599,7 +3582,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {
@@ -3624,7 +3606,7 @@ namespace Fixtures.PetstoreV2AllSync
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -3756,7 +3738,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3770,7 +3752,6 @@ namespace Fixtures.PetstoreV2AllSync
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {

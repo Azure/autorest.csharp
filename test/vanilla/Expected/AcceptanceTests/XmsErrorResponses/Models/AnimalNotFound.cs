@@ -47,15 +47,14 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of AnimalNotFoundException
         /// </summary>
-        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
+        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
             var ex = new AnimalNotFoundException
             {
                 Request = requestMessage,
-                Response = responseMessage,
-                ResponseStatusCode = statusCode
+                Response = responseMessage
             };
-            ex.SetErrorModel(this);
+            ex.ErrorBody = this;
             throw ex;
         }
     }

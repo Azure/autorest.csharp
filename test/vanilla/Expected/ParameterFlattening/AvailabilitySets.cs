@@ -68,7 +68,7 @@ namespace Fixtures.ParameterFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="T:Microsoft.Rest.HttpRestException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -230,7 +230,7 @@ namespace Fixtures.ParameterFlattening
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.SetErrorModel(errorResponseModel);
+                    ex.ErrorBody = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -244,7 +244,6 @@ namespace Fixtures.ParameterFlattening
 
             ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
             ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            ex.ResponseStatusCode = statusCode;
             _httpRequest.Dispose();
             if (_httpResponse != null)
             {

@@ -52,15 +52,14 @@ namespace Fixtures.Azure.Fluent.CustomBaseUri.Models
         /// <summary>
         /// Method that creates an exception of ErrorException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int statusCode)
+        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
             var ex = new ErrorException
             {
                 Request = requestMessage,
-                Response = responseMessage,
-                ResponseStatusCode = statusCode
+                Response = responseMessage
             };
-            ex.SetErrorModel(this);
+            ex.ErrorBody = this;
             throw ex;
         }
     }

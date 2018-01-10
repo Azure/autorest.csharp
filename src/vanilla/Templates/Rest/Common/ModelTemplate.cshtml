@@ -387,15 +387,14 @@ if (!anythingToValidate)
                 methodSignaturePrefix = "override ";
             }
         }
-        @:public @(methodSignaturePrefix)void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage, int statusCode)
+        @:public @(methodSignaturePrefix)void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
         @:{
             @:var ex = new @(Model.ExceptionTypeDefinitionName)
             @:{
                 @:Request = requestMessage,
-                @:Response = responseMessage,
-                @:ResponseStatusCode = statusCode
+                @:Response = responseMessage
             @:};
-            @:ex.SetErrorModel(this);
+            @:ex.ErrorBody = this;
             @:throw ex;
         @:}
     }

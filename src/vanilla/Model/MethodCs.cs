@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Model
                 }
                 else
                 {
-                    return "T:Microsoft.Rest.HttpRestException";
+                    return "T:Microsoft.Rest.RestException";
                 }
             }
         }
@@ -488,7 +488,7 @@ namespace AutoRest.CSharp.Model
             }
             if(response.Body is PrimaryTypeCs)
             {
-                return "T:Microsoft.Rest.HttpRestException";
+                return "T:Microsoft.Rest.RestException";
             }
             if(response.Body.Name == "CloudError")
             {

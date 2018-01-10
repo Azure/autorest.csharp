@@ -95,7 +95,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:{
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-            @:ex.SetErrorModel(errorResponseModel);
+            @:ex.ErrorBody = errorResponseModel;
         @:}
         @:catch (Newtonsoft.Json.JsonException)
         @:{
@@ -109,7 +109,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @EmptyLine
     @:ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
     @:ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @:ex.ResponseStatusCode = statusCode;
     @:_httpRequest.Dispose();
     @:if (_httpResponse != null)
     @:{
@@ -138,17 +137,21 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
             @:if(errorResponseModel!=null)
             @:{
-                @:errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                @:errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
             @:}
             @:else
             @:{
                 if(!Model.IsAzureARMGenerator())
                 {
-                @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
                 else 
                 {
-                @:throw new Microsoft.Rest.Azure.CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                @:throw new Microsoft.Rest.Azure.CloudException(errorMessage)
+                @:{
+                    @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                @:};
                 }
             @:}
         @:}
@@ -156,11 +159,15 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:{
             if(!Model.IsAzureARMGenerator())
             {
-            @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+            @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
             }
             else 
             {
-            @:throw new Microsoft.Rest.Azure.CloudException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+            @:throw new Microsoft.Rest.Azure.CloudException(errorMessage)
+            @:{
+                @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                @:Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+            @:};
             }
         @:}
         @:@(Model.SetRequestIdForException())
