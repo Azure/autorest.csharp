@@ -47,9 +47,9 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of NotFoundErrorBaseException
         /// </summary>
-        public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public virtual void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new NotFoundErrorBaseException
+            var ex = new NotFoundErrorBaseException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

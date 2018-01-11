@@ -387,9 +387,9 @@ if (!anythingToValidate)
                 methodSignaturePrefix = "override ";
             }
         }
-        @:public @(methodSignaturePrefix)void CreateAndThrowException(Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
+        @:public @(methodSignaturePrefix)void CreateAndThrowException(string errorMessage, Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
         @:{
-            @:var ex = new @(Model.ExceptionTypeDefinitionName)
+            @:var ex = new @(Model.ExceptionTypeDefinitionName)(errorMessage)
             @:{
                 @:Request = requestMessage,
                 @:Response = responseMessage

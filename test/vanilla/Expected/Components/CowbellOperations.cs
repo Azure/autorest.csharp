@@ -131,7 +131,7 @@ namespace Fixtures.Components
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -326,7 +326,7 @@ namespace Fixtures.Components
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {

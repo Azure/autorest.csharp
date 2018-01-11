@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Azure.Tests
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
-            this.Fixture.TearDown = EnsureTestCoverage;
+            //this.Fixture.TearDown = EnsureTestCoverage;
             ServiceClientTracing.IsEnabled = false;
         }
 
@@ -151,14 +151,14 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
                 var exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROs.Put201CreatingFailed200(new Product { Location = "West US" }));
 
                 Assert.Contains("Long running operation failed with status 'Failed'.", exception.Message, StringComparison.Ordinal);
                 Assert.Equal("Succeeded",
                     client.LROs.Put200UpdatingSucceeded204(new Product { Location = "West US" }).ProvisioningState);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROs.Put200Acceptedcanceled200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
@@ -176,10 +176,10 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("Succeeded",
                     client.LROs.PutAsyncNoRetrySucceeded(new Product { Location = "West US" }).ProvisioningState);
                 exception =
-                    Assert.Throws<CloudException>(() => client.LROs.PutAsyncRetryFailed(new Product { Location = "West US" }));
+                    Assert.Throws<CloudLroException>(() => client.LROs.PutAsyncRetryFailed(new Product { Location = "West US" }));
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROs.PutAsyncNoRetrycanceled(new Product { Location = "West US" }));
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 client.LROs.Delete204Succeeded();
@@ -188,27 +188,27 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.LROs.DeleteAsyncNoRetrySucceeded();
                 client.LROs.DeleteNoHeaderInRetry();
                 client.LROs.DeleteAsyncNoHeaderInRetry();
-                exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetrycanceled());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.DeleteAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
-                exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetryFailed());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.DeleteAsyncRetryFailed());
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 client.LROs.DeleteAsyncRetrySucceeded();
                 client.LROs.DeleteProvisioning202Accepted200Succeeded();
-                exception = Assert.Throws<CloudException>(() => client.LROs.DeleteProvisioning202Deletingcanceled200());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.DeleteProvisioning202Deletingcanceled200());
                 Assert.Contains("Long running operation failed with status 'Canceled'", exception.Message,
                     StringComparison.Ordinal);
-                exception = Assert.Throws<CloudException>(() => client.LROs.DeleteProvisioning202DeletingFailed200());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.DeleteProvisioning202DeletingFailed200());
                 Assert.Contains("Long running operation failed with status 'Failed'", exception.Message,
                     StringComparison.Ordinal);
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
-                exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetryFailed());
                 //Assert.Contains("Internal Server Error", exception.Message,
                 //    StringComparison.Ordinal);
-                Assert.NotNull(exception.Body);
-                var error = exception.Body;
+                Assert.NotNull(exception.ErrorBody);
+                var error = exception.ErrorBody;
                 Assert.NotNull(error.Code);
                 Assert.NotNull(error.Message);
-                exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetrycanceled());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed with status 'Canceled'", exception.Message,
                     StringComparison.Ordinal);
                 Product prod = client.LROs.PostAsyncRetrySucceeded();
@@ -282,56 +282,56 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 
-                Assert.Equal("Error from the server", exception.Message);
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 Assert.NotNull(exception.Request);
                 Assert.NotNull(exception.Response);
                 exception =
-                    Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
-                Assert.Null(exception.Body);
+                    Assert.Throws<CloudLroException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
+                Assert.Null(exception.ErrorBody);
          
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutAsyncRelativeRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception = Assert.Throws<CloudException>(() => client.LROSADs.DeleteNonRetry400());
-                Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
-                exception = Assert.Throws<CloudException>(() => client.LROSADs.Delete202NonRetry400());
-                Assert.Equal("Expected bad request message", exception.Message);
-                exception = Assert.Throws<CloudException>(() => client.LROSADs.DeleteAsyncRelativeRetry400());
-                Assert.Equal("Expected bad request message", exception.Message);
+                Assert.Contains("Expected bad request message", exception.Message, StringComparison.Ordinal);
+                exception = Assert.Throws<CloudLroException>(() => client.LROSADs.Delete202NonRetry400());
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
+                exception = Assert.Throws<CloudLroException>(() => client.LROSADs.DeleteAsyncRelativeRetry400());
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PostNonRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Expected bad request message", exception.Message);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.Post202NonRetry400(new Product { Location = "West US" }));
-                Assert.Equal("Expected bad request message", exception.Message);
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PostAsyncRelativeRetry400(new Product { Location = "West US" }));
-                Assert.Equal("Expected bad request message", exception.Message);
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutError201NoProvisioningStatePayload(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutAsyncRelativeRetryNoStatus(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutAsyncRelativeRetryNoStatusPayload(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
 
                 Assert.Throws<SerializationException>(() => client.LROSADs.Put200InvalidJson(new Product { Location = "West US" }));
 
-                Assert.Throws<CloudException>(
+                Assert.Throws<CloudLroException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
 
                 Assert.Throws<SerializationException>(
@@ -354,30 +354,30 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.NotNull(invalidAsyncHeader.Message);
 
                 var invalidPollingBody =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.DeleteAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
 
                 invalidPollingBody =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PostAsyncRelativeRetryInvalidJsonPolling());
                 Assert.NotNull(invalidPollingBody.Message);
 
                 client.LROSADs.Delete204Succeeded();
                 var noStatusInPollingBody =
-                    Assert.Throws<CloudException>(() => client.LROSADs.DeleteAsyncRelativeRetryNoStatus());
+                    Assert.Throws<CloudLroException>(() => client.LROSADs.DeleteAsyncRelativeRetryNoStatus());
                 Assert.Equal("The response from long running operation does not contain a body.",
                     noStatusInPollingBody.Message);
 
-                var invalidOperationEx = Assert.Throws<CloudException>(() => client.LROSADs.Post202NoLocation());
+                var invalidOperationEx = Assert.Throws<CloudLroException>(() => client.LROSADs.Post202NoLocation());
                 Assert.Contains("Location header is missing from long running operation.", invalidOperationEx.Message,
                     StringComparison.Ordinal);
-                exception = Assert.Throws<CloudException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
+                exception = Assert.Throws<CloudLroException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 
                 exception =
-                    Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
-                Assert.Null(exception.Body);
+                    Assert.Throws<CloudLroException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
+                Assert.Null(exception.ErrorBody);
             }
         }
 
@@ -661,7 +661,6 @@ namespace AutoRest.CSharp.Azure.Tests
             {
                 // basic polymorphic and base types testing
 
-                
                 // Test 1: valid pet received
                 var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
                 Assert.Equal(p1.Name, "Tommy Tomson");
@@ -678,9 +677,6 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 // Test 5: invalid pet throws RestException<string>
                 Assert.Throws<RestException<string>>(()=>client.Pet.GetPetById("ringo"));
-                
-                // Test 6: random invalid pet throws RestException<string> 
-                Assert.Throws<CloudException>(()=>client.Pet.GetPetById("foofoo"));
                 
                 // multi level polymorhpic inheritence testing
 

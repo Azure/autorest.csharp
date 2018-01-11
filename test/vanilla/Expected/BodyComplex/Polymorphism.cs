@@ -126,7 +126,7 @@ namespace Fixtures.BodyComplex
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -200,7 +200,7 @@ namespace Fixtures.BodyComplex
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -209,7 +209,7 @@ namespace Fixtures.BodyComplex
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    // Ignore the exception
                 }
             }
             _httpRequest.Dispose();
@@ -350,7 +350,7 @@ namespace Fixtures.BodyComplex
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -405,7 +405,7 @@ namespace Fixtures.BodyComplex
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -414,7 +414,7 @@ namespace Fixtures.BodyComplex
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    // Ignore the exception
                 }
             }
             _httpRequest.Dispose();
@@ -502,7 +502,7 @@ namespace Fixtures.BodyComplex
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -576,7 +576,7 @@ namespace Fixtures.BodyComplex
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -585,7 +585,7 @@ namespace Fixtures.BodyComplex
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    // Ignore the exception
                 }
             }
             _httpRequest.Dispose();
@@ -694,7 +694,7 @@ namespace Fixtures.BodyComplex
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -749,7 +749,7 @@ namespace Fixtures.BodyComplex
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -758,7 +758,7 @@ namespace Fixtures.BodyComplex
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    // Ignore the exception
                 }
             }
             _httpRequest.Dispose();
@@ -894,7 +894,7 @@ namespace Fixtures.BodyComplex
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -949,7 +949,7 @@ namespace Fixtures.BodyComplex
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -958,7 +958,7 @@ namespace Fixtures.BodyComplex
                 }
                 catch (JsonException)
                 {
-                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                    // Ignore the exception
                 }
             }
             _httpRequest.Dispose();

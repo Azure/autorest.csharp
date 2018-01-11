@@ -144,7 +144,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -321,7 +321,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -498,7 +498,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -679,7 +679,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {

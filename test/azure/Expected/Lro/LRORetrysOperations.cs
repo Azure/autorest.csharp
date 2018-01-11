@@ -305,7 +305,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -402,7 +402,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -415,11 +415,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -552,7 +548,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -643,7 +639,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -656,11 +652,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -782,7 +774,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -892,7 +884,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -905,11 +897,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -1027,7 +1015,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1099,7 +1087,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -1112,11 +1100,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -1234,7 +1218,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1306,7 +1290,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -1319,11 +1303,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -1452,7 +1432,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1524,7 +1504,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -1537,11 +1517,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {
@@ -1671,7 +1647,7 @@ namespace Fixtures.Azure.Lro
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1743,7 +1719,7 @@ namespace Fixtures.Azure.Lro
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                     }
                     else
                     {
@@ -1756,11 +1732,7 @@ namespace Fixtures.Azure.Lro
                 }
                 catch (JsonException)
                 {
-                    throw new CloudException(errorMessage)
-                    {
-                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response =new HttpResponseMessageWrapper(_httpResponse, _responseContent)
-                    };
+                    // Ignore the exception
                 }
                 catch(CloudException ex)
                 {

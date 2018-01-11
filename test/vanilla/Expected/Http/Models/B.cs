@@ -47,9 +47,9 @@ namespace Fixtures.Http.Models
         /// <summary>
         /// Method that creates an exception of BException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new BException
+            var ex = new BException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

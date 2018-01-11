@@ -122,7 +122,7 @@ namespace Fixtures.InternalCtors
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {

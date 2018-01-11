@@ -48,9 +48,9 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of PetActionErrorException
         /// </summary>
-        public virtual void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public virtual void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new PetActionErrorException
+            var ex = new PetActionErrorException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

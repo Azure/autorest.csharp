@@ -138,7 +138,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {
@@ -323,7 +323,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     // Ignore the exception
                 }
-                catch(RestException ex)
+                catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
                     {

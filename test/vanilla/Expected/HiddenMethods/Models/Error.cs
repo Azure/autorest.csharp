@@ -48,9 +48,9 @@ namespace Fixtures.HiddenMethods.Models
         /// <summary>
         /// Method that creates an exception of ErrorException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new ErrorException
+            var ex = new ErrorException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

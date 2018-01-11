@@ -65,9 +65,9 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Method that creates an exception of ErrorModelException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new ErrorModelException
+            var ex = new ErrorModelException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

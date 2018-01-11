@@ -46,9 +46,9 @@ namespace Fixtures.Http.Models
         /// <summary>
         /// Method that creates an exception of AException
         /// </summary>
-        public void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new AException
+            var ex = new AException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage

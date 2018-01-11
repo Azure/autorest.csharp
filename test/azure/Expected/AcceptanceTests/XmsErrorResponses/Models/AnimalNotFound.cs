@@ -47,9 +47,9 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of AnimalNotFoundException
         /// </summary>
-        public override void CreateAndThrowException(HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
         {
-            var ex = new AnimalNotFoundException
+            var ex = new AnimalNotFoundException(errorMessage)
             {
                 Request = requestMessage,
                 Response = responseMessage
