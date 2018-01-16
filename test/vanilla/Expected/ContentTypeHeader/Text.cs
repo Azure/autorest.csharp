@@ -154,7 +154,7 @@ namespace Fixtures.ContentTypeHeader
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -330,7 +330,7 @@ namespace Fixtures.ContentTypeHeader
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result

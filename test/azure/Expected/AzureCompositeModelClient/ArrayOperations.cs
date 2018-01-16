@@ -155,7 +155,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -241,6 +241,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {
@@ -376,7 +381,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -443,6 +448,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {
@@ -566,7 +576,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -652,6 +662,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {
@@ -787,7 +802,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -854,6 +869,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {
@@ -978,7 +998,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1064,6 +1084,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new CloudException(errorMessage)
+                    {
+                        Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    };
                 }
                 catch(CloudException ex)
                 {

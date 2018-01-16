@@ -128,7 +128,7 @@ namespace Fixtures.HiddenMethods
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -206,6 +206,7 @@ namespace Fixtures.HiddenMethods
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -351,7 +352,7 @@ namespace Fixtures.HiddenMethods
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -410,6 +411,7 @@ namespace Fixtures.HiddenMethods
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -502,7 +504,7 @@ namespace Fixtures.HiddenMethods
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -580,6 +582,7 @@ namespace Fixtures.HiddenMethods
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -693,7 +696,7 @@ namespace Fixtures.HiddenMethods
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -752,6 +755,7 @@ namespace Fixtures.HiddenMethods
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();
@@ -892,7 +896,7 @@ namespace Fixtures.HiddenMethods
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -951,6 +955,7 @@ namespace Fixtures.HiddenMethods
                 catch (JsonException)
                 {
                     // Ignore the exception
+                    throw new RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
                 }
             }
             _httpRequest.Dispose();

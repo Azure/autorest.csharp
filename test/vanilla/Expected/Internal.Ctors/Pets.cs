@@ -128,7 +128,7 @@ namespace Fixtures.InternalCtors
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result

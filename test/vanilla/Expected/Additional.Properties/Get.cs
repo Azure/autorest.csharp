@@ -150,7 +150,7 @@ namespace Fixtures.AdditionalProperties
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result

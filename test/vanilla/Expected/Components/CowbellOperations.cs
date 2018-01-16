@@ -137,7 +137,7 @@ namespace Fixtures.Components
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -331,7 +331,7 @@ namespace Fixtures.Components
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result

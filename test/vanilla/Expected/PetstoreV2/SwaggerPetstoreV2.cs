@@ -394,7 +394,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -604,7 +604,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -790,7 +790,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1005,7 +1005,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1201,7 +1201,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1439,7 +1439,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1612,7 +1612,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1775,7 +1775,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -1984,7 +1984,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -2202,7 +2202,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -2413,7 +2413,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -2594,7 +2594,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -2772,7 +2772,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -2950,7 +2950,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -3145,7 +3145,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -3343,7 +3343,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -3518,7 +3518,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -3736,7 +3736,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
@@ -3911,7 +3911,7 @@ namespace Fixtures.PetstoreV2
                     {
                         ServiceClientTracing.Error(_invocationId, ex);
                     }
-                    throw ex;
+                    throw;
                 }
             }
             // Create Result
