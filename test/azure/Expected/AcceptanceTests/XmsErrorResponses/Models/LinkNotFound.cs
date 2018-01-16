@@ -14,6 +14,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    [Newtonsoft.Json.JsonObject("InvalidResourceLink")]
     public partial class LinkNotFound : NotFoundErrorBase, IRestErrorModel
     {
         /// <summary>
