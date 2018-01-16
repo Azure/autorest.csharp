@@ -219,7 +219,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types that have readonly properties
         /// </summary>
@@ -381,7 +380,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

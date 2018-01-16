@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Azure.Tests
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
-            //this.Fixture.TearDown = EnsureTestCoverage;
+            this.Fixture.TearDown = EnsureTestCoverage;
             ServiceClientTracing.IsEnabled = false;
         }
 
@@ -202,8 +202,8 @@ namespace AutoRest.CSharp.Azure.Tests
                     StringComparison.Ordinal);
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
                 exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetryFailed());
-                //Assert.Contains("Internal Server Error", exception.Message,
-                //    StringComparison.Ordinal);
+                Assert.Contains("Internal Server Error", exception.Message,
+                    StringComparison.Ordinal);
                 Assert.NotNull(exception.ErrorBody);
                 var error = exception.ErrorBody;
                 Assert.NotNull(error.Code);

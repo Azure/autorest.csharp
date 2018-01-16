@@ -206,7 +206,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get false Boolean value on path
         /// </summary>
@@ -361,7 +360,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null Boolean value on query (query string should be absent)
@@ -523,7 +521,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '1000000' integer value
         /// </summary>
@@ -679,7 +676,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-1000000' integer value
         /// </summary>
@@ -834,7 +830,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null integer value (no query parameter)
@@ -996,7 +991,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '10000000000' 64 bit integer value
         /// </summary>
@@ -1152,7 +1146,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-10000000000' 64 bit integer value
         /// </summary>
@@ -1307,7 +1300,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get 'null 64 bit integer value (no query param in uri)
@@ -1469,7 +1461,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '1.034E+20' numeric value
         /// </summary>
@@ -1625,7 +1616,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-1.034E-20' numeric value
         /// </summary>
@@ -1780,7 +1770,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null numeric value (no query parameter)
@@ -1942,7 +1931,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '9999999.999' numeric value
         /// </summary>
@@ -2098,7 +2086,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-9999999.999' numeric value
         /// </summary>
@@ -2253,7 +2240,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null numeric value (no query parameter)
@@ -2415,7 +2401,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// </summary>
@@ -2573,7 +2558,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
@@ -2733,7 +2717,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get ''
         /// </summary>
@@ -2891,7 +2874,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null (no query parameter in url)
@@ -3052,7 +3034,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get using uri with query parameter 'green color'
@@ -3215,7 +3196,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get null (no query parameter in url)
         /// </summary>
@@ -3377,7 +3357,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </summary>
@@ -3538,7 +3517,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '' as byte array
         /// </summary>
@@ -3696,7 +3674,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as byte array (no query parameters in uri)
@@ -3858,7 +3835,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '2012-01-01' as date
         /// </summary>
@@ -4013,7 +3989,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as date - this should result in no query parameters in uri
@@ -4175,7 +4150,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
@@ -4330,7 +4304,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as date-time, should result in no query parameters in uri
@@ -4491,7 +4464,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -4655,7 +4627,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get a null array of string using the csv-array format
         /// </summary>
@@ -4816,7 +4787,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get an empty array [] of string using the csv-array format
         /// </summary>
@@ -4976,7 +4946,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -5140,7 +5109,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
         /// null, ''] using the tsv-array format
@@ -5303,7 +5271,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
         /// null, ''] using the pipes-array format
@@ -5465,7 +5432,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

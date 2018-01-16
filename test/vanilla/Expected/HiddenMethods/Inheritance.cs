@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types that extend others
         /// </summary>
@@ -385,7 +384,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

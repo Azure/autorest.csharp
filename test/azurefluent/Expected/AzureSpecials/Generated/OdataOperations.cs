@@ -251,6 +251,5 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
     }
 }

@@ -211,7 +211,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 501 status code - should be represented in the client as an error
         /// </summary>
@@ -372,7 +371,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 505 status code - should be represented in the client as an error
@@ -546,7 +544,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
@@ -718,7 +715,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

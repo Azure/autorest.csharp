@@ -219,7 +219,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Get empty error form server
         /// </summary>
@@ -393,7 +392,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Get empty response from server
         /// </summary>
@@ -566,7 +564,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
     }
 }

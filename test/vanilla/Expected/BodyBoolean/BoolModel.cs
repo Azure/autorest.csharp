@@ -219,7 +219,6 @@ namespace Fixtures.BodyBoolean
             }
         }
 
-
         /// <summary>
         /// Set Boolean value true
         /// </summary>
@@ -372,7 +371,6 @@ namespace Fixtures.BodyBoolean
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get false Boolean value
@@ -543,7 +541,6 @@ namespace Fixtures.BodyBoolean
             }
         }
 
-
         /// <summary>
         /// Set Boolean value false
         /// </summary>
@@ -696,7 +693,6 @@ namespace Fixtures.BodyBoolean
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null Boolean value
@@ -867,7 +863,6 @@ namespace Fixtures.BodyBoolean
             }
         }
 
-
         /// <summary>
         /// Get invalid Boolean value
         /// </summary>
@@ -1036,7 +1031,6 @@ namespace Fixtures.BodyBoolean
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

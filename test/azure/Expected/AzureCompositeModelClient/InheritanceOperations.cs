@@ -259,7 +259,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Put complex types that extend others
         /// </summary>
@@ -469,7 +468,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

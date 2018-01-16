@@ -197,7 +197,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 500 status code, then 200 after retry
         /// </summary>
@@ -355,7 +354,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 500 status code, then 200 after retry
@@ -515,7 +513,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 502 status code, then 200 after retry
         /// </summary>
@@ -662,7 +659,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 503 status code, then 200 after retry
@@ -822,7 +818,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 503 status code, then 200 after retry
         /// </summary>
@@ -980,7 +975,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 504 status code, then 200 after retry
@@ -1140,7 +1134,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 504 status code, then 200 after retry
         /// </summary>
@@ -1298,7 +1291,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

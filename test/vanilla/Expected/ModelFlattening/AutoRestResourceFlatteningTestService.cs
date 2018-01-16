@@ -309,7 +309,6 @@ namespace Fixtures.ModelFlattening
             }
         }
 
-
         /// <summary>
         /// Get External Resource as an Array
         /// <see href="http://tempuri.org" />
@@ -480,7 +479,6 @@ namespace Fixtures.ModelFlattening
             }
         }
 
-
         /// <summary>
         /// No need to have a route in Express server for this operation. Used to
         /// verify the type flattened is not removed if it's referenced in an array
@@ -640,7 +638,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// No need to have a route in Express server for this operation. Used to
@@ -813,7 +810,6 @@ namespace Fixtures.ModelFlattening
             }
         }
 
-
         /// <summary>
         /// Put External Resource as a Dictionary
         /// <see href="http://tempuri.org" />
@@ -972,7 +968,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get External Resource as a Dictionary
@@ -1144,7 +1139,6 @@ namespace Fixtures.ModelFlattening
             }
         }
 
-
         /// <summary>
         /// Put External Resource as a ResourceCollection
         /// <see href="http://tempuri.org" />
@@ -1303,7 +1297,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
@@ -1474,7 +1467,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -1660,7 +1652,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put Flattened Simple Product with client flattening true on the parameter
@@ -1880,7 +1871,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -2123,7 +2113,6 @@ namespace Fixtures.ModelFlattening
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

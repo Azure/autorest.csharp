@@ -220,7 +220,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get invalid array [1, 2, 3
         /// </summary>
@@ -389,7 +388,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get empty array value []
@@ -560,7 +558,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value empty []
         /// </summary>
@@ -727,7 +724,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get boolean array value [true, false, false, true]
@@ -898,7 +894,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value empty [true, false, false, true]
         /// </summary>
@@ -1065,7 +1060,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get boolean array value [true, null, false]
@@ -1236,7 +1230,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get boolean array value [true, 'boolean', false]
         /// </summary>
@@ -1405,7 +1398,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer array value [1, -1, 3, 300]
@@ -1576,7 +1568,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value empty [1, -1, 3, 300]
         /// </summary>
@@ -1743,7 +1734,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer array value [1, null, 0]
@@ -1914,7 +1904,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get integer array value [1, 'integer', 0]
         /// </summary>
@@ -2083,7 +2072,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer array value [1, -1, 3, 300]
@@ -2254,7 +2242,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value empty [1, -1, 3, 300]
         /// </summary>
@@ -2421,7 +2408,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get long array value [1, null, 0]
@@ -2592,7 +2578,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get long array value [1, 'integer', 0]
         /// </summary>
@@ -2761,7 +2746,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float array value [0, -0.01, 1.2e20]
@@ -2932,7 +2916,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value [0, -0.01, 1.2e20]
         /// </summary>
@@ -3099,7 +3082,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float array value [0.0, null, -1.2e20]
@@ -3270,7 +3252,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get boolean array value [1.0, 'number', 0.0]
         /// </summary>
@@ -3439,7 +3420,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float array value [0, -0.01, 1.2e20]
@@ -3610,7 +3590,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value [0, -0.01, 1.2e20]
         /// </summary>
@@ -3777,7 +3756,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float array value [0.0, null, -1.2e20]
@@ -3948,7 +3926,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get boolean array value [1.0, 'number', 0.0]
         /// </summary>
@@ -4117,7 +4094,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get string array value ['foo1', 'foo2', 'foo3']
@@ -4288,7 +4264,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value ['foo1', 'foo2', 'foo3']
         /// </summary>
@@ -4455,7 +4430,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get string array value ['foo', null, 'foo2']
@@ -4626,7 +4600,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get string array value ['foo', 123, 'foo2']
         /// </summary>
@@ -4795,7 +4768,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
@@ -4968,7 +4940,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
         /// 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
@@ -5137,7 +5108,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
@@ -5308,7 +5278,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         /// </summary>
@@ -5478,7 +5447,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
         /// </summary>
@@ -5645,7 +5613,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date array value ['2012-01-01', null, '1776-07-04']
@@ -5816,7 +5783,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get date array value ['2011-03-22', 'date']
         /// </summary>
@@ -5985,7 +5951,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date-time array value ['2000-12-01t00:00:01z',
@@ -6157,7 +6122,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
         /// '1492-10-12T10:15:01-08:00']
@@ -6325,7 +6289,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date array value ['2000-12-01t00:00:01z', null]
@@ -6496,7 +6459,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get date array value ['2000-12-01t00:00:01z', 'date-time']
         /// </summary>
@@ -6665,7 +6627,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan
@@ -6837,7 +6798,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
         /// 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -7005,7 +6965,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -7176,7 +7135,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// </summary>
@@ -7343,7 +7301,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
@@ -7515,7 +7472,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
         /// with each elementencoded in base 64
@@ -7683,7 +7639,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get byte array value [hex(AB, AC, AD), null] with the first item base64
@@ -7855,7 +7810,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get array value ['a string that gets encoded with base64url', 'test string'
         /// 'Lorem ipsum'] with the items base64url encoded
@@ -8026,7 +7980,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get array of complex type null value
         /// </summary>
@@ -8196,7 +8149,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get empty array of complex type []
         /// </summary>
@@ -8365,7 +8317,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get array of complex type with null item [{'integer': 1 'string': '2'},
@@ -8537,7 +8488,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get array of complex type with empty item [{'integer': 1 'string': '2'},
         /// {}, {'integer': 5, 'string': '6'}]
@@ -8707,7 +8657,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
@@ -8879,7 +8828,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Put an array of complex type with values [{'integer': 1 'string': '2'},
         /// {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -9047,7 +8995,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a null array
@@ -9218,7 +9165,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get an empty array []
         /// </summary>
@@ -9387,7 +9333,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
@@ -9558,7 +9503,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
         /// </summary>
@@ -9727,7 +9671,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
@@ -9899,7 +9842,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
         /// '8', '9']]
@@ -10067,7 +10009,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of Dictionaries with value null
@@ -10238,7 +10179,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value []
         /// </summary>
@@ -10407,7 +10347,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value
@@ -10580,7 +10519,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value
         /// [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight',
@@ -10751,7 +10689,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value
@@ -10924,7 +10861,6 @@ namespace Fixtures.BodyArray
             }
         }
 
-
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value
         /// [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
@@ -11093,7 +11029,6 @@ namespace Fixtures.BodyArray
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

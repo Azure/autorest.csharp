@@ -235,7 +235,6 @@ namespace Fixtures.ExtensibleEnums
             throw ex;
         }
 
-
         /// <param name='petParam'>
         /// </param>
         /// <param name='customHeaders'>
@@ -419,7 +418,6 @@ namespace Fixtures.ExtensibleEnums
             }
             throw ex;
         }
-
 
     }
 }

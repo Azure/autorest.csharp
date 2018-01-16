@@ -311,7 +311,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
             }
             throw ex;
         }
-
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
@@ -359,7 +358,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Asks pet to do something
@@ -603,7 +601,6 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

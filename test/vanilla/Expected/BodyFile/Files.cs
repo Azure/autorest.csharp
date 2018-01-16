@@ -205,7 +205,6 @@ namespace Fixtures.BodyFile
             }
         }
 
-
         /// <summary>
         /// Get a large file
         /// </summary>
@@ -361,7 +360,6 @@ namespace Fixtures.BodyFile
             }
         }
 
-
         /// <summary>
         /// Get empty file
         /// </summary>
@@ -516,7 +514,6 @@ namespace Fixtures.BodyFile
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

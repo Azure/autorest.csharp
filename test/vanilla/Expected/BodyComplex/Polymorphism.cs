@@ -219,7 +219,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types that are polymorphic
         /// </summary>
@@ -424,7 +423,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Get complex types that are polymorphic, but not at the root of the
         /// hierarchy; also have additional properties
@@ -594,7 +592,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
@@ -767,7 +764,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
@@ -967,7 +963,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

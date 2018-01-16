@@ -228,7 +228,6 @@ namespace Fixtures.Components
             throw ex;
         }
 
-
         /// <summary>
         /// A good description.
         /// </summary>
@@ -403,7 +402,6 @@ namespace Fixtures.Components
             }
             throw ex;
         }
-
 
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

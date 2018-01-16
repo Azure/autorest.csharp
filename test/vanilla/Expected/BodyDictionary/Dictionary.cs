@@ -220,7 +220,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get empty dictionary value {}
         /// </summary>
@@ -390,7 +389,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value empty {}
         /// </summary>
@@ -557,7 +555,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get Dictionary with null value
@@ -728,7 +725,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get Dictionary with null key
         /// </summary>
@@ -897,7 +893,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get Dictionary with key as empty string
@@ -1068,7 +1063,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get invalid Dictionary value
         /// </summary>
@@ -1237,7 +1231,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true
@@ -1409,7 +1402,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
         /// </summary>
@@ -1576,7 +1568,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get boolean dictionary value {"0": true, "1": null, "2": false }
@@ -1747,7 +1738,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
         /// </summary>
@@ -1916,7 +1906,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -2087,7 +2076,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
@@ -2254,7 +2242,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": null, "2": 0}
@@ -2425,7 +2412,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
         /// </summary>
@@ -2594,7 +2580,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -2765,7 +2750,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
         /// </summary>
@@ -2932,7 +2916,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get long dictionary value {"0": 1, "1": null, "2": 0}
@@ -3103,7 +3086,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get long dictionary value {"0": 1, "1": "integer", "2": 0}
         /// </summary>
@@ -3272,7 +3254,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -3443,7 +3424,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
         /// </summary>
@@ -3610,7 +3590,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -3781,7 +3760,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
         /// </summary>
@@ -3950,7 +3928,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -4121,7 +4098,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
         /// </summary>
@@ -4288,7 +4264,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -4459,7 +4434,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
         /// </summary>
@@ -4628,7 +4602,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -4799,7 +4772,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
         /// </summary>
@@ -4966,7 +4938,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
@@ -5137,7 +5108,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
         /// </summary>
@@ -5306,7 +5276,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -5478,7 +5447,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
         /// "1492-10-12"}
@@ -5646,7 +5614,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
@@ -5817,7 +5784,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get date dictionary value {"0": "2011-03-22", "1": "date"}
         /// </summary>
@@ -5986,7 +5952,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -6158,7 +6123,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
         /// "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
@@ -6326,7 +6290,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
@@ -6497,7 +6460,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
         /// </summary>
@@ -6666,7 +6628,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
@@ -6839,7 +6800,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
         /// "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
@@ -7007,7 +6967,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
@@ -7179,7 +7138,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
         /// </summary>
@@ -7346,7 +7304,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
@@ -7518,7 +7475,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
         /// hex (25, 29, 43)} with each elementencoded in base 64
@@ -7686,7 +7642,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
@@ -7858,7 +7813,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get base64url dictionary value {"0": "a string that gets encoded with
         /// base64url", "1": "test string", "2": "Lorem ipsum"}
@@ -8029,7 +7983,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get dictionary of complex type null value
         /// </summary>
@@ -8199,7 +8152,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get empty dictionary of complex type {}
         /// </summary>
@@ -8368,7 +8320,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get dictionary of complex type with null item {"0": {"integer": 1,
@@ -8540,7 +8491,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get dictionary of complex type with empty item {"0": {"integer": 1,
         /// "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
@@ -8710,7 +8660,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
@@ -8882,7 +8831,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Put an dictionary of complex type with values {"0": {"integer": 1,
         /// "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
@@ -9051,7 +8999,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a null array
@@ -9222,7 +9169,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get an empty dictionary {}
         /// </summary>
@@ -9391,7 +9337,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
@@ -9563,7 +9508,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
         /// ["7", "8", "9"]}
@@ -9733,7 +9677,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
@@ -9905,7 +9848,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
         /// "6"], "2": ["7", "8", "9"]}
@@ -10073,7 +10015,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an dictionaries of dictionaries with value null
@@ -10244,7 +10185,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
         /// value {}
@@ -10414,7 +10354,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
@@ -10587,7 +10526,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
         /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
@@ -10758,7 +10696,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
@@ -10931,7 +10868,6 @@ namespace Fixtures.BodyDictionary
             }
         }
 
-
         /// <summary>
         /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
         /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
@@ -11100,7 +11036,6 @@ namespace Fixtures.BodyDictionary
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

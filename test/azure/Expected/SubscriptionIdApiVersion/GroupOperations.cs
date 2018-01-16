@@ -287,6 +287,5 @@ namespace Fixtures.Azure.SubscriptionIdApiVersion
             }
         }
 
-
     }
 }

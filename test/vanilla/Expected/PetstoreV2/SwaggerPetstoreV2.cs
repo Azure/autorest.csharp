@@ -494,7 +494,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Update an existing pet
         /// </summary>
@@ -676,7 +675,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Finds Pets by status
@@ -891,7 +889,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Finds Pets by tags
@@ -1108,7 +1105,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Find pet by Id
         /// </summary>
@@ -1304,7 +1300,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Updates a pet in the store with form data
@@ -1516,7 +1511,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Deletes a pet
         /// </summary>
@@ -1689,7 +1683,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Returns pet inventories by status
@@ -1881,7 +1874,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Place an order for a pet
@@ -2091,7 +2083,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Find purchase order by Id
@@ -2311,7 +2302,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Delete purchase order by Id
         /// </summary>
@@ -2495,7 +2485,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Create user
         /// </summary>
@@ -2677,7 +2666,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Creates list of users with given input array
         /// </summary>
@@ -2856,7 +2844,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Creates list of users with given input array
         /// </summary>
@@ -3034,7 +3021,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Logs user into the system
@@ -3272,7 +3258,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Logs out current logged in user session
         /// </summary>
@@ -3429,7 +3414,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Get user by user name
@@ -3634,7 +3618,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Updated user
         /// </summary>
@@ -3825,7 +3808,6 @@ namespace Fixtures.PetstoreV2
             throw ex;
         }
 
-
         /// <summary>
         /// Delete user
         /// </summary>
@@ -4000,7 +3982,6 @@ namespace Fixtures.PetstoreV2
             }
             throw ex;
         }
-
 
     }
 }

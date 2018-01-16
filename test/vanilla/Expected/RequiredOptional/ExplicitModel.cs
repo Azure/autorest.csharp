@@ -219,7 +219,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional integer. Please put null.
         /// </summary>
@@ -376,7 +375,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required integer. Please put a valid int-wrapper with
@@ -553,7 +551,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional integer. Please put a valid int-wrapper with
         /// 'value' = null.
@@ -717,7 +714,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required integer. Please put a header 'headerParameter'
@@ -889,7 +885,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional integer. Please put a header 'headerParameter'
         /// =&gt; null.
@@ -1048,7 +1043,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required string. Please put null and the client library
@@ -1232,7 +1226,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional string. Please put null.
         /// </summary>
@@ -1389,7 +1382,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required string. Please put a valid string-wrapper with
@@ -1579,7 +1571,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional integer. Please put a valid string-wrapper with
         /// 'value' = null.
@@ -1743,7 +1734,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required string. Please put a header 'headerParameter'
@@ -1928,7 +1918,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional string. Please put a header 'headerParameter'
         /// =&gt; null.
@@ -2087,7 +2076,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required complex object. Please put null and the client
@@ -2275,7 +2263,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional complex object. Please put null.
         /// </summary>
@@ -2436,7 +2423,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required complex object. Please put a valid class-wrapper
@@ -2630,7 +2616,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional complex object. Please put a valid class-wrapper
         /// with 'value' = null.
@@ -2798,7 +2783,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required array. Please put null and the client library
@@ -2982,7 +2966,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional array. Please put null.
         /// </summary>
@@ -3139,7 +3122,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required array. Please put a valid array-wrapper with
@@ -3329,7 +3311,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional array. Please put a valid array-wrapper with
         /// 'value' = null.
@@ -3493,7 +3474,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test explicitly required array. Please put a header 'headerParameter' =&gt;
@@ -3678,7 +3658,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test explicitly optional integer. Please put a header 'headerParameter'
         /// =&gt; null.
@@ -3837,7 +3816,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

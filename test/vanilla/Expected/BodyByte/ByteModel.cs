@@ -219,7 +219,6 @@ namespace Fixtures.BodyByte
             }
         }
 
-
         /// <summary>
         /// Get empty byte value ''
         /// </summary>
@@ -388,7 +387,6 @@ namespace Fixtures.BodyByte
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -559,7 +557,6 @@ namespace Fixtures.BodyByte
             }
         }
 
-
         /// <summary>
         /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
@@ -727,7 +724,6 @@ namespace Fixtures.BodyByte
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get invalid byte value ':::SWAGGER::::'
@@ -897,7 +893,6 @@ namespace Fixtures.BodyByte
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

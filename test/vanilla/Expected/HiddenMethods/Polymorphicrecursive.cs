@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references
         /// </summary>
@@ -439,7 +438,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

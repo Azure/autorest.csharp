@@ -220,7 +220,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Sends value 'red color' from enumeration of 'red color', 'green-color',
         /// 'blue_color'
@@ -376,7 +375,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get enum value 'red color' from enumeration of 'red color', 'green-color',
@@ -548,7 +546,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Sends value 'red color' from enumeration of 'red color', 'green-color',
         /// 'blue_color'
@@ -704,7 +701,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get value 'green-color' from the constant.
@@ -875,7 +871,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Sends value 'green-color' from a constant
         /// </summary>
@@ -1038,7 +1033,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

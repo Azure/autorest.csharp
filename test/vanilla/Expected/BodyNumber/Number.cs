@@ -219,7 +219,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Get invalid float Number value
         /// </summary>
@@ -388,7 +387,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get invalid double Number value
@@ -559,7 +557,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Get invalid decimal Number value
         /// </summary>
@@ -729,7 +726,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big float value 3.402823e+20
         /// </summary>
@@ -883,7 +879,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big float value 3.402823e+20
@@ -1054,7 +1049,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big double value 2.5976931e+101
         /// </summary>
@@ -1208,7 +1202,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big double value 2.5976931e+101
@@ -1379,7 +1372,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big double value 99999999.99
         /// </summary>
@@ -1532,7 +1524,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big double value 99999999.99
@@ -1703,7 +1694,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big double value -99999999.99
         /// </summary>
@@ -1856,7 +1846,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big double value -99999999.99
@@ -2027,7 +2016,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big decimal value 2.5976931e+101
         /// </summary>
@@ -2181,7 +2169,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big decimal value 2.5976931e+101
@@ -2352,7 +2339,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big decimal value 99999999.99
         /// </summary>
@@ -2505,7 +2491,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big decimal value 99999999.99
@@ -2676,7 +2661,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put big decimal value -99999999.99
         /// </summary>
@@ -2829,7 +2813,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big decimal value -99999999.99
@@ -3000,7 +2983,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put small float value 3.402823e-20
         /// </summary>
@@ -3154,7 +3136,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big double value 3.402823e-20
@@ -3325,7 +3306,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put small double value 2.5976931e-101
         /// </summary>
@@ -3479,7 +3459,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get big double value 2.5976931e-101
@@ -3650,7 +3629,6 @@ namespace Fixtures.BodyNumber
             }
         }
 
-
         /// <summary>
         /// Put small decimal value 2.5976931e-101
         /// </summary>
@@ -3804,7 +3782,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get small decimal value 2.5976931e-101
@@ -3974,7 +3951,6 @@ namespace Fixtures.BodyNumber
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

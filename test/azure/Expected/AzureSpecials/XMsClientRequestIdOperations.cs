@@ -238,7 +238,6 @@ namespace Fixtures.Azure.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method that overwrites x-ms-client-request header with value
         /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -449,7 +448,6 @@ namespace Fixtures.Azure.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

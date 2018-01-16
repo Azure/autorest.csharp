@@ -249,7 +249,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the credential
         /// subscriptionId to null, and client-side validation should prevent you from
@@ -449,7 +448,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the credential
@@ -658,7 +656,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the credential
         /// subscriptionId to '1234-5678-9012-3456' to succeed
@@ -858,7 +855,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// POST method with subscriptionId modeled in credentials.  Set the credential
         /// subscriptionId to '1234-5678-9012-3456' to succeed
@@ -1057,7 +1053,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

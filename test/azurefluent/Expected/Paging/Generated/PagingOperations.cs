@@ -259,7 +259,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
@@ -510,7 +509,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -763,7 +761,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -1037,7 +1034,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
         /// and then get a response including a nextLink that has 10 pages
@@ -1247,7 +1243,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -1460,7 +1455,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that receives a 400 on the first call
         /// </summary>
@@ -1669,7 +1663,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -1880,7 +1873,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that receives an invalid nextLink
         /// </summary>
@@ -2089,7 +2081,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -2326,7 +2317,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment with
@@ -2572,7 +2562,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
         /// </summary>
@@ -2817,7 +2806,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
@@ -3071,7 +3059,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink
         /// </summary>
@@ -3294,7 +3281,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
@@ -3560,7 +3546,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink in odata format that has 10
@@ -3828,7 +3813,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
@@ -4094,7 +4078,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then retries
         /// and then get a response including a nextLink that has 10 pages
@@ -4318,7 +4301,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages, of which the
@@ -4545,7 +4527,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that receives a 400 on the first call
         /// </summary>
@@ -4768,7 +4749,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// A paging operation that receives a 400 on the second call
@@ -4993,7 +4973,6 @@ namespace Fixtures.Azure.Fluent.Paging
             }
         }
 
-
         /// <summary>
         /// A paging operation that receives an invalid nextLink
         /// </summary>
@@ -5216,7 +5195,6 @@ namespace Fixtures.Azure.Fluent.Paging
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

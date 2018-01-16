@@ -400,7 +400,6 @@ namespace Fixtures.Validation
             }
         }
 
-
         /// <summary>
         /// Validates body parameters on the method. See swagger for details.
         /// </summary>
@@ -656,7 +655,6 @@ namespace Fixtures.Validation
             }
         }
 
-
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -807,7 +805,6 @@ namespace Fixtures.Validation
             }
             throw ex;
         }
-
 
         /// <param name='body'>
         /// </param>
@@ -995,7 +992,6 @@ namespace Fixtures.Validation
             }
             throw ex;
         }
-
 
     }
 }

@@ -219,7 +219,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
@@ -381,7 +380,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with dictionary property which is empty
@@ -552,7 +550,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
@@ -714,7 +711,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with dictionary property which is null
@@ -885,7 +881,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Get complex types with dictionary property while server doesn't provide a
         /// response payload
@@ -1055,7 +1050,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

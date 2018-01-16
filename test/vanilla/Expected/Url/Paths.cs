@@ -201,7 +201,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get false Boolean value on path
         /// </summary>
@@ -351,7 +350,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '1000000' integer value
@@ -503,7 +501,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-1000000' integer value
         /// </summary>
@@ -653,7 +650,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '10000000000' 64 bit integer value
@@ -805,7 +801,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-10000000000' 64 bit integer value
         /// </summary>
@@ -955,7 +950,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '1.034E+20' numeric value
@@ -1107,7 +1101,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-1.034E-20' numeric value
         /// </summary>
@@ -1257,7 +1250,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '9999999.999' numeric value
@@ -1409,7 +1401,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '-9999999.999' numeric value
         /// </summary>
@@ -1559,7 +1550,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -1711,7 +1701,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get 'begin!*'();:@ &amp;=+$,/?#[]end
         /// </summary>
@@ -1862,7 +1851,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get ''
         /// </summary>
@@ -2012,7 +2000,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null (should throw)
@@ -2176,7 +2163,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get using uri with 'green color' in path parameter
         /// </summary>
@@ -2330,7 +2316,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get null (should throw on the client before the request is sent on wire)
         /// </summary>
@@ -2483,7 +2468,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -2647,7 +2631,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '' as byte array
         /// </summary>
@@ -2797,7 +2780,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as byte array (should throw)
@@ -2961,7 +2943,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '2012-01-01' as date
         /// </summary>
@@ -3111,7 +3092,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as date - this should throw or be unusable on the client side,
@@ -3266,7 +3246,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
@@ -3416,7 +3395,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null as date-time, should be disallowed or throw depending on
@@ -3570,7 +3548,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
@@ -3733,7 +3710,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -3899,7 +3875,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
         /// </summary>
@@ -4051,7 +4026,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

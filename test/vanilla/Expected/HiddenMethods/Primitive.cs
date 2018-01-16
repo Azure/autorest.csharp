@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with integer properties
         /// </summary>
@@ -383,7 +382,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with long properties
@@ -554,7 +552,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with long properties
         /// </summary>
@@ -722,7 +719,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with float properties
@@ -893,7 +889,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with float properties
         /// </summary>
@@ -1061,7 +1056,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with double properties
@@ -1232,7 +1226,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with double properties
         /// </summary>
@@ -1401,7 +1394,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with bool properties
@@ -1572,7 +1564,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with bool properties
         /// </summary>
@@ -1740,7 +1731,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with string properties
@@ -1911,7 +1901,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with string properties
         /// </summary>
@@ -2079,7 +2068,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with date properties
@@ -2250,7 +2238,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with date properties
         /// </summary>
@@ -2418,7 +2405,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with datetime properties
@@ -2589,7 +2575,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with datetime properties
         /// </summary>
@@ -2757,7 +2742,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with datetimeRfc1123 properties
@@ -2928,7 +2912,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with datetimeRfc1123 properties
         /// </summary>
@@ -3097,7 +3080,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with duration properties
@@ -3268,7 +3250,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with duration properties
         /// </summary>
@@ -3430,7 +3411,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with byte properties
@@ -3601,7 +3581,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with byte properties
         /// </summary>
@@ -3763,7 +3742,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

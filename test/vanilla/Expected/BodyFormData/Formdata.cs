@@ -249,7 +249,6 @@ namespace Fixtures.BodyFormData
             }
         }
 
-
         /// <summary>
         /// Upload file
         /// </summary>
@@ -427,7 +426,6 @@ namespace Fixtures.BodyFormData
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

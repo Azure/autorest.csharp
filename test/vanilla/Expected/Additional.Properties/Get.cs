@@ -241,6 +241,5 @@ namespace Fixtures.AdditionalProperties
             throw ex;
         }
 
-
     }
 }

@@ -197,7 +197,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Get 200 success
         /// </summary>
@@ -367,7 +366,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Put boolean value true returning 200 success
         /// </summary>
@@ -525,7 +523,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Patch true Boolean value in request returning 200
@@ -685,7 +682,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Post bollean value true in request that returns a 200
         /// </summary>
@@ -843,7 +839,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Delete simple boolean value true returns 200
@@ -1003,7 +998,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Put true Boolean value in request returns 201
         /// </summary>
@@ -1161,7 +1155,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Post true Boolean value in request returns 201 (Created)
@@ -1321,7 +1314,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Put true Boolean value in request returns 202 (Accepted)
         /// </summary>
@@ -1479,7 +1471,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Patch true Boolean value in request returns 202
@@ -1639,7 +1630,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Post true Boolean value in request returns 202 (Accepted)
         /// </summary>
@@ -1797,7 +1787,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Delete true Boolean value in request returns 202 (accepted)
@@ -1957,7 +1946,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 204 status code if successful
         /// </summary>
@@ -2104,7 +2092,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put true Boolean value in request returns 204 (no content)
@@ -2264,7 +2251,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Patch true Boolean value in request returns 204 (no content)
         /// </summary>
@@ -2422,7 +2408,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Post true Boolean value in request returns 204 (no content)
@@ -2582,7 +2567,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Delete true Boolean value in request returns 204 (no content)
         /// </summary>
@@ -2741,7 +2725,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 404 status code
         /// </summary>
@@ -2888,7 +2871,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

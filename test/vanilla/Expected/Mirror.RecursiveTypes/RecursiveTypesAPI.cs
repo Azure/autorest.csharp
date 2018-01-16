@@ -367,6 +367,5 @@ namespace Fixtures.MirrorRecursiveTypes
             }
         }
 
-
     }
 }

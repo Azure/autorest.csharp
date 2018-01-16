@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types that have readonly properties
         /// </summary>
@@ -377,7 +376,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

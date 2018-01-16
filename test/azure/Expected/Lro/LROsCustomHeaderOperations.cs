@@ -378,7 +378,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
         /// message header for all requests. Long running put request, service returns
@@ -622,7 +621,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
         /// message header for all requests. Long running post request, service returns
@@ -836,7 +834,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -1052,7 +1049,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

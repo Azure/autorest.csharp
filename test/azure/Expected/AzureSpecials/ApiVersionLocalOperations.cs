@@ -244,7 +244,6 @@ namespace Fixtures.Azure.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// null to succeed
@@ -442,7 +441,6 @@ namespace Fixtures.Azure.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
@@ -637,7 +635,6 @@ namespace Fixtures.Azure.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
@@ -831,7 +828,6 @@ namespace Fixtures.Azure.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

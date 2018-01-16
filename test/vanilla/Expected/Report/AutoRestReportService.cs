@@ -332,6 +332,5 @@ namespace Fixtures.Report
             }
         }
 
-
     }
 }

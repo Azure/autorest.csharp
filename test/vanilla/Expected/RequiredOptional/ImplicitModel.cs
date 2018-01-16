@@ -225,7 +225,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
@@ -385,7 +384,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test implicitly optional header parameter
         /// </summary>
@@ -544,7 +542,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test implicitly optional body parameter
         /// </summary>
@@ -701,7 +698,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test implicitly required path parameter
@@ -874,7 +870,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Test implicitly required query parameter
@@ -1056,7 +1051,6 @@ namespace Fixtures.RequiredOptional
             }
         }
 
-
         /// <summary>
         /// Test implicitly optional query parameter
         /// </summary>
@@ -1226,7 +1220,6 @@ namespace Fixtures.RequiredOptional
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

@@ -592,7 +592,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Create products
         /// </summary>
@@ -851,7 +850,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Update products
         /// </summary>
@@ -1109,7 +1107,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

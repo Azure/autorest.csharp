@@ -517,6 +517,5 @@ namespace Fixtures.Azure.AzureReport
             }
         }
 
-
     }
 }

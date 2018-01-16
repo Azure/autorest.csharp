@@ -295,7 +295,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
             }
         }
 
-
         /// <summary>
         /// Post a bunch of optional parameters grouped
         /// </summary>
@@ -509,7 +508,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Post parameters from multiple different parameter groups
@@ -752,7 +750,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
             }
         }
 
-
         /// <summary>
         /// Post parameters with a shared parameter group object
         /// </summary>
@@ -966,7 +963,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

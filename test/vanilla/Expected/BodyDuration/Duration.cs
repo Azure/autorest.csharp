@@ -219,7 +219,6 @@ namespace Fixtures.BodyDuration
             }
         }
 
-
         /// <summary>
         /// Put a positive duration value
         /// </summary>
@@ -373,7 +372,6 @@ namespace Fixtures.BodyDuration
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a positive duration value
@@ -544,7 +542,6 @@ namespace Fixtures.BodyDuration
             }
         }
 
-
         /// <summary>
         /// Get an invalid duration value
         /// </summary>
@@ -713,7 +710,6 @@ namespace Fixtures.BodyDuration
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

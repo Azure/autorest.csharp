@@ -259,7 +259,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </summary>
@@ -474,7 +473,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Get a basic complex type that is invalid for the local strong type
         /// </summary>
@@ -683,7 +681,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a basic complex type that is empty
@@ -894,7 +891,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Get a basic complex type whose properties are null
         /// </summary>
@@ -1103,7 +1099,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a basic complex type while the server doesn't provide a response
@@ -1314,7 +1309,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

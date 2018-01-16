@@ -255,7 +255,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// send globalStringPath='globalStringPath',
         /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
@@ -459,7 +458,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// send globalStringPath=globalStringPath,
@@ -665,7 +663,6 @@ namespace Fixtures.Url
             }
         }
 
-
         /// <summary>
         /// send globalStringPath='globalStringPath',
         /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
@@ -869,7 +866,6 @@ namespace Fixtures.Url
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

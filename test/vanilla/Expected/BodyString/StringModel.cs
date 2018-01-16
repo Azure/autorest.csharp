@@ -220,7 +220,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Set string value null
         /// </summary>
@@ -378,7 +377,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get empty string value value ''
@@ -549,7 +547,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Set string value empty ''
         /// </summary>
@@ -705,7 +702,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get mbcs string value
@@ -877,7 +873,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Set string value mbcs
         /// '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
@@ -1034,7 +1029,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get string value with leading and trailing whitespace
@@ -1207,7 +1201,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Set String value with leading and trailing whitespace
         /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
@@ -1365,7 +1358,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get String value when no string value is sent in response payload
@@ -1536,7 +1528,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Get value that is base64 encoded
         /// </summary>
@@ -1705,7 +1696,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get value that is base64url encoded
@@ -1876,7 +1866,6 @@ namespace Fixtures.BodyString
             }
         }
 
-
         /// <summary>
         /// Put value that is base64url encoded
         /// </summary>
@@ -2043,7 +2032,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get null value that is expected to be base64url encoded
@@ -2213,7 +2201,6 @@ namespace Fixtures.BodyString
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

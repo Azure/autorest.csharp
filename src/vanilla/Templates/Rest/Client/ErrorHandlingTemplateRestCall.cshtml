@@ -116,7 +116,6 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
     @:}
     @:throw ex;
 @:}
-@EmptyLine
 }
 
 @if(Model.IsErrorResponseWithErrorModel())
@@ -168,5 +167,4 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
         @:_httpResponse.Dispose();
     @:}
 @:}
-@EmptyLine
 }

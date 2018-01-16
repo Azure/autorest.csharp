@@ -219,7 +219,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -388,7 +387,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201'}
@@ -559,7 +557,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 202 response with no payload:
         /// </summary>
@@ -728,7 +725,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 400 response with valid error payload: {'status': 400, 'message':
@@ -899,7 +895,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1088,7 +1083,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 201 response with valid payload: {'statusCode': '201',
@@ -1279,7 +1273,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
         /// error'}
@@ -1468,7 +1461,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1677,7 +1669,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 200 response with valid payload: {'httpCode': '201'}
         /// </summary>
@@ -1885,7 +1876,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 200 response with valid payload: {'httpStatusCode': '404'}
         /// </summary>
@@ -2092,7 +2082,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -2302,7 +2291,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 202 response with no payload
         /// </summary>
@@ -2449,7 +2437,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 204 response with no payload
@@ -2598,7 +2585,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 400 response with valid payload: {'code': '400', 'message': 'client
         /// error'}
@@ -2746,7 +2732,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 202 response with an unexpected payload {'property': 'value'}
@@ -2899,7 +2884,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 204 response with no payload
         /// </summary>
@@ -3050,7 +3034,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 400 response with no payload
@@ -3203,7 +3186,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 400 response with an unexpected payload {'property': 'value'}
         /// </summary>
@@ -3354,7 +3336,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 200 response with valid payload: {'statusCode': '200'}
@@ -3517,7 +3498,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 200 response with no payload
         /// </summary>
@@ -3678,7 +3658,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
@@ -3841,7 +3820,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -4003,7 +3981,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Send a 200 response with invalid payload: {'statusCode': '200'}
         /// </summary>
@@ -4154,7 +4131,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 200 response with no payload
@@ -4307,7 +4283,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 400 response with valid payload: {'statusCode': '400'}
         /// </summary>
@@ -4459,7 +4434,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 400 response with no payload
         /// </summary>
@@ -4610,7 +4584,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 200 response with no payload, when a payload is expected - client
@@ -4786,7 +4759,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '200'}
         /// </summary>
@@ -4960,7 +4932,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
         /// </summary>
@@ -5133,7 +5104,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 400 response with no payload client should treat as an http error
@@ -5309,7 +5279,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 200 response with payload {'statusCode': '400'}
         /// </summary>
@@ -5482,7 +5451,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
         /// <summary>
         /// Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -5657,7 +5625,6 @@ namespace Fixtures.Http
             throw ex;
         }
 
-
         /// <summary>
         /// Send a 202 response with payload {'statusCode': '202'}
         /// </summary>
@@ -5830,7 +5797,6 @@ namespace Fixtures.Http
             }
             throw ex;
         }
-
 
     }
 }

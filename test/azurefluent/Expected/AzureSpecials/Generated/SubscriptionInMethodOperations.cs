@@ -253,7 +253,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
         /// subscription id = null, client-side validation should prevent you from
@@ -459,7 +458,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
         /// subscription id = '1234-5678-9012-3456' to succeed
@@ -662,7 +660,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// POST method with subscriptionId modeled in the method.  pass in
@@ -867,7 +864,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

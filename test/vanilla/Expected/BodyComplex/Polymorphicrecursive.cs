@@ -219,7 +219,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references
         /// </summary>
@@ -443,7 +442,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

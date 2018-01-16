@@ -211,7 +211,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
@@ -372,7 +371,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 400 status code - should be represented in the client as an error
@@ -546,7 +544,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
@@ -718,7 +715,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 400 status code - should be represented in the client as an error
@@ -892,7 +888,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
@@ -1065,7 +1060,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 401 status code - should be represented in the client as an error
         /// </summary>
@@ -1226,7 +1220,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 402 status code - should be represented in the client as an error
@@ -1389,7 +1382,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 403 status code - should be represented in the client as an error
         /// </summary>
@@ -1550,7 +1542,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 404 status code - should be represented in the client as an error
@@ -1724,7 +1715,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 405 status code - should be represented in the client as an error
         /// </summary>
@@ -1896,7 +1886,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 406 status code - should be represented in the client as an error
@@ -2070,7 +2059,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 407 status code - should be represented in the client as an error
         /// </summary>
@@ -2242,7 +2230,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 409 status code - should be represented in the client as an error
@@ -2416,7 +2403,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 410 status code - should be represented in the client as an error
         /// </summary>
@@ -2577,7 +2563,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 411 status code - should be represented in the client as an error
@@ -2740,7 +2725,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 412 status code - should be represented in the client as an error
         /// </summary>
@@ -2901,7 +2885,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 413 status code - should be represented in the client as an error
@@ -3075,7 +3058,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 414 status code - should be represented in the client as an error
         /// </summary>
@@ -3247,7 +3229,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 415 status code - should be represented in the client as an error
@@ -3421,7 +3402,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 416 status code - should be represented in the client as an error
         /// </summary>
@@ -3582,7 +3562,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Return 417 status code - should be represented in the client as an error
@@ -3756,7 +3735,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 429 status code - should be represented in the client as an error
         /// </summary>
@@ -3917,7 +3895,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

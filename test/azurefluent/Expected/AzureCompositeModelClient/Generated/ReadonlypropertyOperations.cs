@@ -259,7 +259,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Put complex types that have readonly properties
         /// </summary>
@@ -461,7 +460,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

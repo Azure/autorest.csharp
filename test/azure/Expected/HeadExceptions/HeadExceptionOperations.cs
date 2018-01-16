@@ -236,7 +236,6 @@ namespace Fixtures.Azure.HeadExceptions
             }
         }
 
-
         /// <summary>
         /// Return 204 status code if successful
         /// </summary>
@@ -424,7 +423,6 @@ namespace Fixtures.Azure.HeadExceptions
             }
         }
 
-
         /// <summary>
         /// Return 404 status code if successful
         /// </summary>
@@ -611,7 +609,6 @@ namespace Fixtures.Azure.HeadExceptions
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

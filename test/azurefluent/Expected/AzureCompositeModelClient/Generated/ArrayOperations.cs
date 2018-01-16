@@ -259,7 +259,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Put complex types with array property
         /// </summary>
@@ -461,7 +460,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with array property which is empty
@@ -672,7 +670,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Put complex types with array property which is empty
         /// </summary>
@@ -874,7 +871,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with array property while server doesn't provide a
@@ -1085,7 +1081,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

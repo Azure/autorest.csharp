@@ -257,6 +257,5 @@ namespace Fixtures.Azure.CustomBaseUri
             }
         }
 
-
     }
 }

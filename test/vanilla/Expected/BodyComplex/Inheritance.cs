@@ -219,7 +219,6 @@ namespace Fixtures.BodyComplex
             }
         }
 
-
         /// <summary>
         /// Put complex types that extend others
         /// </summary>
@@ -389,7 +388,6 @@ namespace Fixtures.BodyComplex
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

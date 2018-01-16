@@ -434,7 +434,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running put request, service returns a 500, then a 200 to the initial
         /// request, with an entity that contains ProvisioningState=’Creating’. Poll
@@ -670,7 +669,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the
@@ -916,7 +914,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
         /// initial request. Polls return this value until the last poll returns a
@@ -1119,7 +1116,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 500, then a 202 to the
         /// initial request. Poll the endpoint indicated in the Azure-AsyncOperation
@@ -1321,7 +1317,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial
@@ -1536,7 +1531,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running post request, service returns a 500, then a 202 to the initial
         /// request, with an entity that contains ProvisioningState=’Creating’. Poll
@@ -1750,7 +1744,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

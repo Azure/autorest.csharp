@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
@@ -377,7 +376,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with dictionary property which is empty
@@ -548,7 +546,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
@@ -710,7 +707,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get complex types with dictionary property which is null
@@ -881,7 +877,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Get complex types with dictionary property while server doesn't provide a
         /// response payload
@@ -1051,7 +1046,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

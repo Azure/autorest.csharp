@@ -499,7 +499,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
             }
         }
 
-
         /// <summary>
         /// Get External Resource as an Array
         /// <see href="http://tempuri.org" />
@@ -710,7 +709,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
             }
         }
 
-
         /// <summary>
         /// Put External Resource as a Dictionary
         /// <see href="http://tempuri.org" />
@@ -909,7 +907,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get External Resource as a Dictionary
@@ -1121,7 +1118,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
             }
         }
 
-
         /// <summary>
         /// Put External Resource as a ResourceCollection
         /// <see href="http://tempuri.org" />
@@ -1320,7 +1316,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
@@ -1531,7 +1526,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

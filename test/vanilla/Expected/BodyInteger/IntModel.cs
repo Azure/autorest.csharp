@@ -220,7 +220,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Get invalid Int value
         /// </summary>
@@ -389,7 +388,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get overflow Int32 value
@@ -560,7 +558,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Get underflow Int32 value
         /// </summary>
@@ -729,7 +726,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get overflow Int64 value
@@ -900,7 +896,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Get underflow Int64 value
         /// </summary>
@@ -1070,7 +1065,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Put max int32 value
         /// </summary>
@@ -1224,7 +1218,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put max int64 value
@@ -1380,7 +1373,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Put min int32 value
         /// </summary>
@@ -1535,7 +1527,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Put min int64 value
         /// </summary>
@@ -1689,7 +1680,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get datetime encoded as Unix time value
@@ -1860,7 +1850,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Put datetime encoded as Unix time
         /// </summary>
@@ -2014,7 +2003,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get invalid Unix time value
@@ -2185,7 +2173,6 @@ namespace Fixtures.BodyInteger
             }
         }
 
-
         /// <summary>
         /// Get null Unix time value
         /// </summary>
@@ -2354,7 +2341,6 @@ namespace Fixtures.BodyInteger
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

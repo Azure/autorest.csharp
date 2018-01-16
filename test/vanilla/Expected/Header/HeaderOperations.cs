@@ -220,7 +220,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header value "User-Agent": "overwrite"
         /// </summary>
@@ -380,7 +379,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header value "Content-Type": "text/html"
@@ -543,7 +541,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header value "Content-Type": "text/html"
         /// </summary>
@@ -703,7 +700,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header values "scenario": "positive", "value": 1
@@ -883,7 +879,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header value "value": 1 or -2
@@ -1067,7 +1062,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "positive", "value": 105
         /// or "scenario": "negative", "value": -2
@@ -1246,7 +1240,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header value "value": 105 or -2
@@ -1430,7 +1423,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "positive", "value":
         /// 0.07 or "scenario": "negative", "value": -3.0
@@ -1609,7 +1601,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header value "value": 0.07 or -3.0
@@ -1793,7 +1784,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "positive", "value":
         /// 7e120 or "scenario": "negative", "value": -3.0
@@ -1972,7 +1962,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header value "value": 7e120 or -3.0
@@ -2156,7 +2145,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "true", "value": true or
         /// "scenario": "false", "value": false
@@ -2335,7 +2323,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header value "value": true or false
@@ -2518,7 +2505,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value": "The
@@ -2705,7 +2691,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header values "The quick brown fox jumps over the lazy
         /// dog" or null or ""
@@ -2890,7 +2875,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value":
         /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
@@ -3069,7 +3053,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header values "2010-01-01" or "0001-01-01"
@@ -3253,7 +3236,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value":
         /// "2010-01-01T12:34:56Z" or "scenario": "min", "value":
@@ -3434,7 +3416,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header values "2010-01-01T12:34:56Z" or
@@ -3618,7 +3599,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value": "Wed,
@@ -3804,7 +3784,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
         /// 01 Jan 0001 00:00:00 GMT"
@@ -3988,7 +3967,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value":
         /// "P123DT22H14M12.011S"
@@ -4167,7 +4145,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a response with header values "P123DT22H14M12.011S"
@@ -4350,7 +4327,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value":
@@ -4538,7 +4514,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
@@ -4720,7 +4695,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Send a post request with header values "scenario": "valid", "value": "GREY"
@@ -4906,7 +4880,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Get a response with header values "GREY" or null
         /// </summary>
@@ -5090,7 +5063,6 @@ namespace Fixtures.Header
             }
         }
 
-
         /// <summary>
         /// Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
         /// header of the request
@@ -5238,7 +5210,6 @@ namespace Fixtures.Header
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

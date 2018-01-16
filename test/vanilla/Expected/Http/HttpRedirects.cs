@@ -210,7 +210,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 300 status code and redirect to /http/success/200
         /// </summary>
@@ -393,7 +392,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
@@ -554,7 +552,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
@@ -714,7 +711,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put true Boolean value in request returns 301.  This request should not be
@@ -889,7 +885,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
@@ -1050,7 +1045,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
@@ -1210,7 +1204,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Patch true Boolean value in request returns 302.  This request should not
@@ -1385,7 +1378,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Post true Boolean value in request returns 303.  This request should be
         /// automatically redirected usign a get, ultimately returning a 200 status
@@ -1559,7 +1551,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Redirect with 307, resulting in a 200 success
         /// </summary>
@@ -1720,7 +1711,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Redirect get with 307, resulting in a 200 success
         /// </summary>
@@ -1880,7 +1870,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put redirected with 307, resulting in a 200 after redirect
@@ -2053,7 +2042,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Patch redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -2224,7 +2212,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Post redirected with 307, resulting in a 200 after redirect
@@ -2397,7 +2384,6 @@ namespace Fixtures.Http
             }
         }
 
-
         /// <summary>
         /// Delete redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -2568,7 +2554,6 @@ namespace Fixtures.Http
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

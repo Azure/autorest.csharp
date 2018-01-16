@@ -349,7 +349,6 @@ namespace Fixtures.MirrorSequences
             }
         }
 
-
         /// <summary>
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
@@ -544,7 +543,6 @@ namespace Fixtures.MirrorSequences
             throw ex;
         }
 
-
         /// <summary>
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>
@@ -738,7 +736,6 @@ namespace Fixtures.MirrorSequences
             }
             throw ex;
         }
-
 
     }
 }

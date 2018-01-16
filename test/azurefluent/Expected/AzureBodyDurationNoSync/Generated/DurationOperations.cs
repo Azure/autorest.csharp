@@ -259,7 +259,6 @@ namespace Fixtures.Azure.Fluent.AzureBodyDurationNoSync
             }
         }
 
-
         /// <summary>
         /// Put a positive duration value
         /// </summary>
@@ -453,7 +452,6 @@ namespace Fixtures.Azure.Fluent.AzureBodyDurationNoSync
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get a positive duration value
@@ -664,7 +662,6 @@ namespace Fixtures.Azure.Fluent.AzureBodyDurationNoSync
             }
         }
 
-
         /// <summary>
         /// Get an invalid duration value
         /// </summary>
@@ -873,7 +870,6 @@ namespace Fixtures.Azure.Fluent.AzureBodyDurationNoSync
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

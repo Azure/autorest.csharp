@@ -252,7 +252,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
@@ -455,7 +454,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
@@ -645,7 +643,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get method with unencoded query parameter with value
@@ -853,7 +850,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with unencoded query parameter with value null
         /// </summary>
@@ -1048,7 +1044,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get method with unencoded query parameter with value
@@ -1256,7 +1251,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
@@ -1450,7 +1444,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

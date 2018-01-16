@@ -226,7 +226,6 @@ namespace Fixtures.ContentTypeHeader
             throw ex;
         }
 
-
         /// <param name='text'>
         /// A text stream.
         /// </param>
@@ -402,7 +401,6 @@ namespace Fixtures.ContentTypeHeader
             }
             throw ex;
         }
-
 
     }
 }

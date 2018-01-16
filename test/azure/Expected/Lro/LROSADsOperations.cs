@@ -792,7 +792,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running put request, service returns a Product with
         /// 'ProvisioningState' = 'Creating' and 201 response code
@@ -1032,7 +1031,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running put request, service returns a Product with
@@ -1274,7 +1272,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running put request, service returns a 200 with
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -1510,7 +1507,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 400 with an error body
         /// </summary>
@@ -1711,7 +1707,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 202 with a location header
         /// </summary>
@@ -1911,7 +1906,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request.
@@ -2114,7 +2108,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 400 with no error body
@@ -2327,7 +2320,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running post request, service returns a 202 with a location header
         /// </summary>
@@ -2538,7 +2530,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request
@@ -2752,7 +2743,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running put request, service returns a 201 to the initial request with
@@ -2994,7 +2984,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running put request, service returns a 200 to the initial request,
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -3229,7 +3218,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running put request, service returns a 200 to the initial request,
@@ -3466,7 +3454,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial request,
         /// indicating success.
@@ -3654,7 +3641,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request.
@@ -3857,7 +3843,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
@@ -4071,7 +4056,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -4284,7 +4268,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running put request, service returns a 200 to the initial request,
@@ -4506,7 +4489,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running put request, service returns a 200 to the initial request,
@@ -4743,7 +4725,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running put request, service returns a 200 to the initial request,
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -4979,7 +4960,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request
         /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
@@ -5180,7 +5160,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request.
@@ -5383,7 +5362,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial request.
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
@@ -5585,7 +5563,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
@@ -5798,7 +5775,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
@@ -6013,7 +5989,6 @@ namespace Fixtures.Azure.Lro
             }
         }
 
-
         /// <summary>
         /// Long running post request, service returns a 202 to the initial request,
         /// with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -6226,7 +6201,6 @@ namespace Fixtures.Azure.Lro
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

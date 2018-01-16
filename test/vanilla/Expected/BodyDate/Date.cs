@@ -220,7 +220,6 @@ namespace Fixtures.BodyDate
             }
         }
 
-
         /// <summary>
         /// Get invalid date value
         /// </summary>
@@ -389,7 +388,6 @@ namespace Fixtures.BodyDate
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get overflow date value
@@ -560,7 +558,6 @@ namespace Fixtures.BodyDate
             }
         }
 
-
         /// <summary>
         /// Get underflow date value
         /// </summary>
@@ -730,7 +727,6 @@ namespace Fixtures.BodyDate
             }
         }
 
-
         /// <summary>
         /// Put max date value 9999-12-31
         /// </summary>
@@ -884,7 +880,6 @@ namespace Fixtures.BodyDate
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get max date value 9999-12-31
@@ -1055,7 +1050,6 @@ namespace Fixtures.BodyDate
             }
         }
 
-
         /// <summary>
         /// Put min date value 0000-01-01
         /// </summary>
@@ -1209,7 +1203,6 @@ namespace Fixtures.BodyDate
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get min date value 0000-01-01
@@ -1379,7 +1372,6 @@ namespace Fixtures.BodyDate
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

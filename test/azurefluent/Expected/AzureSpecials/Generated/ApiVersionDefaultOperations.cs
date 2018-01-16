@@ -251,7 +251,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
@@ -452,7 +451,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// GET method with api-version modeled in global settings.
@@ -655,7 +653,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
             }
         }
 
-
         /// <summary>
         /// GET method with api-version modeled in global settings.
         /// </summary>
@@ -856,7 +853,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

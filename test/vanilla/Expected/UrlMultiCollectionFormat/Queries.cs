@@ -220,7 +220,6 @@ namespace Fixtures.UrlMultiCollectionFormat
             }
         }
 
-
         /// <summary>
         /// Get an empty array [] of string using the multi-array format
         /// </summary>
@@ -390,7 +389,6 @@ namespace Fixtures.UrlMultiCollectionFormat
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
@@ -563,7 +561,6 @@ namespace Fixtures.UrlMultiCollectionFormat
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

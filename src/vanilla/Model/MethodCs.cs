@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Model
                     foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-error-response") && (bool)Responses[key].Extensions["x-error-response"])))
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                        "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
+                            "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
                     }
 
                     return string.Join(" && ", predicates);

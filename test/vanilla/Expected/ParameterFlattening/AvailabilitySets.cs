@@ -252,6 +252,5 @@ namespace Fixtures.ParameterFlattening
             throw ex;
         }
 
-
     }
 }

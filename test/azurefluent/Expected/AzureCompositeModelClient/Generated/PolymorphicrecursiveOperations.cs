@@ -259,7 +259,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
             }
         }
 
-
         /// <summary>
         /// Put complex types that are polymorphic and have recursive references
         /// </summary>
@@ -523,7 +522,6 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

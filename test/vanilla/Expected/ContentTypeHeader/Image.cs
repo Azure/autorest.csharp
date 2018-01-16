@@ -222,7 +222,6 @@ namespace Fixtures.ContentTypeHeader
             throw ex;
         }
 
-
         /// <param name='image'>
         /// An image stream.
         /// </param>
@@ -399,7 +398,6 @@ namespace Fixtures.ContentTypeHeader
             throw ex;
         }
 
-
         /// <param name='image'>
         /// An image stream.
         /// </param>
@@ -575,7 +573,6 @@ namespace Fixtures.ContentTypeHeader
             }
             throw ex;
         }
-
 
         /// <param name='image'>
         /// An image stream.
@@ -756,7 +753,6 @@ namespace Fixtures.ContentTypeHeader
             }
             throw ex;
         }
-
 
     }
 }

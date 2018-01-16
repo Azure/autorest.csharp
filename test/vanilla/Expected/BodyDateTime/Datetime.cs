@@ -219,7 +219,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Get invalid datetime value
         /// </summary>
@@ -388,7 +387,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get overflow datetime value
@@ -559,7 +557,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Get underflow datetime value
         /// </summary>
@@ -729,7 +726,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
@@ -883,7 +879,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get max datetime value 9999-12-31t23:59:59.9999999z
@@ -1054,7 +1049,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Get max datetime value 9999-12-31T23:59:59.9999999Z
         /// </summary>
@@ -1224,7 +1218,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put max datetime value with positive numoffset
         /// 9999-12-31t23:59:59.9999999+14:00
@@ -1379,7 +1372,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -1551,7 +1543,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31T23:59:59.9999999+14:00
@@ -1722,7 +1713,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put max datetime value with positive numoffset
         /// 9999-12-31t23:59:59.9999999-14:00
@@ -1877,7 +1867,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -2049,7 +2038,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Get max datetime value with positive num offset
         /// 9999-12-31t23:59:59.9999999-14:00
@@ -2220,7 +2208,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00Z
         /// </summary>
@@ -2374,7 +2361,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00Z
@@ -2545,7 +2531,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00+14:00
         /// </summary>
@@ -2699,7 +2684,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00+14:00
@@ -2870,7 +2854,6 @@ namespace Fixtures.BodyDateTime
             }
         }
 
-
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00-14:00
         /// </summary>
@@ -3024,7 +3007,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00-14:00
@@ -3194,7 +3176,6 @@ namespace Fixtures.BodyDateTime
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

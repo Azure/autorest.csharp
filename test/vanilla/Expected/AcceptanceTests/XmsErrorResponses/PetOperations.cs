@@ -284,7 +284,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
             }
             throw ex;
         }
-
         /// <summary>
         /// Handle error responses, deserialize errors of types V and throw exceptions of type T
         /// </summary>
@@ -319,7 +318,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Asks pet to do something
@@ -523,7 +521,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

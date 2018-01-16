@@ -336,6 +336,5 @@ namespace Fixtures.MirrorPolymorphic
             }
         }
 
-
     }
 }

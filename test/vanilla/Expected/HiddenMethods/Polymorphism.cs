@@ -215,7 +215,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Put complex types that are polymorphic
         /// </summary>
@@ -420,7 +419,6 @@ namespace Fixtures.HiddenMethods
             }
         }
 
-
         /// <summary>
         /// Get complex types that are polymorphic, but not at the root of the
         /// hierarchy; also have additional properties
@@ -590,7 +588,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
@@ -763,7 +760,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
@@ -963,7 +959,6 @@ namespace Fixtures.HiddenMethods
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }

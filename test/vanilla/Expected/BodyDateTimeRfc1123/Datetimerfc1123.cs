@@ -220,7 +220,6 @@ namespace Fixtures.BodyDateTimeRfc1123
             }
         }
 
-
         /// <summary>
         /// Get invalid datetime value
         /// </summary>
@@ -389,7 +388,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get overflow datetime value
@@ -560,7 +558,6 @@ namespace Fixtures.BodyDateTimeRfc1123
             }
         }
 
-
         /// <summary>
         /// Get underflow datetime value
         /// </summary>
@@ -730,7 +727,6 @@ namespace Fixtures.BodyDateTimeRfc1123
             }
         }
 
-
         /// <summary>
         /// Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
         /// </summary>
@@ -884,7 +880,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get max datetime value fri, 31 dec 9999 23:59:59 gmt
@@ -1055,7 +1050,6 @@ namespace Fixtures.BodyDateTimeRfc1123
             }
         }
 
-
         /// <summary>
         /// Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
         /// </summary>
@@ -1225,7 +1219,6 @@ namespace Fixtures.BodyDateTimeRfc1123
             }
         }
 
-
         /// <summary>
         /// Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
         /// </summary>
@@ -1379,7 +1372,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 _httpResponse.Dispose();
             }
         }
-
 
         /// <summary>
         /// Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -1549,7 +1541,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 _httpResponse.Dispose();
             }
         }
-
 
     }
 }
