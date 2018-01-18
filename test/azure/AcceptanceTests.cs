@@ -3,12 +3,7 @@
 
 // TODO: file length is getting excessive.
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Net.Http;
+using AutoRest.CSharp.Tests.Utilities;
 using Fixtures.Azure.AzureBodyDuration;
 using Fixtures.Azure.AzureParameterGrouping;
 using Fixtures.Azure.AzureParameterGrouping.Models;
@@ -22,13 +17,17 @@ using Fixtures.Azure.Lro;
 using Fixtures.Azure.Lro.Models;
 using Fixtures.Azure.Paging;
 using Fixtures.Azure.SubscriptionIdApiVersion;
-using Xunit;
-using AutoRest.CSharp.Tests.Utilities;
-using AutoRest.CSharp.Tests;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
 using Microsoft.Rest.Azure.OData;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using Xunit;
 using ValidationException = Microsoft.Rest.ValidationException;
 
 namespace AutoRest.CSharp.Azure.Tests
@@ -185,7 +184,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.LROs.Delete202NoRetry204();
                 client.LROs.DeleteAsyncNoRetrySucceeded();
                 client.LROs.DeleteNoHeaderInRetry();
-                //FIX TEST
                 client.LROs.DeleteAsyncNoHeaderInRetry();
                 exception = Assert.Throws<CloudException>(() => client.LROs.DeleteAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
@@ -222,7 +220,7 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 client.LRORetrys.DeleteProvisioning202Accepted200Succeeded();
                 client.LRORetrys.Delete202Retry200();
-                client.LRORetrys.DeleteAsyncRelativeRetrySucceeded(); // Re-write as now for Delete/Post sending LocationHeader in add
+                client.LRORetrys.DeleteAsyncRelativeRetrySucceeded();
 
                 var customHeaders = new Dictionary<string, List<string>>
                 {
@@ -263,7 +261,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("Succeeded",
                     client.LRORetrys.PutAsyncRelativeRetrySucceeded(new Product { Location = "West US" }).ProvisioningState);
                 client.LRORetrys.Post202Retry200(new Product { Location = "West US" });
-                //FIX TEST
                 client.LRORetrys.PostAsyncRelativeRetrySucceeded(new Product { Location = "West US" });
 
                 Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
@@ -274,7 +271,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroSadPathTests()
         {
-            //FIX TEST
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
