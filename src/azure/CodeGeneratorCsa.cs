@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Azure
 
             await GenerateServiceClient<AzureServiceClientTemplate>(codeModel);
             await GenerateOperations<AzureMethodGroupTemplate>(codeModel.Operations);
-            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes).Union(codeModel.ErrorTypes));
             await GenerateEnums(codeModel.EnumTypes);
             await GeneratePageClasses(codeModel.pageClasses);
             await GenerateExceptions(codeModel.ErrorTypes, codeModel.ModelTypes.Union(codeModel.HeaderTypes));
@@ -70,13 +70,6 @@ namespace AutoRest.CSharp.Azure
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
                 await Write(exceptionTemplate,
                      $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
-                
-                if(!existingModelTypes.Contains(exceptionType))
-                {
-                    await Write(new ModelTemplate{ Model = exceptionType },
-                        $"{GeneratedSourcesBaseFolder}{FolderModels}/{exceptionType.Name}{ImplementationFileExtension}");
-                }
-
             }
         }
     }

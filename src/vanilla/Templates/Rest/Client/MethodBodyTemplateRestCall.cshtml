@@ -311,10 +311,6 @@ if (@(Model.FailureStatusCodePredicate))
         @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
         }
     }
-    catch (Newtonsoft.Json.JsonException)
-    {
-        // Ignore the exception
-    }
     catch(RestExceptionBase ex)
     {
         if (_shouldTrace)
