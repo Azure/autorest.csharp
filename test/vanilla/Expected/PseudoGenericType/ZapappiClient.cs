@@ -15,6 +15,9 @@ namespace Zapappi.Client
     using System.Net;
     using System.Net.Http;
 
+    /// <summary>
+    /// This is a test API.
+    /// </summary>
     public partial class ZapappiClient : ServiceClient<ZapappiClient>, IZapappiClient
     {
         /// <summary>
@@ -286,7 +289,7 @@ namespace Zapappi.Client
             Porting = new Porting(this);
             SMS = new SMS(this);
             Trunks = new Trunks(this);
-            BaseUri = new System.Uri("https://zapappi-publicapi-staging.azurewebsites.net");
+            BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

@@ -11,6 +11,7 @@ namespace Zapappi.Client
     using Newtonsoft.Json;
 
     /// <summary>
+    /// This is a test API.
     /// </summary>
     public partial interface IZapappiClient : System.IDisposable
     {
