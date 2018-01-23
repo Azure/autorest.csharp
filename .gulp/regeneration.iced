@@ -138,7 +138,8 @@ azureCompositeMappings = {
 configurationFiles = {
   'HiddenMethods': 'hidden-methods.md',
   'Components': 'components.md',
-  'ContentTypeHeader': 'content-type-header.md'
+  'ContentTypeHeader': 'content-type-header.md',
+  'PseudoGenericType': 'pseudo-generic-type.md'
 }
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
