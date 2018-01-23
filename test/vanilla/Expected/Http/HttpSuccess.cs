@@ -119,7 +119,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -266,7 +266,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -440,7 +440,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -595,7 +595,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPatch200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -750,7 +750,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -905,7 +905,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1060,7 +1060,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut201(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1215,7 +1215,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost201(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1370,7 +1370,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1525,7 +1525,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPatch202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1680,7 +1680,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1835,7 +1835,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1979,7 +1979,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2134,7 +2134,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2289,7 +2289,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPatch204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2444,7 +2444,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2599,7 +2599,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2743,7 +2743,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead404(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

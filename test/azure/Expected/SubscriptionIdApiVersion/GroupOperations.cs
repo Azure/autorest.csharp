@@ -173,7 +173,7 @@ namespace Fixtures.Azure.SubscriptionIdApiVersion
                 {
                     await HandleDefaultErrorResponseForGetSampleResourceGroup(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

@@ -122,7 +122,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -288,7 +288,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetInvalidFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -454,7 +454,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetInvalidDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -620,7 +620,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetInvalidDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -790,7 +790,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -937,7 +937,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1107,7 +1107,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1254,7 +1254,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1423,7 +1423,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDoublePositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1570,7 +1570,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDoublePositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1739,7 +1739,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDoubleNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1886,7 +1886,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDoubleNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2056,7 +2056,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2203,7 +2203,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2372,7 +2372,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimalPositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2519,7 +2519,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDecimalPositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2688,7 +2688,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimalNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2835,7 +2835,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetBigDecimalNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3005,7 +3005,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3152,7 +3152,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetSmallFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3322,7 +3322,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3469,7 +3469,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetSmallDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3639,7 +3639,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3786,7 +3786,7 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetSmallDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

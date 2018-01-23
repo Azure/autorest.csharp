@@ -140,7 +140,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForA(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -196,7 +196,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -312,7 +312,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForB(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -368,7 +368,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -484,7 +484,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForC(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -540,7 +540,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -660,7 +660,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForD(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -716,7 +716,7 @@ namespace Fixtures.ContentTypeHeader
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

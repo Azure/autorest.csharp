@@ -270,7 +270,7 @@ namespace Fixtures.MirrorRecursiveTypes
                 {
                     await HandleDefaultErrorResponseForPost(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

@@ -123,7 +123,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -289,7 +289,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetInvalidDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -455,7 +455,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetOverflowDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -621,7 +621,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetUnderflowDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -791,7 +791,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForPutMaxDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -938,7 +938,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetMaxDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1108,7 +1108,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForPutMinDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1255,7 +1255,7 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetMinDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

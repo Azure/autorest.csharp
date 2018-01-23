@@ -478,7 +478,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForList(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -737,7 +737,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForCreate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -996,7 +996,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForUpdate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

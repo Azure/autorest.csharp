@@ -166,7 +166,7 @@ namespace Fixtures.BodyFormData
                 {
                     await HandleDefaultErrorResponseForUploadFile(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -341,7 +341,7 @@ namespace Fixtures.BodyFormData
                 {
                     await HandleDefaultErrorResponseForUploadFileViaBody(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

@@ -252,7 +252,7 @@ namespace Fixtures.MirrorSequences
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -439,7 +439,7 @@ namespace Fixtures.MirrorSequences
                 {
                     await HandleDefaultErrorResponseForAddPetStyles(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -514,7 +514,7 @@ namespace Fixtures.MirrorSequences
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -629,7 +629,7 @@ namespace Fixtures.MirrorSequences
                 {
                     await HandleDefaultErrorResponseForUpdatePetStyles(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -704,7 +704,7 @@ namespace Fixtures.MirrorSequences
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

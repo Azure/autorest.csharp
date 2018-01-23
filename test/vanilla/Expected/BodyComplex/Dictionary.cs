@@ -122,7 +122,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -300,7 +300,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -447,7 +447,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -625,7 +625,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -772,7 +772,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -939,7 +939,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

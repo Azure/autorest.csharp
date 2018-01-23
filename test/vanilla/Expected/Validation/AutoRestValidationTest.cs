@@ -303,7 +303,7 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForValidationOfMethodParameters(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -555,7 +555,7 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForValidationOfBody(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -718,7 +718,7 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForGetWithConstantInPath(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -774,7 +774,7 @@ namespace Fixtures.Validation
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -882,7 +882,7 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForPostWithConstantInBody(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -957,7 +957,7 @@ namespace Fixtures.Validation
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

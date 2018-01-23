@@ -134,7 +134,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     await HandleDefaultErrorResponseForGetByPetId(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -209,7 +209,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -314,7 +314,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -389,7 +389,7 @@ namespace Fixtures.ExtensibleEnums
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

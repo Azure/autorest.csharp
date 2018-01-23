@@ -154,7 +154,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostMethodGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -355,7 +355,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostMethodGlobalNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -563,7 +563,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostMethodGlobalNotProvidedValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -763,7 +763,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostPathGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -963,7 +963,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostSwaggerGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

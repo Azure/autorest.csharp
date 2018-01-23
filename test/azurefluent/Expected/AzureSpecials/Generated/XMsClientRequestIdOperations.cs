@@ -143,7 +143,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -355,7 +355,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForParamGet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

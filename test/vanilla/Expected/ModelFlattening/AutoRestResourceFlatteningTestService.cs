@@ -231,7 +231,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -379,7 +379,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForGetArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -555,7 +555,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutWrappedArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -704,7 +704,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForGetWrappedArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -879,7 +879,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1027,7 +1027,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForGetDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1202,7 +1202,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1350,7 +1350,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForGetResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1532,7 +1532,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutSimpleProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1748,7 +1748,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPostFlattenedSimpleProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1987,7 +1987,7 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutSimpleProductWithGrouping(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

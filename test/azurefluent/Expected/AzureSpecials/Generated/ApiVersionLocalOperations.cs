@@ -149,7 +149,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -347,7 +347,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodLocalNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -542,7 +542,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetPathLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -737,7 +737,7 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetSwaggerLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

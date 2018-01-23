@@ -51,7 +51,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.Name;
+                return Body?.Name;
             }
         }
 
@@ -61,7 +61,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.Reason;
+                return Body?.Reason;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.SomeBaseProp;
+                return Body?.SomeBaseProp;
             }
         }
 

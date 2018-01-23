@@ -127,7 +127,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -295,7 +295,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -453,7 +453,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -628,7 +628,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -781,7 +781,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -951,7 +951,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1116,7 +1116,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1284,7 +1284,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1455,7 +1455,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1630,7 +1630,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1796,7 +1796,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1966,7 +1966,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2135,7 +2135,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2307,7 +2307,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2482,7 +2482,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2661,7 +2661,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2826,7 +2826,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2994,7 +2994,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3165,7 +3165,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3340,7 +3340,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3506,7 +3506,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3676,7 +3676,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

@@ -145,7 +145,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -375,7 +375,7 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

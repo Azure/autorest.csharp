@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.ErrorMessage;
+                return Body?.ErrorMessage;
             }
         }
 

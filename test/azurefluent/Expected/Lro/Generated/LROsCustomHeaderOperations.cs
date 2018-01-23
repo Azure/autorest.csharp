@@ -251,7 +251,7 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -489,7 +489,7 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -729,7 +729,7 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPost202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -945,7 +945,7 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

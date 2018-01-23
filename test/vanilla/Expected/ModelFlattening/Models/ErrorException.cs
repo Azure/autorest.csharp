@@ -50,7 +50,7 @@ namespace Fixtures.ModelFlattening.Models
         {
             get
             {
-                return ErrorBody?.Status;
+                return Body?.Status;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.ModelFlattening.Models
         {
             get
             {
-                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Fixtures.ModelFlattening.Models
         {
             get
             {
-                return ErrorBody?.ParentError;
+                return Body?.ParentError;
             }
         }
 

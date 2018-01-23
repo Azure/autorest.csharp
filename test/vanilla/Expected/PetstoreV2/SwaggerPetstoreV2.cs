@@ -384,7 +384,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -468,7 +468,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -590,7 +590,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdatePet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -646,7 +646,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -772,7 +772,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForFindPetsByStatus(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -856,7 +856,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -983,7 +983,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForFindPetsByTags(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1067,7 +1067,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1175,7 +1175,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1259,7 +1259,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1409,7 +1409,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdatePetWithForm(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1465,7 +1465,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1578,7 +1578,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForDeletePet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1634,7 +1634,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1737,7 +1737,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForGetInventory(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1821,7 +1821,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -1942,7 +1942,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForPlaceOrder(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2026,7 +2026,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2156,7 +2156,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForGetOrderById(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2240,7 +2240,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2363,7 +2363,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForDeleteOrder(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2419,7 +2419,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2540,7 +2540,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForCreateUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2596,7 +2596,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2714,7 +2714,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForCreateUsersWithArrayInput(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2770,7 +2770,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2888,7 +2888,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForCreateUsersWithListInput(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2944,7 +2944,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3079,7 +3079,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForLoginUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3176,7 +3176,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3273,7 +3273,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForLogoutUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3329,7 +3329,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3444,7 +3444,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForGetUserByName(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3528,7 +3528,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3658,7 +3658,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdateUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3714,7 +3714,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3829,7 +3829,7 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForDeleteUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3885,7 +3885,7 @@ namespace Fixtures.PetstoreV2
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

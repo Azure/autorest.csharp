@@ -145,7 +145,7 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -359,7 +359,7 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForPutPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -550,7 +550,7 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForGetPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -760,7 +760,7 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

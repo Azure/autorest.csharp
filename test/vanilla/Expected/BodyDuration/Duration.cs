@@ -122,7 +122,7 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -292,7 +292,7 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForPutPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -439,7 +439,7 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForGetPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -605,7 +605,7 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

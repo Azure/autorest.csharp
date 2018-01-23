@@ -59,7 +59,7 @@ namespace Fixtures.Report.Models
                 Request = requestMessage,
                 Response = responseMessage
             };
-            ex.ErrorBody = this;
+            ex.Body = this;
             throw ex;
         }
     }

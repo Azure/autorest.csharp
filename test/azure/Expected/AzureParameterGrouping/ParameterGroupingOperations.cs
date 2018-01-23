@@ -200,7 +200,7 @@ namespace Fixtures.Azure.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostRequired(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -415,7 +415,7 @@ namespace Fixtures.Azure.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostOptional(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -657,7 +657,7 @@ namespace Fixtures.Azure.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostMultiParamGroups(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -872,7 +872,7 @@ namespace Fixtures.Azure.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostSharedParameterGroupObject(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

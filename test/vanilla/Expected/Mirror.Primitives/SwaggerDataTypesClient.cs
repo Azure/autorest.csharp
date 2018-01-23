@@ -243,7 +243,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForGetProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -432,7 +432,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForPutProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -621,7 +621,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForPostProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -810,7 +810,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForPatchProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

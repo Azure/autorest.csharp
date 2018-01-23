@@ -123,7 +123,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -297,7 +297,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -444,7 +444,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -616,7 +616,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -764,7 +764,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetMbcs(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -937,7 +937,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutMbcs(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1086,7 +1086,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetWhitespace(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1260,7 +1260,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutWhitespace(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1407,7 +1407,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1573,7 +1573,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetBase64Encoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1739,7 +1739,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1922,7 +1922,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2069,7 +2069,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNullBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

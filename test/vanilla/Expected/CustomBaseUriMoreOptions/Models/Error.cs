@@ -59,7 +59,7 @@ namespace Fixtures.CustomBaseUriMoreOptions.Models
                 Request = requestMessage,
                 Response = responseMessage
             };
-            ex.ErrorBody = this;
+            ex.Body = this;
             throw ex;
         }
     }

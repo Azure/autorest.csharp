@@ -122,7 +122,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetInt(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -306,7 +306,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutInt(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -453,7 +453,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetLong(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -637,7 +637,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutLong(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -784,7 +784,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -968,7 +968,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1115,7 +1115,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1300,7 +1300,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1447,7 +1447,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetBool(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1631,7 +1631,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutBool(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1778,7 +1778,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1962,7 +1962,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2109,7 +2109,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2293,7 +2293,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2440,7 +2440,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2624,7 +2624,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2771,7 +2771,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetDateTimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2956,7 +2956,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutDateTimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3103,7 +3103,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3281,7 +3281,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3428,7 +3428,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForGetByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3606,7 +3606,7 @@ namespace Fixtures.BodyComplex
                 {
                     await HandleDefaultErrorResponseForPutByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

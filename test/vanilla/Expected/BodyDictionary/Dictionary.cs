@@ -123,7 +123,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -289,7 +289,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -472,7 +472,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -619,7 +619,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetNullValue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -785,7 +785,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetNullKey(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -951,7 +951,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetEmptyStringKey(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1117,7 +1117,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1284,7 +1284,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1467,7 +1467,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1614,7 +1614,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1780,7 +1780,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1946,7 +1946,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2129,7 +2129,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2276,7 +2276,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2442,7 +2442,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2608,7 +2608,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetLongValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2791,7 +2791,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutLongValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2938,7 +2938,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3104,7 +3104,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3270,7 +3270,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3453,7 +3453,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3600,7 +3600,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3766,7 +3766,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3932,7 +3932,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4115,7 +4115,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4262,7 +4262,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4428,7 +4428,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4594,7 +4594,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetStringValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4777,7 +4777,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutStringValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4924,7 +4924,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetStringWithNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5090,7 +5090,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetStringWithInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5257,7 +5257,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5441,7 +5441,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5588,7 +5588,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5754,7 +5754,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5921,7 +5921,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6105,7 +6105,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6252,7 +6252,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6418,7 +6418,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6586,7 +6586,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6770,7 +6770,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6918,7 +6918,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7101,7 +7101,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7249,7 +7249,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetByteValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7433,7 +7433,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutByteValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7581,7 +7581,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetByteInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7748,7 +7748,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetBase64Url(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7914,7 +7914,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetComplexNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8080,7 +8080,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetComplexEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8247,7 +8247,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetComplexItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8414,7 +8414,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetComplexItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8581,7 +8581,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8766,7 +8766,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8913,7 +8913,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetArrayNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9079,7 +9079,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetArrayEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9246,7 +9246,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetArrayItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9413,7 +9413,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetArrayItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9580,7 +9580,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9764,7 +9764,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9911,7 +9911,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDictionaryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10078,7 +10078,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDictionaryEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10246,7 +10246,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10414,7 +10414,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10582,7 +10582,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForGetDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10767,7 +10767,7 @@ namespace Fixtures.BodyDictionary
                 {
                     await HandleDefaultErrorResponseForPutDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

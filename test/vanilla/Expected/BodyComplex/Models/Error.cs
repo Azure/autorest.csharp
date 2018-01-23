@@ -59,7 +59,7 @@ namespace Fixtures.BodyComplex.Models
                 Request = requestMessage,
                 Response = responseMessage
             };
-            ex.ErrorBody = this;
+            ex.Body = this;
             throw ex;
         }
     }

@@ -142,7 +142,7 @@ namespace Fixtures.UrlMultiCollectionFormat
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -309,7 +309,7 @@ namespace Fixtures.UrlMultiCollectionFormat
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -478,7 +478,7 @@ namespace Fixtures.UrlMultiCollectionFormat
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

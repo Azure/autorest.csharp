@@ -403,7 +403,7 @@ namespace Fixtures.Azure.Fluent.AzureReport
                 {
                     await HandleDefaultErrorResponseForGetReport(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

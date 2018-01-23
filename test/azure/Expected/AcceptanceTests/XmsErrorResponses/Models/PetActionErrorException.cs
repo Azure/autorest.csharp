@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.ErrorMessage;
+                return Body?.ErrorMessage;
             }
         }
 

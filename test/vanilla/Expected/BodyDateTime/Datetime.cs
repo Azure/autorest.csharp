@@ -122,7 +122,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -288,7 +288,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -454,7 +454,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetOverflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -620,7 +620,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetUnderflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -790,7 +790,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutUtcMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -937,7 +937,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetUtcLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1103,7 +1103,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetUtcUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1274,7 +1274,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalPositiveOffsetMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1422,7 +1422,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1589,7 +1589,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1760,7 +1760,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalNegativeOffsetMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1908,7 +1908,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2075,7 +2075,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2245,7 +2245,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2392,7 +2392,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2562,7 +2562,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalPositiveOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2709,7 +2709,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2879,7 +2879,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalNegativeOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3026,7 +3026,7 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

@@ -145,7 +145,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForGetValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -367,7 +367,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForPutValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -558,7 +558,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -780,7 +780,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -971,7 +971,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1182,7 +1182,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

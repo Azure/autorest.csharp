@@ -50,7 +50,7 @@ namespace Fixtures.DateTimeOffset.Models
         {
             get
             {
-                return ErrorBody?.Code;
+                return Body?.Code;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.DateTimeOffset.Models
         {
             get
             {
-                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Fixtures.DateTimeOffset.Models
         {
             get
             {
-                return ErrorBody?.Fields;
+                return Body?.Fields;
             }
         }
 

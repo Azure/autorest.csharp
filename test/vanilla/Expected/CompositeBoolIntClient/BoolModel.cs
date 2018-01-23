@@ -122,7 +122,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -291,7 +291,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -438,7 +438,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetFalse(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -607,7 +607,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutFalse(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -754,7 +754,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -920,7 +920,7 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

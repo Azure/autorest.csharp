@@ -123,7 +123,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNotExpandable(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -295,7 +295,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutNotExpandable(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -443,7 +443,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetReferenced(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -615,7 +615,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutReferenced(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -762,7 +762,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetReferencedConstant(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -941,7 +941,7 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutReferencedConstant(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

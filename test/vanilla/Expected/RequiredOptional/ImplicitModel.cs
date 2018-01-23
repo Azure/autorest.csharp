@@ -133,7 +133,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetRequiredPath(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -303,7 +303,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPutOptionalQuery(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -458,7 +458,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPutOptionalHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -612,7 +612,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPutOptionalBody(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -767,7 +767,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetRequiredGlobalPath(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -944,7 +944,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetRequiredGlobalQuery(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1111,7 +1111,7 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetOptionalGlobalQuery(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

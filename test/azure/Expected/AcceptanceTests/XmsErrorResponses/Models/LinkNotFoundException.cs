@@ -50,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.WhatSubAddress;
+                return Body?.WhatSubAddress;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.Reason;
+                return Body?.Reason;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.SomeBaseProp;
+                return Body?.SomeBaseProp;
             }
         }
 

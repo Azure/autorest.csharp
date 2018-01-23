@@ -158,7 +158,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostMethodLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -364,7 +364,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostMethodLocalNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -568,7 +568,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostPathLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -773,7 +773,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForPostSwaggerLocalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

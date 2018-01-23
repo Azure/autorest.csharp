@@ -404,7 +404,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -596,7 +596,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForGetArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -815,7 +815,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1007,7 +1007,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForGetDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1226,7 +1226,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1418,7 +1418,7 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForGetResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

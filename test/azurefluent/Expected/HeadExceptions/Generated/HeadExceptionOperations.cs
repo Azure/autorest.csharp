@@ -141,7 +141,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 {
                     await HandleDefaultErrorResponseForHead200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 {
                     await HandleDefaultErrorResponseForHead204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -517,7 +517,7 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 {
                     await HandleDefaultErrorResponseForHead404(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

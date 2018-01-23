@@ -118,7 +118,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetInt(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -302,7 +302,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutInt(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -449,7 +449,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetLong(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -633,7 +633,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutLong(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -780,7 +780,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -964,7 +964,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1111,7 +1111,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1296,7 +1296,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1443,7 +1443,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetBool(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1627,7 +1627,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutBool(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1774,7 +1774,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1958,7 +1958,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2105,7 +2105,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2289,7 +2289,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2436,7 +2436,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2620,7 +2620,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2767,7 +2767,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetDateTimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2952,7 +2952,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutDateTimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3099,7 +3099,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3277,7 +3277,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3424,7 +3424,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForGetByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3602,7 +3602,7 @@ namespace Fixtures.HiddenMethods
                 {
                     await HandleDefaultErrorResponseForPutByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

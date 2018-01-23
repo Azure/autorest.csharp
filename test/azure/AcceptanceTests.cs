@@ -204,8 +204,8 @@ namespace AutoRest.CSharp.Azure.Tests
                 exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
                 Assert.Contains("Internal Server Error", exception.Message,
                     StringComparison.Ordinal);
-                Assert.NotNull(exception.ErrorBody);
-                var error = exception.ErrorBody;
+                Assert.NotNull(exception.Body);
+                var error = exception.Body;
                 Assert.NotNull(error.Code);
                 Assert.NotNull(error.Message);
                 exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetrycanceled());
@@ -290,7 +290,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.NotNull(exception.Response);
                 exception =
                     Assert.Throws<CloudLroException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
-                Assert.Null(exception.ErrorBody);
+                Assert.Null(exception.Body);
          
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
@@ -377,7 +377,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 
                 exception =
                     Assert.Throws<CloudLroException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
-                Assert.Null(exception.ErrorBody);
+                Assert.Null(exception.Body);
             }
         }
 

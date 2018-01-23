@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.HungryOrThirsty;
+                return Body?.HungryOrThirsty;
             }
         }
 
@@ -63,7 +63,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.Reason;
+                return Body?.Reason;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         {
             get
             {
-                return ErrorBody?.ErrorMessage;
+                return Body?.ErrorMessage;
             }
         }
 

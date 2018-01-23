@@ -145,7 +145,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetSinglePages(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -397,7 +397,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePages(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -650,7 +650,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetOdataMultiplePages(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -923,7 +923,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesWithOffset(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1134,7 +1134,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesRetryFirst(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1346,7 +1346,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesRetrySecond(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1556,7 +1556,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetSinglePagesFailure(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1766,7 +1766,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFailure(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1976,7 +1976,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFailureUri(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2213,7 +2213,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFragmentNextLink(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2458,7 +2458,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFragmentWithGroupingNextLink(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2704,7 +2704,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForNextFragment(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2957,7 +2957,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForNextFragmentWithGrouping(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3181,7 +3181,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetSinglePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3447,7 +3447,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3714,7 +3714,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetOdataMultiplePagesNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3980,7 +3980,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesWithOffsetNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4205,7 +4205,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesRetryFirstNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4431,7 +4431,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesRetrySecondNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4655,7 +4655,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetSinglePagesFailureNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4879,7 +4879,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFailureNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5103,7 +5103,7 @@ namespace Fixtures.Azure.Fluent.Paging
                 {
                     await HandleDefaultErrorResponseForGetMultiplePagesFailureUriNext(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

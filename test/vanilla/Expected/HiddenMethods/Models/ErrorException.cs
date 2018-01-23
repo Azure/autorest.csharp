@@ -46,7 +46,7 @@ namespace Fixtures.HiddenMethods.Models
         {
             get
             {
-                return ErrorBody?.Status;
+                return Body?.Status;
             }
         }
 
@@ -56,7 +56,7 @@ namespace Fixtures.HiddenMethods.Models
         {
             get
             {
-                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
         }
 

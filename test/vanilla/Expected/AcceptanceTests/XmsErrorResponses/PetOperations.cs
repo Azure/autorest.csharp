@@ -151,7 +151,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                             break;
                     }
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -259,7 +259,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -411,7 +411,7 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                             break;
                     }
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

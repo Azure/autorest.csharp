@@ -123,7 +123,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -289,7 +289,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -455,7 +455,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetOverflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -621,7 +621,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetUnderflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -791,7 +791,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForPutUtcMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -938,7 +938,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetUtcLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1104,7 +1104,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetUtcUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1274,7 +1274,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForPutUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1421,7 +1421,7 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

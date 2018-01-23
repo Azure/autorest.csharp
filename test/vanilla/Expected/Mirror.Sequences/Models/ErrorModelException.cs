@@ -50,7 +50,7 @@ namespace Fixtures.MirrorSequences.Models
         {
             get
             {
-                return ErrorBody?.Code ?? default(int);
+                return Body?.Code ?? default(int);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Fixtures.MirrorSequences.Models
         {
             get
             {
-                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
+                return string.IsNullOrEmpty(Body?.Message)? base.Message : Body.Message;
             }
         }
 

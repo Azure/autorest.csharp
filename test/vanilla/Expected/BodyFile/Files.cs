@@ -122,7 +122,7 @@ namespace Fixtures.BodyFile
                 {
                     await HandleDefaultErrorResponseForGetFile(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -274,7 +274,7 @@ namespace Fixtures.BodyFile
                 {
                     await HandleDefaultErrorResponseForGetFileLarge(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -426,7 +426,7 @@ namespace Fixtures.BodyFile
                 {
                     await HandleDefaultErrorResponseForGetEmptyFile(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

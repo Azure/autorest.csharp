@@ -156,7 +156,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -358,7 +358,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodGlobalNotProvidedValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -560,7 +560,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetPathGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -762,7 +762,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetSwaggerGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

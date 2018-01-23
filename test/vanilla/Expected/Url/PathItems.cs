@@ -177,7 +177,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetAllWithValues(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -378,7 +378,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetGlobalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -579,7 +579,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -780,7 +780,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetLocalPathItemQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

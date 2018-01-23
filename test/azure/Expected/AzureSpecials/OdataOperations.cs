@@ -156,7 +156,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetWithFilter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

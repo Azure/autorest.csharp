@@ -122,7 +122,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -288,7 +288,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError204Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -454,7 +454,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError201Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -620,7 +620,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError202None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -787,7 +787,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model204NoModelDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -953,7 +953,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model201ModelDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1139,7 +1139,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model201ModelDefaultError201Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1325,7 +1325,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200Model201ModelDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1510,7 +1510,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError200Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1714,7 +1714,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError201Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1918,7 +1918,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError404Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2123,7 +2123,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA201ModelC404ModelDDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2324,7 +2324,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultError202None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2468,7 +2468,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultError204None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2613,7 +2613,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultError400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2757,7 +2757,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultNone202Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2813,7 +2813,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -2904,7 +2904,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultNone204None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2960,7 +2960,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3051,7 +3051,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultNone400None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3107,7 +3107,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3198,7 +3198,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet202None204NoneDefaultNone400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3254,7 +3254,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -3345,7 +3345,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultModelA200Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3503,7 +3503,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultModelA200None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3661,7 +3661,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultModelA400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3819,7 +3819,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultModelA400None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3977,7 +3977,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultNone200Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4033,7 +4033,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4124,7 +4124,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultNone200None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4180,7 +4180,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4271,7 +4271,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultNone400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4327,7 +4327,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4418,7 +4418,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetDefaultNone400None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4474,7 +4474,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4569,7 +4569,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA200None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4644,7 +4644,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4738,7 +4738,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA200Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4813,7 +4813,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -4907,7 +4907,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA200Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4982,7 +4982,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -5077,7 +5077,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA400None(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5152,7 +5152,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -5246,7 +5246,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA400Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5321,7 +5321,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -5415,7 +5415,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA400Invalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5490,7 +5490,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {
@@ -5584,7 +5584,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet200ModelA202Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5659,7 +5659,7 @@ namespace Fixtures.Http
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
-                    ex.ErrorBody = errorResponseModel;
+                    ex.Body = errorResponseModel;
                 }
                 catch (JsonException)
                 {

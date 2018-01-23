@@ -157,7 +157,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodPathValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -360,7 +360,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetPathPathValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -551,7 +551,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetSwaggerPathValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -758,7 +758,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodQueryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -954,7 +954,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1161,7 +1161,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetPathQueryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1356,7 +1356,7 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetSwaggerQueryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

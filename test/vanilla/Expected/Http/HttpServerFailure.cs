@@ -119,7 +119,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead501(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -277,7 +277,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGet501(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -446,7 +446,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost505(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -615,7 +615,7 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete505(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

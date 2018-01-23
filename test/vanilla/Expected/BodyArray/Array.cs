@@ -123,7 +123,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -289,7 +289,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -455,7 +455,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -638,7 +638,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -785,7 +785,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -968,7 +968,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1115,7 +1115,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1281,7 +1281,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1447,7 +1447,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1630,7 +1630,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1777,7 +1777,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1943,7 +1943,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2109,7 +2109,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetLongValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2292,7 +2292,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutLongValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2439,7 +2439,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2605,7 +2605,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2771,7 +2771,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2954,7 +2954,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3101,7 +3101,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3267,7 +3267,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3433,7 +3433,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3616,7 +3616,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3763,7 +3763,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3929,7 +3929,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4095,7 +4095,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetStringValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4278,7 +4278,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutStringValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4425,7 +4425,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetStringWithNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4591,7 +4591,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetStringWithInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4759,7 +4759,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetUuidValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4944,7 +4944,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutUuidValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5091,7 +5091,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetUuidInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5257,7 +5257,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5440,7 +5440,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5587,7 +5587,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5753,7 +5753,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5920,7 +5920,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6104,7 +6104,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6251,7 +6251,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6417,7 +6417,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6584,7 +6584,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6768,7 +6768,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -6915,7 +6915,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7098,7 +7098,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7246,7 +7246,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetByteValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7430,7 +7430,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutByteValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7578,7 +7578,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetByteInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7745,7 +7745,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBase64Url(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -7911,7 +7911,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8077,7 +8077,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8244,7 +8244,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8411,7 +8411,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8578,7 +8578,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8762,7 +8762,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -8909,7 +8909,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9075,7 +9075,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9241,7 +9241,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9407,7 +9407,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9574,7 +9574,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9758,7 +9758,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -9905,7 +9905,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10071,7 +10071,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10239,7 +10239,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10407,7 +10407,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10575,7 +10575,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -10760,7 +10760,7 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {

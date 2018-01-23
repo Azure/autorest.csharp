@@ -128,7 +128,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetBooleanTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -280,7 +280,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetBooleanFalse(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -437,7 +437,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetBooleanNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -589,7 +589,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetIntOneMillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -741,7 +741,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetIntNegativeOneMillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -898,7 +898,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetIntNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1050,7 +1050,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetTenBillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1202,7 +1202,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetNegativeTenBillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1359,7 +1359,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetLongNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1511,7 +1511,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForFloatScientificPositive(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1663,7 +1663,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForFloatScientificNegative(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1820,7 +1820,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForFloatNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -1972,7 +1972,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDoubleDecimalPositive(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2124,7 +2124,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDoubleDecimalNegative(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2281,7 +2281,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDoubleNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2436,7 +2436,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringUnicode(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2591,7 +2591,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringUrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2746,7 +2746,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -2903,7 +2903,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3061,7 +3061,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForEnumValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3219,7 +3219,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForEnumNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3376,7 +3376,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForByteMultiByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3531,7 +3531,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForByteEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3688,7 +3688,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForByteNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3840,7 +3840,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -3997,7 +3997,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDateNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4149,7 +4149,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4306,7 +4306,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDateTimeNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4465,7 +4465,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringCsvValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4622,7 +4622,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringCsvNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4779,7 +4779,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringCsvEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -4938,7 +4938,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringSsvValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5097,7 +5097,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringTsvValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
@@ -5256,7 +5256,7 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayStringPipesValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch(RestExceptionBase ex)
+                catch(RestException ex)
                 {
                     if (_shouldTrace)
                     {
