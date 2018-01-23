@@ -200,10 +200,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostRequired(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -418,10 +414,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 try
                 {
                     await HandleDefaultErrorResponseForPostOptional(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -665,10 +657,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 {
                     await HandleDefaultErrorResponseForPostMultiParamGroups(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -883,10 +871,6 @@ namespace Fixtures.Azure.Fluent.AzureParameterGrouping
                 try
                 {
                     await HandleDefaultErrorResponseForPostSharedParameterGroupObject(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

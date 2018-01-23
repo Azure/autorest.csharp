@@ -122,10 +122,6 @@ namespace Fixtures.BodyByte
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -292,10 +288,6 @@ namespace Fixtures.BodyByte
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -461,10 +453,6 @@ namespace Fixtures.BodyByte
                 try
                 {
                     await HandleDefaultErrorResponseForGetNonAscii(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -650,10 +638,6 @@ namespace Fixtures.BodyByte
                 {
                     await HandleDefaultErrorResponseForPutNonAscii(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -800,10 +784,6 @@ namespace Fixtures.BodyByte
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

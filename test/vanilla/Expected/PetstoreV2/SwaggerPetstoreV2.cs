@@ -384,10 +384,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -594,10 +590,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdatePet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -779,10 +771,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForFindPetsByStatus(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -995,10 +983,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForFindPetsByTags(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1190,10 +1174,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForGetPetById(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1429,10 +1409,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdatePetWithForm(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1602,10 +1578,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForDeletePet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1764,10 +1736,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForGetInventory(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1973,10 +1941,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForPlaceOrder(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2192,10 +2156,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForGetOrderById(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2403,10 +2363,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForDeleteOrder(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2584,10 +2540,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForCreateUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2762,10 +2714,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForCreateUsersWithArrayInput(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2939,10 +2887,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForCreateUsersWithListInput(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3134,10 +3078,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForLoginUser(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3333,10 +3273,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForLogoutUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3507,10 +3443,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForGetUserByName(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3726,10 +3658,6 @@ namespace Fixtures.PetstoreV2
                 {
                     await HandleDefaultErrorResponseForUpdateUser(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3900,10 +3828,6 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     await HandleDefaultErrorResponseForDeleteUser(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

@@ -177,10 +177,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetAllWithValues(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -381,10 +377,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForGetGlobalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -587,10 +579,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -791,10 +779,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalPathItemQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

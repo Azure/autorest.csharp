@@ -122,10 +122,6 @@ namespace Fixtures.BodyBoolean
                 {
                     await HandleDefaultErrorResponseForGetTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -295,10 +291,6 @@ namespace Fixtures.BodyBoolean
                 {
                     await HandleDefaultErrorResponseForPutTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -445,10 +437,6 @@ namespace Fixtures.BodyBoolean
                 try
                 {
                     await HandleDefaultErrorResponseForGetFalse(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -619,10 +607,6 @@ namespace Fixtures.BodyBoolean
                 {
                     await HandleDefaultErrorResponseForPutFalse(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -769,10 +753,6 @@ namespace Fixtures.BodyBoolean
                 try
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -939,10 +919,6 @@ namespace Fixtures.BodyBoolean
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

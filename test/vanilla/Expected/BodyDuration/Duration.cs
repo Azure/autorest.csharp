@@ -122,10 +122,6 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -296,10 +292,6 @@ namespace Fixtures.BodyDuration
                 {
                     await HandleDefaultErrorResponseForPutPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -446,10 +438,6 @@ namespace Fixtures.BodyDuration
                 try
                 {
                     await HandleDefaultErrorResponseForGetPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -616,10 +604,6 @@ namespace Fixtures.BodyDuration
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

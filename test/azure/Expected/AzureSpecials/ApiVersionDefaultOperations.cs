@@ -156,10 +156,6 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetMethodGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -361,10 +357,6 @@ namespace Fixtures.Azure.AzureSpecials
                 try
                 {
                     await HandleDefaultErrorResponseForGetMethodGlobalNotProvidedValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -568,10 +560,6 @@ namespace Fixtures.Azure.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForGetPathGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -773,10 +761,6 @@ namespace Fixtures.Azure.AzureSpecials
                 try
                 {
                     await HandleDefaultErrorResponseForGetSwaggerGlobalValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

@@ -134,10 +134,6 @@ namespace Fixtures.ExtensibleEnums
                 {
                     await HandleDefaultErrorResponseForGetByPetId(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -317,10 +313,6 @@ namespace Fixtures.ExtensibleEnums
                 try
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

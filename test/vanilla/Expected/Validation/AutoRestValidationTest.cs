@@ -303,10 +303,6 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForValidationOfMethodParameters(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -559,10 +555,6 @@ namespace Fixtures.Validation
                 {
                     await HandleDefaultErrorResponseForValidationOfBody(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -725,10 +717,6 @@ namespace Fixtures.Validation
                 try
                 {
                     await HandleDefaultErrorResponseForGetWithConstantInPath(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -893,10 +881,6 @@ namespace Fixtures.Validation
                 try
                 {
                     await HandleDefaultErrorResponseForPostWithConstantInBody(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

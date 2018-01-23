@@ -165,10 +165,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForCustomNamedRequestId(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -402,10 +398,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 {
                     await HandleDefaultErrorResponseForCustomNamedRequestIdParamGrouping(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -629,10 +621,6 @@ namespace Fixtures.Azure.Fluent.AzureSpecials
                 try
                 {
                     await HandleDefaultErrorResponseForCustomNamedRequestIdHead(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

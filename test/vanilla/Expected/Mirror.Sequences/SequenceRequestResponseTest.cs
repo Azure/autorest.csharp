@@ -252,10 +252,6 @@ namespace Fixtures.MirrorSequences
                 {
                     await HandleDefaultErrorResponseForAddPet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -442,10 +438,6 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     await HandleDefaultErrorResponseForAddPetStyles(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -636,10 +628,6 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     await HandleDefaultErrorResponseForUpdatePetStyles(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

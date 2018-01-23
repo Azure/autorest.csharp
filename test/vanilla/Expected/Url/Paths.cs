@@ -123,10 +123,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetBooleanTrue(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -273,10 +269,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForGetBooleanFalse(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -425,10 +417,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetIntOneMillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -575,10 +563,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForGetIntNegativeOneMillion(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -727,10 +711,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForGetTenBillion(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -877,10 +857,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForGetNegativeTenBillion(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1029,10 +1005,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForFloatScientificPositive(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1179,10 +1151,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForFloatScientificNegative(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1331,10 +1299,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDoubleDecimalPositive(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1481,10 +1445,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForDoubleDecimalNegative(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1633,10 +1593,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringUnicode(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1784,10 +1740,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringUrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1934,10 +1886,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForStringEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2098,10 +2046,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForStringNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2252,10 +2196,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForEnumValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2405,10 +2345,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForEnumNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2569,10 +2505,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForByteMultiByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2719,10 +2651,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForByteEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2883,10 +2811,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForByteNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3033,10 +2957,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForDateValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3188,10 +3108,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForDateNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3338,10 +3254,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3492,10 +3404,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForDateTimeNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3655,10 +3563,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForBase64Url(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3821,10 +3725,6 @@ namespace Fixtures.Url
                 {
                     await HandleDefaultErrorResponseForArrayCsvInPath(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3973,10 +3873,6 @@ namespace Fixtures.Url
                 try
                 {
                     await HandleDefaultErrorResponseForUnixTimeUrl(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

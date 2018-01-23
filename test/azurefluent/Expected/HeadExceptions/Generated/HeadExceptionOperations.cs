@@ -141,10 +141,6 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 {
                     await HandleDefaultErrorResponseForHead200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -333,10 +329,6 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 {
                     await HandleDefaultErrorResponseForHead204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -524,10 +516,6 @@ namespace Fixtures.Azure.Fluent.HeadExceptions
                 try
                 {
                     await HandleDefaultErrorResponseForHead404(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

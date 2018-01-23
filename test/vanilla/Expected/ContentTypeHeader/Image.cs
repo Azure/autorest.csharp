@@ -140,10 +140,6 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForA(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -316,10 +312,6 @@ namespace Fixtures.ContentTypeHeader
                 {
                     await HandleDefaultErrorResponseForB(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -491,10 +483,6 @@ namespace Fixtures.ContentTypeHeader
                 try
                 {
                     await HandleDefaultErrorResponseForC(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -671,10 +659,6 @@ namespace Fixtures.ContentTypeHeader
                 try
                 {
                     await HandleDefaultErrorResponseForD(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

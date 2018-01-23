@@ -123,10 +123,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNotExpandable(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -299,10 +295,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutNotExpandable(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -450,10 +442,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetReferenced(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -627,10 +615,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutReferenced(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -777,10 +761,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetReferencedConstant(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -960,10 +940,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForPutReferencedConstant(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

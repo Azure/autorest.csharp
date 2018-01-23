@@ -866,10 +866,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPut200Succeeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1091,10 +1087,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPut200SucceededNoState(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1319,10 +1311,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPut202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1546,10 +1534,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPut201CreatingSucceeded200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1794,10 +1778,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPut200UpdatingSucceeded204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2021,10 +2001,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPut201CreatingFailed200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2269,10 +2245,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPut200Acceptedcanceled200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2495,10 +2467,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutNoHeaderInRetry(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2736,10 +2704,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2975,10 +2939,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncNoRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3216,10 +3176,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRetryFailed(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3455,10 +3411,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncNoRetrycanceled(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3696,10 +3648,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncNoHeaderInRetry(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3934,10 +3882,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutNonResource(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4158,10 +4102,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncNonResource(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4389,10 +4329,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutSubResource(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4619,10 +4555,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncSubResource(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4835,10 +4767,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteProvisioning202Accepted200Succeeded(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5085,10 +5013,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteProvisioning202DeletingFailed200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5334,10 +5258,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteProvisioning202Deletingcanceled200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5577,10 +5497,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDelete204Succeeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5773,10 +5689,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDelete202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6003,10 +5915,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDelete202NoRetry204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6229,10 +6137,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteNoHeaderInRetry(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6435,10 +6339,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncNoHeaderInRetry(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6643,10 +6543,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6849,10 +6745,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncNoRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7057,10 +6949,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRetryFailed(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -7263,10 +7151,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRetrycanceled(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7473,10 +7357,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPost200WithPayload(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7717,10 +7597,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPost202Retry200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -7936,10 +7812,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPost202NoRetry204(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -8177,10 +8049,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8417,10 +8285,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncNoRetrySucceeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8654,10 +8518,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRetryFailed(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8871,10 +8731,6 @@ namespace Fixtures.Azure.Fluent.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRetrycanceled(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

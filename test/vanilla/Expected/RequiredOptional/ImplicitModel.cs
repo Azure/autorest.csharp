@@ -133,10 +133,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetRequiredPath(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -307,10 +303,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPutOptionalQuery(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -466,10 +458,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPutOptionalHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -623,10 +611,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPutOptionalBody(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -782,10 +766,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForGetRequiredGlobalPath(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -964,10 +944,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForGetRequiredGlobalQuery(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1134,10 +1110,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForGetOptionalGlobalQuery(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

@@ -122,10 +122,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -291,10 +287,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -462,10 +454,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForGetOverflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -631,10 +619,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnderflow(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -806,10 +790,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutUtcMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -956,10 +936,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1126,10 +1102,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1302,10 +1274,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalPositiveOffsetMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1453,10 +1421,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1624,10 +1588,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1800,10 +1760,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalNegativeOffsetMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1951,10 +1907,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2122,10 +2074,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2297,10 +2245,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2447,10 +2391,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2622,10 +2562,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalPositiveOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2772,10 +2708,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalPositiveOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2947,10 +2879,6 @@ namespace Fixtures.BodyDateTime
                 {
                     await HandleDefaultErrorResponseForPutLocalNegativeOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3097,10 +3025,6 @@ namespace Fixtures.BodyDateTime
                 try
                 {
                     await HandleDefaultErrorResponseForGetLocalNegativeOffsetMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

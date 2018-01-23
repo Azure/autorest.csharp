@@ -122,10 +122,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -291,10 +287,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalidFloat(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -462,10 +454,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForGetInvalidDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -631,10 +619,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalidDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -806,10 +790,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -956,10 +936,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigFloat(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1131,10 +1107,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1281,10 +1253,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDouble(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1455,10 +1423,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDoublePositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1605,10 +1569,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDoublePositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1779,10 +1739,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDoubleNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1929,10 +1885,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDoubleNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2104,10 +2056,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2254,10 +2202,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2428,10 +2372,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimalPositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2578,10 +2518,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDecimalPositiveDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2752,10 +2688,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutBigDecimalNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2902,10 +2834,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetBigDecimalNegativeDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3077,10 +3005,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3227,10 +3151,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetSmallFloat(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3402,10 +3322,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3552,10 +3468,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetSmallDouble(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3727,10 +3639,6 @@ namespace Fixtures.BodyNumber
                 {
                     await HandleDefaultErrorResponseForPutSmallDecimal(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3877,10 +3785,6 @@ namespace Fixtures.BodyNumber
                 try
                 {
                     await HandleDefaultErrorResponseForGetSmallDecimal(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

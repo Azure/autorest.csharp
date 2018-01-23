@@ -123,10 +123,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -292,10 +288,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -463,10 +455,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetOverflowInt32(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -632,10 +620,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnderflowInt32(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -803,10 +787,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForGetOverflowInt64(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -972,10 +952,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnderflowInt64(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1147,10 +1123,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutMax32(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1301,10 +1273,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForPutMax64(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1457,10 +1425,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutMin32(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1612,10 +1576,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutMin64(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1762,10 +1722,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnixTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1937,10 +1893,6 @@ namespace Fixtures.CompositeBoolIntClient
                 {
                     await HandleDefaultErrorResponseForPutUnixTimeDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2087,10 +2039,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalidUnixTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2257,10 +2205,6 @@ namespace Fixtures.CompositeBoolIntClient
                 try
                 {
                     await HandleDefaultErrorResponseForGetNullUnixTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

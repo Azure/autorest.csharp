@@ -123,10 +123,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -292,10 +288,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -463,10 +455,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForGetOverflow(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -632,10 +620,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnderflow(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -807,10 +791,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForPutUtcMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -957,10 +937,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcLowercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1127,10 +1103,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcUppercaseMaxDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1302,10 +1274,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 {
                     await HandleDefaultErrorResponseForPutUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1452,10 +1420,6 @@ namespace Fixtures.BodyDateTimeRfc1123
                 try
                 {
                     await HandleDefaultErrorResponseForGetUtcMinDateTime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

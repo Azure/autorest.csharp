@@ -127,10 +127,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -299,10 +295,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerParameter(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -460,10 +452,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -640,10 +628,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -796,10 +780,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -971,10 +951,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalIntegerHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1139,10 +1115,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1311,10 +1283,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1486,10 +1454,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1666,10 +1630,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1835,10 +1795,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2010,10 +1966,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalStringHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2182,10 +2134,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2358,10 +2306,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostOptionalClassParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2537,10 +2481,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2721,10 +2661,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalClassProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2889,10 +2825,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3061,10 +2993,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayParameter(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3236,10 +3164,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3416,10 +3340,6 @@ namespace Fixtures.RequiredOptional
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayProperty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3585,10 +3505,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostRequiredArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3759,10 +3675,6 @@ namespace Fixtures.RequiredOptional
                 try
                 {
                     await HandleDefaultErrorResponseForPostOptionalArrayHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

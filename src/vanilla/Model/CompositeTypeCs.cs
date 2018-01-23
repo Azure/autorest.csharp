@@ -204,6 +204,16 @@ namespace AutoRest.CSharp.Model
             }
         }
 
+        public string DisambiguateExceptionPropertyName(string property)
+        {
+            // can be further extended to disambiguate more property names is necessary
+            switch(property.ToLower())
+            {
+                case "body": return property+"Property";
+                default : return property;
+            }
+        }
+
         public bool IsValueType => false;
         
     }

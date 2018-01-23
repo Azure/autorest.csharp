@@ -151,10 +151,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                             break;
                     }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -414,10 +410,6 @@ namespace Fixtures.AcceptanceTestsXmsErrorResponses
                             await HandleDefaultErrorResponseForDoSomething(_httpRequest, _httpResponse, (int)_statusCode);
                             break;
                     }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

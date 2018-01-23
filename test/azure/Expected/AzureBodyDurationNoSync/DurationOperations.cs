@@ -145,10 +145,6 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -363,10 +359,6 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 {
                     await HandleDefaultErrorResponseForPutPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -557,10 +549,6 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 try
                 {
                     await HandleDefaultErrorResponseForGetPositiveDuration(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -771,10 +759,6 @@ namespace Fixtures.Azure.AzureBodyDurationNoSync
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

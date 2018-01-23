@@ -123,10 +123,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -301,10 +297,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -451,10 +443,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -628,10 +616,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -779,10 +763,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetMbcs(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -957,10 +937,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutMbcs(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1109,10 +1085,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetWhitespace(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1288,10 +1260,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutWhitespace(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1438,10 +1406,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetNotProvided(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1609,10 +1573,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForGetBase64Encoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1778,10 +1738,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1966,10 +1922,6 @@ namespace Fixtures.BodyString
                 {
                     await HandleDefaultErrorResponseForPutBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2116,10 +2068,6 @@ namespace Fixtures.BodyString
                 try
                 {
                     await HandleDefaultErrorResponseForGetNullBase64UrlEncoded(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

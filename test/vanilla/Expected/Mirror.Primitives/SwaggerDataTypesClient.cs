@@ -243,10 +243,6 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForGetProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -435,10 +431,6 @@ namespace Fixtures.MirrorPrimitives
                 try
                 {
                     await HandleDefaultErrorResponseForPutProduct(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -629,10 +621,6 @@ namespace Fixtures.MirrorPrimitives
                 {
                     await HandleDefaultErrorResponseForPostProduct(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -821,10 +809,6 @@ namespace Fixtures.MirrorPrimitives
                 try
                 {
                     await HandleDefaultErrorResponseForPatchProduct(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

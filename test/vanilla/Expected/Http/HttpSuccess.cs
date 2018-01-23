@@ -119,10 +119,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -269,10 +265,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGet200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -448,10 +440,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -606,10 +594,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForPatch200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -766,10 +750,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost200(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -924,10 +904,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForDelete200(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1084,10 +1060,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut201(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1242,10 +1214,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForPost201(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1402,10 +1370,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1560,10 +1524,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForPatch202(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1720,10 +1680,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1879,10 +1835,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete202(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2026,10 +1978,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForHead204(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2186,10 +2134,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2344,10 +2288,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForPatch204(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2504,10 +2444,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2663,10 +2599,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForDelete204(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2810,10 +2742,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForHead404(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

@@ -404,10 +404,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -599,10 +595,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 try
                 {
                     await HandleDefaultErrorResponseForGetArray(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -823,10 +815,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1018,10 +1006,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 try
                 {
                     await HandleDefaultErrorResponseForGetDictionary(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1242,10 +1226,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 {
                     await HandleDefaultErrorResponseForPutResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1437,10 +1417,6 @@ namespace Fixtures.Azure.Fluent.AzureResource
                 try
                 {
                     await HandleDefaultErrorResponseForGetResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

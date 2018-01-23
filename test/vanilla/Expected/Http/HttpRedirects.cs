@@ -119,10 +119,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead300(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -282,10 +278,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGet300(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -463,10 +455,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead301(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -623,10 +611,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGet301(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -798,10 +782,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut301(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -959,10 +939,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead302(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1119,10 +1095,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGet302(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1294,10 +1266,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPatch302(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1468,10 +1436,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost303(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1629,10 +1593,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForHead307(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1789,10 +1749,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGet307(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1962,10 +1918,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPut307(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2133,10 +2085,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForPatch307(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2306,10 +2254,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForPost307(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2477,10 +2421,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForDelete307(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

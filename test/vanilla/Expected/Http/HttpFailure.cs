@@ -122,10 +122,6 @@ namespace Fixtures.Http
                 {
                     await HandleDefaultErrorResponseForGetEmptyError(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -291,10 +287,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGetNoModelError(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -464,10 +456,6 @@ namespace Fixtures.Http
                 try
                 {
                     await HandleDefaultErrorResponseForGetNoModelEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

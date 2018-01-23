@@ -25,7 +25,7 @@ regenExpected = (opts,done) ->
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
     
     args.push("--use=F:/artemp/rcm/autorest.modeler")
-    args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
+    #args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
 
     if (opts.addCredentials)
       args.push("--csharp.add-credentials=true")
@@ -85,7 +85,7 @@ regenExpectedConfigurations = (configFiles,done) ->
         args.push(arg);
     
     args.push("--use=F:/artemp/rcm/autorest.modeler")
-    args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
+    #args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
 
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)

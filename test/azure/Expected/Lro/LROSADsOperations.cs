@@ -659,10 +659,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutNonRetry400(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -904,10 +900,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutNonRetry201Creating400(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1148,10 +1140,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutNonRetry201Creating400InvalidJson(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1395,10 +1383,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetry400(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1619,10 +1603,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDeleteNonRetry400(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1823,10 +1803,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDelete202NonRetry400(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2030,10 +2006,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetry400(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2247,10 +2219,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostNonRetry400(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2462,10 +2430,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPost202NonRetry400(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2680,10 +2644,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRelativeRetry400(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2900,10 +2860,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutError201NoProvisioningStatePayload(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3147,10 +3103,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryNoStatus(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3387,10 +3339,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryNoStatusPayload(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3612,10 +3560,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDelete204Succeeded(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3805,10 +3749,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryNoStatus(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4023,10 +3963,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPost202NoLocation(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4240,10 +4176,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryNoPayload(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4460,10 +4392,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPut200InvalidJson(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4687,10 +4615,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryInvalidHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4928,10 +4852,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPutAsyncRelativeRetryInvalidJsonPolling(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5153,10 +5073,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginDelete202RetryInvalidHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5358,10 +5274,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryInvalidHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5565,10 +5477,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginDeleteAsyncRelativeRetryInvalidJsonPolling(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5782,10 +5690,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPost202RetryInvalidHeader(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6001,10 +5905,6 @@ namespace Fixtures.Azure.Lro
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryInvalidHeader(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6218,10 +6118,6 @@ namespace Fixtures.Azure.Lro
                 try
                 {
                     await HandleDefaultErrorResponseForBeginPostAsyncRelativeRetryInvalidJsonPolling(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

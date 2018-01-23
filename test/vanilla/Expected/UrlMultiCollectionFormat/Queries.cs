@@ -142,10 +142,6 @@ namespace Fixtures.UrlMultiCollectionFormat
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -312,10 +308,6 @@ namespace Fixtures.UrlMultiCollectionFormat
                 try
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -485,10 +477,6 @@ namespace Fixtures.UrlMultiCollectionFormat
                 try
                 {
                     await HandleDefaultErrorResponseForArrayStringMultiValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

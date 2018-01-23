@@ -123,10 +123,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -293,10 +289,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetInvalid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -462,10 +454,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -650,10 +638,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -800,10 +784,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -988,10 +968,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutBooleanTfft(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1138,10 +1114,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1309,10 +1281,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBooleanInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1478,10 +1446,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1666,10 +1630,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutIntegerValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1816,10 +1776,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1987,10 +1943,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetIntInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2156,10 +2108,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetLongValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2344,10 +2292,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutLongValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2494,10 +2438,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2665,10 +2605,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetLongInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2834,10 +2770,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3022,10 +2954,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutFloatValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3172,10 +3100,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3343,10 +3267,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetFloatInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3512,10 +3432,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3700,10 +3616,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDoubleValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3850,10 +3762,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4021,10 +3929,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDoubleInvalidString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4190,10 +4094,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetStringValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4378,10 +4278,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutStringValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4528,10 +4424,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetStringWithNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4698,10 +4590,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetStringWithInvalid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4870,10 +4758,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetUuidValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5060,10 +4944,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutUuidValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5210,10 +5090,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetUuidInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5380,10 +5256,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDateValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5568,10 +5440,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5718,10 +5586,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -5889,10 +5753,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6059,10 +5919,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6248,10 +6104,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateTimeValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6398,10 +6250,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6569,10 +6417,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDateTimeInvalidChars(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -6739,10 +6583,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -6928,10 +6768,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDateTimeRfc1123Valid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -7078,10 +6914,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7266,10 +7098,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutDurationValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -7417,10 +7245,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetByteValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7606,10 +7430,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutByteValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -7757,10 +7577,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetByteInvalidNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -7929,10 +7745,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetBase64Url(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8099,10 +7911,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8268,10 +8076,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetComplexEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -8440,10 +8244,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8611,10 +8411,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetComplexItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -8781,10 +8577,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -8970,10 +8762,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutComplexValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -9120,10 +8908,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetArrayNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -9291,10 +9075,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -9460,10 +9240,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetArrayItemNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -9631,10 +9407,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetArrayItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -9801,10 +9573,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -9990,10 +9758,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForPutArrayValid(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -10140,10 +9904,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDictionaryNull(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -10310,10 +10070,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDictionaryEmpty(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -10483,10 +10239,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -10655,10 +10407,6 @@ namespace Fixtures.BodyArray
                 {
                     await HandleDefaultErrorResponseForGetDictionaryItemEmpty(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -10826,10 +10574,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForGetDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -11015,10 +10759,6 @@ namespace Fixtures.BodyArray
                 try
                 {
                     await HandleDefaultErrorResponseForPutDictionaryValid(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

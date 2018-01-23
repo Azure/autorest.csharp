@@ -137,10 +137,6 @@ namespace Fixtures.AdditionalProperties
                 {
                     await HandleDefaultErrorResponseForPets(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)

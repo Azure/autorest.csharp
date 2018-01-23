@@ -78,7 +78,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             @:get
             @:{
-                @:return (string.IsNullOrEmpty(ErrorBody?.Message))? base.Message : ErrorBody.Message;
+                @:return (string.IsNullOrEmpty(Body?.Message))? base.Message : Body.Message;
             @:}
         @:}
         }
@@ -90,17 +90,17 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             @:get
             @:{
-                @:return ErrorBody?.@property.Name;
+                @:return Body?.@property.Name;
             @:}
         @:}
             }
             else
             {
-        @:public @property.ModelTypeName @property.Name 
+        @:public @property.ModelTypeName @(Model.DisambiguateExceptionPropertyName(@property.Name))
         @:{
             @:get
             @:{ 
-                @:return ErrorBody?.@property.Name ?? default(@property.ModelTypeName);
+                @:return Body?.@property.Name ?? default(@property.ModelTypeName);
             @:}
         @:}
             }

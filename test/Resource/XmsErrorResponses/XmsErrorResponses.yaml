@@ -27,21 +27,21 @@ paths:
           description: something something dark side
         '400':
           description: Bad request
-          x-ms-error-response: true
+          x-error-response: true
           content:
             application/json:
               schema:
                 type: string
         '404':
           description: Not found
-          x-ms-error-response: true
+          x-error-response: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundErrorBase'
         '501':
           description: Some unexpected error
-          x-ms-error-response: true
+          x-error-response: true
           content:
             application/json:
               schema:

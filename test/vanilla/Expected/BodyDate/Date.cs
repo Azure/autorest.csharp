@@ -123,10 +123,6 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetNull(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -292,10 +288,6 @@ namespace Fixtures.BodyDate
                 try
                 {
                     await HandleDefaultErrorResponseForGetInvalidDate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -463,10 +455,6 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForGetOverflowDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -632,10 +620,6 @@ namespace Fixtures.BodyDate
                 try
                 {
                     await HandleDefaultErrorResponseForGetUnderflowDate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -807,10 +791,6 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForPutMaxDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -957,10 +937,6 @@ namespace Fixtures.BodyDate
                 try
                 {
                     await HandleDefaultErrorResponseForGetMaxDate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1132,10 +1108,6 @@ namespace Fixtures.BodyDate
                 {
                     await HandleDefaultErrorResponseForPutMinDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1282,10 +1254,6 @@ namespace Fixtures.BodyDate
                 try
                 {
                     await HandleDefaultErrorResponseForGetMinDate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

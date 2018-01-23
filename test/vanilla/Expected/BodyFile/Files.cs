@@ -122,10 +122,6 @@ namespace Fixtures.BodyFile
                 {
                     await HandleDefaultErrorResponseForGetFile(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -278,10 +274,6 @@ namespace Fixtures.BodyFile
                 {
                     await HandleDefaultErrorResponseForGetFileLarge(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -433,10 +425,6 @@ namespace Fixtures.BodyFile
                 try
                 {
                     await HandleDefaultErrorResponseForGetEmptyFile(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

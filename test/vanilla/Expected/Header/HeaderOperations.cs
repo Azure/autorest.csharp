@@ -142,10 +142,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamExistingKey(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -289,10 +285,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseExistingKey(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -465,10 +457,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamProtectedKey(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -612,10 +600,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseProtectedKey(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -806,10 +790,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamInteger(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -975,10 +955,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseInteger(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1169,10 +1145,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamLong(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1338,10 +1310,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseLong(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1532,10 +1500,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamFloat(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1701,10 +1665,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseFloat(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1895,10 +1855,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamDouble(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2064,10 +2020,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseDouble(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2258,10 +2210,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamBool(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2427,10 +2375,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseBool(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2627,10 +2571,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamString(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -2798,10 +2738,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseString(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2992,10 +2928,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamDate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3161,10 +3093,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseDate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3357,10 +3285,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamDatetime(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3527,10 +3451,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseDatetime(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -3726,10 +3646,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamDatetimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -3896,10 +3812,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseDatetimeRfc1123(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4090,10 +4002,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamDuration(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4259,10 +4167,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseDuration(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4460,10 +4364,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamByte(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4629,10 +4529,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForResponseByte(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -4828,10 +4724,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForParamEnum(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -4999,10 +4891,6 @@ namespace Fixtures.Header
                 {
                     await HandleDefaultErrorResponseForResponseEnum(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -5160,10 +5048,6 @@ namespace Fixtures.Header
                 try
                 {
                     await HandleDefaultErrorResponseForCustomRequestId(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

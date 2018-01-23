@@ -478,10 +478,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForList(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -741,10 +737,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 {
                     await HandleDefaultErrorResponseForCreate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1003,10 +995,6 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                 try
                 {
                     await HandleDefaultErrorResponseForUpdate(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

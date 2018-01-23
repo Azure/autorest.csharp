@@ -231,10 +231,6 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -382,10 +378,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForGetArray(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -563,10 +555,6 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutWrappedArray(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -715,10 +703,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForGetWrappedArray(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -895,10 +879,6 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutDictionary(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1046,10 +1026,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForGetDictionary(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1226,10 +1202,6 @@ namespace Fixtures.ModelFlattening
                 {
                     await HandleDefaultErrorResponseForPutResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
                 catch(RestExceptionBase ex)
                 {
                     if (_shouldTrace)
@@ -1377,10 +1349,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForGetResourceCollection(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1563,10 +1531,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForPutSimpleProduct(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -1783,10 +1747,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForPostFlattenedSimpleProduct(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {
@@ -2026,10 +1986,6 @@ namespace Fixtures.ModelFlattening
                 try
                 {
                     await HandleDefaultErrorResponseForPutSimpleProductWithGrouping(_httpRequest, _httpResponse, (int)_statusCode);
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
                 }
                 catch(RestExceptionBase ex)
                 {

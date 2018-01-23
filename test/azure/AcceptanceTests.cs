@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 
                 Assert.Equal("Succeeded",
                     client.LROs.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
-                var exception =
+                CloudException exception =
                     Assert.Throws<CloudLroException>(
                         () => client.LROs.Put201CreatingFailed200(new Product { Location = "West US" }));
 
@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Contains("Long running operation failed with status 'Failed'", exception.Message,
                     StringComparison.Ordinal);
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
-                exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetryFailed());
+                exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
                 Assert.Contains("Internal Server Error", exception.Message,
                     StringComparison.Ordinal);
                 Assert.NotNull(exception.ErrorBody);
@@ -276,13 +276,13 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
-                var exception =
+                CloudException exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
 
                 Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
                 exception =
-                    Assert.Throws<CloudLroException>(
+                    Assert.Throws<CloudException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
