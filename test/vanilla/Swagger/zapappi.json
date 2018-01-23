@@ -1,10 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1",
-    "title": "api.zapappi.com"
+    "version": "test",
+    "title": "api.zapappi.com",
+    "description": "This is a test API."
   },
-  "host": "zapappi-publicapi-staging.azurewebsites.net",
+  "host": "localhost",
   "schemes": [
     "https"
   ],
