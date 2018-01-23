@@ -1501,8 +1501,6 @@ namespace Zapappi.Client
         /// <param name='id'>
         /// The Id of Port Request
         /// </param>
-        /// <param name='file'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1524,15 +1522,11 @@ namespace Zapappi.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<bool?>> AddPortFileWithHttpMessagesAsync(string subscriptionId, int id, Stream file, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<bool?>> AddPortFileWithHttpMessagesAsync(string subscriptionId, int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
-            }
-            if (file == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "file");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1543,7 +1537,6 @@ namespace Zapappi.Client
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("subscriptionId", subscriptionId);
                 tracingParameters.Add("id", id);
-                tracingParameters.Add("file", file);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "AddPortFile", tracingParameters);
             }
@@ -1574,13 +1567,6 @@ namespace Zapappi.Client
 
             // Serialize Request
             string _requestContent = null;
-            var values = new List<KeyValuePair<string, string>>();
-            if(file != null)
-            {
-                values.Add(new KeyValuePair<string,string>("file", file));
-            }
-            var _formContent = new FormUrlEncodedContent(values);
-            _httpRequest.Content = _formContent;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1869,8 +1855,6 @@ namespace Zapappi.Client
         /// <param name='loaId'>
         /// The Id of the Contact to add the file to
         /// </param>
-        /// <param name='file'>
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1892,15 +1876,11 @@ namespace Zapappi.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<bool?>> AddPortLoaFileWithHttpMessagesAsync(string subscriptionId, int id, int loaId, Stream file, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<bool?>> AddPortLoaFileWithHttpMessagesAsync(string subscriptionId, int id, int loaId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "subscriptionId");
-            }
-            if (file == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "file");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1912,7 +1892,6 @@ namespace Zapappi.Client
                 tracingParameters.Add("subscriptionId", subscriptionId);
                 tracingParameters.Add("id", id);
                 tracingParameters.Add("loaId", loaId);
-                tracingParameters.Add("file", file);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "AddPortLoaFile", tracingParameters);
             }
@@ -1944,13 +1923,6 @@ namespace Zapappi.Client
 
             // Serialize Request
             string _requestContent = null;
-            var values = new List<KeyValuePair<string, string>>();
-            if(file != null)
-            {
-                values.Add(new KeyValuePair<string,string>("file", file));
-            }
-            var _formContent = new FormUrlEncodedContent(values);
-            _httpRequest.Content = _formContent;
             // Set Credentials
             if (Client.Credentials != null)
             {

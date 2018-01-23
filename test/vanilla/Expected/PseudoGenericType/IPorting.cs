@@ -10,7 +10,6 @@ namespace Zapappi.Client
     using Models;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -278,8 +277,6 @@ namespace Zapappi.Client
         /// <param name='id'>
         /// The Id of Port Request
         /// </param>
-        /// <param name='file'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -295,7 +292,7 @@ namespace Zapappi.Client
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<bool?>> AddPortFileWithHttpMessagesAsync(string subscriptionId, int id, Stream file, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<bool?>> AddPortFileWithHttpMessagesAsync(string subscriptionId, int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Add an LOA to a specified port request
         /// </summary>
@@ -346,8 +343,6 @@ namespace Zapappi.Client
         /// <param name='loaId'>
         /// The Id of the Contact to add the file to
         /// </param>
-        /// <param name='file'>
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -363,7 +358,7 @@ namespace Zapappi.Client
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<bool?>> AddPortLoaFileWithHttpMessagesAsync(string subscriptionId, int id, int loaId, Stream file, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<bool?>> AddPortLoaFileWithHttpMessagesAsync(string subscriptionId, int id, int loaId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Generate an LOA file for a specified port request
         /// </summary>

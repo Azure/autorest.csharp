@@ -81,7 +81,7 @@ namespace Zapappi.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<PagedResponse>> GetContactsWithHttpMessagesAsync(string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<PagedResponse<ContactsModel>>> GetContactsWithHttpMessagesAsync(string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
             {
@@ -181,7 +181,7 @@ namespace Zapappi.Client
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<PagedResponse>();
+            var _result = new HttpOperationResponse<PagedResponse<ContactsModel>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -190,7 +190,7 @@ namespace Zapappi.Client
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<PagedResponse>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<PagedResponse<ContactsModel>>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

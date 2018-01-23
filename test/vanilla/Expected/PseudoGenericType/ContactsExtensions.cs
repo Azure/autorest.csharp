@@ -32,7 +32,7 @@ namespace Zapappi.Client
             /// <param name='country'>
             /// The country of the contact
             /// </param>
-            public static PagedResponse GetContacts(this IContacts operations, string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?))
+            public static PagedResponse<ContactsModel> GetContacts(this IContacts operations, string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?))
             {
                 return operations.GetContactsAsync(subscriptionId, take, skip, country).GetAwaiter().GetResult();
             }
@@ -57,7 +57,7 @@ namespace Zapappi.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<PagedResponse> GetContactsAsync(this IContacts operations, string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<PagedResponse<ContactsModel>> GetContactsAsync(this IContacts operations, string subscriptionId, int take, int skip, System.Guid? country = default(System.Guid?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetContactsWithHttpMessagesAsync(subscriptionId, take, skip, country, null, cancellationToken).ConfigureAwait(false))
                 {

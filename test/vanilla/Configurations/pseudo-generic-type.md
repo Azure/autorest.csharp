@@ -14,17 +14,22 @@ csharp: # just having a 'csharp' node enables the use of the csharp generator.
     transform: >-
       $.name.raw = $.name.raw.replace('_', '<').replace('_', '>');    /* C#-ify generic name */
       $.name.fixed = true;                                            /* prevent sanitizing that name */
-      if ($.name.raw.includes("ContactsModel"))
+      if ($.name.raw.includes("<ContactsModel>"))
       {
-        $.name.raw = $.name.raw.replace('<ContactsModel>', '');
+        $.name.raw = $.name.raw.replace('<ContactsModel>', 'Generic');
       }
       else
       {
         $.extensions = { "x-ms-external": true };                       /* don't generate the class definitions */
       }
-  - from: Models/PagedResponse.cs
+  - from: Models/PagedResponseGeneric.cs
     where: $
     transform: >-
-        $ = $.replace("PagedResponse", "PagedResponse<T>");
+        $ = $.replace("PagedResponseGeneric", "PagedResponse<T>");
+        $ = $.replace(/PagedResponseGeneric/g, "PagedResponse");
         $ = $.replace(/ContactsModel/g, "T");
+  - from: source-file-csharp
+    where: $
+    transform: >-
+        $ = $.replace(/PagedResponseGeneric/g, "PagedResponse<ContactsModel>");
 ```

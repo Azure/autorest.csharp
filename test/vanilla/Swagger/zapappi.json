@@ -1,1 +1,4671 @@
-{"swagger":"2.0","info":{"version":"v1","title":"api.zapappi.com"},"host":"zapappi-publicapi-staging.azurewebsites.net","schemes":["https"],"paths":{"/v1/{subscriptionId}/applications":{"get":{"tags":["Applications"],"summary":"Returns a list of ZapApp Applications under your account","operationId":"Applications_GetApplications","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/ApplicationModel"}}}}},"post":{"tags":["Applications"],"summary":"Adds a new Application to the Zapappi subscription","operationId":"Applications_AddApplication","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"name","in":"query","description":"","required":true,"type":"string"},{"name":"description","in":"query","description":"","required":true,"type":"string"},{"name":"enabled","in":"query","description":"","required":true,"type":"boolean"},{"name":"scriptBody","in":"query","description":"","required":true,"type":"string"},{"name":"scriptUrl","in":"query","description":"","required":true,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"format":"string","type":"string"}},"400":{"description":"Invalid subscription or application id"}}}},"/v1/{subscriptionId}/applications/{id}":{"get":{"tags":["Applications"],"summary":"Returns a specific Application based on the Id","operationId":"Applications_GetApplication","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/ApplicationModel"}}}},"put":{"tags":["Applications"],"summary":"Updates an existing Zapappi Application","operationId":"Applications_UpdateApplication","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"The subscription id the application is attached too","required":true,"type":"string","format":"string"},{"name":"appId","in":"query","description":"The application id","required":true,"type":"string","format":"string"},{"name":"description","in":"query","description":"The application description","required":true,"type":"string"},{"name":"enabled","in":"query","description":"Is the application enabled (call it be used to termiante calls)","required":true,"type":"boolean"},{"name":"scriptBody","in":"query","description":"The script used to process the call","required":true,"type":"string"},{"name":"scriptUrl","in":"query","description":"The Url of your script (if set, ScriptBody won't be used)","required":true,"type":"string"},{"name":"id","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"type":"object"}},"404":{"description":"Invalid subscription or application id"}}}},"/v1/{subscriptionId}/applications/{id}/files":{"get":{"tags":["Applications"],"summary":"Returns a list of media files attached to this Application","operationId":"Applications_GetApplicationFiles","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Application Id","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"Success","schema":{"type":"array","items":{"type":"string"}}},"404":{"description":"Invalid application id"}}}},"/v1/{subscriptionId}/applications/{id}/files/{filename}":{"delete":{"tags":["Applications"],"summary":"Deletes a media file attached to this Application","operationId":"Applications_DeleteApplicationFile","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Application Id","required":true,"type":"string","format":"string"},{"name":"filename","in":"path","description":"","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}}}},"/v1/{subscriptionId}/applications/{id}/callout":{"post":{"tags":["Applications"],"summary":"Creates a new outbound call request for this Application","operationId":"Applications_ApplicationCallout","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Application Id","required":true,"type":"string","format":"string"},{"name":"model","in":"body","description":"Callout details","required":true,"schema":{"$ref":"#/definitions/CalloutModel"}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/CalloutReturnModel"}}}}},"/v1/{subscriptionId}/applications/{id}/resources":{"get":{"tags":["Applications"],"summary":"Returns a list of Application Resources associated with the given Application","operationId":"Applications_GetApplicationResources","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/ResourceModel"}}}}},"post":{"tags":["Applications"],"summary":"Adds an Application Resource to the given Application","operationId":"Applications_AddApplicationResources","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":[],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"model","in":"body","description":"","required":true,"schema":{"$ref":"#/definitions/ResourceModel"}}],"responses":{"200":{"description":"Success"}}}},"/v1/{subscriptionId}/applications/{id}/resources/{resourceId}":{"delete":{"tags":["Applications"],"summary":"Deletes an Application Resource from the given Application","operationId":"Applications_DeleteApplicationResources","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"resourceId","in":"path","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}}}},"/v1/{subscriptionId}/applications/providers":{"get":{"tags":["Applications"],"summary":"Gets a list of SIP Provider Accounts connected to your ZapApp platform","operationId":"Applications_GetSIPProviders","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/SIPProviderModel"}}}}}},"/v1/{subscriptionId}/applications/{id}/cdr":{"get":{"tags":["Applications"],"summary":"Returns call records for the given application","operationId":"Applications_GetApplicationCDR","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"skip","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"startDate","in":"query","description":"","required":false,"type":"string","format":"date-time"},{"name":"endDate","in":"query","description":"","required":false,"type":"string","format":"date-time"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/ApplicationCDRModel"}}}}}},"/v1/{subscriptionId}/applications/deploy":{"post":{"tags":["Applications"],"summary":"","operationId":"Applications_DeployApplication","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"manifestUrl","in":"query","description":"","required":true,"type":"string"},{"name":"applicationName","in":"query","description":"","required":true,"type":"string"},{"name":"applicationDescription","in":"query","description":"","required":true,"type":"string"},{"name":"configurationValues","in":"body","description":"","required":true,"schema":{"type":"object","additionalProperties":{"type":"string"}}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/ApplicationModel"}}}}},"/v1/{subscriptionId}/applications/{id}/KeyValuePairs":{"get":{"tags":["Applications"],"summary":"Returns all the Key Value Pairs for a given Application","operationId":"Applications_GetApplicationKeyValuePairs","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"Subscription Id","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"Application Id","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/KeyValuePairModel"}}}}}},"/v1/{subscriptionId}/contacts":{"get":{"tags":["Contacts"],"summary":"Get a list of contacts","operationId":"Contacts_GetContacts","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"},{"name":"country","in":"query","description":"The country of the contact","required":false,"type":"string","format":"uuid"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[ContactsModel]"}}}},"post":{"tags":["Contacts"],"summary":"Add a new contact","operationId":"Contacts_AddContact","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"building","in":"query","required":true,"type":"string"},{"name":"city","in":"query","required":true,"type":"string"},{"name":"street","in":"query","required":true,"type":"string"},{"name":"postcode","in":"query","required":true,"type":"string"},{"name":"company","in":"query","required":false,"type":"string"},{"name":"title","in":"query","required":false,"type":"string"},{"name":"first_name","in":"query","required":false,"type":"string"},{"name":"last_name","in":"query","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/ContactsModel"}}}}},"/v1/{subscriptionId}/contacts/{id}":{"get":{"tags":["Contacts"],"summary":"Get a contact","operationId":"Contacts_GetContact","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"Get specific contact","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/ContactsModel"}}}}},"/v1/domains":{"get":{"tags":["Domains"],"summary":"Returns a list of domains associated with your services","operationId":"Domains_GetDomains","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"query","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/CustomerDomain"}}}}}},"/v1/{subscriptionId}/inbound/endpoints":{"get":{"tags":["Inbound"],"summary":"Get Endpoints from Inbound Platform","operationId":"Inbound_GetEndpoints","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"search","in":"query","description":"","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[EndpointViewModel]"}}}}},"/v1/{subscriptionId}/inbound/endpoints/simple/{endpointId}":{"get":{"tags":["Inbound"],"summary":"Get Simple Endpoint Details","operationId":"Inbound_GetSimpleEndpoint","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"endpointId","in":"path","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SimpleEndpointModel"}}}}},"/v1/{subscriptionId}/inbound/endpoints/simple":{"put":{"tags":["Inbound"],"summary":"Update Simple Endpoint","operationId":"Inbound_UpdateSimpleEndpoint","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"model","in":"body","description":"","required":true,"schema":{"$ref":"#/definitions/SimpleEndpointModel"}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SimpleEndpointModel"}}}},"post":{"tags":["Inbound"],"summary":"Create Simple Endpoint","operationId":"Inbound_CreateSimpleEndpoint","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"description","in":"query","required":true,"type":"string"},{"name":"forwardUri","in":"query","required":true,"type":"string"},{"name":"username","in":"query","required":false,"type":"string"},{"name":"password","in":"query","required":false,"type":"string"},{"name":"proxyUri","in":"query","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SimpleEndpointModel"}}}}},"/v1/{subscriptionId}/inbound/mappings":{"get":{"tags":["Inbound"],"summary":"Get Mappings from Inbound Platform","operationId":"Inbound_GetMappings","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"search","in":"query","description":"","required":false,"type":"string"},{"name":"withoutEndpoint","in":"query","description":"","required":false,"type":"boolean"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[EndpointMappingViewModel]"}}}},"post":{"tags":["Inbound"],"summary":"","operationId":"Inbound_AddMapping","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"domain","in":"query","description":"","required":true,"type":"string"},{"name":"match","in":"query","description":"","required":true,"type":"string"},{"name":"endpointId","in":"query","description":"","required":true,"type":"string","format":"string"},{"name":"isDefault","in":"query","description":"","required":true,"type":"boolean"},{"name":"cvar1","in":"query","description":"","required":true,"type":"string"},{"name":"cvar2","in":"query","description":"","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/EndpointMappingViewModel"}}}}},"/v1/{subscriptionId}/inbound/mappings/{id}":{"get":{"tags":["Inbound"],"summary":"Get a specific Mapping from Inbound Platform by Id","operationId":"Inbound_GetMapping","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"string","format":"uuid"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/EndpointMappingViewModel"}}}}},"/v1/{subscriptionId}/inbound/mappings/{Id}":{"put":{"tags":["Inbound"],"summary":"","operationId":"Inbound_UpdateMapping","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"Id","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"endpointId","in":"query","description":"","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/EndpointMappingViewModel"}}}}},"/v1/{subscriptionId}/numbers":{"get":{"tags":["Numbers"],"summary":"Returns a list of the numbers under the given subscription","operationId":"Numbers_ExistingNumbers","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"skip","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"take","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"countryId","in":"query","description":"","required":false,"type":"string","format":"uuid"},{"name":"search","in":"query","description":"","required":false,"type":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/TelephoneNumberModel"}}}}},"post":{"tags":["Numbers"],"summary":"","operationId":"Numbers_PurchaseNumbers","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"countryId","in":"query","description":"","required":true,"type":"string","format":"string"},{"name":"numberType","in":"query","description":"","required":true,"type":"string","enum":["Any","Local","National","Mobile","PremiumRate","Freephone"]},{"name":"areaId","in":"query","description":"","required":true,"type":"string","format":"string"},{"name":"numberQty","in":"query","description":"","required":true,"type":"integer","format":"int32"},{"name":"description","in":"query","description":"","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/TelephoneNumberModel"}}}}}},"/v1/{subscriptionId}/numbers/{numberId}":{"get":{"tags":["Numbers"],"summary":"Returns a specific number for the given subscription","operationId":"Numbers_ExistingNumber","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"Id","in":"query","description":"","required":true,"type":"string","format":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"},{"name":"numberId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/TelephoneNumberModel"}}}}},"/v1/{subscriptionId}/numbers/countries":{"get":{"tags":["Numbers"],"summary":"Returns a list of countries for which numbers are available","operationId":"Numbers_GetCountries","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/Country"}}}}}},"/v1/{subscriptionId}/numbers/states/{countryId}":{"get":{"tags":["Numbers"],"summary":"Returns a list of states available for a given country","operationId":"Numbers_GetStatesByCountry","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"countryId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/State"}}}}}},"/v1/{subscriptionId}/numbers/areas/{countryId}/{stateId}":{"get":{"tags":["Numbers"],"summary":"Returns a list of Areas available for a given State and Country","operationId":"Numbers_GetAreasByStateAndCountry","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"countryId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"stateId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"numberType","in":"query","description":"","required":true,"type":"string","enum":["Any","Local","National","Mobile","PremiumRate","Freephone"]},{"name":"subscriptionId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/Area"}}}}}},"/v1/{subscriptionId}/numbers/areas/{countryId}":{"get":{"tags":["Numbers"],"summary":"Returns a list of Areas available for a given Country","operationId":"Numbers_GetAreasByCountry","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"countryId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"numberType","in":"query","description":"","required":true,"type":"string","enum":["Any","Local","National","Mobile","PremiumRate","Freephone"]},{"name":"subscriptionId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/Area"}}}}}},"/v1/{subscriptionId}/numbers/{number}/endpoint/sms":{"post":{"tags":["Numbers"],"summary":"Set the SMS Endoint for the given number","operationId":"Numbers_SetSMSEndpoint","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"numberId","in":"query","description":"The UniqueID of the number","required":true,"type":"string","format":"string"},{"name":"endpointType","in":"query","description":"The endpoint type that daa should be sent to","required":true,"type":"string","enum":["None","EMail","HTTPPost","HTTPGet"]},{"name":"data","in":"query","description":"Data for the endpoint type (E.g. Url or EMail Address)","required":false,"type":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"},{"name":"number","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}}}},"/v1/{subscriptionId}/porting":{"get":{"tags":["Porting"],"summary":"Get your port requests as a paged response","operationId":"Porting_GetPortRequests","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[PortModel]"}}}},"post":{"tags":["Porting"],"summary":"Create a new port request","operationId":"Porting_CreatePortRequest","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"reference","in":"query","description":"User Reference for the Port Request","required":true,"type":"string"},{"name":"type","in":"query","description":"Number Type for the Port Request","required":true,"type":"string","enum":["Geo","NonGeo","Mobile","Freephone"]},{"name":"countryId","in":"query","description":"Country of the Port Request","required":true,"type":"string","format":"string"},{"name":"billingNumber","in":"query","description":"The billing number for this Port Request","required":false,"type":"string"},{"name":"requestedPortDate","in":"query","description":"Specify a preferred porting date","required":false,"type":"string","format":"date-time"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PortModel"}}}}},"/v1/{subscriptionId}/porting/{id}":{"get":{"tags":["Porting"],"summary":"Get a specific port request","operationId":"Porting_GetPortRequest","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id for the Port Request","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PortModel"}}}},"put":{"tags":["Porting"],"summary":"Update the specified port request","operationId":"Porting_UpdatePortRequest","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"billingNumber","in":"query","description":"The billing number of the Port Request","required":true,"type":"string"},{"name":"reference","in":"query","description":"The reference of the Port Request","required":false,"type":"string"},{"name":"requestedPortDate","in":"query","description":"Specify a preferred porting date","required":false,"type":"string","format":"date-time"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}},"delete":{"tags":["Porting"],"summary":"Delete the specified port request","operationId":"Porting_DeletePortRequest","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}}},"/v1/{subscriptionId}/porting/{id}/numbers":{"get":{"tags":["Porting"],"summary":"Get numbers associated with a specific port request","operationId":"Porting_GetPortNumbers","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id for the Port Request","required":true,"type":"integer","format":"int32"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"},{"name":"search","in":"query","description":"Find a specific number details","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[RequestNumberModel]"}}}},"post":{"tags":["Porting"],"summary":"Add numbers to a port request","operationId":"Porting_AddPortNumbers","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"numbers","in":"body","description":"List of numbers to add to the Port Request","required":true,"schema":{"type":"array","items":{"type":"string"}}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[RequestNumberModel]"}}}},"delete":{"tags":["Porting"],"operationId":"Porting_RemovePortNumbers","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","required":true,"type":"integer","format":"int32"},{"name":"numbers","in":"body","required":true,"schema":{"type":"array","items":{"format":"int32","type":"integer"}}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[RequestNumberModel]"}}}}},"/v1/{subscriptionId}/porting/{id}/submit":{"post":{"tags":["Porting"],"summary":"Submit a specified port request","operationId":"Porting_SubmitPortRequest","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}}},"/v1/{subscriptionId}/porting/{id}/billing":{"post":{"tags":["Porting"],"summary":"Add a Billing file to a specified port request","operationId":"Porting_AddPortFile","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"file","in":"formData","required":true,"type":"file"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}}},"/v1/{subscriptionId}/porting/{id}/loa":{"post":{"tags":["Porting"],"summary":"Add an LOA to a specified port request","operationId":"Porting_AddPortLoa","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"customerContactId","in":"query","description":"The Id of the customer contact","required":true,"type":"string","format":"string"},{"name":"requesterContactId","in":"query","description":"The Id of the requester contact","required":true,"type":"string","format":"string"},{"name":"siteContactId","in":"query","description":"The Id of the site contact","required":true,"type":"string","format":"string"},{"name":"losingProviderId","in":"query","description":"The Id of the losing provider","required":true,"type":"string","format":"string"},{"name":"otherProvider","in":"query","description":"If provider is missing","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/LoaModel"}}}}},"/v1/{subscriptionId}/porting/{id}/loa/{loaId}":{"post":{"tags":["Porting"],"summary":"Add a file to an LOA for a specified port request","operationId":"Porting_AddPortLoaFile","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"loaId","in":"path","description":"The Id of the Contact to add the file to","required":true,"type":"integer","format":"int32"},{"name":"file","in":"formData","required":true,"type":"file"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}}},"/v1/{subscriptionId}/porting/{id}/loa/generate":{"post":{"tags":["Porting"],"summary":"Generate an LOA file for a specified port request","operationId":"Porting_GeneratePortLoaFile","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/LoaModel"}}}}},"/v1/{subscriptionId}/porting/{id}/message":{"get":{"tags":["Porting"],"summary":"Get a list of messages for a specified port request","operationId":"Porting_GetPortMessages","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}},"post":{"tags":["Porting"],"summary":"Add a message to a specified port request","operationId":"Porting_AddPortMessage","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"The Id of Port Request","required":true,"type":"integer","format":"int32"},{"name":"message","in":"query","description":"The message to add to the Port Request","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"boolean"}}}}},"/v1/{subscriptionId}/porting/countries":{"get":{"tags":["Porting"],"summary":"Get a list of porting countries","operationId":"Porting_GetPortingCountries","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/CountryModel"}}}}}},"/v1/{subscriptionId}/porting/countries/{countryId}/providers":{"get":{"tags":["Porting"],"summary":"Get a list of porting providers for a country","operationId":"Porting_GetPortingProviders","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"countryId","in":"path","required":true,"type":"string","format":"string"},{"name":"type","in":"query","description":"The number type","required":true,"type":"string","enum":["National","Mobile","Local","Freephone"]}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[ProviderModel]"}}}}},"/v1/{subscriptionId}/porting/webhook":{"post":{"tags":["Porting"],"summary":"Add a webhook","operationId":"Porting_AddPortingWebhook","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"url","in":"query","description":"The url of the webhook","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/RequestWebhookModel"}}}}},"/v1/{subscriptionId}/sms":{"post":{"tags":["SMS"],"summary":"Sends an SMS Message to the given destination","operationId":"SMS_SendSms","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"source","in":"query","description":"","required":true,"type":"string"},{"name":"destination","in":"query","description":"","required":true,"type":"string"},{"name":"message","in":"query","description":"","required":true,"type":"string"},{"name":"webhook","in":"query","description":"","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SMSResponseModel"}}}}},"/v1/{subscriptionId}/sms/queue/{id}":{"get":{"tags":["SMS"],"summary":"Returns all SMSs currently in your numbers queue","operationId":"SMS_GetSmsQueue","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"numberId","in":"query","required":true,"type":"string","format":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"},{"name":"id","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/SMSQueueItem"}}}},"deprecated":true}},"/v1/{subscriptionId}/sms/queue/{id}/{messageId}":{"delete":{"tags":["SMS"],"summary":"Deletes a specific SMS from the queue","operationId":"SMS_GetSmsFromQueue","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"id","in":"path","description":"","required":true,"type":"string"},{"name":"entryId","in":"query","description":"","required":true,"type":"string","format":"string"},{"name":"subscriptionId","in":"path","required":true,"type":"string"},{"name":"messageId","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}},"deprecated":true}},"/v1/{subscriptionId}/sms/log":{"get":{"tags":["SMS"],"summary":"Returns the SMS Log for the given Subscription Id","operationId":"SMS_GetSmsLog","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"","required":false,"type":"integer","format":"int32"},{"name":"messageId","in":"query","description":"","required":false,"type":"string"},{"name":"destination","in":"query","description":"","required":false,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/SmsCdrEntry"}}}}}},"/v1/{subscriptionId}/trunks":{"get":{"tags":["Trunks"],"summary":"Get your SIP Trunks as a PagedResponse","operationId":"Trunks_GetTrunks","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[SipTrunkModel]"}}}},"post":{"tags":["Trunks"],"summary":"Create a new SIP Trunk","operationId":"Trunks_CreateTrunk","consumes":[],"produces":["application/json","text/json"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"description","in":"query","required":true,"type":"string"},{"name":"endpointId","in":"query","required":true,"type":"string","format":"string"},{"name":"autoCreateEndpoint","in":"query","required":true,"type":"boolean"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/NewSipTrunkResponseModel"}}}}},"/v1/{subscriptionId}/trunks/{id}":{"get":{"tags":["Trunks"],"summary":"Get a specific SIP Trunk by Id","operationId":"Trunks_GetTrunk","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SipTrunkModel"}}}},"put":{"tags":["Trunks"],"summary":"Update SIP Trunk","operationId":"Trunks_UpdateTrunk","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"SIP Trunk ID to get endpoints for","required":true,"type":"integer","format":"int32"},{"name":"model","in":"body","description":"Model used to update Trunk","required":true,"schema":{"$ref":"#/definitions/UpdateSIPTrunkModel"}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SipTrunkModel"}}}}},"/v1/{subscriptionId}/trunks/{id}/Endpoints":{"get":{"tags":["Trunks"],"summary":"Return PagedResponse of SIP Trunk Endpoints (IP Addresses)","operationId":"Trunks_GetTrunkEndpoints","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"SIP Trunk ID to get endpoints for","required":true,"type":"integer","format":"int32"},{"name":"take","in":"query","description":"Number of items to return","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"Number of item to skip over","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[SipTrunkEndpointModel]"}}}},"post":{"tags":["Trunks"],"summary":"Create a new SIP Trunk Endpoint IP Address","operationId":"Trunks_CreateTrunkEndpoint","consumes":["application/json","text/json","application/xml","text/xml","application/x-www-form-urlencoded"],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"SIP Trunk Id","required":true,"type":"integer","format":"int32"},{"name":"model","in":"body","description":"Endpoint Model","required":true,"schema":{"$ref":"#/definitions/NewSipTrunkEndpointModel"}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SipTrunkEndpointModel"}}}},"delete":{"tags":["Trunks"],"summary":"Delete the specified SIP Trunk Endpoint","operationId":"Trunks_DeleteTrunkEndpoint","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"SIP Trunk Id","required":true,"type":"integer","format":"int32"},{"name":"endpointId","in":"query","description":"Endpoint Id","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}}}},"/v1/{subscriptionId}/trunks/{id}/Endpoints/{endpointId}":{"get":{"tags":["Trunks"],"summary":"Get specific SIP Trunk endpoint","operationId":"Trunks_GetTrunkEndpoint","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"SIP Trunk Id","required":true,"type":"integer","format":"int32"},{"name":"endpointId","in":"path","description":"Endpoint Id","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/SipTrunkEndpointModel"}}}}},"/v1/{subscriptionId}/trunks/{id}/restrictions":{"get":{"tags":["Trunks"],"summary":"Returns a list of all restrictions on the trunk (Blacklist and Whitelist items)","operationId":"Trunks_GetRestrictions","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"Trunk Id","required":true,"type":"integer","format":"int32"},{"name":"take","in":"query","description":"","required":true,"type":"integer","format":"int32"},{"name":"skip","in":"query","description":"","required":true,"type":"integer","format":"int32"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/PagedResponse[SipTrunkRestrictionItemModel]"}}}},"post":{"tags":["Trunks"],"summary":"Adds a new restriction to the trunk (Blacklist and Whitelist items)","operationId":"Trunks_AddRestriction","consumes":[],"produces":["application/json","text/json","application/xml","text/xml"],"parameters":[{"name":"subscriptionId","in":"path","description":"","required":true,"type":"string","format":"string"},{"name":"id","in":"path","description":"Trunk Id","required":true,"type":"integer","format":"int32"},{"name":"prefix","in":"query","description":"Called number prefix","required":true,"type":"string"},{"name":"description","in":"query","description":"","required":true,"type":"string"},{"name":"blacklist","in":"query","description":"","required":true,"type":"boolean"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}}}}}},"definitions":{"ApplicationModel":{"type":"object","properties":{"AppId":{"format":"string","type":"string"},"ApplicationName":{"type":"string"},"Description":{"type":"string"},"Enabled":{"type":"boolean"},"ScriptSource":{"type":"string"},"ScriptSourceUrl":{"type":"string"},"SubscriptionId":{"format":"string","type":"string"},"ApplicationFQDN":{"type":"string"},"ApplicationSIPUri":{"type":"string"},"ApplicationTier":{"type":"string"}}},"CalloutModel":{"required":["CallerID","Destination","Provider","Timeout"],"type":"object","properties":{"CallerID":{"type":"string"},"Destination":{"type":"string"},"Provider":{"type":"string"},"Timeout":{"format":"int32","type":"integer"},"WebHook":{"type":"string"},"MessageGroup":{"type":"string"}}},"CalloutReturnModel":{"type":"object","properties":{"MessageId":{"format":"string","type":"string"},"IsAccepted":{"type":"boolean"},"Reason":{"type":"string"}}},"ResourceModel":{"type":"object","properties":{"ResourceId":{"format":"string","type":"string"},"Type":{"type":"string"},"ResourceKey":{"type":"string"}}},"SIPProviderModel":{"type":"object","properties":{"Id":{"type":"string"},"Username":{"type":"string"},"Password":{"type":"string"},"Server":{"type":"string"},"Provider":{"type":"string"},"Description":{"type":"string"}}},"ApplicationCDRModel":{"type":"object","properties":{"UniqueId":{"type":"string"},"CallDate":{"format":"date-time","type":"string"},"CallerID":{"type":"string"},"Source":{"type":"string"},"Destination":{"type":"string"},"Duration":{"format":"int32","type":"integer"},"BillingDuration":{"format":"int32","type":"integer"},"AnswerState":{"type":"string"},"Server":{"type":"string"}}},"KeyValuePairModel":{"type":"object","properties":{"ApplicationId":{"format":"string","type":"string"},"Name":{"type":"string"},"Value":{"type":"string"}}},"PagedResponse[ContactsModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/ContactsModel"}}}},"ContactsModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"Title":{"type":"string"},"FirstName":{"type":"string"},"LastName":{"type":"string"},"CompanyName":{"type":"string"},"Building":{"type":"string"},"Street":{"type":"string"},"City":{"type":"string"},"PostalCode":{"type":"string"},"CountryName":{"type":"string"},"CountryId":{"format":"string","type":"string"},"Created":{"format":"date-time","type":"string"},"SupplierRef":{"type":"string"},"Authorised":{"type":"boolean"},"NumberCount":{"format":"int32","type":"integer"}}},"CustomerDomain":{"type":"object","properties":{"Domain":{"type":"string"},"CustomerId":{"format":"int32","type":"integer"},"Created":{"format":"date-time","type":"string"},"Label":{"type":"string"},"Approved":{"type":"boolean"},"ServiceType":{"type":"string"},"ApprovalCode":{"type":"string"}}},"PagedResponse[EndpointViewModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/EndpointViewModel"}}}},"EndpointViewModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"CustomerId":{"format":"int32","type":"integer"},"SubscriptionId":{"format":"string","type":"string"},"Type":{"enum":["Simple","Dispatcher","Dynamic","LCR"],"type":"string"},"Description":{"type":"string"},"ProxyUri":{"type":"string"}}},"SimpleEndpointModel":{"type":"object","properties":{"Description":{"type":"string"},"ProxyUri":{"type":"string"},"ForwardUri":{"type":"string"},"Password":{"type":"string"},"Username":{"type":"string"}}},"PagedResponse[EndpointMappingViewModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/EndpointMappingViewModel"}}}},"EndpointMappingViewModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"CustomerId":{"format":"int32","type":"integer"},"SubscriptionId":{"format":"string","type":"string"},"Domain":{"type":"string"},"Match":{"type":"string"},"IsDomainDefault":{"type":"boolean"},"EndpointId":{"format":"uuid","type":"string","example":"00000000-0000-0000-0000-000000000000"},"CustomVar1":{"type":"string"},"CustomVar2":{"type":"string"},"CustomVar3":{"type":"string"},"CustomVar4":{"type":"string"}}},"TelephoneNumberModel":{"type":"object","properties":{"Number":{"type":"string"},"Created":{"format":"date-time","type":"string"},"NextBillingDate":{"format":"date-time","type":"string"},"Description":{"type":"string"},"CountryCode":{"type":"string"},"SMSEndpoint":{"type":"string"},"SMSEndpointType":{"type":"string"},"MappingId":{"format":"string","type":"string"},"Type":{"type":"string","readOnly":true},"NetworkType":{"type":"string","readOnly":true},"CountryName":{"type":"string","readOnly":true}}},"Country":{"type":"object","properties":{"Description":{"type":"string"},"DialCode":{"type":"string","readOnly":true},"HasRestrictions":{"type":"boolean"},"HasStates":{"type":"boolean"},"ISO2Digit":{"type":"string","readOnly":true},"ISO3Digit":{"type":"string","readOnly":true},"Id":{"format":"string","type":"string"}}},"State":{"type":"object","properties":{"Description":{"type":"string"},"ISO2Digit":{"type":"string","readOnly":true},"Id":{"format":"string","type":"string"}}},"Area":{"type":"object","properties":{"CountryId":{"format":"string","type":"string"},"Description":{"type":"string"},"DialCode":{"type":"string","readOnly":true},"Key":{"format":"string","type":"string"}}},"PagedResponse[PortModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/PortModel"}}}},"PortModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"Reference":{"type":"string"},"State":{"type":"string"},"PortDate":{"format":"date-time","type":"string"},"RequestedPortDate":{"format":"date-time","type":"string"},"Type":{"type":"string"},"LoaId":{"format":"int32","type":"integer"},"LoaURL":{"type":"string"},"BillURL":{"type":"string"},"BillingNumber":{"type":"string"},"CreatedDate":{"format":"date-time","type":"string"}}},"PagedResponse[RequestNumberModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/RequestNumberModel"}}}},"RequestNumberModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"RequestID":{"format":"int32","type":"integer"},"Number":{"type":"string"},"IsValid":{"type":"boolean"},"Reason":{"type":"string"},"MappingId":{"format":"uuid","type":"string","example":"00000000-0000-0000-0000-000000000000"}}},"LoaModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"RequestId":{"format":"int32","type":"integer"},"LoaName":{"type":"string"},"CustomerContactId":{"format":"string","type":"string"},"ContactName":{"type":"string"},"RequesterContactId":{"format":"string","type":"string"},"RequesterName":{"type":"string"},"SiteContactId":{"format":"string","type":"string"},"SiteName":{"type":"string"},"LosingProviderId":{"format":"string","type":"string"},"ProviderName":{"type":"string"},"LoaUrl":{"type":"string"}}},"CountryModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"ISO2Digit":{"type":"string"},"ISO3Digit":{"type":"string"},"Name":{"type":"string"},"DialCode":{"type":"string"},"HasStates":{"type":"boolean"},"HasRestrictions":{"type":"boolean"},"CanPort":{"type":"boolean"},"OnNet":{"type":"boolean"}}},"PagedResponse[ProviderModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/ProviderModel"}}}},"ProviderModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"ProviderName":{"type":"string"},"ProviderRef":{"type":"string"},"Type":{"enum":["National","Mobile","Local","Freephone"],"type":"string"},"Restrictions":{"type":"string"},"Aliases":{"type":"string"}}},"RequestWebhookModel":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"WebhookUrl":{"type":"string"},"CustomerId":{"format":"int32","type":"integer"}}},"SMSResponseModel":{"type":"object","properties":{"MessageId":{"format":"string","type":"string"},"Status":{"enum":["Queued","Sent","Delivered","Failed","SentToNetwork","NetworkAccepted"],"type":"string"}}},"SMSQueueItem":{"type":"object","properties":{"Number":{"type":"string"},"Id":{"format":"string","type":"string"},"MessageBody":{"type":"string"},"CLID":{"type":"string"},"DDI":{"type":"string"},"Received":{"format":"date-time","type":"string"},"UniqueID":{"type":"string"},"CroppedBody":{"type":"string","readOnly":true}}},"SmsCdrEntry":{"type":"object","properties":{"Id":{"format":"string","type":"string"},"MessageId":{"type":"string"},"SubscriptionId":{"format":"string","type":"string"},"Type":{"enum":["Outbound","Inbound"],"type":"string"},"Created":{"format":"date-time","type":"string"},"Sent":{"format":"date-time","type":"string"},"Delivered":{"format":"date-time","type":"string"},"Failed":{"format":"date-time","type":"string"},"Destination":{"type":"string"},"Source":{"type":"string"},"Message":{"type":"string"},"WebhookUrl":{"type":"string"},"Parts":{"format":"int32","type":"integer"},"Status":{"enum":["Received","Sent","Delivered","Failed"],"type":"string"},"StatusMessage":{"type":"string"},"OriginatingIP":{"type":"string"},"OriginatingService":{"type":"string"},"RatedValue":{"format":"double","type":"number"}}},"PagedResponse[SipTrunkModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/SipTrunkModel"}}}},"SipTrunkModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"Description":{"type":"string"},"CustomerId":{"format":"int32","type":"integer"},"SubscriptionId":{"format":"string","type":"string"},"ServerAddress":{"type":"string"},"EndpointId":{"format":"string","type":"string"},"AuthUser":{"type":"string"},"AuthPassword":{"type":"string"},"NotifcationsEmails":{"type":"string"},"GlobalChannelCap":{"format":"int32","type":"integer"},"InboundChannelCap":{"format":"int32","type":"integer"},"OutboundChannelCap":{"format":"int32","type":"integer"},"UseWhitelist":{"type":"boolean"},"UseBlacklist":{"type":"boolean"},"ForceClid":{"type":"string"},"AccountCode":{"type":"string"},"Enabled":{"type":"boolean"},"CallRecord":{"type":"boolean"},"BillingId":{"format":"string","type":"string"}}},"NewSipTrunkResponseModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"Description":{"type":"string"},"EndpointId":{"format":"string","type":"string"},"InboundEndpointId":{"format":"uuid","type":"string","example":"00000000-0000-0000-0000-000000000000"}}},"UpdateSIPTrunkModel":{"description":"","type":"object","properties":{"EndpointId":{"format":"string","type":"string"},"Description":{"type":"string"},"ForceClid":{"type":"string"},"GlobalChannelCap":{"format":"int32","type":"integer"},"InboundChannelCap":{"format":"int32","type":"integer"},"NotifcationsEmails":{"type":"string"},"OutboundChannelCap":{"format":"int32","type":"integer"},"UseBlacklist":{"type":"boolean"},"UseWhitelist":{"type":"boolean"},"AccountCode":{"type":"string","readOnly":true},"Enabled":{"type":"boolean","readOnly":true}}},"PagedResponse[SipTrunkEndpointModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/SipTrunkEndpointModel"}}}},"SipTrunkEndpointModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"IpAddress":{"type":"string"},"Port":{"format":"int32","type":"integer"},"Description":{"type":"string"},"Priority":{"format":"int32","type":"integer"},"Active":{"type":"boolean"}}},"NewSipTrunkEndpointModel":{"type":"object","properties":{"Description":{"type":"string"},"IpAddress":{"type":"string"},"Port":{"format":"int32","type":"integer"},"Priority":{"format":"int32","type":"integer"}}},"PagedResponse[SipTrunkRestrictionItemModel]":{"type":"object","properties":{"TotalItems":{"format":"int32","type":"integer"},"Items":{"type":"array","items":{"$ref":"#/definitions/SipTrunkRestrictionItemModel"}}}},"SipTrunkRestrictionItemModel":{"type":"object","properties":{"Id":{"format":"int32","type":"integer"},"Blacklist":{"type":"boolean"},"Prefix":{"type":"string"},"Description":{"type":"string"}}}},"securityDefinitions":{"basic":{"type":"basic","description":"Basic HTTP Authentication"}}}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "api.zapappi.com"
+  },
+  "host": "zapappi-publicapi-staging.azurewebsites.net",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/{subscriptionId}/applications": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns a list of ZapApp Applications under your account",
+        "operationId": "Applications_GetApplications",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationModel"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Adds a new Application to the Zapappi subscription",
+        "operationId": "Applications_AddApplication",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "scriptBody",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scriptUrl",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid subscription or application id"
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns a specific Application based on the Id",
+        "operationId": "Applications_GetApplication",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Updates an existing Zapappi Application",
+        "operationId": "Applications_UpdateApplication",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription id the application is attached too",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "appId",
+            "in": "query",
+            "description": "The application id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "The application description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "Is the application enabled (call it be used to termiante calls)",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "scriptBody",
+            "in": "query",
+            "description": "The script used to process the call",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scriptUrl",
+            "in": "query",
+            "description": "The Url of your script (if set, ScriptBody won't be used)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Invalid subscription or application id"
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/files": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns a list of media files attached to this Application",
+        "operationId": "Applications_GetApplicationFiles",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Application Id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid application id"
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/files/{filename}": {
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Deletes a media file attached to this Application",
+        "operationId": "Applications_DeleteApplicationFile",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Application Id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "filename",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/callout": {
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Creates a new outbound call request for this Application",
+        "operationId": "Applications_ApplicationCallout",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Application Id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "description": "Callout details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalloutModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalloutReturnModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/resources": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns a list of Application Resources associated with the given Application",
+        "operationId": "Applications_GetApplicationResources",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceModel"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Adds an Application Resource to the given Application",
+        "operationId": "Applications_AddApplicationResources",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/resources/{resourceId}": {
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Deletes an Application Resource from the given Application",
+        "operationId": "Applications_DeleteApplicationResources",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/providers": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Gets a list of SIP Provider Accounts connected to your ZapApp platform",
+        "operationId": "Applications_GetSIPProviders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SIPProviderModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/cdr": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns call records for the given application",
+        "operationId": "Applications_GetApplicationCDR",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationCDRModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/deploy": {
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "",
+        "operationId": "Applications_DeployApplication",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "manifestUrl",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationDescription",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationValues",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/applications/{id}/KeyValuePairs": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Returns all the Key Value Pairs for a given Application",
+        "operationId": "Applications_GetApplicationKeyValuePairs",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Application Id",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/KeyValuePairModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get a list of contacts",
+        "operationId": "Contacts_GetContacts",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "The country of the contact",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[ContactsModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Add a new contact",
+        "operationId": "Contacts_AddContact",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "building",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "street",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "postcode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContactsModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/contacts/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get a contact",
+        "operationId": "Contacts_GetContact",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Get specific contact",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContactsModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/domains": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Returns a list of domains associated with your services",
+        "operationId": "Domains_GetDomains",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerDomain"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/endpoints": {
+      "get": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Get Endpoints from Inbound Platform",
+        "operationId": "Inbound_GetEndpoints",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[EndpointViewModel]"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/endpoints/simple/{endpointId}": {
+      "get": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Get Simple Endpoint Details",
+        "operationId": "Inbound_GetSimpleEndpoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "endpointId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SimpleEndpointModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/endpoints/simple": {
+      "put": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Update Simple Endpoint",
+        "operationId": "Inbound_UpdateSimpleEndpoint",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimpleEndpointModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SimpleEndpointModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Create Simple Endpoint",
+        "operationId": "Inbound_CreateSimpleEndpoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forwardUri",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "proxyUri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SimpleEndpointModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/mappings": {
+      "get": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Get Mappings from Inbound Platform",
+        "operationId": "Inbound_GetMappings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "withoutEndpoint",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[EndpointMappingViewModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "",
+        "operationId": "Inbound_AddMapping",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "match",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "isDefault",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "cvar1",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cvar2",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EndpointMappingViewModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/mappings/{id}": {
+      "get": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "Get a specific Mapping from Inbound Platform by Id",
+        "operationId": "Inbound_GetMapping",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EndpointMappingViewModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/inbound/mappings/{Id}": {
+      "put": {
+        "tags": [
+          "Inbound"
+        ],
+        "summary": "",
+        "operationId": "Inbound_UpdateMapping",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "endpointId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EndpointMappingViewModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a list of the numbers under the given subscription",
+        "operationId": "Numbers_ExistingNumbers",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "countryId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TelephoneNumberModel"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "",
+        "operationId": "Numbers_PurchaseNumbers",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "countryId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "numberType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Any",
+              "Local",
+              "National",
+              "Mobile",
+              "PremiumRate",
+              "Freephone"
+            ]
+          },
+          {
+            "name": "areaId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "numberQty",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TelephoneNumberModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/{numberId}": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a specific number for the given subscription",
+        "operationId": "Numbers_ExistingNumber",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TelephoneNumberModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/countries": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a list of countries for which numbers are available",
+        "operationId": "Numbers_GetCountries",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/states/{countryId}": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a list of states available for a given country",
+        "operationId": "Numbers_GetStatesByCountry",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/State"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/areas/{countryId}/{stateId}": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a list of Areas available for a given State and Country",
+        "operationId": "Numbers_GetAreasByStateAndCountry",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "stateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "numberType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Any",
+              "Local",
+              "National",
+              "Mobile",
+              "PremiumRate",
+              "Freephone"
+            ]
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Area"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/areas/{countryId}": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Returns a list of Areas available for a given Country",
+        "operationId": "Numbers_GetAreasByCountry",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "numberType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Any",
+              "Local",
+              "National",
+              "Mobile",
+              "PremiumRate",
+              "Freephone"
+            ]
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Area"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/numbers/{number}/endpoint/sms": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Set the SMS Endoint for the given number",
+        "operationId": "Numbers_SetSMSEndpoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "numberId",
+            "in": "query",
+            "description": "The UniqueID of the number",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "endpointType",
+            "in": "query",
+            "description": "The endpoint type that daa should be sent to",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "None",
+              "EMail",
+              "HTTPPost",
+              "HTTPGet"
+            ]
+          },
+          {
+            "name": "data",
+            "in": "query",
+            "description": "Data for the endpoint type (E.g. Url or EMail Address)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get your port requests as a paged response",
+        "operationId": "Porting_GetPortRequests",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[PortModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Create a new port request",
+        "operationId": "Porting_CreatePortRequest",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "reference",
+            "in": "query",
+            "description": "User Reference for the Port Request",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Number Type for the Port Request",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Geo",
+              "NonGeo",
+              "Mobile",
+              "Freephone"
+            ]
+          },
+          {
+            "name": "countryId",
+            "in": "query",
+            "description": "Country of the Port Request",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "billingNumber",
+            "in": "query",
+            "description": "The billing number for this Port Request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "requestedPortDate",
+            "in": "query",
+            "description": "Specify a preferred porting date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PortModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get a specific port request",
+        "operationId": "Porting_GetPortRequest",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id for the Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PortModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Update the specified port request",
+        "operationId": "Porting_UpdatePortRequest",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "billingNumber",
+            "in": "query",
+            "description": "The billing number of the Port Request",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reference",
+            "in": "query",
+            "description": "The reference of the Port Request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "requestedPortDate",
+            "in": "query",
+            "description": "Specify a preferred porting date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Delete the specified port request",
+        "operationId": "Porting_DeletePortRequest",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/numbers": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get numbers associated with a specific port request",
+        "operationId": "Porting_GetPortNumbers",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id for the Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Find a specific number details",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[RequestNumberModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add numbers to a port request",
+        "operationId": "Porting_AddPortNumbers",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "numbers",
+            "in": "body",
+            "description": "List of numbers to add to the Port Request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[RequestNumberModel]"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Porting"
+        ],
+        "operationId": "Porting_RemovePortNumbers",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "numbers",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[RequestNumberModel]"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/submit": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Submit a specified port request",
+        "operationId": "Porting_SubmitPortRequest",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/billing": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add a Billing file to a specified port request",
+        "operationId": "Porting_AddPortFile",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/loa": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add an LOA to a specified port request",
+        "operationId": "Porting_AddPortLoa",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "customerContactId",
+            "in": "query",
+            "description": "The Id of the customer contact",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "requesterContactId",
+            "in": "query",
+            "description": "The Id of the requester contact",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "siteContactId",
+            "in": "query",
+            "description": "The Id of the site contact",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "losingProviderId",
+            "in": "query",
+            "description": "The Id of the losing provider",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "otherProvider",
+            "in": "query",
+            "description": "If provider is missing",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoaModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/loa/{loaId}": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add a file to an LOA for a specified port request",
+        "operationId": "Porting_AddPortLoaFile",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "loaId",
+            "in": "path",
+            "description": "The Id of the Contact to add the file to",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/loa/generate": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Generate an LOA file for a specified port request",
+        "operationId": "Porting_GeneratePortLoaFile",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoaModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/{id}/message": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get a list of messages for a specified port request",
+        "operationId": "Porting_GetPortMessages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add a message to a specified port request",
+        "operationId": "Porting_AddPortMessage",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of Port Request",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "description": "The message to add to the Port Request",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/countries": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get a list of porting countries",
+        "operationId": "Porting_GetPortingCountries",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CountryModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/countries/{countryId}/providers": {
+      "get": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Get a list of porting providers for a country",
+        "operationId": "Porting_GetPortingProviders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "countryId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The number type",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "National",
+              "Mobile",
+              "Local",
+              "Freephone"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[ProviderModel]"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/porting/webhook": {
+      "post": {
+        "tags": [
+          "Porting"
+        ],
+        "summary": "Add a webhook",
+        "operationId": "Porting_AddPortingWebhook",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "The url of the webhook",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestWebhookModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/sms": {
+      "post": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Sends an SMS Message to the given destination",
+        "operationId": "SMS_SendSms",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webhook",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SMSResponseModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/sms/queue/{id}": {
+      "get": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Returns all SMSs currently in your numbers queue",
+        "operationId": "SMS_GetSmsQueue",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "numberId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SMSQueueItem"
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/v1/{subscriptionId}/sms/queue/{id}/{messageId}": {
+      "delete": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Deletes a specific SMS from the queue",
+        "operationId": "SMS_GetSmsFromQueue",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entryId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/v1/{subscriptionId}/sms/log": {
+      "get": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Returns the SMS Log for the given Subscription Id",
+        "operationId": "SMS_GetSmsLog",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "messageId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SmsCdrEntry"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/trunks": {
+      "get": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Get your SIP Trunks as a PagedResponse",
+        "operationId": "Trunks_GetTrunks",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[SipTrunkModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Create a new SIP Trunk",
+        "operationId": "Trunks_CreateTrunk",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "autoCreateEndpoint",
+            "in": "query",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NewSipTrunkResponseModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/trunks/{id}": {
+      "get": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Get a specific SIP Trunk by Id",
+        "operationId": "Trunks_GetTrunk",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SipTrunkModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Update SIP Trunk",
+        "operationId": "Trunks_UpdateTrunk",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SIP Trunk ID to get endpoints for",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "description": "Model used to update Trunk",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSIPTrunkModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SipTrunkModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/trunks/{id}/Endpoints": {
+      "get": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Return PagedResponse of SIP Trunk Endpoints (IP Addresses)",
+        "operationId": "Trunks_GetTrunkEndpoints",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SIP Trunk ID to get endpoints for",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of item to skip over",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[SipTrunkEndpointModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Create a new SIP Trunk Endpoint IP Address",
+        "operationId": "Trunks_CreateTrunkEndpoint",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SIP Trunk Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "model",
+            "in": "body",
+            "description": "Endpoint Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewSipTrunkEndpointModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SipTrunkEndpointModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Delete the specified SIP Trunk Endpoint",
+        "operationId": "Trunks_DeleteTrunkEndpoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SIP Trunk Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endpointId",
+            "in": "query",
+            "description": "Endpoint Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/trunks/{id}/Endpoints/{endpointId}": {
+      "get": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Get specific SIP Trunk endpoint",
+        "operationId": "Trunks_GetTrunkEndpoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SIP Trunk Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "endpointId",
+            "in": "path",
+            "description": "Endpoint Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SipTrunkEndpointModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/{subscriptionId}/trunks/{id}/restrictions": {
+      "get": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Returns a list of all restrictions on the trunk (Blacklist and Whitelist items)",
+        "operationId": "Trunks_GetRestrictions",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Trunk Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PagedResponse[SipTrunkRestrictionItemModel]"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Trunks"
+        ],
+        "summary": "Adds a new restriction to the trunk (Blacklist and Whitelist items)",
+        "operationId": "Trunks_AddRestriction",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Trunk Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "description": "Called number prefix",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blacklist",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationModel": {
+      "type": "object",
+      "properties": {
+        "AppId": {
+          "format": "string",
+          "type": "string"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "ScriptSource": {
+          "type": "string"
+        },
+        "ScriptSourceUrl": {
+          "type": "string"
+        },
+        "SubscriptionId": {
+          "format": "string",
+          "type": "string"
+        },
+        "ApplicationFQDN": {
+          "type": "string"
+        },
+        "ApplicationSIPUri": {
+          "type": "string"
+        },
+        "ApplicationTier": {
+          "type": "string"
+        }
+      }
+    },
+    "CalloutModel": {
+      "required": [
+        "CallerID",
+        "Destination",
+        "Provider",
+        "Timeout"
+      ],
+      "type": "object",
+      "properties": {
+        "CallerID": {
+          "type": "string"
+        },
+        "Destination": {
+          "type": "string"
+        },
+        "Provider": {
+          "type": "string"
+        },
+        "Timeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "WebHook": {
+          "type": "string"
+        },
+        "MessageGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "CalloutReturnModel": {
+      "type": "object",
+      "properties": {
+        "MessageId": {
+          "format": "string",
+          "type": "string"
+        },
+        "IsAccepted": {
+          "type": "boolean"
+        },
+        "Reason": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceModel": {
+      "type": "object",
+      "properties": {
+        "ResourceId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "ResourceKey": {
+          "type": "string"
+        }
+      }
+    },
+    "SIPProviderModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Server": {
+          "type": "string"
+        },
+        "Provider": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationCDRModel": {
+      "type": "object",
+      "properties": {
+        "UniqueId": {
+          "type": "string"
+        },
+        "CallDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "CallerID": {
+          "type": "string"
+        },
+        "Source": {
+          "type": "string"
+        },
+        "Destination": {
+          "type": "string"
+        },
+        "Duration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "BillingDuration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "AnswerState": {
+          "type": "string"
+        },
+        "Server": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyValuePairModel": {
+      "type": "object",
+      "properties": {
+        "ApplicationId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "PagedResponse[ContactsModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactsModel"
+          }
+        }
+      }
+    },
+    "ContactsModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "CompanyName": {
+          "type": "string"
+        },
+        "Building": {
+          "type": "string"
+        },
+        "Street": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "CountryName": {
+          "type": "string"
+        },
+        "CountryId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "SupplierRef": {
+          "type": "string"
+        },
+        "Authorised": {
+          "type": "boolean"
+        },
+        "NumberCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CustomerDomain": {
+      "type": "object",
+      "properties": {
+        "Domain": {
+          "type": "string"
+        },
+        "CustomerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Label": {
+          "type": "string"
+        },
+        "Approved": {
+          "type": "boolean"
+        },
+        "ServiceType": {
+          "type": "string"
+        },
+        "ApprovalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "PagedResponse[EndpointViewModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointViewModel"
+          }
+        }
+      }
+    },
+    "EndpointViewModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "CustomerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "SubscriptionId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Type": {
+          "enum": [
+            "Simple",
+            "Dispatcher",
+            "Dynamic",
+            "LCR"
+          ],
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "ProxyUri": {
+          "type": "string"
+        }
+      }
+    },
+    "SimpleEndpointModel": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "ProxyUri": {
+          "type": "string"
+        },
+        "ForwardUri": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      }
+    },
+    "PagedResponse[EndpointMappingViewModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointMappingViewModel"
+          }
+        }
+      }
+    },
+    "EndpointMappingViewModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "CustomerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "SubscriptionId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Domain": {
+          "type": "string"
+        },
+        "Match": {
+          "type": "string"
+        },
+        "IsDomainDefault": {
+          "type": "boolean"
+        },
+        "EndpointId": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "CustomVar1": {
+          "type": "string"
+        },
+        "CustomVar2": {
+          "type": "string"
+        },
+        "CustomVar3": {
+          "type": "string"
+        },
+        "CustomVar4": {
+          "type": "string"
+        }
+      }
+    },
+    "TelephoneNumberModel": {
+      "type": "object",
+      "properties": {
+        "Number": {
+          "type": "string"
+        },
+        "Created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "NextBillingDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "CountryCode": {
+          "type": "string"
+        },
+        "SMSEndpoint": {
+          "type": "string"
+        },
+        "SMSEndpointType": {
+          "type": "string"
+        },
+        "MappingId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "NetworkType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "CountryName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Country": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "DialCode": {
+          "type": "string",
+          "readOnly": true
+        },
+        "HasRestrictions": {
+          "type": "boolean"
+        },
+        "HasStates": {
+          "type": "boolean"
+        },
+        "ISO2Digit": {
+          "type": "string",
+          "readOnly": true
+        },
+        "ISO3Digit": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Id": {
+          "format": "string",
+          "type": "string"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "ISO2Digit": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Id": {
+          "format": "string",
+          "type": "string"
+        }
+      }
+    },
+    "Area": {
+      "type": "object",
+      "properties": {
+        "CountryId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "DialCode": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Key": {
+          "format": "string",
+          "type": "string"
+        }
+      }
+    },
+    "PagedResponse[PortModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortModel"
+          }
+        }
+      }
+    },
+    "PortModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Reference": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "PortDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "RequestedPortDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "LoaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "LoaURL": {
+          "type": "string"
+        },
+        "BillURL": {
+          "type": "string"
+        },
+        "BillingNumber": {
+          "type": "string"
+        },
+        "CreatedDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "PagedResponse[RequestNumberModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestNumberModel"
+          }
+        }
+      }
+    },
+    "RequestNumberModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RequestID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Number": {
+          "type": "string"
+        },
+        "IsValid": {
+          "type": "boolean"
+        },
+        "Reason": {
+          "type": "string"
+        },
+        "MappingId": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "LoaModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RequestId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "LoaName": {
+          "type": "string"
+        },
+        "CustomerContactId": {
+          "format": "string",
+          "type": "string"
+        },
+        "ContactName": {
+          "type": "string"
+        },
+        "RequesterContactId": {
+          "format": "string",
+          "type": "string"
+        },
+        "RequesterName": {
+          "type": "string"
+        },
+        "SiteContactId": {
+          "format": "string",
+          "type": "string"
+        },
+        "SiteName": {
+          "type": "string"
+        },
+        "LosingProviderId": {
+          "format": "string",
+          "type": "string"
+        },
+        "ProviderName": {
+          "type": "string"
+        },
+        "LoaUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "CountryModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "ISO2Digit": {
+          "type": "string"
+        },
+        "ISO3Digit": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "DialCode": {
+          "type": "string"
+        },
+        "HasStates": {
+          "type": "boolean"
+        },
+        "HasRestrictions": {
+          "type": "boolean"
+        },
+        "CanPort": {
+          "type": "boolean"
+        },
+        "OnNet": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PagedResponse[ProviderModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderModel"
+          }
+        }
+      }
+    },
+    "ProviderModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "ProviderName": {
+          "type": "string"
+        },
+        "ProviderRef": {
+          "type": "string"
+        },
+        "Type": {
+          "enum": [
+            "National",
+            "Mobile",
+            "Local",
+            "Freephone"
+          ],
+          "type": "string"
+        },
+        "Restrictions": {
+          "type": "string"
+        },
+        "Aliases": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestWebhookModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "WebhookUrl": {
+          "type": "string"
+        },
+        "CustomerId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SMSResponseModel": {
+      "type": "object",
+      "properties": {
+        "MessageId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Status": {
+          "enum": [
+            "Queued",
+            "Sent",
+            "Delivered",
+            "Failed",
+            "SentToNetwork",
+            "NetworkAccepted"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "SMSQueueItem": {
+      "type": "object",
+      "properties": {
+        "Number": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "MessageBody": {
+          "type": "string"
+        },
+        "CLID": {
+          "type": "string"
+        },
+        "DDI": {
+          "type": "string"
+        },
+        "Received": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "UniqueID": {
+          "type": "string"
+        },
+        "CroppedBody": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SmsCdrEntry": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "string",
+          "type": "string"
+        },
+        "MessageId": {
+          "type": "string"
+        },
+        "SubscriptionId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Type": {
+          "enum": [
+            "Outbound",
+            "Inbound"
+          ],
+          "type": "string"
+        },
+        "Created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Sent": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Delivered": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Failed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Destination": {
+          "type": "string"
+        },
+        "Source": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "WebhookUrl": {
+          "type": "string"
+        },
+        "Parts": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "enum": [
+            "Received",
+            "Sent",
+            "Delivered",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "StatusMessage": {
+          "type": "string"
+        },
+        "OriginatingIP": {
+          "type": "string"
+        },
+        "OriginatingService": {
+          "type": "string"
+        },
+        "RatedValue": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "PagedResponse[SipTrunkModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SipTrunkModel"
+          }
+        }
+      }
+    },
+    "SipTrunkModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "CustomerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "SubscriptionId": {
+          "format": "string",
+          "type": "string"
+        },
+        "ServerAddress": {
+          "type": "string"
+        },
+        "EndpointId": {
+          "format": "string",
+          "type": "string"
+        },
+        "AuthUser": {
+          "type": "string"
+        },
+        "AuthPassword": {
+          "type": "string"
+        },
+        "NotifcationsEmails": {
+          "type": "string"
+        },
+        "GlobalChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InboundChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "OutboundChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "UseWhitelist": {
+          "type": "boolean"
+        },
+        "UseBlacklist": {
+          "type": "boolean"
+        },
+        "ForceClid": {
+          "type": "string"
+        },
+        "AccountCode": {
+          "type": "string"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "CallRecord": {
+          "type": "boolean"
+        },
+        "BillingId": {
+          "format": "string",
+          "type": "string"
+        }
+      }
+    },
+    "NewSipTrunkResponseModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "EndpointId": {
+          "format": "string",
+          "type": "string"
+        },
+        "InboundEndpointId": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "UpdateSIPTrunkModel": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "EndpointId": {
+          "format": "string",
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "ForceClid": {
+          "type": "string"
+        },
+        "GlobalChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InboundChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NotifcationsEmails": {
+          "type": "string"
+        },
+        "OutboundChannelCap": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "UseBlacklist": {
+          "type": "boolean"
+        },
+        "UseWhitelist": {
+          "type": "boolean"
+        },
+        "AccountCode": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Enabled": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedResponse[SipTrunkEndpointModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SipTrunkEndpointModel"
+          }
+        }
+      }
+    },
+    "SipTrunkEndpointModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IpAddress": {
+          "type": "string"
+        },
+        "Port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Priority": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NewSipTrunkEndpointModel": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "IpAddress": {
+          "type": "string"
+        },
+        "Port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Priority": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "PagedResponse[SipTrunkRestrictionItemModel]": {
+      "type": "object",
+      "properties": {
+        "TotalItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SipTrunkRestrictionItemModel"
+          }
+        }
+      }
+    },
+    "SipTrunkRestrictionItemModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Blacklist": {
+          "type": "boolean"
+        },
+        "Prefix": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic",
+      "description": "Basic HTTP Authentication"
+    }
+  }
+}

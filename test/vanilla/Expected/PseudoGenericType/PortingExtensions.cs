@@ -9,7 +9,6 @@ namespace Zapappi.Client
     using Models;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -441,11 +440,9 @@ namespace Zapappi.Client
             /// <param name='id'>
             /// The Id of Port Request
             /// </param>
-            /// <param name='file'>
-            /// </param>
-            public static bool? AddPortFile(this IPorting operations, string subscriptionId, int id, Stream file)
+            public static bool? AddPortFile(this IPorting operations, string subscriptionId, int id)
             {
-                return operations.AddPortFileAsync(subscriptionId, id, file).GetAwaiter().GetResult();
+                return operations.AddPortFileAsync(subscriptionId, id).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -459,14 +456,12 @@ namespace Zapappi.Client
             /// <param name='id'>
             /// The Id of Port Request
             /// </param>
-            /// <param name='file'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> AddPortFileAsync(this IPorting operations, string subscriptionId, int id, Stream file, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> AddPortFileAsync(this IPorting operations, string subscriptionId, int id, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.AddPortFileWithHttpMessagesAsync(subscriptionId, id, file, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.AddPortFileWithHttpMessagesAsync(subscriptionId, id, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -554,11 +549,9 @@ namespace Zapappi.Client
             /// <param name='loaId'>
             /// The Id of the Contact to add the file to
             /// </param>
-            /// <param name='file'>
-            /// </param>
-            public static bool? AddPortLoaFile(this IPorting operations, string subscriptionId, int id, int loaId, Stream file)
+            public static bool? AddPortLoaFile(this IPorting operations, string subscriptionId, int id, int loaId)
             {
-                return operations.AddPortLoaFileAsync(subscriptionId, id, loaId, file).GetAwaiter().GetResult();
+                return operations.AddPortLoaFileAsync(subscriptionId, id, loaId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -575,14 +568,12 @@ namespace Zapappi.Client
             /// <param name='loaId'>
             /// The Id of the Contact to add the file to
             /// </param>
-            /// <param name='file'>
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> AddPortLoaFileAsync(this IPorting operations, string subscriptionId, int id, int loaId, Stream file, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> AddPortLoaFileAsync(this IPorting operations, string subscriptionId, int id, int loaId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.AddPortLoaFileWithHttpMessagesAsync(subscriptionId, id, loaId, file, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.AddPortLoaFileWithHttpMessagesAsync(subscriptionId, id, loaId, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
