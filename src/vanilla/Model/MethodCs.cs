@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Model
 
         public SyncMethodsGenerationMode SyncMethods { get; set; }
 
+        public bool ExcludeFromInterface { get; set; }
+
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates failure
         /// </summary>
@@ -61,14 +63,8 @@ namespace AutoRest.CSharp.Model
             foreach (var parameter in LocalParameters)
             {
                 string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
-
-                string defaultValue = $"default({parameter.ModelTypeName})";
-                if (!string.IsNullOrEmpty(parameter.DefaultValue) && parameter.ModelType is PrimaryType)
-                {
-                    defaultValue = parameter.DefaultValue;
-                }
                 declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                    format, parameter.ModelTypeName, parameter.Name, defaultValue));
+                    format, parameter.ModelTypeName, parameter.Name, parameter.ActualDefaultValue));
             }
 
             if (addCustomHeaderParameters)
@@ -320,6 +316,13 @@ namespace AutoRest.CSharp.Model
         {
             return ((int)code).ToString(CultureInfo.InvariantCulture);
         }
+
+        /// <summary>
+        /// Generates a code fragment like `.ProfileOperations.Create` or `.GetOperations`
+        /// representing how to reach this method given a client instance.
+        /// </summary>
+        public virtual string MethodReference
+            => $"{ClientReference}{(MethodGroup?.Name.IsNullOrEmpty() != false ? "" : "." + MethodGroup.NameForProperty)}.{Name}";
 
         /// <summary>
         /// Generate code to build the URL from a url expression and method parameters

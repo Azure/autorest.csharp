@@ -380,7 +380,7 @@ namespace Fixtures.PetstoreV2
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 405 && (int)_statusCode != 200)
+            if ((int)_statusCode != 200 && (int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
@@ -1117,7 +1117,7 @@ namespace Fixtures.PetstoreV2
             MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
-                 StreamContent _fileContent = new StreamContent(fileContent);
+                StreamContent _fileContent = new StreamContent(fileContent);
                 _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 FileStream _fileContentAsFileStream = fileContent as FileStream;
                 if (_fileContentAsFileStream != null)

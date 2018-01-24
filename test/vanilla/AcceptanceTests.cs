@@ -13,39 +13,41 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Tests.Utilities;
-using Fixtures.AcceptanceTestsBodyArray;
-using Fixtures.AcceptanceTestsBodyBoolean;
-using Fixtures.AcceptanceTestsBodyByte;
-using Fixtures.AcceptanceTestsBodyComplex;
-using Fixtures.AcceptanceTestsBodyComplex.Models;
-using Fixtures.AcceptanceTestsBodyDate;
-using Fixtures.AcceptanceTestsBodyDateTime;
-using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
-using Fixtures.AcceptanceTestsBodyDictionary;
-using Fixtures.AcceptanceTestsBodyDictionary.Models;
-using Fixtures.AcceptanceTestsBodyDuration;
-using Fixtures.AcceptanceTestsBodyFile;
-using Fixtures.AcceptanceTestsBodyFormData;
-using Fixtures.AcceptanceTestsBodyInteger;
-using Fixtures.AcceptanceTestsBodyNumber;
-using Fixtures.AcceptanceTestsBodyString;
-using Fixtures.AcceptanceTestsBodyString.Models;
-using Fixtures.AcceptanceTestsCompositeBoolIntClient;
-using Fixtures.AcceptanceTestsCustomBaseUri;
-using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
-using Fixtures.AcceptanceTestsHeader;
-using Fixtures.AcceptanceTestsHeader.Models;
-using Fixtures.AcceptanceTestsHttp;
-using Fixtures.AcceptanceTestsHttp.Models;
-using Fixtures.AcceptanceTestsModelFlattening;
-using Fixtures.AcceptanceTestsModelFlattening.Models;
-using Fixtures.AcceptanceTestsReport;
-using Fixtures.AcceptanceTestsRequiredOptional;
-using Fixtures.AcceptanceTestsUrl;
-using Fixtures.AcceptanceTestsUrl.Models;
-using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
-using Fixtures.AcceptanceTestsValidation;
-using Fixtures.AcceptanceTestsValidation.Models;
+using Fixtures.BodyArray;
+using Fixtures.BodyBoolean;
+using Fixtures.BodyByte;
+using Fixtures.BodyComplex;
+using Fixtures.BodyComplex.Models;
+using Fixtures.BodyDate;
+using Fixtures.BodyDateTime;
+using Fixtures.BodyDateTimeRfc1123;
+using Fixtures.BodyDictionary;
+using Fixtures.BodyDictionary.Models;
+using Fixtures.BodyDuration;
+using Fixtures.BodyFile;
+using Fixtures.BodyFormData;
+using Fixtures.BodyInteger;
+using Fixtures.BodyNumber;
+using Fixtures.BodyString;
+using Fixtures.BodyString.Models;
+using Fixtures.CompositeBoolIntClient;
+using Fixtures.CustomBaseUri;
+using Fixtures.CustomBaseUriMoreOptions;
+using Fixtures.ExtensibleEnums;
+using Fixtures.ExtensibleEnums.Models;
+using Fixtures.Header;
+using Fixtures.Header.Models;
+using Fixtures.Http;
+using Fixtures.Http.Models;
+using Fixtures.ModelFlattening;
+using Fixtures.ModelFlattening.Models;
+using Fixtures.Report;
+using Fixtures.RequiredOptional;
+using Fixtures.Url;
+using Fixtures.Url.Models;
+using Fixtures.UrlMultiCollectionFormat;
+using Fixtures.Validation;
+using Fixtures.Validation.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -53,8 +55,8 @@ using Microsoft.Rest;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Xunit;
-using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
-using ErrorException = Fixtures.AcceptanceTestsHttp.Models.ErrorException;
+using Error = Fixtures.Http.Models.Error;
+using ErrorException = Fixtures.Http.Models.ErrorException;
 using SwaggerPetstoreV2Extensions = Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -181,8 +183,8 @@ namespace AutoRest.CSharp.Tests
             var client = new AutoRestBoolTestService(Fixture.Uri);
             Assert.False(client.BoolModel.GetFalse());
             Assert.True(client.BoolModel.GetTrue());
-            client.BoolModel.PutTrue(true);
-            client.BoolModel.PutFalse(false);
+            client.BoolModel.PutTrue();
+            client.BoolModel.PutFalse();
             client.BoolModel.GetNull();
             Assert.Throws<SerializationException>(() => client.BoolModel.GetInvalid());
         }
@@ -213,8 +215,8 @@ namespace AutoRest.CSharp.Tests
             var client = new CompositeBoolInt(Fixture.Uri);
             Assert.False(client.BoolModel.GetFalse());
             Assert.True(client.BoolModel.GetTrue());
-            client.BoolModel.PutTrue(true);
-            client.BoolModel.PutFalse(false);
+            client.BoolModel.PutTrue();
+            client.BoolModel.PutFalse();
             client.BoolModel.GetNull();
             Assert.Throws<SerializationException>(() => client.BoolModel.GetInvalid());
 
@@ -238,8 +240,8 @@ namespace AutoRest.CSharp.Tests
             client.Number.PutSmallFloat(3.402823e-20);
             client.Number.PutBigDouble(2.5976931e+101);
             client.Number.PutSmallDouble(2.5976931e-101);
-            client.Number.PutBigDoubleNegativeDecimal(-99999999.99);
-            client.Number.PutBigDoublePositiveDecimal(99999999.99);
+            client.Number.PutBigDoubleNegativeDecimal();
+            client.Number.PutBigDoublePositiveDecimal();
             client.Number.GetNull();
             Assert.Equal(3.402823e+20, client.Number.GetBigFloat());
             Assert.Equal(3.402823e-20, client.Number.GetSmallFloat());
@@ -259,21 +261,19 @@ namespace AutoRest.CSharp.Tests
                 Assert.Null(client.StringModel.GetNull());
                 client.StringModel.PutNull(null);
                 Assert.Equal(string.Empty, client.StringModel.GetEmpty());
-                client.StringModel.PutEmpty("");
+                client.StringModel.PutEmpty();
                 Assert.Equal("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€",
                     client.StringModel.GetMbcs());
-                client.StringModel.PutMbcs("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+                client.StringModel.PutMbcs();
                 Assert.Equal("    Now is the time for all good men to come to the aid of their country    ",
                     client.StringModel.GetWhitespace());
-                client.StringModel.PutWhitespace(
-                    "    Now is the time for all good men to come to the aid of their country    ");
+                client.StringModel.PutWhitespace();
                 Assert.Null(client.StringModel.GetNotProvided());
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetNotExpandable());
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);
 
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetReferenced());
                 client.EnumModel.PutReferenced(Colors.Redcolor);
-
                 Assert.Equal(RefColorConstant.ColorConstant, "green-color");
                 Assert.Equal("Sample String", client.EnumModel.GetReferencedConstant().Field1);
                 client.EnumModel.PutReferencedConstant();
@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact(Skip = "Travis: Cannot access a closed Stream.")]
+        [Fact]
         public void FormDataFileUploadStreamTests()
         {
             using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
@@ -359,7 +359,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact(Skip = "Travis: Cannot access a closed Stream.")]
+        [Fact]
         public void FormDataFileUploadFileStreamTests()
         {
             using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
@@ -413,6 +413,29 @@ namespace AutoRest.CSharp.Tests
                 Assert.Throws<SerializationException>(() => client.Date.GetUnderflowDate());
             }
         }
+
+        [Fact]
+        public void ExtensibleEnumsTest()
+        {
+            using (var client = new PetStoreInc(Fixture.Uri))
+            {
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);
+
+                // Valid enums test
+                Assert.Equal(client.Pet.GetByPetId("casper").DaysOfWeek, (DaysOfWeekExtensibleEnum)"Weekend");
+
+                // Valid enums test
+                Assert.True(client.Pet.GetByPetId("scooby").IntEnum == IntEnum.Two);
+
+                // Roundtripping enums test
+                var reqPet = new Fixtures.ExtensibleEnums.Models.Pet(IntEnum.Three, "Retriever", DaysOfWeekExtensibleEnum.Friday);
+                var respPet = client.Pet.AddPet(reqPet);
+                Assert.Equal(reqPet.DaysOfWeek, respPet.DaysOfWeek);
+                Assert.Equal(reqPet.IntEnum, respPet.IntEnum);
+            }
+        }
+        
 
         [Fact]
         public void DateTimeTests()
@@ -539,22 +562,22 @@ namespace AutoRest.CSharp.Tests
                     new ByteArrayEqualityComparer()));
                 bytesResult = client.Array.GetByteInvalidNull();
                 Assert.True(new List<byte[]> {bytes4, null}.SequenceEqual(bytesResult, new ByteArrayEqualityComparer()));
-                var testProduct1 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct1 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 1,
                     StringProperty = "2"
                 };
-                var testProduct2 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct2 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 3,
                     StringProperty = "4"
                 };
-                var testProduct3 = new Fixtures.AcceptanceTestsBodyArray.Models.Product
+                var testProduct3 = new Fixtures.BodyArray.Models.Product
                 {
                     Integer = 5,
                     StringProperty = "6"
                 };
-                var testList1 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var testList1 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
                     testProduct2,
@@ -584,17 +607,17 @@ namespace AutoRest.CSharp.Tests
                     new DictionaryEqualityComparer<string>()));
                 Assert.Null(client.Array.GetComplexNull());
                 Assert.Empty(client.Array.GetComplexEmpty());
-                var productList2 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var productList2 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
                     null,
                     testProduct3
                 };
                 Assert.True(productList2.SequenceEqual(client.Array.GetComplexItemNull(), new ProductEqualityComparer()));
-                var productList3 = new List<Fixtures.AcceptanceTestsBodyArray.Models.Product>
+                var productList3 = new List<Fixtures.BodyArray.Models.Product>
                 {
                     testProduct1,
-                    new Fixtures.AcceptanceTestsBodyArray.Models.Product(),
+                    new Fixtures.BodyArray.Models.Product(),
                     testProduct3
                 };
                 var emptyComplex = client.Array.GetComplexItemEmpty();
@@ -1368,7 +1391,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact(Skip = "TEMP")]
+        [Fact]
         public void HeaderTests()
         {
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
@@ -1379,7 +1402,7 @@ namespace AutoRest.CSharp.Tests
 
                 // Check the UserAgent ProductInfoHeaderValue
                 ProductInfoHeaderValue defaultProduct = client.UserAgent.Where<ProductInfoHeaderValue>(c => c.Product.Name.Equals(this.GetType().FullName)).FirstOrDefault<ProductInfoHeaderValue>();
-                Assert.Equal("1.5.0.1", defaultProduct.Product.Version);
+                Assert.Equal("1.0.0.0", defaultProduct.Product.Version);
 
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
@@ -1576,7 +1599,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
 
                 // POST param/existingkey
-                client.Header.ParamProtectedKey("text/html"); // Content-Type header ignored by default now (according to spec.)
+                Assert.Throws<Fixtures.Header.Models.ErrorException>(() => client.Header.ParamProtectedKey("text/html")); // Content-Type header ignored by default now (according to spec.)
 
                 // POST response/protectedkey
                 var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
@@ -1673,11 +1696,11 @@ namespace AutoRest.CSharp.Tests
             using (var client = new AutoRestHttpInfrastructureTestService(Fixture.Uri))
             {
                 TestSuccessStatusCodes(client);
-                TestRedirectStatusCodes(client);
                 TestClientErrorStatusCodes(client);
                 TestServerErrorStatusCodes(client);
                 TestResponseModeling(client);
             }
+            TestRedirectStatusCodes();
         }
 
         private static void TestResponseModeling(AutoRestHttpInfrastructureTestService client)
@@ -1780,6 +1803,7 @@ namespace AutoRest.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.NotFound, () => client.HttpClientFailure.Put404(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.MethodNotAllowed, () => client.HttpClientFailure.Patch405(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.NotAcceptable, () => client.HttpClientFailure.Post406(true));
+            EnsureThrowsWithStatusCode(HttpStatusCode.ProxyAuthenticationRequired, () => client.HttpClientFailure.Delete407(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Conflict, () => client.HttpClientFailure.Put409(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Gone, () => client.HttpClientFailure.Head410());
             EnsureThrowsWithStatusCode(HttpStatusCode.LengthRequired, () => client.HttpClientFailure.Get411());
@@ -1795,20 +1819,28 @@ namespace AutoRest.CSharp.Tests
             EnsureThrowsWithStatusCode((HttpStatusCode) 429, () => client.HttpClientFailure.Head429());
         }
 
-        private static void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
+        private void TestRedirectStatusCodes()
         {
+            Func<bool, AutoRestHttpInfrastructureTestService> getClient = autoRedirect =>
+            {
+                var handler = new HttpClientHandler();
+                handler.AllowAutoRedirect = autoRedirect;
+                return new AutoRestHttpInfrastructureTestService(Fixture.Uri, handler);
+            };
+            var client = getClient(true);
+            var clientNoRedirect = getClient(false);
+
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head300WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head302WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get301WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            //EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.Put301WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.MovedPermanently, () => clientNoRedirect.HttpRedirects.Put301WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
-            // EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
-            //TODO, Fix this test on PORTABLE
-            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.Found, () => clientNoRedirect.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
@@ -2291,6 +2323,30 @@ namespace AutoRest.CSharp.Tests
             Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
         }
 
+        [Fact]
+        // Really, this test is more useful at compile time since this field is introduced by a partial and compilation
+        // will fail if the partials can't be merged.
+        public void SupportsPartialExceptionTest()
+        {
+            Assert.NotNull(ErrorException.StringFromPartial);
+        }
+
+        [Fact]
+        public async Task EnsureHiddenMethodsMissingTest()
+        {
+            // Confirm the method exists in body-complex, which hidden methods is based on
+            var knownMethod = typeof(Fixtures.BodyComplex.IBasicOperations).GetMethod("PutValidWithHttpMessagesAsync");
+            // Make sure it is missing for hidden methods
+            var missingMethod = typeof(Fixtures.HiddenMethods.IBasicOperations).GetMethod(knownMethod.Name);
+            Assert.Null(missingMethod);
+
+            // Use the facade method
+            using (var client = new Fixtures.HiddenMethods.AutoRestComplexTestService(Fixture.Uri))
+            {
+                await client.Basic.PutValidAsync("abc", CMYKColors.Magenta, 2);
+            }
+        }
+
         public void EnsureTestCoverage()
         {
             using (var client =
@@ -2301,22 +2357,17 @@ namespace AutoRest.CSharp.Tests
                 factory.AddConsole();
 
                 var report = client.GetReport();
-                //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
                 var skipped = report.Where(p => p.Value == 0).Select(p => p.Key);
                 foreach (var item in skipped)
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
-                // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 54;
-                int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);
                 foreach (var item in nullValued)
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "MISSING: {0}", item));
                 }
-                Assert.Equal(totalTests, executedTests);
             }
         }
 
@@ -2384,7 +2435,7 @@ namespace AutoRest.CSharp.Tests
                     errorValidator(exception.Body as T);
                 }
             }
-            catch (MyException exception1)
+            catch (AException exception1)
             {
                 Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
                 if (errorValidator != null)

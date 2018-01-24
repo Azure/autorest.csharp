@@ -10,7 +10,6 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using Fixtures.AdditionalProperties;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         public Feature()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

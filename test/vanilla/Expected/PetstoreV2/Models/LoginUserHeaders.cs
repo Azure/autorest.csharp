@@ -10,7 +10,6 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
-    using Fixtures.PetstoreV2;
     using Newtonsoft.Json;
     using System.Linq;
     using System.Xml;
@@ -26,7 +25,7 @@ namespace Fixtures.PetstoreV2.Models
         /// </summary>
         public LoginUserHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

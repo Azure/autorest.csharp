@@ -1,13 +1,10 @@
-﻿---
-swagger: '2.0'
+---
+openapi: 3.0.0
+servers:
+- url: http://localhost:27332/
 info:
   version: v1
   title: Api
-host: localhost:27332
-schemes:
-- http
-produces:
-- application/json
 paths:
   "/api/circular":
     get:
@@ -15,11 +12,14 @@ paths:
       responses:
         '200':
           description: OK
-          schema:
-            "$ref": "#/definitions/Node"
-definitions:
-  Node:
-    type: object
-    properties:
-      child:
-        "$ref": "#/definitions/Node"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Node"
+components:
+  schemas:
+    Node:
+      type: object
+      properties:
+        child:
+          "$ref": "#/components/schemas/Node"

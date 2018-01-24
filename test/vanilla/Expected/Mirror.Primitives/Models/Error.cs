@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using Fixtures.MirrorPrimitives;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Azure.Tests
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
-            //this.Fixture.TearDown = EnsureTestCoverage;
+            this.Fixture.TearDown = EnsureTestCoverage;
             ServiceClientTracing.IsEnabled = false;
         }
 
@@ -485,7 +485,6 @@ namespace AutoRest.CSharp.Azure.Tests
                     _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
                         "The test coverage for Azure is {0}/{1}",
                         executedTests, totalTests));
-                    Assert.Equal(totalTests, executedTests);
                 }
             }
         }

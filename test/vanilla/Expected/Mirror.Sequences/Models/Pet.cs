@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -24,7 +23,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

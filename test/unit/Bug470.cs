@@ -33,8 +33,6 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 var settings = new Settings
                 {
-                    CodeGenerator = "CSharp",
-                    OutputDirectory = "",
                     Namespace = "Test",
                     ModelsName = modelsName
                 };

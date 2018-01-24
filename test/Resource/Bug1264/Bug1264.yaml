@@ -1,8 +1,5 @@
-#
-# Bug1264.ps1
-#
----
-swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: API with collection format
@@ -14,21 +11,25 @@ paths:
       - name: arrayPath
         in: path
         required: true
-        type: array
-        items:
-          type: string
-        collectionFormat: csv
         description: array type path param
+        style: simple
+        schema:
+          type: array
+          items:
+            type: string
       responses:
         '200':
           description: OK
-          schema:
-            "$ref": "#/definitions/ResultObject"
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultObject"
       description: simple put op
-definitions:
-  ResultObject:
-    properties:
-      SomeProp:
-        type: string
-        description: simple prop
-    description: simple res obj
+components:
+  schemas:
+    ResultObject:
+      properties:
+        SomeProp:
+          type: string
+          description: simple prop
+      description: simple res obj

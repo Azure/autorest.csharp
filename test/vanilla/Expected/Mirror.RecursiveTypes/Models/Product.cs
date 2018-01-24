@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using Fixtures.MirrorRecursiveTypes;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// </summary>
         public Product()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

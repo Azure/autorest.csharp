@@ -13,18 +13,14 @@ using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibili
 
 namespace AutoRest.CSharp
 {
-    public static class ExtensionsLoader
+    static class ExtensionsLoader
     {
-        public static IAnyPlugin GetPlugin(string name)
+        public static IAnyPlugin GetPlugin(string generator, bool azure, bool fluent)
         {
-            switch (name)
-            {
-                case "CSharp": return new AutoRest.CSharp.PluginCs();
-                case "Azure.CSharp": return new AutoRest.CSharp.Azure.PluginCsa();
-                case "Azure.CSharp.Fluent": return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
-                case "Azure.JsonRpcClient": return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
-            }
-            throw new Exception("Unknown plugin: " + name);
+            if (generator == "jsonrpcclient") return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
+            if (fluent) return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
+            if (azure) return new AutoRest.CSharp.Azure.PluginCsa();
+            return new AutoRest.CSharp.PluginCs();
         }
     }
 
@@ -33,8 +29,8 @@ namespace AutoRest.CSharp
         public static int Main(string[] args )
         {
             if(args != null && args.Length > 0 && args[0] == "--server") {
-                var connection = new Connection(Console.Out, Console.OpenStandardInput());
-                connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "csharp", "csharp-simplifier" });
+                var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
+                connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "jsonrpcclient", "csharp", "csharp-simplifier" });
                 connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, plugin, sessionId).Process());
                 connection.DispatchNotification("Shutdown", connection.Stop);
 
@@ -49,12 +45,7 @@ namespace AutoRest.CSharp
             return 1;
         }
 
-        private string plugin;
-
-        public Program(Connection connection, string plugin, string sessionId) : base(connection, sessionId)
-        {
-            this.plugin = plugin;
-        }
+        public Program(Connection connection, string plugin, string sessionId) : base(connection, plugin, sessionId) { }
 
         private T GetXmsCodeGenSetting<T>(CodeModel codeModel, string name)
         {
@@ -71,9 +62,19 @@ namespace AutoRest.CSharp
             }
         }
 
+        protected async Task WriteFiles(MemoryFileSystem fs)
+        {
+            var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
+            foreach (var outFile in outFiles)
+            {
+                WriteFile(outFile, fs.ReadAllText(outFile), null);
+            }
+
+        }
+
         protected override async Task<bool> ProcessInternal()
         {
-            if (this.plugin == "csharp-simplifier")
+            if (this.Plugin == "csharp-simplifier")
             {
                 var fs = new MemoryFileSystem();
 
@@ -86,20 +87,12 @@ namespace AutoRest.CSharp
 
                 // simplify
                 new AutoRest.Simplify.CSharpSimplifier().Run(fs).ConfigureAwait(false).GetAwaiter().GetResult();
-
-                // write out files
-                var outFiles = fs.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, fs.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(fs);
+                
                 return true;
             }
             else
             {
-                var codeGenerator = this.plugin;
-
                 var files = await ListInputs();
                 if (files.Length != 1)
                 {
@@ -107,20 +100,6 @@ namespace AutoRest.CSharp
                 }
                 var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
                 var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
-
-                // get internal name
-                var language = new[] {
-                    "CSharp",
-                    "Ruby",
-                    "NodeJS",
-                    "Python",
-                    "Go",
-                    "Php",
-                    "Java",
-                    "AzureResourceSchema",
-                    "JsonRpcClient" }
-                    .Where(x => x.ToLowerInvariant() == codeGenerator)
-                    .First();
 
                 // build settings
                 var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
@@ -141,33 +120,17 @@ namespace AutoRest.CSharp
                 Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(codeModelT, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
                 Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(codeModelT, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
                 Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
-                Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
-                int defaultMaximumCommentColumns = codeGenerator == "go" ? 120 : Settings.DefaultMaximumCommentColumns;
+                Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? true;
+                int defaultMaximumCommentColumns = Settings.DefaultMaximumCommentColumns;
                 Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? defaultMaximumCommentColumns;
                 Settings.Instance.OutputFileName = await GetValue<string>("output-file");
-                if (codeGenerator == "csharp")
-                {
-                    Settings.Instance.Header = $"<auto-generated>\n{Settings.Instance.Header}\n</auto-generated>";
-                }
-                if (codeGenerator == "ruby" || codeGenerator == "python")
-                {
-                    // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
-                    var inputFile = await GetValue<string[]>("input-file");
-                    Settings.Instance.Input = inputFile.FirstOrDefault();
-                    Settings.Instance.PackageName = await GetValue("package-name");
-                    Settings.Instance.PackageVersion = await GetValue("package-version");
-                }
-                if (codeGenerator == "go")
-                {
-                    Settings.Instance.PackageVersion = await GetValue("package-version");
-                }
+                Settings.Instance.Header = $"<auto-generated>\n{Settings.Instance.Header}\n</auto-generated>";
 
                 // process
                 var plugin = ExtensionsLoader.GetPlugin(
-                    (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
-                    language +
-                    (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
-                    (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
+                    this.Plugin,
+                    await GetValue<bool?>("azure-arm") ?? false,
+                    await GetValue<bool?>("fluent") ?? false);
                 Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
                 
                 using (plugin.Activate())
@@ -186,13 +149,7 @@ namespace AutoRest.CSharp
                 }
 
                 // write out files
-                var outFS = Settings.Instance.FileSystemOutput;
-                var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-                foreach (var outFile in outFiles)
-                {
-                    WriteFile(outFile, outFS.ReadAllText(outFile), null);
-                }
-
+                await WriteFiles(Settings.Instance.FileSystemOutput);
                 return true;
             }
         }

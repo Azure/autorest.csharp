@@ -10,7 +10,6 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
@@ -22,7 +21,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         public ErrorModel()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -1,10 +1,9 @@
-﻿---
-swagger: '2.0'
+---
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
-produces:
-- application/json
 paths:
   "/someOp":
     get:
@@ -13,14 +12,18 @@ paths:
         '200':
           description: OK
           x-nullable: false
-          schema:
-            type: integer
+          content:
+            application/json:
+              schema:
+                type: integer
         '201':
           description: another response type
           x-nullable: false
-          schema:
-            type: integer
-        'default':
+          content:
+            application/json:
+              schema:
+                type: integer
+        default:
           description: default resp
           scheam:
             type: bool

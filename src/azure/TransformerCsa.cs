@@ -97,7 +97,6 @@ namespace AutoRest.CSharp.Azure
                     {
                         SerializedName = "$filter",
                         Name = "odataQuery",
-                        // ModelType = New<CompositeType>(new { Name = new Fixable<string>(){FixedValue = $"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"} } ),
                         ModelType = New<ILiteralType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
@@ -119,7 +118,7 @@ namespace AutoRest.CSharp.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException($"serviceClient");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             var convertedTypes = new Dictionary<IModelType, CompositeType>();

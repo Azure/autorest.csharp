@@ -10,13 +10,12 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
 
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-    public class ErrorModelException : RestException
+    public partial class ErrorModelException : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.

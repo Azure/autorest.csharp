@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 
                 var codeText = fileSystem.ReadAllText(@"TestOperationsExtensions.cs");
                 // get hold of the async func
-                var methodSignature = "public static async System.Threading.Tasks.Task PutAsync(this ITestOperations operations, MyParam param = default(MyParam), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
+                var methodSignature = "public static async System.Threading.Tasks.Task PutAsync(this ITestOperations operations, Body body = default(Body), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
                 var regex = new Regex(Regex.Escape(methodSignature) + @"[^}]+");
                 var match = regex.Match(codeText);
                 Assert.NotNull(match);

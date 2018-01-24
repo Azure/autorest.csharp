@@ -28,6 +28,17 @@ namespace AutoRest.CSharp.Model
         }
 
         [JsonIgnore]
+        public string EffectiveDocumentation =>
+            (string.IsNullOrEmpty(Summary) ? Documentation : Summary)?.EscapeXmlComment() +
+            (string.IsNullOrEmpty(ExternalDocsUrl) ? "" : $"\n<see href=\"{ExternalDocsUrl}\" />");
+
+        // the following two properties should be disjoint and their union equal to `Properties`
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant);
+        [JsonIgnore]
+        public IEnumerable<PropertyCs> ClassProperties => Properties.OfType<PropertyCs>().Where(p => p.IsConstant);
+
+        [JsonIgnore]
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
 
         [JsonIgnore]
@@ -74,7 +85,7 @@ namespace AutoRest.CSharp.Model
             get
             {
                 var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
-                    Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
+                    Enumerable.Empty<InheritedPropertyInfo>()).ToList();
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
                 return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
@@ -134,7 +145,7 @@ namespace AutoRest.CSharp.Model
                         yield return string.Format(
                             CultureInfo.InvariantCulture,
                             "<param name=\"{0}\">{1}</param>",
-                            char.ToLower(property.Name.CharAt(0)) + property.Name.Substring(1),
+                            CodeNamer.Instance.CamelCase(property.Name),
                             documentationInnerText);
                     }
                 }

@@ -11,6 +11,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// </summary>
     @if (!Model.ModelAsString)
     {
+        @if (Model.Deprecated)
+        {
+    @:[System.Obsolete()]
+        }
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     @:public enum @Model.ClassName
     @:{
@@ -75,6 +79,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     }
     else
     {
+        if (Model.Deprecated)
+        {
+    @:[System.Obsolete()]
+        }
     @:public static class @Model.ClassName
     @:{
         foreach (var t in Model.Values)

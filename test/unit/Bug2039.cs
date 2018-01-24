@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public void CircularReferenceBreaksIsConstant()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(new AutoRest.CSharp.Azure.PluginCsa()))
             {
                 // if we reach this, apparently no stack overflow has happened :-)
                 Assert.True(fileSystem.FileExists(@"Models\Node.cs"));

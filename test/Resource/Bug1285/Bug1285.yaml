@@ -1,40 +1,45 @@
-﻿swagger: '2.0'
+openapi: 3.0.0
+servers: []
 info:
   version: 1.0.0
   title: Simple API
 paths:
-  /operation:
+  "/operation":
     get:
       operationId: deprecated_operation
       deprecated: true
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ResultObject'
-
-  /operation2:
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultObject"
+  "/operation2":
     get:
       operationId: approved_operation2
       deprecated: false
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ResultObject'
-
-  /operation3:
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultObject"
+  "/operation3":
     get:
       operationId: approved_operation3
       responses:
-        200:
+        '200':
           description: OK
-          schema:
-            $ref: '#/definitions/ResultObject'
-
-definitions:
-  ResultObject:
-    properties:
-      Message:
-        type: string
-        description: 'This is a response.'
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultObject"
+components:
+  schemas:
+    ResultObject:
+      properties:
+        Message:
+          type: string
+          description: This is a response.
