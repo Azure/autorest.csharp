@@ -33,11 +33,20 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
     @:[Microsoft.Rest.Serialization.JsonTransformation]
 }
+
+@{
+    var baseClassSignatures = (Model.BaseModelType != null)? " : " + Model.BaseModelType.Name : string.Empty;
+    if(Model.IsErrorResponseModel())
+    {
+        baseClassSignatures+= string.IsNullOrEmpty(baseClassSignatures)? ": " : ", ";
+        baseClassSignatures+= "Microsoft.Rest.IRestErrorModel";
+    }
+}
 @if (Model.Deprecated)
 {
     @:[System.Obsolete()]
 }
-    public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
+    public partial class @Model.Name@baseClassSignatures
     {
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
@@ -361,6 +370,33 @@ if (!anythingToValidate)
             return result;
         } 
     </text>}
-    
+
+    @if(Model.IsErrorResponseModel())
+    {
+        @:/// <summary>
+        @:/// Method that creates an exception of @(Model.Name+"Exception")
+        @:/// </summary>
+        @{
+            var methodSignaturePrefix = string.Empty;
+            if(Model.IsPolymorphic)
+            {
+                methodSignaturePrefix = "virtual ";
+            }
+            if(Model.IsPolymorphicErrorResponseModel())
+            {
+                methodSignaturePrefix = "override ";
+            }
+        }
+        @:public @(methodSignaturePrefix)void CreateAndThrowException(string errorMessage, Microsoft.Rest.HttpRequestMessageWrapper requestMessage, Microsoft.Rest.HttpResponseMessageWrapper responseMessage)
+        @:{
+            @:var ex = new @(Model.ExceptionTypeDefinitionName)(errorMessage)
+            @:{
+                @:Request = requestMessage,
+                @:Response = responseMessage
+            @:};
+            @:ex.ErrorBody = this;
+            @:throw ex;
+        @:}
+    }
     }
 }

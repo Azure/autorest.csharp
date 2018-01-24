@@ -15,22 +15,8 @@ namespace Fixtures.Http.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-    public partial class AException : RestException
+    public partial class AException : RestException<A>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public A Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AException class.
@@ -44,7 +30,7 @@ namespace Fixtures.Http.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         public AException(string message)
-            : this(message, null)
+        : this(message, null)
         {
         }
 
@@ -54,8 +40,19 @@ namespace Fixtures.Http.Models
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         public AException(string message, System.Exception innerException)
-            : base(message, innerException)
+        : base(message, innerException)
         {
         }
+
+            /// <summary>
+        /// </summary>
+        public string StatusCode
+        {
+            get
+            {
+                return ErrorBody?.StatusCode;
+            }
+        }
+
     }
 }

@@ -11,22 +11,8 @@ namespace Fixtures.HiddenMethods.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-    public partial class ErrorException : RestException
+    public partial class ErrorException : RestException<Error>
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public Error Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
@@ -40,7 +26,7 @@ namespace Fixtures.HiddenMethods.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         public ErrorException(string message)
-            : this(message, null)
+        : this(message, null)
         {
         }
 
@@ -50,8 +36,29 @@ namespace Fixtures.HiddenMethods.Models
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         public ErrorException(string message, System.Exception innerException)
-            : base(message, innerException)
+        : base(message, innerException)
         {
         }
+
+            /// <summary>
+        /// </summary>
+        public int? Status
+        {
+            get
+            {
+                return ErrorBody?.Status;
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        public override string Message
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ErrorBody?.Message)? base.Message : ErrorBody.Message;
+            }
+        }
+
     }
 }
