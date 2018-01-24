@@ -204,6 +204,38 @@ namespace Fixtures.BodyComplex
             }
 
             /// <summary>
+            /// Put complex types that are polymorphic, omitting the discriminator
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            public static Salmon PutMissingDiscriminator(this IPolymorphism operations, Salmon complexBody)
+            {
+                return operations.PutMissingDiscriminatorAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types that are polymorphic, omitting the discriminator
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Salmon> PutMissingDiscriminatorAsync(this IPolymorphism operations, Salmon complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PutMissingDiscriminatorWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Put complex types that are polymorphic, attempting to omit required
             /// 'birthday' field - the request should not be allowed from the client
             /// </summary>
