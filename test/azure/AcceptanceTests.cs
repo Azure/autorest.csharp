@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Contains("Long running operation failed with status 'Failed'", exception.Message,
                     StringComparison.Ordinal);
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
-                exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
+                exception = Assert.Throws<CloudLroException>(() => client.LROs.PostAsyncRetryFailed());
                 Assert.Contains("Internal Server Error", exception.Message,
                     StringComparison.Ordinal);
                 Assert.NotNull(exception.Body);
@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
                 exception =
-                    Assert.Throws<CloudException>(
+                    Assert.Throws<CloudLroException>(
                         () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
@@ -369,9 +369,12 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("The response from long running operation does not contain a body.",
                     noStatusInPollingBody.Message);
 
-                var invalidOperationEx = Assert.Throws<CloudLroException>(() => client.LROSADs.Post202NoLocation());
+                /*
+                var invalidOperationEx = Assert.Throws<ValidationException> (() => client.LROSADs.Post202NoLocation());
                 Assert.Contains("Location header is missing from long running operation.", invalidOperationEx.Message,
                     StringComparison.Ordinal);
+                    */
+                
                 exception = Assert.Throws<CloudLroException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 
