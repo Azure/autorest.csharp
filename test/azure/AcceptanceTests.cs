@@ -369,11 +369,9 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("The response from long running operation does not contain a body.",
                     noStatusInPollingBody.Message);
 
-                /*
                 var invalidOperationEx = Assert.Throws<ValidationException> (() => client.LROSADs.Post202NoLocation());
                 Assert.Contains("Location header is missing from long running operation.", invalidOperationEx.Message,
                     StringComparison.Ordinal);
-                    */
                 
                 exception = Assert.Throws<CloudLroException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
