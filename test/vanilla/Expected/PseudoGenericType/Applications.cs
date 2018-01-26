@@ -57,7 +57,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -113,8 +113,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -134,28 +132,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplications(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<ApplicationModel>>();
@@ -164,6 +154,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -187,6 +178,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplications(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplications<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplications(int statusCode)
+        {
+            return string.Format("Operation GetApplications returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplications<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplications(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Adds a new Application to the Zapappi subscription
         /// </summary>
         /// <param name='subscriptionId'>
@@ -207,7 +256,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -306,8 +355,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -327,28 +374,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForAddApplication(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<string>();
@@ -357,6 +396,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -380,6 +420,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForAddApplication(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForAddApplication<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForAddApplication(int statusCode)
+        {
+            return string.Format("Operation AddApplication returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForAddApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForAddApplication(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Returns a specific Application based on the Id
         /// </summary>
         /// <param name='subscriptionId'>
@@ -392,7 +490,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -454,8 +552,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -475,28 +571,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplication(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<ApplicationModel>();
@@ -505,6 +593,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -525,6 +614,64 @@ namespace Zapappi.Client
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplication(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplication<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplication(int statusCode)
+        {
+            return string.Format("Operation GetApplication returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplication(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
         }
 
         /// <summary>
@@ -556,7 +703,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -661,8 +808,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -682,28 +827,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForUpdateApplication(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -712,6 +849,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -735,6 +873,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForUpdateApplication(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForUpdateApplication<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForUpdateApplication(int statusCode)
+        {
+            return string.Format("Operation UpdateApplication returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForUpdateApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForUpdateApplication(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Returns a list of media files attached to this Application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -748,7 +944,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -810,8 +1006,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -831,28 +1025,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 404)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplicationFiles(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<string>>();
@@ -861,6 +1047,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -884,6 +1071,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplicationFiles(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplicationFiles<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplicationFiles(int statusCode)
+        {
+            return string.Format("Operation GetApplicationFiles returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplicationFiles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationFiles(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Deletes a media file attached to this Application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -899,7 +1144,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -967,8 +1212,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -988,28 +1231,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForDeleteApplicationFile(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1018,6 +1253,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1041,6 +1277,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForDeleteApplicationFile(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForDeleteApplicationFile<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForDeleteApplicationFile(int statusCode)
+        {
+            return string.Format("Operation DeleteApplicationFile returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForDeleteApplicationFile<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationFile(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Creates a new outbound call request for this Application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -1057,7 +1351,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1128,7 +1422,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
             string _requestContent = null;
             if(model != null)
             {
@@ -1155,28 +1448,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForApplicationCallout(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<CalloutReturnModel>();
@@ -1185,6 +1470,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1208,6 +1494,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForApplicationCallout(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForApplicationCallout<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForApplicationCallout(int statusCode)
+        {
+            return string.Format("Operation ApplicationCallout returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForApplicationCallout<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForApplicationCallout(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Returns a list of Application Resources associated with the given
         /// Application
         /// </summary>
@@ -1221,7 +1565,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1283,8 +1627,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1304,28 +1646,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplicationResources(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<ResourceModel>>();
@@ -1334,6 +1668,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1357,6 +1692,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplicationResources(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplicationResources<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplicationResources(int statusCode)
+        {
+            return string.Format("Operation GetApplicationResources returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationResources(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Adds an Application Resource to the given Application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -1371,7 +1764,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -1435,7 +1828,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
             string _requestContent = null;
             if(model != null)
             {
@@ -1462,28 +1854,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForAddApplicationResources(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -1494,6 +1878,64 @@ namespace Zapappi.Client
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForAddApplicationResources(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForAddApplicationResources<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForAddApplicationResources(int statusCode)
+        {
+            return string.Format("Operation AddApplicationResources returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForAddApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForAddApplicationResources(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
         }
 
         /// <summary>
@@ -1511,7 +1953,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1579,8 +2021,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1600,28 +2040,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForDeleteApplicationResources(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<object>();
@@ -1630,6 +2062,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1653,6 +2086,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForDeleteApplicationResources(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForDeleteApplicationResources<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForDeleteApplicationResources(int statusCode)
+        {
+            return string.Format("Operation DeleteApplicationResources returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForDeleteApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationResources(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Gets a list of SIP Provider Accounts connected to your ZapApp platform
         /// </summary>
         /// <param name='subscriptionId'>
@@ -1663,7 +2154,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1719,8 +2210,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1740,28 +2229,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetSIPProviders(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<SIPProviderModel>>();
@@ -1770,6 +2251,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1793,6 +2275,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetSIPProviders(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetSIPProviders<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetSIPProviders(int statusCode)
+        {
+            return string.Format("Operation GetSIPProviders returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetSIPProviders<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetSIPProviders(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Returns call records for the given application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -1811,7 +2351,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -1893,8 +2433,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -1914,28 +2452,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplicationCDR(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<ApplicationCDRModel>>();
@@ -1944,6 +2474,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -1966,6 +2497,64 @@ namespace Zapappi.Client
             return _result;
         }
 
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplicationCDR(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplicationCDR<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplicationCDR(int statusCode)
+        {
+            return string.Format("Operation GetApplicationCDR returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplicationCDR<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationCDR(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
         /// <param name='subscriptionId'>
         /// </param>
         /// <param name='manifestUrl'>
@@ -1982,7 +2571,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -2075,7 +2664,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
             string _requestContent = null;
             if(configurationValues != null)
             {
@@ -2102,28 +2690,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForDeployApplication(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<ApplicationModel>();
@@ -2132,6 +2712,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2155,6 +2736,64 @@ namespace Zapappi.Client
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForDeployApplication(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForDeployApplication<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForDeployApplication(int statusCode)
+        {
+            return string.Format("Operation DeployApplication returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForDeployApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForDeployApplication(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// Returns all the Key Value Pairs for a given Application
         /// </summary>
         /// <param name='subscriptionId'>
@@ -2169,7 +2808,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -2231,8 +2870,6 @@ namespace Zapappi.Client
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -2252,28 +2889,20 @@ namespace Zapappi.Client
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGetApplicationKeyValuePairs(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<KeyValuePairModel>>();
@@ -2282,6 +2911,7 @@ namespace Zapappi.Client
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -2302,6 +2932,64 @@ namespace Zapappi.Client
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetApplicationKeyValuePairs(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGetApplicationKeyValuePairs<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetApplicationKeyValuePairs(int statusCode)
+        {
+            return string.Format("Operation GetApplicationKeyValuePairs returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGetApplicationKeyValuePairs<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationKeyValuePairs(statusCode));
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
         }
 
     }

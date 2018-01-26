@@ -142,7 +142,11 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:{
                 if(!Model.IsAzureARMGenerator())
                 {
-                @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                @:throw new Microsoft.Rest.RestException<V>(errorMessage)
+                    @:{ 
+                        @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), 
+                        @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    @:};
                 }
                 else 
                 {
@@ -159,7 +163,11 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:// Ignore the exception
             if(!Model.IsAzureARMGenerator())
             {
-            @:throw new Microsoft.Rest.RestException<V>(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+            @:throw new Microsoft.Rest.RestException<V>(errorMessage) 
+                @:{
+                    @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), 
+                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                @:};
             }
             else 
             {
