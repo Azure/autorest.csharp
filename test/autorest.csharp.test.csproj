@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" >
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <VersionPrefix>1.0.0</VersionPrefix>
     <GenerateFullPaths>true</GenerateFullPaths>
@@ -9,7 +9,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <Target Name="Nuke" AfterTargets="clean" >
+  <Target Name="Nuke" AfterTargets="clean">
     <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
     <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
   </Target>
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.10" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.11" />
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime/ClientRuntime/Microsoft.Rest.ClientRuntime.csproj" /> -->
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime.Azure/ClientRuntime.Azure/Microsoft.Rest.ClientRuntime.Azure.csproj" /> -->
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />
