@@ -452,8 +452,9 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(p1.AniType, "Dog");
 
                 // Test 2: invalid pet throws AnimalNotFoundException
-                var ex = Assert.ThrowsAsync<AnimalNotFoundException>(()=>client.Pet.GetPetByIdAsync("coyoteUgly"));
-                
+                AnimalNotFoundException ex = Assert.Throws<AnimalNotFoundException>(()=>client.Pet.GetPetById("coyoteUgly"));
+                Assert.Equal(ex.HttpStatusCode, 404);
+
                 // Test 3: invalid pet throws LinkNotFoundException
                 Assert.ThrowsAsync<LinkNotFoundException>(()=>client.Pet.GetPetByIdAsync("weirdAlYankovic"));
                 
