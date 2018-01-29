@@ -232,7 +232,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetEndpoints<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetEndpoints(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetEndpoints(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -429,7 +432,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetSimpleEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetSimpleEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetSimpleEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -632,7 +638,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForUpdateSimpleEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdateSimpleEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateSimpleEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -869,7 +878,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForCreateSimpleEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateSimpleEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateSimpleEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1091,7 +1103,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetMappings<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetMappings(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetMappings(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1341,7 +1356,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddMapping<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddMapping(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddMapping(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1534,7 +1552,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetMapping<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetMapping(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetMapping(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1744,7 +1765,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForUpdateMapping<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdateMapping(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateMapping(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

@@ -189,7 +189,10 @@ namespace Fixtures.ContentTypeHeader
         private async Task HandleErrorResponseWithKnownTypeForA<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForA(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForA(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -361,7 +364,10 @@ namespace Fixtures.ContentTypeHeader
         private async Task HandleErrorResponseWithKnownTypeForB<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForB(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForB(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -533,7 +539,10 @@ namespace Fixtures.ContentTypeHeader
         private async Task HandleErrorResponseWithKnownTypeForC<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForC(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForC(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -709,7 +718,10 @@ namespace Fixtures.ContentTypeHeader
         private async Task HandleErrorResponseWithKnownTypeForD<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForD(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForD(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

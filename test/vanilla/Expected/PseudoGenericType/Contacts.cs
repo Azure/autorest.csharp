@@ -229,7 +229,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetContacts<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetContacts(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetContacts(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -495,7 +498,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddContact<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddContact(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddContact(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -693,7 +699,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetContact<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetContact(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetContact(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

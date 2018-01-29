@@ -221,7 +221,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortRequests<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortRequests(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortRequests(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -468,7 +471,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForCreatePortRequest<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreatePortRequest(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreatePortRequest(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -662,7 +668,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortRequest<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortRequest(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortRequest(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -889,7 +898,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForUpdatePortRequest<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdatePortRequest(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePortRequest(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1083,7 +1095,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForDeletePortRequest<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeletePortRequest(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeletePortRequest(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1300,7 +1315,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortNumbers<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortNumbers(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortNumbers(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1509,7 +1527,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortNumbers<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortNumbers(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortNumbers(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1713,7 +1734,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForRemovePortNumbers<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForRemovePortNumbers(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForRemovePortNumbers(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1907,7 +1931,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForSubmitPortRequest<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForSubmitPortRequest(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForSubmitPortRequest(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2101,7 +2128,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortFile<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortFile(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortFile(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2356,7 +2386,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortLoa<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortLoa(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortLoa(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2555,7 +2588,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortLoaFile<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortLoaFile(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortLoaFile(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2749,7 +2785,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGeneratePortLoaFile<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGeneratePortLoaFile(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGeneratePortLoaFile(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2958,7 +2997,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortMessages<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortMessages(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortMessages(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3169,7 +3211,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortMessage<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortMessage(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortMessage(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3358,7 +3403,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortingCountries<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortingCountries(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortingCountries(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3573,7 +3621,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetPortingProviders<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPortingProviders(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPortingProviders(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3779,7 +3830,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddPortingWebhook<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPortingWebhook(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPortingWebhook(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

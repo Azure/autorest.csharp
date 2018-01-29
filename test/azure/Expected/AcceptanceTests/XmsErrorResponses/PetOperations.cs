@@ -279,7 +279,10 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
         private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -323,14 +326,15 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new CloudException(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                     }
                 }
@@ -340,7 +344,8 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     throw new CloudException(errorMessage)
                     {
                         Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        HttpStatusCode = statusCode
                     };
                 }
                 catch(CloudException ex)
@@ -567,14 +572,15 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new CloudException(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                     }
                 }
@@ -584,7 +590,8 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses
                     throw new CloudException(errorMessage)
                     {
                         Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        HttpStatusCode = statusCode
                     };
                 }
                 catch(CloudException ex)

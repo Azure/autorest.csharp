@@ -202,7 +202,10 @@ namespace Fixtures.ExtensibleEnums
         private async Task HandleErrorResponseWithKnownTypeForGetByPetId<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetByPetId(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetByPetId(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -382,7 +385,10 @@ namespace Fixtures.ExtensibleEnums
         private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

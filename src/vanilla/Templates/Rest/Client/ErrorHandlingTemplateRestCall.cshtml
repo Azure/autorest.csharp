@@ -87,7 +87,10 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
 @:private async System.Threading.Tasks.Task HandleErrorResponseWithKnownTypeFor@(Model.Name)<T>(System.Net.Http.HttpRequestMessage _httpRequest, System.Net.Http.HttpResponseMessage _httpResponse, int statusCode)
 @:{
     @:string _responseContent = null;
-    @:var ex = new RestException<T>(GetErrorMessageFor@(Model.Name)(statusCode));
+    @:var ex = new RestException<T>(GetErrorMessageFor@(Model.Name)(statusCode))
+                    @:{
+                        @:HttpStatusCode = statusCode
+                    @:};
 
     @:if (_httpResponse.Content != null)
     @:{
@@ -136,7 +139,7 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
             @:if(errorResponseModel!=null)
             @:{
-                @:errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                @:errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
             @:}
             @:else
             @:{
@@ -145,7 +148,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
                 @:throw new Microsoft.Rest.RestException<V>(errorMessage)
                     @:{ 
                         @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), 
-                        @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        @:HttpStatusCode = statusCode
                     @:};
                 }
                 else 
@@ -153,7 +157,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
                 @:throw new Microsoft.Rest.Azure.CloudException(errorMessage)
                 @:{
                     @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                    @:HttpStatusCode = statusCode
                 @:};
                 }
             @:}
@@ -166,7 +171,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:throw new Microsoft.Rest.RestException<V>(errorMessage) 
                 @:{
                     @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), 
-                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                    @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                    @:HttpStatusCode = statusCode
                 @:};
             }
             else 
@@ -174,7 +180,8 @@ private string GetErrorMessageFor@(Model.Name)(int statusCode)
             @:throw new Microsoft.Rest.Azure.CloudException(errorMessage)
             @:{
                 @:Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                @:Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                @:HttpStatusCode = statusCode
             @:};
             }
         @:}

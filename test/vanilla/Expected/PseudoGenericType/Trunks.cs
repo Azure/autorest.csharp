@@ -221,7 +221,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetTrunks<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetTrunks(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetTrunks(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -441,7 +444,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForCreateTrunk<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateTrunk(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateTrunk(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -634,7 +640,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetTrunk<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetTrunk(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetTrunk(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -843,7 +852,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForUpdateTrunk<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdateTrunk(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateTrunk(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1052,7 +1064,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetTrunkEndpoints<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetTrunkEndpoints(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetTrunkEndpoints(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1261,7 +1276,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForCreateTrunkEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateTrunkEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateTrunkEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1465,7 +1483,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForDeleteTrunkEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeleteTrunkEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteTrunkEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1664,7 +1685,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetTrunkEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetTrunkEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetTrunkEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1872,7 +1896,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetRestrictions<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetRestrictions(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetRestrictions(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2098,7 +2125,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddRestriction<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddRestriction(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddRestriction(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

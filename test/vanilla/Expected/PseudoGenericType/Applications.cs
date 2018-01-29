@@ -206,7 +206,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplications<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplications(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplications(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -448,7 +451,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddApplication(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddApplication(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -645,7 +651,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplication(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplication(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -901,7 +910,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForUpdateApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdateApplication(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateApplication(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1099,7 +1111,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplicationFiles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplicationFiles(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationFiles(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1305,7 +1320,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForDeleteApplicationFile<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationFile(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationFile(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1522,7 +1540,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForApplicationCallout<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForApplicationCallout(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForApplicationCallout(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1720,7 +1741,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplicationResources(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationResources(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1909,7 +1933,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForAddApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddApplicationResources(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddApplicationResources(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2114,7 +2141,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForDeleteApplicationResources<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationResources(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteApplicationResources(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2303,7 +2333,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetSIPProviders<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetSIPProviders(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetSIPProviders(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2526,7 +2559,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplicationCDR<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplicationCDR(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationCDR(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2764,7 +2800,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForDeployApplication<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeployApplication(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeployApplication(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2963,7 +3002,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetApplicationKeyValuePairs<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetApplicationKeyValuePairs(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetApplicationKeyValuePairs(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

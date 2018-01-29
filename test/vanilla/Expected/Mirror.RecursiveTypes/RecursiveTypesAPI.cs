@@ -344,14 +344,15 @@ namespace Fixtures.MirrorRecursiveTypes
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -361,7 +362,8 @@ namespace Fixtures.MirrorRecursiveTypes
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }

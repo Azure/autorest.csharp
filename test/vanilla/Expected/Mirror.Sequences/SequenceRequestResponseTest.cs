@@ -326,14 +326,15 @@ namespace Fixtures.MirrorSequences
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -343,7 +344,8 @@ namespace Fixtures.MirrorSequences
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -515,7 +517,10 @@ namespace Fixtures.MirrorSequences
         private async Task HandleErrorResponseWithKnownTypeForAddPetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPetStyles(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPetStyles(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -705,7 +710,10 @@ namespace Fixtures.MirrorSequences
         private async Task HandleErrorResponseWithKnownTypeForUpdatePetStyles<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdatePetStyles(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePetStyles(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

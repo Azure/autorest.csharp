@@ -214,7 +214,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetDomains<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetDomains(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDomains(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

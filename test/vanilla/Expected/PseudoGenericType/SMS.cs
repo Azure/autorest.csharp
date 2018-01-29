@@ -251,7 +251,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForSendSms<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForSendSms(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForSendSms(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -465,7 +468,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetSmsQueue<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetSmsQueue(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetSmsQueue(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -687,7 +693,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetSmsFromQueue<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetSmsFromQueue(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetSmsFromQueue(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -909,7 +918,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetSmsLog<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetSmsLog(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetSmsLog(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

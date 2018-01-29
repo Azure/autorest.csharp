@@ -377,14 +377,15 @@ namespace Fixtures.Validation
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -394,7 +395,8 @@ namespace Fixtures.Validation
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -637,14 +639,15 @@ namespace Fixtures.Validation
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -654,7 +657,8 @@ namespace Fixtures.Validation
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -783,7 +787,10 @@ namespace Fixtures.Validation
         private async Task HandleErrorResponseWithKnownTypeForGetWithConstantInPath<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetWithConstantInPath(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetWithConstantInPath(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -966,7 +973,10 @@ namespace Fixtures.Validation
         private async Task HandleErrorResponseWithKnownTypeForPostWithConstantInBody<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForPostWithConstantInBody(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForPostWithConstantInBody(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

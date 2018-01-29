@@ -64,12 +64,13 @@ namespace Fixtures.Azure.AzureSpecials.Models
         /// <summary>
         /// Method that creates an exception of ErrorException
         /// </summary>
-        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
         {
             var ex = new ErrorException(errorMessage)
             {
                 Request = requestMessage,
-                Response = responseMessage
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
             };
             ex.Body = this;
             throw ex;

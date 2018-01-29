@@ -556,14 +556,15 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new CloudException(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                     }
                 }
@@ -573,7 +574,8 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     throw new CloudException(errorMessage)
                     {
                         Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        HttpStatusCode = statusCode
                     };
                 }
                 catch(CloudException ex)
@@ -815,14 +817,15 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new CloudException(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                     }
                 }
@@ -832,7 +835,8 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     throw new CloudException(errorMessage)
                     {
                         Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        HttpStatusCode = statusCode
                     };
                 }
                 catch(CloudException ex)
@@ -1074,14 +1078,15 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     var errorResponseModel = SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new CloudException(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                     }
                 }
@@ -1091,7 +1096,8 @@ namespace Fixtures.Azure.Fluent.AzureCompositeModelClient
                     throw new CloudException(errorMessage)
                     {
                         Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                        Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                        HttpStatusCode = statusCode
                     };
                 }
                 catch(CloudException ex)

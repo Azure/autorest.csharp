@@ -195,7 +195,10 @@ namespace Fixtures.Components
         private async Task HandleErrorResponseWithKnownTypeForGet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -366,7 +369,10 @@ namespace Fixtures.Components
         private async Task HandleErrorResponseWithKnownTypeForAdd<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAdd(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAdd(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

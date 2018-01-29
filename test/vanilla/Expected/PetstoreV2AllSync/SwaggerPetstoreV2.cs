@@ -328,7 +328,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForAddPet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForAddPet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -500,7 +503,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForUpdatePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdatePet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -704,7 +710,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForFindPetsByStatus<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForFindPetsByStatus(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForFindPetsByStatus(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -909,7 +918,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForFindPetsByTags<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForFindPetsByTags(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForFindPetsByTags(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1095,7 +1107,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForGetPetById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetPetById(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1295,7 +1310,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForUpdatePetWithForm<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdatePetWithForm(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdatePetWithForm(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1458,7 +1476,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForDeletePet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeletePet(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeletePet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1639,7 +1660,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForGetInventory<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetInventory(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetInventory(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1838,7 +1862,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForPlaceOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForPlaceOrder(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForPlaceOrder(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2046,7 +2073,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForGetOrderById<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetOrderById(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetOrderById(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2219,7 +2249,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForDeleteOrder<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeleteOrder(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteOrder(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2390,7 +2423,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForCreateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUser(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2558,7 +2594,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithArrayInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithArrayInput(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithArrayInput(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2726,7 +2765,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForCreateUsersWithListInput<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithListInput(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForCreateUsersWithListInput(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -2952,7 +2994,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForLoginUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForLoginUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForLoginUser(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3099,7 +3144,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForLogoutUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForLogoutUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForLogoutUser(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3292,7 +3340,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForGetUserByName<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetUserByName(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetUserByName(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3472,7 +3523,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForUpdateUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdateUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdateUser(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3637,7 +3691,10 @@ namespace Fixtures.PetstoreV2AllSync
         private async Task HandleErrorResponseWithKnownTypeForDeleteUser<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForDeleteUser(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForDeleteUser(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

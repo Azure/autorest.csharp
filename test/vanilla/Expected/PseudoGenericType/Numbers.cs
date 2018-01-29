@@ -239,7 +239,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForExistingNumbers<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForExistingNumbers(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForExistingNumbers(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -476,7 +479,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForPurchaseNumbers<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForPurchaseNumbers(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForPurchaseNumbers(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -689,7 +695,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForExistingNumber<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForExistingNumber(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForExistingNumber(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -878,7 +887,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetCountries<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetCountries(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetCountries(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1075,7 +1087,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetStatesByCountry<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetStatesByCountry(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetStatesByCountry(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1298,7 +1313,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetAreasByStateAndCountry<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetAreasByStateAndCountry(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetAreasByStateAndCountry(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1513,7 +1531,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForGetAreasByCountry<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetAreasByCountry(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetAreasByCountry(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -1748,7 +1769,10 @@ namespace Zapappi.Client
         private async Task HandleErrorResponseWithKnownTypeForSetSMSEndpoint<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForSetSMSEndpoint(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForSetSMSEndpoint(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

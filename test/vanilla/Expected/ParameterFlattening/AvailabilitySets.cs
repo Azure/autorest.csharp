@@ -219,7 +219,10 @@ namespace Fixtures.ParameterFlattening
         private async Task HandleErrorResponseWithKnownTypeForUpdate<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForUpdate(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForUpdate(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

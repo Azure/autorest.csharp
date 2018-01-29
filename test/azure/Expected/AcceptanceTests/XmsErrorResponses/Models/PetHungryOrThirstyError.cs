@@ -52,12 +52,13 @@ namespace Fixtures.Azure.AcceptanceTestsXmsErrorResponses.Models
         /// <summary>
         /// Method that creates an exception of PetHungryOrThirstyErrorException
         /// </summary>
-        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage)
+        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
         {
             var ex = new PetHungryOrThirstyErrorException(errorMessage)
             {
                 Request = requestMessage,
-                Response = responseMessage
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
             };
             ex.Body = this;
             throw ex;

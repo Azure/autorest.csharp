@@ -196,14 +196,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -213,7 +214,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -370,14 +372,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -387,7 +390,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -544,14 +548,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -561,7 +566,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -718,14 +724,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -735,7 +742,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -893,14 +901,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -910,7 +919,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -1086,14 +1096,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -1103,7 +1114,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -1280,14 +1292,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -1297,7 +1310,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -1474,14 +1488,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -1491,7 +1506,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -1686,14 +1702,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -1703,7 +1720,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -1898,14 +1916,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -1915,7 +1934,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2110,14 +2130,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -2127,7 +2148,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2323,14 +2345,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -2340,7 +2363,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2475,14 +2499,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -2492,7 +2517,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2627,14 +2653,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -2644,7 +2671,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2780,14 +2808,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -2797,7 +2826,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -2926,7 +2956,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone202Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone202Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3073,7 +3106,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone204None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone204None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3220,7 +3256,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3367,7 +3406,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet202None204NoneDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet202None204NoneDefaultNone400Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -3534,14 +3576,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -3551,7 +3594,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -3700,14 +3744,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -3717,7 +3762,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -3866,14 +3912,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -3883,7 +3930,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -4032,14 +4080,15 @@ namespace Fixtures.Http
                     var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
                     if(errorResponseModel!=null)
                     {
-                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent));
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
                     }
                     else
                     {
                         throw new RestException<V>(errorMessage)
                             {
                                 Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
                             };
                     }
                 }
@@ -4049,7 +4098,8 @@ namespace Fixtures.Http
                     throw new RestException<V>(errorMessage)
                         {
                             Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
-                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent)
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
                         };
                 }
             }
@@ -4178,7 +4228,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -4325,7 +4378,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone200None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -4472,7 +4528,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -4619,7 +4678,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGetDefaultNone400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGetDefaultNone400None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -4789,7 +4851,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -4958,7 +5023,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Valid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -5127,7 +5195,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA200Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA200Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -5297,7 +5368,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400None<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400None(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400None(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -5466,7 +5540,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Valid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -5635,7 +5712,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA400Invalid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Invalid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA400Invalid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
@@ -5804,7 +5884,10 @@ namespace Fixtures.Http
         private async Task HandleErrorResponseWithKnownTypeForGet200ModelA202Valid<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForGet200ModelA202Valid(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForGet200ModelA202Valid(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try

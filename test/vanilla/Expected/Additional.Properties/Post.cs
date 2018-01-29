@@ -186,7 +186,10 @@ namespace Fixtures.AdditionalProperties
         private async Task HandleErrorResponseWithKnownTypeForPets<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
         {
             string _responseContent = null;
-            var ex = new RestException<T>(GetErrorMessageForPets(statusCode));
+            var ex = new RestException<T>(GetErrorMessageForPets(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
             if (_httpResponse.Content != null)
             {
                 try
