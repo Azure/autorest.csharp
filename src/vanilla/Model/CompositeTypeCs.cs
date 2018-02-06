@@ -66,11 +66,26 @@ namespace AutoRest.CSharp.Model
                     var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
-                        return ext["name"].ToString();
+                        return ext["name"].ToString()+"Exception";
                     }
                 }
                 return Name + "Exception";
             }
+        }
+
+        public bool IsErrorResponseModel() => CodeModel.ErrorTypes.Select(errType=>errType.Name).Contains(Name);
+
+        public bool IsPolymorphicErrorResponseModel() {
+            var baseModelType = BaseModelType;
+            while(baseModelType!=null && baseModelType is CompositeType)
+            {
+                if(!string.IsNullOrEmpty(baseModelType.PolymorphicDiscriminator) && CodeModel.ErrorTypes.Contains(baseModelType))
+                {
+                    return true;
+                }
+                baseModelType = baseModelType.BaseModelType;
+            }
+            return false;
         }
 
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
@@ -189,7 +204,17 @@ namespace AutoRest.CSharp.Model
             }
         }
 
-        public bool IsValueType => false;
+        public string DisambiguateExceptionPropertyName(string property)
+        {
+            // can be further extended to disambiguate more property names is necessary
+            switch(property.ToLower())
+            {
+                case "body": return property+"Property";
+                default : return property;
+            }
+        }
 
+        public bool IsValueType => false;
+        
     }
 }

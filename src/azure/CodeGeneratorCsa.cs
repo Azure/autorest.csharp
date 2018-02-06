@@ -39,10 +39,10 @@ namespace AutoRest.CSharp.Azure
 
             await GenerateServiceClient<AzureServiceClientTemplate>(codeModel);
             await GenerateOperations<AzureMethodGroupTemplate>(codeModel.Operations);
-            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes).Union(codeModel.ErrorTypes));
             await GenerateEnums(codeModel.EnumTypes);
             await GeneratePageClasses(codeModel.pageClasses);
-            await GenerateExceptions(codeModel.ErrorTypes);
+            await GenerateExceptions(codeModel.ErrorTypes, codeModel.ModelTypes.Union(codeModel.HeaderTypes));
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 await GenerateXmlSerialization();
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Azure
             }
         }
 
-        protected override async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes)
+        protected override async Task GenerateExceptions(IEnumerable<CompositeType> errorTypes, IEnumerable<CompositeType> existingModelTypes)
         {
             foreach (CompositeTypeCs exceptionType in errorTypes)
             {

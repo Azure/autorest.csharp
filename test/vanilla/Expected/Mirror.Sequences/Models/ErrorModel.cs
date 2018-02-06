@@ -14,7 +14,7 @@ namespace Fixtures.MirrorSequences.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class ErrorModel
+    public partial class ErrorModel: IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
@@ -61,6 +61,20 @@ namespace Fixtures.MirrorSequences.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Message");
             }
+        }
+        /// <summary>
+        /// Method that creates an exception of ErrorModelException
+        /// </summary>
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
+        {
+            var ex = new ErrorModelException(errorMessage)
+            {
+                Request = requestMessage,
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
+            };
+            ex.Body = this;
+            throw ex;
         }
     }
 }

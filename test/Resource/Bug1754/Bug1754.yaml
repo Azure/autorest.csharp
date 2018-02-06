@@ -13,8 +13,13 @@ paths:
           description: OK
       requestBody:
         content:
-          "application/json":
+          application/json:
             schema:
-              properties:
-                prop1:
-                  type: string
+              "$ref": "#/components/schemas/ReqBody"
+components:
+  schemas:
+    ReqBody:
+      description: request body
+      properties:
+        prop1:
+          type: string

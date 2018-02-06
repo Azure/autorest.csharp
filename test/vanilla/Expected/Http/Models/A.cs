@@ -10,10 +10,11 @@
 
 namespace Fixtures.Http.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class A
+    public partial class A: IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the A class.
@@ -42,5 +43,19 @@ namespace Fixtures.Http.Models
         [JsonProperty(PropertyName = "statusCode")]
         public string StatusCode { get; set; }
 
+        /// <summary>
+        /// Method that creates an exception of AException
+        /// </summary>
+        public void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
+        {
+            var ex = new AException(errorMessage)
+            {
+                Request = requestMessage,
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
+            };
+            ex.Body = this;
+            throw ex;
+        }
     }
 }

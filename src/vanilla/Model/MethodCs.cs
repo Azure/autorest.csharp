@@ -35,7 +35,8 @@ namespace AutoRest.CSharp.Model
                 if (Responses.Any())
                 {
                     List<string> predicates = new List<string>();
-                    foreach (var responseStatus in Responses.Keys)
+                    //foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-ms-error-response") && (bool)Responses[key].Extensions["x-ms-error-response"])))
+                    foreach (var responseStatus in Responses.Keys.Where(key=>!(Responses[key].Extensions.ContainsKey("x-error-response") && (bool)Responses[key].Extensions["x-error-response"])))
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
                             "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
@@ -187,28 +188,23 @@ namespace AutoRest.CSharp.Model
                         var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (ext != null && ext["name"] != null)
                         {
-                            return ext["name"].ToString();
+                            return ext["name"].ToString() + "Exception";
                         }
                     }
                     return type.Name + "Exception";
                 }
                 else
                 {
-                    return "Microsoft.Rest.HttpOperationException";
+                    return "T:Microsoft.Rest.RestException";
                 }
             }
         }
 
         /// <summary>
-        /// Get the expression for exception initialization with message.
+        /// Gets whether model is azure model or not
         /// </summary>
-        public virtual string InitializeExceptionWithMessage => string.Empty;
-
-        /// <summary>
-        /// Get the expression for exception initialization with message.
-        /// </summary>
-        public virtual string InitializeException => string.Empty;
-
+        public virtual bool IsAzureARMGenerator() => false;
+        
         /// <summary>
         /// Gets the expression for response body initialization.
         /// </summary>
@@ -481,5 +477,44 @@ namespace AutoRest.CSharp.Model
                     .Where(m => m.InputParameter.IsNullable())
                     .Select(m => m.InputParameter.Name + " != null"));
         }
+
+        public static string GetResponseTypeName(Response response) => (response.Body==null)? "Microsoft.Rest.Azure.CloudError": response.Body.ClassName;
+       
+        public static string GetExceptionTypeName(Response response)
+        {
+            if (response.Body==null)
+            {
+                return "Microsoft.Rest.Azure.CloudException";
+            }
+            if(response.Body is PrimaryTypeCs)
+            {
+                return "T:Microsoft.Rest.RestException";
+            }
+            if(response.Body.Name == "CloudError")
+            {
+                return "Microsoft.Rest.Azure.CloudException";
+            }
+            if(response.Body is CompositeTypeCs)
+            {
+                return (response.Body as CompositeTypeCs).ExceptionTypeDefinitionName;
+            }
+            return response.Body.Name;
+        }
+
+        //public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-ms-error-response") && (bool)response.Extensions["x-ms-error-response"];
+        public static bool IsErrorResponse(Response response) => response.Extensions.ContainsKey("x-error-response") && (bool)response.Extensions["x-error-response"];
+        
+        public bool IsErrorResponseWithErrorModel() => 
+            Responses.Values.Any(resp=> resp.Body is CompositeTypeCs && MethodCs.IsErrorResponse(resp)) ||
+                (DefaultResponse.Body is CompositeTypeCs);
+
+        public bool IsErrorResponseWithKnownType() => 
+            Responses.Values.Any(resp=> !(resp.Body is CompositeTypeCs) && MethodCs.IsErrorResponse(resp)) ||
+                !(DefaultResponse.Body is CompositeTypeCs);
+
+        public virtual string SetRequestIdForException() => string.Empty;
+
+        public IEnumerable<HttpStatusCode> GetErrorResponseStatusCodes() => Responses.Keys.Where(key=> MethodCs.IsErrorResponse(Responses[key]));
+                     
     }
 }

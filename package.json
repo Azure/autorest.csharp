@@ -31,9 +31,9 @@
   },
   "homepage": "https://github.com/Azure/autorest.csharp/blob/master/README.md",
   "devDependencies": {
-    "@microsoft.azure/autorest.testserver": "^2.3.22",
-    "@microsoft.azure/autorest.modeler": "2.3.43",
-    "autorest": "^2.0.4215",
+    "@microsoft.azure/autorest.testserver": "F:/artemp/rcm/autorest.testserver/microsoft.azure-autorest.testserver-2.3.22.tgz",
+    "@microsoft.azure/autorest.modeler": "F:/artemp/rcm/autorest.modeler/microsoft.azure-autorest.modeler-2.3.0.tgz",
+    "autorest": "^2.0.4238",
     "coffee-script": "^1.11.1",
     "dotnet-sdk-2.0.0": "^1.4.4",
     "gulp": "^3.9.1",
