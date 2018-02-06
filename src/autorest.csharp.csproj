@@ -59,20 +59,14 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.12" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.4.0-prerelease-1" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.4.0-prerelease-1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.11" />
-    <PackageReference Include="autorest.common" Version="2.4.36" />
+    <PackageReference Include="Microsoft.Autorest.Common" Version="2.4.42" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
-    <!-->
-    <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime\ClientRuntime\Microsoft.Rest.ClientRuntime.csproj" />
-    <ProjectReference Include="F:\artemp\rcm\azure-sdk-for-net\src\SdkCommon\ClientRuntime.Azure\ClientRuntime.Azure\Microsoft.Rest.ClientRuntime.Azure.csproj" />
-    <-->
   </ItemGroup>
 
   <ItemGroup>
@@ -83,17 +77,6 @@
     <PackageReference Include="dotnet-Perks.CodeGen" Version="2.0.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="autorest.common">
-      <HintPath>..\..\autorest.common\src\bin\netstandard2.0\autorest.common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Rest.ClientRuntime">
-      <HintPath>..\..\azure-sdk-for-net\src\SdkCommon\ClientRuntime.Azure\ClientRuntime.Azure\bin\Debug\netstandard1.4\Microsoft.Rest.ClientRuntime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Rest.ClientRuntime.Azure">
-      <HintPath>..\..\azure-sdk-for-net\src\SdkCommon\ClientRuntime.Azure\ClientRuntime.Azure\bin\Debug\netstandard1.4\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

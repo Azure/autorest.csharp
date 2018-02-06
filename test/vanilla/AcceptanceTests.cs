@@ -48,8 +48,8 @@ using Fixtures.Url.Models;
 using Fixtures.UrlMultiCollectionFormat;
 using Fixtures.Validation;
 using Fixtures.Validation.Models;
-using Fixtures.AcceptanceTestsXmsErrorResponses;
-using Fixtures.AcceptanceTestsXmsErrorResponses.Models;
+using Fixtures.XmsErrorResponses;
+using Fixtures.XmsErrorResponses.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -441,8 +441,7 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void CustomExceptionsAndStatusCodesTests()
         {
-            
-            using(var client = new Fixtures.AcceptanceTestsXmsErrorResponses.XMSErrorResponseExtensions(Fixture.Uri))
+            using(var client = new Fixtures.XmsErrorResponses.XMSErrorResponseExtensions(Fixture.Uri))
             {
                 // basic polymorphic and base types testing
 

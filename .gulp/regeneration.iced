@@ -24,9 +24,6 @@ regenExpected = (opts,done) ->
     for swaggerFile in swaggerFiles
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
     
-    args.push("--use=F:/artemp/rcm/autorest.modeler")
-    #args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
-
     if (opts.addCredentials)
       args.push("--csharp.add-credentials=true")
 
@@ -54,7 +51,7 @@ regenExpected = (opts,done) ->
       args.push("--override-info.title=#{opts['override-info.title']}")
     if (opts['override-info.description'])
       args.push("--override-info.description=#{opts['override-info.description']}")
-
+    
     if (argv.args)
       for arg in argv.args.split(" ")
         args.push(arg);
@@ -84,9 +81,6 @@ regenExpectedConfigurations = (configFiles,done) ->
       for arg in argv.args.split(" ")
         args.push(arg);
     
-    args.push("--use=F:/artemp/rcm/autorest.modeler")
-    #args.push("--version=F:/artemp/rcm/autorest/src/autorest-core")
-
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)
       # console.error(stderr)
@@ -148,8 +142,7 @@ configurationFiles = {
   'PseudoGenericType': 'pseudo-generic-type.md'
 }
 
-#swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
-swaggerDir = "F:/artemp/rcm/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger"
+swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums', 'regenerate-csazure-xms-error-responses'], (done) ->
   mappings = Object.assign({
@@ -304,7 +297,7 @@ task 'regenerate-csextensibleenums', '', (done) ->
 task 'regenerate-csazure-xms-error-responses', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/azure',
-    'mappings': {'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json'},
+    'mappings': {'XmsErrorResponses': 'xms-error-responses.json'},
     'inputBaseDir': swaggerDir,
     'outputDir': 'Expected',
     'azureArm': true,
@@ -316,7 +309,7 @@ task 'regenerate-csazure-xms-error-responses', '', (done) ->
 task 'regenerate-csxms-error-responses', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'mappings': {'AcceptanceTests/XmsErrorResponses': 'xms-error-responses.json'},
+    'mappings': {'XmsErrorResponses': 'xms-error-responses.json'},
     'inputBaseDir': swaggerDir,
     'outputDir': 'Expected',
     'nsPrefix': 'Fixtures',
