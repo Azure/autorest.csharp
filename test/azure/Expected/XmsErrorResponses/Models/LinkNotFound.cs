@@ -10,11 +10,12 @@
 
 namespace Fixtures.Azure.XmsErrorResponses.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
     [Newtonsoft.Json.JsonObject("InvalidResourceLink")]
-    public partial class LinkNotFound : NotFoundErrorBase
+    public partial class LinkNotFound : NotFoundErrorBase, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the LinkNotFound class.
@@ -44,5 +45,19 @@ namespace Fixtures.Azure.XmsErrorResponses.Models
         [JsonProperty(PropertyName = "whatSubAddress")]
         public string WhatSubAddress { get; set; }
 
+        /// <summary>
+        /// Method that creates an exception of LinkNotFoundException
+        /// </summary>
+        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
+        {
+            var ex = new LinkNotFoundException(errorMessage)
+            {
+                Request = requestMessage,
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
+            };
+            ex.Body = this;
+            throw ex;
+        }
     }
 }

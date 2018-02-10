@@ -10,10 +10,11 @@
 
 namespace Fixtures.Azure.XmsErrorResponses.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class AnimalNotFound : NotFoundErrorBase
+    public partial class AnimalNotFound : NotFoundErrorBase, IRestErrorModel
     {
         /// <summary>
         /// Initializes a new instance of the AnimalNotFound class.
@@ -43,5 +44,19 @@ namespace Fixtures.Azure.XmsErrorResponses.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Method that creates an exception of AnimalNotFoundException
+        /// </summary>
+        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
+        {
+            var ex = new AnimalNotFoundException(errorMessage)
+            {
+                Request = requestMessage,
+                Response = responseMessage,
+                HttpStatusCode = httpStatusCode
+            };
+            ex.Body = this;
+            throw ex;
+        }
     }
 }
