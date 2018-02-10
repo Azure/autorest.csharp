@@ -10,11 +10,10 @@
 
 namespace Fixtures.XmsErrorResponses.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class NotFoundErrorBase : BaseError, IRestErrorModel
+    public partial class NotFoundErrorBase : BaseError
     {
         /// <summary>
         /// Initializes a new instance of the NotFoundErrorBase class.
@@ -44,19 +43,5 @@ namespace Fixtures.XmsErrorResponses.Models
         [JsonProperty(PropertyName = "reason")]
         public string Reason { get; set; }
 
-        /// <summary>
-        /// Method that creates an exception of NotFoundErrorBaseException
-        /// </summary>
-        public virtual void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
-        {
-            var ex = new NotFoundErrorBaseException(errorMessage)
-            {
-                Request = requestMessage,
-                Response = responseMessage,
-                HttpStatusCode = httpStatusCode
-            };
-            ex.Body = this;
-            throw ex;
-        }
     }
 }

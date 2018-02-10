@@ -77,7 +77,7 @@ namespace Fixtures.XmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<Pet>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petId == null)
             {
@@ -161,7 +161,7 @@ namespace Fixtures.XmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new HttpOperationResponse<Pet>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -356,7 +356,7 @@ namespace Fixtures.XmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<PetAction>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (whatAction == null)
             {
@@ -434,7 +434,7 @@ namespace Fixtures.XmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new HttpOperationResponse<PetAction>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response

@@ -10,11 +10,10 @@
 
 namespace Fixtures.XmsErrorResponses.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class PetSadError : PetActionError, IRestErrorModel
+    public partial class PetSadError : PetActionError
     {
         /// <summary>
         /// Initializes a new instance of the PetSadError class.
@@ -47,19 +46,5 @@ namespace Fixtures.XmsErrorResponses.Models
         [JsonProperty(PropertyName = "reason")]
         public string Reason { get; set; }
 
-        /// <summary>
-        /// Method that creates an exception of PetSadErrorException
-        /// </summary>
-        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
-        {
-            var ex = new PetSadErrorException(errorMessage)
-            {
-                Request = requestMessage,
-                Response = responseMessage,
-                HttpStatusCode = httpStatusCode
-            };
-            ex.Body = this;
-            throw ex;
-        }
     }
 }

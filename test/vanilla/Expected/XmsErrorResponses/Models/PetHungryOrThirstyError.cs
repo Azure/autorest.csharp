@@ -10,11 +10,10 @@
 
 namespace Fixtures.XmsErrorResponses.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class PetHungryOrThirstyError : PetSadError, IRestErrorModel
+    public partial class PetHungryOrThirstyError : PetSadError
     {
         /// <summary>
         /// Initializes a new instance of the PetHungryOrThirstyError class.
@@ -49,19 +48,5 @@ namespace Fixtures.XmsErrorResponses.Models
         [JsonProperty(PropertyName = "hungryOrThirsty")]
         public string HungryOrThirsty { get; set; }
 
-        /// <summary>
-        /// Method that creates an exception of PetHungryOrThirstyErrorException
-        /// </summary>
-        public override void CreateAndThrowException(string errorMessage, HttpRequestMessageWrapper requestMessage, HttpResponseMessageWrapper responseMessage, int httpStatusCode)
-        {
-            var ex = new PetHungryOrThirstyErrorException(errorMessage)
-            {
-                Request = requestMessage,
-                Response = responseMessage,
-                HttpStatusCode = httpStatusCode
-            };
-            ex.Body = this;
-            throw ex;
-        }
     }
 }

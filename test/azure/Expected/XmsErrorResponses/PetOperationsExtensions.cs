@@ -30,7 +30,7 @@ namespace Fixtures.Azure.XmsErrorResponses
             /// <param name='petId'>
             /// pet id
             /// </param>
-            public static Pet GetPetById(this IPetOperations operations, string petId)
+            public static object GetPetById(this IPetOperations operations, string petId)
             {
                 return operations.GetPetByIdAsync(petId).GetAwaiter().GetResult();
             }
@@ -47,7 +47,7 @@ namespace Fixtures.Azure.XmsErrorResponses
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Pet> GetPetByIdAsync(this IPetOperations operations, string petId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetPetByIdAsync(this IPetOperations operations, string petId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetPetByIdWithHttpMessagesAsync(petId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.XmsErrorResponses
             /// <param name='whatAction'>
             /// what action the pet should do
             /// </param>
-            public static PetAction DoSomething(this IPetOperations operations, string whatAction)
+            public static object DoSomething(this IPetOperations operations, string whatAction)
             {
                 return operations.DoSomethingAsync(whatAction).GetAwaiter().GetResult();
             }
@@ -81,7 +81,7 @@ namespace Fixtures.Azure.XmsErrorResponses
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<PetAction> DoSomethingAsync(this IPetOperations operations, string whatAction, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> DoSomethingAsync(this IPetOperations operations, string whatAction, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DoSomethingWithHttpMessagesAsync(whatAction, null, cancellationToken).ConfigureAwait(false))
                 {

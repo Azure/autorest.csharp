@@ -77,7 +77,7 @@ namespace Fixtures.Azure.XmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Pet>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<object>> GetPetByIdWithHttpMessagesAsync(string petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petId == null)
             {
@@ -184,7 +184,7 @@ namespace Fixtures.Azure.XmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new AzureOperationResponse<Pet>();
+            var _result = new AzureOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -392,7 +392,7 @@ namespace Fixtures.Azure.XmsErrorResponses
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<PetAction>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<object>> DoSomethingWithHttpMessagesAsync(string whatAction, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (whatAction == null)
             {
@@ -493,7 +493,7 @@ namespace Fixtures.Azure.XmsErrorResponses
                 }
             }
             // Create Result
-            var _result = new AzureOperationResponse<PetAction>();
+            var _result = new AzureOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
