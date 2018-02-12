@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Azure
                 new Factory<EnumType, EnumTypeCs>(),
                 new Factory<Method, MethodCsa>(),
                 new Factory<MethodGroup, MethodGroupCsa>(),
-                new Factory<Parameter, ParameterCsa>(),
-                new Factory<PrimaryType, PrimaryTypeCsa>(),
+                new Factory<Parameter, ParameterCs>(),
+                new Factory<PrimaryType, PrimaryTypeCs>(),
                 new Factory<Property, PropertyCs>(),
                 new Factory<SequenceType, SequenceTypeCs>(),
 

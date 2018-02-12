@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Azure.Model
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
-        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension) && true == Extensions[AzureExtensions.LongRunningExtension] as bool?;
+        public bool IsLongRunningOperation => true == Extensions.Get<bool>(AzureExtensions.LongRunningExtension);
 
         private string ReturnTypePageInterfaceName
         {
@@ -254,8 +254,8 @@ namespace AutoRest.CSharp.Azure.Model
             builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
             if (LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                foreach (var queryParameter in LogicalParameters
-                    .Where(p => p.Location == ParameterLocation.Query).Select(p => p as ParameterCsa))
+                foreach (ParameterCs queryParameter in LogicalParameters
+                    .Where(p => p.Location == ParameterLocation.Query))
                 {
                     string queryParametersAddString =
                         "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
