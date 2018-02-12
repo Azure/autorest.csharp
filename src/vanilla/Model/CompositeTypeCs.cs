@@ -172,20 +172,21 @@ namespace AutoRest.CSharp.Model
                 }
             }
 
-            public string BaseCall => CreateBaseCall(_model);
-
-            private static string CreateBaseCall(CompositeTypeCs model)
+            public string BaseCall
             {
-                if (model.BaseModelType != null)
+                get
                 {
-                    IEnumerable<ConstructorParameterModel> parameters = (model.BaseModelType as CompositeTypeCs)._constructorModel.Parameters;
-                    if (parameters.Any())
+                    if (_model.BaseModelType != null)
                     {
-                        return $": base({string.Join(", ", parameters.Select(p => p.Name))})";
+                        var parameters = (_model.BaseModelType as CompositeTypeCs)._constructorModel.Parameters.Where(p => !p.UnderlyingProperty.IsConstant);
+                        if (parameters.Any())
+                        {
+                            return $": base({string.Join(", ", parameters.Select(p => p.Name))})";
+                        }
                     }
-                }
 
-                return string.Empty;
+                    return string.Empty;
+                }
             }
         }
 
