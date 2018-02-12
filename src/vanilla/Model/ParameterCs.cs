@@ -5,6 +5,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using AutoRest.Extensions.Azure;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -20,7 +21,13 @@ namespace AutoRest.CSharp.Model
         /// Gets True if parameter can call .Validate method
         /// </summary>
         [JsonIgnore]
-        public virtual bool CanBeValidated => Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation;
+        public virtual bool CanBeValidated => Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation && !IsODataFilterExpression;
+
+        /// <summary>
+        /// Gets True if parameter is OData $filter, $top, $orderby, $expand, $skip expression
+        /// </summary>
+        [JsonIgnore]
+        public virtual bool IsODataFilterExpression => base.Extensions.ContainsKey(AzureExtensions.ODataExtension);
 
         [JsonIgnore]
         public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
