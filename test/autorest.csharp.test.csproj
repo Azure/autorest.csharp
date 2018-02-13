@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.11" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.4.0-prerelease-1" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.4.0-prerelease-1" />
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime/ClientRuntime/Microsoft.Rest.ClientRuntime.csproj" /> -->
     <!-- <ProjectReference Include="C:/work/azure-sdk-for-net/src/SdkCommon/ClientRuntime.Azure/ClientRuntime.Azure/Microsoft.Rest.ClientRuntime.Azure.csproj" /> -->
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />

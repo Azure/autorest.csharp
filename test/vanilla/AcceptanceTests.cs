@@ -48,6 +48,8 @@ using Fixtures.Url.Models;
 using Fixtures.UrlMultiCollectionFormat;
 using Fixtures.Validation;
 using Fixtures.Validation.Models;
+using Fixtures.XmsErrorResponses;
+using Fixtures.XmsErrorResponses.Models;
 using Fixtures.InternalCtors;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
@@ -417,7 +419,7 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void ExtensibleEnumsTest()
         {
-            using (var client = new PetStoreInc(Fixture.Uri))
+            using (var client = new Fixtures.ExtensibleEnums.PetStoreInc(Fixture.Uri))
             {
                 // Valid enums test
                 Assert.Equal(client.Pet.GetByPetId("tommy").DaysOfWeek, DaysOfWeekExtensibleEnum.Monday);
@@ -436,6 +438,46 @@ namespace AutoRest.CSharp.Tests
             }
         }
         
+        [Fact]
+        public void CustomExceptionsAndStatusCodesTests()
+        {
+            using(var client = new Fixtures.XmsErrorResponses.XMSErrorResponseExtensions(Fixture.Uri))
+            {
+                // basic polymorphic and base types testing
+
+                // Test 1: valid pet received
+                var p1 = client.Pet.GetPetByIdAsync("tommy").GetAwaiter().GetResult();
+                Assert.Equal(p1.Name, "Tommy Tomson");
+                Assert.Equal(p1.AniType, "Dog");
+
+                // Test 2: invalid pet throws AnimalNotFoundException
+                var ex = Assert.ThrowsAsync<AnimalNotFoundException>(()=>client.Pet.GetPetByIdAsync("coyoteUgly"));
+                
+                // Test 3: invalid pet throws LinkNotFoundException
+                Assert.ThrowsAsync<LinkNotFoundException>(()=>client.Pet.GetPetByIdAsync("weirdAlYankovic"));
+                
+                // Test 4: invalid pet throws RestException<int>
+                Assert.ThrowsAsync<RestException<int>>(()=>client.Pet.GetPetByIdAsync("alien123"));
+                
+                // Test 5: invalid pet throws RestException<string>
+                Assert.ThrowsAsync<RestException<string>>(()=>client.Pet.GetPetByIdAsync("ringo"));
+
+                // Test 6: random invalid pet throws RestException<string> 
+                Assert.ThrowsAsync<RestException<string>>(()=>client.Pet.GetPetByIdAsync("foofoo"));
+                
+                // multi level polymorhpic inheritence testing
+
+                // test 1: valid action no exceptions
+                client.Pet.DoSomething("stay");
+
+                // test 2: invalid action throws PetSadErrorException
+                Assert.ThrowsAsync<PetSadErrorException>(()=>client.Pet.DoSomethingAsync("jump"));
+                
+                // test 3: invalid action throws PetHungryOrThirstyErrorException
+                Assert.ThrowsAsync<PetHungryOrThirstyErrorException>(()=>client.Pet.DoSomethingAsync("fetch"));
+                
+            }
+        }
 
         [Fact]
         public void DateTimeTests()
@@ -1024,7 +1066,7 @@ namespace AutoRest.CSharp.Tests
 
         private static void TestBasicDictionaryParsing(AutoRestSwaggerBATdictionaryService client)
         {
-// GET empty
+            // GET empty
             Assert.Empty(client.Dictionary.GetEmpty());
             // PUT empty
             client.Dictionary.PutEmpty(new Dictionary<string, string>());
@@ -1745,10 +1787,10 @@ namespace AutoRest.CSharp.Tests
             Assert.Null(client.MultipleResponses.GetDefaultModelA200None());
             client.MultipleResponses.GetDefaultModelA200Valid();
             client.MultipleResponses.GetDefaultModelA200None();
-            EnsureThrowsWithErrorModel<A>(HttpStatusCode.BadRequest,
+            EnsureThrowsWithErrorModel<AException>(HttpStatusCode.BadRequest,
                 () => client.MultipleResponses.GetDefaultModelA400Valid(), e => Assert.Equal("400", e.StatusCode));
-            EnsureThrowsWithErrorModel<A>(HttpStatusCode.BadRequest,
-                () => client.MultipleResponses.GetDefaultModelA400None(), Assert.Null);
+            EnsureThrowsWithErrorModel<RestException<A>>(HttpStatusCode.BadRequest,
+                () => client.MultipleResponses.GetDefaultModelA400None());
             client.MultipleResponses.GetDefaultNone200Invalid();
             client.MultipleResponses.GetDefaultNone200None();
             EnsureThrowsWithStatusCode(HttpStatusCode.BadRequest, client.MultipleResponses.GetDefaultNone400Invalid);
@@ -1854,12 +1896,12 @@ namespace AutoRest.CSharp.Tests
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
             var ex = Assert.Throws<ErrorException>(() => client.HttpFailure.GetEmptyError());
-            Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
-
-            var ex2 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelError());
+            Assert.Equal("Operation GetEmptyError returned status code: '400'", ex.Message);
+            
+            var ex2 = Assert.Throws<RestException<string>>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
 
-            var ex3 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelEmpty());
+            var ex3 = Assert.Throws<RestException<string>>(() => client.HttpFailure.GetNoModelEmpty());
             Assert.Equal(string.Empty, ex3.Response.Content);
 
             client.HttpSuccess.Head200();
@@ -1869,7 +1911,7 @@ namespace AutoRest.CSharp.Tests
             client.HttpSuccess.Patch200(true);
             client.HttpSuccess.Delete200(true);
             //TODO, 4042586: Support options operations in swagger modeler
-            //Assert.True(client.HttpSuccess.Options200();
+            //Assert.True(client.HttpSuccess.Options200());
             client.HttpSuccess.Put201(true);
             client.HttpSuccess.Post201(true);
             client.HttpSuccess.Put202(true);
@@ -2413,7 +2455,7 @@ namespace AutoRest.CSharp.Tests
         }
 
         private static void EnsureThrowsWithStatusCode(HttpStatusCode expectedStatusCode,
-            Action operation, Action<Error> errorValidator = null)
+            Action operation, Action<ErrorException> errorValidator = null)
         {
             EnsureThrowsWithErrorModel(expectedStatusCode, operation, errorValidator);
         }
@@ -2432,7 +2474,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception.Body as T);
+                    errorValidator(exception as T);
                 }
             }
             catch (AException exception1)
@@ -2440,20 +2482,52 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception1.Body as T);
+                    errorValidator(exception1 as T);
                 }
-            }
+            }       
             catch (HttpOperationException exception2)
             {
                 Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
                 if (errorValidator != null)
                 {
-                    errorValidator(exception2.Body as T);
+                    errorValidator(exception2 as T);
+                }
+            }
+            catch (RestException<string> exception3)
+            {
+                Assert.Equal(expectedStatusCode, exception3.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception3 as T);
+                }
+            }
+            catch (RestException<A> exception5)
+            {
+                Assert.Equal(expectedStatusCode, exception5.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception5 as T);
+                }
+            }
+            catch (RestException<Error> exception6)
+            {
+                Assert.Equal(expectedStatusCode, exception6.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception6 as T);
+                }
+            }
+            catch (RestException<T> exception4)
+            {
+                Assert.Equal(expectedStatusCode, exception4.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception4 as T);
                 }
             }
         }
 
-        private static Action<Error> GetDefaultErrorValidator(int code, string message)
+        private static Action<ErrorException> GetDefaultErrorValidator(int code, string message)
         {
             return e =>
             {

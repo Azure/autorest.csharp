@@ -29,7 +29,7 @@ namespace Zapappi.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">

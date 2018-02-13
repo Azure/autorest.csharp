@@ -57,7 +57,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -108,8 +108,6 @@ namespace Fixtures.Components
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -123,28 +121,20 @@ namespace Fixtures.Components
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForGet(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse<Cowbell>();
@@ -153,6 +143,7 @@ namespace Fixtures.Components
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
+                string _responseContent = null;
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
@@ -176,6 +167,67 @@ namespace Fixtures.Components
         }
 
         /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGet(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForGet<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGet(int statusCode)
+        {
+            return string.Format("Operation Get returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForGet<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForGet(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
+        /// <summary>
         /// A good description.
         /// </summary>
         /// <param name='body'>
@@ -186,7 +238,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -242,7 +294,6 @@ namespace Fixtures.Components
                 }
             }
 
-            // Serialize Request
             string _requestContent = null;
             if(body != null)
             {
@@ -263,28 +314,20 @@ namespace Fixtures.Components
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForAdd(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -297,13 +340,74 @@ namespace Fixtures.Components
             return _result;
         }
 
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForAdd(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForAdd<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForAdd(int statusCode)
+        {
+            return string.Format("Operation Add returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForAdd<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForAdd(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
+        }
+
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -314,13 +418,14 @@ namespace Fixtures.Components
             throw new System.NotImplementedException();
         }
 
+
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -332,13 +437,14 @@ namespace Fixtures.Components
             return null; // no cowbell to retrieve here
         }
 
+
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -350,6 +456,7 @@ namespace Fixtures.Components
             return null; // no cowbell to retrieve here
         }
 
+
         /// <param name='id'>
         /// </param>
         /// <param name='customHeaders'>
@@ -358,7 +465,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -372,13 +479,14 @@ namespace Fixtures.Components
                 cancellationToken: cancellationToken);
         }
 
+
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
@@ -392,6 +500,7 @@ namespace Fixtures.Components
                 cancellationToken: cancellationToken);
         }
 
+
         /// <param name='name'>
         /// </param>
         /// <param name='id'>
@@ -402,7 +511,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -422,6 +531,7 @@ namespace Fixtures.Components
                 cancellationToken: cancellationToken);
         }
 
+
         /// <param name='name'>
         /// </param>
         /// <param name='idx'>
@@ -432,7 +542,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -452,6 +562,7 @@ namespace Fixtures.Components
                 cancellationToken: cancellationToken);
         }
 
+
         /// <param name='name'>
         /// </param>
         /// <param name='idx'>
@@ -462,7 +573,7 @@ namespace Fixtures.Components
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -481,6 +592,7 @@ namespace Fixtures.Components
                 customHeaders: customHeaders,
                 cancellationToken: cancellationToken);
         }
+
 
     }
 }

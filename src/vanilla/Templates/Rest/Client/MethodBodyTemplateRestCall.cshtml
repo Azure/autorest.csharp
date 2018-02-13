@@ -123,8 +123,6 @@ if (customHeaders != null)
 }
 @EmptyLine
 
-// Serialize Request
-string _requestContent = null;
 @if (Model.RequestBody != null)
 {
     if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
@@ -146,6 +144,7 @@ if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.
     }
     else
     {
+@:string _requestContent = null;
         if (Model.RequestContentType.StartsWith("application/xml"))
         {
             if (!Model.RequestBody.IsNullable()) {
@@ -287,60 +286,39 @@ if (_shouldTrace)
 
 System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
 cancellationToken.ThrowIfCancellationRequested();
-string _responseContent = null;
 
 if (@(Model.FailureStatusCodePredicate))
 {
-    var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-@if (Model.DefaultResponse.Body != null)
-{
-    @:try
-    @:{
-        if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
+    try
+    {
+        @if(Model.GetErrorResponseStatusCodes().Any())
         {
-        @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        @:switch((int)_statusCode)
+        @:{
+            foreach(var errorCode in Model.GetErrorResponseStatusCodes())
+            {
+            @:case @((int)errorCode):
+                @:await this.Handle@((int)errorCode)ErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse);
+                @:break;
+            }
+            @:default:
+                @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
+                @:break;
+        @:}
         }
         else
         {
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:await this.HandleDefaultErrorResponseFor@(Model.Name)(_httpRequest, _httpResponse, (int)_statusCode);
         }
-        @:if (_errorBody != null)
-        @:{
-            @:@(Model.InitializeExceptionWithMessage)
-            @:ex.Body = _errorBody;
-        @:}
-    @:}
-    @:catch (Newtonsoft.Json.JsonException)
-    @:{
-    @:    // Ignore the exception
-    @:}
-}
-else
-{
-    //If not defined by default model, read content as string
-    @:if (_httpResponse.Content != null) {
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-    @:}
-    @:else {
-        @:_responseContent = string.Empty;
-    @:}
-}
-
-    ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-    ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
-    @(Model.InitializeException)
-    if (_shouldTrace)
-    {
-        Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
     }
-
-    _httpRequest.Dispose();
-    if (_httpResponse != null)
+    catch(RestException ex)
     {
-        _httpResponse.Dispose();
+        if (_shouldTrace)
+        {
+            Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+        }
+        throw;
     }
-    throw ex;
 }
 
 // Create Result
@@ -349,7 +327,7 @@ _result.Request = _httpRequest;
 _result.Response = _httpResponse;
 @(Model.InitializeResponseBody)
 
-@foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
+@foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null && !MethodCs.IsErrorResponse(r.Value)))
 {
 <text>
 // Deserialize Response
@@ -360,7 +338,7 @@ if ((int)_statusCode == @MethodCs.GetStatusCodeReference(responsePair.Key))
     @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
     else
-    {<text>
+    {<text>    string _responseContent = null;
     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     try
     {

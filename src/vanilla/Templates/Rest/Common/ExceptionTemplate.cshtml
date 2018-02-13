@@ -1,4 +1,10 @@
 ﻿@using System.Linq
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@using AutoRest.Extensions
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
@@ -8,51 +14,98 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
+@{
+    var baseModelType = "Microsoft.Rest.RestException<" + Model.Name + ">";
+}
 @if (Model.Deprecated)
 {
     @:[System.Obsolete()]
 }
-    public partial class @Model.ExceptionTypeDefinitionName : Microsoft.Rest.RestException
+    public partial class @Model.ExceptionTypeDefinitionName : @baseModelType
     {
-        /// <summary>
-        /// Gets information about the associated HTTP request.
-        /// </summary>
-        public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
-@EmptyLine
-        /// <summary>
-        /// Gets information about the associated HTTP response.
-        /// </summary>
-        public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
-@EmptyLine
-        /// <summary>
-        /// Gets or sets the body object.
-        /// </summary>
-        public @Model.Name Body { get; set; }
-@EmptyLine
+        @EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         public @(@Model.ExceptionTypeDefinitionName)()
         {
         }
-@EmptyLine
+        @EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         public @(Model.ExceptionTypeDefinitionName)(string message)
-            : this(message, null)
+        : this(message, null)
         {
         }
-@EmptyLine
+        @EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
         public @(Model.ExceptionTypeDefinitionName)(string message, System.Exception innerException)
-            : base(message, innerException)
+        : base(message, innerException)
         {
         }
+        @EmptyLine
+
+    @{
+        var props = Model.InstanceProperties;
+        var modelType = Model.BaseModelType;
+        while (modelType != null && modelType is CompositeTypeCs)
+        {
+            props = props.Union((modelType as CompositeTypeCs).InstanceProperties);
+            modelType = modelType.BaseModelType;
+        }
+    }
+    @foreach (PropertyCs property in props)
+    {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.GetFormattedPropertySummary())
+        @:/// </summary>
+        if (!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
+        {
+        @:/// <remarks>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </remarks>
+        }
+
+        if (property.Name == "Message")
+        {
+        @:public override string Message
+        @:{
+            @:get
+            @:{
+                @:return (string.IsNullOrEmpty(Body?.Message))? base.Message : Body.Message;
+            @:}
+        @:}
+        }
+        else
+        {
+            if (property.IsNullable())
+            {
+        @:public @property.ModelTypeName @property.Name
+        @:{
+            @:get
+            @:{
+                @:return Body?.@property.Name;
+            @:}
+        @:}
+            }
+            else
+            {
+        @:public @property.ModelTypeName @(Model.DisambiguateExceptionPropertyName(@property.Name))
+        @:{
+            @:get
+            @:{ 
+                @:return Body?.@property.Name ?? default(@property.ModelTypeName);
+            @:}
+        @:}
+            }
+        }
+        @EmptyLine
+    }
     }
 }

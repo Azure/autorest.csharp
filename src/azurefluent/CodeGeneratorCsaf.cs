@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes).Where(m => !m.IsResource()));
             await GenerateEnums(codeModel.EnumTypes);
             await GeneratePageClasses(codeModel.pageClasses);
-            await GenerateExceptions(codeModel.ErrorTypes);
+            await GenerateExceptions(codeModel.ErrorTypes, codeModel.ModelTypes.Union(codeModel.HeaderTypes).Where(m => !m.IsResource()));
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 await GenerateXmlSerialization();

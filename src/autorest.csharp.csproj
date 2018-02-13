@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" >
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><PowerShell># 2&gt;nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
   <PropertyGroup>
@@ -59,13 +59,13 @@
   </Target>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.4.0-prerelease-1" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.4.0-prerelease-1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.11" />
-    <PackageReference Include="autorest.common" Version="2.4.36" />
+    <PackageReference Include="Microsoft.Autorest.Common" Version="2.4.42" />
     <!-- <ProjectReference Include="../../autorest.common/src/autorest.common.csproj" /> -->
   </ItemGroup>
 

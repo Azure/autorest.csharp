@@ -23,7 +23,7 @@ regenExpected = (opts,done) ->
 
     for swaggerFile in swaggerFiles
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
-
+    
     if (opts.addCredentials)
       args.push("--csharp.add-credentials=true")
 
@@ -51,7 +51,7 @@ regenExpected = (opts,done) ->
       args.push("--override-info.title=#{opts['override-info.title']}")
     if (opts['override-info.description'])
       args.push("--override-info.description=#{opts['override-info.description']}")
-
+    
     if (argv.args)
       for arg in argv.args.split(" ")
         args.push(arg);
@@ -80,7 +80,7 @@ regenExpectedConfigurations = (configFiles,done) ->
     if (argv.args)
       for arg in argv.args.split(" ")
         args.push(arg);
-
+    
     autorest args,(code, stdout, stderr) =>
       # console.log(stdout)
       # console.error(stderr)
@@ -144,7 +144,7 @@ configurationFiles = {
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
-task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums'], (done) ->
+task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync', 'regenerate-csextensibleenums', 'regenerate-csazure-xms-error-responses'], (done) ->
   mappings = Object.assign({
     'AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
@@ -176,7 +176,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   },done
   return null
 
-task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-cs-config'], (done) ->
+task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync', 'regenerate-cs-config', 'regenerate-csxms-error-responses'], (done) ->
   mappings = {
     'Mirror.RecursiveTypes': 'swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'swagger-mirror-primitives.json',
@@ -293,6 +293,30 @@ task 'regenerate-csextensibleenums', '', (done) ->
     'flatteningThreshold': '1'
   },done
   return null
+
+task 'regenerate-csazure-xms-error-responses', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/azure',
+    'mappings': {'XmsErrorResponses': 'xms-error-responses.json'},
+    'inputBaseDir': swaggerDir,
+    'outputDir': 'Expected',
+    'azureArm': true,
+    'nsPrefix': 'Fixtures.Azure',
+    'flatteningThreshold': '1'
+  },done
+  return null
+
+task 'regenerate-csxms-error-responses', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'test/vanilla',
+    'mappings': {'XmsErrorResponses': 'xms-error-responses.json'},
+    'inputBaseDir': swaggerDir,
+    'outputDir': 'Expected',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  },done
+  return null
+
 
 task 'regenerate-csazurenosync', '', (done) ->
   mappings = {

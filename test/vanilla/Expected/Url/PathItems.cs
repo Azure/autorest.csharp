@@ -158,8 +158,6 @@ namespace Fixtures.Url
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -173,35 +171,20 @@ namespace Fixtures.Url
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    await HandleDefaultErrorResponseForGetAllWithValues(_httpRequest, _httpResponse, (int)_statusCode);
+                }
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
                     {
-                        ex.Body = _errorBody;
+                        ServiceClientTracing.Error(_invocationId, ex);
                     }
+                    throw;
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -212,6 +195,71 @@ namespace Fixtures.Url
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetAllWithValues(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetAllWithValues<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetAllWithValues(int statusCode)
+        {
+            return string.Format("Operation GetAllWithValues returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetAllWithValues<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetAllWithValues(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    }
+                    else
+                    {
+                        throw new RestException<V>(errorMessage)
+                            {
+                                Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
+                            };
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                    throw new RestException<V>(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
+                        };
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
         }
 
         /// <summary>
@@ -321,8 +369,6 @@ namespace Fixtures.Url
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -336,35 +382,20 @@ namespace Fixtures.Url
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    await HandleDefaultErrorResponseForGetGlobalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
+                }
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
                     {
-                        ex.Body = _errorBody;
+                        ServiceClientTracing.Error(_invocationId, ex);
                     }
+                    throw;
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -375,6 +406,71 @@ namespace Fixtures.Url
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetGlobalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetGlobalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetGlobalQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetGlobalQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetGlobalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetGlobalQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    }
+                    else
+                    {
+                        throw new RestException<V>(errorMessage)
+                            {
+                                Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
+                            };
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                    throw new RestException<V>(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
+                        };
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
         }
 
         /// <summary>
@@ -484,8 +580,6 @@ namespace Fixtures.Url
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -499,35 +593,20 @@ namespace Fixtures.Url
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    await HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
+                }
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
                     {
-                        ex.Body = _errorBody;
+                        ServiceClientTracing.Error(_invocationId, ex);
                     }
+                    throw;
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -538,6 +617,71 @@ namespace Fixtures.Url
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetGlobalAndLocalQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetGlobalAndLocalQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetGlobalAndLocalQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetGlobalAndLocalQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetGlobalAndLocalQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetGlobalAndLocalQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    }
+                    else
+                    {
+                        throw new RestException<V>(errorMessage)
+                            {
+                                Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
+                            };
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                    throw new RestException<V>(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
+                        };
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
         }
 
         /// <summary>
@@ -647,8 +791,6 @@ namespace Fixtures.Url
                 }
             }
 
-            // Serialize Request
-            string _requestContent = null;
             // Send Request
             if (_shouldTrace)
             {
@@ -662,35 +804,20 @@ namespace Fixtures.Url
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
+                    await HandleDefaultErrorResponseForGetLocalPathItemQueryNull(_httpRequest, _httpResponse, (int)_statusCode);
+                }
+                catch(RestException ex)
+                {
+                    if (_shouldTrace)
                     {
-                        ex.Body = _errorBody;
+                        ServiceClientTracing.Error(_invocationId, ex);
                     }
+                    throw;
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -701,6 +828,71 @@ namespace Fixtures.Url
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="ErrorException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForGetLocalPathItemQueryNull(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseForGetLocalPathItemQueryNull<Error>(_httpRequest, _httpResponse, statusCode, Client.DeserializationSettings);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForGetLocalPathItemQueryNull(int statusCode)
+        {
+            return string.Format("Operation GetLocalPathItemQueryNull returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle error responses, deserialize errors of types V and throw exceptions of type T
+        /// </summary>
+        private async Task HandleErrorResponseForGetLocalPathItemQueryNull<V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode, JsonSerializerSettings deserializationSettings)
+            where V : IRestErrorModel
+        {
+            string errorMessage = GetErrorMessageForGetLocalPathItemQueryNull(statusCode);
+            string _responseContent = null;
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, deserializationSettings);
+                    if(errorResponseModel!=null)
+                    {
+                        errorResponseModel.CreateAndThrowException(errorMessage, new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()), new HttpResponseMessageWrapper(_httpResponse, _responseContent), statusCode);
+                    }
+                    else
+                    {
+                        throw new RestException<V>(errorMessage)
+                            {
+                                Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                                Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                                HttpStatusCode = statusCode
+                            };
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                    throw new RestException<V>(errorMessage)
+                        {
+                            Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString()),
+                            Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent),
+                            HttpStatusCode = statusCode
+                        };
+                }
+            }
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
         }
 
     }

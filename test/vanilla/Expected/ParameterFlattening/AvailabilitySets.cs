@@ -12,6 +12,7 @@ namespace Fixtures.ParameterFlattening
 {
     using Microsoft.Rest;
     using Models;
+    using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -67,7 +68,7 @@ namespace Fixtures.ParameterFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="HttpOperationException">
+        /// <exception cref="T:Microsoft.Rest.RestException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -143,7 +144,6 @@ namespace Fixtures.ParameterFlattening
                 }
             }
 
-            // Serialize Request
             string _requestContent = null;
             if(tags1 != null)
             {
@@ -164,28 +164,20 @@ namespace Fixtures.ParameterFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
+                try
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    await HandleDefaultErrorResponseForUpdate(_httpRequest, _httpResponse, (int)_statusCode);
                 }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
+                catch(RestException ex)
                 {
-                    _httpResponse.Dispose();
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw;
                 }
-                throw ex;
             }
             // Create Result
             var _result = new HttpOperationResponse();
@@ -196,6 +188,67 @@ namespace Fixtures.ParameterFlattening
                 ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
+        }
+
+        /// <summary>
+        /// Handle other unhandled status codes
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleDefaultErrorResponseForUpdate(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            await HandleErrorResponseWithKnownTypeForUpdate<string>(_httpRequest, _httpResponse, statusCode);
+        }
+
+        /// <summary>
+        /// Method that generates error message for status code
+        /// </summary>
+        private string GetErrorMessageForUpdate(int statusCode)
+        {
+            return string.Format("Operation Update returned status code: '{0}'", statusCode);
+        }
+
+        /// <summary>
+        /// Handle responses where error model is a known primary type
+        /// Creates a RestException object and throws it
+        /// </summary>
+        /// <exception cref="T:Microsoft.Rest.RestException">
+        /// Deserialize error body returned by the operation
+        /// </exception>
+        private async Task HandleErrorResponseWithKnownTypeForUpdate<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, int statusCode)
+        {
+            string _responseContent = null;
+            var ex = new RestException<T>(GetErrorMessageForUpdate(statusCode))
+                            {
+                                HttpStatusCode = statusCode
+                            };
+            if (_httpResponse.Content != null)
+            {
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var errorResponseModel = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent);
+                    ex.Body = errorResponseModel;
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+            }
+            else
+            {
+                _responseContent = string.Empty;
+            }
+
+            ex.Request = new HttpRequestMessageWrapper(_httpRequest, _httpRequest.Content.AsString());
+            ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw ex;
         }
 
     }
