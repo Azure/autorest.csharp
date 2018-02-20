@@ -83,7 +83,7 @@ components:
         - a
         - b
       x-ms-enum:
-        modelAsString: true
+        oldModelAsString: true
         name: Enum2No
     Enum2Yes:
       deprecated: true
@@ -92,7 +92,7 @@ components:
         - a
         - b
       x-ms-enum:
-        modelAsString: true
+        oldModelAsString: true
         name: Enum2Yes
     Enum3No:
       type: string
@@ -100,7 +100,7 @@ components:
         - a
         - b
       x-ms-enum:
-        modelAsExtensible: true
+        modelAsString: true
         name: Enum3No
     Enum3Yes:
       deprecated: true
@@ -109,5 +109,5 @@ components:
         - a
         - b
       x-ms-enum:
-        modelAsExtensible: true
+        modelAsString: true
         name: Enum3Yes

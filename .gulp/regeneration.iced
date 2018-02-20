@@ -52,6 +52,9 @@ regenExpected = (opts,done) ->
     if (opts['override-info.description'])
       args.push("--override-info.description=#{opts['override-info.description']}")
 
+    args.push('--version=F:/artemp/rcm/autorest/src/autorest-core')
+    args.push('--use=F:/artemp/rcm/autorest.modeler')
+
     if (argv.args)
       for arg in argv.args.split(" ")
         args.push(arg);
@@ -76,6 +79,8 @@ regenExpectedConfigurations = (configFiles,done) ->
     ]
 
     args.push("--output-folder=$(base-folder)/../../../test/vanilla/Expected/#{key}")
+    args.push('--version=F:/artemp/rcm/autorest/src/autorest-core')
+    args.push('--use=F:/artemp/rcm/autorest.modeler')
 
     if (argv.args)
       for arg in argv.args.split(" ")

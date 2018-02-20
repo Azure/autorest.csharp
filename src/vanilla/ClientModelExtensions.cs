@@ -202,7 +202,7 @@ namespace AutoRest.CSharp
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
-            if (enumType != null && enumType.ModelAsString)
+            if (enumType != null && enumType.OldModelAsString)
             {
                 primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp
                 pt.KnownPrimaryType == KnownPrimaryType.String &&
                 pt.KnownFormat != KnownFormat.@char ||
             t is EnumType et &&
-                et.ModelAsString;
+                (et.OldModelAsString || (string.IsNullOrEmpty(et.Name) && et.ModelAsString));
 
         /// <summary>
         /// Simple conversion of the type to string
