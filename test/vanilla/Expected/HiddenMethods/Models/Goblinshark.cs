@@ -25,10 +25,13 @@ namespace Fixtures.HiddenMethods.Models
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
+        /// <param name="color">Colors possible. Possible values include:
+        /// 'pink', 'gray', 'brown'</param>
+        public Goblinshark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?), GoblinSharkColor? color = default(GoblinSharkColor?))
             : base(length, birthday, species, siblings, age)
         {
             Jawsize = jawsize;
+            Color = color;
             CustomInit();
         }
 
@@ -41,6 +44,13 @@ namespace Fixtures.HiddenMethods.Models
         /// </summary>
         [JsonProperty(PropertyName = "jawsize")]
         public int? Jawsize { get; set; }
+
+        /// <summary>
+        /// Gets or sets colors possible. Possible values include: 'pink',
+        /// 'gray', 'brown'
+        /// </summary>
+        [JsonProperty(PropertyName = "color")]
+        public GoblinSharkColor? Color { get; set; }
 
         /// <summary>
         /// Validate the object.
