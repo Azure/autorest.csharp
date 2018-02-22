@@ -219,14 +219,25 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
     <text>        
     System.Net.Http.StreamContent _@parameter.Name = new System.Net.Http.StreamContent(@parameter.Name);
     @(localParam).Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-    System.IO.FileStream @(localParam)AsFileStream = @parameter.Name as System.IO.FileStream;
-    if (@(localParam)AsFileStream != null)
+    System.Net.Http.Headers.ContentDispositionHeaderValue _contentDispositionHeaderValue = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
+    _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
+
+    // get filename from stream if it's a file otherwise, just use  'unknown'
+    var _fileName = (file as System.IO.FileStream)?.Name ?? "unknown";
+
+    if(_fileName.Any(c => c > 127))
     {
-        System.Net.Http.Headers.ContentDispositionHeaderValue _contentDispositionHeaderValue = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
-        _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
-        _contentDispositionHeaderValue.FileName = @(localParam)AsFileStream.Name;
-        @(localParam).Headers.ContentDisposition = _contentDispositionHeaderValue;        
-    }    
+        // non ASCII chars detected, need UTF encoding:
+        _contentDispositionHeaderValue.FileNameStar = _fileName;
+    }
+    else
+    {
+        // ASCII only
+        _contentDispositionHeaderValue.FileName = _fileName;
+    } 
+
+    @(localParam).Headers.ContentDisposition = _contentDispositionHeaderValue;        
+
 </text>
         }
         else
