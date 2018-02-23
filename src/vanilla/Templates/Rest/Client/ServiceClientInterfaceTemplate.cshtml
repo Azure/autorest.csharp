@@ -77,10 +77,10 @@ namespace @Settings.Namespace
         @:@WrapComment("/// ", method.Description.EscapeXmlComment())
         @:/// </remarks>
         }
-        foreach (var parameter in method.LocalParameters)
+        foreach (ParameterCs parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>
-        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())
         @:/// </param>
         }
         @:/// <param name='customHeaders'>
