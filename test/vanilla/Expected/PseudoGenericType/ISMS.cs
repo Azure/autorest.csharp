@@ -71,7 +71,7 @@ namespace Zapappi.Client
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [System.Obsolete()]
+        [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
         Task<HttpOperationResponse<IList<SMSQueueItem>>> GetSmsQueueWithHttpMessagesAsync(string numberId, string subscriptionId, string id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Deletes a specific SMS from the queue
@@ -99,7 +99,7 @@ namespace Zapappi.Client
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [System.Obsolete()]
+        [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
         Task<HttpOperationResponse<object>> GetSmsFromQueueWithHttpMessagesAsync(string id, string entryId, string subscriptionId, string messageId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Returns the SMS Log for the given Subscription Id
