@@ -67,10 +67,7 @@ namespace @Settings.Namespace
         @:/// Thrown when a required parameter is null
         @:/// </exception>
         }
-        @if (method.Deprecated)
-        {
-        @:[System.Obsolete()]
-        }
+        @:@(method.GetObsoleteAttribute())
         @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
     }
     }

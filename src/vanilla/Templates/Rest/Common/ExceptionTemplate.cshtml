@@ -8,10 +8,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-@if (Model.Deprecated)
-{
-    @:[System.Obsolete()]
-}
+    @(Model.GetObsoleteAttribute())
     public partial class @Model.ExceptionTypeDefinitionName : Microsoft.Rest.RestException
     {
         /// <summary>

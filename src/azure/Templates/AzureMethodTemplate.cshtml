@@ -41,10 +41,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
+@(Model.GetObsoleteAttribute())
 @((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
@@ -85,10 +82,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
+@(Model.GetObsoleteAttribute())
 @((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request

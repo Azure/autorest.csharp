@@ -57,10 +57,7 @@
 /// <return>
 /// A response object containing the response body and response headers.
 /// </return>
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
+@(Model.GetObsoleteAttribute())
 @(Model.AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @switch (Model.Flavor)
