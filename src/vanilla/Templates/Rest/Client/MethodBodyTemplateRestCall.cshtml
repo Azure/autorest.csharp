@@ -225,7 +225,7 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
     // get filename from stream if it's a file otherwise, just use  'unknown'
     var _fileName = (file as System.IO.FileStream)?.Name ?? "unknown";
 
-    if(_fileName.Any(c => c > 127))
+    if(System.Linq.Enumerable.Any(_fileName, c => c > 127) )
     {
         // non ASCII chars detected, need UTF encoding:
         _contentDispositionHeaderValue.FileNameStar = _fileName;
