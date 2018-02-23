@@ -27,10 +27,10 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
-    foreach (var parameter in Model.LocalParameters)
+    foreach (ParameterCs parameter in Model.LocalParameters)
     {
 @:/// <param name='@parameter.Name'>
-@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())
 @:/// </param>
     }
 @(Model.GetObsoleteAttribute())
@@ -71,10 +71,10 @@ if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summ
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
-foreach (var parameter in Model.LocalParameters)
+foreach (ParameterCs parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
-@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())
 @:/// </param>
 }
 @:/// <param name='cancellationToken'>
@@ -134,10 +134,10 @@ foreach (var parameter in Model.LocalParameters)
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
-    foreach (var parameter in Model.LocalParameters)
+    foreach (ParameterCs parameter in Model.LocalParameters)
     {
 @:/// <param name='@parameter.Name'>
-@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())
 @:/// </param>
     }
 @:/// <param name='customHeaders'>
