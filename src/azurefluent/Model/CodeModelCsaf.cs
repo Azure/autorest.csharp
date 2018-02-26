@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Model;
+using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Azure.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -29,18 +30,18 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
                 SerializedName = "Resource",
             });
             _resourceType.Name.FixedValue = "Microsoft.Rest.Azure.Resource";
-            _resourceType.Add(New <Property>(new { Name = "location", SerializedName = "location", ModelType = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "id", SerializedName = "id", ModelType = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "name", SerializedName = "name", ModelType = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "type", SerializedName = "type", ModelType = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) }));
+            _resourceType.Add(new PropertyCs { Name = "location", SerializedName = "location", ModelType = stringType });
+            _resourceType.Add(new PropertyCs { Name = "id", SerializedName = "id", ModelType = stringType });
+            _resourceType.Add(new PropertyCs { Name = "name", SerializedName = "name", ModelType = stringType });
+            _resourceType.Add(new PropertyCs { Name = "type", SerializedName = "type", ModelType = stringType });
+            _resourceType.Add(new PropertyCs { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) });
 
             _subResourceType = New<CompositeType>(new
             {
                 SerializedName = "SubResource"
             });
             _subResourceType.Name.FixedValue = "Microsoft.Rest.Azure.SubResource";
-            _subResourceType.Add(New<Property>(new { Name = "id", SerializedName = "id", ModelType = stringType }));
+            _subResourceType.Add(new PropertyCs { Name = "id", SerializedName = "id", ModelType = stringType });
         }
     }
 }

@@ -77,7 +77,7 @@ namespace Zapappi.Client
             /// </param>
             /// <param name='id'>
             /// </param>
-            [System.Obsolete()]
+            [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
             public static IList<SMSQueueItem> GetSmsQueue(this ISMS operations, string numberId, string subscriptionId, string id)
             {
                 return operations.GetSmsQueueAsync(numberId, subscriptionId, id).GetAwaiter().GetResult();
@@ -98,7 +98,7 @@ namespace Zapappi.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            [System.Obsolete()]
+            [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
             public static async Task<IList<SMSQueueItem>> GetSmsQueueAsync(this ISMS operations, string numberId, string subscriptionId, string id, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSmsQueueWithHttpMessagesAsync(numberId, subscriptionId, id, null, cancellationToken).ConfigureAwait(false))
@@ -121,7 +121,7 @@ namespace Zapappi.Client
             /// </param>
             /// <param name='messageId'>
             /// </param>
-            [System.Obsolete()]
+            [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
             public static object GetSmsFromQueue(this ISMS operations, string id, string entryId, string subscriptionId, string messageId)
             {
                 return operations.GetSmsFromQueueAsync(id, entryId, subscriptionId, messageId).GetAwaiter().GetResult();
@@ -144,7 +144,7 @@ namespace Zapappi.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            [System.Obsolete()]
+            [System.Obsolete("This operation is deprecated. Please do not use it any longer.")]
             public static async Task<object> GetSmsFromQueueAsync(this ISMS operations, string id, string entryId, string subscriptionId, string messageId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSmsFromQueueWithHttpMessagesAsync(id, entryId, subscriptionId, messageId, null, cancellationToken).ConfigureAwait(false))
