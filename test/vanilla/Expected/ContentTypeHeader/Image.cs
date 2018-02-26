@@ -442,15 +442,11 @@ namespace Fixtures.ContentTypeHeader
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DWithHttpMessagesAsync(Stream image, string imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DWithHttpMessagesAsync(Stream image, ImageTypeRestrictedStrings imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (image == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "image");
-            }
-            if (imageContentType == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "imageContentType");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -496,7 +492,7 @@ namespace Fixtures.ContentTypeHeader
             if (image != null && image != Stream.Null)
             {
                 _httpRequest.Content = new StreamContent(image);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType.ToSerializedValue());
             }
             // Send Request
             if (_shouldTrace)

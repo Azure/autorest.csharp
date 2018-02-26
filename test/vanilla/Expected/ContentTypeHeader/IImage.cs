@@ -98,6 +98,6 @@ namespace Fixtures.ContentTypeHeader
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DWithHttpMessagesAsync(Stream image, string imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DWithHttpMessagesAsync(Stream image, ImageTypeRestrictedStrings imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
