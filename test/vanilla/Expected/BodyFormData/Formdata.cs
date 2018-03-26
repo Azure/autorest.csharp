@@ -133,14 +133,22 @@ namespace Fixtures.BodyFormData
             {
                 StreamContent _fileContent = new StreamContent(fileContent);
                 _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                FileStream _fileContentAsFileStream = fileContent as FileStream;
-                if (_fileContentAsFileStream != null)
+                ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+                _contentDispositionHeaderValue.Name = "fileContent";
+                // get filename from stream if it's a file otherwise, just use  'unknown'
+                var _fileStream = fileContent as FileStream;
+                var _fileName = (_fileStream != null ? _fileStream.Name : null) ?? "unknown";
+                if(System.Linq.Enumerable.Any(_fileName, c => c > 127) )
                 {
-                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
-                    _contentDispositionHeaderValue.Name = "fileContent";
-                    _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
-                    _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
+                    // non ASCII chars detected, need UTF encoding:
+                    _contentDispositionHeaderValue.FileNameStar = _fileName;
                 }
+                else
+                {
+                    // ASCII only
+                    _contentDispositionHeaderValue.FileName = _fileName;
+                }
+                _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
                 _multiPartContent.Add(_fileContent, "fileContent");
             }
             if (fileName != null)

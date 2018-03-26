@@ -4,6 +4,7 @@
   "description": "The C# extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
+    "code" : "code .",
     "start": "dotnet src/bin/netcoreapp2.0/autorest.csharp.dll --server",
     "test": "gulp test",
     "testci": "gulp testci",
