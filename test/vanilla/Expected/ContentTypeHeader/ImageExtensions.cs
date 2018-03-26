@@ -125,7 +125,7 @@ namespace Fixtures.ContentTypeHeader
             /// The content type of the image. Possible values include: 'image/png',
             /// 'image/tiff'
             /// </param>
-            public static void D(this IImage operations, Stream image, ImageTypeRestrictedStrings imageContentType)
+            public static void D(this IImage operations, Stream image, string imageContentType)
             {
                 operations.DAsync(image, imageContentType).GetAwaiter().GetResult();
             }
@@ -143,7 +143,7 @@ namespace Fixtures.ContentTypeHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DAsync(this IImage operations, Stream image, ImageTypeRestrictedStrings imageContentType, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DAsync(this IImage operations, Stream image, string imageContentType, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.DWithHttpMessagesAsync(image, imageContentType, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

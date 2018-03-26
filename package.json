@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest.csharp",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "The C# extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",

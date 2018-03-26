@@ -6,51 +6,13 @@
 
 namespace Fixtures.ContentTypeHeader.Models
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for ImageTypeRestrictedStrings.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum ImageTypeRestrictedStrings
+    public static class ImageTypeRestrictedStrings
     {
-        [EnumMember(Value = "image/png")]
-        ImagePng,
-        [EnumMember(Value = "image/tiff")]
-        ImageTiff
-    }
-    internal static class ImageTypeRestrictedStringsEnumExtension
-    {
-        internal static string ToSerializedValue(this ImageTypeRestrictedStrings? value)
-        {
-            return value == null ? null : ((ImageTypeRestrictedStrings)value).ToSerializedValue();
-        }
-
-        internal static string ToSerializedValue(this ImageTypeRestrictedStrings value)
-        {
-            switch( value )
-            {
-                case ImageTypeRestrictedStrings.ImagePng:
-                    return "image/png";
-                case ImageTypeRestrictedStrings.ImageTiff:
-                    return "image/tiff";
-            }
-            return null;
-        }
-
-        internal static ImageTypeRestrictedStrings? ParseImageTypeRestrictedStrings(this string value)
-        {
-            switch( value )
-            {
-                case "image/png":
-                    return ImageTypeRestrictedStrings.ImagePng;
-                case "image/tiff":
-                    return ImageTypeRestrictedStrings.ImageTiff;
-            }
-            return null;
-        }
+        public const string ImagePng = "image/png";
+        public const string ImageTiff = "image/tiff";
     }
 }
