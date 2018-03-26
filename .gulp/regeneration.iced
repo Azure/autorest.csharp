@@ -15,6 +15,7 @@ regenExpected = (opts,done) ->
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
       "--csharp",
+      "--opt-in-extensible-enums", # more interesting to test - remove once this is default
       "--clear-output-folder",
       "--output-folder=#{outputDir}/#{key}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
@@ -67,6 +68,7 @@ regenExpectedConfigurations = (configFiles,done) ->
     args = [
       "test/vanilla/Configurations/#{configFiles[key]}",
       "--csharp",
+      "--opt-in-extensible-enums", # more interesting to test - remove once this is default
       # "--debug",
       # "--verbose",
       # "--output-artifact=openapi-document.yaml",

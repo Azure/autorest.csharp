@@ -13,11 +13,21 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+## Temporary: Turn `modelAsString` into `oldModelAsString` in order to maintain old behavior for now (Use `--opt-in-extensible-enums` to opt in)
+
+``` yaml !$(opt-in-extensible-enums)
+directive:
+  - from: swagger-document
+    where: $..*[?(typeof @.modelAsString === "boolean" && typeof @.oldModelAsString !== "boolean")]
+    transform: $.oldModelAsString = $.modelAsString
+```
+
+
 # AutoRest extension configuration
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "2.3.50" # keep in sync with package.json's dev dependency in order to have meaningful tests
+  "@microsoft.azure/autorest.modeler": "2.3.51" # keep in sync with package.json's dev dependency in order to have meaningful tests
 
 pipeline:
   csharp/imodeler1:

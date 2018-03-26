@@ -68,7 +68,7 @@ paths:
         in: query
         x-ms-enum:
           name: enum5CustomName
-          modelAsString: true
+          oldModelAsString: true
           values:
           - value: enum5aOVERRIDDEN
             description: enum5a is cool.

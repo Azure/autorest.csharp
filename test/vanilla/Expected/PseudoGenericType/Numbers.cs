@@ -299,7 +299,7 @@ namespace Zapappi.Client
             }
             if (numberType != null)
             {
-                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(numberType)));
+                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(numberType, Client.SerializationSettings).Trim('"'))));
             }
             if (areaId != null)
             {
@@ -934,7 +934,7 @@ namespace Zapappi.Client
             List<string> _queryParameters = new List<string>();
             if (numberType != null)
             {
-                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(numberType)));
+                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(numberType, Client.SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1100,7 +1100,7 @@ namespace Zapappi.Client
             List<string> _queryParameters = new List<string>();
             if (numberType != null)
             {
-                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(numberType)));
+                _queryParameters.Add(string.Format("numberType={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(numberType, Client.SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1282,7 +1282,7 @@ namespace Zapappi.Client
             }
             if (endpointType != null)
             {
-                _queryParameters.Add(string.Format("endpointType={0}", System.Uri.EscapeDataString(endpointType)));
+                _queryParameters.Add(string.Format("endpointType={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(endpointType, Client.SerializationSettings).Trim('"'))));
             }
             if (data != null)
             {

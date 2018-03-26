@@ -117,7 +117,7 @@ namespace AutoRest.CSharp
         {
             foreach (EnumTypeCs enumType in enumTypes)
             {
-                if(enumType.ModelAsExtensible)
+                if(enumType.ModelAsString && !enumType.OldModelAsString)
                 {
                     await Write(new ExtensibleEnumTemplate { Model = enumType },
                         $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");

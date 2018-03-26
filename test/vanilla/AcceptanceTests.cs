@@ -1242,6 +1242,8 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
                 Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
                 Assert.Equal(1, ((Goblinshark) polymorphismResult.Siblings[2]).Age);
+                Assert.Equal("pinkish-gray", ((Goblinshark) polymorphismResult.Siblings[2]).Color);
+                
                 // PUT polymorphism/valid
                 var polymorphismRequest = new Salmon
                 {
@@ -1272,7 +1274,8 @@ namespace AutoRest.CSharp.Tests
                             Length = 30,
                             Species = "scary",
                             Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Jawsize = 5
+                            Jawsize = 5,
+                            Color = "pinkish-gray"
                         }
                     }
                 };

@@ -288,7 +288,7 @@ namespace Zapappi.Client
             }
             if (type != null)
             {
-                _queryParameters.Add(string.Format("type={0}", System.Uri.EscapeDataString(type)));
+                _queryParameters.Add(string.Format("type={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(type, Client.SerializationSettings).Trim('"'))));
             }
             if (countryId != null)
             {
@@ -2668,7 +2668,7 @@ namespace Zapappi.Client
             List<string> _queryParameters = new List<string>();
             if (type != null)
             {
-                _queryParameters.Add(string.Format("type={0}", System.Uri.EscapeDataString(type)));
+                _queryParameters.Add(string.Format("type={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(type, Client.SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {

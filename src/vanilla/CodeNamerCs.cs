@@ -94,7 +94,7 @@ namespace AutoRest.CSharp
                 {
                     return "new " + type.Name + "()";
                 }
-                if (type is EnumType && (type as EnumType).ModelAsString)
+                if (type is EnumType && (type as EnumType).OldModelAsString)
                 {
                     return Instance.QuoteValue(defaultValue);
                 }

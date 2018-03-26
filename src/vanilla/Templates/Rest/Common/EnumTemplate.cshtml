@@ -9,7 +9,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
-    @if (!Model.ModelAsString)
+    @if (!Model.OldModelAsString)
     {
     @:@(Model.GetObsoleteAttribute())
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]

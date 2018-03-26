@@ -85,7 +85,7 @@ paths:
         description: The content type of the image.
         type: string
         x-ms-enum:
-          modelAsString: true
+          oldModelAsString: true
           name: ImageTypeRestrictedStrings
       consumes:
       - image/png
