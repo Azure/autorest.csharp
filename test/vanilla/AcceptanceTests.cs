@@ -1244,41 +1244,11 @@ namespace AutoRest.CSharp.Tests
                     Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
                     Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
                     Assert.Equal("pinkish-gray", ((Goblinshark) polymorphismResult.Siblings[2]).Color);
+                    // PUT polymorphism/missingdiscriminator
+                    polymorphismResult = client.Polymorphism.PutMissingDiscriminator(polymorphismResult);
+                    Assert.True(polymorphismResult.GetType().Name == "Salmon");
                     // PUT polymorphism/valid
-                    var polymorphismRequest = new Salmon
-                    {
-                        Iswild = true,
-                        Length = 1,
-                        Location = "alaska",
-                        Species = "king",
-                        Siblings = new List<Fish>
-                        {
-                            new Shark
-                            {
-                                Age = 6,
-                                Length = 20,
-                                Species = "predator",
-                                Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
-                            },
-                            new Sawshark
-                            {
-                                Age = 105,
-                                Length = 10,
-                                Species = "dangerous",
-                                Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
-                                Picture = new byte[] {255, 255, 255, 255, 254}
-                            },
-                            new Goblinshark
-                            {
-                                Age = 1,
-                                Length = 30,
-                                Species = "scary",
-                                Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
-                                Jawsize = 5
-                            }
-                        }
-                    };
-                    client.Polymorphism.PutValid(polymorphismRequest);
+                    client.Polymorphism.PutValid(polymorphismResult);
                 }
 
                 /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM: not the peek of the hierarchy */
@@ -1298,6 +1268,7 @@ namespace AutoRest.CSharp.Tests
                     Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
                     Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
                     Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    Assert.Equal("pinkish-gray", ((Goblinshark) polymorphismResult.Siblings[2]).Color);
                     client.Polymorphism.PutComplicated(polymorphismResult); // roundtrips?
                     // PUT polymorphism/valid
                     var polymorphismRequest = new SmartSalmon
