@@ -223,8 +223,8 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
     _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
 
     // get filename from stream if it's a file otherwise, just use  'unknown'
-    var _fileStream = file as System.IO.FileStream;
-    var _fileName = (file != null ? file.Name : null) ?? "unknown";
+    var _fileStream = @parameter.Name as System.IO.FileStream;
+    var _fileName = (_fileStream != null ? _fileStream.Name : null) ?? "unknown";
 
     if(System.Linq.Enumerable.Any(_fileName, c => c > 127) )
     {
