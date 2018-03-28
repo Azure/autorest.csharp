@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact(Skip = "Linux exposes bug!")]
+        [Fact(Skip = "Linux exposes bug! Disabling only to test new CI system.")]
         public void FormDataFileUploadStreamTests()
         {
             using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
