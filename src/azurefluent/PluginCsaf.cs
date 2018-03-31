@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.Azure.Fluent
 
                 // set code model implementations our own implementations 
                 new Factory<CodeModel, CodeModelCsaf>(),
-                new Factory<CompositeType, CompositeTypeCsa>(),
+                new Factory<CompositeType, CompositeTypeCsaf>(),
                 new Factory<DictionaryType, DictionaryTypeCs>(),
-                new Factory<EnumType, EnumTypeCs>(),
+                new Factory<EnumType, EnumTypeCsaf>(),
                 new Factory<Method, MethodCsa>(),
                 new Factory<MethodGroup, MethodGroupCsa>(),
                 new Factory<Parameter, ParameterCs>(),

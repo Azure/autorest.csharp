@@ -11,6 +11,6 @@ namespace AutoRest.CSharp.Model
     {
         protected override string ModelAsStringType => "string";
 
-        public bool IsValueType => !ModelAsString || (!OldModelAsString && !string.IsNullOrEmpty(Name.FixedValue)); 
+        public virtual bool IsValueType => !ModelAsString || (!OldModelAsString && !string.IsNullOrEmpty(Name.FixedValue)); 
     }
 }

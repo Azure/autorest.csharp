@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
@@ -10,11 +12,16 @@ using AutoRest.CSharp.Azure.Fluent.Model;
 using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
+using Pluralize.NET;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
     public class TransformerCsaf : TransformerCsa, ITransformer<CodeModelCsaf>
     {
+        private Pluralizer pluralizer = new Pluralizer();
+        private List<string> addInner = new List<string>();
+        private List<string> removeInner = new List<string>();
+
         CodeModelCsaf ITransformer<CodeModelCsaf>.TransformCodeModel(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsaf;
@@ -27,6 +34,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             TransformParameters(codeModel);
 
             // Fluent Specific stuff.
+            MoveResourceTypeProperties(codeModel); // call this before normalizing the resource types
             NormalizeResourceTypes(codeModel);
             NormalizeTopLevelTypes(codeModel);
             NormalizeModelProperties(codeModel);
@@ -55,15 +63,131 @@ namespace AutoRest.CSharp.Azure.Fluent
             {
                 foreach (var model in codeModel.ModelTypes)
                 {
-                    if (true == model.BaseModelType?.Extensions?.Get<bool>(AzureExtensions.AzureResourceExtension) && model.Name != "ProxyResource" && model.Name != "TrackedResource")
+                    if (model.BaseModelType is CompositeTypeCsaf type && type.IsResource)
                     {
-                        if (model.BaseModelType.Name == "Resource")
+                        model.BaseModelType = RealResourceType(type, codeModel);
+                    }
+                    model.Properties.ForEach(p =>
+                    {
+                        if (p.ModelType.IsResource())
                         {
-                            model.BaseModelType = codeModel._resourceType;
+                            p.ModelType = RealResourceType((CompositeTypeCsaf) p.ModelType, codeModel);
                         }
-                        else if (model.BaseModelType.Name == "SubResource")
+                        else if (p.ModelType.IsResourceArray())
                         {
-                            model.BaseModelType = codeModel._subResourceType;
+                            ((SequenceType)p.ModelType).ElementType = RealResourceType((CompositeTypeCsaf)((SequenceType)p.ModelType).ElementType, codeModel);
+                        }
+                        else if (p.ModelType.IsResourceMap())
+                        {
+                            ((DictionaryType)p.ModelType).ValueType = RealResourceType((CompositeTypeCsaf)((DictionaryType)p.ModelType).ValueType, codeModel);
+                        }
+                    });
+                }
+                foreach(var method in codeModel.Methods)
+                {
+                    method.Responses.ForEach(r =>
+                    {
+                        if (r.Value.Body.IsResource())
+                        {
+                            r.Value.Body = RealResourceType((CompositeTypeCsaf)r.Value.Body, codeModel);
+                        }
+                        else if (r.Value.Body.IsResourceArray())
+                        {
+                            ((SequenceType)r.Value.Body).ElementType = RealResourceType((CompositeTypeCsaf)((SequenceType)r.Value.Body).ElementType, codeModel);
+                        }
+                        else if (r.Value.Body.IsResourceMap())
+                        {
+                            ((DictionaryType)r.Value.Body).ValueType = RealResourceType((CompositeTypeCsaf)((DictionaryType)r.Value.Body).ValueType, codeModel);
+                        }
+                    });
+                    if (method.ReturnType.Body.IsResource())
+                    {
+                        method.ReturnType.Body = RealResourceType((CompositeTypeCsaf)method.ReturnType.Body, codeModel);
+                    }
+                    else if (method.ReturnType.Body.IsResourceArray())
+                    {
+                        ((SequenceType)method.ReturnType.Body).ElementType = RealResourceType((CompositeTypeCsaf)((SequenceType)method.ReturnType.Body).ElementType, codeModel);
+                    }
+                    else if (method.ReturnType.Body.IsResourceMap())
+                    {
+                        ((DictionaryType)method.ReturnType.Body).ValueType = RealResourceType((CompositeTypeCsaf)((DictionaryType)method.ReturnType.Body).ValueType, codeModel);
+                    }
+                    method.Parameters.ForEach(p =>
+                    {
+                        if (p.ModelType.IsResource())
+                        {
+                            p.ModelType = RealResourceType((CompositeTypeCsaf)p.ModelType, codeModel);
+                        }
+                        else if (p.ModelType.IsResourceArray())
+                        {
+                            ((SequenceType)p.ModelType).ElementType = RealResourceType((CompositeTypeCsaf)((SequenceType)p.ModelType).ElementType, codeModel);
+                        }
+                        else if (p.ModelType.IsResourceMap())
+                        {
+                            ((DictionaryType)p.ModelType).ValueType = RealResourceType((CompositeTypeCsaf)((DictionaryType)p.ModelType).ValueType, codeModel);
+                        }
+                    });
+                }
+            }
+        }
+
+        private CompositeTypeCsaf RealResourceType(CompositeTypeCsaf type, CodeModelCsaf codeModel)
+        {
+            switch (type.ModelResourceType)
+            {
+                case ResourceType.ProxyResource:
+                    return codeModel._proxyResourceType;
+                case ResourceType.Resource:
+                    return codeModel._resourceType;
+                case ResourceType.SubResource:
+                    return codeModel._subResourceType;
+                default:
+                    return type;
+            }
+        }
+
+        public virtual void MoveResourceTypeProperties(CodeModel client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
+            {
+                var baseType = subtype.BaseModelType as CompositeTypeCsaf;
+                if (baseType.ModelResourceType == ResourceType.SubResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id"))
+                    {
+                        subtype.Add(prop);
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.ProxyResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id" && p.SerializedName != "name" && p.SerializedName != "type"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.Resource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id" && p.SerializedName != "name" && p.SerializedName != "type" && p.SerializedName != "location" && p.SerializedName != "tags"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
                         }
                     }
                 }
@@ -72,18 +196,34 @@ namespace AutoRest.CSharp.Azure.Fluent
 
         public void NormalizeTopLevelTypes(CodeModelCsaf codeModel)
         {
-            foreach (var param in codeModel.Methods.SelectMany(m => m.Parameters))
+            var included = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("add-inner").Result;
+            if (included != null)
             {
-                AppendInnerToTopLevelType(param.ModelType, codeModel);
+                included.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(addInner.Add);
             }
-            foreach (var response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+            var excluded = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("remove-inner").Result;
+            if (excluded != null)
+            {
+                excluded.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(removeInner.Add);
+            }
+
+            foreach (var response in codeModel.Methods
+                .SelectMany(m => m.Responses)
+                .Select(r => r.Value))
             {
                 AppendInnerToTopLevelType(response.Body, codeModel);
-                AppendInnerToTopLevelType(response.Headers, codeModel);
             }
             foreach (var model in codeModel.ModelTypes)
             {
-                if ((model.BaseModelType != null) && model.BaseModelType.IsResource())
+                if (addInner.Contains(model.Name))
+                {
+                    AppendInnerToTopLevelType(model, codeModel);
+                }
+                if (model.BaseModelType != null && model.BaseModelType.IsResource())
+                {
+                    AppendInnerToTopLevelType(model, codeModel);
+                }
+                else if (codeModel.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name) || o.Name.EqualsIgnoreCase(pluralizer.Pluralize(model.Name)))) // Naive plural check
                 {
                     AppendInnerToTopLevelType(model, codeModel);
                 }
@@ -92,16 +232,35 @@ namespace AutoRest.CSharp.Azure.Fluent
 
         private void AppendInnerToTopLevelType(IModelType type, CodeModelCsaf codeModel)
         {
-            if ((type is CompositeType compositeType) && !codeModel._innerTypes.Contains(compositeType))
+            if (type == null || removeInner.Contains(type.Name))
             {
-                compositeType.Name.FixedValue = compositeType.Name + "Inner";
-                codeModel._innerTypes.Add(compositeType);
+                return;
             }
-            else if (type is SequenceType sequenceType)
+            CompositeTypeCsaf compositeType = type as CompositeTypeCsaf;
+            SequenceType sequenceType = type as SequenceType;
+            DictionaryType dictionaryType = type as DictionaryType;
+            if (compositeType != null && !compositeType.IsResource)
+            {
+                compositeType.IsInnerModel = true;
+                foreach (var t in codeModel.ModelTypes)
+                {
+                    foreach (var p in t.Properties.Where(p => p.ModelType is CompositeTypeCsaf && !((CompositeTypeCsaf)p.ModelType).IsInnerModel))
+                    {
+                        if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
+                            || (p.ModelType is SequenceType && ((SequenceType)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
+                            || (p.ModelType is DictionaryType && ((DictionaryType)p.ModelType).ValueType.Name.EqualsIgnoreCase(compositeType.Name)))
+                        {
+                            AppendInnerToTopLevelType(t, codeModel);
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (sequenceType != null)
             {
                 AppendInnerToTopLevelType(sequenceType.ElementType, codeModel);
             }
-            else if (type is DictionaryType dictionaryType)
+            else if (dictionaryType != null)
             {
                 AppendInnerToTopLevelType(dictionaryType.ValueType, codeModel);
             }
@@ -121,8 +280,7 @@ namespace AutoRest.CSharp.Azure.Fluent
         private void AddNamespaceToResourceType(IModelType type, CodeModelCsa serviceClient)
         {
             // SubResource property { get; set; } => Microsoft.Rest.Azure.SubResource property { get; set; }
-            if ((type is CompositeType compositeType) &&
-                (compositeType.Name.Equals("Resource") || compositeType.Name.Equals("SubResource")))
+            if ((type is CompositeTypeCsaf compositeType) && compositeType.IsResource)
             {
                 compositeType.Name.FixedValue = "Microsoft.Rest.Azure." + compositeType.Name;
             }

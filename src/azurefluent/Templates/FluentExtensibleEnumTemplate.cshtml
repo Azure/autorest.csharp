@@ -1,0 +1,26 @@
+@using System.Linq
+@using AutoRest.Core.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.EnumTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
+    /// </summary>
+    @{var underlyingType = (Model.UnderlyingType?.ClassName == null)? "string" : Model.UnderlyingType.ClassName;
+    var hasAllowedValues = Model.Values.Any(val=>val.AllowedValues.Any());}
+    
+    /// <summary>
+    @WrapComment("/// ", "Determine base value for a given allowed value if exists, else return the value itself")
+    /// </summary>
+    @(Model.GetObsoleteAttribute())
+    public class @Model.ClassName : Management.ResourceManager.Fluent.Core.ExpandableStringEnum<@Model.ClassName>
+    {
+        @foreach (var t in Model.Values)
+        {
+@:        public static readonly @Model.ClassName @t.MemberName = Parse("@t.SerializedName");
+        }
+    }
+}
