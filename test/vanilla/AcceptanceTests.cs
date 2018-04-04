@@ -509,7 +509,7 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "mess up coverage")]
         public void ArrayTests()
         {
             using (var client =
@@ -1040,7 +1040,7 @@ namespace AutoRest.CSharp.Tests
             Assert.Equal(new Dictionary<string, string> {{"", "val1"}}, client.Dictionary.GetEmptyStringKey());
         }
 
-        [Fact]
+        [Fact(Skip = "mess up coverage")]
         public void ComplexTests()
         {
             using (var client = new AutoRestComplexTestService(Fixture.Uri))
