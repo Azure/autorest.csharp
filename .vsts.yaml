@@ -22,4 +22,3 @@ steps:
     arguments: 'run show-results -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)'
     workingFolder: 'node_modules/@microsoft.azure/autorest.testserver'
   continueOnError: true
-
