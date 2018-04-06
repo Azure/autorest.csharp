@@ -86,14 +86,23 @@ namespace @Settings.Namespace
             @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             }
-
+            @EmptyLine
             CustomInitialize();
+            @EmptyLine
+            if(SerializationSettings.ContractResolver == null)
+            {
+                SerializationSettings.ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver();
+            }
+
+            if (DeserializationSettings.ContractResolver == null)
+            {
+                DeserializationSettings.ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver();
+            }
             
             @if (Model.NeedsTransformationConverter)
             {
             @:DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
-            }
-    
+            }    
         }    
     
         @foreach (MethodCs method in Model.Methods.Where( m => m.Group.IsNullOrEmpty()))
