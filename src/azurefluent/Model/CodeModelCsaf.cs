@@ -7,6 +7,7 @@ using AutoRest.Core.Model;
 using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Azure.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Fluent.Model
 {
@@ -34,6 +35,7 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
             _proxyResourceType.Add(new PropertyCs { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
             _proxyResourceType.Add(new PropertyCs { Name = "name", SerializedName = "name", ModelType = stringType, IsReadOnly = true });
             _proxyResourceType.Add(new PropertyCs { Name = "type", SerializedName = "type", ModelType = stringType, IsReadOnly = true });
+            _proxyResourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
 
             _resourceType = New<CompositeTypeCsaf>(new
             {
@@ -43,6 +45,7 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
             _resourceType.BaseModelType = _proxyResourceType;
             _resourceType.Add(new PropertyCs { Name = "location", SerializedName = "location", ModelType = stringType, IsRequired = true });
             _resourceType.Add(new PropertyCs { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) });
+            _resourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
 
             _subResourceType = New<CompositeTypeCsaf>(new
             {
@@ -50,6 +53,7 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
             });
             _subResourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.SubResource";
             _subResourceType.Add(new PropertyCs { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
+            _subResourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
         }
     }
 }

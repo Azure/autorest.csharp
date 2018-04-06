@@ -3,8 +3,10 @@
 
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure.Model;
+using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.CSharp.Azure.Fluent.Model
@@ -14,12 +16,19 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         public CompositeTypeCsaf()
         {
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
+            ExtraProperties = new List<PropertyCsaf>();
         }
 
         public CompositeTypeCsaf(string name ) : base(name)
         {
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
+            ExtraProperties = new List<PropertyCsaf>();
         }
+
+        public List<PropertyCsaf> ExtraProperties { get; set; }
+
+        [JsonIgnore]
+        public override IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant).Union(ExtraProperties);
 
         [JsonIgnore]
         public bool IsResource =>
@@ -53,13 +62,13 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
                     }
                     else if (rawName == "Resource")
                     {
-                        var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
-                        var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                        var locationProperty = Properties.Where(p => p.SerializedName == "location").FirstOrDefault();
+                        var tagsProperty = Properties.Where(p => p.SerializedName == "tags").FirstOrDefault();
                         if (locationProperty == null || tagsProperty == null)
                         {
-                            var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
-                            var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
-                            var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
+                            var idProperty = Properties.Where(p => p.SerializedName == "id").FirstOrDefault();
+                            var nameProperty = Properties.Where(p => p.SerializedName == "name").FirstOrDefault();
+                            var typeProperty = Properties.Where(p => p.SerializedName == "type").FirstOrDefault();
                             if (idProperty == null || nameProperty == null || typeProperty == null)
                             {
                                 return ResourceType.SubResource;

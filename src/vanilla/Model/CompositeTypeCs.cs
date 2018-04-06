@@ -34,9 +34,9 @@ namespace AutoRest.CSharp.Model
 
         // the following two properties should be disjoint and their union equal to `Properties`
         [JsonIgnore]
-        public IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant);
+        public virtual IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant);
         [JsonIgnore]
-        public IEnumerable<PropertyCs> ClassProperties => Properties.OfType<PropertyCs>().Where(p => p.IsConstant);
+        public virtual IEnumerable<PropertyCs> ClassProperties => Properties.OfType<PropertyCs>().Where(p => p.IsConstant);
 
         [JsonIgnore]
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";

@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 throw new ArgumentNullException("client");
             }
 
-            foreach (var subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
+            foreach (CompositeTypeCsaf subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
             {
                 var baseType = subtype.BaseModelType as CompositeTypeCsaf;
                 if (baseType.ModelResourceType == ResourceType.SubResource)
@@ -187,7 +187,22 @@ namespace AutoRest.CSharp.Azure.Fluent
                     {
                         if (!prop.IsReadOnly)
                         {
-                            subtype.Add(prop);
+                            var newProp = new PropertyCsaf
+                            {
+                                SerializedName = null, // Indicates PropertyFlavor.Implementation
+                                Name = prop.Name,
+                                //ForwardTo = forwardToProp,
+                                Documentation = prop.Documentation,
+                                Summary = prop.Summary,
+                                IsReadOnly = prop.IsReadOnly,
+                                ModelType = prop.ModelType,
+                                ResourcePropertyOverride = true,
+                                Implementation = new Dictionary<string, string>()
+                                {
+                                    {"csharp", new IndentedStringBuilder().Indent().AppendLine("get { return base." + prop.Name + "; }").AppendLine("set { base." + prop.Name + " = value; }").Outdent().ToString() }
+                                }
+                            };
+                            subtype.ExtraProperties.Add(newProp);
                         }
                     }
                 }
@@ -279,13 +294,8 @@ namespace AutoRest.CSharp.Azure.Fluent
 
         private void AddNamespaceToResourceType(IModelType type, CodeModelCsa serviceClient)
         {
-            // SubResource property { get; set; } => Microsoft.Rest.Azure.SubResource property { get; set; }
-            if ((type is CompositeTypeCsaf compositeType) && compositeType.IsResource)
-            {
-                compositeType.Name.FixedValue = "Microsoft.Rest.Azure." + compositeType.Name;
-            }
             // iList<SubResource> property { get; set; } => iList<Microsoft.Rest.Azure.SubResource> property { get; set; }
-            else if (type is SequenceType sequenceType)
+            if (type is SequenceType sequenceType)
             {
                 AddNamespaceToResourceType(sequenceType.ElementType, serviceClient);
             }
