@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Azure.Fluent
         {
             foreach (EnumTypeCsaf enumType in enumTypes)
             {
-                if (enumType.ModelAsString && !enumType.OldModelAsString)
+                if (enumType.ModelAsString || enumType.OldModelAsString)
                 {
                     await Write(new FluentExtensibleEnumTemplate { Model = enumType },
                         $"{GeneratedSourcesBaseFolder}{FolderModels}/{enumType.Name}{ImplementationFileExtension}");

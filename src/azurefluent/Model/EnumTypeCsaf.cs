@@ -12,6 +12,6 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
     {
         protected override string ModelAsStringType => Name;
 
-        public override bool IsValueType => !(ModelAsString && !OldModelAsString) && !string.IsNullOrEmpty(Name.FixedValue);
+        public override bool IsValueType => !(ModelAsString || OldModelAsString) && !string.IsNullOrEmpty(Name.FixedValue);
     }
 }
