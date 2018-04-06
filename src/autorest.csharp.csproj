@@ -79,8 +79,5 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <DotnetRazor Remove="azurefluent\Templates\FluentExtensibleEnumTemplate.cshtml" />
-  </ItemGroup>
 
 </Project>
