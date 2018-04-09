@@ -138,7 +138,14 @@ namespace AutoRest.CSharp.Azure.Fluent
                 case ResourceType.ProxyResource:
                     return codeModel._proxyResourceType;
                 case ResourceType.Resource:
-                    return codeModel._resourceType;
+                    if (type.Properties.First(p => p.SerializedName == "location").IsRequired)
+                    {
+                        return codeModel._resourceType;
+                    }
+                    else
+                    {
+                        return codeModel._resourceTypeNoValidate;
+                    }
                 case ResourceType.SubResource:
                     return codeModel._subResourceType;
                 default:
@@ -191,7 +198,6 @@ namespace AutoRest.CSharp.Azure.Fluent
                             {
                                 SerializedName = null, // Indicates PropertyFlavor.Implementation
                                 Name = prop.Name,
-                                //ForwardTo = forwardToProp,
                                 Documentation = prop.Documentation,
                                 Summary = prop.Summary,
                                 IsReadOnly = prop.IsReadOnly,
@@ -204,6 +210,11 @@ namespace AutoRest.CSharp.Azure.Fluent
                             };
                             subtype.ExtraProperties.Add(newProp);
                         }
+                    }
+                    var locationProp = baseType.Properties.First(p => p.SerializedName == "location");
+                    if (!locationProp.IsRequired)
+                    {
+                        subtype.Add(new PropertyCsaf { Name = "fluentdummy", ModelType = new PrimaryTypeCs(KnownPrimaryType.String), RequiredPropertyOverride = true });
                     }
                 }
             }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Model;
@@ -28,7 +29,21 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         public List<PropertyCsaf> ExtraProperties { get; set; }
 
         [JsonIgnore]
-        public override IEnumerable<PropertyCs> InstanceProperties => Properties.OfType<PropertyCs>().Where(p => !p.IsConstant).Union(ExtraProperties);
+        public override IEnumerable<PropertyCs> InstanceProperties
+        {
+            get
+            {
+                return base.InstanceProperties.Where(p => !(p as PropertyCsaf).RequiredPropertyOverride).Union(ExtraProperties);
+            }
+        }
+
+        protected override IEnumerable<InheritedPropertyInfo> AllPropertyTemplateModels
+        {
+            get
+            {
+                return base.AllPropertyTemplateModels.Where(p => !(p.Property as PropertyCsaf).RequiredPropertyOverride);
+            }
+        }
 
         [JsonIgnore]
         public bool IsResource =>
