@@ -16,6 +16,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @WrapComment("/// ", "Determine base value for a given allowed value if exists, else return the value itself")
     /// </summary>
     @(Model.GetObsoleteAttribute())
+    [JsonConverter(typeof(Management.ResourceManager.Fluent.Core.ExpandableStringEnumConverter<@Model.ClassName>))]
     public class @Model.ClassName : Management.ResourceManager.Fluent.Core.ExpandableStringEnum<@Model.ClassName>
     {
         @foreach (var t in Model.Values)

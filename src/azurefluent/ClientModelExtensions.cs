@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Model;
 using AutoRest.CSharp.Azure.Fluent.Model;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {

@@ -15,22 +15,5 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         public override string ModelTypeName => ResourcePropertyOverride ? "new " + base.ModelTypeName : base.ModelTypeName;
 
         public bool ResourcePropertyOverride { get; set; }
-
-        public bool RequiredPropertyOverride { get; set; }
-
-        public override Dictionary<Constraint, string> Constraints
-        {
-            get
-            {
-                if (RequiredPropertyOverride)
-                {
-                    return new Dictionary<Constraint, string> { { Constraint.Pattern, "." } };
-                }
-                else
-                {
-                    return base.Constraints;
-                }
-            }
-        }
     }
 }

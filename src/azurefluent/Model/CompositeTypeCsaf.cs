@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         {
             get
             {
-                return base.InstanceProperties.Where(p => !(p as PropertyCsaf).RequiredPropertyOverride).Union(ExtraProperties);
+                return base.Properties.OfType<PropertyCs>().Where(p => !p.IsConstant).Union(ExtraProperties);
             }
         }
 
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         {
             get
             {
-                return base.AllPropertyTemplateModels.Where(p => !(p.Property as PropertyCsaf).RequiredPropertyOverride);
+                return base.AllPropertyTemplateModels;
             }
         }
 

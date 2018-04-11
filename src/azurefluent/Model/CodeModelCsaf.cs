@@ -47,7 +47,6 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
             _resourceType.Add(new PropertyCsaf { Name = "location", SerializedName = "location", ModelType = stringType, IsRequired = true });
             _resourceType.Add(new PropertyCsaf { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) });
             _resourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
-
             _resourceTypeNoValidate = New<CompositeTypeCsaf>(new
             {
                 SerializedName = "Resource",

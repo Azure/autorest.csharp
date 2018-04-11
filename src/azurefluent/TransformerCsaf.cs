@@ -211,11 +211,6 @@ namespace AutoRest.CSharp.Azure.Fluent
                             subtype.ExtraProperties.Add(newProp);
                         }
                     }
-                    var locationProp = baseType.Properties.First(p => p.SerializedName == "location");
-                    if (!locationProp.IsRequired)
-                    {
-                        subtype.Add(new PropertyCsaf { Name = "fluentdummy", ModelType = new PrimaryTypeCs(KnownPrimaryType.String), RequiredPropertyOverride = true });
-                    }
                 }
             }
         }
