@@ -190,27 +190,6 @@ namespace AutoRest.CSharp.Azure.Fluent
                     {
                         subtype.Add(prop);
                     }
-                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type"))
-                    {
-                        if (!prop.IsReadOnly)
-                        {
-                            var newProp = new PropertyCsaf
-                            {
-                                SerializedName = null, // Indicates PropertyFlavor.Implementation
-                                Name = prop.Name,
-                                Documentation = prop.Documentation,
-                                Summary = prop.Summary,
-                                IsReadOnly = prop.IsReadOnly,
-                                ModelType = prop.ModelType,
-                                ResourcePropertyOverride = true,
-                                Implementation = new Dictionary<string, string>()
-                                {
-                                    {"csharp", new IndentedStringBuilder().Indent().AppendLine("get { return base." + prop.Name + "; }").AppendLine("set { base." + prop.Name + " = value; }").Outdent().ToString() }
-                                }
-                            };
-                            subtype.ExtraProperties.Add(newProp);
-                        }
-                    }
                 }
             }
         }
