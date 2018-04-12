@@ -17,16 +17,16 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         public CompositeTypeCsaf()
         {
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
-            ExtraProperties = new List<PropertyCsaf>();
+            ExtraProperties = new List<PropertyCs>();
         }
 
         public CompositeTypeCsaf(string name ) : base(name)
         {
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
-            ExtraProperties = new List<PropertyCsaf>();
+            ExtraProperties = new List<PropertyCs>();
         }
 
-        public List<PropertyCsaf> ExtraProperties { get; set; }
+        public List<PropertyCs> ExtraProperties { get; set; }
 
         [JsonIgnore]
         public override IEnumerable<PropertyCs> InstanceProperties

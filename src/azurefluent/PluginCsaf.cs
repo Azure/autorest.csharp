@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 new Factory<MethodGroup, MethodGroupCsa>(),
                 new Factory<Parameter, ParameterCs>(),
                 new Factory<PrimaryType, PrimaryTypeCs>(),
-                new Factory<Property, PropertyCsaf>(),
+                new Factory<Property, PropertyCs>(),
                 new Factory<SequenceType, SequenceTypeCs>(),
 
                 // we have a specific constructor for when a literal type is necessary.

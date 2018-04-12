@@ -66,6 +66,11 @@ namespace AutoRest.CSharp
                 return false;
             }
 
+            if (true == (model as ModelType)?.Extensions.Get<bool>("fluent-skip-validation"))
+            {
+                return false;
+            }
+
             var typesToValidate = new Stack<IModelType>();
             typesToValidate.Push(model);
             var validatedTypes = new HashSet<IModelType>();
