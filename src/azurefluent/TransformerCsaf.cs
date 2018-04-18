@@ -11,6 +11,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure.Fluent.Model;
 using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Model;
+using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using Pluralize.NET;
 
@@ -37,6 +38,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             MoveResourceTypeProperties(codeModel); // call this before normalizing the resource types
             NormalizeResourceTypes(codeModel);
             NormalizeTopLevelTypes(codeModel);
+            UseSubResourceForResourceProperties(codeModel);
             NormalizeModelProperties(codeModel);
 
 
@@ -288,6 +290,36 @@ namespace AutoRest.CSharp.Azure.Fluent
             else if (type is DictionaryType dictionaryType)
             {
                 AddNamespaceToResourceType(dictionaryType.ValueType, serviceClient);
+            }
+        }
+
+        public virtual void UseSubResourceForResourceProperties(CodeModelCsaf codeModel)
+        {
+            foreach (var type in codeModel.ModelTypes)
+            {
+                foreach (var p in type.Properties.Where(p => !p.IsReadOnly))
+                {
+                    if (true == (p.ModelType as CompositeType)?.BaseModelType?.IsResource())
+                    {
+                        p.ModelType = codeModel._subResourceType;
+                    }
+                    else if (p.ModelType is SequenceType && true == (p.ModelType as SequenceType)?.ElementType?.IsResource())
+                    {
+                        p.ModelType = new SequenceTypeCs
+                        {
+                            ElementType = codeModel._subResourceType,
+                            CodeModel = codeModel
+                        };
+                    }
+                    else if (p.ModelType is DictionaryType && true == (p.ModelType as DictionaryType)?.ValueType?.IsResource())
+                    {
+                        p.ModelType = new DictionaryTypeCs
+                        {
+                            ValueType = codeModel._subResourceType,
+                            CodeModel = codeModel
+                        };
+                    }
+                }
             }
         }
     }
