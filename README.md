@@ -92,6 +92,36 @@ output-artifact:
 - source-file-jsonrpcclient
 ```
 
+``` yaml $(static-serializer)
+directive: 
+  - reason: Altering the usage of SerializationSettings/DeserializationSettings to use a static instance instead.
+    from: source-file-csharp
+    where: $
+    transform: > 
+      if( /public JsonSerializerSettings/g.exec( $ ) ) {
+        $ = $.replace( /public JsonSerializerSettings/g, "public static JsonSerializerSettings" );
+        $ = $.replace( /(\s*)(\w*erializationSettings) = (new JsonSerializerSettings)/g, "$1$2 = $2 ?? $3" );
+        
+        let content = $;
+
+        let rx = /SerializationSettings.Converters.Add\((.*)\)/g;
+        let match;
+        
+        while (match = rx.exec( content )  ) {
+            $ = $.replace(/\r\n/g,'«').replace( /(SerializationSettings = SerializationSettings.*?Converters = new List<JsonConverter>.*?{.*?new.*?\))/m, `$1,\n                        ${match[1]}`).replace(/«/g,'\r\n' );
+        }
+        $ = $.replace( /SerializationSettings.Converters.Add\((.*)\).*/g , '');
+
+        rx = /DeserializationSettings.Converters.Add\((.*)\)/g;
+        while (match = rx.exec( content )  ) {
+            $ = $.replace(/\r\n/g,'«').replace( /(DeserializationSettings = DeserializationSettings.*?Converters = new List<JsonConverter>.*?{.*?new.*?\))/m, `$1,\n                        ${match[1]}`).replace(/«/g,'\r\n' );
+        }
+        $ = $.replace( /DeserializationSettings.Converters.Add\((.*)\).*/g , '');
+      } 
+```
+
+
+
 ## Help
 
 ``` yaml
@@ -137,4 +167,6 @@ help-content:
       type: string
     - key: sample-generation
       description: generate sample code from x-ms-examples (experimental)
+    - key: static-serializer
+      description: generate client serlializer settings as a static member (experimental)
 ```
