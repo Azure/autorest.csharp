@@ -92,6 +92,12 @@ output-artifact:
 - source-file-jsonrpcclient
 ```
 
+### Static Initializer Fix
+This directive is enabled when `--static-initializer` is added to the commandline (or configuration `static-initializer: true`)
+
+This directive will alter the client generation so that the JsonSerializerSettings are created and stored statically for the client
+which will significantly reduce the stress on the GC if the client is dumped/recreated alot.
+
 ``` yaml $(static-serializer)
 directive: 
   - reason: Altering the usage of SerializationSettings/DeserializationSettings to use a static instance instead.
