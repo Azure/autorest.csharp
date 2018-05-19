@@ -93,7 +93,7 @@ namespace AutoRest.CSharp
             }
             else
             {
-                var files = await ListInputs();
+                var files = await ListInputs("code-model-v1");
                 if (files.Length != 1)
                 {
                     throw new Exception($"Generator received incorrect number of inputs: {files.Length} : {string.Join(",", files)}");
