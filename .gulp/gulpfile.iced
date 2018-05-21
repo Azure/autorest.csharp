@@ -28,7 +28,7 @@ task 'test', "more", [], (done) ->
   done();
 
 task 'install_common',"", (done) ->
-  global.verbose = true
+  # global.verbose = true
   execute "npm install",{cwd:"#{basefolder}/autorest.common", silent:false }, done
       
 
