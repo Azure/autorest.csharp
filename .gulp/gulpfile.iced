@@ -28,8 +28,9 @@ task 'test', "more", [], (done) ->
   done();
 
 task 'install_common',"", (done) ->
-  process.chdir "autorest.common"
+  global.verbose = true
   execute "npm install",{cwd:"#{basefolder}/autorest.common", silent:false }, done
+      
 
 # CI job
 task 'testci', "more", [], (done) ->
