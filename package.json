@@ -9,7 +9,7 @@
     "test": "gulp test",
     "testci": "gulp testci",
     "build": "gulp build",
-    "prepare": "gulp prepare --verbose --debug",
+    "prepare": "gulp prepare --verbose",
     "publish-preview": "gulp publish-preview",
     "regenerate": "gulp regenerate",
     "clean": "gulp clean",

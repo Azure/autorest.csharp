@@ -28,6 +28,7 @@ task 'test', "more", [], (done) ->
   done();
 
 task 'prepare',"", (done) ->
+  process.chdir "autorest.common"
   execute "npm install",{cwd:"#{basefolder}/autorest.common", silent:false }, done
 
 # CI job
