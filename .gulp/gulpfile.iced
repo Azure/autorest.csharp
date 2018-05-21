@@ -27,7 +27,7 @@ task 'test', "more", [], (done) ->
   # echo "Testing More"
   done();
 
-task 'prepare',"", (done) ->
+task 'install_common',"", (done) ->
   process.chdir "autorest.common"
   execute "npm install",{cwd:"#{basefolder}/autorest.common", silent:false }, done
 
