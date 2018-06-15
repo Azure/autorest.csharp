@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             }
         }
 
-        public virtual void MoveResourceTypeProperties(CodeModel client)
+        public virtual void MoveResourceTypeProperties(CodeModelCsaf client)
         {
             if (client == null)
             {
@@ -192,6 +192,26 @@ namespace AutoRest.CSharp.Azure.Fluent
                     {
                         subtype.Add(prop);
                     }
+                }
+            }
+
+            foreach (CompositeTypeCsaf subtype in client.ModelTypes.Where(t => t.BaseModelType == null && !t.IsResource() && t.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension)))
+            {
+                if (subtype.Properties.Any(prop => prop.SerializedName == "id") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "name") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "type"))
+                {
+                    if (subtype.Properties.Any(prop => prop.SerializedName == "location") &&
+                        subtype.Properties.Any(prop => prop.SerializedName == "tags"))
+                    {
+                        subtype.BaseModelType = client._resourceType;
+                        subtype.Remove(p => p.SerializedName == "location" || p.SerializedName == "tags");
+                    }
+                    else
+                    {
+                        subtype.BaseModelType = client._proxyResourceType;
+                    }
+                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type");
                 }
             }
         }
