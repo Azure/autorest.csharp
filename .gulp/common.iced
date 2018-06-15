@@ -482,10 +482,15 @@ task 'get-tag', '!', (done)->
     global.tag = semver.parse((package_json.version).trim()).prerelease.join(".")
     if( global.tag ) 
       return done()
-
+    
+    # if branch is provided by environment
+    if( env.BUILD_SOURCEBRANCHNAME ) 
+      global.tag = if ( env.BUILD_SOURCEBRANCHNAME == "master" || env.BUILD_SOURCEBRANCHNAME =="HEAD" ) then "preview" else env.BUILD_SOURCEBRANCHNAME
+      return done();
+    
     # grab the git branch name.
     execute "git rev-parse --abbrev-ref HEAD" , {silent:true}, (c,o,e)->
-      o = "preview" if( o == undefined || o == null || o == "" || o.trim() == 'master')
+      o = "preview" if( o == undefined || o == null || o == "" || o.trim() == 'master' || o.trim() == 'HEAD')
       global.tag = o.trim()
       done();
 

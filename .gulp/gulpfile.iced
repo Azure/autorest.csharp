@@ -27,6 +27,11 @@ task 'test', "more", [], (done) ->
   # echo "Testing More"
   done();
 
+task 'install_common',"", (done) ->
+  # global.verbose = true
+  execute "npm install",{cwd:"#{basefolder}/autorest.common", silent:false }, done
+      
+
 # CI job
 task 'testci', "more", [], (done) ->
   # install latest AutoRest
