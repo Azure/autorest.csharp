@@ -113,6 +113,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         public virtual IReadonlypropertyOperations Readonlyproperty { get; private set; }
 
         /// <summary>
+        /// Gets the IFlattencomplexOperations.
+        /// </summary>
+        public virtual IFlattencomplexOperations Flattencomplex { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the AzureCompositeModelClient class.
         /// </summary>
         /// <param name='handlers'>
@@ -321,6 +326,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             Polymorphism = new PolymorphismOperations(this);
             Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
             Readonlyproperty = new ReadonlypropertyOperations(this);
+            Flattencomplex = new FlattencomplexOperations(this);
             BaseUri = new System.Uri("http://localhost:3000");
             SubscriptionId = "123456";
             AcceptLanguage = "en-US";
@@ -339,6 +345,7 @@ namespace Fixtures.Azure.AzureCompositeModelClient
                         new Iso8601TimeSpanConverter()
                     }
             };
+            SerializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
@@ -353,7 +360,10 @@ namespace Fixtures.Azure.AzureCompositeModelClient
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MyBaseType>("kind"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<MyBaseType>("kind"));
             CustomInitialize();
+            DeserializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
         }
         /// <summary>

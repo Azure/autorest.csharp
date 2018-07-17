@@ -1141,6 +1141,104 @@ namespace Fixtures.Azure.Lro
             }
 
             /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product PostDoubleHeadersFinalLocationGet(this ILROsOperations operations)
+            {
+                return operations.PostDoubleHeadersFinalLocationGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> PostDoubleHeadersFinalLocationGetAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PostDoubleHeadersFinalLocationGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product PostDoubleHeadersFinalAzureHeaderGet(this ILROsOperations operations)
+            {
+                return operations.PostDoubleHeadersFinalAzureHeaderGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> PostDoubleHeadersFinalAzureHeaderGetAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PostDoubleHeadersFinalAzureHeaderGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object if you support
+            /// initial Autorest behavior.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product PostDoubleHeadersFinalAzureHeaderGetDefault(this ILROsOperations operations)
+            {
+                return operations.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object if you support
+            /// initial Autorest behavior.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PostDoubleHeadersFinalAzureHeaderGetDefaultWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
             /// with an entity that contains ProvisioningState=’Creating’. Poll the
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -2406,6 +2504,104 @@ namespace Fixtures.Azure.Lro
             public static async Task<Product> BeginPost202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPost202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product BeginPostDoubleHeadersFinalLocationGet(this ILROsOperations operations)
+            {
+                return operations.BeginPostDoubleHeadersFinalLocationGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPostDoubleHeadersFinalLocationGetAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginPostDoubleHeadersFinalLocationGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product BeginPostDoubleHeadersFinalAzureHeaderGet(this ILROsOperations operations)
+            {
+                return operations.BeginPostDoubleHeadersFinalAzureHeaderGetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPostDoubleHeadersFinalAzureHeaderGetAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginPostDoubleHeadersFinalAzureHeaderGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object if you support
+            /// initial Autorest behavior.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product BeginPostDoubleHeadersFinalAzureHeaderGetDefault(this ILROsOperations operations)
+            {
+                return operations.BeginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// with both Location and Azure-Async header. Poll Azure-Async and it's
+            /// success. Should NOT poll Location to get the final object if you support
+            /// initial Autorest behavior.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginPostDoubleHeadersFinalAzureHeaderGetDefaultWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

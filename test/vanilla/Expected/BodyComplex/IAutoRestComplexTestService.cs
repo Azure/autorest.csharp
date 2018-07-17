@@ -79,5 +79,10 @@ namespace Fixtures.BodyComplex
         /// </summary>
         IReadonlyproperty Readonlyproperty { get; }
 
+        /// <summary>
+        /// Gets the IFlattencomplex.
+        /// </summary>
+        IFlattencomplex Flattencomplex { get; }
+
     }
 }
