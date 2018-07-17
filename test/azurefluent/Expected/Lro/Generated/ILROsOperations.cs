@@ -634,6 +634,61 @@ namespace Fixtures.Azure.Fluent.Lro
         Task<AzureOperationResponse<ProductInner,LROsPost202NoRetry204HeadersInner>> Post202NoRetry204WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should poll Location to get the final object
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> PostDoubleHeadersFinalLocationGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should NOT poll Location to get the final object
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> PostDoubleHeadersFinalAzureHeaderGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should NOT poll Location to get the final object
+        /// if you support initial Autorest behavior.
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> PostDoubleHeadersFinalAzureHeaderGetDefaultWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains ProvisioningState=’Creating’.
         /// Poll the endpoint indicated in the Azure-AsyncOperation header for
         /// operation status
@@ -1323,6 +1378,61 @@ namespace Fixtures.Azure.Fluent.Lro
         /// Thrown when unable to deserialize the response
         /// </exception>
         Task<AzureOperationResponse<ProductInner,LROsPost202NoRetry204HeadersInner>> BeginPost202NoRetry204WithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should poll Location to get the final object
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> BeginPostDoubleHeadersFinalLocationGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should NOT poll Location to get the final object
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> BeginPostDoubleHeadersFinalAzureHeaderGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running post request, service returns a 202 to the initial
+        /// request with both Location and Azure-Async header. Poll Azure-Async
+        /// and it's success. Should NOT poll Location to get the final object
+        /// if you support initial Autorest behavior.
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<ProductInner>> BeginPostDoubleHeadersFinalAzureHeaderGetDefaultWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
         /// request, with an entity that contains ProvisioningState=’Creating’.

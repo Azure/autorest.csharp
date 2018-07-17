@@ -388,6 +388,44 @@ namespace Fixtures.Azure.Paging
             }
 
             /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static IPage<Product> GetMultiplePagesLRO(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions))
+            {
+                return operations.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLROOptions).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> GetMultiplePagesLROAsync(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesLROWithHttpMessagesAsync(clientRequestId, pagingGetMultiplePagesLROOptions, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// A paging operation that doesn't return a full URL, just a fragment
             /// </summary>
             /// <param name='operations'>
@@ -468,6 +506,44 @@ namespace Fixtures.Azure.Paging
             public static async Task<IPage<Product>> NextFragmentWithGroupingAsync(this IPagingOperations operations, string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.NextFragmentWithGroupingWithHttpMessagesAsync(nextLink, customParameterGroup, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static IPage<Product> BeginGetMultiplePagesLRO(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions))
+            {
+                return operations.BeginGetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLROOptions).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> BeginGetMultiplePagesLROAsync(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginGetMultiplePagesLROWithHttpMessagesAsync(clientRequestId, pagingGetMultiplePagesLROOptions, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -812,6 +888,94 @@ namespace Fixtures.Azure.Paging
             public static async Task<IPage<Product>> GetMultiplePagesFailureUriNextAsync(this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesFailureUriNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static IPage<Product> GetMultiplePagesLRONext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions))
+            {
+                return operations.GetMultiplePagesLRONextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> GetMultiplePagesLRONextAsync(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesLRONextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static IPage<Product> BeginGetMultiplePagesLRONext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions))
+            {
+                return operations.BeginGetMultiplePagesLRONextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A long-running paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesLROOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> BeginGetMultiplePagesLRONextAsync(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginGetMultiplePagesLRONextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

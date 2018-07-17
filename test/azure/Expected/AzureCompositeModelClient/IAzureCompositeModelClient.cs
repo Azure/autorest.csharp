@@ -110,6 +110,11 @@ namespace Fixtures.Azure.AzureCompositeModelClient
         IReadonlypropertyOperations Readonlyproperty { get; }
 
         /// <summary>
+        /// Gets the IFlattencomplexOperations.
+        /// </summary>
+        IFlattencomplexOperations Flattencomplex { get; }
+
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <remarks>

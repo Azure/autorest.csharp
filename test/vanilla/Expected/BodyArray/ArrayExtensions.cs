@@ -757,6 +757,120 @@ namespace Fixtures.BodyArray
             }
 
             /// <summary>
+            /// Get enum array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<FooEnum?> GetEnumValid(this IArray operations)
+            {
+                return operations.GetEnumValidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get enum array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<FooEnum?>> GetEnumValidAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetEnumValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Set array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutEnumValid(this IArray operations, IList<FooEnum?> arrayBody)
+            {
+                operations.PutEnumValidAsync(arrayBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutEnumValidAsync(this IArray operations, IList<FooEnum?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutEnumValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get enum array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<string> GetStringEnumValid(this IArray operations)
+            {
+                return operations.GetStringEnumValidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get enum array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<string>> GetStringEnumValidAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetStringEnumValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Set array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutStringEnumValid(this IArray operations, IList<string> arrayBody)
+            {
+                operations.PutStringEnumValidAsync(arrayBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set array value ['foo1', 'foo2', 'foo3']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutStringEnumValidAsync(this IArray operations, IList<string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutStringEnumValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Get string array value ['foo', null, 'foo2']
             /// </summary>
             /// <param name='operations'>

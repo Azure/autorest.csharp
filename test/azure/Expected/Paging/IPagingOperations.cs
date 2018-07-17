@@ -240,6 +240,28 @@ namespace Fixtures.Azure.Paging
         /// </exception>
         Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesFragmentWithGroupingNextLinkWithHttpMessagesAsync(CustomParameterGroup customParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// A long-running paging operation that includes a nextLink that has
+        /// 10 pages
+        /// </summary>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetMultiplePagesLROOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesLROWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// A paging operation that doesn't return a full URL, just a fragment
         /// </summary>
         /// <param name='apiVersion'>
@@ -292,6 +314,28 @@ namespace Fixtures.Azure.Paging
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse<IPage<Product>>> NextFragmentWithGroupingWithHttpMessagesAsync(string nextLink, CustomParameterGroup customParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// A long-running paging operation that includes a nextLink that has
+        /// 10 pages
+        /// </summary>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetMultiplePagesLROOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> BeginGetMultiplePagesLROWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// A paging operation that finishes on the first call without a
         /// nextlink
@@ -511,5 +555,61 @@ namespace Fixtures.Azure.Paging
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// A long-running paging operation that includes a nextLink that has
+        /// 10 pages
+        /// </summary>
+        /// <param name='nextPageLink'>
+        /// The NextLink from the previous successful call to List operation.
+        /// </param>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetMultiplePagesLROOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesLRONextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// A long-running paging operation that includes a nextLink that has
+        /// 10 pages
+        /// </summary>
+        /// <param name='nextPageLink'>
+        /// The NextLink from the previous successful call to List operation.
+        /// </param>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetMultiplePagesLROOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> BeginGetMultiplePagesLRONextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = default(PagingGetMultiplePagesLROOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

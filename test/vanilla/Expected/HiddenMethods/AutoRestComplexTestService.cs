@@ -81,6 +81,11 @@ namespace Fixtures.HiddenMethods
         public virtual IReadonlyproperty Readonlyproperty { get; private set; }
 
         /// <summary>
+        /// Gets the IFlattencomplex.
+        /// </summary>
+        public virtual IFlattencomplex Flattencomplex { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the AutoRestComplexTestService class.
         /// </summary>
         /// <param name='handlers'>
@@ -167,6 +172,7 @@ namespace Fixtures.HiddenMethods
             Polymorphism = new Polymorphism(this);
             Polymorphicrecursive = new Polymorphicrecursive(this);
             Readonlyproperty = new Readonlyproperty(this);
+            Flattencomplex = new Flattencomplex(this);
             BaseUri = new System.Uri("http://localhost:3000");
             ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings
@@ -182,6 +188,7 @@ namespace Fixtures.HiddenMethods
                         new Iso8601TimeSpanConverter()
                     }
             };
+            SerializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
@@ -196,7 +203,10 @@ namespace Fixtures.HiddenMethods
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<MyBaseType>("kind"));
+            DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<MyBaseType>("kind"));
             CustomInitialize();
+            DeserializationSettings.Converters.Add(new TransformationJsonConverter());
         }
     }
 }
