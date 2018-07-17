@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Azure.Fluent
 
             NormalizePaginatedMethods(codeModel);
             NormalizeODataMethods(codeModel);
-
+            NormalizeEnumTypesWithNoNames(codeModel);
             return codeModel;
         }
 
@@ -338,6 +338,39 @@ namespace AutoRest.CSharp.Azure.Fluent
                             ValueType = codeModel._subResourceType,
                             CodeModel = codeModel
                         };
+                    }
+                }
+            }
+        }
+
+        public virtual void NormalizeEnumTypesWithNoNames(CodeModelCsaf codeModel)
+        {
+            var variables = codeModel.Methods.SelectMany(m => m.Parameters).Select(p => (IVariable)p)
+                .Concat(codeModel.ModelTypes.SelectMany(t => t.Properties).Select(p => (IVariable)p));
+            foreach (var variable in variables)
+            {
+                if (variable.ModelType is EnumType && variable.ModelTypeName == "enum")
+                {
+                    ((EnumType)variable.ModelType).SetName(variable.Name.ToPascalCase());
+                    if (!codeModel.EnumTypes.Contains(variable.ModelType))
+                    {
+                        codeModel.Add((EnumType)variable.ModelType);
+                    }
+                }
+                else if (variable.ModelType is SequenceType && (variable.ModelType as SequenceType).ElementType is EnumType && (variable.ModelType as SequenceType).ElementType.Name == "enum")
+                {
+                    ((EnumType)((SequenceType)variable.ModelType).ElementType).SetName(variable.Name.ToPascalCase());
+                    if (!codeModel.EnumTypes.Contains(((SequenceType)variable.ModelType).ElementType))
+                    {
+                        codeModel.Add((EnumType)((SequenceType)variable.ModelType).ElementType);
+                    }
+                }
+                else if (variable.ModelType is DictionaryType && (variable.ModelType as DictionaryType).ValueType is EnumType && (variable.ModelType as DictionaryType).ValueType.Name == "enum")
+                {
+                    ((EnumType)((DictionaryType)variable.ModelType).ValueType).SetName(variable.Name.ToPascalCase());
+                    if (!codeModel.EnumTypes.Contains(((DictionaryType)variable.ModelType).ValueType))
+                    {
+                        codeModel.Add((EnumType)((SequenceType)variable.ModelType).ElementType);
                     }
                 }
             }
