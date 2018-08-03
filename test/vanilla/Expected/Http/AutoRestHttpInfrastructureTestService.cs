@@ -77,6 +77,19 @@ namespace Fixtures.Http
         /// <summary>
         /// Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
         /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling AutoRestHttpInfrastructureTestService.Dispose(). False: will not dispose provided httpClient</param>
+        public AutoRestHttpInfrastructureTestService(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
+        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>

@@ -47,6 +47,19 @@ namespace Fixtures.BodyBoolean
         /// <summary>
         /// Initializes a new instance of the AutoRestBoolTestService class.
         /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling AutoRestBoolTestService.Dispose(). False: will not dispose provided httpClient</param>
+        public AutoRestBoolTestService(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestBoolTestService class.
+        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>

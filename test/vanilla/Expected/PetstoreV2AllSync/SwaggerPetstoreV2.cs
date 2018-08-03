@@ -50,6 +50,19 @@ namespace Fixtures.PetstoreV2AllSync
         /// <summary>
         /// Initializes a new instance of the SwaggerPetstoreV2 class.
         /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling SwaggerPetstoreV2.Dispose(). False: will not dispose provided httpClient</param>
+        public SwaggerPetstoreV2(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the SwaggerPetstoreV2 class.
+        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
