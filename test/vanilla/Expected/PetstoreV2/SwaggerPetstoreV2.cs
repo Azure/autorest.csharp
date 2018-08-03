@@ -66,6 +66,16 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Initializes a new instance of the SwaggerPetstoreV2 class.
         /// </summary>
+        /// <param name="httpClient">HttpClient to be used</param>
+        /// <param name="disposeHttpClient">True: will dispose the provided httpClient on calling @(Model.Name).Dispose(). False: will not dispose provided httpClient</param>
+        protected SwaggerPetstoreV2(HttpClient httpClient, bool disposeHttpClient): base(httpClient: httpClient, disposeHttpClient: disposeHttpClient)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the SwaggerPetstoreV2 class.
+        /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
         /// </param>
@@ -135,6 +145,19 @@ namespace Fixtures.PetstoreV2
         /// Thrown when a required parameter is null
         /// </exception>
         public SwaggerPetstoreV2(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (credentials == null)
+            {
+                throw new System.ArgumentNullException("credentials");
+            }
+            Credentials = credentials;
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        public SwaggerPetstoreV2(ServiceClientCredentials credentials, HttpClient httpClient, bool disposeHttpClient) : this(httpClient: httpClient, disposeHttpClient: disposeHttpClient)
         {
             if (credentials == null)
             {

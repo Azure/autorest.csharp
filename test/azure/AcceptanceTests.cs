@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     noStatusInPollingBody.Message);
 
                 var invalidOperationEx = Assert.Throws<ValidationException>(() => client.LROSADs.Post202NoLocation());
-                Assert.Contains("Recommended patterns: POST-202-LocationHeder(Prefered)/AzureAsyncOperationHeader", invalidOperationEx.Message,
+                Assert.Contains("Recommended patterns: POST-202-LocationHeader(Prefered)/AzureAsyncOperationHeader", invalidOperationEx.Message,
                     StringComparison.Ordinal);
                 exception = Assert.Throws<CloudException>(() => client.LROSADs.PostAsyncRelativeRetryNoPayload());
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
