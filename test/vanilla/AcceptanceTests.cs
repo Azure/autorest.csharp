@@ -176,6 +176,49 @@ namespace AutoRest.CSharp.Tests
             var client = new SwaggerPetstoreV2(new TokenCredentials("123"));
             client.Dispose();
         }
+        
+        [Theory]
+        [InlineData("true")]
+        [InlineData("false")]
+        public void ConstructorWithHttpClientAndTestDispose(bool disposeClient)
+        {
+            HttpClient httpClient = new HttpClient(new RecordedDelegatingHandler());
+            TimeSpan expectedTimeout = TimeSpan.FromMinutes(2);
+            httpClient.Timeout = expectedTimeout;
+
+            var client = new SwaggerPetstoreV2(new TokenCredentials("123"), httpClient, disposeHttpClient: disposeClient);
+            Assert.Equal(expectedTimeout, client.HttpClient.Timeout);            
+            client.Dispose();
+
+
+            if(disposeClient == true)
+            {
+                Assert.Throws<NullReferenceException>(() =>
+                {
+                    client.HttpClient.Timeout = TimeSpan.FromSeconds(99);
+                });
+            }
+            else
+            {
+                client.HttpClient.Timeout = TimeSpan.FromSeconds(99);
+                Assert.True(true);
+            }
+        }
+
+        [Fact]
+        public void ConstructorWithNoHttpClient()
+        {
+            TimeSpan NotExpectedTimeout = TimeSpan.FromMinutes(2);
+
+            var client = new SwaggerPetstoreV2(new TokenCredentials("123"));
+            Assert.NotEqual(NotExpectedTimeout, client.HttpClient.Timeout);
+            client.Dispose();
+
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                client.HttpClient.Timeout = TimeSpan.FromSeconds(20);
+            });
+        }
 
         [Fact]
         public void BoolTests()

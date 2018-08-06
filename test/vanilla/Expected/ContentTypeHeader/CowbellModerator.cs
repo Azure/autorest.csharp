@@ -45,6 +45,19 @@ namespace Fixtures.ContentTypeHeader
         /// <summary>
         /// Initializes a new instance of the CowbellModerator class.
         /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling CowbellModerator.Dispose(). False: will not dispose provided httpClient</param>
+        public CowbellModerator(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the CowbellModerator class.
+        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
