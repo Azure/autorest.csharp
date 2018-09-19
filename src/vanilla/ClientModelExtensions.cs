@@ -444,7 +444,7 @@ namespace AutoRest.CSharp
                     case Constraint.UniqueItems:
                         if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
-                            constraintCheck = $"{valueReference}.Count != {valueReference}.Distinct().Count()";
+                            constraintCheck = $"{valueReference}.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct({valueReference}))";
                         }
                         else
                         {

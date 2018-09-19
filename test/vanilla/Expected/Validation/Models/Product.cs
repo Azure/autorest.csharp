@@ -134,7 +134,7 @@ namespace Fixtures.Validation.Models
                 {
                     throw new ValidationException(ValidationRules.MinItems, "DisplayNames", 0);
                 }
-                if (DisplayNames.Count != DisplayNames.Distinct().Count())
+                if (DisplayNames.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(DisplayNames)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "DisplayNames");
                 }
