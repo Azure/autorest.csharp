@@ -29,6 +29,9 @@ directive:
 use-extension:
   "@microsoft.azure/autorest.modeler": "2.3.55" # keep in sync with package.json's dev dependency in order to have meaningful tests
 
+skip-simplifier-on-namespace: 
+  - System.Security.Permissions
+
 pipeline:
   csharp/imodeler1:
     input: openapi-document/identity
