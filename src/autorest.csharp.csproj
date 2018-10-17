@@ -31,6 +31,11 @@
  
     <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)</OutputPath>
+
+    <!-- SourceLink related properties https://github.com/dotnet/SourceLink#using-sourcelink -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <Target Name="Nuke" AfterTargets="clean">
@@ -68,6 +73,7 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.11" />
     <!-- <PackageReference Include="Microsoft.AutoRest.Common" Version="2.4.43" /> -->
     <ProjectReference Include="../autorest.common/src/autorest.common.csproj" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
