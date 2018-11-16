@@ -22,7 +22,6 @@ directive:
     transform: $.oldModelAsString = $.modelAsString
 ```
 
-
 # AutoRest extension configuration
 
 ``` yaml
