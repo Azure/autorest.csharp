@@ -257,7 +257,20 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
     {
 @:if(@(parameter.Name) != null)
 @:{
-    @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name));
+  // if (parameter.IsString)
+  //   @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name));
+  // else if (parameter.IsCollection)
+  // {
+  //   foreach (var item in @parameter.Name)
+  //   {
+  //     if (parameter.IsString)
+  //       @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name));
+  //     else
+  //       @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name.ToString()));
+  //   }
+  // }
+  // else (parameter.IsPrimitive)
+  //   @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name.ToString()));
 @:}
     }
 @:var _formContent = new System.Net.Http.FormUrlEncodedContent(values);

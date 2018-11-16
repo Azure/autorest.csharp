@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FormData request with all types",
+    "version": "1.0"
+  },
+  "host": "example.com",
+  "paths": {
+    "/Test": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "string",
+            "type": "string",
+            "default": "default"
+          },
+          {
+            "in": "formData",
+            "name": "int",
+            "type": "integer",
+            "default": 0
+          },
+          {
+            "in": "formData",
+            "name": "number",
+            "type": "number",
+            "default": 1.0
+          },
+          {
+            "in": "formData",
+            "name": "boolean",
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "in": "formData",
+            "name": "stringArray",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "intArray",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "only-op"
+      }
+    }
+  },
+  "definitions": {}
+}
