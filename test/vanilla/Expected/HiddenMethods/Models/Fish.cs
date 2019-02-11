@@ -11,6 +11,7 @@ namespace Fixtures.HiddenMethods.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    [Newtonsoft.Json.JsonObject("Fish")]
     public partial class Fish
     {
         /// <summary>
