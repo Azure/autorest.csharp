@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Model
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
 
         [JsonIgnore]
-        public bool NeedsPolymorphicConverter => BaseIsPolymorphic && Name != SerializedName;
+        public bool NeedsPolymorphicConverter => BaseIsPolymorphic;
 
         [JsonIgnore]
         public bool NeedsTransformationConverter => Properties.Any(p => p.WasFlattened());

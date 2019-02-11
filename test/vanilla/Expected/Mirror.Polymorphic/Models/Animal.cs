@@ -13,6 +13,7 @@ namespace Fixtures.MirrorPolymorphic.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    [Newtonsoft.Json.JsonObject("Animal")]
     public partial class Animal
     {
         /// <summary>

@@ -11,6 +11,7 @@ namespace Fixtures.HiddenMethods.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    [Newtonsoft.Json.JsonObject("MyBaseType")]
     [JsonTransformation]
     public partial class MyBaseType
     {
