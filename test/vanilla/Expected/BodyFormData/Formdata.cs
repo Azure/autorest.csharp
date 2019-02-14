@@ -156,7 +156,7 @@ namespace Fixtures.BodyFormData
                 StringContent _fileName = new StringContent(fileName, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_fileName, "fileName");
             }
-            _httpRequest.Content = _multiPartContent;
+            _httpRequest.Content = System.Linq.Enumerable.Any(_multiPartContent) ? _multiPartContent : null;
             // Send Request
             if (_shouldTrace)
             {

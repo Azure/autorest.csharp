@@ -248,7 +248,7 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
     @:_multiPartContent.Add(@(localParam), "@(parameter.SerializedName)");
 @:}
     }
-@:_httpRequest.Content = _multiPartContent;
+@:_httpRequest.Content = System.Linq.Enumerable.Any(_multiPartContent) ? _multiPartContent : null;
     }
     else
     {
