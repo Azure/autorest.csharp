@@ -61,8 +61,9 @@ namespace AutoRest.CSharp.LoadBalanced
             usings.Add("Microsoft.Rest");
             usings.Add("System.IO");
             usings.Add("Microsoft.Rest.Serialization");
-            usings.Add("Agoda.RoundRobin");
-            usings.Add("Agoda.RoundRobin.Constants");
+            usings.Add("System.Net.Http");
+            usings.Add("Agoda.Frameworks.Http");
+            usings.Add("Agoda.Frameworks.Http.AutoRestExt");
             usings.Add("Newtonsoft.Json");
             usings.Add($"{codeModel.Namespace}.Models");
 
