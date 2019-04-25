@@ -1,0 +1,78 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/getday":
+    get:
+      operationId: getday
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SomethingWithADay"
+  "/":
+    get:
+      operationId: myoperation
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/testObject"
+  "/getSchedule":
+    get:
+      operationId: getschedule
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/RecurrenceSchedule"
+components:
+  schemas:
+    DayOfWeek:
+      type: string
+      enum:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+      x-ms-enum:
+        name: DayOfWeek
+        modelAsString: false
+    SomethingWithADay:
+      type: object
+      properties:
+        theDay:
+          type: array
+          "$ref": "#/components/schemas/DayOfWeek"
+        anotherday:
+          type: array
+          "$ref": "#/components/schemas/DayOfWeek"
+    testObject:
+      properties:
+        pattern:
+          type: string
+          default: "\\w+"
+          description: A regular expression pattern to match token separators. Default
+            is "\W+".
+    RecurrenceSchedule:
+      type: object
+      properties:
+        weekDays:
+          type: array
+          items:
+            "$ref": "#/components/schemas/DayOfWeek"
+        otherweekDays:
+          type: array
+          items:
+            "$ref": "#/components/schemas/DayOfWeek"

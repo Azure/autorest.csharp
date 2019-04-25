@@ -1,0 +1,59 @@
+openapi: 3.0.0
+servers:
+- url: http://{petBaseUrl}
+  variables: {}
+info:
+  title: PetStore Inc.
+  description: Pets online.
+  version: 0.0.0
+  x-ms-code-generation-settings:
+    useDateTimeOffset: true
+    internalConstructors: true
+x-ms-parameterized-host:
+  hostTemplate: http://{petBaseUrl}
+  parameters:
+  - name: petBaseUrl
+    required: true
+    type: string
+    in: path
+    x-ms-skip-url-encoding: true
+    schema:
+      name: petBaseUrl
+      type: string
+      in: path
+      x-ms-skip-url-encoding: true
+paths:
+  "/Pets/{petId}/GetPet":
+    post:
+      operationId: Pet_GetPetById
+      description: Gets pets by id.
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        description: pet id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/Pet"
+      requestBody:
+        x-ms-requestBody-name: streamContents
+        content:
+          application/json:
+            schema:
+              type: object
+              format: file
+      x-ms-requestBody-index: 1
+components:
+  schemas:
+    Pet:
+      properties:
+        name:
+          type: string
+          readOnly: true
+          description: Gets the Pet by id.

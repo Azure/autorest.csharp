@@ -1,0 +1,56 @@
+{
+  "name": "@microsoft.azure/autorest.csharp",
+  "version": "2.3.0",
+  "description": "The C# extension for classic generators in AutoRest.",
+  "scripts": {
+    "autorest": "autorest",
+    "code": "code .",
+    "start": "dotnet src/bin/netcoreapp2.0/autorest.csharp.dll --server",
+    "test": "gulp test",
+    "testci": "gulp testci",
+    "build": "gulp build",
+    "prepare": "gulp install_common",
+    "publish-preview": "gulp publish-preview",
+    "regenerate": "gulp regenerate",
+    "clean": "gulp clean",
+    "nuke": "git clean -xdf"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest.csharp"
+  },
+  "readme": "https://github.com/Azure/autorest.csharp/readme.md",
+  "keywords": [
+    "autorest",
+    "classic-generators",
+    "csharp"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest.csharp/blob/master/README.md",
+  "devDependencies": {
+    "@microsoft.azure/autorest.testserver": "^2.5.16",
+    "@microsoft.azure/autorest.modeler": "2.3.55",
+    "autorest": "^2.0.4255",
+    "coffee-script": "^1.11.1",
+    "dotnet-sdk-2.0.0": "^1.4.4",
+    "gulp": "^3.9.1",
+    "gulp-filter": "^5.0.0",
+    "gulp-line-ending-corrector": "^1.0.1",
+    "iced-coffee-script": "^108.0.11",
+    "marked": "^0.3.6",
+    "marked-terminal": "^2.0.0",
+    "moment": "^2.17.1",
+    "run-sequence": "*",
+    "shx": "^0.2.2",
+    "through2-parallel": "^0.1.3",
+    "yargs": "^8.0.2",
+    "yarn": "^1.0.2"
+  },
+  "dependencies": {
+    "dotnet-2.0.0": "^1.4.4"
+  }
+}
