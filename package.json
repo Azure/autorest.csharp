@@ -1,6 +1,6 @@
 {
-  "name": "@microsoft.azure/autorest.csharp",
-  "version": "2.3.0",
+  "name": "agoda-extension",
+  "version": "1.0.0",
   "description": "The C# extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -17,20 +17,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Azure/autorest.csharp"
+    "url": "https://github.com/agoda-com/autorest.csharp.git"
   },
-  "readme": "https://github.com/Azure/autorest.csharp/readme.md",
+  "readme": "https://github.com/agoda-com/autorest.csharp/README.md",
   "keywords": [
     "autorest",
     "classic-generators",
     "csharp"
   ],
-  "author": "Microsoft Corporation",
+  "author": "Agoda",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/autorest/issues"
+    "url": "https://github.com/agoda-com/autorest.csharp/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.csharp/blob/master/README.md",
+  "homepage": "https://github.com/agoda-com/autorest.csharp/README.md",
   "devDependencies": {
     "@microsoft.azure/autorest.testserver": "^2.5.16",
     "@microsoft.azure/autorest.modeler": "2.3.55",
