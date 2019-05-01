@@ -255,10 +255,29 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
 @:var values = new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, string>>();
     foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
     {
+        var parameterExpression = parameter.Name;
+        var couldBeNullable = !parameter.IsRequired && parameter.IsNullable();
+        if (parameter.ModelTypeName != "string")
+        {
+            if (couldBeNullable)
+            {
+                parameterExpression += "?";
+            }
+            
+            parameterExpression += ".ToString()";
+        }
+
+		if (couldBeNullable)
+		{
 @:if(@(parameter.Name) != null)
 @:{
-    @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @parameter.Name));
+    @:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @(parameterExpression)));
 @:}
+        }
+		else
+		{
+@:values.Add(new System.Collections.Generic.KeyValuePair<string,string>("@(parameter.SerializedName)", @(parameterExpression)));
+		}
     }
 @:var _formContent = new System.Net.Http.FormUrlEncodedContent(values);
 @:_httpRequest.Content = _formContent;
