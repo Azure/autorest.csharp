@@ -40,3 +40,17 @@ scope-agoda-extension/emitter:
 output-artifact:
 - some-file-generated-by-agoda-extension
 ```
+
+## Build
+
+```
+./build/start-test-server.sh
+# Linux (PowerShell)
+pwsh ./build/build.ps1
+```
+
+## Test
+```
+# Run build.ps1 before test, and start test server.
+dotnet test
+```
