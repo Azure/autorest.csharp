@@ -1,15 +1,11 @@
 "Clearing old packages"
-rmrf *gz
+rm *gz
 npm install
 npm version patch -f --no-git-tag-version
 $currentBranch = git rev-parse --abbrev-ref HEAD
-If ($currentBranch -eq "tests") {
-	$testProject = "agoda.csharp.client.test\agoda.csharp.client.test.csproj"
-}
-Else {
-	 $testProject =	"autorest.csharp.test\autorest.csharp.test.csproj"
-}
+$testProject="agoda.csharp.client.test/agoda.csharp.client.test.csproj"
 dotnet sln remove $testProject
+dotnet restore
 dotnet build
 $c = npm pack
 $b = $c -split "\n"
