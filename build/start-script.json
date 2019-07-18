@@ -1,3 +1,0 @@
-"scripts": {
-  "start": "dotnet ./autorest.csharp.dll --server"
-}
