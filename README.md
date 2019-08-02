@@ -6,7 +6,7 @@ The [AutoRest](https://github.com/Azure/autorest) tool generates client librarie
 
 ### Usage
 
-- Install nodejs on your machine
+- Install nodejs > 10.11.5 on your machine
 - `npm install -g autorest`
 - `autorest --use=agoda-extension@1.0.2 --csharp --input-file=yourswagger.json --output-folder=./output-file-path --namespace=Agoda.Abc.YourName`
 
