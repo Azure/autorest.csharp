@@ -39,5 +39,11 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             }
             set => base.ModelType = value;
         }
+        
+        public string DocumentationString => (
+            this.DeprecationMessage != null
+                ? base.Documentation + "\nCAUTION: " + this.DeprecationMessage
+                : (string)base.Documentation
+        ).Trim();
     }
 }
