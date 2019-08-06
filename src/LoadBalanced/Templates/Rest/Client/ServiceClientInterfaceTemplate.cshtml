@@ -3,6 +3,7 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.LoadBalanced.Model
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
+@Header("// ")
 @foreach (var usingString in Model.Usings)
 {
     @:using @usingString;
@@ -11,49 +12,81 @@
 namespace @Settings.Namespace
 {
 @EmptyLine
-    /// <summary>@(Model.Documentation.EscapeXmlComment())</summary>
+    /// <summary>
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    /// </summary>
     public partial interface I@(Model.Name) 
     {
 
-    @EmptyLine
+        @EmptyLine
 
-    /// <summary>Gets or sets json serialization settings.</summary>
-    Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
-    @EmptyLine
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        @EmptyLine
 
-    /// <summary>Gets or sets json deserialization settings.</summary>
-    Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
-    @EmptyLine
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        @EmptyLine
 
-    @EmptyLine
-    @foreach (var operation in Model.AllOperations)
+        @foreach (var property in Model.Properties)
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+        @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
+        @EmptyLine
+        }
+
+        @EmptyLine
+    @foreach(var operation in Model.AllOperations)
     {
-        @:/// <summary>Gets the I@(operation.TypeName).</summary>
+        @:/// <summary>
+        @:/// Gets the I@(operation.TypeName).
+        @:/// </summary>
         @:I@(operation.TypeName) @(operation.NameForProperty) { get; }
         @EmptyLine
         @:
     }
-
-    @foreach (MethodCs method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
+     
+    @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
     {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {
-            @:/// <summary>@(String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())</summary>
+        @:/// <summary>
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+        @:/// </summary>
         }
         if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
         {
-            @:/// <remarks>@(method.Description.EscapeXmlComment())</remarks>
+        @:/// <remarks>
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        @:/// </remarks>
         }
-        foreach (var parameter in method.LocalParameters)
+        foreach (ParameterCs parameter in method.LocalParameters)
         {
-            @:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
+        @:/// <param name='@parameter.Name'>
+        @:@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())
+        @:/// </param>
         }
-        @:/// <param name='customHeaders'>The headers that will be added to request.</param>
-        @:/// <param name='cancellationToken'>The cancellation token.</param>
+        @:/// <param name='customHeaders'>
+        @:/// The headers that will be added to request.
+        @:/// </param>
+        @:/// <param name='cancellationToken'>
+        @:/// The cancellation token.
+        @:/// </param>
         @:@(method.OperationResponseReturnTypeString) @(method.Name)Async(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:
-        }
+    }
 
     }
-    }
+}

@@ -20,6 +20,8 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         }
         
+        public bool ExcludeFromInterface { get; set; }
+        
         public bool IsCustomBaseUri
             => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
