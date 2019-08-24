@@ -91,7 +91,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
     }
     @Model.BuildInputMappings()
 @EmptyLine
-    var verb = HttpMethod.@(Model.HttpMethod.ToString());
+    var verb = @(Model.HttpMethod.GetHttpMethod());
 @EmptyLine
     @(Model.BuildUrl("_url"))
 @EmptyLine
