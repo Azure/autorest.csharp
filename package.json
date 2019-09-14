@@ -1,0 +1,9 @@
+{
+  "verison": "0.0.0",
+  "private": true,
+  "name": "@autorest/csharp.v3",
+  "description": "> See readme.md for instructions",
+  "scripts": {
+    "start": "dotnet ./path/to/binary/extension.exe"
+  }
+}
