@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core.Utilities;
 using Microsoft.Perks.JsonRPC;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System.Linq;
 
 // KEEP IN SYNC with message.ts
 public class SmartPosition
@@ -45,8 +46,8 @@ public abstract class NewPlugin
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
     public void WriteFile(string filename, string content, object sourcemap, string artifactType) => _connection.Notify( "Message", _sessionId, new Message { 
         Channel = "file", 
-        Details = new { 
-            content = content,
+        Details = new {
+            content,
             type = artifactType,
             uri = filename,
             sourceMap = sourcemap
@@ -113,7 +114,7 @@ public abstract class NewPlugin
     {
         if (true == await GetValue<bool?>($"{Plugin}.debugger"))
         {
-            AutoRest.Core.Utilities.Debugger.Await();
+            Debugger.Await();
         }
         try
         {

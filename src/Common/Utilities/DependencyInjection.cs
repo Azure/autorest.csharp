@@ -5,8 +5,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 using System.Threading;
 
 namespace AutoRest.Core.Utilities
@@ -33,30 +31,26 @@ namespace AutoRest.Core.Utilities
 
             private void Decrement()
             {
-                if (_context != null)
+                if (_context == null) return;
+
+                Interlocked.Decrement(ref _refCount);
+                if (_refCount != 0) return;
+
+                // ok, cleanup.
+                // unhook ourself
+                Current = _parent;
+
+                // remove ourselves from the Activations collection
+                lock (typeof(Activation))
                 {
-                    Interlocked.Decrement(ref _refCount);
-                    if (_refCount == 0)
-                    {
-                        // ok, cleanup.
-                        // unhook ourself
-                        Current = _parent;
-
-                        // remove ourselves from the Activations collection
-                        lock (typeof(Activation))
-                        {
-                            Activations.Remove(_id);
-                        }
-
-                        // drop the reference to the DI factories.
-                        _context = null;
-
-                        // drop the singletons
-
-                        // remove the reference to the parent. (which can cause them to disappear if they are done)
-                        _parent?.Decrement();
-                    }
+                    Activations.Remove(_id);
                 }
+
+                // drop the reference to the DI factories.
+                _context = null;
+
+                // remove the reference to the parent. (which can cause them to disappear if they are done)
+                _parent?.Decrement();
             }
 
             public Activation(Context contextToActivate)
@@ -70,22 +64,6 @@ namespace AutoRest.Core.Utilities
                 }
                 Current = this;
                 _context.PerformOnActivate();
-#if DEBUG
-                // Let's verify that the Context's factories have 
-                // correctly implemented constructors of the base 
-                // class.
-                foreach (var factory in _context)
-                {
-                    // For each of the actual constructors for the actual target type,
-                    // do each of the constructors of the target type have an 
-                    // implementation in factory?
-                    foreach( var missingConstructor in factory.TargetTypeConstructors.Where( each => factory.GetConstructorImplementation(each.ParameterTypes()) == null ) )
-                    {
-                        //Logger.Instance.Log(Category.Warning, $"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
-                    }
-
-                }
-#endif
             }
 
             private static Activation Current
@@ -106,15 +84,13 @@ namespace AutoRest.Core.Utilities
 
             public void Dispose()
             {
-                if (!_disposed)
-                {
-                    _disposed = true;
-                    Decrement();
-                }
+                if (_disposed) return;
+                _disposed = true;
+                Decrement();
             }
         }
 
-        public class Context : IEnumerable<Factory>
+        private class Context : IEnumerable<Factory>
         {
             private readonly Dictionary<Type, Factory> _factories = new Dictionary<Type, Factory>();
             private event Action OnActivate;

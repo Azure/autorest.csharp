@@ -4,7 +4,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
@@ -28,16 +27,16 @@ namespace Microsoft.Perks.JsonRPC
         public bool SetCompleted(JToken result)
         {
             T value;
-            Func<object, bool> trueLikeValue = obj => obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj);
+            static bool TrueLikeValue(object obj) => obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj);
             if (typeof(T) == typeof(bool))
             {
                 var obj = result.ToObject<object>();
-                value = (T)(object)(trueLikeValue(obj));
+                value = (T)(object)(TrueLikeValue(obj));
             }
             else if (typeof(T) == typeof(bool?))
             {
                 var obj = result.ToObject<object>();
-                value = obj == null ? (T)(object)(null) : (T)(object)(trueLikeValue(obj));
+                value = obj == null ? (T)(object)(null) : (T)(object)(TrueLikeValue(obj));
             }
             else
             {

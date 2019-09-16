@@ -13,18 +13,16 @@ namespace AutoRest.JsonRpc
         public PeekingBinaryReader(Stream input)
         {
             _lastByte = null;
-            this._input = input;
+            _input = input;
         }
 
         private int ReadByte()
         {
-            if (_lastByte.HasValue)
-            {
-                var result = _lastByte.Value;
-                _lastByte = null;
-                return result;
-            }
-            return _input.ReadByte();
+            if (!_lastByte.HasValue) return _input.ReadByte();
+
+            var result = _lastByte.Value;
+            _lastByte = null;
+            return result;
         }
 
         public int PeekByte()
@@ -60,7 +58,7 @@ namespace AutoRest.JsonRpc
         public string ReadAsciiLine()
         {
             var result = new StringBuilder();
-            int c = ReadByte();
+            var c = ReadByte();
             while (c != '\r' && c != '\n' && c != -1)
             {
                 result.Append((char)c);

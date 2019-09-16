@@ -37,7 +37,6 @@ namespace AutoRest.Core.Utilities
 
         public static bool operator !=(T y, Fixable<T> x) => !(y == x);
 
-
         public static bool operator ==(Fixable<T> x, Fixable<T> y)
         {
             if (ReferenceEquals(x, y))

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -42,25 +43,23 @@ namespace Microsoft.Perks.JsonRPC
         internal static string ToJsonValue( this object value ) =>
           value == null || value is string || value.IsPrimitive() ?
             Quote(value) :
-            Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            JsonConvert.SerializeObject(value);
 
         ///<Summary>
         /// Creates a comma-separated Json Object notation { ... } from the array of strings
         ///</Summary>
-        private static string JsonObject(params string[] members ) =>
-           $"{{{members.Aggregate((c,e) =>$"{c},{e}")}}}";
-        
+        private static string JsonObject(params string[] members ) => $"{{{members.Aggregate((c,e) =>$"{c},{e}")}}}";
+
         ///<Summary>
         /// creates a comma-separated Json Array notation [ ... ] from the array of values
         ///</Summary>
-        private static string JsonArray( this IEnumerable<object> values ) => 
-            $"[{values.Select(ToJsonValue).Aggregate((c,e) => $"{c},{e}")}]";
+        private static string JsonArray( this IEnumerable<object> values ) => $"[{values.Select(ToJsonValue).Aggregate((c,e) => $"{c},{e}")}]";
 
         ///<Summary>
         /// Returns a quoted string and a serialized value for a key/value pair {"key": "value" }
         ///</Summary>
         private static string MemberValue(this string key, object value) => MemberObject(key,ToJsonValue(value));
-        
+
         ///<Summary>
         /// Returns a quotes string and the value for a key/value pair (rawValue must be JSON encoded already)
         ///</Summary>
@@ -70,7 +69,7 @@ namespace Microsoft.Perks.JsonRPC
         /// Returns the JSON-RPC protocol pair
         ///</Summary>
         private static readonly string Protocol = MemberValue("jsonrpc","2.0");
-        
+
         ///<Summary>
         /// Formats 'id' member
         ///</Summary>
@@ -80,13 +79,12 @@ namespace Microsoft.Perks.JsonRPC
         /// Formats 'result' member
         ///</Summary>
         private static string Result(this string rawValue) => MemberObject("result",rawValue);
-        
+
         ///<Summary>
         /// Formats 'method' member
         ///</Summary>
         private static string Method(this string value) => MemberValue("method",value);
-        
-        
+
         ///<Summary>
         /// Formats 'params' member for an array of value
         ///</Summary>
@@ -100,12 +98,7 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Generates a Response JSON object
         ///</Summary>
-        internal static string Response (string id, string result) => 
-            JsonObject(
-              Protocol,
-              Id(id),
-              Result(result)
-            );
+        internal static string Response (string id, string result) => JsonObject(Protocol, Id(id), Result(result));
 
         ///<Summary>
         /// Generates a Notification JSON object (array parameters syntax)

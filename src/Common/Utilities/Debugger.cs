@@ -3,6 +3,8 @@
 // 
 
 using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace AutoRest.Core.Utilities
 {
@@ -12,14 +14,14 @@ namespace AutoRest.Core.Utilities
         {
             while (!System.Diagnostics.Debugger.IsAttached)
             {
-                Console.Error.WriteLine($"Waiting for debugger to attach to process {System.Diagnostics.Process.GetCurrentProcess().Id}");
-                for (int i = 0; i < 50; i++)
+                Console.Error.WriteLine($"Waiting for debugger to attach to process {Process.GetCurrentProcess().Id}");
+                for (var i = 0; i < 50; i++)
                 {
                     if (System.Diagnostics.Debugger.IsAttached)
                     {
                         break;
                     }
-                    System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
                     Console.Error.Write(".");
                 }
                 Console.Error.WriteLine();

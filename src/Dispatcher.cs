@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3
                     content = codeModel,
                     type = "source-file-csharp",
                     uri = "CodeModel.yaml"
-                },
+                }
                 //Text = codeModel,
                 //Key = new[] { "source-file-csharp", "CodeModel.yaml" }
             };

@@ -1,13 +1,14 @@
-using AutoRest.JsonRpc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.JsonRpc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -81,7 +82,7 @@ namespace Microsoft.Perks.JsonRPC
         private readonly Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
         public void Dispatch<T>(string path, Func<Task<T>> method)
         {
-            _dispatch.Add(path, async (input) =>
+            _dispatch.Add(path, async input =>
             {
                 var result = await method();
                 if (result == null)
@@ -128,7 +129,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public void DispatchNotification(string path, Action method)
         {
-            _dispatch.Add(path, async (input) =>
+            _dispatch.Add(path, async input =>
             {
                 method();
                 return null;
@@ -137,18 +138,14 @@ namespace Microsoft.Perks.JsonRPC
 
         public void Dispatch<P1, P2, T>(string path, Func<P1, P2, Task<T>> method)
         {
-            _dispatch.Add(path, async (input) =>
+            _dispatch.Add(path, async input =>
             {
                 var args = ReadArguments(input, 2);
                 var a1 = args[0].Value<P1>();
                 var a2 = args[1].Value<P2>();
 
                 var result = await method(a1, a2);
-                if (result == null)
-                {
-                    return "null";
-                }
-                return ProtocolExtensions.ToJsonValue(result);
+                return result == null ? "null" : result.ToJsonValue();
             });
         }
 
@@ -223,14 +220,13 @@ namespace Microsoft.Perks.JsonRPC
                     if (IsAlive)
                     {
                         Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
-                        continue;
                     }
                 }
             }
             return false;
         }
 
-        public void Process(JToken content)
+        private void Process(JToken content)
         {
             if (content is JObject)
             {
@@ -295,29 +291,27 @@ namespace Microsoft.Perks.JsonRPC
         {
             // ensure that we are in a cancelled state.
             _cancellationTokenSource?.Cancel();
-            if (!_isDisposed)
+            if (_isDisposed) return;
+            // make sure we can't dispose twice
+            _isDisposed = true;
+            if (!disposing) return;
+
+            foreach (var t in _tasks.Values)
             {
-                // make sure we can't dispose twice
-                _isDisposed = true;
-                if (disposing)
-                {
-                    foreach (var t in _tasks.Values)
-                    {
-                        t.SetCancelled();
-                    }
-
-                    _writer?.Dispose();
-                    _writer = null;
-                    _reader?.Dispose();
-                    _reader = null;
-
-                    _cancellationTokenSource?.Dispose();
-                    _cancellationTokenSource = null;
-                }
+                t.SetCancelled();
             }
+
+            _writer?.Dispose();
+            _writer = null;
+            _reader?.Dispose();
+            _reader = null;
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
+            _streamReady?.Dispose();
+            _streamReady = null;
         }
 
-        private readonly Semaphore _streamReady = new Semaphore(1, 1);
+        private Semaphore _streamReady = new Semaphore(1, 1);
         private async Task Send(string text)
         {
             _streamReady.WaitOne();
@@ -330,13 +324,12 @@ namespace Microsoft.Perks.JsonRPC
         }
         private Task Write(byte[] buffer) => _writer.WriteAsync(buffer, 0, buffer.Length);
 
-        public async Task Respond(string id, string value)
+        private async Task Respond(string id, string value)
         {
             await Send(ProtocolExtensions.Response(id, value)).ConfigureAwait(false);
         }
 
-        public async Task Notify(string methodName, params object[] values) =>
-            await Send(ProtocolExtensions.Notification(methodName, values)).ConfigureAwait(false);
+        public async Task Notify(string methodName, params object[] values) => await Send(ProtocolExtensions.Notification(methodName, values)).ConfigureAwait(false);
 
         public async Task<T> Request<T>(string methodName, params object[] values)
         {
@@ -347,6 +340,6 @@ namespace Microsoft.Perks.JsonRPC
             return await response.Task.ConfigureAwait(false);
         }
 
-        public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
+        public TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
     }
 }
