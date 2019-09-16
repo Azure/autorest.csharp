@@ -118,7 +118,7 @@ namespace Microsoft.Perks.JsonRPC
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
             JsonObject(Protocol,methodName.Method(),Id(id)):
-            
+
             // with values 
             JsonObject(Protocol,methodName.Method(),Params(values),Id(id));
     }

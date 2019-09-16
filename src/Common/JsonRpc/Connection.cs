@@ -85,11 +85,7 @@ namespace Microsoft.Perks.JsonRPC
             _dispatch.Add(path, async input =>
             {
                 var result = await method();
-                if (result == null)
-                {
-                    return "null";
-                }
-                return JsonConvert.SerializeObject(result);
+                return result == null ? "null" : JsonConvert.SerializeObject(result);
             });
         }
 
