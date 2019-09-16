@@ -92,19 +92,6 @@ namespace Microsoft.Perks.JsonRPC
             });
         }
 
-        public void Dispatch(string path, Func<Task<string>> method)
-        {
-            _dispatch.Add(path, async (input) =>
-            {
-                var result = await method();
-                if (result == null)
-                {
-                    return "null";
-                }
-                return ProtocolExtensions.Quote(result);
-            });
-        }
-
         private JToken[] ReadArguments(JToken input, int expectedArgs)
         {
             var args = (input as JArray)?.ToArray();
@@ -146,10 +133,6 @@ namespace Microsoft.Perks.JsonRPC
                 method();
                 return null;
             });
-        }
-
-        public void Dispatch<P1, T>(string path, Func<P1, Task<T>> method)
-        {
         }
 
         public void Dispatch<P1, P2, T>(string path, Func<P1, P2, Task<T>> method)
@@ -347,10 +330,6 @@ namespace Microsoft.Perks.JsonRPC
         }
         private Task Write(byte[] buffer) => _writer.WriteAsync(buffer, 0, buffer.Length);
 
-        public async Task SendError(string id, int code, string message)
-        {
-            await Send(ProtocolExtensions.Error(id, code, message)).ConfigureAwait(false);
-        }
         public async Task Respond(string id, string value)
         {
             await Send(ProtocolExtensions.Response(id, value)).ConfigureAwait(false);
@@ -358,8 +337,6 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task Notify(string methodName, params object[] values) =>
             await Send(ProtocolExtensions.Notification(methodName, values)).ConfigureAwait(false);
-        public async Task NotifyWithObject(string methodName, object parameter) =>
-            await Send(ProtocolExtensions.NotificationWithObject(methodName, parameter)).ConfigureAwait(false);
 
         public async Task<T> Request<T>(string methodName, params object[] values)
         {
@@ -369,18 +346,6 @@ namespace Microsoft.Perks.JsonRPC
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
-
-        public async Task<T> RequestWithObject<T>(string methodName, object parameter)
-        {
-            var id = Interlocked.Decrement(ref _requestId).ToString();
-            var response = new CallerResponse<T>(id);
-            lock( _tasks ) { _tasks.Add(id, response); }
-            await Send(ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);
-            return await response.Task.ConfigureAwait(false);
-        }
-
-        public async Task Batch(IEnumerable<string> calls) =>
-            await Send(calls.JsonArray());
 
         public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
     }

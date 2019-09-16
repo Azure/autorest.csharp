@@ -13,20 +13,13 @@ namespace Microsoft.Perks.JsonRPC
     public interface ICallerResponse
     {
         bool SetCompleted(JToken result);
-        bool SetException(JToken error);
         bool SetCancelled();
     }
 
     public class CallerResponse<T> : TaskCompletionSource<T>, ICallerResponse
     {
         public string Id { get; private set; }
-        private Action<JObject> _setResult;
 
-        public CallerResponse(string id, Action<JObject> setResult)
-        {
-            Id = id;
-            _setResult = setResult;
-        }
         public CallerResponse(string id)
         {
             Id = id;
@@ -51,11 +44,6 @@ namespace Microsoft.Perks.JsonRPC
                 value = result.ToObject<T>();
             }
             return TrySetResult(value);
-        }
-
-        public bool SetException(JToken error)
-        {
-            return TrySetException(error.ToObject<Exception>());
         }
 
         public bool SetCancelled()

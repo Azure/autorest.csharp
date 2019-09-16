@@ -17,8 +17,6 @@ namespace AutoRest.Core.Utilities
     {
         internal class Activation : IDisposable
         {
-            private const string Slot = "LODIS-CurrentContext";
-
             private static AsyncLocal<Guid?> LodisContext = new AsyncLocal<Guid?>();
             internal static Dictionary<Guid, Activation> Activations = new Dictionary<Guid, Activation>();
 
@@ -243,106 +241,13 @@ namespace AutoRest.Core.Utilities
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public Context Add(Factory factory)
-            {
-                _factories.AddOrSet(factory.TargetType, factory);
-                return this;
-            }
-
-            public Context Add(IEnumerable<Factory> factories)
-            {
-                foreach (var factory in factories)
-                {
-                    _factories.AddOrSet(factory.TargetType, factory);
-                }
-                return this;
-            }
-            public Context Add(Context parent)
-            {
-                if (parent.OnActivate != null)
-                {
-                    OnActivate += parent.OnActivate;
-                }
-                return Add((IEnumerable<Factory>) (parent));
-            }
-
             public IDisposable Activate() => new Activation(this);
 
-            public static bool HasFactory(Type t)
-            {
-                for (var c = Activation.Current; c != null; c = c.Parent)
-                {
-                    if (c.Context._factories.ContainsKey(t))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
             public static bool IsActive => Activation.Current != null;
-
-            /// <summary>
-            /// Returns the currently active context. If there is no active context, 
-            /// it creates an anonymous one, activates it and returs that.
-            /// (fyi, that will hang around until the process ends)
-            /// </summary>
-            public static Context Active => Activation.Default.Context;
-
-            internal static Factory<T> GetFactory<T>() where T : class
-            {
-                // walk the tree of contexts
-                for (var c = Activation.Current; c != null; c = c.Parent)
-                {
-                    if (true == c.Context?._factories.ContainsKey(typeof(T)))
-                    {
-                        return c.Context._factories[typeof(T)] as Factory<T>;
-                    }
-                }
-
-                // didn't find it? create a default one
-                // (yes, this may create an anonymous context and activate it. that's ok)
-                return Active.AddDefault<T>();
-            }
-
-            private Factory<T> AddDefault<T>() where T : class
-            {
-                var fact = new Factory<T, T>();
-
-                //add it to the context 
-                Add(fact);
-
-                // return what we just added.
-                return fact;
-            }
-
-            public void Add(Action onActivate)
-            {
-                OnActivate += onActivate;
-            }
 
             protected internal void PerformOnActivate()
             {
                 OnActivate?.Invoke();
-            }
-        }
-
-        /// <summary>
-        ///     An overridable means to create a new instance of a given type,
-        ///     and pass an initializer to it.
-        /// </summary>
-        /// <typeparam name="T">The desired type (or subclass) to create</typeparam>
-        /// <returns>An instance of the type (or a subclass)</returns>
-        public static T New<T>() where T : class
-        {
-            try
-            {
-                return Context.GetFactory<T>().Invoke();
-            }
-            catch (Exception e)
-            {
-                Logger.Instance.Log(Category.Fatal, $"New<{typeof(T)}() threw exception {e.GetType().Name} - {e.Message}");
-                throw;
             }
         }
 

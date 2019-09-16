@@ -3,7 +3,6 @@
 // 
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AutoRest.Core.Utilities.Collections
 {
@@ -24,16 +23,5 @@ namespace AutoRest.Core.Utilities.Collections
             }
             return value;
         }
-
-        /// <summary>
-        ///     Concatenates a single item to an IEnumerable
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public static IEnumerable<T> ConcatSingleItem<T>(this IEnumerable<T> enumerable, T item) => (enumerable ?? Enumerable.Empty<T>()).Concat(item.SingleItemAsEnumerable());
-
-        public static IEnumerable<T> SingleItemAsEnumerable<T>(this T item) => new[] { item };
     }
 }

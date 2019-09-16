@@ -6,7 +6,7 @@ using System.Linq;
 namespace Microsoft.Perks.JsonRPC
 {
     public static class ProtocolExtensions {
-        private static Type[] primitives = new Type[] { typeof(bool), typeof(int),typeof(float), typeof(double), typeof(short), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(byte),typeof(sbyte)};
+        private static Type[] primitives = { typeof(bool), typeof(int),typeof(float), typeof(double), typeof(short), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(byte),typeof(sbyte)};
         private static bool IsPrimitive( this object value ) => primitives.Contains(value.GetType());
 
         ///<Summary>
@@ -106,17 +106,6 @@ namespace Microsoft.Perks.JsonRPC
               Id(id),
               Result(result)
             );
-            
-        ///<Summary>
-        /// Generates an Error JSON object
-        ///</Summary>
-        internal static string Error( string id,  int code, string message ) =>
-            JsonObject(
-              Protocol,
-              Id(id),
-              MemberObject( "error", JsonObject(MemberValue("code", code),
-              MemberValue("message",message)
-            )));
 
         ///<Summary>
         /// Generates a Notification JSON object (array parameters syntax)
@@ -130,18 +119,6 @@ namespace Microsoft.Perks.JsonRPC
             ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(values));
 
         ///<Summary>
-        /// Generates a Notification JSON object (object parameter syntax)
-        ///</Summary>    
-        public static string NotificationWithObject(string methodName, object parameter ) =>
-          parameter == null || parameter is string || parameter.IsPrimitive() ? 
-            // if you pass in null, a string, or a primitive
-            // this has to be passed as an array
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(new[]{parameter})):
-            
-            // pass as an object
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(parameter.ToJsonValue()));        
-
-        ///<Summary>
         /// Generates a Request JSON object (array syntax)
         ///</Summary>
         public static string Request(string id, string methodName, params object[] values ) => 
@@ -151,17 +128,5 @@ namespace Microsoft.Perks.JsonRPC
             
             // with values 
             ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(values),Id(id));
-            
-        ///<Summary>
-        /// Generates a Request JSON object (object parameter syntax)
-        ///</Summary>
-        public static string RequestWithObject(string id, string methodName, object parameter ) =>
-          parameter == null || parameter is string || parameter.IsPrimitive() ? 
-            // if you pass in null, a string, or a primitive
-            // this has to be passed as an array
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(new[]{parameter}),Id(id)):
-            
-            // pass as an object
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(parameter.ToJsonValue()), Id(id));
     }
 }
