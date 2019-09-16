@@ -12,7 +12,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 
@@ -325,22 +324,6 @@ namespace AutoRest.Core.Utilities
         }
 
         /// <summary>
-        /// Converts the specified string to a camel cased string.
-        /// </summary>
-        /// <param name="value">The string to convert.</param>
-        /// <returns>The camel case string.</returns>
-        public static string ToCamelCase(this string value) => CodeNamer.Instance.CamelCase(value);
-        public static string ToCamelCase(this Fixable<string> value) => CodeNamer.Instance.CamelCase(value.Value);
-
-        /// <summary>
-        /// Converts the specified string to a pascal cased string.
-        /// </summary>
-        /// <param name="value">The string to convert.</param>
-        /// <returns>The pascal case string.</returns>
-        public static string ToPascalCase(this string value) => CodeNamer.Instance.PascalCase(value);
-        public static string ToPascalCase(this Fixable<string> value) => CodeNamer.Instance.PascalCase(value.Value);
-
-        /// <summary>
         /// Escape reserved characters in xml comments with their escaped representations
         /// </summary>
         /// <param name="comment">The xml comment to escape</param>
@@ -360,62 +343,6 @@ namespace AutoRest.Core.Utilities
 
         public static string EscapeXmlComment(this Fixable<string> comment) => EscapeXmlComment(comment.Value);
 
-        /// <summary>
-        /// Returns true if the type is a PrimaryType with KnownPrimaryType matching typeToMatch.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="typeToMatch"></param>
-        /// <returns></returns>
-        public static bool IsPrimaryType(this IModelType type, KnownPrimaryType typeToMatch) => typeToMatch == (type as PrimaryType)?.KnownPrimaryType;
-
-        /// <summary>
-        /// Returns true if the <paramref name="type"/> is a PrimaryType with KnownPrimaryType matching <paramref name="typeToMatch"/>
-        /// or a DictionaryType with ValueType matching <paramref name="typeToMatch"/> or a SequenceType matching <paramref name="typeToMatch"/>
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="typeToMatch"></param>
-        /// <returns></returns>
-        public static bool IsOrContainsPrimaryType(this IModelType type, KnownPrimaryType typeToMatch)
-        {
-            if (type == null)
-            {
-                return false;
-            }
-
-            if (type.IsPrimaryType(typeToMatch) ||
-                type.IsDictionaryContainingType(typeToMatch) ||
-                type.IsSequenceContainingType(typeToMatch))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Returns true if the <paramref name="type"/> is a DictionaryType with ValueType matching <paramref name="typeToMatch"/>
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="typeToMatch"></param>
-        /// <returns></returns>
-        public static bool IsDictionaryContainingType(this IModelType type, KnownPrimaryType typeToMatch)
-        {
-            DictionaryType dictionaryType = type as DictionaryType;
-            PrimaryType dictionaryPrimaryType = dictionaryType?.ValueType as PrimaryType;
-            return dictionaryPrimaryType != null && dictionaryPrimaryType.IsPrimaryType(typeToMatch);
-        }
-
-        /// <summary>
-        /// Returns true if the <paramref name="type"/>is a SequenceType matching <paramref name="typeToMatch"/>
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="typeToMatch"></param>
-        /// <returns></returns>
-        public static bool IsSequenceContainingType(this IModelType type, KnownPrimaryType typeToMatch)
-        {
-            SequenceType sequenceType = type as SequenceType;
-            PrimaryType sequencePrimaryType = sequenceType?.ElementType as PrimaryType;
-            return sequencePrimaryType != null && sequencePrimaryType.IsPrimaryType(typeToMatch);
-        }
 
         public static string StripControlCharacters(this string input)
         {
@@ -464,30 +391,7 @@ namespace AutoRest.Core.Utilities
         public static string Else(this Fixable<string> preferred, string fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback : preferred.Value;
         public static string Else(this string preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred) ? fallback.Value : preferred;
         public static string Else(this Fixable<string> preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback.Value : preferred.Value;
-        public static string GetUniqueName(this IChild scope, string desiredName)
-        {
-            //// current hack: get the methods params and add them to the local list.
-            //var names = new HashSet<string>((scope as Method)?.Parameters.Select(each => each.Name.Value) ?? Enumerable.Empty<string>());
-            //names.AddRange(scope.LocallyUsedNames);
 
-            //// get a unique name
-            //var result = CodeNamer.Instance.GetUnique(desiredName, scope, scope.Parent.IdentifiersInScope,
-            //    scope.Parent.Children, names);
-
-            
-            //// tell the child that they own that name now.
-            //scope?.LocallyUsedNames?.Add(result);
-            //return result;
-            return null;
-        }
-
-        public static void Disambiguate(this IEnumerable<IChild> children)
-        {
-            foreach (var child in children)
-            {
-                child.Disambiguate();
-            }
-        }
         public static Task<T> AsResultTask<T>(this T result)
         {
             var x = new TaskCompletionSource<T>(TaskCreationOptions.AttachedToParent);
