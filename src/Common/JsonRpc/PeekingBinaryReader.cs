@@ -5,38 +5,38 @@ using System.Threading.Tasks;
 
 namespace AutoRest.JsonRpc
 {
-    class PeekingBinaryReader : IDisposable
+    internal class PeekingBinaryReader : IDisposable
     {
-        byte? lastByte;
-        Stream input;
+        private byte? _lastByte;
+        private readonly Stream _input;
 
         public PeekingBinaryReader(Stream input)
         {
-            lastByte = null;
-            this.input = input;
+            _lastByte = null;
+            this._input = input;
         }
 
-        public int ReadByte()
+        private int ReadByte()
         {
-            if (lastByte.HasValue)
+            if (_lastByte.HasValue)
             {
-                var result = lastByte.Value;
-                lastByte = null;
+                var result = _lastByte.Value;
+                _lastByte = null;
                 return result;
             }
-            return input.ReadByte();
+            return _input.ReadByte();
         }
 
         public int PeekByte()
         {
-            if (lastByte.HasValue)
+            if (_lastByte.HasValue)
             {
-                return lastByte.Value;
+                return _lastByte.Value;
             }
             var result = ReadByte();
             if (result != -1)
             {
-                lastByte = (byte)result;
+                _lastByte = (byte)result;
             }
             return result;
         }
@@ -45,14 +45,14 @@ namespace AutoRest.JsonRpc
         {
             var buffer = new byte[count];
             var read = 0;
-            if (count > 0 && lastByte.HasValue)
+            if (count > 0 && _lastByte.HasValue)
             {
-                buffer[read++] = lastByte.Value;
-                lastByte = null;
+                buffer[read++] = _lastByte.Value;
+                _lastByte = null;
             }
             while (read < count)
             {
-                read += await input.ReadAsync(buffer, read, count - read);
+                read += await _input.ReadAsync(buffer, read, count - read);
             }
             return buffer;
         }
@@ -79,7 +79,7 @@ namespace AutoRest.JsonRpc
 
         public void Dispose()
         {
-            input.Dispose();
+            _input.Dispose();
         }
     }
 }

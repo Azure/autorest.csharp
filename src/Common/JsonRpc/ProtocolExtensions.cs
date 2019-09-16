@@ -6,13 +6,13 @@ using System.Linq;
 namespace Microsoft.Perks.JsonRPC
 {
     public static class ProtocolExtensions {
-        private static Type[] primitives = { typeof(bool), typeof(int),typeof(float), typeof(double), typeof(short), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(byte),typeof(sbyte)};
-        private static bool IsPrimitive( this object value ) => primitives.Contains(value.GetType());
+        private static readonly Type[] Primitives = { typeof(bool), typeof(int),typeof(float), typeof(double), typeof(short), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(byte),typeof(sbyte)};
+        private static bool IsPrimitive( this object value ) => Primitives.Contains(value.GetType());
 
         ///<Summary>
         /// Ensures a given string is safe to transport in JSON
         ///</Summary>
-        static string ToLiteral(string input) {
+        private static string ToLiteral(string input) {
           return string.IsNullOrEmpty(input) ?
             input:
             input.
@@ -31,18 +31,18 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Converts the value to a Primitive and reutrns the JSON Primitive equivalent
         ///</Summary>
-        internal static string Quote(this object value) => 
-            value == null ? "null":                                                // null values
-              primitives.Contains(value.GetType()) ? value.ToString().ToLower() :  // primitive values (number,boolean)
-              $"\"{ToLiteral(value.ToString())}\"";                                // everything else.
+        private static string Quote(this object value) =>
+            value == null ? "null":
+              Primitives.Contains(value.GetType()) ? value.ToString().ToLower() :
+              $"\"{ToLiteral(value.ToString())}\"";
         
         ///<Summary>
         /// Converts the value to an object/string/primitive representation 
         ///</Summary>
         internal static string ToJsonValue( this object value ) =>
-          value == null || value is string || value.IsPrimitive() ?   // if this is simple or primitive
-            Quote(value) :                                            // just return the formatted valuue
-            Newtonsoft.Json.JsonConvert.SerializeObject(value);       // otherwise serialize it.
+          value == null || value is string || value.IsPrimitive() ?
+            Quote(value) :
+            Newtonsoft.Json.JsonConvert.SerializeObject(value);
 
         ///<Summary>
         /// Creates a comma-separated Json Object notation { ... } from the array of strings
@@ -53,13 +53,13 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// creates a comma-separated Json Array notation [ ... ] from the array of values
         ///</Summary>
-        internal static string JsonArray( this IEnumerable<object> values ) => 
+        private static string JsonArray( this IEnumerable<object> values ) => 
             $"[{values.Select(ToJsonValue).Aggregate((c,e) => $"{c},{e}")}]";
 
         ///<Summary>
         /// Returns a quoted string and a serialized value for a key/value pair {"key": "value" }
         ///</Summary>
-        internal static string MemberValue(this string key, object value) => MemberObject(key,ToJsonValue(value));
+        private static string MemberValue(this string key, object value) => MemberObject(key,ToJsonValue(value));
         
         ///<Summary>
         /// Returns a quotes string and the value for a key/value pair (rawValue must be JSON encoded already)
@@ -69,7 +69,7 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Returns the JSON-RPC protocol pair
         ///</Summary>
-        private static string Protocol = MemberValue("jsonrpc","2.0");
+        private static readonly string Protocol = MemberValue("jsonrpc","2.0");
         
         ///<Summary>
         /// Formats 'id' member

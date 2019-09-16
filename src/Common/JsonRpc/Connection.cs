@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Perks.JsonRPC
 {
-    public class Connection : IDisposable
+    public sealed class Connection : IDisposable
     {
         private Stream _writer;
         private PeekingBinaryReader _reader;
-        private bool _isDisposed = false;
+        private bool _isDisposed;
         private int _requestId;
-        private Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
+        private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
 
-        private Task _loop;
+        private readonly Task _loop;
 
         public event Action<string> OnDebug;
 
@@ -31,8 +31,8 @@ namespace Microsoft.Perks.JsonRPC
         }
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private CancellationToken _cancellationToken => _cancellationTokenSource.Token;
-        public bool IsAlive => !_cancellationToken.IsCancellationRequested && _writer != null && _reader != null;
+        private CancellationToken CancellationToken => _cancellationTokenSource.Token;
+        private bool IsAlive => !CancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
         public void Stop() => _cancellationTokenSource.Cancel();
 
@@ -78,7 +78,7 @@ namespace Microsoft.Perks.JsonRPC
             }
             return json;
         }
-        private Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
+        private readonly Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
         public void Dispatch<T>(string path, Func<Task<T>> method)
         {
             _dispatch.Add(path, async (input) =>
@@ -92,7 +92,7 @@ namespace Microsoft.Perks.JsonRPC
             });
         }
 
-        private JToken[] ReadArguments(JToken input, int expectedArgs)
+        private static JToken[] ReadArguments(JToken input, int expectedArgs)
         {
             var args = (input as JArray)?.ToArray();
             var arg = (input as JObject);
@@ -291,7 +291,7 @@ namespace Microsoft.Perks.JsonRPC
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             // ensure that we are in a cancelled state.
             _cancellationTokenSource?.Cancel();

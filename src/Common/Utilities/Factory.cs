@@ -11,22 +11,21 @@ namespace AutoRest.Core.Utilities
 {
     public class Factory
     {
-        protected internal readonly Dictionary<Type[], Delegate> Constructors = new Dictionary<Type[], Delegate>();
-        public readonly Type TargetType;
+        private readonly Dictionary<Type[], Delegate> _constructors = new Dictionary<Type[], Delegate>();
+        private readonly Type _targetType;
 
-        protected internal const BindingFlags AllConstructorsFlags =
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private const BindingFlags AllConstructorsFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
-        protected internal IEnumerable<ConstructorInfo> TargetTypeConstructors => TargetType.GetConstructors(AllConstructorsFlags);
+        protected internal IEnumerable<ConstructorInfo> TargetTypeConstructors => _targetType.GetConstructors(AllConstructorsFlags);
 
         protected internal Factory(Type t)
         {
-            TargetType = t;
+            _targetType = t;
         }
 
         internal Delegate GetConstructorImplementation(Type[] args)
         {
-            var signatures = Constructors.Keys.Where(each => each.Length == args.Length).ToArray();
+            var signatures = _constructors.Keys.Where(each => each.Length == args.Length).ToArray();
 
             if (!signatures.Any())
             {
@@ -36,7 +35,7 @@ namespace AutoRest.Core.Utilities
             if (signatures.Length == 1)
             {
                 // quick match : if there is only one match, let's just try that.
-                return Constructors[signatures[0]];
+                return _constructors[signatures[0]];
             }
 
             // look for an exact match, or failing that, an acceptable match.
@@ -45,7 +44,7 @@ namespace AutoRest.Core.Utilities
 
             if (s != null)
             {
-                return Constructors[s];
+                return _constructors[s];
             }
 
             return null;

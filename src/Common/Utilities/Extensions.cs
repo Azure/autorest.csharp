@@ -15,11 +15,8 @@ namespace AutoRest.Core.Utilities
     public static class Extensions
     {
         public static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
-        public static Assembly GetAssembly(this Type type) => type.GetTypeInfo().Assembly;
 
-        public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "�null�" }").Trim(',') ?? "";
-
-        public static Type[] ParameterTypes(this IEnumerable<ParameterInfo> parameterInfos) => parameterInfos?.Select(p => p.ParameterType).ToArray();
+        private static Type[] ParameterTypes(this IEnumerable<ParameterInfo> parameterInfos) => parameterInfos?.Select(p => p.ParameterType).ToArray();
 
         public static Type[] ParameterTypes(this MethodBase method) => method?.GetParameters().ParameterTypes();
     }

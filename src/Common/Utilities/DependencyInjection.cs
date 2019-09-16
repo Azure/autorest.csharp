@@ -8,76 +8,73 @@ using System.Collections.Generic;
 using System.Linq;
 
 using System.Threading;
-using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Core.Utilities
 {
     public static class DependencyInjection
     {
-        internal class Activation : IDisposable
+        private class Activation : IDisposable
         {
-            private static AsyncLocal<Guid?> LodisContext = new AsyncLocal<Guid?>();
-            internal static Dictionary<Guid, Activation> Activations = new Dictionary<Guid, Activation>();
+            private static readonly AsyncLocal<Guid?> LodisContext = new AsyncLocal<Guid?>();
+            private static readonly Dictionary<Guid, Activation> Activations = new Dictionary<Guid, Activation>();
 
-            internal readonly Guid Id = Guid.NewGuid();
-            internal readonly Activation Parent;
+            private readonly Guid _id = Guid.NewGuid();
+            private readonly Activation _parent;
             private bool _disposed;
-            protected internal Context Context;
-            protected internal Dictionary<Type, object> Singletons = new Dictionary<Type, object>();
+            private Context _context;
 
             // upon activation, we start at count 1
-            private int _refcount = 1;
+            private int _refCount = 1;
 
             private void Increment()
             {
-                Interlocked.Increment(ref _refcount);
+                Interlocked.Increment(ref _refCount);
             }
 
             private void Decrement()
             {
-                if (Context != null)
+                if (_context != null)
                 {
-                    Interlocked.Decrement(ref _refcount);
-                    if (_refcount == 0)
+                    Interlocked.Decrement(ref _refCount);
+                    if (_refCount == 0)
                     {
                         // ok, cleanup.
                         // unhook ourself
-                        Current = Parent;
+                        Current = _parent;
 
                         // remove ourselves from the Activations collection
                         lock (typeof(Activation))
                         {
-                            Activations.Remove(Id);
+                            Activations.Remove(_id);
                         }
 
                         // drop the reference to the DI factories.
-                        Context = null;
+                        _context = null;
 
                         // drop the singletons
-                        Singletons = null;
 
                         // remove the reference to the parent. (which can cause them to disappear if they are done)
-                        Parent?.Decrement();
+                        _parent?.Decrement();
                     }
                 }
             }
 
             public Activation(Context contextToActivate)
             {
-                Parent = Current;
-                Parent?.Increment();
-                Context = contextToActivate;
+                _parent = Current;
+                _parent?.Increment();
+                _context = contextToActivate;
                 lock (typeof(Activation))
                 {
-                    Activations.Add(Id, this);
+                    Activations.Add(_id, this);
                 }
                 Current = this;
-                Context.PerformOnActivate();
+                _context.PerformOnActivate();
 #if DEBUG
                 // Let's verify that the Context's factories have 
                 // correctly implemented constructors of the base 
                 // class.
-                foreach (var factory in Context)
+                foreach (var factory in _context)
                 {
                     // For each of the actual constructors for the actual target type,
                     // do each of the constructors of the target type have an 
@@ -91,7 +88,7 @@ namespace AutoRest.Core.Utilities
 #endif
             }
 
-            protected internal static Activation Current
+            private static Activation Current
             {
                 get
                 {
@@ -103,20 +100,7 @@ namespace AutoRest.Core.Utilities
                 }
                 set
                 {
-                    LodisContext.Value = value?.Id;
-                }
-            }
-
-            protected internal static Activation Default
-            {
-                get
-                {
-                    var activation = Current;
-                    if (activation == null)
-                    {
-                        new Context().Activate();
-                    }
-                    return Current;
+                    LodisContext.Value = value?._id;
                 }
             }
 
@@ -126,107 +110,6 @@ namespace AutoRest.Core.Utilities
                 {
                     _disposed = true;
                     Decrement();
-                }
-            }
-        }
-
-        public class IsSingleton<T>
-        {
-            public static T Instance => Singleton<T>.Instance;
-        }
-
-        public class Singleton<T>
-        {
-            public static bool HasInstanceInCurrentActivation => Activation.Current.Singletons.ContainsKey(typeof(T));
-
-            public static bool HasInstance
-            {
-                get
-                {
-                    for (var c = Activation.Current; c != null; c = c.Parent)
-                    {
-                        if (c.Singletons.ContainsKey(typeof(T)))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            }
-
-            public static T Instance
-            {
-                get
-                {
-                    // check for the exact match
-                    for (var c = Activation.Current; c != null; c = c.Parent)
-                    {
-                        if (c.Singletons.ContainsKey(typeof(T)))
-                        {
-                            return (T)c.Singletons[typeof(T)];
-                        }
-                    }
-
-                    // check for anything that is inherited
-                    for (var c = Activation.Current; c != null; c = c.Parent)
-                    {
-                        foreach (var item in c.Singletons.Values)
-                        {
-                            if (item is T)
-                            {
-                                return (T)item;
-                            }
-                        }
-                    }
-                    return default(T);
-                }
-                set { Activation.Default.Singletons.AddOrSet(typeof(T), value); }
-            }
-
-            /// <summary>
-            /// Retrieves the singleton of this but also the parent contexts, if existing.
-            /// </summary>
-            public static IEnumerable<T> RecursiveInstances
-            {
-                get
-                {
-                    Type key = typeof(T);
-                    for (var c = Activation.Current; c != null; c = c.Parent)
-                    {
-                        if (c.Singletons.ContainsKey(key))
-                        {
-                            yield return (T)c.Singletons[key];
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Convenience methods for singletons that are of type IEnumerable&lt;T&gt;
-        /// </summary>
-        public class SingletonList<T>
-        {
-            /// <summary>
-            /// Adds given item to the current context.
-            /// </summary>
-            public static void Add(T item)
-            {
-                if (!Activation.Current.Singletons.ContainsKey(typeof(IEnumerable<T>)))
-                {
-                    Activation.Current.Singletons[typeof(IEnumerable<T>)] = Enumerable.Empty<T>();
-                }
-                Activation.Current.Singletons[typeof(IEnumerable<T>)] = (Activation.Current.Singletons[typeof(IEnumerable<T>)] as IEnumerable<T>).Concat(new[] { item });
-            }
-
-            /// <summary>
-            /// For retrieving singletons that are lists while also considering the list items of parent contexts.
-            /// </summary>
-            public static IEnumerable<T> RecursiveInstances
-            {
-                get
-                {
-                    return Singleton<IEnumerable<T>>.RecursiveInstances.SelectMany(list => list);
                 }
             }
         }
@@ -241,8 +124,6 @@ namespace AutoRest.Core.Utilities
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             public IDisposable Activate() => new Activation(this);
-
-            public static bool IsActive => Activation.Current != null;
 
             protected internal void PerformOnActivate()
             {

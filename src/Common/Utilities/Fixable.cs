@@ -5,13 +5,12 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 
 namespace AutoRest.Core.Utilities
 {
     [DebuggerDisplay("{DebuggerValue,nq}")]
-    public class Fixable<T> : ICopyFrom<T>, ICopyFrom<Fixable<T>>
+    public class Fixable<T>
     {
         [JsonProperty("fixed")]
         public bool IsFixed { get; protected set; }
@@ -90,7 +89,6 @@ namespace AutoRest.Core.Utilities
 
         public override int GetHashCode() => Value?.GetHashCode() ?? 0;
 
-
         public Fixable()
         {
         }
@@ -121,7 +119,7 @@ namespace AutoRest.Core.Utilities
         }
 
         [JsonIgnore]
-        public T Value
+        private T Value
         {
             get
             {
