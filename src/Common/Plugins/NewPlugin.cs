@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core.Utilities;
 using Microsoft.Perks.JsonRPC;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 // KEEP IN SYNC with message.ts
 public class SmartPosition
@@ -33,8 +32,6 @@ public class Message
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 public abstract class NewPlugin
 {
-    private static IDisposable Start => NewContext;
-
     public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
     public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
     public Task<string> GetValue(string key) => GetValue<string>(key);
@@ -118,11 +115,7 @@ public abstract class NewPlugin
         }
         try
         {
-            using (Start)
-            {
-                //Logger.Instance.AddListener(new JsonRpcLogListener(Message));
-                return await ProcessInternal();
-            }
+            return await ProcessInternal();
         }
         catch (Exception e)
         {
