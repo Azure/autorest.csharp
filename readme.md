@@ -13,9 +13,9 @@ pipeline:
     input: remodeler
   csharp-v3/emitter:
     input: csharp-v3
-    scope: output-info
+    scope: output-scope
 
-output-info:
+output-scope:
   output-artifact: source-file-csharp
 
 #     emitter:

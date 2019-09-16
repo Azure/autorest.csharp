@@ -27,11 +27,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AutoRest.Common" Version="2.4.48" />
+    <Folder Include="Plugins\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Plugins\" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="YamlDotNet" Version="5.2.1" />
   </ItemGroup>
 
 </Project>
