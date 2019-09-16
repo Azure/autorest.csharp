@@ -4,13 +4,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
@@ -24,30 +20,6 @@ namespace AutoRest.Core.Utilities
     public static class Extensions
     {
         /// <summary>
-        /// Maps an action with side effects over a sequence.
-        /// </summary>
-        /// <param name='sequence'>The sequence to map over.</param>
-        /// <param name='action'>The action to map.</param>
-        /// <typeparam name='T'>Type of elements in the sequence.</typeparam>
-        public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
-        {
-            if (sequence == null)
-            {
-                throw new ArgumentNullException("sequence");
-            }
-
-            if (action == null)
-            {
-                throw new ArgumentNullException("action");
-            }
-
-            foreach (T element in sequence)
-            {
-                action(element);
-            }
-        }
-
-        /// <summary>
         ///     Determines whether the collection object is either null or an empty collection.
         /// </summary>
         /// <typeparam name="T"> </typeparam>
@@ -59,69 +31,14 @@ namespace AutoRest.Core.Utilities
         /// </remarks>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection) => collection == null || !collection.Any();
 
-        /// <summary>
-        /// Word wrap a string of text to a given width.
-        /// </summary>
-        /// <param name='text'>The text to word wrap.</param>
-        /// <param name='width'>Width available to wrap.</param>
-        /// <returns>Lines of word wrapped text.</returns>
-        public static IEnumerable<string> WordWrap(this string text, int width)
-        {
-            Debug.Assert(text != null, "text should not be null.");
-
-            var lines = text.Split(new [] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
-            foreach (var line in lines)
-            {
-                var processedLine = line.Trim();
-
-                // yield empty lines as they are (probably) intensional
-                if (processedLine.Length == 0)
-                {
-                    yield return processedLine;
-                }
-
-                // feast on the line until it's gone
-                while (processedLine.Length > 0)
-                {
-                    // determine potential wrapping points
-                    var whitespacePositions = Enumerable
-                        .Range(0, processedLine.Length)
-                        .Where(i => char.IsWhiteSpace(processedLine[i]))
-                        .Concat(new [] { processedLine.Length })
-                        .Cast<int?>();
-                    var preWidthWrapAt = whitespacePositions.LastOrDefault(i => i <= width);
-                    var postWidthWrapAt = whitespacePositions.FirstOrDefault(i => i > width);
-
-                    // choose preferred wrapping point
-                    var wrapAt = preWidthWrapAt ?? postWidthWrapAt ?? processedLine.Length;
-
-                    // wrap
-                    yield return processedLine.Substring(0, wrapAt);
-                    processedLine = processedLine.Substring(wrapAt).Trim();
-                }
-            }
-        }
-
         public static bool IsMarked<T>(this PropertyInfo property)
             => property.GetCustomAttributes(typeof(T), true).Any();
 
-        public static bool IsGenericOf(this Type type, Type genericType)
-            => type.IsGenericType() && type.GetGenericTypeDefinition() == genericType;
-
         public static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
         public static bool IsEnum(this Type type) => type.GetTypeInfo().IsEnum;
-        public static IEnumerable<T> GetCustomAttributes<T>(this Type type, bool inherit) where T : Attribute => type.GetTypeInfo().GetCustomAttributes<T>(inherit);
         public static Type BaseType(this Type type) => type.GetTypeInfo().BaseType;
         public static bool IsGenericType(this Type type) => type.GetTypeInfo().IsGenericType;
-        public static IEnumerable<CustomAttributeData> CustomAttributes(this Type type) => type.GetTypeInfo().CustomAttributes;
-        public static bool IsClass(this Type type) => type.GetTypeInfo().IsClass;
         public static Assembly GetAssembly(this Type type) => type.GetTypeInfo().Assembly;
-
-        public static string CodeBaseDirectory(Type type)
-        {
-            var a = GetAssembly(type);
-            return Directory.GetParent(a.Location.ToString()).ToString();
-        }
 
         public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "�null�" }").Trim(',') ?? "";
 
@@ -241,53 +158,6 @@ namespace AutoRest.Core.Utilities
             return destination;
         }
 
-        public static T? Get<T>(this IDictionary<string, object> dictionary, string key) where T : struct, IComparable, IConvertible
-
-        {
-            if (dictionary.TryGetValue(key, out object value))
-            {
-                if (typeof(T).IsEnum())
-                {
-                    return (T)Enum.Parse(typeof(T), value.ToString(), true);
-                }
-
-                if (value is T)
-                {
-                    return (T) value;
-                }
-
-                try
-                {
-                    return (T) Convert.ChangeType(value, typeof(T));
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-            return null;
-        }
-
-        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key) where T : class
-        {
-            if (dictionary.TryGetValue(key, out object value))
-            {
-                if (value is T)
-                {
-                    return (T)value;
-                }
-                try
-                {
-                    return (T)Convert.ChangeType(value, typeof(T));
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-            return null;
-        }
-
         private const BindingFlags AnyPropertyFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy /* | BindingFlags.GetProperty */ | BindingFlags.Instance;
 
         private static PropertyInfo GetReadableProperty(this Type type, string propertyName)
@@ -323,74 +193,7 @@ namespace AutoRest.Core.Utilities
             return true == pi?.CanWrite ? pi : GetWriteableProperty(type.BaseType(), propertyName);
         }
 
-        /// <summary>
-        /// Escape reserved characters in xml comments with their escaped representations
-        /// </summary>
-        /// <param name="comment">The xml comment to escape</param>
-        /// <returns>The text appropriately escaped for inclusing in an xml comment</returns>
-        public static string EscapeXmlComment(this string comment)
-        {
-            if (comment == null)
-            {
-                return null;
-            }
-
-            return new StringBuilder(comment)
-                .Replace("&", "&amp;")
-                .Replace("<", "&lt;")
-                .Replace(">", "&gt;").ToString();
-        }
-
-        public static string EscapeXmlComment(this Fixable<string> comment) => EscapeXmlComment(comment.Value);
-
-
-        public static string StripControlCharacters(this string input)
-        {
-            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz-[\cj\cm\ci]]", string.Empty);
-        }
-
-        public static string Capitalize(this string input)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                throw new ArgumentException("Input may not be null, empty, or whitespace.");
-            }
-
-            // if it's only one character
-            if (input.Length == 1)
-            {
-                return input.ToUpper();
-            }
-
-            //otherwise the first letter as uppercase, and the rest of the string unaltered.
-            return $"{char.ToUpper(input[0])}{input.Substring(1)}";
-        }
-
-        public static bool Equals(this Fixable<string> s1, string s2, StringComparison comparison) => ReferenceEquals(s1.Value, s2) || s1.Value.Equals(s2, comparison);
-        public static bool Equals(this string s1, Fixable<string> s2, StringComparison comparison) => ReferenceEquals(s1, s2.Value) || s1.Equals(s2.Value, comparison);
-        public static bool EqualsIgnoreCase(this Fixable<string> s1, string s2) => ReferenceEquals(s1.Value, s2) || true == s1.Value?.Equals(s2, StringComparison.OrdinalIgnoreCase);
         public static bool EqualsIgnoreCase(this string s1, Fixable<string> s2) => ReferenceEquals(s1,s2.Value) || (s1?.Equals(s2.Value, StringComparison.OrdinalIgnoreCase) ?? false);
-        public static bool EqualsIgnoreCase(this Fixable<string> s1, Fixable<string> s2) => ReferenceEquals(s1.Value, s2.Value) || s1.Value.Equals(s2.Value, StringComparison.OrdinalIgnoreCase);
-
-        public static char CharAt(this Fixable<string> str, int index) => str.Value[index];
-        public static string Substring(this Fixable<string> str, int startIndex) => str.Value.Substring(startIndex);
-
-        public static string ToLower(this Fixable<string> str) => str?.Value.ToLowerInvariant();
-        public static string ToLowerInvariant(this Fixable<string> str) => str?.Value.ToLowerInvariant();
-        public static bool IsNullOrEmpty(this Fixable<string> str) => string.IsNullOrWhiteSpace(str?.Value);
-        public static bool Contains( this Fixable<string> str, string contained) => true == str?.Value?.Contains(contained);
-        public static bool Contains(this Fixable<string> str, char chr) => true == str?.Value?.Contains(chr);
-        public static int IndexOf(this Fixable<string> str, char chr) => str?.Value?.IndexOf(chr) ?? -1;
-        public static bool StartsWith(this Fixable<string> str, string startsWith) => true == str?.Value?.StartsWith(startsWith, StringComparison.Ordinal);
-
-        public static string EnsureEndsWith(this string str, string suffix) => string.IsNullOrEmpty(str) ? str : (str.EndsWith(suffix) ? str : str + suffix);
-        public static string EnsureEndsWith(this Fixable<string> str, string suffix) => str.IsNullOrEmpty() ? str.Value : str.Value.EnsureEndsWith(suffix);
-
-        public static string Else(this string preferred, string fallback) => string.IsNullOrWhiteSpace(preferred) ? fallback : preferred;
-
-        public static string Else(this Fixable<string> preferred, string fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback : preferred.Value;
-        public static string Else(this string preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred) ? fallback.Value : preferred;
-        public static string Else(this Fixable<string> preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback.Value : preferred.Value;
 
         public static Task<T> AsResultTask<T>(this T result)
         {
@@ -398,8 +201,5 @@ namespace AutoRest.Core.Utilities
             x.SetResult(result);
             return x.Task;
         }
-        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java", ".go",".json" };
-        public static bool IsFileLineFeedOnly(this string filename) => LFOnly.Any(each => filename.EndsWith(each, StringComparison.OrdinalIgnoreCase));
-        public static string LineEnding(this string filename) => filename.IsFileLineFeedOnly() ? "\n" : "\r\n";
     }
 }
