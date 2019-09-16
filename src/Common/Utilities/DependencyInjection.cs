@@ -346,60 +346,6 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        /// <summary>
-        ///    A means to clone an object (and still use DI)
-        /// </summary>
-        /// <param name="original">the original object to make a copy from</param>
-        /// <typeparam name="T">The desired type (or subclass) to create</typeparam>
-        /// <returns>An instance of the type (or a subclass) that has been copied from the original</returns>
-        public static T Duplicate<T>(T original) where T : class
-        {
-            return New<T>().LoadFrom(original);
-        }
-
         public static IDisposable NewContext => new Context().Activate();
-
-        /// <summary>
-        ///     An overridable means to create a new instance of a given type,
-        ///     and pass an initializer to it.
-        /// </summary>
-        /// <param name="arguments">
-        ///     The arguments to the constructor.
-        ///     If the last argument is an anonymous object, it will not be passed to the
-        ///     constructor, rather it will be used as an object initializer for the object
-        ///     once it has been constructed.
-        /// </param>
-        /// <typeparam name="T">The desired type (or subclass) to create</typeparam>
-        /// <returns>An instance of the type (or a subclass)</returns>
-        public static T New<T>(params object[] arguments) where T : class
-        {
-            try
-            {
-                var ctor = Context.GetFactory<T>();
-                if (arguments.Length == 0)
-                {
-                    return ctor.Invoke();
-                }
-
-                // if the last parameter is an anonymous object, 
-                // we'll treat that as an initializer.
-                var last = arguments[arguments.Length - 1];
-                if (last.IsAnonymous())
-                {
-                    return ctor.Invoke(arguments.Take(arguments.Length - 1)).LoadFrom(last);
-                }
-
-                // otherwise, just inwvoke with all the arguments.
-                return ctor.Invoke(arguments);
-            }
-            catch (Exception e)
-            {
-                Logger.Instance.Log(Category.Fatal, $"New<{typeof(T)}({arguments.Select(each => each?.ToString()).Aggregate((cur, each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
-                throw;
-            }
-        }
-
-        public static bool IsAnonymous(this object instance)
-            => (instance != null) && (instance.GetType().Namespace == null);
     }
 }

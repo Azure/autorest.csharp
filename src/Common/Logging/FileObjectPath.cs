@@ -19,10 +19,5 @@ namespace AutoRest.Core.Logging
         public Uri FilePath { get; }
 
         public ObjectPath ObjectPath { get; }
-
-        // https://tools.ietf.org/id/draft-pbryan-zyp-json-ref-03.html
-        public string JsonReference => $"{FilePath}#{ObjectPath.JsonPointer}";
-
-        public string ReadablePath => $"{FilePath}#{ObjectPath.ReadablePath}";
     }
 }

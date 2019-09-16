@@ -17,53 +17,13 @@ namespace AutoRest.Core.Utilities
         public bool IsFixed { get; protected set; }
 
         [JsonIgnore]
-        private string DebuggerValue => IsFixed || (OnGet == null) ? $"\"{Value}\"" : $"\"{Value}\" (#:\"{_value}\")";
+        private string DebuggerValue => IsFixed || (OnGet == null) ? $"\"{Value}\"" : $"\"{Value}\" (#:\"{RawValue}\")";
 
-        private T _value;
         public event Func<T, T> OnGet;
         public event Func<T, T> OnSet;
 
         public static implicit operator T(Fixable<T> d) => d.Value;
-        public static implicit operator Fixable<T>(T d) => new Fixable<T> {_value = d};
-
-        public bool CopyFrom(T source)
-        {
-            Value = source;
-            return true;
-        }
-
-        public bool CopyFrom(Fixable<T> value)
-        {
-            if (!ReferenceEquals(value,null))
-            {
-                _value = Invoke(OnSet, value._value);
-                IsFixed = value.IsFixed;
-                return true;
-            }
-            return false;
-        }
-
-        public bool CopyFrom(object source)
-        {
-            if (ReferenceEquals(source,null))
-            {
-                _value = default(T);
-                IsFixed = false;
-                return true;
-            }
-
-            if (source is Fixable<T>)
-            {
-                return CopyFrom((Fixable<T>) source);
-            }
-
-            if (source is T)
-            {
-                return CopyFrom((T) source);
-            }
-
-            return false;
-        }
+        public static implicit operator Fixable<T>(T d) => new Fixable<T> {RawValue = d};
 
         public override string ToString() => Value?.ToString();
 
@@ -123,7 +83,7 @@ namespace AutoRest.Core.Utilities
             }
             if (obj is T)
             {
-                return Equals(obj, _value);
+                return Equals(obj, RawValue);
             }
             return false;
         }
@@ -137,7 +97,7 @@ namespace AutoRest.Core.Utilities
 
         public Fixable(T value)
         {
-            _value = value;
+            RawValue = value;
         }
 
         public Fixable(Func<T, T> onGet)
@@ -167,29 +127,18 @@ namespace AutoRest.Core.Utilities
             {
                 if (!IsFixed && (OnGet != null))
                 {
-                    return Invoke(OnGet, _value);
+                    return Invoke(OnGet, RawValue);
                 }
-                return _value;
+                return RawValue;
             }
             set
             {
                 IsFixed = false;
-                _value = Invoke(OnSet, value);
+                RawValue = Invoke(OnSet, value);
             }
         }
 
         [JsonProperty("raw")]
-        public T RawValue { get => _value; set => _value = value; }
-
-        [JsonIgnore]
-        public T FixedValue
-        {
-            get { return _value; }
-            set
-            {
-                IsFixed = true;
-                _value = Invoke(OnSet, value);
-            }
-        }
+        public T RawValue { get; set; }
     }
 }

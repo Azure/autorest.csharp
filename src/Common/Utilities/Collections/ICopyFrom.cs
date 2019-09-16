@@ -6,11 +6,9 @@ namespace AutoRest.Core.Utilities.Collections
 {
     public interface ICopyFrom<in T> : ICopyFrom
     {
-        bool CopyFrom(T source);
     }
 
     public interface ICopyFrom
     {
-        bool CopyFrom(object source);
     }
 }
