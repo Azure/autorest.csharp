@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Perks.JsonRPC;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Core.Logging;
 using System.Linq;
 
 // KEEP IN SYNC with message.ts
@@ -31,45 +30,6 @@ public class Message
 }
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-class JsonRpcLogListener : ILogListener
-{
-    private Action<Message> SendMessage;
-
-    public JsonRpcLogListener(Action<Message> sendMessage)
-    {
-        SendMessage = sendMessage;
-    }
-
-    private SourceLocation[] GetSourceLocations(FileObjectPath path)
-    {
-        if (path == null)
-        {
-            return new SourceLocation[0];
-        }
-        return new[]
-        {
-            new SourceLocation
-            {
-                document = path.FilePath?.ToString(),
-                Position = new SmartPosition
-                {
-                    path = path.ObjectPath?.Path.Select(part => part.RawPath).ToArray() ?? new object[0]
-                }
-            }
-        };
-    }
-
-    public void Log(LogMessage m)
-    {
-        SendMessage(new Message
-        {
-            Text = m.Message,
-            Source = GetSourceLocations(m.Path),
-            Channel = m.Severity.ToString().ToLowerInvariant()
-        });
-    }
-}
-
 public abstract class NewPlugin :  AutoRest.Core.IHost
 {
     private IDisposable Start => NewContext;
@@ -141,7 +101,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
     }
 
     private Connection _connection;
-    protected string Plugin { get; private set; }
+    protected string Plugin { get; }
     protected string _sessionId;
 
     public NewPlugin(Connection connection, string plugin, string sessionId)
@@ -153,7 +113,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
 
     public async Task<bool> Process()
     {
-        if (true == await this.GetValue<bool?>($"{Plugin}.debugger"))
+        if (true == await GetValue<bool?>($"{Plugin}.debugger"))
         {
             AutoRest.Core.Utilities.Debugger.Await();
         }
@@ -161,7 +121,7 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
         {
             using (Start)
             {
-                Logger.Instance.AddListener(new JsonRpcLogListener(Message));
+                //Logger.Instance.AddListener(new JsonRpcLogListener(Message));
                 return await ProcessInternal();
             }
         }

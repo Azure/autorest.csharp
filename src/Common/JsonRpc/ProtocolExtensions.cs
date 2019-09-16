@@ -113,10 +113,10 @@ namespace Microsoft.Perks.JsonRPC
         public static string Notification(string methodName, params object[] values ) => 
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method()):
+            JsonObject(Protocol,methodName.Method()):
 
             // with values 
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(values));
+            JsonObject(Protocol,methodName.Method(),Params(values));
 
         ///<Summary>
         /// Generates a Request JSON object (array syntax)
@@ -124,9 +124,9 @@ namespace Microsoft.Perks.JsonRPC
         public static string Request(string id, string methodName, params object[] values ) => 
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Id(id)):
+            JsonObject(Protocol,methodName.Method(),Id(id)):
             
             // with values 
-            ProtocolExtensions.JsonObject(Protocol,methodName.Method(),Params(values),Id(id));
+            JsonObject(Protocol,methodName.Method(),Params(values),Id(id));
     }
 }

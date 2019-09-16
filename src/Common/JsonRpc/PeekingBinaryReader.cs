@@ -12,7 +12,7 @@ namespace AutoRest.JsonRpc
 
         public PeekingBinaryReader(Stream input)
         {
-            this.lastByte = null;
+            lastByte = null;
             this.input = input;
         }
 

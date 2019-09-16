@@ -61,7 +61,7 @@ Licensed under the MIT License.
             FileSystemInput = new MemoryFileSystem();
             FileSystemOutput = new MemoryFileSystem();
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeaderWithoutVersion, Settings.Version);
+            Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeaderWithoutVersion, Version);
             CodeGenerator = "CSharp";
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
@@ -81,7 +81,7 @@ Licensed under the MIT License.
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
-        public IDictionary<string, object> CustomSettings { get; private set; }
+        public IDictionary<string, object> CustomSettings { get; }
 
         // The CommandLineInfo attribute is reflected to display help.
         // Prefer to show required properties before optional.
@@ -121,11 +121,11 @@ Licensed under the MIT License.
             {
                 if (value == "MICROSOFT_MIT")
                 {
-                    _header = MicrosoftMitLicenseHeader + Environment.NewLine + string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, Settings.Version);
+                    _header = MicrosoftMitLicenseHeader + Environment.NewLine + string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, Version);
                 }
                 else if (value == "MICROSOFT_APACHE")
                 {
-                    _header = MicrosoftApacheLicenseHeader + Environment.NewLine + string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, Settings.Version);
+                    _header = MicrosoftApacheLicenseHeader + Environment.NewLine + string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, Version);
                 }
                 else if (value == "MICROSOFT_MIT_NO_VERSION")
                 {

@@ -9,7 +9,6 @@ using System.Linq;
 
 using System.Threading;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Logging;
 
 namespace AutoRest.Core.Utilities
 {
@@ -85,7 +84,7 @@ namespace AutoRest.Core.Utilities
                     // implementation in factory?
                     foreach( var missingConstructor in factory.TargetTypeConstructors.Where( each => factory.GetConstructorImplementation(each.ParameterTypes()) == null ) )
                     {
-                        Logger.Instance.Log(Category.Warning, $"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
+                        //Logger.Instance.Log(Category.Warning, $"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
                     }
 
                 }
