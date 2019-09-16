@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.V3
                 //Key = new[] { "source-file-csharp", "CodeModel.yaml" }
             };
             //Message(new Message {Text = codeModel, Channel = "fatal"});
+            Message(new Message { Text = (await GetValue<string[]>("input-file")).FirstOrDefault(), Channel = "fatal" });
             Message(file);
             //WriteFile("CodeModel.yaml", codeModel, null);
             //Console.WriteLine("Got here");
