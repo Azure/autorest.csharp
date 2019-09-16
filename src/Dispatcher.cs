@@ -18,6 +18,22 @@ namespace AutoRest.CSharp.V3
             }
 
             var codeModel = await ReadFile(files.First());
+            var file = new Message
+            {
+                Channel = "file",
+                Details = new
+                {
+                    content = codeModel,
+                    type = "source-file-csharp",
+                    uri = "CodeModel.yaml"
+                },
+                //Text = codeModel,
+                //Key = new[] { "source-file-csharp", "CodeModel.yaml" }
+            };
+            //Message(new Message {Text = codeModel, Channel = "fatal"});
+            Message(file);
+            //WriteFile("CodeModel.yaml", codeModel, null);
+            //Console.WriteLine("Got here");
             return true;
         }
     }

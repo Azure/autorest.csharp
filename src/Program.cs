@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            using var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
+            var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
             connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new[] { "csharp-v3" });
             connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Dispatcher(connection, plugin, sessionId).Process());
             connection.DispatchNotification("Shutdown", connection.Stop);
