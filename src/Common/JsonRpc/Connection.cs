@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.JsonRpc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -37,75 +37,57 @@ namespace Microsoft.Perks.JsonRPC
 
         public void Stop() => _cancellationTokenSource.Cancel();
 
-        private async Task<JToken> ReadJson()
+        private async Task<JsonElement?> ReadJson()
         {
             var jsonText = string.Empty;
-            JToken json = null;
+            JsonElement? json = null;
             while (json == null)
             {
                 jsonText += _reader.ReadAsciiLine(); // + "\n";
-                if (jsonText.StartsWith("{") && jsonText.EndsWith("}"))
+
+                // try to parse it.
+                try
                 {
-                    // try to parse it.
-                    try
+                    json = jsonText.Parse();
+                    if (json != null)
                     {
-                        json = JObject.Parse(jsonText);
-                        if (json != null)
-                        {
-                            return json;
-                        }
-                    }
-                    catch
-                    {
-                        // not enough text?
+                        return json;
                     }
                 }
-                else if (jsonText.StartsWith("[") && jsonText.EndsWith("]"))
+                catch
                 {
-                    // try to parse it.
-                    try
-                    {
-                        json = JArray.Parse(jsonText);
-                        if (json != null)
-                        {
-                            return json;
-                        }
-                    }
-                    catch
-                    {
-                        // not enough text?
-                    }
+                    // not enough text?
                 }
             }
             return json;
         }
-        private readonly Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
+        private readonly Dictionary<string, Func<JsonElement, Task<string>>> _dispatch = new Dictionary<string, Func<JsonElement, Task<string>>>();
         public void Dispatch<T>(string path, Func<Task<T>> method)
         {
             _dispatch.Add(path, async input =>
             {
                 var result = await method();
-                return result == null ? "null" : JsonConvert.SerializeObject(result);
+                return result == null ? "null" : JsonSerializer.Serialize(result);
             });
         }
 
-        private static JToken[] ReadArguments(JToken input, int expectedArgs)
+        private static JsonElement[] ReadArguments(JsonElement input, int expectedArgs)
         {
-            var args = (input as JArray)?.ToArray();
-            var arg = (input as JObject);
+            var args = input.ValueKind == JsonValueKind.Array ? input.EnumerateArray().ToArray() : null;
+            var arg = input.ValueKind == JsonValueKind.Object ? input : (JsonElement?)null;
 
             if (expectedArgs == 0)
             {
                 if (args == null && arg == null)
                 {
-                    // expected zero, recieved zero
-                    return new JToken[0];
+                    // expected zero, received zero
+                    return new JsonElement[0];
                 }
 
-                throw new Exception($"Invalid nubmer of arguments {args.Length} or argument object passed '{arg}' for this call. Expected {expectedArgs}");
+                throw new Exception($"Invalid number of arguments {args?.Length} or argument object passed '{arg}' for this call. Expected {expectedArgs}");
             }
 
-            if (args.Length == expectedArgs)
+            if (args?.Length == expectedArgs)
             {
                 // passed as an array
                 return args;
@@ -113,14 +95,14 @@ namespace Microsoft.Perks.JsonRPC
 
             if (expectedArgs == 1)
             {
-                if (args.Length == 0 && arg != null)
+                if (args?.Length == 0 && arg != null)
                 {
                     // passed as an object
-                    return new JToken[] { arg };
+                    return new [] { arg.Value };
                 }
             }
 
-            throw new Exception($"Invalid nubmer of arguments {args.Length} for this call. Expected {expectedArgs}");
+            throw new Exception($"Invalid number of arguments {args?.Length} for this call. Expected {expectedArgs}");
         }
 
         public void DispatchNotification(string path, Action method)
@@ -137,22 +119,18 @@ namespace Microsoft.Perks.JsonRPC
             _dispatch.Add(path, async input =>
             {
                 var args = ReadArguments(input, 2);
-                var a1 = args[0].Value<P1>();
-                var a2 = args[1].Value<P2>();
+                var a1 = args[0].ToObject<P1>();
+                var a2 = args[1].ToObject<P2>();
 
                 var result = await method(a1, a2);
                 return result == null ? "null" : result.ToJsonValue();
             });
         }
 
-        private async Task<JToken> ReadJson(int contentLength)
+        private async Task<JsonElement?> ReadJson(int contentLength)
         {
             var jsonText = Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength));
-            if (jsonText.StartsWith("{"))
-            {
-                return JObject.Parse(jsonText);
-            }
-            return JArray.Parse(jsonText);
+            return jsonText.Parse();
         }
 
         private void Log(string text) => OnDebug?.Invoke(text);
@@ -222,23 +200,23 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        private void Process(JToken content)
+        private void Process(JsonElement? content)
         {
-            if (content is JObject)
+            if (content != null && content.Value.ValueKind == JsonValueKind.Object)
             {
                 Task.Factory.StartNew(async () => {
-                    var jobject = content as JObject;
+                    var jsonObject = content.Value;
                     try
                     {
-                        if (jobject.Properties().Any(each => each.Name == "method"))
+                        if (jsonObject.EnumerateObject().Any(each => each.Name == "method"))
                         {
-                            var method = jobject.Property("method").Value.ToString();
-                            var id = jobject.Property("id")?.Value.ToString();
+                            var method = jsonObject.GetProperty("method").ToString();
+                            var id = jsonObject.GetPropertyOrNull("id")?.ToString();
                             // this is a method call.
                             // pass it to the service that is listening...
-                            if (_dispatch.TryGetValue(method, out Func<JToken, Task<string>> fn))
+                            if (_dispatch.TryGetValue(method, out Func<JsonElement, Task<string>> fn))
                             {
-                                var parameters = jobject.Property("params").Value;
+                                var parameters = jsonObject.GetProperty("params");
                                 var result = await fn(parameters);
                                 if (id != null)
                                 {
@@ -250,18 +228,18 @@ namespace Microsoft.Perks.JsonRPC
                         }
 
                         // this is a result from a previous call.
-                        if (jobject.Properties().Any(each => each.Name == "result"))
+                        if (jsonObject.EnumerateObject().Any(each => each.Name == "result"))
                         {
-                            var id = jobject.Property("id")?.Value.ToString();
+                            var id = jsonObject.GetPropertyOrNull("id")?.ToString();
                             if (!string.IsNullOrEmpty(id))
                             {
-                                ICallerResponse f = null;
+                                ICallerResponse f;
                                 lock( _tasks )
                                 {
                                     f = _tasks[id];
                                     _tasks.Remove(id);
                                 }
-                                f.SetCompleted(jobject.Property("result").Value);
+                                f.SetCompleted(jsonObject.GetProperty("result"));
                             }
                         }
                     }
@@ -270,10 +248,6 @@ namespace Microsoft.Perks.JsonRPC
                         Console.Error.WriteLine(e);
                     }
                 });
-            }
-            if (content is JArray)
-            {
-                Console.Error.WriteLine("Unhandled: Batch Request");
             }
         }
 

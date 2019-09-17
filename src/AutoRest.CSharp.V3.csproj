@@ -30,9 +30,4 @@
     <Folder Include="Plugins\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="YamlDotNet" Version="5.2.1" />
-  </ItemGroup>
-
 </Project>

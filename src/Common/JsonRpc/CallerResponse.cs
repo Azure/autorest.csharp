@@ -4,14 +4,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace Microsoft.Perks.JsonRPC
 {
     public interface ICallerResponse
     {
-        bool SetCompleted(JToken result);
+        bool SetCompleted(JsonElement result);
         bool SetCancelled();
     }
 
@@ -24,7 +25,7 @@ namespace Microsoft.Perks.JsonRPC
             Id = id;
         }
 
-        public bool SetCompleted(JToken result)
+        public bool SetCompleted(JsonElement result)
         {
             T value;
             static bool TrueLikeValue(object obj) => obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj);

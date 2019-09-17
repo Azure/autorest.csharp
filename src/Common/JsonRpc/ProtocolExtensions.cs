@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -43,7 +43,7 @@ namespace Microsoft.Perks.JsonRPC
         internal static string ToJsonValue( this object value ) =>
           value == null || value is string || value.IsPrimitive() ?
             Quote(value) :
-            JsonConvert.SerializeObject(value);
+            JsonSerializer.Serialize(value);
 
         ///<Summary>
         /// Creates a comma-separated Json Object notation { ... } from the array of strings
@@ -53,7 +53,7 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// creates a comma-separated Json Array notation [ ... ] from the array of values
         ///</Summary>
-        private static string JsonArray( this IEnumerable<object> values ) => $"[{values.Select(ToJsonValue).Aggregate((c,e) => $"{c},{e}")}]";
+        private static string JsonArray(this IEnumerable<object> values) => $"[{values.Select(ToJsonValue).Aggregate((c,e) => $"{c},{e}")}]";
 
         ///<Summary>
         /// Returns a quoted string and a serialized value for a key/value pair {"key": "value" }
@@ -98,12 +98,12 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Generates a Response JSON object
         ///</Summary>
-        internal static string Response (string id, string result) => JsonObject(Protocol, Id(id), Result(result));
+        internal static string Response(string id, string result) => JsonObject(Protocol, Id(id), Result(result));
 
         ///<Summary>
         /// Generates a Notification JSON object (array parameters syntax)
         ///</Summary>
-        public static string Notification(string methodName, params object[] values ) => 
+        public static string Notification(string methodName, params object[] values) =>
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
             JsonObject(Protocol,methodName.Method()):
@@ -114,7 +114,7 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Generates a Request JSON object (array syntax)
         ///</Summary>
-        public static string Request(string id, string methodName, params object[] values ) => 
+        public static string Request(string id, string methodName, params object[] values) =>
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
             JsonObject(Protocol,methodName.Method(),Id(id)):
