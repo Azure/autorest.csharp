@@ -7,77 +7,91 @@ namespace AutoRest.JsonRpc
 {
     internal class PeekingBinaryReader : IDisposable
     {
-        private byte? _lastByte;
-        private readonly Stream _input;
+        private readonly Stream _stream;
 
-        public PeekingBinaryReader(Stream input)
+        private byte? _currentByte;
+        public byte? CurrentByte
         {
-            _lastByte = null;
-            _input = input;
+            get
+            {
+                if (_currentByte.HasValue)
+                {
+                    return _currentByte.Value;
+                }
+                var result = GetByte();
+                if (result.HasValue)
+                {
+                    _currentByte = result;
+                }
+                return result;
+            }
         }
 
-        private int ReadByte()
-        {
-            if (!_lastByte.HasValue) return _input.ReadByte();
+        private const int EndOfStream = -1;
 
-            var result = _lastByte.Value;
-            _lastByte = null;
+        public PeekingBinaryReader(Stream stream)
+        {
+            _stream = stream;
+        }
+
+        private byte? PopCurrentByte()
+        {
+            if (!_currentByte.HasValue) return null;
+
+            var result = _currentByte.Value;
+            _currentByte = null;
             return result;
         }
 
-        public int PeekByte()
+        // Pops the current byte or reads a new one if there is no current byte
+        // Returns null if end-of-stream
+        private byte? GetByte()
         {
-            if (_lastByte.HasValue)
-            {
-                return _lastByte.Value;
-            }
-            var result = ReadByte();
-            if (result != -1)
-            {
-                _lastByte = (byte)result;
-            }
-            return result;
+            if (_currentByte.HasValue) return PopCurrentByte();
+
+            var streamByte = _stream.ReadByte();
+            return streamByte != EndOfStream ? (byte?)streamByte : null;
         }
 
         public async Task<byte[]> ReadBytesAsync(int count)
         {
             var buffer = new byte[count];
-            var read = 0;
-            if (count > 0 && _lastByte.HasValue)
+            var index = 0;
+            if (count > 0 && _currentByte.HasValue)
             {
-                buffer[read++] = _lastByte.Value;
-                _lastByte = null;
+                // ReSharper disable once PossibleInvalidOperationException
+                buffer[index++] = PopCurrentByte().Value;
             }
-            while (read < count)
+            while (index < count)
             {
-                read += await _input.ReadAsync(buffer, read, count - read);
+                index += await _stream.ReadAsync(buffer, index, count - index);
             }
             return buffer;
         }
 
         public string ReadAsciiLine()
         {
-            var result = new StringBuilder();
-            var c = ReadByte();
-            while (c != '\r' && c != '\n' && c != -1)
+            var sb = new StringBuilder();
+            var character = GetByte();
+            while (character.HasValue && character != '\r' && character != '\n')
             {
-                result.Append((char)c);
-                c = ReadByte();
+                sb.Append((char)character.Value);
+                character = GetByte();
             }
-            if (c == '\r' && PeekByte() == '\n')
+
+            // CurrentByte will only ever be null or a non-line-ending value when this method returns since we read until line ending characters,
+            // and discard the last value if it is a '\n' preceded by a '\r'.
+            if (character == '\r' && CurrentByte == '\n')
             {
-                ReadByte();
+                GetByte();
             }
-            if (c == -1 && result.Length == 0)
-            {
-                return null;
-            }
-            return result.ToString();
+
+            return sb.Length != 0 ? sb.ToString() : null;
         }
 
         public void Dispose()
         {
-            _input.Dispose();
+            _stream.Dispose();
         }
     }
 }

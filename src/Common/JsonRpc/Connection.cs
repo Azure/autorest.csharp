@@ -141,7 +141,7 @@ namespace Microsoft.Perks.JsonRPC
             {
                 try
                 {
-                    var ch = _reader?.PeekByte();
+                    var ch = _reader?.CurrentByte;
                     if (-1 == ch)
                     {
                         // didn't get anything. start again, it'll know if we're shutting down
@@ -160,15 +160,15 @@ namespace Microsoft.Perks.JsonRPC
 
                     // We're looking at headers
                     var headers = new Dictionary<string, string>();
-                    var line = _reader.ReadAsciiLine();
+                    var line = _reader?.ReadAsciiLine();
                     while (!string.IsNullOrWhiteSpace(line))
                     {
                         var bits = line.Split(new[] { ':' }, 2);
                         headers.Add(bits[0].Trim(), bits[1].Trim());
-                        line = _reader.ReadAsciiLine();
+                        line = _reader?.ReadAsciiLine();
                     }
 
-                    ch = _reader?.PeekByte();
+                    ch = _reader?.CurrentByte;
                     // the next character had better be a { or [
                     if ('{' == ch || '[' == ch)
                     {

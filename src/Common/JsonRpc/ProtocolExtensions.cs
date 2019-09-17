@@ -7,9 +7,6 @@ using System.Text.Json;
 namespace Microsoft.Perks.JsonRPC
 {
     public static class ProtocolExtensions {
-        private static readonly Type[] Primitives = { typeof(bool), typeof(int),typeof(float), typeof(double), typeof(short), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(byte),typeof(sbyte)};
-        private static bool IsPrimitive( this object value ) => Primitives.Contains(value.GetType());
-
         ///<Summary>
         /// Ensures a given string is safe to transport in JSON
         ///</Summary>
@@ -17,16 +14,16 @@ namespace Microsoft.Perks.JsonRPC
           return string.IsNullOrEmpty(input) ?
             input:
             input.
-              Replace( "\\","\\\\" ). // backslashes
-              Replace( "\"","\\\"" ). // quotes
-              Replace( "\0","\\0" ).  // nulls
-              Replace( "\a","\\a" ).  // alert
-              Replace( "\b","\\b" ).  // backspace
-              Replace( "\f","\\f" ).  // formfeed
-              Replace( "\n","\\n" ).  // newline
-              Replace( "\r","\\r" ).  // return
-              Replace( "\t","\\t" ).  // tab
-              Replace( "\v","\\v" );  // vertical tab
+              Replace("\\","\\\\"). // backslashes
+              Replace("\"","\\\""). // quotes
+              Replace("\0","\\0").  // nulls
+              Replace("\a","\\a").  // alert
+              Replace("\b","\\b").  // backspace
+              Replace("\f","\\f").  // formfeed
+              Replace("\n","\\n").  // newline
+              Replace("\r","\\r").  // return
+              Replace("\t","\\t").  // tab
+              Replace("\v","\\v");  // vertical tab
         }
 
         ///<Summary>
@@ -34,14 +31,14 @@ namespace Microsoft.Perks.JsonRPC
         ///</Summary>
         private static string Quote(this object value) =>
             value == null ? "null":
-              Primitives.Contains(value.GetType()) ? value.ToString().ToLower() :
+              value.GetType().IsPrimitive ? value.ToString().ToLower() :
               $"\"{ToLiteral(value.ToString())}\"";
         
         ///<Summary>
         /// Converts the value to an object/string/primitive representation 
         ///</Summary>
         internal static string ToJsonValue( this object value ) =>
-          value == null || value is string || value.IsPrimitive() ?
+          value == null || value is string || value.GetType().IsPrimitive ?
             Quote(value) :
             JsonSerializer.Serialize(value);
 
@@ -106,10 +103,10 @@ namespace Microsoft.Perks.JsonRPC
         public static string Notification(string methodName, params object[] values) =>
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
-            JsonObject(Protocol,methodName.Method()):
+            JsonObject(Protocol, methodName.Method()):
 
-            // with values 
-            JsonObject(Protocol,methodName.Method(),Params(values));
+            // with values
+            JsonObject(Protocol, methodName.Method(), Params(values));
 
         ///<Summary>
         /// Generates a Request JSON object (array syntax)
@@ -117,9 +114,9 @@ namespace Microsoft.Perks.JsonRPC
         public static string Request(string id, string methodName, params object[] values) =>
           values == null || values.Length == 0 ?
             // without any values, this doesn't need parameters
-            JsonObject(Protocol,methodName.Method(),Id(id)):
+            JsonObject(Protocol, methodName.Method(), Id(id)):
 
-            // with values 
-            JsonObject(Protocol,methodName.Method(),Params(values),Id(id));
+            // with values
+            JsonObject(Protocol, methodName.Method(), Params(values), Id(id));
     }
 }
