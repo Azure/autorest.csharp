@@ -15,11 +15,13 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
-            connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new[] { "csharp-v3" });
-            connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Dispatcher(connection, plugin, sessionId).Process());
-            connection.DispatchNotification("Shutdown", connection.Stop);
-            connection.GetAwaiter().GetResult();
+            var autoRestConnection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(), 
+                (connection, pluginName, sessionId) => new Dispatcher(connection, pluginName, sessionId).Process(),
+                "csharp-v3");
+            //connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new[] { "csharp-v3" });
+            //connection.Dispatch<string, string, bool>("Process", (pluginName, sessionId) => new Dispatcher(connection, pluginName, sessionId).Process());
+            //connection.Dispatch("Shutdown", connection.Stop);
+            autoRestConnection.GetAwaiter().GetResult();
 
             Console.Error.WriteLine("Shutting Down");
             return 0;

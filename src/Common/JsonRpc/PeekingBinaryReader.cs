@@ -14,16 +14,14 @@ namespace AutoRest.JsonRpc
         {
             get
             {
-                if (_currentByte.HasValue)
+                if (_currentByte.HasValue) return _currentByte.Value;
+
+                var newByte = GetByte();
+                if (newByte.HasValue)
                 {
-                    return _currentByte.Value;
+                    _currentByte = newByte;
                 }
-                var result = GetByte();
-                if (result.HasValue)
-                {
-                    _currentByte = result;
-                }
-                return result;
+                return newByte;
             }
         }
 

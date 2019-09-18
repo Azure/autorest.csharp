@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using DiagDebugger = System.Diagnostics.Debugger;
 
 namespace AutoRest.Core.Utilities
 {
@@ -12,12 +13,12 @@ namespace AutoRest.Core.Utilities
     {
         public static void Await()
         {
-            while (!System.Diagnostics.Debugger.IsAttached)
+            while (!DiagDebugger.IsAttached)
             {
                 Console.Error.WriteLine($"Waiting for debugger to attach to process {Process.GetCurrentProcess().Id}");
                 for (var i = 0; i < 50; i++)
                 {
-                    if (System.Diagnostics.Debugger.IsAttached)
+                    if (DiagDebugger.IsAttached)
                     {
                         break;
                     }
@@ -26,7 +27,7 @@ namespace AutoRest.Core.Utilities
                 }
                 Console.Error.WriteLine();
             }
-            System.Diagnostics.Debugger.Break();
+            DiagDebugger.Break();
         }
     }
 }

@@ -12,128 +12,137 @@ using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace Microsoft.Perks.JsonRPC
 {
+    public delegate Task<bool> Processor(Connection connection, string pluginName, string sessionId);
+
+#pragma warning disable IDE0069 // Disposable fields should be disposed
     public sealed class Connection : IDisposable
     {
+        private readonly DisposeService<Connection> _disposeService;
+
         private Stream _writer;
         private PeekingBinaryReader _reader;
-        private bool _isDisposed;
-        private int _requestId;
-        private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
-
         private readonly Task _loop;
 
-        public event Action<string> OnDebug;
+        private int _requestId;
+        private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
+        private readonly Dictionary<string, Func<JsonElement, Task<string>>> _dispatch;
 
-        public Connection(Stream writer, Stream input)
+        //connection.Dispatch<IEnumerable<string>>("GetPluginNames", async() => new[] { "csharp-v3" });
+        //connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Dispatcher(connection, plugin, sessionId).Process());
+        //connection.Dispatch("Shutdown", connection.Stop);
+
+        public Connection(Stream inputStream, Stream outputStream, Processor processor, params string[] pluginNames)
         {
-            _writer = writer;
-            _reader = new PeekingBinaryReader(input);
+            _disposeService = new DisposeService<Connection>(this, Disposer);
+
+            _reader = new PeekingBinaryReader(inputStream);
+            _writer = outputStream;
+            _dispatch = new Dictionary<string, Func<JsonElement, Task<string>>>
+            {
+                { "GetPluginNames", async je => pluginNames.ToJsonArray() },
+                { "Process", async je => await RunProcessor(je, processor) },
+                { "Shutdown", async je => { Stop(); return null; } }
+            };
+
             _loop = Task.Factory.StartNew(Listen).Unwrap();
         }
+
+        private async Task<string> RunProcessor(JsonElement jsonElement, Processor processor)
+        {
+            var elements = jsonElement.Unwrap().Select(je => je.GetString()).ToArray();
+            return (await processor(this, elements[0], elements[1])).ToJsonBool();
+        }
+
+        public void Dispose()
+        {
+            _disposeService.Dispose(true);
+        }
+
+        private void Disposer(Connection connection)
+        {
+            lock (_tasks)
+            {
+                foreach (var t in _tasks.Values)
+                {
+                    t.SetCancelled();
+                }
+            }
+
+            _writer?.Dispose();
+            _writer = null;
+            _reader?.Dispose();
+            _reader = null;
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
+            _streamReady?.Dispose();
+            _streamReady = null;
+        }
+
+        public TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private CancellationToken CancellationToken => _cancellationTokenSource.Token;
         private bool IsAlive => !CancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
-        public void Stop() => _cancellationTokenSource.Cancel();
+        private void Stop() => _cancellationTokenSource.Cancel();
 
         private async Task<JsonElement?> ReadJson()
         {
-            var jsonText = string.Empty;
-            JsonElement? json = null;
-            while (json == null)
+            var text = String.Empty;
+            var nextLine = _reader.ReadAsciiLine();
+            JsonElement? element = null;
+            while (nextLine != null)
             {
-                jsonText += _reader.ReadAsciiLine(); // + "\n";
+                text += nextLine;
+                element = text.Parse();
+                if (element != null) break;
 
-                // try to parse it.
-                try
-                {
-                    json = jsonText.Parse();
-                    if (json != null)
-                    {
-                        return json;
-                    }
-                }
-                catch
-                {
-                    // not enough text?
-                }
+                nextLine = _reader.ReadAsciiLine();
             }
-            return json;
-        }
-        private readonly Dictionary<string, Func<JsonElement, Task<string>>> _dispatch = new Dictionary<string, Func<JsonElement, Task<string>>>();
-        public void Dispatch<T>(string path, Func<Task<T>> method)
-        {
-            _dispatch.Add(path, async input =>
-            {
-                var result = await method();
-                return result == null ? "null" : JsonSerializer.Serialize(result);
-            });
+            return element;
         }
 
-        private static JsonElement[] ReadArguments(JsonElement input, int expectedArgs)
-        {
-            var args = input.ValueKind == JsonValueKind.Array ? input.EnumerateArray().ToArray() : null;
-            var arg = input.ValueKind == JsonValueKind.Object ? input : (JsonElement?)null;
 
-            if (expectedArgs == 0)
-            {
-                if (args == null && arg == null)
-                {
-                    // expected zero, received zero
-                    return new JsonElement[0];
-                }
+        //private JsonElement _shutdown;
+        //private JsonElement _pluginNames;
+        //private JsonElement _process;
+        //private string _serializedBool;
 
-                throw new Exception($"Invalid number of arguments {args?.Length} or argument object passed '{arg}' for this call. Expected {expectedArgs}");
-            }
+        //public void Dispatch(string path, Action method) =>
+        //    _dispatch.Add(path, async input =>
+        //    {
+        //        _shutdown = input;
+        //        method();
+        //        return null;
+        //    });
 
-            if (args?.Length == expectedArgs)
-            {
-                // passed as an array
-                return args;
-            }
+        //public void Dispatch<TResult>(string path, Func<Task<TResult>> method) =>
+        //    _dispatch.Add(path, async input =>
+        //    {
+        //        _pluginNames = input;
+        //        var result = await method();
+        //        return result == null ? "null" : JsonSerializer.Serialize(result);
+        //    });
 
-            if (expectedArgs == 1)
-            {
-                if (args?.Length == 0 && arg != null)
-                {
-                    // passed as an object
-                    return new [] { arg.Value };
-                }
-            }
+        //public void Dispatch<T1, T2, TResult>(string path, Func<T1, T2, Task<TResult>> method) =>
+        //    _dispatch.Add(path, async input =>
+        //    {
+        //        _process = input;
+        //        var args = input.Unwrap();
+        //        if (args.Length < 2)
+        //        {
+        //            throw new Exception("Invalid number of arguments. Expected at least 2 arguments.");
+        //        }
 
-            throw new Exception($"Invalid number of arguments {args?.Length} for this call. Expected {expectedArgs}");
-        }
+        //        var a1 = args[0].ToObject<T1>();
+        //        var a2 = args[1].ToObject<T2>();
 
-        public void DispatchNotification(string path, Action method)
-        {
-            _dispatch.Add(path, async input =>
-            {
-                method();
-                return null;
-            });
-        }
+        //        var result = await method(a1, a2);
+        //        _serializedBool = result.ToJsonValue();
+        //        return result == null ? "null" : result.ToJsonValue();
+        //    });
 
-        public void Dispatch<P1, P2, T>(string path, Func<P1, P2, Task<T>> method)
-        {
-            _dispatch.Add(path, async input =>
-            {
-                var args = ReadArguments(input, 2);
-                var a1 = args[0].ToObject<P1>();
-                var a2 = args[1].ToObject<P2>();
-
-                var result = await method(a1, a2);
-                return result == null ? "null" : result.ToJsonValue();
-            });
-        }
-
-        private async Task<JsonElement?> ReadJson(int contentLength)
-        {
-            var jsonText = Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength));
-            return jsonText.Parse();
-        }
-
-        private void Log(string text) => OnDebug?.Invoke(text);
+        private async Task<JsonElement?> ReadJson(int contentLength) => Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength)).Parse();
 
         private async Task<bool> Listen()
         {
@@ -185,16 +194,16 @@ namespace Microsoft.Perks.JsonRPC
                         continue;
                     }
 
-                    Log("SHOULD NEVER GET HERE!");
+                    //Log("SHOULD NEVER GET HERE!");
                     return false;
 
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    if (IsAlive)
-                    {
-                        Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
-                    }
+                    //if (IsAlive)
+                    //{
+                    //    Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
+                    //}
                 }
             }
             return false;
@@ -251,36 +260,6 @@ namespace Microsoft.Perks.JsonRPC
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            // ensure that we are in a cancelled state.
-            _cancellationTokenSource?.Cancel();
-            if (_isDisposed) return;
-            // make sure we can't dispose twice
-            _isDisposed = true;
-            if (!disposing) return;
-
-            foreach (var t in _tasks.Values)
-            {
-                t.SetCancelled();
-            }
-
-            _writer?.Dispose();
-            _writer = null;
-            _reader?.Dispose();
-            _reader = null;
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = null;
-            _streamReady?.Dispose();
-            _streamReady = null;
-        }
-
         private Semaphore _streamReady = new Semaphore(1, 1);
         private async Task Send(string text)
         {
@@ -305,11 +284,10 @@ namespace Microsoft.Perks.JsonRPC
         {
             var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
-            lock( _tasks ) { _tasks.Add(id, response); }
+            lock(_tasks) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
-
-        public TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
     }
+#pragma warning restore IDE0069 // Disposable fields should be disposed
 }
