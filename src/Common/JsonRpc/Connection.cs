@@ -12,7 +12,8 @@ using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace Microsoft.Perks.JsonRPC
 {
-    public delegate Task<bool> Processor(Connection connection, string pluginName, string sessionId);
+    public delegate Task<bool> ProcessMethod(Connection connection, string pluginName, string sessionId);
+    public delegate Task<string> DispatchMethod(JsonElement jsonElement);
 
 #pragma warning disable IDE0069 // Disposable fields should be disposed
     public sealed class Connection : IDisposable
@@ -25,32 +26,28 @@ namespace Microsoft.Perks.JsonRPC
 
         private int _requestId;
         private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
-        private readonly Dictionary<string, Func<JsonElement, Task<string>>> _dispatch;
+        private readonly Dictionary<string, DispatchMethod> _dispatch;
 
-        //connection.Dispatch<IEnumerable<string>>("GetPluginNames", async() => new[] { "csharp-v3" });
-        //connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Dispatcher(connection, plugin, sessionId).Process());
-        //connection.Dispatch("Shutdown", connection.Stop);
-
-        public Connection(Stream inputStream, Stream outputStream, Processor processor, params string[] pluginNames)
+        public Connection(Stream inputStream, Stream outputStream, ProcessMethod processMethod, params string[] pluginNames)
         {
             _disposeService = new DisposeService<Connection>(this, Disposer);
 
             _reader = new PeekingBinaryReader(inputStream);
             _writer = outputStream;
-            _dispatch = new Dictionary<string, Func<JsonElement, Task<string>>>
+            _dispatch = new Dictionary<string, DispatchMethod>
             {
                 { "GetPluginNames", async je => pluginNames.ToJsonArray() },
-                { "Process", async je => await RunProcessor(je, processor) },
+                { "Process", async je => await RunProcessor(je, processMethod) },
                 { "Shutdown", async je => { Stop(); return null; } }
             };
 
             _loop = Task.Factory.StartNew(Listen).Unwrap();
         }
 
-        private async Task<string> RunProcessor(JsonElement jsonElement, Processor processor)
+        private async Task<string> RunProcessor(JsonElement jsonElement, ProcessMethod processMethod)
         {
             var elements = jsonElement.Unwrap().Select(je => je.GetString()).ToArray();
-            return (await processor(this, elements[0], elements[1])).ToJsonBool();
+            return (await processMethod(this, elements[0], elements[1])).ToJsonBool();
         }
 
         public void Dispose()
@@ -101,46 +98,6 @@ namespace Microsoft.Perks.JsonRPC
             }
             return element;
         }
-
-
-        //private JsonElement _shutdown;
-        //private JsonElement _pluginNames;
-        //private JsonElement _process;
-        //private string _serializedBool;
-
-        //public void Dispatch(string path, Action method) =>
-        //    _dispatch.Add(path, async input =>
-        //    {
-        //        _shutdown = input;
-        //        method();
-        //        return null;
-        //    });
-
-        //public void Dispatch<TResult>(string path, Func<Task<TResult>> method) =>
-        //    _dispatch.Add(path, async input =>
-        //    {
-        //        _pluginNames = input;
-        //        var result = await method();
-        //        return result == null ? "null" : JsonSerializer.Serialize(result);
-        //    });
-
-        //public void Dispatch<T1, T2, TResult>(string path, Func<T1, T2, Task<TResult>> method) =>
-        //    _dispatch.Add(path, async input =>
-        //    {
-        //        _process = input;
-        //        var args = input.Unwrap();
-        //        if (args.Length < 2)
-        //        {
-        //            throw new Exception("Invalid number of arguments. Expected at least 2 arguments.");
-        //        }
-
-        //        var a1 = args[0].ToObject<T1>();
-        //        var a2 = args[1].ToObject<T2>();
-
-        //        var result = await method(a1, a2);
-        //        _serializedBool = result.ToJsonValue();
-        //        return result == null ? "null" : result.ToJsonValue();
-        //    });
 
         private async Task<JsonElement?> ReadJson(int contentLength) => Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength)).Parse();
 
@@ -209,55 +166,106 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        private void Process(JsonElement? content)
-        {
-            if (content != null && content.Value.ValueKind == JsonValueKind.Object)
-            {
-                Task.Factory.StartNew(async () => {
-                    var jsonObject = content.Value;
-                    try
-                    {
-                        if (jsonObject.EnumerateObject().Any(each => each.Name == "method"))
-                        {
-                            var method = jsonObject.GetProperty("method").ToString();
-                            var id = jsonObject.GetPropertyOrNull("id")?.ToString();
-                            // this is a method call.
-                            // pass it to the service that is listening...
-                            if (_dispatch.TryGetValue(method, out Func<JsonElement, Task<string>> fn))
-                            {
-                                var parameters = jsonObject.GetProperty("params");
-                                var result = await fn(parameters);
-                                if (id != null)
-                                {
-                                    // if this is a request, send the response.
-                                    await Respond(id, result);
-                                }
-                            }
-                            return;
-                        }
+        //private void Process3(JsonElement? content)
+        //{
+        //    if (content != null && content.Value.ValueKind == JsonValueKind.Object)
+        //    {
+        //        Task.Factory.StartNew(async () =>
+        //        {
+        //            var jsonObject = content.Value;
+        //            try
+        //            {
+        //                if (jsonObject.TryGetProperty("method", out _))
+        //                {
+        //                    var method = jsonObject.GetProperty("method").ToString();
+        //                    var id = jsonObject.GetPropertyOrNull("id")?.ToString();
+        //                    // this is a method call.
+        //                    // pass it to the service that is listening...
+        //                    if (_dispatch.TryGetValue(method, out var fn))
+        //                    {
+        //                        var parameters = jsonObject.GetProperty("params");
+        //                        var result = await fn(parameters);
+        //                        if (id != null)
+        //                        {
+        //                            // if this is a request, send the response.
+        //                            await Respond(id, result);
+        //                        }
+        //                    }
+        //                    return;
+        //                }
 
-                        // this is a result from a previous call.
-                        if (jsonObject.EnumerateObject().Any(each => each.Name == "result"))
+        //                // this is a result from a previous call.
+        //                if (jsonObject.TryGetProperty("result", out _))
+        //                {
+        //                    var id = jsonObject.GetPropertyOrNull("id")?.ToString();
+        //                    if (!string.IsNullOrEmpty(id))
+        //                    {
+        //                        ICallerResponse f;
+        //                        lock (_tasks)
+        //                        {
+        //                            f = _tasks[id];
+        //                            _tasks.Remove(id);
+        //                        }
+        //                        f.SetCompleted(jsonObject.GetProperty("result"));
+        //                    }
+        //                }
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                Console.Error.WriteLine(e);
+        //            }
+        //        });
+        //    }
+        //}
+
+        private void Process(JsonElement? element)
+        {
+            if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
+
+            Task.Factory.StartNew(async () =>
+            {
+                //try
+                //{
+                var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
+                var method = properties.GetPropertyOrNull("method");
+                var result = properties.GetPropertyOrNull("result");
+                var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
+                var isValidId = !String.IsNullOrEmpty(idString);
+
+                // this is a method call.
+                // pass it to the service that is listening...
+                if (method != null)
+                {
+                    if (_dispatch.TryGetValue(method.Value.Value.ToString(), out var dispatchMethod))
+                    {
+                        var parameters = properties.GetPropertyOrNull("params");
+                        var response = await dispatchMethod(parameters?.Value ?? new JsonElement());
+                        if (isValidId)
                         {
-                            var id = jsonObject.GetPropertyOrNull("id")?.ToString();
-                            if (!string.IsNullOrEmpty(id))
-                            {
-                                ICallerResponse f;
-                                lock( _tasks )
-                                {
-                                    f = _tasks[id];
-                                    _tasks.Remove(id);
-                                }
-                                f.SetCompleted(jsonObject.GetProperty("result"));
-                            }
+                            // if this is a request, send the response.
+                            await Respond(idString, response);
                         }
                     }
-                    catch (Exception e)
+                    return;
+                }
+
+                // this is a result from a previous call.
+                if (result != null && isValidId)
+                {
+                    ICallerResponse f;
+                    lock (_tasks)
                     {
-                        Console.Error.WriteLine(e);
+                        f = _tasks[idString];
+                        _tasks.Remove(idString);
                     }
-                });
-            }
+                    f.SetCompleted(result.Value.Value);
+                }
+                //}
+                //catch (Exception e)
+                //{
+                //    Console.Error.WriteLine(e);
+                //}
+            }, CancellationToken);
         }
 
         private Semaphore _streamReady = new Semaphore(1, 1);
