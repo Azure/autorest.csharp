@@ -166,110 +166,51 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        //private void Process3(JsonElement? content)
-        //{
-        //    if (content != null && content.Value.ValueKind == JsonValueKind.Object)
-        //    {
-        //        Task.Factory.StartNew(async () =>
-        //        {
-        //            var jsonObject = content.Value;
-        //            try
-        //            {
-        //                if (jsonObject.TryGetProperty("method", out _))
-        //                {
-        //                    var method = jsonObject.GetProperty("method").ToString();
-        //                    var id = jsonObject.GetPropertyOrNull("id")?.ToString();
-        //                    // this is a method call.
-        //                    // pass it to the service that is listening...
-        //                    if (_dispatch.TryGetValue(method, out var fn))
-        //                    {
-        //                        var parameters = jsonObject.GetProperty("params");
-        //                        var result = await fn(parameters);
-        //                        if (id != null)
-        //                        {
-        //                            // if this is a request, send the response.
-        //                            await Respond(id, result);
-        //                        }
-        //                    }
-        //                    return;
-        //                }
-
-        //                // this is a result from a previous call.
-        //                if (jsonObject.TryGetProperty("result", out _))
-        //                {
-        //                    var id = jsonObject.GetPropertyOrNull("id")?.ToString();
-        //                    if (!string.IsNullOrEmpty(id))
-        //                    {
-        //                        ICallerResponse f;
-        //                        lock (_tasks)
-        //                        {
-        //                            f = _tasks[id];
-        //                            _tasks.Remove(id);
-        //                        }
-        //                        f.SetCompleted(jsonObject.GetProperty("result"));
-        //                    }
-        //                }
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                Console.Error.WriteLine(e);
-        //            }
-        //        });
-        //    }
-        //}
-
         private void Process(JsonElement? element)
         {
             if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
 
             Task.Factory.StartNew(async () =>
             {
-                //try
-                //{
                 var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
-                var method = properties.GetPropertyOrNull("method");
-                var result = properties.GetPropertyOrNull("result");
+                var methodProperty = properties.GetPropertyOrNull("method");
+                var resultProperty = properties.GetPropertyOrNull("result");
                 var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
                 var isValidId = !String.IsNullOrEmpty(idString);
 
                 // this is a method call.
                 // pass it to the service that is listening...
-                if (method != null)
+                if (methodProperty != null)
                 {
-                    if (_dispatch.TryGetValue(method.Value.Value.ToString(), out var dispatchMethod))
+                    if (_dispatch.TryGetValue(methodProperty.Value.Value.ToString(), out var dispatchMethod))
                     {
                         var parameters = properties.GetPropertyOrNull("params");
-                        var response = await dispatchMethod(parameters?.Value ?? new JsonElement());
+                        var result = await dispatchMethod(parameters?.Value ?? new JsonElement());
                         if (isValidId)
                         {
                             // if this is a request, send the response.
-                            await Respond(idString, response);
+                            await Respond(idString, result);
                         }
                     }
                     return;
                 }
 
                 // this is a result from a previous call.
-                if (result != null && isValidId)
+                if (resultProperty != null && isValidId)
                 {
-                    ICallerResponse f;
+                    ICallerResponse response;
                     lock (_tasks)
                     {
-                        f = _tasks[idString];
+                        response = _tasks[idString];
                         _tasks.Remove(idString);
                     }
-                    f.SetCompleted(result.Value.Value);
+                    response.SetCompleted(resultProperty.Value.Value);
                 }
-                //}
-                //catch (Exception e)
-                //{
-                //    Console.Error.WriteLine(e);
-                //}
             }, CancellationToken);
         }
 
         private Semaphore _streamReady = new Semaphore(1, 1);
-        private async Task Send(string text)
+        public async Task Send(string text)
         {
             _streamReady.WaitOne();
 
@@ -296,6 +237,17 @@ namespace Microsoft.Perks.JsonRPC
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
+
+        public async Task<T> Request2<T>(string request)
+        {
+            var id = _requestId.ToString();
+            var response = new CallerResponse<T>(id);
+            lock (_tasks) { _tasks.Add(id, response); }
+            await Send(request).ConfigureAwait(false);
+            return await response.Task.ConfigureAwait(false);
+        }
+
+        public int NewRequestId => Interlocked.Decrement(ref _requestId);
     }
 #pragma warning restore IDE0069 // Disposable fields should be disposed
 }

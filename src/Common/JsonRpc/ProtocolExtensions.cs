@@ -1,8 +1,11 @@
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.CodeDom.Compiler;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -10,34 +13,46 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Ensures a given string is safe to transport in JSON
         ///</Summary>
-        private static string ToLiteral(string input) {
-          return string.IsNullOrEmpty(input) ?
-            input:
-            input.
-              Replace("\\","\\\\"). // backslashes
-              Replace("\"","\\\""). // quotes
-              Replace("\0","\\0").  // nulls
-              Replace("\a","\\a").  // alert
-              Replace("\b","\\b").  // backspace
-              Replace("\f","\\f").  // formfeed
-              Replace("\n","\\n").  // newline
-              Replace("\r","\\r").  // return
-              Replace("\t","\\t").  // tab
-              Replace("\v","\\v");  // vertical tab
+        private static string ToLiteral(string input)
+        {
+            return String.IsNullOrEmpty(input)
+                ? input
+                : input.
+                    Replace("\\", "\\\\"). // backslashes
+                    Replace("\"", "\\\""). // quotes
+                    Replace("\0", "\\0").  // nulls
+                    Replace("\a", "\\a").  // alert
+                    Replace("\b", "\\b").  // backspace
+                    Replace("\f", "\\f").  // form feed
+                    Replace("\n", "\\n").  // newline
+                    Replace("\r", "\\r").  // return
+                    Replace("\t", "\\t").  // tab
+                    Replace("\v", "\\v");  // vertical tab
         }
+
+        //https://stackoverflow.com/a/324812/294804
+        //private static string ToLiteral(string input)
+        //{
+        //    using var writer = new StringWriter();
+        //    using var provider = CodeDomProvider.CreateProvider("CSharp");
+        //    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+        //    return writer.ToString();
+        //}
 
         ///<Summary>
         /// Converts the value to a Primitive and reutrns the JSON Primitive equivalent
         ///</Summary>
         private static string Quote(this object value) =>
-            value == null ? "null":
-              value.GetType().IsPrimitive ? value.ToString().ToLower() :
-              $"\"{ToLiteral(value.ToString())}\"";
+            value == null
+                ? "null"
+                : value.GetType().IsPrimitive
+                    ? value.ToString().ToLower()
+                    : $"\"{ToLiteral(value.ToString())}\"";
         
         ///<Summary>
         /// Converts the value to an object/string/primitive representation 
         ///</Summary>
-        internal static string ToJsonValue( this object value ) =>
+        private static string ToJsonValue( this object value ) =>
           value == null || value is string || value.GetType().IsPrimitive ?
             Quote(value) :
             JsonSerializer.Serialize(value);

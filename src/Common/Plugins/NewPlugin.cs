@@ -42,7 +42,7 @@ public abstract class NewPlugin
 
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
     public void WriteFile(string filename, string content, object sourcemap, string artifactType) => _connection.Notify( "Message", _sessionId, new Message { 
-        Channel = "file", 
+        Channel = "file",
         Details = new {
             content,
             type = artifactType,
