@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         public SourceLocation[] Source { get; set; } = null;
 
         public override string ToString() =>
-            $@"{{""Channel"":""{Channel.ToString().ToLowerInvariant()}""{Key.TextOrEmpty($@",""Key"":{Key.ToJsonArray()}")}{Details.TextOrEmpty($@",""Details"":{Details}")},""Text"":""{Text.ToLiteral()}""{Source.TextOrEmpty($@",""Source"":{Source.ToJsonArray()}")}}}";
+            $@"{{""Channel"":""{Channel.ToString().ToLowerInvariant()}""{Key.TextOrEmpty($@",""Key"":{Key.ToJsonArray()}")}{Details.TextOrEmpty($@",""Details"":{Details}")},""Text"":""{Text.ToStringLiteral()}""{Source.TextOrEmpty($@",""Source"":{Source.ToJsonArray()}")}}}";
     }
 
     internal class ArtifactMessage : IMessage
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         public SourceLocation[] Source { get; set; } = null;
 
         public override string ToString() =>
-            $@"{{""Channel"":""{Channel.ToString().ToLowerInvariant()}""{Key.TextOrEmpty($@",""Key"":{Key.ToJsonArray()}")},""Details"":{Details},""Text"":""{Text.ToLiteral()}""{Source.TextOrEmpty($@",""Source"":{Source.ToJsonArray()}")}}}";
+            $@"{{""Channel"":""{Channel.ToString().ToLowerInvariant()}""{Key.TextOrEmpty($@",""Key"":{Key.ToJsonArray()}")},""Details"":{Details},""Text"":""{Text.ToStringLiteral()}""{Source.TextOrEmpty($@",""Source"":{Source.ToJsonArray()}")}}}";
     }
 
     internal interface IPosition { }
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         public string Content { get; set; }
         public RawSourceMap SourceMap { get; set; } = null;
 
-        public override string ToString() => $@"{{""uri"":""{Uri}"",""type"":""{Type}"",""content"":""{Content.ToLiteral()}""{SourceMap.TextOrEmpty($@",""sourceMap"":{SourceMap}")}}}";
+        public override string ToString() => $@"{{""uri"":""{Uri}"",""type"":""{Type}"",""content"":""{Content.ToStringLiteral()}""{SourceMap.TextOrEmpty($@",""sourceMap"":{SourceMap}")}}}";
     }
 
     internal class ArtifactMapping : IArtifact
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         public string Content { get; set; }
         public Mapping[] SourceMap { get; set; } = null;
 
-        public override string ToString() => $@"{{""uri"":""{Uri}"",""type"":""{Type}"",""content"":""{Content.ToLiteral()}""{SourceMap.TextOrEmpty($@",""sourceMap"":{SourceMap.ToJsonArray()}")}}}";
+        public override string ToString() => $@"{{""uri"":""{Uri}"",""type"":""{Type}"",""content"":""{Content.ToStringLiteral()}""{SourceMap.TextOrEmpty($@",""sourceMap"":{SourceMap.ToJsonArray()}")}}}";
     }
 
     internal class RawSourceMap

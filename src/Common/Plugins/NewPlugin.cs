@@ -119,15 +119,10 @@ public abstract class NewPlugin
         }
         catch (Exception e)
         {
-            Message(new Message
-            {
-                Channel = "fatal",
-                Text = e.ToString()
-            });
+            Message(new Message {Channel = "fatal", Text = e.ToString()});
             return false;
         }
     }
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-
     protected abstract Task<bool> ProcessInternal();
 }
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
