@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using AutoRest.JsonRpc;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Common.Utilities;
-using Microsoft.VisualBasic;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -27,6 +27,7 @@ namespace Microsoft.Perks.JsonRPC
 
         private int _requestId;
         private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
+        private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _tasks2 = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
         private readonly Dictionary<string, DispatchMethod> _dispatch;
 
         public Connection(Stream inputStream, Stream outputStream, ProcessMethod processMethod, params string[] pluginNames)
@@ -72,8 +73,8 @@ namespace Microsoft.Perks.JsonRPC
             _reader = null;
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = null;
-            _streamReady?.Dispose();
-            _streamReady = null;
+            _streamSemaphore?.Dispose();
+            _streamSemaphore = null;
         }
 
         public TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
@@ -134,68 +135,6 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        //private async Task<bool> Listen()
-        //{
-        //    while (IsAlive)
-        //    {
-        //        try
-        //        {
-        //            var currentByte = _reader?.CurrentByte;
-        //            // didn't get anything. start again, it'll know if we're shutting down
-        //            if (currentByte == null) break;
-
-        //            if ('{' == currentByte || '[' == currentByte)
-        //            {
-        //                // looks like a json block or array. let's do this.
-        //                // don't wait for this to finish!
-        //                Process(await ReadJson());
-
-        //                // we're done here, start again.
-        //                continue;
-        //            }
-
-        //            // We're looking at headers
-        //            var headers = new Dictionary<string, string>();
-        //            var line = _reader?.ReadAsciiLine();
-        //            while (!string.IsNullOrWhiteSpace(line))
-        //            {
-        //                var bits = line.Split(new[] { ':' }, 2);
-        //                headers.Add(bits[0].Trim(), bits[1].Trim());
-        //                line = _reader?.ReadAsciiLine();
-        //            }
-
-        //            currentByte = _reader?.CurrentByte;
-        //            // the next character had better be a { or [
-        //            if ('{' == currentByte || '[' == currentByte)
-        //            {
-        //                if (headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out int contentLength))
-        //                {
-        //                    // don't wait for this to finish!
-        //                    Process(await ReadJson(contentLength));
-        //                    continue;
-        //                }
-        //                // looks like a json block or array. let's do this.
-        //                // don't wait for this to finish!
-        //                Process(await ReadJson());
-        //                // we're done here, start again.
-        //                continue;
-        //            }
-
-        //            //Log("SHOULD NEVER GET HERE!");
-        //            return false;
-
-        //        }
-        //        catch (Exception)
-        //        {
-        //            //if (IsAlive)
-        //            //{
-        //            //    Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
-        //            //}
-        //        }
-        //    }
-        //    return false;
-        //}
-
         private void Process(JsonElement? element)
         {
             if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
@@ -239,18 +178,18 @@ namespace Microsoft.Perks.JsonRPC
             }, CancellationToken);
         }
 
-        private Semaphore _streamReady = new Semaphore(1, 1);
+        private Semaphore _streamSemaphore = new Semaphore(1, 1);
         public async Task Send(string text)
         {
-            _streamReady.WaitOne();
+            _streamSemaphore.WaitOne();
 
             var buffer = Encoding.UTF8.GetBytes(text);
-            await Write(Encoding.ASCII.GetBytes($"Content-Length: {buffer.Length}\r\n\r\n"));
-            await Write(buffer);
+            var header = Encoding.ASCII.GetBytes($"Content-Length: {buffer.Length}\r\n\r\n");
+            await _writer.WriteAsync(header, 0, header.Length, CancellationToken);
+            await _writer.WriteAsync(buffer, 0, buffer.Length, CancellationToken);
 
-            _streamReady.Release();
+            _streamSemaphore.Release();
         }
-        private Task Write(byte[] buffer) => _writer.WriteAsync(buffer, 0, buffer.Length);
 
         private async Task Respond(string id, string value)
         {
@@ -273,6 +212,14 @@ namespace Microsoft.Perks.JsonRPC
             var id = _requestId.ToString();
             var response = new CallerResponse<T>(id);
             lock (_tasks) { _tasks.Add(id, response); }
+            await Send(request).ConfigureAwait(false);
+            return await response.Task.ConfigureAwait(false);
+        }
+
+        public async Task<string> Request3(string request)
+        {
+            var response = new TaskCompletionSource<string>();
+            _tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
             await Send(request).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }

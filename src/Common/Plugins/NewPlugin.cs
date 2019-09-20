@@ -111,7 +111,7 @@ public abstract class NewPlugin
     {
         if (true == await GetValue<bool?>($"{Plugin}.debugger"))
         {
-            Debugger.Await();
+            AutoRestDebugger.Await();
         }
         try
         {
