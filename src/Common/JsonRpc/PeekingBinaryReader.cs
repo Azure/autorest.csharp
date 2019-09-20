@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoRest.JsonRpc
 {
@@ -51,7 +51,7 @@ namespace AutoRest.JsonRpc
             return streamByte != EndOfStream ? (byte?)streamByte : null;
         }
 
-        public async Task<byte[]> ReadBytesAsync(int count)
+        public byte[] ReadBytes(int count)
         {
             var buffer = new byte[count];
             var index = 0;
@@ -62,19 +62,28 @@ namespace AutoRest.JsonRpc
             }
             while (index < count)
             {
-                index += await _stream.ReadAsync(buffer, index, count - index);
+                index += _stream.Read(buffer, index, count - index);
             }
             return buffer;
+        }
+
+        public IEnumerable<string> ReadAllAsciiLines(Predicate<string> condition = null)
+        {
+            condition ??= s => s == null;
+            string line;
+            while (condition(line = ReadAsciiLine()))
+            {
+                yield return line;
+            }
         }
 
         public string ReadAsciiLine()
         {
             var sb = new StringBuilder();
-            var character = GetByte();
-            while (character.HasValue && character != '\r' && character != '\n')
+            byte? character;
+            while ((character = GetByte()).HasValue && character != '\r' && character != '\n')
             {
                 sb.Append((char)character.Value);
-                character = GetByte();
             }
 
             // CurrentByte will only ever be null or a non-line-ending value when this method returns since we read until line ending characters,

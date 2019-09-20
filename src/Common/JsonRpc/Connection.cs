@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoRest.JsonRpc;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Common.Utilities;
+using Microsoft.VisualBasic;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -83,88 +84,117 @@ namespace Microsoft.Perks.JsonRPC
 
         private void Stop() => _cancellationTokenSource.Cancel();
 
-        private async Task<JsonElement?> ReadJson()
-        {
-            var text = String.Empty;
-            var nextLine = _reader.ReadAsciiLine();
-            JsonElement? element = null;
-            while (nextLine != null)
-            {
-                text += nextLine;
-                element = text.Parse();
-                if (element != null) break;
 
-                nextLine = _reader.ReadAsciiLine();
-            }
-            return element;
+        private JsonElement? ReadJson(int contentLength) => Encoding.UTF8.GetString(_reader.ReadBytes(contentLength)).Parse();
+        private JsonElement? ReadJson()
+        {
+            var sb = new StringBuilder();
+            // ReSharper disable once IteratorMethodResultIsIgnored
+            _reader.ReadAllAsciiLines(l => sb.Append(l).ToString().Parse() != null);
+            return sb.ToString().Parse();
         }
 
-        private async Task<JsonElement?> ReadJson(int contentLength) => Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength)).Parse();
+        private static bool IsJsonBlock(byte? value) => '{' == value || '[' == value;
 
-        private async Task<bool> Listen()
+        private bool ProcessHeaders()
         {
-            while (IsAlive)
+            var headers = _reader.ReadAllAsciiLines(l => !l.IsNullOrWhiteSpace()).Select(l =>
             {
-                try
-                {
-                    var ch = _reader?.CurrentByte;
-                    if (-1 == ch)
-                    {
-                        // didn't get anything. start again, it'll know if we're shutting down
-                        break;
-                    }
+                var parts = l.Split(":", 2).Select(p => p.Trim()).ToArray();
+                return (Key: parts[0], Value: parts[1]);
+            }).ToDictionary(h => h.Key, h => h.Value);
 
-                    if ('{' == ch || '[' == ch)
-                    {
-                        // looks like a json block or array. let's do this.
-                        // don't wait for this to finish!
-                        Process(await ReadJson());
-
-                        // we're done here, start again.
-                        continue;
-                    }
-
-                    // We're looking at headers
-                    var headers = new Dictionary<string, string>();
-                    var line = _reader?.ReadAsciiLine();
-                    while (!string.IsNullOrWhiteSpace(line))
-                    {
-                        var bits = line.Split(new[] { ':' }, 2);
-                        headers.Add(bits[0].Trim(), bits[1].Trim());
-                        line = _reader?.ReadAsciiLine();
-                    }
-
-                    ch = _reader?.CurrentByte;
-                    // the next character had better be a { or [
-                    if ('{' == ch || '[' == ch)
-                    {
-                        if (headers.TryGetValue("Content-Length", out string value) && Int32.TryParse(value, out int contentLength))
-                        {
-                            // don't wait for this to finish!
-                            Process(await ReadJson(contentLength));
-                            continue;
-                        }
-                        // looks like a json block or array. let's do this.
-                        // don't wait for this to finish!
-                        Process(await ReadJson());
-                        // we're done here, start again.
-                        continue;
-                    }
-
-                    //Log("SHOULD NEVER GET HERE!");
-                    return false;
-
-                }
-                catch (Exception)
-                {
-                    //if (IsAlive)
-                    //{
-                    //    Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
-                    //}
-                }
+            // After the headers are read, the next byte should be the content block.
+            if (IsJsonBlock(_reader.CurrentByte) && headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out var contentLength))
+            {
+                Process(ReadJson(contentLength));
+                return true;
             }
             return false;
         }
+
+        private bool ProcessStream()
+        {
+            var currentByte = _reader.CurrentByte;
+            // didn't get anything. start again, it'll know if we're shutting down
+            if (currentByte == null) return false;
+
+            if (IsJsonBlock(currentByte))
+            {
+                Process(ReadJson());
+                return true;
+            }
+
+            return ProcessHeaders();
+        }
+
+        private async Task<bool> Listen()
+        {
+            while (IsAlive && ProcessStream()) { }
+            return false;
+        }
+
+        //private async Task<bool> Listen()
+        //{
+        //    while (IsAlive)
+        //    {
+        //        try
+        //        {
+        //            var currentByte = _reader?.CurrentByte;
+        //            // didn't get anything. start again, it'll know if we're shutting down
+        //            if (currentByte == null) break;
+
+        //            if ('{' == currentByte || '[' == currentByte)
+        //            {
+        //                // looks like a json block or array. let's do this.
+        //                // don't wait for this to finish!
+        //                Process(await ReadJson());
+
+        //                // we're done here, start again.
+        //                continue;
+        //            }
+
+        //            // We're looking at headers
+        //            var headers = new Dictionary<string, string>();
+        //            var line = _reader?.ReadAsciiLine();
+        //            while (!string.IsNullOrWhiteSpace(line))
+        //            {
+        //                var bits = line.Split(new[] { ':' }, 2);
+        //                headers.Add(bits[0].Trim(), bits[1].Trim());
+        //                line = _reader?.ReadAsciiLine();
+        //            }
+
+        //            currentByte = _reader?.CurrentByte;
+        //            // the next character had better be a { or [
+        //            if ('{' == currentByte || '[' == currentByte)
+        //            {
+        //                if (headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out int contentLength))
+        //                {
+        //                    // don't wait for this to finish!
+        //                    Process(await ReadJson(contentLength));
+        //                    continue;
+        //                }
+        //                // looks like a json block or array. let's do this.
+        //                // don't wait for this to finish!
+        //                Process(await ReadJson());
+        //                // we're done here, start again.
+        //                continue;
+        //            }
+
+        //            //Log("SHOULD NEVER GET HERE!");
+        //            return false;
+
+        //        }
+        //        catch (Exception)
+        //        {
+        //            //if (IsAlive)
+        //            //{
+        //            //    Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
+        //            //}
+        //        }
+        //    }
+        //    return false;
+        //}
 
         private void Process(JsonElement? element)
         {
