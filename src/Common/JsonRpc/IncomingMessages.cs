@@ -24,20 +24,6 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
             tokenSource.Cancel();
             return null;
         }
-
-        public static T ParseResponseType<T>(string jsonResponse)
-        {
-            var element = jsonResponse.Parse();
-            return typeof(T) switch
-            {
-                var t when t == typeof(string) => (T)(object)element.ToStringValue(),
-                var t when t == typeof(string[]) => (T)(object)element.ToStringArray(),
-                var t when t == typeof(int?) => (T)(object)element.ToNumber(),
-                var t when t == typeof(bool?) => (T)(object)element.ToBoolean(),
-                var t when t == typeof(JsonElement?) => (T)(object)element,
-                _ => throw new NotSupportedException($"Type {typeof(T)} is not a supported response type.")
-            };
-        }
     }
 
     internal class IncomingRequest

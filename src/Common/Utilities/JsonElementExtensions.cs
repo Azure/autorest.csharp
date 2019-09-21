@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
@@ -34,5 +35,16 @@ namespace AutoRest.CSharp.V3.Common.Utilities
 
         public static bool IsNull(this JsonElement? element) => element?.ValueKind == JsonValueKind.Null;
         public static bool IsObject(this JsonElement? element) => element?.ValueKind == JsonValueKind.Object;
+
+        public static T ToType<T>(this JsonElement? element) =>
+            typeof(T) switch
+            {
+                var t when t == typeof(string) => (T)(object)element.ToStringValue(),
+                var t when t == typeof(string[]) => (T)(object)element.ToStringArray(),
+                var t when t == typeof(int?) => (T)(object)element.ToNumber(),
+                var t when t == typeof(bool?) => (T)(object)element.ToBoolean(),
+                var t when t == typeof(JsonElement?) => (T)(object)element,
+                _ => throw new NotSupportedException($"Type {typeof(T)} is not a supported response type.")
+            };
     }
 }

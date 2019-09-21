@@ -6,7 +6,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Plugins;
 using AutoRest.CSharp.V3.Common.Utilities;
-using Microsoft.Perks.JsonRPC;
 
 namespace AutoRest.CSharp.V3
 {

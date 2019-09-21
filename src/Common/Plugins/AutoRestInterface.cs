@@ -15,17 +15,17 @@ namespace AutoRest.CSharp.V3.Common.Plugins
         public Task<T> GetValue<T>(string key) => ProcessRequest<T>(requestId => OutgoingMessages.GetValue(requestId, _sessionId, key));
         public Task<string[]> ListInputs(string artifactType = null) => ProcessRequest<string[]>(requestId => OutgoingMessages.ListInputs(requestId, _sessionId, artifactType));
         public Task<string> ProtectFiles(string path) => ProcessRequest<string>(requestId => OutgoingMessages.ProtectFiles(requestId, _sessionId, path));
-        public Task Message(IMessage message) => _connection.Send(OutgoingMessages.Message(_sessionId, message));
+        public Task Message(IMessage message) => _connection.Notification(OutgoingMessages.Message(_sessionId, message));
 
         public Task WriteFile(string filename, string content, string artifactType, RawSourceMap sourceMap = null) =>
-            _connection.Send(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+            _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
-            _connection.Send(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+            _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
 
         private Task<T> ProcessRequest<T>(Func<string, string> requestMethod)
         {
             var requestId = Guid.NewGuid().ToString();
-            return _connection.Request5<T>(requestId, requestMethod(requestId));
+            return _connection.Request<T>(requestId, requestMethod(requestId));
         }
 
         private readonly Connection _connection;

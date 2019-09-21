@@ -34,5 +34,6 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         private const string BasicResponseFormat = @"{{""jsonrpc"":""2.0"",""result"":{1},""id"":{0}}}";
 
         public static string Response(string responseId, string result) => String.Format(BasicResponseFormat, responseId.ToJsonStringOrNull(), result);
+        public static string Header(int contentLength) => $"Content-Length: {contentLength}\r\n\r\n";
     }
 }
