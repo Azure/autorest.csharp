@@ -3,7 +3,7 @@ using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace AutoRest.CSharp.V3.Common.JsonRpc
 {
-    internal static class AutoRestRequests
+    internal static class OutgoingMessages
     {
         private const string BasicRequestFormat = @"{{""jsonrpc"":""2.0"",""method"":{1},""params"":[{2},{3}],""id"":{0}}}";
         private const string BasicNotificationFormat = @"{{""jsonrpc"":""2.0"",""method"":{0},""params"":[{1},{2}]}}";

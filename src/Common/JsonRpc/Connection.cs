@@ -11,6 +11,7 @@ using AutoRest.JsonRpc;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
+using static AutoRest.CSharp.V3.Common.JsonRpc.IncomingMessages;
 
 namespace Microsoft.Perks.JsonRPC
 {
@@ -24,9 +25,9 @@ namespace Microsoft.Perks.JsonRPC
 
         private Stream _writer;
         private PeekingBinaryReader _reader;
-        private readonly Task _loop;
+        private readonly Task _listener;
 
-        private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _tasks2 = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
+        private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _responses = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
         private readonly Dictionary<string, DispatchMethod> _dispatch;
 
         public Connection(Stream inputStream, Stream outputStream, ProcessMethod processMethod, params string[] pluginNames)
@@ -42,12 +43,12 @@ namespace Microsoft.Perks.JsonRPC
                 { "Shutdown", async je => { Stop(); return null; } }
             };
 
-            _loop = Task.Factory.StartNew(Listen).Unwrap();
+            _listener = Task.Factory.StartNew(Listen).Unwrap();
         }
 
         private async Task<string> RunProcessor(JsonElement jsonElement, ProcessMethod processMethod)
         {
-            var elements = jsonElement.Unwrap().Select(je => je.GetString()).ToArray();
+            var elements = (jsonElement as JsonElement?).ToStringArray();
             return (await processMethod(this, elements[0], elements[1])).ToJsonBool();
         }
 
@@ -58,7 +59,7 @@ namespace Microsoft.Perks.JsonRPC
 
         private void Disposer(Connection connection)
         {
-            foreach (var t in _tasks2.Values) { t.SetCanceled(); }
+            foreach (var t in _responses.Values) { t.SetCanceled(); }
 
             _writer?.Dispose();
             _writer = null;
@@ -70,14 +71,13 @@ namespace Microsoft.Perks.JsonRPC
             _streamSemaphore = null;
         }
 
-        public TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
+        public TaskAwaiter Start() => _listener.GetAwaiter();
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private CancellationToken CancellationToken => _cancellationTokenSource.Token;
         private bool IsAlive => !CancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
         private void Stop() => _cancellationTokenSource.Cancel();
-
 
         private JsonElement? ReadJson(int contentLength) => Encoding.UTF8.GetString(_reader.ReadBytes(contentLength)).Parse();
         private JsonElement? ReadJson()
@@ -101,7 +101,7 @@ namespace Microsoft.Perks.JsonRPC
             // After the headers are read, the next byte should be the content block.
             if (IsJsonBlock(_reader.CurrentByte) && headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out var contentLength))
             {
-                Process(ReadJson(contentLength));
+                ProcessMessage(ReadJson(contentLength));
                 return true;
             }
             return false;
@@ -115,7 +115,7 @@ namespace Microsoft.Perks.JsonRPC
 
             if (IsJsonBlock(currentByte))
             {
-                Process(ReadJson());
+                ProcessMessage(ReadJson());
                 return true;
             }
 
@@ -128,7 +128,7 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        private void Process(JsonElement? element)
+        private void ProcessMessage(JsonElement? element)
         {
             if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
 
@@ -137,8 +137,7 @@ namespace Microsoft.Perks.JsonRPC
                 var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
                 var methodProperty = properties.GetPropertyOrNull("method");
                 var resultProperty = properties.GetPropertyOrNull("result");
-                var id = properties.GetPropertyOrNull("id")?.Value;
-                var idString = id.ToString();
+                var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
                 var isValidId = !String.IsNullOrEmpty(idString);
 
                 // this is a method call.
@@ -161,7 +160,7 @@ namespace Microsoft.Perks.JsonRPC
                 // this is a result from a previous call.
                 if (resultProperty != null && isValidId)
                 {
-                    _tasks2.Remove(idString, out var response);
+                    _responses.Remove(idString, out var response);
                     response.TrySetResult(resultProperty.Value.Value.GetRawText());
                 }
             }, CancellationToken);
@@ -182,27 +181,13 @@ namespace Microsoft.Perks.JsonRPC
 
         private async Task Respond(string id, string json)
         {
-            await Send(AutoRestRequests.Response(id, json)).ConfigureAwait(false);
-        }
-
-        private static T ParseResponseType<T>(string jsonResponse)
-        {
-            var element = jsonResponse.Parse();
-            return typeof(T) switch
-            {
-                var t when t == typeof(string) => (T)(object)element.ToStringValue(),
-                var t when t == typeof(string[]) => (T)(object)element.ToStringArray(),
-                var t when t == typeof(int?) => (T)(object)element.ToNumber(),
-                var t when t == typeof(bool?) => (T)(object)element.ToBoolean(),
-                var t when t == typeof(JsonElement?) => (T)(object)element,
-                _ => throw new NotSupportedException($"Type {typeof(T)} is not a supported response type.")
-            };
+            await Send(OutgoingMessages.Response(id, json)).ConfigureAwait(false);
         }
 
         public async Task<T> Request5<T>(string id, string json)
         {
             var response = new TaskCompletionSource<string>();
-            _tasks2.AddOrUpdate(id, response, (k, e) => response);
+            _responses.AddOrUpdate(id, response, (k, e) => response);
             await Send(json).ConfigureAwait(false);
             return ParseResponseType<T>(await response.Task.ConfigureAwait(false));
         }

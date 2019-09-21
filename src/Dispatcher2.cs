@@ -9,14 +9,14 @@ namespace AutoRest.CSharp.V3
 {
     internal class Dispatcher2
     {
-        private readonly AutoRestCommands _autoRest;
+        private readonly AutoRestInterface _autoRest;
 
         public Dispatcher2(Connection connection, string pluginName, string sessionId)
         {
-            _autoRest = new AutoRestCommands(connection, pluginName, sessionId);
+            _autoRest = new AutoRestInterface(connection, pluginName, sessionId);
         }
 
-        public async Task<bool> Process() => await _autoRest.Process(ProcessInternal);
+        public async Task<bool> Start() => await _autoRest.Process(ProcessInternal);
 
         private async Task<bool> ProcessInternal()
         {

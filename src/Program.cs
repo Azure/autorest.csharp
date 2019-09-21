@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.V3.Common.Plugins;
 using Microsoft.Perks.JsonRPC;
 
 namespace AutoRest.CSharp.V3
@@ -15,10 +16,15 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            var autoRestConnection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(), 
-                (connection, pluginName, sessionId) => new Dispatcher2(connection, pluginName, sessionId).Process(),
+            //var autoRestConnection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(), 
+            //    (connection, pluginName, sessionId) => new Dispatcher2(connection, pluginName, sessionId).Start(),
+            //    "csharp-v3");
+
+            var autoRestConnection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(),
+                (connection, pluginName, sessionId) => PluginProcessor.Start(new AutoRestInterface(connection, pluginName, sessionId)),
                 "csharp-v3");
-            autoRestConnection.GetAwaiter().GetResult();
+
+            autoRestConnection.Start().GetResult();
 
             Console.Error.WriteLine("Shutting Down");
             return 0;
