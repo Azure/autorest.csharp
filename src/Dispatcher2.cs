@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.V3
         private async Task<bool> ProcessInternal()
         {
             var testItem = await _autoRest.GetValue<string>("test-item");
+            var debugger = await _autoRest.GetValue<string>("csharp-v2.debugger");
 
             var files = await _autoRest.ListInputs();
             if (!files.Any())
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.V3
             var codeModel = await _autoRest.ReadFile(files.FirstOrDefault());
 
             var inputFiles = await _autoRest.GetValue<string[]>("input-file");
-            var inputFileMessage = new Common.JsonRpc.Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
+            var inputFileMessage = new Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
             await _autoRest.Message(inputFileMessage);
 
             await _autoRest.WriteFile("CodeModel.yaml", codeModel, "source-file-csharp");

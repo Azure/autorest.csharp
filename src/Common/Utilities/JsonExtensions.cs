@@ -6,7 +6,7 @@ namespace AutoRest.CSharp.V3.Common.Utilities
 {
     internal static class JsonExtensions
     {
-        public static string ToJsonArray(this IEnumerable<string> values) => values != null ? $"[{String.Join(",", values.Select(v => $"\"{v}\""))}]" : "[]";
+        public static string ToJsonArray(this IEnumerable<string> values) => values != null ? $"[{String.Join(",", values.Select(v => $@"""{v}"""))}]" : "[]";
         public static string ToJsonArray(this IEnumerable<int> values) => values != null ? $"[{String.Join(",", values.Select(v => v.ToString()))}]" : "[]";
         public static string ToJsonArray(this IEnumerable<object> values) => values != null ? $"[{String.Join(",", values.Select(sl => sl.ToString()))}]" : "[]";
 
