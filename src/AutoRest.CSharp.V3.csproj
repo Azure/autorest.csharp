@@ -27,10 +27,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Plugins\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
   </ItemGroup>
 

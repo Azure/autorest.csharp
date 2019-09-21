@@ -2,18 +2,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.JsonRpc;
+using AutoRest.CSharp.V3.Common.Plugins;
 using Microsoft.Perks.JsonRPC;
 
 namespace AutoRest.CSharp.V3
 {
-    internal class Dispatcher : NewPlugin
+    internal class Dispatcher2
     {
-        public Connection Connection { get; }
-        public string SessionId { get; }
-        public Dispatcher(Connection connection, string plugin, string sessionId) : base(connection, plugin, sessionId)
+        private readonly AutoRestCommands _autoRest;
+
+        public Dispatcher2(Connection connection, string sessionId)
         {
-            Connection = connection;
-            SessionId = sessionId;
+            _autoRest = new AutoRestCommands(connection, sessionId);
         }
 
         //protected override async Task<bool> ProcessInternal()
@@ -69,31 +69,29 @@ namespace AutoRest.CSharp.V3
         //    return true;
         //}
 
-        protected override async Task<bool> ProcessInternal()
-        {
-            var requestId = Connection.NewRequestId.ToString();
-            var filename = await Connection.Request3(AutoRestRequests.GetValue(requestId, SessionId, "test-item"));
+        public async Task<bool> Process() => await _autoRest.Process(ProcessInternal);
 
-            requestId = Connection.NewRequestId.ToString();
+        private async Task<bool> ProcessInternal()
+        {
+            var testItem = await _autoRest.GetValue<string>("test-item");
+
             // array
-            var files = await Connection.Request3(AutoRestRequests.ListInputs(requestId, SessionId));
+            var files = await _autoRest.ListInputs();
             //if (!files.Any())
             //{
             //    throw new Exception("Generator did not receive the code model file.");
             //}
 
-            requestId = Connection.NewRequestId.ToString();
-            var codeModel = await Connection.Request3(AutoRestRequests.ReadFile(requestId, SessionId, files));
+            var codeModel = await _autoRest.ReadFile(files.FirstOrDefault());
 
             //requestId = Connection.NewRequestId.ToString();
             //// array
             //var inputFile = (await Connection.Request3(AutoRestRequests.GetValue(requestId, SessionId, "input-file")));
+            var inputFiles = await _autoRest.GetValue<string[]>("input-file");
+            var inputFileMessage = new Common.JsonRpc.Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
+            await _autoRest.Message(inputFileMessage);
 
-            var inputFileMessage = new Common.JsonRpc.Message { Channel = Channel.Fatal, Text = filename };
-            await Connection.Send(AutoRestRequests.Message(SessionId, inputFileMessage));
-
-            var file = AutoRestRequests.WriteFile(SessionId, "CodeModel.yaml", codeModel, "source-file-csharp");
-            await Connection.Send(file);
+            await _autoRest.WriteFile("CodeModel.yaml", codeModel, "source-file-csharp");
 
             return true;
         }

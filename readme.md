@@ -3,6 +3,7 @@
 
 ## Configuration
 ```yaml
+test-item: "cheese"
 use-extension:
   "@autorest/remodeler" : "~2.0.4"
 

@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3
             }
 
             var autoRestConnection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(), 
-                (connection, pluginName, sessionId) => new Dispatcher(connection, pluginName, sessionId).Process(),
+                (connection, pluginName, sessionId) => new Dispatcher2(connection, sessionId).Process(),
                 "csharp-v3");
             autoRestConnection.GetAwaiter().GetResult();
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core.Utilities;
+using AutoRest.CSharp.V3.Common.JsonRpc;
 using Microsoft.Perks.JsonRPC;
 
 // KEEP IN SYNC with message.ts
@@ -96,11 +97,11 @@ public abstract class NewPlugin
          });
     }
 
-    private readonly Connection _connection;
+    private readonly Microsoft.Perks.JsonRPC.Connection _connection;
     private string Plugin { get; }
     private readonly string _sessionId;
 
-    protected NewPlugin(Connection connection, string plugin, string sessionId)
+    protected NewPlugin(Microsoft.Perks.JsonRPC.Connection connection, string plugin, string sessionId)
     {
         _connection = connection;
         Plugin = plugin;
@@ -109,10 +110,13 @@ public abstract class NewPlugin
 
     public async Task<bool> Process()
     {
-        if (true == await GetValue<bool?>($"{Plugin}.debugger"))
-        {
+        //if (true == await GetValue<bool?>($"{Plugin}.debugger"))
+        //{
+            //var requestId = _connection.NewRequestId.ToString();
+            //if ("true" == await _connection.Request3(AutoRestRequests.GetValue(requestId, _sessionId, $"{Plugin}.debugger")))
+            //{
             AutoRestDebugger.Await();
-        }
+        //}
         try
         {
             return await ProcessInternal();

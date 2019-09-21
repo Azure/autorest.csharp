@@ -67,6 +67,8 @@ namespace Microsoft.Perks.JsonRPC
                 }
             }
 
+            foreach (var t in _tasks2.Values) { t.SetCanceled(); }
+
             _writer?.Dispose();
             _writer = null;
             _reader?.Dispose();
@@ -144,7 +146,8 @@ namespace Microsoft.Perks.JsonRPC
                 var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
                 var methodProperty = properties.GetPropertyOrNull("method");
                 var resultProperty = properties.GetPropertyOrNull("result");
-                var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
+                var id = properties.GetPropertyOrNull("id")?.Value;
+                var idString = id.ToString();
                 var isValidId = !String.IsNullOrEmpty(idString);
 
                 // this is a method call.
@@ -167,23 +170,26 @@ namespace Microsoft.Perks.JsonRPC
                 // this is a result from a previous call.
                 if (resultProperty != null && isValidId)
                 {
-                    ICallerResponse response;
-                    lock (_tasks)
-                    {
-                        response = _tasks[idString];
-                        _tasks.Remove(idString);
-                    }
-                    response.SetCompleted(resultProperty.Value.Value);
+                    //ICallerResponse response;
+                    //lock (_tasks)
+                    //{
+                    //    response = _tasks[idString];
+                    //    _tasks.Remove(idString);
+                    //}
+                    //response.SetCompleted(resultProperty.Value.Value);
+
+                    _tasks2.Remove(idString, out var response);
+                    response.TrySetResult(resultProperty.Value.Value.GetRawText());
                 }
             }, CancellationToken);
         }
 
         private Semaphore _streamSemaphore = new Semaphore(1, 1);
-        public async Task Send(string text)
+        public async Task Send(string json)
         {
             _streamSemaphore.WaitOne();
 
-            var buffer = Encoding.UTF8.GetBytes(text);
+            var buffer = Encoding.UTF8.GetBytes(json);
             var header = Encoding.ASCII.GetBytes($"Content-Length: {buffer.Length}\r\n\r\n");
             await _writer.WriteAsync(header, 0, header.Length, CancellationToken);
             await _writer.WriteAsync(buffer, 0, buffer.Length, CancellationToken);
@@ -219,9 +225,41 @@ namespace Microsoft.Perks.JsonRPC
         public async Task<string> Request3(string request)
         {
             var response = new TaskCompletionSource<string>();
-            _tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
+            //_tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
+            _tasks2.AddOrUpdate(_requestId.ToString(), response, (k, e) => response);
             await Send(request).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
+        }
+
+        public async Task<string> Request4(string requestId, string request)
+        {
+            var response = new TaskCompletionSource<string>();
+            //_tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
+            _tasks2.AddOrUpdate(requestId, response, (k, e) => response);
+            await Send(request).ConfigureAwait(false);
+            return await response.Task.ConfigureAwait(false);
+        }
+
+        private static T ParseResponseType<T>(string jsonResponse)
+        {
+            var element = jsonResponse.Parse();
+            return typeof(T) switch
+            {
+                var t when t == typeof(string) => (T)(object)element.ToStringValue(),
+                var t when t == typeof(string[]) => (T)(object)element.ToStringArray(),
+                var t when t == typeof(int?) => (T)(object)element.ToNumber(),
+                var t when t == typeof(bool?) => (T)(object)element.ToBoolean(),
+                var t when t == typeof(JsonElement?) => (T)(object)element,
+                _ => throw new NotSupportedException($"Type {typeof(T)} is not a supported response type.")
+            };
+        }
+
+        public async Task<T> Request5<T>(string id, string json)
+        {
+            var response = new TaskCompletionSource<string>();
+            _tasks2.AddOrUpdate(id, response, (k, e) => response);
+            await Send(json).ConfigureAwait(false);
+            return ParseResponseType<T>(await response.Task.ConfigureAwait(false));
         }
 
         public int NewRequestId => Interlocked.Decrement(ref _requestId);
