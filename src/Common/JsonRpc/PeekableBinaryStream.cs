@@ -6,12 +6,12 @@ using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace AutoRest.JsonRpc
 {
-    internal class PeekingBinaryReader : IDisposable
+    internal class PeekableBinaryStream : IDisposable
     {
 #pragma warning disable IDE0069 // Disposable fields should be disposed
         private readonly Stream _stream;
 #pragma warning restore IDE0069 // Disposable fields should be disposed
-        private readonly DisposeService<PeekingBinaryReader> _disposeService;
+        private readonly DisposeService<PeekableBinaryStream> _disposeService;
 
         private byte? _currentByte;
         public byte? CurrentByte
@@ -31,9 +31,9 @@ namespace AutoRest.JsonRpc
 
         private const int EndOfStream = -1;
 
-        public PeekingBinaryReader(Stream stream)
+        public PeekableBinaryStream(Stream stream)
         {
-            _disposeService = new DisposeService<PeekingBinaryReader>(this, pbr => _stream.Dispose());
+            _disposeService = new DisposeService<PeekableBinaryStream>(this, pbr => _stream.Dispose());
             _stream = stream;
         }
 

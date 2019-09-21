@@ -15,55 +15,28 @@ using static AutoRest.CSharp.V3.Common.JsonRpc.IncomingMessages;
 
 namespace Microsoft.Perks.JsonRPC
 {
-    internal delegate Task<bool> ProcessMethod(Connection connection, string pluginName, string sessionId);
-    internal delegate Task<string> DispatchMethod(JsonElement jsonElement);
-
     internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
 
 #pragma warning disable IDE0069 // Disposable fields should be disposed
     internal sealed class Connection : IDisposable
     {
         private readonly DisposeService<Connection> _disposeService;
-
-        private Stream _writer;
-        private PeekingBinaryReader _reader;
+        private Stream _outputStream;
+        private PeekableBinaryStream _inputStream;
         private readonly Task _listener;
 
         private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _responses = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
-        private readonly Dictionary<string, DispatchMethod> _dispatch;
-
-        //public Dictionary<string, IncomingRequestAction> IncomingRequestActions { get; } = new Dictionary<string, IncomingRequestAction>();
         private readonly Dictionary<string, IncomingRequestAction> _incomingRequestActions;
-
-        public Connection(Stream inputStream, Stream outputStream, ProcessMethod processMethod, params string[] pluginNames)
-        {
-            _disposeService = new DisposeService<Connection>(this, Disposer);
-
-            _reader = new PeekingBinaryReader(inputStream);
-            _writer = outputStream;
-            _dispatch = new Dictionary<string, DispatchMethod>
-            {
-                { "GetPluginNames", async je => pluginNames.ToJsonArray() },
-                { "Process", async je => await RunProcessor(je, processMethod) },
-                { "Shutdown", async je => { Stop(); return null; } }
-            };
-
-            _listener = Task.Factory.StartNew(Listen).Unwrap();
-        }
+        private readonly MessageProcessor _messageProcessor;
 
         public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction> incomingRequestActions = null)
         {
             _disposeService = new DisposeService<Connection>(this, Disposer);
-            _reader = new PeekingBinaryReader(inputStream);
-            _writer = outputStream;
+            _inputStream = new PeekableBinaryStream(inputStream);
+            _outputStream = outputStream;
             _incomingRequestActions = incomingRequestActions ?? new Dictionary<string, IncomingRequestAction>();
+            _messageProcessor = new MessageProcessor(_inputStream, HandleIncomingRequest, HandleIncomingResponse);
             _listener = Task.Factory.StartNew(Listen).Unwrap();
-        }
-
-        private async Task<string> RunProcessor(JsonElement jsonElement, ProcessMethod processMethod)
-        {
-            var elements = (jsonElement as JsonElement?).ToStringArray();
-            return (await processMethod(this, elements[0], elements[1])).ToJsonBool();
         }
 
         public void Dispose()
@@ -75,71 +48,95 @@ namespace Microsoft.Perks.JsonRPC
         {
             foreach (var t in _responses.Values) { t.SetCanceled(); }
 
-            _writer?.Dispose();
-            _writer = null;
-            _reader?.Dispose();
-            _reader = null;
+            _outputStream?.Dispose();
+            _outputStream = null;
+            _inputStream?.Dispose();
+            _inputStream = null;
             CancellationTokenSource?.Dispose();
             CancellationTokenSource = null;
             _streamSemaphore?.Dispose();
             _streamSemaphore = null;
         }
 
-        public TaskAwaiter Start() => _listener.GetAwaiter();
+        public void Start() => _listener.GetAwaiter().GetResult();
 
         public CancellationTokenSource CancellationTokenSource { get; private set; } = new CancellationTokenSource();
         private CancellationToken CancellationToken => CancellationTokenSource.Token;
-        private bool IsAlive => !CancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
-        private void Stop() => CancellationTokenSource.Cancel();
+        //private JsonElement? ReadJson(int contentLength) => Encoding.UTF8.GetString(_inputStream.ReadBytes(contentLength)).Parse();
+        //private JsonElement? ReadJson()
+        //{
+        //    var sb = new StringBuilder();
+        //    // ReSharper disable once IteratorMethodResultIsIgnored
+        //    _inputStream.ReadAllAsciiLines(l => sb.Append(l).ToString().Parse() != null);
+        //    return sb.ToString().Parse();
+        //}
 
-        private JsonElement? ReadJson(int contentLength) => Encoding.UTF8.GetString(_reader.ReadBytes(contentLength)).Parse();
-        private JsonElement? ReadJson()
-        {
-            var sb = new StringBuilder();
-            // ReSharper disable once IteratorMethodResultIsIgnored
-            _reader.ReadAllAsciiLines(l => sb.Append(l).ToString().Parse() != null);
-            return sb.ToString().Parse();
-        }
+        //private static bool IsJsonBlock(byte? value) => '{' == value || '[' == value;
 
-        private static bool IsJsonBlock(byte? value) => '{' == value || '[' == value;
+        //private bool ProcessHeaders()
+        //{
+        //    var headers = _inputStream.ReadAllAsciiLines(l => !l.IsNullOrWhiteSpace()).Select(l =>
+        //    {
+        //        var parts = l.Split(":", 2).Select(p => p.Trim()).ToArray();
+        //        return (Key: parts[0], Value: parts[1]);
+        //    }).ToDictionary(h => h.Key, h => h.Value);
 
-        private bool ProcessHeaders()
-        {
-            var headers = _reader.ReadAllAsciiLines(l => !l.IsNullOrWhiteSpace()).Select(l =>
-            {
-                var parts = l.Split(":", 2).Select(p => p.Trim()).ToArray();
-                return (Key: parts[0], Value: parts[1]);
-            }).ToDictionary(h => h.Key, h => h.Value);
+        //    // After the headers are read, the next byte should be the content block.
+        //    if (IsJsonBlock(_inputStream.CurrentByte) && headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out var contentLength))
+        //    {
+        //        ProcessMessage(ReadJson(contentLength));
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
-            // After the headers are read, the next byte should be the content block.
-            if (IsJsonBlock(_reader.CurrentByte) && headers.TryGetValue("Content-Length", out var value) && Int32.TryParse(value, out var contentLength))
-            {
-                ProcessMessage(ReadJson(contentLength));
-                return true;
-            }
-            return false;
-        }
+        //private bool ProcessStream()
+        //{
+        //    var currentByte = _inputStream.CurrentByte;
+        //    if (currentByte == null) return false;
 
-        private bool ProcessStream()
-        {
-            var currentByte = _reader.CurrentByte;
-            // didn't get anything. start again, it'll know if we're shutting down
-            if (currentByte == null) return false;
+        //    if (IsJsonBlock(currentByte))
+        //    {
+        //        ProcessMessage(ReadJson());
+        //        return true;
+        //    }
 
-            if (IsJsonBlock(currentByte))
-            {
-                ProcessMessage(ReadJson());
-                return true;
-            }
-
-            return ProcessHeaders();
-        }
+        //    return ProcessHeaders();
+        //}
 
         private async Task<bool> Listen()
         {
-            while (IsAlive && ProcessStream()) { }
+            bool IsAlive() => !CancellationToken.IsCancellationRequested && _outputStream != null && _inputStream != null;
+            while (IsAlive() && _messageProcessor.ProcessStream()) { }
             return false;
+        }
+
+        private void HandleIncomingRequest(IncomingRequest request)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                if (_incomingRequestActions.TryGetValue(request.Method, out var requestAction))
+                {
+                    var result = requestAction(this, request);
+                    if (!request.Id.IsNullOrEmpty())
+                    {
+                        Respond(request.Id, result).GetAwaiter().GetResult();
+                    }
+                }
+            }, CancellationToken);
+        }
+
+        private void HandleIncomingResponse(IncomingResponse response)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                if (!response.Id.IsNullOrEmpty())
+                {
+                    _responses.Remove(response.Id, out var responseTask);
+                    responseTask.TrySetResult(response.Result);
+                }
+            }, CancellationToken);
         }
 
         //private void ProcessMessage(JsonElement? element)
@@ -180,44 +177,43 @@ namespace Microsoft.Perks.JsonRPC
         //    }, CancellationToken);
         //}
 
-        private void ProcessMessage(JsonElement? element)
-        {
-            if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
+        //private void ProcessMessage(JsonElement? element)
+        //{
+        //    if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
 
-            Task.Factory.StartNew(async () =>
-            {
-                var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
-                var methodProperty = properties.GetPropertyOrNull("method");
-                var resultProperty = properties.GetPropertyOrNull("result");
-                var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
-                var isValidId = !String.IsNullOrEmpty(idString);
+        //    Task.Factory.StartNew(async () =>
+        //    {
+        //        var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
+        //        var methodProperty = properties.GetPropertyOrNull("method");
+        //        var resultProperty = properties.GetPropertyOrNull("result");
+        //        var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
+        //        var isValidId = !String.IsNullOrEmpty(idString);
 
-                // this is a method call.
-                // pass it to the service that is listening...
-                if (methodProperty != null)
-                {
-                    var method = methodProperty.Value.Value.ToString();
-                    if (_incomingRequestActions.TryGetValue(method, out var requestAction))
-                    {
-                        var parameters = properties.GetPropertyOrNull("params")?.Value;
-                        var result = requestAction(this, new IncomingRequest { Id = idString, Method = method, Params = parameters });
-                        if (isValidId)
-                        {
-                            // if this is a request, send the response.
-                            await Respond(idString, result);
-                        }
-                    }
-                    return;
-                }
+        //        // this is a method call.
+        //        // pass it to the service that is listening...
+        //        if (methodProperty != null)
+        //        {
+        //            var method = methodProperty.Value.Value.ToString();
+        //            if (_incomingRequestActions.TryGetValue(method, out var requestAction))
+        //            {
+        //                var parameters = properties.GetPropertyOrNull("params")?.Value;
+        //                var result = requestAction(this, new IncomingRequest { Id = idString, Method = method, Params = parameters });
+        //                if (isValidId)
+        //                {
+        //                    await Respond(idString, result);
+        //                }
+        //            }
+        //            return;
+        //        }
 
-                // this is a result from a previous call.
-                if (resultProperty != null && isValidId)
-                {
-                    _responses.Remove(idString, out var response);
-                    response.TrySetResult(resultProperty.Value.Value.GetRawText());
-                }
-            }, CancellationToken);
-        }
+        //        // this is a result from a previous call.
+        //        if (resultProperty != null && isValidId)
+        //        {
+        //            _responses.Remove(idString, out var response);
+        //            response.TrySetResult(resultProperty.Value.Value.GetRawText());
+        //        }
+        //    }, CancellationToken);
+        //}
 
         private Semaphore _streamSemaphore = new Semaphore(1, 1);
         public async Task Send(string json)
@@ -226,8 +222,8 @@ namespace Microsoft.Perks.JsonRPC
 
             var buffer = Encoding.UTF8.GetBytes(json);
             var header = Encoding.ASCII.GetBytes($"Content-Length: {buffer.Length}\r\n\r\n");
-            await _writer.WriteAsync(header, 0, header.Length, CancellationToken);
-            await _writer.WriteAsync(buffer, 0, buffer.Length, CancellationToken);
+            await _outputStream.WriteAsync(header, 0, header.Length, CancellationToken);
+            await _outputStream.WriteAsync(buffer, 0, buffer.Length, CancellationToken);
 
             _streamSemaphore.Release();
         }
