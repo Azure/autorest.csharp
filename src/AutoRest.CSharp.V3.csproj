@@ -26,8 +26,4 @@
     <DefineConstants>TRACE;RELEASE;NETSTANDARD;SIGN</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.CodeDom" Version="4.5.0" />
-  </ItemGroup>
-
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoRest.CSharp.V3.Common.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc
+namespace AutoRest.CSharp.V3.Common.JsonRpc.Messaging
 {
     internal static class OutgoingMessages
     {

@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Common.Utilities
         public static string TextOrEmpty(this object value, string text) => value != null ? text : String.Empty;
 
         //https://stackoverflow.com/a/324812/294804
-        //private static string ToLiteral(string input)
+        //private static string ToStringLiteral(string input)
         //{
         //    using var writer = new StringWriter();
         //    using var provider = CodeDomProvider.CreateProvider("CSharp");

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Common.JsonRpc;
-using AutoRest.CSharp.V3.Common.Plugins;
-using Microsoft.Perks.JsonRPC;
+using AutoRest.CSharp.V3.Common.JsonRpc.Messaging;
 
 namespace AutoRest.CSharp.V3
 {

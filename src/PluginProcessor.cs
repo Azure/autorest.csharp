@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AutoRest.Core.Utilities;
 using AutoRest.CSharp.V3.Common.JsonRpc;
-using AutoRest.CSharp.V3.Common.Plugins;
 using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace AutoRest.CSharp.V3

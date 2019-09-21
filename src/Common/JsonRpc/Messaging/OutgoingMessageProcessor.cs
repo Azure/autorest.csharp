@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc
+namespace AutoRest.CSharp.V3.Common.JsonRpc.Messaging
 {
 #pragma warning disable IDE0069 // Disposable fields should be disposed
     internal class OutgoingMessageProcessor : IDisposable
