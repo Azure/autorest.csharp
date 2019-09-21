@@ -14,12 +14,6 @@ namespace AutoRest.CSharp.V3.Common.Plugins
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
     internal class AutoRestCommands
     {
-        private Task<T> ProcessRequest<T>(Func<string, string> requestMethod)
-        {
-            var requestId = Guid.NewGuid().ToString();
-            return _connection.Request5<T>(requestId, requestMethod(requestId));
-        }
-
         public Task<string> ReadFile(string filename) => ProcessRequest<string>(requestId => AutoRestRequests.ReadFile(requestId, _sessionId, filename));
         public Task<T> GetValue<T>(string key) => ProcessRequest<T>(requestId => AutoRestRequests.GetValue(requestId, _sessionId, key));
         public Task<string[]> ListInputs(string artifactType = null) => ProcessRequest<string[]>(requestId => AutoRestRequests.ListInputs(requestId, _sessionId, artifactType));
@@ -30,6 +24,12 @@ namespace AutoRest.CSharp.V3.Common.Plugins
             _connection.Send(AutoRestRequests.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
             _connection.Send(AutoRestRequests.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+
+        private Task<T> ProcessRequest<T>(Func<string, string> requestMethod)
+        {
+            var requestId = Guid.NewGuid().ToString();
+            return _connection.Request5<T>(requestId, requestMethod(requestId));
+        }
 
         //public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
         //public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
@@ -113,22 +113,22 @@ namespace AutoRest.CSharp.V3.Common.Plugins
         //}
 
         private readonly Microsoft.Perks.JsonRPC.Connection _connection;
-        //private string Plugin { get; }
+        private readonly string _pluginName;
         private readonly string _sessionId;
 
-        public AutoRestCommands(Microsoft.Perks.JsonRPC.Connection connection, string sessionId)
+        public AutoRestCommands(Microsoft.Perks.JsonRPC.Connection connection, string pluginName, string sessionId)
         {
             _connection = connection;
-            //Plugin = plugin;
+            _pluginName = pluginName;
             _sessionId = sessionId;
         }
 
         public async Task<bool> Process(Func<Task<bool>> processMethod)
         {
-            //if (true == await GetValue<bool?>($"{Plugin}.debugger"))
-            //{
+            if (true == await GetValue<bool?>($"{_pluginName}.debugger"))
+            {
                 AutoRestDebugger.Await();
-            //}
+            }
             try
             {
                 return await processMethod();

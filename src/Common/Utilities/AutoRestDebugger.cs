@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 
 namespace AutoRest.Core.Utilities
@@ -15,12 +16,9 @@ namespace AutoRest.Core.Utilities
             while (!Debugger.IsAttached)
             {
                 Console.Error.WriteLine($"Waiting for debugger to attach to process {Process.GetCurrentProcess().Id}");
-                for (var i = 0; i < 50; i++)
+                foreach (var _ in Enumerable.Range(0, 50))
                 {
-                    if (Debugger.IsAttached)
-                    {
-                        break;
-                    }
+                    if (Debugger.IsAttached) break;
                     Thread.Sleep(100);
                     Console.Error.Write(".");
                 }

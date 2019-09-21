@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
         Hint,
         // File represents a file output from an extension. Details are a Artifact and are required.
         File,
-        // content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file.
+        // Content represents an update/creation of a configuration file. The final URI will be in the same folder as the primary config file.
         Configuration,
         // Protect is a path to not remove during a clear-output-folder.
         Protect

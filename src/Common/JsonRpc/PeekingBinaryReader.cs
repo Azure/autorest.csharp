@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace AutoRest.JsonRpc
 {
     internal class PeekingBinaryReader : IDisposable
     {
+#pragma warning disable IDE0069 // Disposable fields should be disposed
         private readonly Stream _stream;
+#pragma warning restore IDE0069 // Disposable fields should be disposed
+        private readonly DisposeService<PeekingBinaryReader> _disposeService;
 
         private byte? _currentByte;
         public byte? CurrentByte
@@ -29,7 +33,13 @@ namespace AutoRest.JsonRpc
 
         public PeekingBinaryReader(Stream stream)
         {
+            _disposeService = new DisposeService<PeekingBinaryReader>(this, pbr => _stream.Dispose());
             _stream = stream;
+        }
+
+        public void Dispose()
+        {
+            _disposeService.Dispose(true);
         }
 
         private byte? PopCurrentByte()
@@ -67,16 +77,6 @@ namespace AutoRest.JsonRpc
             return buffer;
         }
 
-        public IEnumerable<string> ReadAllAsciiLines(Predicate<string> condition = null)
-        {
-            condition ??= s => s == null;
-            string line;
-            while (condition(line = ReadAsciiLine()))
-            {
-                yield return line;
-            }
-        }
-
         public string ReadAsciiLine()
         {
             var sb = new StringBuilder();
@@ -96,9 +96,14 @@ namespace AutoRest.JsonRpc
             return sb.Length != 0 ? sb.ToString() : null;
         }
 
-        public void Dispose()
+        public IEnumerable<string> ReadAllAsciiLines(Predicate<string> condition = null)
         {
-            _stream.Dispose();
+            condition ??= s => s == null;
+            string line;
+            while (condition(line = ReadAsciiLine()))
+            {
+                yield return line;
+            }
         }
     }
 }
