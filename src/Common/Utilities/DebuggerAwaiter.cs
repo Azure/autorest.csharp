@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace AutoRest.Core.Utilities
 {
-    public static class AutoRestDebugger
+    public static class DebuggerAwaiter
     {
         public static void Await()
         {

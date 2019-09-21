@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading;
 using AutoRest.CSharp.V3.Common.Utilities;
 using Microsoft.Perks.JsonRPC;

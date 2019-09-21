@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace AutoRest.JsonRpc
 {
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal class PeekableBinaryStream : IDisposable
     {
 #pragma warning disable IDE0069 // Disposable fields should be disposed

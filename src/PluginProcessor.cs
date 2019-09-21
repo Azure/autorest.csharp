@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3
             // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
             if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.debugger")).IsObject())
             {
-                AutoRestDebugger.Await();
+                DebuggerAwaiter.Await();
             }
             try
             {

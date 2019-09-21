@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            static bool PluginStart(Connection c1, string pn, string si) => PluginProcessor.Start(new AutoRestInterface(c1, pn, si)).GetAwaiter().GetResult();
+            static bool PluginStart(Connection c, string pn, string si) => PluginProcessor.Start(new AutoRestInterface(c, pn, si)).GetAwaiter().GetResult();
             
             var connection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(),
                 new Dictionary<string, IncomingRequestAction>
