@@ -12,6 +12,8 @@ namespace AutoRest.CSharp.V3
 {
     internal static class PluginProcessor
     {
+        public static string[] PluginNames { get; } = { "csharp-v3" };
+
         public static async Task<bool> Start(AutoRestInterface autoRest)
         {
             // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.

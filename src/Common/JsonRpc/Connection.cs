@@ -15,11 +15,13 @@ using static AutoRest.CSharp.V3.Common.JsonRpc.IncomingMessages;
 
 namespace Microsoft.Perks.JsonRPC
 {
-    public delegate Task<bool> ProcessMethod(Connection connection, string pluginName, string sessionId);
-    public delegate Task<string> DispatchMethod(JsonElement jsonElement);
+    internal delegate Task<bool> ProcessMethod(Connection connection, string pluginName, string sessionId);
+    internal delegate Task<string> DispatchMethod(JsonElement jsonElement);
+
+    internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
 
 #pragma warning disable IDE0069 // Disposable fields should be disposed
-    public sealed class Connection : IDisposable
+    internal sealed class Connection : IDisposable
     {
         private readonly DisposeService<Connection> _disposeService;
 
@@ -29,6 +31,9 @@ namespace Microsoft.Perks.JsonRPC
 
         private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _responses = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
         private readonly Dictionary<string, DispatchMethod> _dispatch;
+
+        //public Dictionary<string, IncomingRequestAction> IncomingRequestActions { get; } = new Dictionary<string, IncomingRequestAction>();
+        private readonly Dictionary<string, IncomingRequestAction> _incomingRequestActions;
 
         public Connection(Stream inputStream, Stream outputStream, ProcessMethod processMethod, params string[] pluginNames)
         {
@@ -43,6 +48,15 @@ namespace Microsoft.Perks.JsonRPC
                 { "Shutdown", async je => { Stop(); return null; } }
             };
 
+            _listener = Task.Factory.StartNew(Listen).Unwrap();
+        }
+
+        public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction> incomingRequestActions = null)
+        {
+            _disposeService = new DisposeService<Connection>(this, Disposer);
+            _reader = new PeekingBinaryReader(inputStream);
+            _writer = outputStream;
+            _incomingRequestActions = incomingRequestActions ?? new Dictionary<string, IncomingRequestAction>();
             _listener = Task.Factory.StartNew(Listen).Unwrap();
         }
 
@@ -65,19 +79,19 @@ namespace Microsoft.Perks.JsonRPC
             _writer = null;
             _reader?.Dispose();
             _reader = null;
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = null;
+            CancellationTokenSource?.Dispose();
+            CancellationTokenSource = null;
             _streamSemaphore?.Dispose();
             _streamSemaphore = null;
         }
 
         public TaskAwaiter Start() => _listener.GetAwaiter();
 
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private CancellationToken CancellationToken => _cancellationTokenSource.Token;
+        public CancellationTokenSource CancellationTokenSource { get; private set; } = new CancellationTokenSource();
+        private CancellationToken CancellationToken => CancellationTokenSource.Token;
         private bool IsAlive => !CancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
-        private void Stop() => _cancellationTokenSource.Cancel();
+        private void Stop() => CancellationTokenSource.Cancel();
 
         private JsonElement? ReadJson(int contentLength) => Encoding.UTF8.GetString(_reader.ReadBytes(contentLength)).Parse();
         private JsonElement? ReadJson()
@@ -128,6 +142,44 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
+        //private void ProcessMessage(JsonElement? element)
+        //{
+        //    if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
+
+        //    Task.Factory.StartNew(async () =>
+        //    {
+        //        var properties = element.Value.EnumerateObject().Select(p => (JsonProperty?)p).ToArray();
+        //        var methodProperty = properties.GetPropertyOrNull("method");
+        //        var resultProperty = properties.GetPropertyOrNull("result");
+        //        var idString = properties.GetPropertyOrNull("id")?.Value.ToString();
+        //        var isValidId = !String.IsNullOrEmpty(idString);
+
+        //        // this is a method call.
+        //        // pass it to the service that is listening...
+        //        if (methodProperty != null)
+        //        {
+        //            if (_dispatch.TryGetValue(methodProperty.Value.Value.ToString(), out var dispatchMethod))
+        //            {
+        //                var parameters = properties.GetPropertyOrNull("params");
+        //                var result = await dispatchMethod(parameters?.Value ?? new JsonElement());
+        //                if (isValidId)
+        //                {
+        //                    // if this is a request, send the response.
+        //                    await Respond(idString, result);
+        //                }
+        //            }
+        //            return;
+        //        }
+
+        //        // this is a result from a previous call.
+        //        if (resultProperty != null && isValidId)
+        //        {
+        //            _responses.Remove(idString, out var response);
+        //            response.TrySetResult(resultProperty.Value.Value.GetRawText());
+        //        }
+        //    }, CancellationToken);
+        //}
+
         private void ProcessMessage(JsonElement? element)
         {
             if (element == null || element.Value.ValueKind != JsonValueKind.Object) return;
@@ -144,10 +196,11 @@ namespace Microsoft.Perks.JsonRPC
                 // pass it to the service that is listening...
                 if (methodProperty != null)
                 {
-                    if (_dispatch.TryGetValue(methodProperty.Value.Value.ToString(), out var dispatchMethod))
+                    var method = methodProperty.Value.Value.ToString();
+                    if (_incomingRequestActions.TryGetValue(method, out var requestAction))
                     {
-                        var parameters = properties.GetPropertyOrNull("params");
-                        var result = await dispatchMethod(parameters?.Value ?? new JsonElement());
+                        var parameters = properties.GetPropertyOrNull("params")?.Value;
+                        var result = requestAction(this, new IncomingRequest { Id = idString, Method = method, Params = parameters });
                         if (isValidId)
                         {
                             // if this is a request, send the response.

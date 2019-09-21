@@ -8,24 +8,18 @@ using Microsoft.Perks.JsonRPC;
 
 namespace AutoRest.CSharp.V3.Common.JsonRpc
 {
-    internal delegate Task<bool> ProcessMethod(Plugins.AutoRestInterface autoRest);
+    internal delegate bool ProcessAction(Connection connection, string pluginName, string sessionId);
 
     internal static class IncomingMessages
     {
-        //_dispatch = new Dictionary<string, DispatchMethod>
-        //{
-        //    { "GetPluginNames", async je => pluginNames.ToJsonArray() },
-        //    { "Process", async je => await RunProcessor(je, processMethod) },
-        //    { "Shutdown", async je => { Stop(); return null; } }
-        //};
-
         public static string GetPluginNames(this IncomingRequest _, params string[] pluginNames) => pluginNames.ToJsonArray();
 
-        //public static string Process(this IncomingRequest request, ProcessMethod processMethod)
-        //{
-        //    var parameters = request.Params.ToStringArray();
-        //    return (await processMethod(this, elements[0], elements[1])).ToJsonBool();
-        //}
+        public static string Process(this IncomingRequest request, Connection connection, ProcessAction processAction)
+        {
+            var parameters = request.Params.ToStringArray();
+            var (pluginName, sessionId) = (parameters[0], parameters[1]);
+            return processAction(connection, pluginName, sessionId).ToJsonBool();
+        }
 
         public static string Shutdown(this IncomingRequest _, CancellationTokenSource tokenSource)
         {
@@ -50,7 +44,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
 
     internal class IncomingRequest
     {
-        public string JsonRpc { get; set; }
+        public string JsonRpc { get; } = "2.0";
         public string Method { get; set; }
         public JsonElement? Params { get; set; }
         public string Id { get; set; }
@@ -58,7 +52,7 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
 
     internal class IncomingResponse
     {
-        public string JsonRpc { get; set; }
+        public string JsonRpc { get; } = "2.0";
         public string Result { get; set; }
         public string Id { get; set; }
     }
