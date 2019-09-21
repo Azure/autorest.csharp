@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.JsonRpc;
 using System.Text.Json;
+using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
 
 namespace Microsoft.Perks.JsonRPC
@@ -25,8 +26,6 @@ namespace Microsoft.Perks.JsonRPC
         private PeekingBinaryReader _reader;
         private readonly Task _loop;
 
-        private int _requestId;
-        private readonly Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
         private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _tasks2 = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
         private readonly Dictionary<string, DispatchMethod> _dispatch;
 
@@ -59,14 +58,6 @@ namespace Microsoft.Perks.JsonRPC
 
         private void Disposer(Connection connection)
         {
-            lock (_tasks)
-            {
-                foreach (var t in _tasks.Values)
-                {
-                    t.SetCancelled();
-                }
-            }
-
             foreach (var t in _tasks2.Values) { t.SetCanceled(); }
 
             _writer?.Dispose();
@@ -170,14 +161,6 @@ namespace Microsoft.Perks.JsonRPC
                 // this is a result from a previous call.
                 if (resultProperty != null && isValidId)
                 {
-                    //ICallerResponse response;
-                    //lock (_tasks)
-                    //{
-                    //    response = _tasks[idString];
-                    //    _tasks.Remove(idString);
-                    //}
-                    //response.SetCompleted(resultProperty.Value.Value);
-
                     _tasks2.Remove(idString, out var response);
                     response.TrySetResult(resultProperty.Value.Value.GetRawText());
                 }
@@ -197,47 +180,9 @@ namespace Microsoft.Perks.JsonRPC
             _streamSemaphore.Release();
         }
 
-        private async Task Respond(string id, string value)
+        private async Task Respond(string id, string json)
         {
-            await Send(ProtocolExtensions.Response(id, value)).ConfigureAwait(false);
-        }
-
-        public async Task Notify(string methodName, params object[] values) => await Send(ProtocolExtensions.Notification(methodName, values)).ConfigureAwait(false);
-
-        public async Task<T> Request<T>(string methodName, params object[] values)
-        {
-            var id = Interlocked.Decrement(ref _requestId).ToString();
-            var response = new CallerResponse<T>(id);
-            lock(_tasks) { _tasks.Add(id, response); }
-            await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
-            return await response.Task.ConfigureAwait(false);
-        }
-
-        public async Task<T> Request2<T>(string request)
-        {
-            var id = _requestId.ToString();
-            var response = new CallerResponse<T>(id);
-            lock (_tasks) { _tasks.Add(id, response); }
-            await Send(request).ConfigureAwait(false);
-            return await response.Task.ConfigureAwait(false);
-        }
-
-        public async Task<string> Request3(string request)
-        {
-            var response = new TaskCompletionSource<string>();
-            //_tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
-            _tasks2.AddOrUpdate(_requestId.ToString(), response, (k, e) => response);
-            await Send(request).ConfigureAwait(false);
-            return await response.Task.ConfigureAwait(false);
-        }
-
-        public async Task<string> Request4(string requestId, string request)
-        {
-            var response = new TaskCompletionSource<string>();
-            //_tasks2.AddOrUpdate(Interlocked.Decrement(ref _requestId).ToString(), response, (k, e) => response);
-            _tasks2.AddOrUpdate(requestId, response, (k, e) => response);
-            await Send(request).ConfigureAwait(false);
-            return await response.Task.ConfigureAwait(false);
+            await Send(AutoRestRequests.Response(id, json)).ConfigureAwait(false);
         }
 
         private static T ParseResponseType<T>(string jsonResponse)
@@ -261,8 +206,6 @@ namespace Microsoft.Perks.JsonRPC
             await Send(json).ConfigureAwait(false);
             return ParseResponseType<T>(await response.Task.ConfigureAwait(false));
         }
-
-        public int NewRequestId => Interlocked.Decrement(ref _requestId);
     }
 #pragma warning restore IDE0069 // Disposable fields should be disposed
 }

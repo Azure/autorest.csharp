@@ -30,5 +30,9 @@ namespace AutoRest.CSharp.V3.Common.JsonRpc
             var message = new ArtifactMessage { Channel = Channel.File, Details = artifact, Text = String.Empty };
             return Message(sessionId, message);
         }
+
+        private const string BasicResponseFormat = @"{{""jsonrpc"":""2.0"",""result"":{1},""id"":{0}}}";
+
+        public static string Response(string responseId, string result) => String.Format(BasicResponseFormat, responseId.ToJsonStringOrNull(), result);
     }
 }
