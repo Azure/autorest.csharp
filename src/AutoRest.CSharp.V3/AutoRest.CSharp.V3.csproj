@@ -6,7 +6,7 @@
     <AssemblyName>AutoRest.CSharp.V3</AssemblyName>
     <RootNamespace>AutoRest.CSharp.V3</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>../bin</OutputPath>
+    <OutputPath>../../bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
     <!-- Some methods are marked async and don't have an await in them -->
     <NoWarn>1998</NoWarn>

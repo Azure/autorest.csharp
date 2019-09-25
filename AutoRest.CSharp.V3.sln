@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.V3", "src\AutoRest.CSharp.V3.csproj", "{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.V3", "src\AutoRest.CSharp.V3\AutoRest.CSharp.V3.csproj", "{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CodeModel", "src\AutoRest.CodeModel\AutoRest.CodeModel.csproj", "{FD9339E6-A987-4506-977F-C294A31D0D53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1018BFE-551F-4EFD-B5C7-D3FF7A82351D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD9339E6-A987-4506-977F-C294A31D0D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD9339E6-A987-4506-977F-C294A31D0D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD9339E6-A987-4506-977F-C294A31D0D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD9339E6-A987-4506-977F-C294A31D0D53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

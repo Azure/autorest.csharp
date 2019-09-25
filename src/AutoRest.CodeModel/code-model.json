@@ -1,0 +1,4530 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CodeModel",
+  "type": "object",
+  "description": "Intermediary output of the AutoRest pipeline",
+  "properties": {
+    "Schemas": {
+      "$ref": "#/definitions/Schemas"
+    },
+    "Info": {
+      "$ref": "#/definitions/Info"
+    },
+    "OperationGroups": {
+      "description": "a collection of operation groups",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/OperationGroup"
+      }
+    },
+    "Language": {
+      "$ref": "#/definitions/Languages"
+    },
+    "Protocol": {
+      "$ref": "#/definitions/Protocols"
+    }
+  },
+  "definitions": {
+    "ApiVersion": {
+      "description": "- since API version formats range from \nAzure ARM API date style (2018-01-01) to semver (1.2.3) \nand virtually any other text, this value tends to be an \nopaque string with the possibility of a modifier to indicate\nthat it is a range.\n\noptions: \n- prepend a dash or append a plus to indicate a range \n(ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )\n\n- semver-range style (ie, '^1.0.0' or '~1.0.0' )",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "the actual api version string used in the API",
+          "type": "string"
+        },
+        "range": {
+          "enum": [
+            "plus",
+            "minus"
+          ],
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "version"
+      ]
+    },
+    "ApiVersions": {
+      "description": "a collection of api versions",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApiVersion"
+      }
+    },
+    "Deprecation": {
+      "description": "represents  deprecation information for a given aspect",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "the reason why this aspect",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "the api versions that this deprecation is applicable to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "apiVersions",
+        "message"
+      ]
+    },
+    "Extensions": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": []
+    },
+    "uri": {
+      "description": "an URI",
+      "type": "string"
+    },
+    "Schema": {
+      "description": "The Schema Object allows the definition of input and output data types.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/AllSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ExternalDocumentation": {
+      "description": "a reference to external documentation",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "url"
+      ]
+    },
+    "Languages": {
+      "description": "custom extensible metadata for individual language generators",
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/Language"
+        },
+        "csharp": {
+          "$ref": "#/definitions/Language"
+        },
+        "python": {
+          "$ref": "#/definitions/Language"
+        },
+        "ruby": {
+          "$ref": "#/definitions/Language"
+        },
+        "go": {
+          "$ref": "#/definitions/Language"
+        },
+        "typescript": {
+          "$ref": "#/definitions/Language"
+        },
+        "javascript": {
+          "$ref": "#/definitions/Language"
+        },
+        "powershell": {
+          "$ref": "#/definitions/Language"
+        },
+        "java": {
+          "$ref": "#/definitions/Language"
+        },
+        "c": {
+          "$ref": "#/definitions/Language"
+        },
+        "cpp": {
+          "$ref": "#/definitions/Language"
+        },
+        "swift": {
+          "$ref": "#/definitions/Language"
+        },
+        "objectivec": {
+          "$ref": "#/definitions/Language"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "default"
+      ]
+    },
+    "Protocols": {
+      "description": "custom extensible metadata for individual protocols (ie, HTTP, etc)",
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "http": {
+          "$ref": "#/definitions/Protocol"
+        },
+        "amqp": {
+          "$ref": "#/definitions/Protocol"
+        },
+        "mqtt": {
+          "$ref": "#/definitions/Protocol"
+        },
+        "jsonrpc": {
+          "$ref": "#/definitions/Protocol"
+        }
+      },
+      "defaultProperties": []
+    },
+    "Metadata": {
+      "description": "common pattern for Metadata on aspects",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "protocol"
+      ]
+    },
+    "Language": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "name used in actual implementation",
+          "type": "string"
+        },
+        "description": {
+          "description": "description text - describes this node.",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "description",
+        "name"
+      ]
+    },
+    "Protocol": {
+      "type": "object",
+      "defaultProperties": []
+    },
+    "SchemaType": {
+      "description": "possible schema types that indicate the type of schema.",
+      "enum": [
+        "and",
+        "array",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "constant",
+        "credential",
+        "date",
+        "date-time",
+        "dictionary",
+        "duration",
+        "integer",
+        "not",
+        "number",
+        "object",
+        "odata-query",
+        "or",
+        "stream",
+        "string",
+        "unixtime",
+        "unknown",
+        "uri",
+        "uuid",
+        "xor"
+      ],
+      "type": "string"
+    },
+    "CompoundSchemaTypes": {
+      "enum": [
+        "and",
+        "or",
+        "xor"
+      ],
+      "type": "string"
+    },
+    "PrimitiveSchemaTypes": {
+      "enum": [
+        "boolean",
+        "char",
+        "credential",
+        "date",
+        "date-time",
+        "duration",
+        "integer",
+        "number",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid"
+      ],
+      "type": "string"
+    },
+    "ValueSchemaTypes": {
+      "enum": [
+        "array",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "credential",
+        "date",
+        "date-time",
+        "duration",
+        "integer",
+        "number",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid"
+      ],
+      "type": "string"
+    },
+    "ObjectSchemaTypes": {
+      "enum": [
+        "and",
+        "dictionary",
+        "object",
+        "or"
+      ],
+      "type": "string"
+    },
+    "AllSchemaTypes": {
+      "enum": [
+        "and",
+        "array",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "constant",
+        "credential",
+        "date",
+        "date-time",
+        "dictionary",
+        "duration",
+        "integer",
+        "number",
+        "object",
+        "odata-query",
+        "or",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid",
+        "xor"
+      ],
+      "type": "string"
+    },
+    "XmlSerlializationFormat": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "boolean"
+        },
+        "wrapped": {
+          "type": "boolean"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "attribute",
+        "wrapped"
+      ]
+    },
+    "SerializationFormats": {
+      "description": "custom extensible metadata for individual serialization formats",
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "json": {
+          "$ref": "#/definitions/Extensions"
+        },
+        "xml": {
+          "$ref": "#/definitions/XmlSerlializationFormat"
+        },
+        "protobuf": {
+          "$ref": "#/definitions/Extensions"
+        }
+      },
+      "defaultProperties": []
+    },
+    "Discriminator": {
+      "description": "Disciminator for polymorphic class hierarchy",
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "type": "string"
+        },
+        "mapping": {
+          "$ref": "#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "propertyName"
+      ]
+    },
+    "Value": {
+      "description": "common base interface for properties, parameters and the like.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "the schema of this Value"
+        },
+        "required": {
+          "description": "if the value is marked 'required'.",
+          "type": "boolean"
+        },
+        "nullable": {
+          "description": "can null be passed in instead",
+          "type": "boolean"
+        },
+        "$key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "schema",
+        "uid"
+      ]
+    },
+    "Property": {
+      "description": "a property is a child value in an object",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "if the property is marked read-only (ie, not intended to be sent to the service)",
+          "type": "boolean"
+        },
+        "serializedName": {
+          "description": "the wire name of this property",
+          "type": "string"
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "the schema of this Value"
+        },
+        "required": {
+          "description": "if the value is marked 'required'.",
+          "type": "boolean"
+        },
+        "nullable": {
+          "description": "can null be passed in instead",
+          "type": "boolean"
+        },
+        "$key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "schema",
+        "serializedName",
+        "uid"
+      ]
+    },
+    "SchemaMetadata": {
+      "description": "language metadata specific to schema instances",
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "description": "namespace of the implementation of this item",
+          "type": "string"
+        },
+        "discriminatorValue": {
+          "description": "if this is a child of a polymorphic class, this will have the value of the descriminator.",
+          "type": "string"
+        },
+        "name": {
+          "description": "name used in actual implementation",
+          "type": "string"
+        },
+        "description": {
+          "description": "description text - describes this node.",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "description",
+        "name"
+      ]
+    },
+    "SerializationFormat": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": []
+    },
+    "NumberSchema": {
+      "description": "a Schema that represents a Number value",
+      "type": "object",
+      "properties": {
+        "precision": {
+          "description": "precision (# of bits?) of the number",
+          "type": "number"
+        },
+        "multipleOf": {
+          "description": "if present, the number must be an exact multiple of this value",
+          "type": "number"
+        },
+        "maximum": {
+          "description": "if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)",
+          "type": "number"
+        },
+        "exclusiveMaximum": {
+          "description": "if present, the value must be lower than maximum",
+          "type": "boolean"
+        },
+        "minimum": {
+          "description": "if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)",
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "description": "if present, the value must be higher than minimum",
+          "type": "boolean"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/NumericSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "precision",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "StringSchema": {
+      "description": "a Schema that represents a string value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "string"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ArraySchema": {
+      "description": "a Schema that represents and array of values",
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "$ref": "#/definitions/Schema",
+          "description": "elementType of the array"
+        },
+        "maxItems": {
+          "description": "maximum number of elements in the array",
+          "type": "number"
+        },
+        "minItems": {
+          "description": "minimum number of elements in the array",
+          "type": "number"
+        },
+        "uniqueItems": {
+          "description": "if the elements in the array should be unique",
+          "type": "boolean"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "array"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "elementType",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ObjectSchema": {
+      "description": "a schema that represents a type with child properties.",
+      "type": "object",
+      "properties": {
+        "discriminator": {
+          "$ref": "#/definitions/Discriminator",
+          "description": "the definition of the polymorphic descriminator for this type"
+        },
+        "properties": {
+          "description": "the collection of properties that are in this object",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        },
+        "maxProperties": {
+          "description": "maximum number of properties permitted",
+          "type": "number"
+        },
+        "minProperties": {
+          "description": "minimum number of properties permitted",
+          "type": "number"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "object"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ChoiceValue": {
+      "description": "an individual choice in a ChoiceSchema",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "the actual value",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "name": {
+          "description": "the name this value should use",
+          "type": "string"
+        },
+        "description": {
+          "description": "the description for this value",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "description",
+        "name",
+        "value"
+      ]
+    },
+    "ChoiceSchema": {
+      "description": "a schema that represents a choice of several values (ie, an 'enum')",
+      "type": "object",
+      "properties": {
+        "choiceType": {
+          "$ref": "#/definitions/ChoiceType",
+          "description": "the primitive type for the choices"
+        },
+        "choices": {
+          "description": "the possible choices for in the set",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChoiceValue"
+          }
+        },
+        "sealed": {
+          "description": "if the set of choices is irrevocably sealed",
+          "type": "boolean"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "choice"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "choiceType",
+        "choices",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ConstantValue": {
+      "description": "a container for the actual constant value",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "the actual constant value to use"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "value"
+      ]
+    },
+    "ConstantSchema": {
+      "description": "a schema that represents a constant value",
+      "type": "object",
+      "properties": {
+        "constantSchema": {
+          "$ref": "#/definitions/ConstantType",
+          "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
+        },
+        "value": {
+          "$ref": "#/definitions/Value",
+          "description": "the actual constant value"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "constant"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "constantSchema",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid",
+        "value"
+      ]
+    },
+    "BooleanSchema": {
+      "description": "a schema that represents a boolean value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "boolean"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ODataQuerySchema": {
+      "description": "a schema that represents a ODataQuery value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "odata-query"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "CredentialSchema": {
+      "description": "a schema that represents a Credential value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "credential"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "UriSchema": {
+      "description": "a schema that represents a Uri value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "uri"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "UuidSchema": {
+      "description": "a schema that represents a Uuid value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "uuid"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "DurationSchema": {
+      "description": "a schema that represents a Duration value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "duration"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "DateTimeSchema": {
+      "description": "a schema that represents a DateTime value",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "date-time format",
+          "enum": [
+            "date-time",
+            "date-time-rfc1123"
+          ],
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "date-time"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "format",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "DateSchema": {
+      "description": "a schema that represents a Date value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "date"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "CharSchema": {
+      "description": "a schema that represents a Char value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "char"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ByteArraySchema": {
+      "description": "a schema that represents a ByteArray value",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "date-time format",
+          "enum": [
+            "base64url",
+            "byte"
+          ],
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "byte-array"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "format",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "UnixTimeSchema": {
+      "description": "a schema that represents a UnixTime value",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "unixtime"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "DictionarySchema": {
+      "description": "a schema that represents a key-value collection",
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "$ref": "#/definitions/Schema",
+          "description": "the element type of the dictionary. (Keys are always strings)"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "dictionary"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "elementType",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "AndSchema": {
+      "description": "an AND relationship between several schemas",
+      "type": "object",
+      "properties": {
+        "allOf": {
+          "description": "the set of schemas that this schema is composed of.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema<ObjectSchemaTypes>"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "and"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "allOf",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "OrSchema": {
+      "description": "an OR relationship between several schemas",
+      "type": "object",
+      "properties": {
+        "anyOf": {
+          "description": "the set of schemas that this schema is composed of. Every schema is optional",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema<ObjectSchemaTypes>"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "or"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "anyOf",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "XorSchema": {
+      "description": "an XOR relationship between several schemas",
+      "type": "object",
+      "properties": {
+        "oneOf": {
+          "description": "the set of schemas that this must be one and only one of.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "xor"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "oneOf",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "NotSchema": {
+      "description": "a NOT relationship between schemas",
+      "type": "object",
+      "properties": {
+        "not": {
+          "$ref": "#/definitions/Schema",
+          "description": "the schema that this may not be."
+        },
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "description": "the schema type",
+          "type": "string",
+          "enum": [
+            "not"
+          ]
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "not",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "Schemas": {
+      "description": "the full set of schemas for a given service, categorized into convenient collections",
+      "type": "object",
+      "properties": {
+        "objects": {
+          "description": "schemas that likely result in the creation of new objects during code generation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectSchema"
+          }
+        },
+        "compounds": {
+          "description": "schemas that construct more complex schemas based on compound construction (ie, allOf, oneOf, anyOf)",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/AndSchema"
+              },
+              {
+                "$ref": "#/definitions/OrSchema"
+              },
+              {
+                "$ref": "#/definitions/XorSchema"
+              }
+            ]
+          }
+        },
+        "choices": {
+          "description": "schemas that represent a set of choices (ie, 'enum')",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChoiceSchema"
+          }
+        },
+        "dictionaries": {
+          "description": "schemas that represent key-value dictionaries used in the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DictionarySchema"
+          }
+        },
+        "constants": {
+          "description": "constant values that are used in models and parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConstantSchema"
+          }
+        },
+        "primitives": {
+          "description": "primitive schemas that represent things that should be able to be represented without additional classes generated",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/NumberSchema"
+              },
+              {
+                "$ref": "#/definitions/StringSchema"
+              },
+              {
+                "$ref": "#/definitions/BooleanSchema"
+              },
+              {
+                "$ref": "#/definitions/CredentialSchema"
+              },
+              {
+                "$ref": "#/definitions/UriSchema"
+              },
+              {
+                "$ref": "#/definitions/UuidSchema"
+              },
+              {
+                "$ref": "#/definitions/DurationSchema"
+              },
+              {
+                "$ref": "#/definitions/DateTimeSchema"
+              },
+              {
+                "$ref": "#/definitions/DateSchema"
+              },
+              {
+                "$ref": "#/definitions/CharSchema"
+              },
+              {
+                "$ref": "#/definitions/ByteArraySchema"
+              },
+              {
+                "$ref": "#/definitions/UnixTimeSchema"
+              },
+              {
+                "$ref": "#/definitions/ArraySchema"
+              },
+              {
+                "$ref": "#/definitions/ChoiceSchema"
+              }
+            ]
+          }
+        }
+      },
+      "defaultProperties": []
+    },
+    "CompoundSchemas": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/AndSchema"
+        },
+        {
+          "$ref": "#/definitions/OrSchema"
+        },
+        {
+          "$ref": "#/definitions/XorSchema"
+        }
+      ]
+    },
+    "PrimitiveSchemas": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/NumberSchema"
+        },
+        {
+          "$ref": "#/definitions/StringSchema"
+        },
+        {
+          "$ref": "#/definitions/BooleanSchema"
+        },
+        {
+          "$ref": "#/definitions/CredentialSchema"
+        },
+        {
+          "$ref": "#/definitions/UriSchema"
+        },
+        {
+          "$ref": "#/definitions/UuidSchema"
+        },
+        {
+          "$ref": "#/definitions/DurationSchema"
+        },
+        {
+          "$ref": "#/definitions/DateTimeSchema"
+        },
+        {
+          "$ref": "#/definitions/DateSchema"
+        },
+        {
+          "$ref": "#/definitions/CharSchema"
+        },
+        {
+          "$ref": "#/definitions/UnixTimeSchema"
+        }
+      ]
+    },
+    "ObjectSchemas": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ObjectSchema"
+        },
+        {
+          "$ref": "#/definitions/AndSchema"
+        },
+        {
+          "$ref": "#/definitions/OrSchema"
+        },
+        {
+          "$ref": "#/definitions/DictionarySchema"
+        }
+      ]
+    },
+    "AllSchemas": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/NumberSchema"
+        },
+        {
+          "$ref": "#/definitions/StringSchema"
+        },
+        {
+          "$ref": "#/definitions/ObjectSchema"
+        },
+        {
+          "$ref": "#/definitions/BooleanSchema"
+        },
+        {
+          "$ref": "#/definitions/CredentialSchema"
+        },
+        {
+          "$ref": "#/definitions/UriSchema"
+        },
+        {
+          "$ref": "#/definitions/UuidSchema"
+        },
+        {
+          "$ref": "#/definitions/DurationSchema"
+        },
+        {
+          "$ref": "#/definitions/DateTimeSchema"
+        },
+        {
+          "$ref": "#/definitions/DateSchema"
+        },
+        {
+          "$ref": "#/definitions/CharSchema"
+        },
+        {
+          "$ref": "#/definitions/ByteArraySchema"
+        },
+        {
+          "$ref": "#/definitions/UnixTimeSchema"
+        },
+        {
+          "$ref": "#/definitions/AndSchema"
+        },
+        {
+          "$ref": "#/definitions/OrSchema"
+        },
+        {
+          "$ref": "#/definitions/ArraySchema"
+        },
+        {
+          "$ref": "#/definitions/ChoiceSchema"
+        },
+        {
+          "$ref": "#/definitions/DictionarySchema"
+        },
+        {
+          "$ref": "#/definitions/ConstantSchema"
+        }
+      ]
+    },
+    "email": {
+      "type": "string"
+    },
+    "Contact": {
+      "description": "contact information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": []
+    },
+    "License": {
+      "description": "license information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the nameof the license",
+          "type": "string"
+        },
+        "url": {
+          "description": "an uri pointing to the full license text",
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "name"
+      ]
+    },
+    "Info": {
+      "description": "code model information",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "the title of this service.",
+          "type": "string"
+        },
+        "description": {
+          "description": "a text description of the service",
+          "type": "string"
+        },
+        "termsOfService": {
+          "description": "an uri to the terms of service specified to access the service",
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/Contact",
+          "description": "contact information for the service"
+        },
+        "license": {
+          "$ref": "#/definitions/License",
+          "description": "license information for th service"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "title"
+      ]
+    },
+    "Parameter": {
+      "description": "a definition of an discrete input for an operation",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "the schema of this Value"
+        },
+        "required": {
+          "description": "if the value is marked 'required'.",
+          "type": "boolean"
+        },
+        "nullable": {
+          "description": "can null be passed in instead",
+          "type": "boolean"
+        },
+        "$key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "schema",
+        "uid"
+      ]
+    },
+    "Response": {
+      "description": "a response from a service.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "protocol"
+      ]
+    },
+    "StreamResponse": {
+      "description": "a response where the content should be treated as a stream instead of a value or object",
+      "type": "object",
+      "properties": {
+        "stream": {
+          "description": "indicates that this response is a stream",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "protocol",
+        "stream"
+      ]
+    },
+    "SchemaResponse": {
+      "description": "a response that should be deserialized into a result of type(schema)",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "the content returned by the service for a given operaiton"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "protocol",
+        "schema"
+      ]
+    },
+    "Operation": {
+      "description": "represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)",
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/Request",
+          "description": "the inputs that are used to build the request."
+        },
+        "responses": {
+          "description": "responses that indicate a successful call",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Response"
+          }
+        },
+        "exceptions": {
+          "description": "responses that indicate a failed call",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Response"
+          }
+        },
+        "profile": {
+          "$ref": "#/definitions/Dictionary<ApiVersion>",
+          "description": "the apiVersion to use for a given profile name"
+        },
+        "$key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "exceptions",
+        "language",
+        "profile",
+        "protocol",
+        "request",
+        "responses",
+        "uid"
+      ]
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "the parameter inputs to the operation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "protocol"
+      ]
+    },
+    "OperationGroup": {
+      "description": "an operation group represents a container around set of operations",
+      "type": "object",
+      "properties": {
+        "$key": {
+          "type": "string"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "language",
+        "operations",
+        "protocol"
+      ]
+    },
+    "CodeModel": {
+      "description": "the model that contains all the information required to generate a service api",
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/Info",
+          "description": "Code model information"
+        },
+        "schemas": {
+          "$ref": "#/definitions/Schemas",
+          "description": "All schemas for the model"
+        },
+        "operationGroups": {
+          "description": "All operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationGroup"
+          }
+        },
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "info",
+        "language",
+        "operationGroups",
+        "protocol",
+        "schemas"
+      ]
+    },
+    "Example": {
+      "description": "example data [UNFINISHED]",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {},
+        "externalValue": {
+          "description": "an URI",
+          "type": "string"
+        }
+      },
+      "defaultProperties": []
+    },
+    "SerializationStyle": {
+      "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
+      "enum": [
+        "deepObject",
+        "form",
+        "json",
+        "label",
+        "matrix",
+        "pipeDelimited",
+        "simple",
+        "spaceDelimited",
+        "xml"
+      ],
+      "type": "string"
+    },
+    "QueryEncodingStyle": {
+      "enum": [
+        "deepObject",
+        "form",
+        "pipeDelimited",
+        "spaceDelimited"
+      ],
+      "type": "string"
+    },
+    "PathEncodingStyle": {
+      "enum": [
+        "label",
+        "matrix",
+        "simple"
+      ],
+      "type": "string"
+    },
+    "HttpMethod": {
+      "description": "standard HTTP protocol methods",
+      "enum": [
+        "delete",
+        "get",
+        "head",
+        "options",
+        "patch",
+        "post",
+        "put",
+        "trace"
+      ],
+      "type": "string"
+    },
+    "ParameterLocation": {
+      "description": "the location that this parameter is placed in the http request",
+      "enum": [
+        "body",
+        "cookie",
+        "header",
+        "path",
+        "query"
+      ],
+      "type": "string"
+    },
+    "Default": {
+      "description": "A catch-all for all un-handled response codes.",
+      "type": "string",
+      "enum": [
+        "default"
+      ]
+    },
+    "StatusCode": {
+      "enum": [
+        100,
+        101,
+        102,
+        103,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        226,
+        300,
+        301,
+        302,
+        304,
+        305,
+        306,
+        307,
+        308,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        428,
+        429,
+        431,
+        451,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        510,
+        511,
+        "default"
+      ]
+    },
+    "HttpServer": {
+      "description": "An object representing a Server.\n\nIf the uri supports template substitution, then the variables are required.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "url": {
+          "description": "base url for the server",
+          "type": "string"
+        },
+        "variables": {
+          "description": "an optional collection of variables for server templating",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVariable"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "language",
+        "url"
+      ]
+    },
+    "ServerVariable": {
+      "description": "An object representing a Server Variable for server URL template substitution.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this aspect"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "schema": {
+          "description": "the schema for the",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/NumberSchema"
+            },
+            {
+              "$ref": "#/definitions/StringSchema"
+            },
+            {
+              "$ref": "#/definitions/ChoiceSchema"
+            }
+          ]
+        },
+        "default": {
+          "description": "The default value to use for substitution, which SHALL be sent if an alternate value is not supplied.",
+          "type": "string"
+        },
+        "required": {
+          "description": "if the value is marked 'required'.",
+          "type": "boolean"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "schema"
+      ]
+    },
+    "Scheme": {
+      "type": "string",
+      "enum": [
+        "bearer"
+      ]
+    },
+    "SecurityType": {
+      "enum": [
+        "apiKey",
+        "http",
+        "oauth2",
+        "openIdConnect"
+      ],
+      "type": "string"
+    },
+    "AuthorizationCodeOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "authorizationUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "authorizationUrl",
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "BearerHTTPSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "enum": [
+            "bearer"
+          ]
+        },
+        "bearerFormat": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "scheme",
+        "type"
+      ]
+    },
+    "ClientCredentialsFlow": {
+      "type": "object",
+      "properties": {
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "ImplicitOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "authorizationUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "authorizationUrl",
+        "scopes"
+      ]
+    },
+    "NonBearerHTTPSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "scheme",
+        "type"
+      ]
+    },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "$ref": "#/definitions/OAuthFlows"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "flows",
+        "type"
+      ]
+    },
+    "OAuthFlows": {
+      "type": "object",
+      "properties": {
+        "implicit": {
+          "$ref": "#/definitions/ImplicitOAuthFlow"
+        },
+        "password": {
+          "$ref": "#/definitions/PasswordOAuthFlow"
+        },
+        "clientCredentials": {
+          "$ref": "#/definitions/ClientCredentialsFlow"
+        },
+        "authorizationCode": {
+          "$ref": "#/definitions/AuthorizationCodeOAuthFlow"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": []
+    },
+    "HTTPSecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
+        }
+      ]
+    },
+    "SecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/OAuth2SecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/APIKeySecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/OpenIdConnectSecurityScheme"
+        }
+      ]
+    },
+    "APIKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "$ref": "#/definitions/ParameterLocation"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "in",
+        "name",
+        "type"
+      ]
+    },
+    "OpenIdConnectSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "openIdConnect"
+          ]
+        },
+        "openIdConnectUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "openIdConnectUrl",
+        "type"
+      ]
+    },
+    "PasswordOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "SecurityRequirement": {
+      "description": "common ways of serializing simple parameters",
+      "type": "object",
+      "defaultProperties": []
+    },
+    "ImplementationLocation": {
+      "enum": [
+        "Client",
+        "Method"
+      ],
+      "type": "string"
+    },
+    "HttpParameter": {
+      "description": "extended metadata for HTTP operation parameters",
+      "type": "object",
+      "properties": {
+        "in": {
+          "$ref": "#/definitions/ParameterLocation",
+          "description": "the location that this parameter is placed in the http request"
+        },
+        "style": {
+          "$ref": "#/definitions/SerializationStyle",
+          "description": "the Serialization Style used for the parameter."
+        },
+        "skipUriEncoding": {
+          "description": "when set, this indicates that the content of the parameter should not be subject to URI encoding rules.",
+          "type": "boolean"
+        },
+        "implementation": {
+          "$ref": "#/definitions/ImplementationLocation",
+          "description": "suggested implementation location for this parameter"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "implementation",
+        "in",
+        "style"
+      ]
+    },
+    "HttpRequest": {
+      "description": "HTTP operation protocol data",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        },
+        "servers": {
+          "description": "each method must have one or more servers that it is connected to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "method",
+        "path",
+        "servers"
+      ]
+    },
+    "HttpWithBodyRequest": {
+      "type": "object",
+      "properties": {
+        "mediaType": {
+          "description": "must set a media type for the body",
+          "type": "string"
+        },
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        },
+        "servers": {
+          "description": "each method must have one or more servers that it is connected to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "mediaType",
+        "method",
+        "path",
+        "servers"
+      ]
+    },
+    "HttpStreamRequest": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "mediaType": {
+          "description": "must set a media type for the body",
+          "type": "string"
+        },
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        },
+        "servers": {
+          "description": "each method must have one or more servers that it is connected to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "mediaType",
+        "method",
+        "path",
+        "servers",
+        "stream"
+      ]
+    },
+    "HttpMultiPartRequest": {
+      "type": "object",
+      "properties": {
+        "multipart": {
+          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "parts": {
+          "description": "the multiple request parts that make up this request ?? is this right?",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Request"
+          }
+        },
+        "mediaType": {
+          "description": "must set a media type for the body",
+          "type": "string"
+        },
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        },
+        "servers": {
+          "description": "each method must have one or more servers that it is connected to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "mediaType",
+        "method",
+        "multipart",
+        "parts",
+        "path",
+        "servers"
+      ]
+    },
+    "HttpMultipartRequest": {
+      "type": "object",
+      "properties": {
+        "multipart": {
+          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
+          "type": "boolean",
+          "enum": [
+            true
+          ],
+          "default": true
+        },
+        "parts": {
+          "description": "the multiple request parts that make up this request ?? is this right?",
+          "type": "array",
+          "items": {},
+          "default": []
+        },
+        "mediaType": {
+          "description": "must set a media type for the body",
+          "type": "string"
+        },
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        },
+        "servers": {
+          "description": "each method must have one or more servers that it is connected to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "mediaType",
+        "method",
+        "multipart",
+        "parts",
+        "path",
+        "servers"
+      ]
+    },
+    "HttpResponse": {
+      "type": "object",
+      "properties": {
+        "statusCodes": {
+          "description": "the possible HTTP status codes that this response MUST match one of.",
+          "type": "array",
+          "items": {
+            "enum": [
+              100,
+              101,
+              102,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              226,
+              300,
+              301,
+              302,
+              304,
+              305,
+              306,
+              307,
+              308,
+              400,
+              401,
+              402,
+              403,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412,
+              413,
+              414,
+              415,
+              416,
+              417,
+              418,
+              421,
+              422,
+              423,
+              424,
+              425,
+              426,
+              428,
+              429,
+              431,
+              451,
+              500,
+              501,
+              502,
+              503,
+              504,
+              505,
+              506,
+              507,
+              508,
+              510,
+              511,
+              "default"
+            ]
+          }
+        },
+        "mediaTypes": {
+          "description": "the possible media types that this response MUST match one of",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "description": "content returned by the service in the HTTP headers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "headers",
+        "mediaTypes",
+        "statusCodes"
+      ]
+    },
+    "HttpStreamResponse": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "description": "stream responses",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "statusCodes": {
+          "description": "the possible HTTP status codes that this response MUST match one of.",
+          "type": "array",
+          "items": {
+            "enum": [
+              100,
+              101,
+              102,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              226,
+              300,
+              301,
+              302,
+              304,
+              305,
+              306,
+              307,
+              308,
+              400,
+              401,
+              402,
+              403,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412,
+              413,
+              414,
+              415,
+              416,
+              417,
+              418,
+              421,
+              422,
+              423,
+              424,
+              425,
+              426,
+              428,
+              429,
+              431,
+              451,
+              500,
+              501,
+              502,
+              503,
+              504,
+              505,
+              506,
+              507,
+              508,
+              510,
+              511,
+              "default"
+            ]
+          }
+        },
+        "mediaTypes": {
+          "description": "the possible media types that this response MUST match one of",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "description": "content returned by the service in the HTTP headers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "headers",
+        "mediaTypes",
+        "statusCodes",
+        "stream"
+      ]
+    },
+    "HttpModel": {
+      "description": "code model metadata for HTTP protocol",
+      "type": "object",
+      "properties": {
+        "servers": {
+          "description": "a collection of server definitions for the service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpServer"
+          }
+        },
+        "security": {
+          "description": "a collection of security requirements for the service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityRequirement"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "servers"
+      ]
+    },
+    "Dictionary<any>": {
+      "type": "object",
+      "additionalProperties": true,
+      "defaultProperties": []
+    },
+    "Dictionary<string>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "defaultProperties": []
+    },
+    "Languages<SchemaMetadata>": {
+      "description": "custom extensible metadata for individual language generators",
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "csharp": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "python": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "ruby": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "go": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "typescript": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "javascript": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "powershell": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "java": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "c": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "cpp": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "swift": {
+          "$ref": "#/definitions/SchemaMetadata"
+        },
+        "objectivec": {
+          "$ref": "#/definitions/SchemaMetadata"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "default"
+      ]
+    },
+    "NumericSchemaTypes": {
+      "enum": [
+        "integer",
+        "number"
+      ],
+      "type": "string"
+    },
+    "ChoiceType": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/AllSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "ConstantType": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/AllSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "Schema<ObjectSchemaTypes>": {
+      "description": "The Schema Object allows the definition of input and output data types.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/ObjectSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "Schema<PrimitiveSchemaTypes>": {
+      "description": "The Schema Object allows the definition of input and output data types.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages<SchemaMetadata>",
+          "description": "per-language information for Schema uses SchemaMetadata"
+        },
+        "type": {
+          "$ref": "#/definitions/PrimitiveSchemaTypes",
+          "description": "the schema type"
+        },
+        "summary": {
+          "description": "a short description",
+          "type": "string"
+        },
+        "example": {
+          "description": "example information"
+        },
+        "defaultValue": {
+          "description": "If the value isn't sent on the wire, the service will assume this"
+        },
+        "serialization": {
+          "$ref": "#/definitions/SerializationFormats",
+          "description": "per-serialization information for this Schema"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "$key": {
+          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the aspect.",
+          "type": "string"
+        },
+        "apiVersions": {
+          "description": "API versions that this applies to. Undefined means all versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          }
+        },
+        "deprecated": {
+          "$ref": "#/definitions/Deprecation",
+          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "externalDocs": {
+          "$ref": "#/definitions/ExternalDocumentation",
+          "description": "External Documentation Links"
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocols",
+          "description": "per-protocol information for this aspect"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "serialization",
+        "type",
+        "uid"
+      ]
+    },
+    "Dictionary<ApiVersion>": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ApiVersion"
+      },
+      "defaultProperties": []
+    }
+  }
+}
