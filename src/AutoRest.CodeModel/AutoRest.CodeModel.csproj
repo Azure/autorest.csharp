@@ -1,18 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>AutoRest.CodeModel</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin</OutputPath>
+    <PublishDir>$(OutputPath)</PublishDir>
+    <!-- Some methods are marked async and don't have an await in them -->
+    <NoWarn>1998</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NJsonSchema.CodeGeneration.CSharp" Version="10.0.23" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="code-model.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
