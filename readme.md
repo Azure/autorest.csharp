@@ -5,13 +5,15 @@
 ```yaml
 test-item: "cheese"
 use-extension:
-  "@autorest/remodeler" : "~2.0.4"
+  "@autorest/modelerfour": "~4.0.4"
 
 pipeline:
-  remodeler:
+  modelerfour:
     input: openapi-document/multi-api/identity
+  modelerfour/new-transform:
+    input: modelerfour
   csharp-v3:
-    input: remodeler
+    input: modelerfour/new-transform
   csharp-v3/emitter:
     input: csharp-v3
     scope: output-scope

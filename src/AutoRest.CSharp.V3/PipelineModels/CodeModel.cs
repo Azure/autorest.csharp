@@ -4154,6 +4154,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         /// <summary>All schemas for the model</summary>
         [System.ComponentModel.DataAnnotations.Required]
+        [System.Runtime.Serialization.DataMember(Name = "schemas")]
+        [SharpYaml.Serialization.YamlMember("schemas")]
         public Schemas Schemas { get; set; } = new Schemas();
 
         /// <summary>All operations</summary>

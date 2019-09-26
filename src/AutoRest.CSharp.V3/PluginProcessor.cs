@@ -4,6 +4,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
+using AutoRest.CSharp.V3.PipelineModels;
+using SharpYaml.Serialization;
 
 namespace AutoRest.CSharp.V3
 {
@@ -30,6 +32,11 @@ namespace AutoRest.CSharp.V3
                 }
 
                 var codeModel = await autoRest.ReadFile(files.FirstOrDefault());
+                //codeModel = codeModel.Replace("<!CodeModel>", "<CodeModel>");
+                var settings = new SerializerSettings();
+                settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
+                var serializer = new Serializer(settings);
+                var cmClass = serializer.Deserialize<CodeModel>(codeModel);
 
                 var inputFiles = await autoRest.GetValue<string[]>("input-file");
                 var inputFileMessage = new Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
