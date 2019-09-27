@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
@@ -32,11 +33,15 @@ namespace AutoRest.CSharp.V3
                 }
 
                 var codeModel = await autoRest.ReadFile(files.FirstOrDefault());
+                //codeModel = Regex.Replace(codeModel, @"(.*)!<!.*>(.*)", "$1$2", RegexOptions.Multiline);
                 //codeModel = codeModel.Replace("<!CodeModel>", "<CodeModel>");
-                var settings = new SerializerSettings();
-                settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
-                var serializer = new Serializer(settings);
-                var cmClass = serializer.Deserialize<CodeModel>(codeModel);
+                //codeModel = codeModel.Replace("!<!CodeModel>", "");
+                //codeModel = codeModel.Replace("primitives:", "primitives: !<!Primitives>");
+                //var settings = new SerializerSettings();
+                ////settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
+                //var serializer = new Serializer(settings);
+                //var cmClass = serializer.Deserialize<CodeModel>(codeModel);
+                var cmClass = CodeModelDeserializer.CreateCodeModel(codeModel);
 
                 var inputFiles = await autoRest.GetValue<string[]>("input-file");
                 var inputFileMessage = new Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };

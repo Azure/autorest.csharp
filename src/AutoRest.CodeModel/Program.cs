@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration.CSharp;
 
@@ -23,18 +24,27 @@ namespace AutoRest.CodeModel
             {
                 Namespace = "AutoRest.CSharp.V3.PipelineModels",
                 HandleReferences = true,
-                GenerateOptionalPropertiesAsNullable = true
+                GenerateOptionalPropertiesAsNullable = true,
+                TypeAccessModifier = "internal"
             };
             var rawFile = new CSharpGenerator(schema, settings).GenerateFile();
-            var cleanFile = String.Join(Environment.NewLine, rawFile.ToLines().Where(l => !l.Contains("[Newtonsoft.Json")))
-                .Replace($"    {Environment.NewLine}    {Environment.NewLine}", String.Empty)
-                .Replace($"    {Environment.NewLine}    }}", "    }")
-                .Replace($"    {Environment.NewLine}", Environment.NewLine)
+            var cleanFile = String.Join(Environment.NewLine, rawFile.ToLines()
+                    .Where(l => !l.Contains("Newtonsoft.Json.JsonConverter") && !l.Contains("Newtonsoft.Json.JsonExtensionData"))
+                    .Select(l => Regex.Replace(l, @"(.*\[)Newtonsoft\.Json\.JsonProperty(.*""),?.*(\)\])", "$1SharpYaml.Serialization.YamlMember$2$3", RegexOptions.Singleline).TrimEnd()))
+                //.Replace($"    {Environment.NewLine}    {Environment.NewLine}", String.Empty)
+                //.Replace($"    {Environment.NewLine}    }}", "    }")
+                //.Replace($"    {Environment.NewLine}", Environment.NewLine)
+                .Replace($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}", Environment.NewLine)
+                .Replace($"{Environment.NewLine}{Environment.NewLine}    }}", $"{Environment.NewLine}    }}")
                 .Replace("\"plus\"", "\"+\"")
                 .Replace("\"minus\"", "\"-\"")
                 .Replace("Language Csharp", "CSharpLanguage Csharp")
                 .Replace("SchemaMetadata Csharp", "CSharpSchemaMetadata Csharp")
-                .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true");
+                .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true")
+                .Replace($"class Languages{Environment.NewLine}", $"class Languages_Unused{Environment.NewLine}")
+                .Replace("Languages ", "LanguagesOfSchemaMetadata ")
+                .Replace("Languages(", "LanguagesOfSchemaMetadata(")
+                .Replace("ICollection<Primitives>", "ICollection<object>");
             File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/CodeModel.cs", cleanFile);
         }
 
