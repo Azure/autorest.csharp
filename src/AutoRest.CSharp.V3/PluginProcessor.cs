@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.V3
                 var inputFileMessage = new Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
                 await autoRest.Message(inputFileMessage);
 
-                await autoRest.WriteFile("CodeModel.yaml", codeModel, "source-file-csharp");
+                await autoRest.WriteFile("CodeModel-new.yaml", codeModel, "source-file-csharp");
                 return true;
             }
             catch (Exception e)

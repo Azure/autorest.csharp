@@ -85,8 +85,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
             CreateTagPair<ClientCredentialsFlow>(),
             CreateTagPair<HttpServer>(),
             CreateTagPair<ServerVariable>(),
-            //CreateTagPair<Languages>(),
-            new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
+            CreateTagPair<Languages>(),
+            //new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
             CreateTagPair<Protocols>(),
             CreateTagPair<ApiVersion>()
             //CreateTagPair<Primitives>()
