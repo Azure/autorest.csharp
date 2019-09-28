@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
 using AutoRest.CSharp.V3.PipelineModels;
-using SharpYaml.Serialization;
+//using SharpYaml.Serialization;
 
 namespace AutoRest.CSharp.V3
 {
@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.V3
                 }
 
                 var codeModel = await autoRest.ReadFile(files.FirstOrDefault());
+                //codeModel = String.Join(Environment.NewLine, codeModel.ToLines().Where(l => !l.Contains("uid:")));
                 //codeModel = Regex.Replace(codeModel, @"(.*)!<!.*>(.*)", "$1$2", RegexOptions.Multiline);
                 //codeModel = codeModel.Replace("<!CodeModel>", "<CodeModel>");
                 //codeModel = codeModel.Replace("!<!CodeModel>", "");
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.V3
                 ////settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
                 //var serializer = new Serializer(settings);
                 //var cmClass = serializer.Deserialize<CodeModel>(codeModel);
+
                 var cmClass = CodeModelDeserializer.CreateCodeModel(codeModel);
 
                 var inputFiles = await autoRest.GetValue<string[]>("input-file");

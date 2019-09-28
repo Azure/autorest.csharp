@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using SharpYaml.Serialization;
+//using SharpYaml.Serialization;
+using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.V3.PipelineModels
 {
     internal static class CodeModelDeserializer
     {
-        private static SerializerSettings RegisterTagMapping(this SerializerSettings serializerSettings, IEnumerable<KeyValuePair<string, Type>> mapping)
+        //private static SerializerSettings RegisterTagMapping(this SerializerSettings serializerSettings, IEnumerable<KeyValuePair<string, Type>> mapping)
+        //{
+        //    foreach (var (tagName, tagType) in mapping)
+        //    {
+        //        serializerSettings.RegisterTagMapping(tagName, tagType);
+        //    }
+        //    return serializerSettings;
+        //}
+
+        private static DeserializerBuilder RegisterTagMapping(this DeserializerBuilder deserializerBuilder, IEnumerable<KeyValuePair<string, Type>> mapping)
         {
             foreach (var (tagName, tagType) in mapping)
             {
-                serializerSettings.RegisterTagMapping(tagName, tagType);
+                deserializerBuilder.WithTagMapping(tagName, tagType);
             }
-            return serializerSettings;
+            return deserializerBuilder;
         }
 
         private static KeyValuePair<string, Type> CreateTagPair<T>() => new KeyValuePair<string, Type>($"!{typeof(T).Name}", typeof(T));
@@ -85,20 +95,27 @@ namespace AutoRest.CSharp.V3.PipelineModels
             CreateTagPair<ClientCredentialsFlow>(),
             CreateTagPair<HttpServer>(),
             CreateTagPair<ServerVariable>(),
-            CreateTagPair<Languages>(),
-            //new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
+            //CreateTagPair<Languages>(),
+            new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
             CreateTagPair<Protocols>(),
             CreateTagPair<ApiVersion>()
             //CreateTagPair<Primitives>()
         };
 
-        private static SerializerSettings _serializerSettings;
-        private static SerializerSettings SerializerSettings => _serializerSettings ??= new SerializerSettings().RegisterTagMapping(TagMap);
+        //private static SerializerSettings _serializerSettings;
+        //private static SerializerSettings SerializerSettings => _serializerSettings ??= new SerializerSettings().RegisterTagMapping(TagMap);
+
+        private static DeserializerBuilder _deserializerBuilder;
+        private static DeserializerBuilder DeserializerBuilder => _deserializerBuilder ??= new DeserializerBuilder().RegisterTagMapping(TagMap).IgnoreUnmatchedProperties();
 
         public static CodeModel CreateCodeModel(string yaml)
         {
-            var serializer = new Serializer(SerializerSettings);
-            return serializer.Deserialize<CodeModel>(yaml);
+            //var db = new DeserializerBuilder();
+            //db.
+            var deserializer = DeserializerBuilder.Build();
+            return deserializer.Deserialize<CodeModel>(yaml);
+            //var serializer = new Serializer(SerializerSettings);
+            //return serializer.Deserialize<CodeModel>(yaml);
         }
     }
 }
