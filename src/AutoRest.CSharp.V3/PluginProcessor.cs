@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.V3
                 //codeModel = codeModel.Replace("<!CodeModel>", "<CodeModel>");
                 //codeModel = codeModel.Replace("!<!CodeModel>", "");
                 //codeModel = codeModel.Replace("primitives:", "primitives: !<!Primitives>");
+                //codeModel = codeModel.Replace("https: ", "https:");
+                codeModel = codeModel.Replace("!<!Metadata>", "!<!OperationGroup>");
                 //var settings = new SerializerSettings();
                 ////settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
                 //var serializer = new Serializer(settings);

@@ -95,8 +95,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
             CreateTagPair<ClientCredentialsFlow>(),
             CreateTagPair<HttpServer>(),
             CreateTagPair<ServerVariable>(),
-            //CreateTagPair<Languages>(),
-            new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
+            CreateTagPair<Languages>(),
+            //new KeyValuePair<string, Type>("!Languages", typeof(LanguagesOfSchemaMetadata)),
             CreateTagPair<Protocols>(),
             CreateTagPair<ApiVersion>()
             //CreateTagPair<Primitives>()
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         //private static SerializerSettings SerializerSettings => _serializerSettings ??= new SerializerSettings().RegisterTagMapping(TagMap);
 
         private static DeserializerBuilder _deserializerBuilder;
-        private static DeserializerBuilder DeserializerBuilder => _deserializerBuilder ??= new DeserializerBuilder().RegisterTagMapping(TagMap).IgnoreUnmatchedProperties();
+        private static DeserializerBuilder DeserializerBuilder => _deserializerBuilder ??= new DeserializerBuilder().RegisterTagMapping(TagMap);
 
         public static CodeModel CreateCodeModel(string yaml)
         {

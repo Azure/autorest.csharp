@@ -19,36 +19,36 @@ namespace AutoRest.CodeModel
     {
         private static void Main()
         {
-            using var webClient = new WebClient();
-            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
+            //using var webClient = new WebClient();
+            //webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
 
-            var schemaJsonLines = File.ReadAllLines("../code-model.json");
-            var schemaJsonLinesList = schemaJsonLines.ToList();
-            var indexIncrementer = 0;
-            var absentAdditionalPropertiesGroups = schemaJsonLines
-                .Zip(schemaJsonLines.Skip(1).Append(String.Empty), (c, n) => (Current: c, Next: n))
-                .Select((p, i) => (Index: i, p.Current, p.Next))
-                .Where(g =>
-                    g.Current.Contains("\"type\":")
-                    && g.Current.Contains(",")
-                    //&& !g.Next.Contains("\"enum\":")
-                    && !g.Next.Contains("\"additionalProperties\""));
-            foreach (var (index, current, _) in absentAdditionalPropertiesGroups)
-            {
-                var spaces = String.Join(String.Empty, current.TakeWhile(c => c == ' '));
-                schemaJsonLinesList.Insert(index + 1 + indexIncrementer++, $"{spaces}\"additionalProperties\": false,");
-            }
+            //var schemaJsonLines = File.ReadAllLines("../code-model.json");
+            //var schemaJsonLinesList = schemaJsonLines.ToList();
+            //var indexIncrementer = 0;
+            //var absentAdditionalPropertiesGroups = schemaJsonLines
+            //    .Zip(schemaJsonLines.Skip(1).Append(String.Empty), (c, n) => (Current: c, Next: n))
+            //    .Select((p, i) => (Index: i, p.Current, p.Next))
+            //    .Where(g =>
+            //        g.Current.Contains("\"type\":")
+            //        && g.Current.Contains(",")
+            //        //&& !g.Next.Contains("\"enum\":")
+            //        && !g.Next.Contains("\"additionalProperties\""));
+            //foreach (var (index, current, _) in absentAdditionalPropertiesGroups)
+            //{
+            //    var spaces = String.Join(String.Empty, current.TakeWhile(c => c == ' '));
+            //    schemaJsonLinesList.Insert(index + 1 + indexIncrementer++, $"{spaces}\"additionalProperties\": false,");
+            //}
 
-            var schemaJson = String.Join(Environment.NewLine, schemaJsonLinesList)
-                .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"");
-                //.Replace($"\"Language\": {{{Environment.NewLine}      \"type\": \"object\",{Environment.NewLine}      \"additionalProperties\": false,"
-                //    , $"\"Language\": {{{Environment.NewLine}      \"type\": \"object\",{Environment.NewLine}      \"additionalProperties\": true,");
+            //var schemaJson = String.Join(Environment.NewLine, schemaJsonLinesList)
+            //    .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"");
+            //    //.Replace($"\"Language\": {{{Environment.NewLine}      \"type\": \"object\",{Environment.NewLine}      \"additionalProperties\": false,"
+            //    //    , $"\"Language\": {{{Environment.NewLine}      \"type\": \"object\",{Environment.NewLine}      \"additionalProperties\": true,");
+
+            //var schema = JsonSchema.FromJsonAsync(schemaJson).GetAwaiter().GetResult();
+            ////var schema = JsonSchema.FromJsonAsync(schemaJson).Result;
 
             //var codeModelJson = File.ReadAllText("../code-model.json")
             //    .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"");
-            var schema = JsonSchema.FromJsonAsync(schemaJson).GetAwaiter().GetResult();
-            //var schema = JsonSchema.FromJsonAsync(schemaJson).Result;
-
 
             //var schema = JsonSchema.FromJsonAsync(codeModelJson, ".", s =>
             //{
@@ -80,6 +80,9 @@ namespace AutoRest.CodeModel
             //    CreateJsonReferenceResolverFactory(), JsonSchema.CreateJsonSerializerContractResolver(SchemaType.JsonSchema))
             //    .GetAwaiter().GetResult();
 
+            var schemaJson = File.ReadAllText("../code-model.json")
+                .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"");
+            var schema = JsonSchema.FromJsonAsync(schemaJson).GetAwaiter().GetResult();
             var settings = new CSharpGeneratorSettings
             {
                 Namespace = "AutoRest.CSharp.V3.PipelineModels",
@@ -99,17 +102,27 @@ namespace AutoRest.CodeModel
                 //.Replace($"    {Environment.NewLine}    {Environment.NewLine}", String.Empty)
                 //.Replace($"    {Environment.NewLine}    }}", "    }")
                 //.Replace($"    {Environment.NewLine}", Environment.NewLine)
+
+                .Replace($"        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();{Environment.NewLine}{Environment.NewLine}        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties{Environment.NewLine}        {{{Environment.NewLine}            get {{ return _additionalProperties; }}{Environment.NewLine}            set {{ _additionalProperties = value; }}{Environment.NewLine}        }}{Environment.NewLine}", String.Empty)
+                .Replace("class Languages", "class Languages : System.Collections.Generic.Dictionary<string, object>")
+                .Replace("class Protocols", "class Protocols : System.Collections.Generic.Dictionary<string, object>")
+                .Replace($"class Language{Environment.NewLine}", $"class Language : System.Collections.Generic.Dictionary<string, object>{Environment.NewLine}")
+                .Replace("class SerializationFormats", "class SerializationFormats : System.Collections.Generic.Dictionary<string, object>")
+                .Replace("class HTTPSecurityScheme", "class HTTPSecurityScheme : System.Collections.Generic.Dictionary<string, object>")
+                .Replace("class SecurityScheme", "class SecurityScheme : System.Collections.Generic.Dictionary<string, object>")
+                .Replace("class ExternalDocumentation", "class ExternalDocumentation : System.Collections.Generic.Dictionary<string, object>")
+
                 .Replace($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}", Environment.NewLine)
                 .Replace($"{Environment.NewLine}{Environment.NewLine}    }}", $"{Environment.NewLine}    }}")
                 .Replace("\"plus\"", "\"+\"")
                 .Replace("\"minus\"", "\"-\"")
                 .Replace("Language Csharp", "CSharpLanguage Csharp")
-                .Replace("SchemaMetadata Csharp", "CSharpSchemaMetadata Csharp")
-                .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true")
-                .Replace($"class Languages{Environment.NewLine}", $"class Languages_Unused{Environment.NewLine}")
-                .Replace("Languages ", "LanguagesOfSchemaMetadata ")
-                .Replace("Languages(", "LanguagesOfSchemaMetadata(");
-            //.Replace("ICollection<Primitives>", "ICollection<object>");
+                //.Replace("SchemaMetadata Csharp", "CSharpSchemaMetadata Csharp")
+                .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true");
+                //.Replace($"class Languages{Environment.NewLine}", $"class Languages_Unused{Environment.NewLine}")
+                //.Replace("Languages ", "LanguagesOfSchemaMetadata ")
+                //.Replace("Languages(", "LanguagesOfSchemaMetadata(");
+                //.Replace("ICollection<Primitives>", "ICollection<object>");
             File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/CodeModel.cs", cleanFile);
         }
 

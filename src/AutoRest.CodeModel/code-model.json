@@ -18,6 +18,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "version"
       ]
@@ -46,6 +47,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "apiVersions",
         "message"
@@ -59,19 +61,19 @@
           "description": "additional metadata extensions dictionary"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "uri": {
       "description": "an URI",
       "type": "string"
     },
     "Schema": {
-      "description": "The Schema Object allows the definition of input and output data types.",
       "type": "object",
       "properties": {
         "language": {
-          "$ref": "#/definitions/Languages<SchemaMetadata>",
-          "description": "per-language information for Schema uses SchemaMetadata"
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for Schema"
         },
         "type": {
           "$ref": "#/definitions/AllSchemaTypes",
@@ -127,6 +129,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -154,6 +157,9 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "url"
       ]
@@ -161,7 +167,9 @@
     "Languages": {
       "description": "custom extensible metadata for individual language generators",
       "type": "object",
-      "additionalProperties": {},
+      "additionalProperties": {
+        "type": "object"
+      },
       "properties": {
         "default": {
           "$ref": "#/definitions/Language"
@@ -211,7 +219,9 @@
     "Protocols": {
       "description": "custom extensible metadata for individual protocols (ie, HTTP, etc)",
       "type": "object",
-      "additionalProperties": {},
+      "additionalProperties": {
+        "type": "object"
+      },
       "properties": {
         "http": {
           "$ref": "#/definitions/Protocol"
@@ -246,6 +256,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "protocol"
@@ -264,6 +275,9 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "description",
         "name"
@@ -271,7 +285,8 @@
     },
     "Protocol": {
       "type": "object",
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "XmlSerlializationFormat": {
       "type": "object",
@@ -293,6 +308,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "attribute",
         "wrapped"
@@ -306,16 +322,18 @@
     "SerializationFormats": {
       "description": "custom extensible metadata for individual serialization formats",
       "type": "object",
-      "additionalProperties": {},
+      "additionalProperties": {
+        "type": "object"
+      },
       "properties": {
         "json": {
-          "$ref": "#/definitions/Extensions"
+          "$ref": "#/definitions/SerializationFormat"
         },
         "xml": {
           "$ref": "#/definitions/XmlSerlializationFormat"
         },
         "protobuf": {
-          "$ref": "#/definitions/Extensions"
+          "$ref": "#/definitions/SerializationFormat"
         }
       },
       "defaultProperties": []
@@ -458,6 +476,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "propertyName"
       ]
@@ -520,6 +539,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -543,6 +563,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -575,6 +596,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -589,30 +611,6 @@
         }
       ]
     },
-    "SchemaMetadata": {
-      "description": "language metadata specific to schema instances",
-      "type": "object",
-      "properties": {
-        "namespace": {
-          "description": "namespace of the implementation of this item",
-          "type": "string"
-        },
-        "discriminatorValue": {
-          "description": "if this is a child of a polymorphic class, this will have the value of the descriminator.",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "required": [
-        "description",
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Language"
-        }
-      ]
-    },
     "SerializationFormat": {
       "type": "object",
       "properties": {
@@ -621,13 +619,15 @@
           "description": "additional metadata extensions dictionary"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "ValueSchema": {
       "description": "schema types that are non-object or complex types",
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -648,6 +648,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -668,6 +669,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -713,6 +715,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -747,6 +750,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -784,6 +788,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -813,6 +818,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -854,6 +860,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -891,6 +898,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "value"
@@ -900,13 +908,6 @@
       "description": "a schema that represents a choice of several values (ie, an 'enum')",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "the schema type",
-          "type": "string",
-          "enum": [
-            "choice"
-          ]
-        },
         "choiceType": {
           "$ref": "#/definitions/StringSchema",
           "description": "the primitive type for the choices"
@@ -917,61 +918,10 @@
           "items": {
             "$ref": "#/definitions/ChoiceValue"
           }
-        },
-        "language": {
-          "$ref": "#/definitions/Languages<SchemaMetadata>",
-          "description": "per-language information for Schema uses SchemaMetadata"
-        },
-        "summary": {
-          "description": "a short description",
-          "type": "string"
-        },
-        "example": {
-          "description": "example information"
-        },
-        "defaultValue": {
-          "description": "If the value isn't sent on the wire, the service will assume this"
-        },
-        "serialization": {
-          "$ref": "#/definitions/SerializationFormats",
-          "description": "per-serialization information for this Schema"
-        },
-        "uid": {
-          "type": "string"
-        },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
-        "apiVersions": {
-          "description": "API versions that this applies to. Undefined means all versions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersion"
-          }
-        },
-        "deprecated": {
-          "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
-        },
-        "externalDocs": {
-          "$ref": "#/definitions/ExternalDocumentation",
-          "description": "External Documentation Links"
-        },
-        "protocol": {
-          "$ref": "#/definitions/Protocols",
-          "description": "per-protocol information for this aspect"
-        },
-        "extensions": {
-          "$ref": "#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "choiceType",
@@ -982,19 +932,17 @@
         "serialization",
         "type",
         "uid"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
       ]
     },
     "SealedChoiceSchema": {
       "description": "a schema that represents a choice of several values (ie, an 'enum')",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "the schema type",
-          "type": "string",
-          "enum": [
-            "sealed-choice"
-          ]
-        },
         "choiceType": {
           "$ref": "#/definitions/StringSchema",
           "description": "the primitive type for the choices"
@@ -1005,61 +953,10 @@
           "items": {
             "$ref": "#/definitions/ChoiceValue"
           }
-        },
-        "language": {
-          "$ref": "#/definitions/Languages<SchemaMetadata>",
-          "description": "per-language information for Schema uses SchemaMetadata"
-        },
-        "summary": {
-          "description": "a short description",
-          "type": "string"
-        },
-        "example": {
-          "description": "example information"
-        },
-        "defaultValue": {
-          "description": "If the value isn't sent on the wire, the service will assume this"
-        },
-        "serialization": {
-          "$ref": "#/definitions/SerializationFormats",
-          "description": "per-serialization information for this Schema"
-        },
-        "uid": {
-          "type": "string"
-        },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
-        "apiVersions": {
-          "description": "API versions that this applies to. Undefined means all versions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersion"
-          }
-        },
-        "deprecated": {
-          "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
-        },
-        "externalDocs": {
-          "$ref": "#/definitions/ExternalDocumentation",
-          "description": "External Documentation Links"
-        },
-        "protocol": {
-          "$ref": "#/definitions/Protocols",
-          "description": "per-protocol information for this aspect"
-        },
-        "extensions": {
-          "$ref": "#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "choiceType",
@@ -1070,6 +967,11 @@
         "serialization",
         "type",
         "uid"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
       ]
     },
     "FlagValue": {
@@ -1088,6 +990,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "value"
@@ -1105,6 +1008,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "choices",
@@ -1138,6 +1042,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "value"
@@ -1148,7 +1053,7 @@
       "type": "object",
       "properties": {
         "constantSchema": {
-          "$ref": "#/definitions/ConstantType",
+          "$ref": "#/definitions/Schema",
           "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
         },
         "value": {
@@ -1157,6 +1062,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "constantSchema",
@@ -1179,6 +1085,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1199,6 +1106,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1232,6 +1140,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1265,6 +1174,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1285,6 +1195,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1305,6 +1216,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1334,6 +1246,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1355,6 +1268,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1375,6 +1289,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1404,6 +1319,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1425,6 +1341,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1450,6 +1367,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1479,6 +1397,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "allOf",
@@ -1508,6 +1427,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "anyOf",
@@ -1537,6 +1457,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1563,6 +1484,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -1760,6 +1682,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "strings"
       ]
@@ -1786,7 +1709,8 @@
           "description": "additional metadata extensions dictionary"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "License": {
       "description": "license information",
@@ -1806,6 +1730,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "name"
       ]
@@ -1844,6 +1769,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "title"
       ]
@@ -1853,6 +1779,7 @@
       "type": "object",
       "properties": {},
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "protocol"
@@ -1876,6 +1803,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "protocol",
@@ -1897,6 +1825,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "protocol",
@@ -1976,6 +1905,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -2000,6 +1930,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "protocol"
@@ -2025,6 +1956,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "language",
@@ -2053,7 +1985,8 @@
           "type": "string"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
@@ -2208,6 +2141,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "language",
         "url"
@@ -2254,6 +2188,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -2300,6 +2235,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "authorizationUrl",
         "scopes",
@@ -2333,6 +2269,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "scheme",
         "type"
@@ -2358,6 +2295,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "scopes",
         "tokenUrl"
@@ -2383,6 +2321,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "authorizationUrl",
         "scopes"
@@ -2409,6 +2348,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "scheme",
         "type"
@@ -2435,6 +2375,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "flows",
         "type"
@@ -2460,7 +2401,8 @@
           "description": "additional metadata extensions dictionary"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "HTTPSecurityScheme": {
       "anyOf": [
@@ -2515,6 +2457,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "in",
         "name",
@@ -2543,6 +2486,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "openIdConnectUrl",
         "type"
@@ -2568,6 +2512,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "scopes",
         "tokenUrl"
@@ -2576,7 +2521,8 @@
     "SecurityRequirement": {
       "description": "common ways of serializing simple parameters",
       "type": "object",
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "HttpParameter": {
       "description": "extended metadata for HTTP operation parameters",
@@ -2596,6 +2542,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "in",
         "style"
@@ -2627,6 +2574,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "method",
         "path",
@@ -2647,6 +2595,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "mediaType",
         "method",
@@ -2670,6 +2619,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "mediaType",
         "method",
@@ -2702,6 +2652,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "mediaType",
         "method",
@@ -2754,6 +2705,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "mediaType",
         "method",
@@ -2853,6 +2805,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "headers",
         "mediaTypes",
@@ -2876,6 +2829,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "headers",
         "mediaTypes",
@@ -2908,6 +2862,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "servers"
       ],
@@ -2919,7 +2874,9 @@
     },
     "Dictionary<any>": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": {
+        "type": "object"
+      },
       "defaultProperties": []
     },
     "Dictionary<string>": {
@@ -2929,62 +2886,12 @@
       },
       "defaultProperties": []
     },
-    "Languages<SchemaMetadata>": {
-      "description": "custom extensible metadata for individual language generators",
-      "type": "object",
-      "additionalProperties": {},
-      "properties": {
-        "default": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "csharp": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "python": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "ruby": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "go": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "typescript": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "javascript": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "powershell": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "java": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "c": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "cpp": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "swift": {
-          "$ref": "#/definitions/SchemaMetadata"
-        },
-        "objectivec": {
-          "$ref": "#/definitions/SchemaMetadata"
-        }
-      },
-      "defaultProperties": [],
-      "required": [
-        "default"
-      ]
-    },
     "ChoiceType": {
       "type": "object",
       "properties": {
         "language": {
-          "$ref": "#/definitions/Languages<SchemaMetadata>",
-          "description": "per-language information for Schema uses SchemaMetadata"
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for Schema"
         },
         "type": {
           "$ref": "#/definitions/AllSchemaTypes",
@@ -3040,6 +2947,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -3054,8 +2962,8 @@
       "type": "object",
       "properties": {
         "language": {
-          "$ref": "#/definitions/Languages<SchemaMetadata>",
-          "description": "per-language information for Schema uses SchemaMetadata"
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for Schema"
         },
         "type": {
           "$ref": "#/definitions/AllSchemaTypes",
@@ -3111,6 +3019,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "$key",
         "description",
@@ -3168,6 +3077,7 @@
     }
   },
   "defaultProperties": [],
+  "additionalProperties": false,
   "required": [
     "globalParameters",
     "info",

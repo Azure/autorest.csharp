@@ -60,14 +60,13 @@ namespace AutoRest.CSharp.V3.PipelineModels
         public DictionaryOfAny Extensions1 { get; set; }
     }
 
-    /// <summary>The Schema Object allows the definition of input and output data types.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Schema
     {
-        /// <summary>per-language information for Schema uses SchemaMetadata</summary>
+        /// <summary>per-language information for Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>the schema type</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "type")]
@@ -129,7 +128,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>a reference to external documentation</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class ExternalDocumentation
+    internal partial class ExternalDocumentation : System.Collections.Generic.Dictionary<string, object>
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         public string Description { get; set; }
@@ -146,7 +145,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>custom extensible metadata for individual language generators</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Languages_Unused
+    //internal partial class Languages : System.Collections.Generic.Dictionary<string, object>
+    internal partial class Languages
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "default")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -187,19 +187,11 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [YamlDotNet.Serialization.YamlMember(Alias = "objectivec")]
         public Language Objectivec { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>custom extensible metadata for individual protocols (ie, HTTP, etc)</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Protocols
+    internal partial class Protocols : System.Collections.Generic.Dictionary<string, object>
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "http")]
         public Protocol Http { get; set; }
@@ -212,14 +204,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [YamlDotNet.Serialization.YamlMember(Alias = "jsonrpc")]
         public Protocol Jsonrpc { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>common pattern for Metadata on aspects</summary>
@@ -229,7 +213,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>per-protocol information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
@@ -242,7 +226,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Language
+    internal partial class Language : System.Collections.Generic.Dictionary<string, object>
     {
         /// <summary>name used in actual implementation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
@@ -281,24 +265,16 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>custom extensible metadata for individual serialization formats</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SerializationFormats
+    internal partial class SerializationFormats : System.Collections.Generic.Dictionary<string, object>
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "json")]
-        public Extensions Json { get; set; }
+        public SerializationFormat Json { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "xml")]
         public XmlSerlializationFormat Xml { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "protobuf")]
-        public Extensions Protobuf { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
+        public SerializationFormat Protobuf { get; set; }
     }
 
     /// <summary>possible schema types that indicate the type of schema.</summary>
@@ -661,7 +637,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>per-protocol information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
@@ -704,19 +680,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>suggested implementation location for this parameter</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "implementation")]
         public ImplementationLocation? Implementation { get; set; }
-    }
-
-    /// <summary>language metadata specific to schema instances</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SchemaMetadata : Language
-    {
-        /// <summary>namespace of the implementation of this item</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "namespace")]
-        public string Namespace { get; set; }
-
-        /// <summary>if this is a child of a polymorphic class, this will have the value of the descriminator.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "discriminatorValue")]
-        public string DiscriminatorValue { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -851,7 +814,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>the actual value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
@@ -865,13 +828,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>a schema that represents a choice of several values (ie, an 'enum')</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class ChoiceSchema
+    internal partial class ChoiceSchema : ValueSchema
     {
-        /// <summary>the schema type</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "type")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public ChoiceSchemaType Type { get; set; }
-
         /// <summary>the primitive type for the choices</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "choiceType")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -881,74 +839,12 @@ namespace AutoRest.CSharp.V3.PipelineModels
         [YamlDotNet.Serialization.YamlMember(Alias = "choices")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ChoiceValue> Choices { get; set; } = new System.Collections.ObjectModel.Collection<ChoiceValue>();
-
-        /// <summary>per-language information for Schema uses SchemaMetadata</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "language")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
-
-        /// <summary>a short description</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "summary")]
-        public string Summary { get; set; }
-
-        /// <summary>example information</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "example")]
-        public object Example { get; set; }
-
-        /// <summary>If the value isn't sent on the wire, the service will assume this</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "defaultValue")]
-        public object DefaultValue { get; set; }
-
-        /// <summary>per-serialization information for this Schema</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "serialization")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SerializationFormats Serialization { get; set; } = new SerializationFormats();
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "uid")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Uid { get; set; }
-
-        /// <summary>common name of the aspect -- in OAI3 this was typically the key in the parent dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "$key")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Key { get; set; }
-
-        /// <summary>description of the aspect.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "description")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Description { get; set; }
-
-        /// <summary>API versions that this applies to. Undefined means all versions</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "apiVersions")]
-        public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; }
-
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
-        public Deprecation Deprecated { get; set; }
-
-        /// <summary>External Documentation Links</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]
-        public ExternalDocumentation ExternalDocs { get; set; }
-
-        /// <summary>per-protocol information for this aspect</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public Protocols Protocol { get; set; } = new Protocols();
-
-        /// <summary>additional metadata extensions dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
-        public DictionaryOfAny Extensions { get; set; }
     }
 
     /// <summary>a schema that represents a choice of several values (ie, an 'enum')</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SealedChoiceSchema
+    internal partial class SealedChoiceSchema : ValueSchema
     {
-        /// <summary>the schema type</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "type")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public SealedChoiceSchemaType Type { get; set; }
-
         /// <summary>the primitive type for the choices</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "choiceType")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -958,63 +854,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
         [YamlDotNet.Serialization.YamlMember(Alias = "choices")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ChoiceValue> Choices { get; set; } = new System.Collections.ObjectModel.Collection<ChoiceValue>();
-
-        /// <summary>per-language information for Schema uses SchemaMetadata</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "language")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
-
-        /// <summary>a short description</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "summary")]
-        public string Summary { get; set; }
-
-        /// <summary>example information</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "example")]
-        public object Example { get; set; }
-
-        /// <summary>If the value isn't sent on the wire, the service will assume this</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "defaultValue")]
-        public object DefaultValue { get; set; }
-
-        /// <summary>per-serialization information for this Schema</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "serialization")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SerializationFormats Serialization { get; set; } = new SerializationFormats();
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "uid")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Uid { get; set; }
-
-        /// <summary>common name of the aspect -- in OAI3 this was typically the key in the parent dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "$key")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Key { get; set; }
-
-        /// <summary>description of the aspect.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "description")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Description { get; set; }
-
-        /// <summary>API versions that this applies to. Undefined means all versions</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "apiVersions")]
-        public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; }
-
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
-        public Deprecation Deprecated { get; set; }
-
-        /// <summary>External Documentation Links</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]
-        public ExternalDocumentation ExternalDocs { get; set; }
-
-        /// <summary>per-protocol information for this aspect</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public Protocols Protocol { get; set; } = new Protocols();
-
-        /// <summary>additional metadata extensions dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
-        public DictionaryOfAny Extensions { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1023,7 +862,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
         public double Value { get; set; }
@@ -1049,7 +888,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>the actual constant value to use</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
@@ -1068,7 +907,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>the schema type of the constant value (ie, StringSchema, NumberSchema, etc)</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "constantSchema")]
         [System.ComponentModel.DataAnnotations.Required]
-        public ConstantType ConstantSchema1 { get; set; } = new ConstantType();
+        public Schema ConstantSchema1 { get; set; } = new Schema();
 
         /// <summary>the actual constant value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
@@ -1478,7 +1317,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>per-protocol information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
@@ -1854,7 +1693,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>base url for the server</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "url")]
@@ -1873,7 +1712,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>common name of the aspect -- in OAI3 this was typically the key in the parent dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "$key")]
@@ -2079,27 +1918,13 @@ namespace AutoRest.CSharp.V3.PipelineModels
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class HTTPSecurityScheme
+    internal partial class HTTPSecurityScheme : System.Collections.Generic.Dictionary<string, object>
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SecurityScheme
+    internal partial class SecurityScheme : System.Collections.Generic.Dictionary<string, object>
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2331,15 +2156,8 @@ namespace AutoRest.CSharp.V3.PipelineModels
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class DictionaryOfAny
+    internal partial class DictionaryOfAny : System.Collections.Generic.Dictionary<string, object>
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2347,66 +2165,13 @@ namespace AutoRest.CSharp.V3.PipelineModels
     {
     }
 
-    /// <summary>custom extensible metadata for individual language generators</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class LanguagesOfSchemaMetadata
-    {
-        [YamlDotNet.Serialization.YamlMember(Alias = "default")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SchemaMetadata Default { get; set; } = new SchemaMetadata();
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "csharp")]
-        public CSharpSchemaMetadata Csharp { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "python")]
-        public SchemaMetadata Python { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "ruby")]
-        public SchemaMetadata Ruby { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "go")]
-        public SchemaMetadata Go { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "typescript")]
-        public SchemaMetadata Typescript { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "javascript")]
-        public SchemaMetadata Javascript { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "powershell")]
-        public SchemaMetadata Powershell { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "java")]
-        public SchemaMetadata Java { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "c")]
-        public SchemaMetadata C { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "cpp")]
-        public SchemaMetadata Cpp { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "swift")]
-        public SchemaMetadata Swift { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "objectivec")]
-        public SchemaMetadata Objectivec { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
-    }
-
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class ChoiceType
     {
-        /// <summary>per-language information for Schema uses SchemaMetadata</summary>
+        /// <summary>per-language information for Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>the schema type</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "type")]
@@ -2469,10 +2234,10 @@ namespace AutoRest.CSharp.V3.PipelineModels
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class ConstantType
     {
-        /// <summary>per-language information for Schema uses SchemaMetadata</summary>
+        /// <summary>per-language information for Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>the schema type</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "type")]
@@ -2564,7 +2329,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
         [System.ComponentModel.DataAnnotations.Required]
-        public LanguagesOfSchemaMetadata Language { get; set; } = new LanguagesOfSchemaMetadata();
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>per-protocol information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "protocol")]
@@ -2584,20 +2349,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [System.Runtime.Serialization.EnumMember(Value = @"-")]
         Minus = 1,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum ChoiceSchemaType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 0,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum SealedChoiceSchemaType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 0,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
