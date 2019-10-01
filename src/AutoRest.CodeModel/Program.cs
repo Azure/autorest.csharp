@@ -104,7 +104,7 @@ namespace AutoRest.CodeModel
                 //.Replace($"    {Environment.NewLine}", Environment.NewLine)
 
                 .Replace($"        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();{Environment.NewLine}{Environment.NewLine}        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties{Environment.NewLine}        {{{Environment.NewLine}            get {{ return _additionalProperties; }}{Environment.NewLine}            set {{ _additionalProperties = value; }}{Environment.NewLine}        }}{Environment.NewLine}", String.Empty)
-                .Replace("class Languages", "class Languages : System.Collections.Generic.Dictionary<string, object>")
+                //.Replace("class Languages", "class Languages : System.Collections.Generic.Dictionary<string, object>")
                 .Replace("class Protocols", "class Protocols : System.Collections.Generic.Dictionary<string, object>")
                 .Replace($"class Language{Environment.NewLine}", $"class Language : System.Collections.Generic.Dictionary<string, object>{Environment.NewLine}")
                 .Replace("class SerializationFormats", "class SerializationFormats : System.Collections.Generic.Dictionary<string, object>")

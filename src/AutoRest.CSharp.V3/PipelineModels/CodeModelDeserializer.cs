@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using AutoRest.CSharp.V3.Common.Utilities;
 //using SharpYaml.Serialization;
 using YamlDotNet.Serialization;
 
@@ -15,6 +18,26 @@ namespace AutoRest.CSharp.V3.PipelineModels
         //    }
         //    return serializerSettings;
         //}
+
+        public static Dictionary<string, PropertyInfo> GetAvailableProperties(Type type) => type.GetProperties()
+            .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault(), p))
+            .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
+
+        public static object ConvertFromDictionary(PropertyInfo propertyInfo, object propertyValue)
+        {
+            if (!(propertyValue is Dictionary<object, object>)) return propertyValue;
+
+            var propertyType = propertyInfo.PropertyType;
+            var availableProperties = GetAvailableProperties(propertyType);
+            var property = Activator.CreateInstance(propertyType);
+            var matchedPairs = ((Dictionary<object, object>)propertyValue).Where(e => availableProperties.ContainsKey(e.Key.ToString()));
+            foreach (var (key, value) in matchedPairs)
+            {
+                var innerInfo = availableProperties[key.ToString()];
+                innerInfo.SetValue(property, ConvertFromDictionary(innerInfo, value));
+            }
+            return property;
+        }
 
         private static DeserializerBuilder RegisterTagMapping(this DeserializerBuilder deserializerBuilder, IEnumerable<KeyValuePair<string, Type>> mapping)
         {
