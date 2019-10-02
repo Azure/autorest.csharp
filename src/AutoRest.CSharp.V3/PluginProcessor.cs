@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -21,34 +22,27 @@ namespace AutoRest.CSharp.V3
             }
             try
             {
-                var testItem = await autoRest.GetValue<string>("test-item");
-                var debugger = await autoRest.GetValue<string>("csharp-v2.debugger");
+                var codeModelFile = (await autoRest.ListInputs()).FirstOrDefault();
+                if (codeModelFile.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
 
-                var files = await autoRest.ListInputs();
-                if (!files.Any())
-                {
-                    throw new Exception("Generator did not receive the code model file.");
-                }
+                var codeModelYaml = await autoRest.ReadFile(codeModelFile);
+                //codeModelYaml = String.Join(Environment.NewLine, codeModelYaml.ToLines().Where(l => !l.Contains("uid:")));
+                //codeModelYaml = Regex.Replace(codeModelYaml, @"(.*)!<!.*>(.*)", "$1$2", RegexOptions.Multiline);
+                //codeModelYaml = codeModelYaml.Replace("<!CodeModel>", "<CodeModel>");
+                //codeModelYaml = codeModelYaml.Replace("!<!CodeModel>", "");
+                //codeModelYaml = codeModelYaml.Replace("primitives:", "primitives: !<!Primitives>");
+                //codeModelYaml = codeModelYaml.Replace("https: ", "https:");
+                //codeModelYaml = codeModelYaml.Replace("!<!Metadata>", "!<!OperationGroup>");
+                //codeModelYaml = String.Join(Environment.NewLine, codeModelYaml.ToLines());
+                //codeModelYaml = codeModelYaml.Replace($"{Environment.NewLine}    x-ms-metadata:{Environment.NewLine}      - url: 'https: //xkcd.com/json.html'", String.Empty);
+                //codeModelYaml = codeModelYaml.Replace("          internal: true", $"          internal: true{Environment.NewLine}          coolCat: 'make me some bacon'");
 
-                var codeModel = await autoRest.ReadFile(files.FirstOrDefault());
-                //codeModel = String.Join(Environment.NewLine, codeModel.ToLines().Where(l => !l.Contains("uid:")));
-                //codeModel = Regex.Replace(codeModel, @"(.*)!<!.*>(.*)", "$1$2", RegexOptions.Multiline);
-                //codeModel = codeModel.Replace("<!CodeModel>", "<CodeModel>");
-                //codeModel = codeModel.Replace("!<!CodeModel>", "");
-                //codeModel = codeModel.Replace("primitives:", "primitives: !<!Primitives>");
-                //codeModel = codeModel.Replace("https: ", "https:");
-                //codeModel = codeModel.Replace("!<!Metadata>", "!<!OperationGroup>");
-                codeModel = String.Join(Environment.NewLine, codeModel.ToLines());
-                codeModel = codeModel.Replace($"{Environment.NewLine}    x-ms-metadata:{Environment.NewLine}      - url: 'https: //xkcd.com/json.html'", String.Empty);
-                codeModel = codeModel.Replace("          internal: true", $"          internal: true{Environment.NewLine}          coolCat: 'make me some bacon'");
+                var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();
+                await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
+                await autoRest.WriteFile($"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml", codeModelYaml, "source-file-csharp");
 
-                var cmClass = CodeModelDeserializer.CreateCodeModel(codeModel);
+                var codeModel = CodeModelDeserializer.CreateCodeModel(codeModelYaml);
 
-                var inputFiles = await autoRest.GetValue<string[]>("input-file");
-                var inputFileMessage = new Message { Channel = Channel.Fatal, Text = inputFiles.FirstOrDefault() };
-                await autoRest.Message(inputFileMessage);
-
-                await autoRest.WriteFile("CodeModel-new.yaml", codeModel, "source-file-csharp");
                 return true;
             }
             catch (Exception e)
