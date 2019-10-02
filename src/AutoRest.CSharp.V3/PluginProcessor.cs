@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Common.JsonRpc;
 using AutoRest.CSharp.V3.Common.Utilities;
 using AutoRest.CSharp.V3.PipelineModels;
-//using SharpYaml.Serialization;
 
 namespace AutoRest.CSharp.V3
 {
@@ -43,10 +41,6 @@ namespace AutoRest.CSharp.V3
                 codeModel = String.Join(Environment.NewLine, codeModel.ToLines());
                 codeModel = codeModel.Replace($"{Environment.NewLine}    x-ms-metadata:{Environment.NewLine}      - url: 'https: //xkcd.com/json.html'", String.Empty);
                 codeModel = codeModel.Replace("          internal: true", $"          internal: true{Environment.NewLine}          coolCat: 'make me some bacon'");
-                //var settings = new SerializerSettings();
-                ////settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
-                //var serializer = new Serializer(settings);
-                //var cmClass = serializer.Deserialize<CodeModel>(codeModel);
 
                 var cmClass = CodeModelDeserializer.CreateCodeModel(codeModel);
 
