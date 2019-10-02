@@ -39,7 +39,10 @@ namespace AutoRest.CSharp.V3
                 //codeModel = codeModel.Replace("!<!CodeModel>", "");
                 //codeModel = codeModel.Replace("primitives:", "primitives: !<!Primitives>");
                 //codeModel = codeModel.Replace("https: ", "https:");
-                codeModel = codeModel.Replace("!<!Metadata>", "!<!OperationGroup>");
+                //codeModel = codeModel.Replace("!<!Metadata>", "!<!OperationGroup>");
+                codeModel = String.Join(Environment.NewLine, codeModel.ToLines());
+                codeModel = codeModel.Replace($"{Environment.NewLine}    x-ms-metadata:{Environment.NewLine}      - url: 'https: //xkcd.com/json.html'", String.Empty);
+                codeModel = codeModel.Replace("          internal: true", $"          internal: true{Environment.NewLine}          coolCat: 'make me some bacon'");
                 //var settings = new SerializerSettings();
                 ////settings.RegisterTagMapping("!CodeModel", typeof(CodeModel));
                 //var serializer = new Serializer(settings);

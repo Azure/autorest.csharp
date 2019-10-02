@@ -23,9 +23,10 @@ namespace AutoRest.CSharp.V3.PipelineModels
             .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault(), p))
             .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
 
+        // Only allows deserialization of properties of Dictionary<object, object> or primitives. Does not support properties that are classes.
         public static object ConvertFromDictionary(PropertyInfo propertyInfo, object propertyValue)
         {
-            if (!(propertyValue is Dictionary<object, object>)) return propertyValue;
+            if (!(propertyValue is Dictionary<object, object>)) return Convert.ChangeType(propertyValue, propertyInfo.PropertyType);
 
             var propertyType = propertyInfo.PropertyType;
             var availableProperties = GetAvailableProperties(propertyType);

@@ -54,6 +54,7 @@
       ]
     },
     "Extensions": {
+      "description": "A dictionary of open-ended 'x-*' extensions propogated from the original source document.",
       "type": "object",
       "properties": {
         "extensions": {
@@ -157,9 +158,7 @@
         }
       },
       "defaultProperties": [],
-      "additionalProperties": {
-        "type": "object"
-      },
+      "additionalProperties": false,
       "required": [
         "url"
       ]
@@ -167,15 +166,12 @@
     "Languages": {
       "description": "custom extensible metadata for individual language generators",
       "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
       "properties": {
         "default": {
           "$ref": "#/definitions/Language"
         },
         "csharp": {
-          "$ref": "#/definitions/Language"
+          "$ref": "#/definitions/CSharpLanguage"
         },
         "python": {
           "$ref": "#/definitions/Language"
@@ -212,6 +208,7 @@
         }
       },
       "defaultProperties": [],
+      "additionalProperties": false,
       "required": [
         "default"
       ]
@@ -219,9 +216,6 @@
     "Protocols": {
       "description": "custom extensible metadata for individual protocols (ie, HTTP, etc)",
       "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
       "properties": {
         "http": {
           "$ref": "#/definitions/Protocol"
@@ -236,7 +230,8 @@
           "$ref": "#/definitions/Protocol"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "Metadata": {
       "description": "common pattern for Metadata on aspects",
@@ -263,6 +258,7 @@
       ]
     },
     "Language": {
+      "description": "the bare-minimum fields for per-language metadata on a given aspect",
       "type": "object",
       "properties": {
         "name": {
@@ -283,7 +279,13 @@
         "name"
       ]
     },
+    "CSharpLanguage": {
+      "type": "object",
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
     "Protocol": {
+      "description": "the bare-minimum fields for per-protocol metadata on a given aspect",
       "type": "object",
       "defaultProperties": [],
       "additionalProperties": false
@@ -322,9 +324,6 @@
     "SerializationFormats": {
       "description": "custom extensible metadata for individual serialization formats",
       "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
       "properties": {
         "json": {
           "$ref": "#/definitions/SerializationFormat"
@@ -336,7 +335,8 @@
           "$ref": "#/definitions/SerializationFormat"
         }
       },
-      "defaultProperties": []
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "SchemaType": {
       "description": "possible schema types that indicate the type of schema.",

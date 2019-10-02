@@ -52,6 +52,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
     }
 
+    /// <summary>A dictionary of open-ended 'x-*' extensions propogated from the original source document.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Extensions
     {
@@ -128,7 +129,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>a reference to external documentation</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class ExternalDocumentation : System.Collections.Generic.Dictionary<string, object>
+    internal partial class ExternalDocumentation
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         public string Description { get; set; }
@@ -141,14 +142,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
         public DictionaryOfAny Extensions { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>custom extensible metadata for individual language generators</summary>
@@ -194,19 +187,11 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [YamlDotNet.Serialization.YamlMember(Alias = "objectivec")]
         public Language Objectivec { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>custom extensible metadata for individual protocols (ie, HTTP, etc)</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Protocols : System.Collections.Generic.Dictionary<string, object>
+    internal partial class Protocols
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "http")]
         public Protocol Http { get; set; }
@@ -219,14 +204,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [YamlDotNet.Serialization.YamlMember(Alias = "jsonrpc")]
         public Protocol Jsonrpc { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>common pattern for Metadata on aspects</summary>
@@ -248,8 +225,9 @@ namespace AutoRest.CSharp.V3.PipelineModels
         public DictionaryOfAny Extensions { get; set; }
     }
 
+    /// <summary>the bare-minimum fields for per-language metadata on a given aspect</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Language : System.Collections.Generic.Dictionary<string, object>
+    internal partial class Language
     {
         /// <summary>name used in actual implementation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
@@ -260,16 +238,14 @@ namespace AutoRest.CSharp.V3.PipelineModels
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class CSharpLanguage
+    {
+    }
+
+    /// <summary>the bare-minimum fields for per-protocol metadata on a given aspect</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Protocol
     {
@@ -296,7 +272,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
     /// <summary>custom extensible metadata for individual serialization formats</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SerializationFormats : System.Collections.Generic.Dictionary<string, object>
+    internal partial class SerializationFormats
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "json")]
         public SerializationFormat Json { get; set; }
@@ -306,14 +282,6 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
         [YamlDotNet.Serialization.YamlMember(Alias = "protobuf")]
         public SerializationFormat Protobuf { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     /// <summary>possible schema types that indicate the type of schema.</summary>
@@ -1959,25 +1927,11 @@ namespace AutoRest.CSharp.V3.PipelineModels
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class HTTPSecurityScheme : System.Collections.Generic.Dictionary<string, object>
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class SecurityScheme : System.Collections.Generic.Dictionary<string, object>
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]

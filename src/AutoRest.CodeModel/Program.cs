@@ -19,8 +19,8 @@ namespace AutoRest.CodeModel
     {
         private static void Main()
         {
-            //using var webClient = new WebClient();
-            //webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
+            using var webClient = new WebClient();
+            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
 
             //var schemaJsonLines = File.ReadAllLines("../code-model.json");
             //var schemaJsonLinesList = schemaJsonLines.ToList();
@@ -105,18 +105,18 @@ namespace AutoRest.CodeModel
 
                 .Replace($"        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();{Environment.NewLine}{Environment.NewLine}        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties{Environment.NewLine}        {{{Environment.NewLine}            get {{ return _additionalProperties; }}{Environment.NewLine}            set {{ _additionalProperties = value; }}{Environment.NewLine}        }}{Environment.NewLine}", String.Empty)
                 //.Replace("class Languages", "class Languages : System.Collections.Generic.Dictionary<string, object>")
-                .Replace("class Protocols", "class Protocols : System.Collections.Generic.Dictionary<string, object>")
-                .Replace($"class Language{Environment.NewLine}", $"class Language : System.Collections.Generic.Dictionary<string, object>{Environment.NewLine}")
-                .Replace("class SerializationFormats", "class SerializationFormats : System.Collections.Generic.Dictionary<string, object>")
+                //.Replace("class Protocols", "class Protocols : System.Collections.Generic.Dictionary<string, object>")
+                //.Replace($"class Language{Environment.NewLine}", $"class Language : System.Collections.Generic.Dictionary<string, object>{Environment.NewLine}")
+                //.Replace("class SerializationFormats", "class SerializationFormats : System.Collections.Generic.Dictionary<string, object>")
                 .Replace("class HTTPSecurityScheme", "class HTTPSecurityScheme : System.Collections.Generic.Dictionary<string, object>")
                 .Replace("class SecurityScheme", "class SecurityScheme : System.Collections.Generic.Dictionary<string, object>")
-                .Replace("class ExternalDocumentation", "class ExternalDocumentation : System.Collections.Generic.Dictionary<string, object>")
+                //.Replace("class ExternalDocumentation", "class ExternalDocumentation : System.Collections.Generic.Dictionary<string, object>")
 
                 .Replace($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}", Environment.NewLine)
                 .Replace($"{Environment.NewLine}{Environment.NewLine}    }}", $"{Environment.NewLine}    }}")
                 .Replace("\"plus\"", "\"+\"")
                 .Replace("\"minus\"", "\"-\"")
-                .Replace("Language Csharp", "CSharpLanguage Csharp")
+                //.Replace("Language Csharp", "CSharpLanguage Csharp")
                 //.Replace("SchemaMetadata Csharp", "CSharpSchemaMetadata Csharp")
                 .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true");
                 //.Replace($"class Languages{Environment.NewLine}", $"class Languages_Unused{Environment.NewLine}")
