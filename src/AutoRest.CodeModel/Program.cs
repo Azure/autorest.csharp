@@ -53,19 +53,9 @@ namespace AutoRest.CodeModel
                 .Replace("\"minus\"", "\"-\"")
                 // Weird generation issue workaround
                 .Replace($"{Namespace}.bool.True", "true");
-            File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/Generated/CodeModel.cs", cleanFile);
-        }
 
-        //https://stackoverflow.com/a/41176852/294804
-        private static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)
-        {
-            using var sr = new StringReader(value);
-            string line;
-            while ((line = sr.ReadLine()) != null)
-            {
-                if (removeEmptyLines && String.IsNullOrWhiteSpace(line)) continue;
-                yield return line;
-            }
+            var fileWithOrdering = Orderer.AddOrderInfo(cleanFile);
+            File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/Generated/CodeModel.cs", fileWithOrdering);
         }
     }
 }

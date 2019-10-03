@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -15,99 +16,26 @@ namespace AutoRest.CSharp.V3.PipelineModels
 {
     internal static class CodeModelDeserializer
     {
-        private static DeserializerBuilder RegisterTagMapping(this DeserializerBuilder deserializerBuilder, IEnumerable<KeyValuePair<string, Type>> mapping)
-        {
-            foreach (var (tagName, tagType) in mapping)
-            {
-                deserializerBuilder.WithTagMapping(tagName, tagType);
-            }
-            return deserializerBuilder;
-        }
-
-        //private static DeserializerBuilder WithTypeConverter(this DeserializerBuilder deserializerBuilder, IEnumerable<IYamlTypeConverter> converters)
+        //private static DeserializerBuilder RegisterTagMapping(this DeserializerBuilder deserializerBuilder, IEnumerable<KeyValuePair<string, Type>> mapping)
         //{
-        //    foreach (var converter in converters)
+        //    foreach (var (tagName, tagType) in mapping)
         //    {
-        //        deserializerBuilder.WithTypeConverter(converter);
+        //        deserializerBuilder.WithTagMapping(tagName, tagType);
         //    }
         //    return deserializerBuilder;
         //}
 
+        private static BuilderSkeleton<TBuilder> WithTagMapping<TBuilder>(this BuilderSkeleton<TBuilder> builder, IEnumerable<KeyValuePair<string, Type>> mapping) where TBuilder : BuilderSkeleton<TBuilder>
+        {
+            foreach (var (tagName, tagType) in mapping)
+            {
+                builder.WithTagMapping(tagName, tagType);
+            }
+            return builder;
+        }
+
         private static KeyValuePair<string, Type> CreateTagPair<T>() => typeof(T).CreateTagPair();
         private static KeyValuePair<string, Type> CreateTagPair(this Type type) => new KeyValuePair<string, Type>($"!{type.Name}", type);
-
-        // From: https://github.com/Azure/perks/blob/57a85fe6e26629ee6b420753d3b6b4f1db4b2719/codemodel/model/yaml-schema.ts#L28-L97
-        //private static readonly IEnumerable<KeyValuePair<string, Type>> TagMap = new[]
-        //{
-        //    CreateTagPair<HttpModel>(),
-        //    CreateTagPair<HttpParameter>(),
-        //    CreateTagPair<HttpStreamRequest>(),
-        //    CreateTagPair<HttpMultipartRequest>(),
-        //    CreateTagPair<HttpResponse>(),
-        //    CreateTagPair<HttpStreamResponse>(),
-        //    CreateTagPair<HttpWithBodyRequest>(),
-        //    CreateTagPair<HttpRequest>(),
-        //    CreateTagPair<SchemaResponse>(),
-        //    CreateTagPair<StreamResponse>(),
-        //    CreateTagPair<Response>(),
-        //    CreateTagPair<Parameter>(),
-        //    CreateTagPair<Property>(),
-        //    CreateTagPair<Value>(),
-        //    CreateTagPair<Operation>(),
-        //    CreateTagPair<ParameterGroupSchema>(),
-        //    CreateTagPair<FlagSchema>(),
-        //    CreateTagPair<FlagValue>(),
-        //    CreateTagPair<NumberSchema>(),
-        //    CreateTagPair<StringSchema>(),
-        //    CreateTagPair<ArraySchema>(),
-        //    CreateTagPair<ObjectSchema>(),
-        //    CreateTagPair<ChoiceValue>(),
-        //    CreateTagPair<ConstantValue>(),
-        //    CreateTagPair<ChoiceSchema>(),
-        //    CreateTagPair<SealedChoiceSchema>(),
-        //    CreateTagPair<ConstantSchema>(),
-        //    CreateTagPair<BooleanSchema>(),
-        //    CreateTagPair<ODataQuerySchema>(),
-        //    CreateTagPair<CredentialSchema>(),
-        //    CreateTagPair<UriSchema>(),
-        //    CreateTagPair<UuidSchema>(),
-        //    CreateTagPair<DurationSchema>(),
-        //    CreateTagPair<DateTimeSchema>(),
-        //    CreateTagPair<DateSchema>(),
-        //    CreateTagPair<CharSchema>(),
-        //    CreateTagPair<ByteArraySchema>(),
-        //    CreateTagPair<UnixTimeSchema>(),
-        //    CreateTagPair<DictionarySchema>(),
-        //    CreateTagPair<AndSchema>(),
-        //    CreateTagPair<OrSchema>(),
-        //    CreateTagPair<XorSchema>(),
-        //    CreateTagPair<Schema>(),
-        //    CreateTagPair<CodeModel>(),
-        //    CreateTagPair<Request>(),
-        //    CreateTagPair<Schemas>(),
-        //    CreateTagPair<Discriminator>(),
-        //    CreateTagPair<ExternalDocumentation>(),
-        //    CreateTagPair<Contact>(),
-        //    CreateTagPair<Info>(),
-        //    CreateTagPair<License>(),
-        //    CreateTagPair<Metadata>(),
-        //    CreateTagPair<OperationGroup>(),
-        //    CreateTagPair<APIKeySecurityScheme>(),
-        //    CreateTagPair<BearerHTTPSecurityScheme>(),
-        //    CreateTagPair<ImplicitOAuthFlow>(),
-        //    CreateTagPair<NonBearerHTTPSecurityScheme>(),
-        //    CreateTagPair<OAuth2SecurityScheme>(),
-        //    CreateTagPair<OAuthFlows>(),
-        //    CreateTagPair<OpenIdConnectSecurityScheme>(),
-        //    CreateTagPair<PasswordOAuthFlow>(),
-        //    CreateTagPair<AuthorizationCodeOAuthFlow>(),
-        //    CreateTagPair<ClientCredentialsFlow>(),
-        //    CreateTagPair<HttpServer>(),
-        //    CreateTagPair<ServerVariable>(),
-        //    CreateTagPair<Languages>(),
-        //    CreateTagPair<Protocols>(),
-        //    CreateTagPair<ApiVersion>()
-        //};
 
         private static readonly IEnumerable<Type> GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.Namespace == "AutoRest.CSharp.V3.PipelineModels.Generated").ToArray();
@@ -228,9 +156,16 @@ namespace AutoRest.CSharp.V3.PipelineModels
         }
 
         private static IDeserializer _deserializer;
-        private static IDeserializer Deserializer => _deserializer ??= new DeserializerBuilder().RegisterTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
+        private static IDeserializer Deserializer => _deserializer ??= new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
 
         public static CodeModel CreateCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
+
+        public static string ToYaml(this CodeModel codeModel)
+        {
+            var builder = new SerializerBuilder();
+            var serializer = builder.WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
+            return serializer.Serialize(codeModel);
+        }
 
         public static Dictionary<string, PropertyInfo> GetDeserializableProperties(this Type type) => type.GetProperties()
             .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault(), p))
