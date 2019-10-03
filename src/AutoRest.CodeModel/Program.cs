@@ -19,9 +19,13 @@ namespace AutoRest.CodeModel
             using var webClient = new WebClient();
             webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
 
-            var schemaJson = File.ReadAllText("../code-model.json")
+            var schemaJsonLines = File.ReadAllLines("../code-model.json");
+            var schemaJson = String.Join(Environment.NewLine, schemaJsonLines)
+                //var schemaJson = File.ReadAllText("../code-model.json")
                 // Fixes + and - enum values that cannot be generated into C# enum names
-                .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"");
+                .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"")
+                // Makes Choices only have string values
+                .Replace($"          \"type\": [{Environment.NewLine}            \"string\",{Environment.NewLine}            \"number\",{Environment.NewLine}            \"boolean\"{Environment.NewLine}          ]{Environment.NewLine}", $"          \"type\": \"string\"{Environment.NewLine}");
             var schema = JsonSchema.FromJsonAsync(schemaJson).GetAwaiter().GetResult();
             var settings = new CSharpGeneratorSettings
             {

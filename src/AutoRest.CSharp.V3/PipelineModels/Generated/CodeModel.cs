@@ -826,7 +826,7 @@ namespace AutoRest.CSharp.V3.PipelineModels.Generated
         /// <summary>the actual value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public double Value { get; set; }
+        public string Value { get; set; }
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
