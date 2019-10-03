@@ -11,6 +11,9 @@ namespace AutoRest.CodeModel
 {
     internal static class Program
     {
+        private const string Path = "AutoRest.CSharp.V3/PipelineModels/Generated";
+        private static readonly string Namespace = Path.Replace("/", ".");
+
         private static void Main()
         {
             using var webClient = new WebClient();
@@ -22,7 +25,7 @@ namespace AutoRest.CodeModel
             var schema = JsonSchema.FromJsonAsync(schemaJson).GetAwaiter().GetResult();
             var settings = new CSharpGeneratorSettings
             {
-                Namespace = "AutoRest.CSharp.V3.PipelineModels",
+                Namespace = Namespace,
                 HandleReferences = true,
                 GenerateOptionalPropertiesAsNullable = true,
                 TypeAccessModifier = "internal"
@@ -45,8 +48,8 @@ namespace AutoRest.CodeModel
                 .Replace("\"plus\"", "\"+\"")
                 .Replace("\"minus\"", "\"-\"")
                 // Weird generation issue workaround
-                .Replace("AutoRest.CSharp.V3.PipelineModels.bool.True", "true");
-            File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/CodeModel.cs", cleanFile);
+                .Replace($"{Namespace}.bool.True", "true");
+            File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/Generated/CodeModel.cs", cleanFile);
         }
 
         //https://stackoverflow.com/a/41176852/294804

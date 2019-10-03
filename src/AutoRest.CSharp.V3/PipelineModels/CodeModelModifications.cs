@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using YamlDotNet.Serialization;
 
-namespace AutoRest.CSharp.V3.PipelineModels
+namespace AutoRest.CSharp.V3.PipelineModels.Generated
 {
     internal partial class CSharpLanguage
     {
