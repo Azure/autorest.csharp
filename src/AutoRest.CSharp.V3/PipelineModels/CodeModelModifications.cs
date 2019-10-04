@@ -26,12 +26,17 @@ namespace AutoRest.CSharp.V3.PipelineModels.Generated
         [YamlMember(Alias = "internal")]
         public bool Internal { get; set; }
 
+        [YamlIgnore]
+        public IDictionary<string, object> AdditionalProperties = new Dictionary<string, object>();
+
         private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
         private static readonly Dictionary<string, PropertyInfo> DeserializableProperties = typeof(Language).GetDeserializableProperties();
 
         // Workaround for mapping properties from the dictionary entries
         private void AddAndMap(string key, object value)
         {
+            _dictionary.Add(key, value);
+
             if (DeserializableProperties.ContainsKey(key))
             {
                 var propInfo = DeserializableProperties[key];
@@ -39,7 +44,7 @@ namespace AutoRest.CSharp.V3.PipelineModels.Generated
                 return;
             }
 
-            _dictionary.Add(key, value);
+            AdditionalProperties.Add(key, value);
         }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _dictionary.GetEnumerator();

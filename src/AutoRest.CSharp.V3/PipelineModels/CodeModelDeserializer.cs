@@ -118,7 +118,9 @@ namespace AutoRest.CSharp.V3.PipelineModels
             {
                 //emitter.Emit(new MappingStart());
 
-                emitter.Emit(new Scalar(value.ToString()));
+                var enumMember = type.GetMember(value.ToString()).FirstOrDefault();
+                var alias = enumMember?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault() ?? value.ToString();
+                emitter.Emit(new Scalar(alias));
 
                 //emitter.Emit(new MappingEnd());
             }
