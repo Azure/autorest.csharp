@@ -52,6 +52,7 @@ namespace AutoRest.CodeModel
             Priority.Select((n, i) => new { Name = n, Value = i }).FirstOrDefault(p => p.Name == alias)?.Value
             ?? NegativePriority.Select((n, i) => new { Name = n, Value = (i + 1) * -1 }).FirstOrDefault(p => p.Name == alias)?.Value;
 
+        // This walks the entire inheritance chain of every class derived from the provided pair, and returns those class names.
         private static IEnumerable<string> GetParentPairs((string ClassName, string ParentName)[] allPairs, (string ClassName, string ParentName) pair)
         {
             yield return pair.ClassName;
@@ -61,16 +62,12 @@ namespace AutoRest.CodeModel
             {
                 yield return foundPair;
             }
-
-            //if (!foundPairs.Any())
-            //{
-            //    yield return pair.ClassName;
-            //}
         }
 
         public static string AddOrderInfo(string cSharpCode)
         {
             var lines = cSharpCode.ToLines().ToArray();
+            // Parse and pair the class and parent class information
             var namePairs = lines
                 .Where(l => l.Contains("partial class"))
                 .Select(l =>
@@ -82,8 +79,10 @@ namespace AutoRest.CodeModel
                 })
                 .ToArray();
             var parentPairs = namePairs.Where(p => p.ParentName != String.Empty).ToArray();
+            // Group classes based on all classes that derive from a class with no parent (base class)
             var classNameGroups = namePairs
                 .Where(p => p.ParentName == String.Empty)
+                // Get class names from all branches of a base class
                 .Select((p, i) => (ClassNames: GetParentPairs(parentPairs, p).ToArray(), GroupIndex: i))
                 .ToArray();
 

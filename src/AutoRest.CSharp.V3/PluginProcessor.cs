@@ -43,9 +43,9 @@ namespace AutoRest.CSharp.V3
                 await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
                 //codeModelYaml = await autoRest.ReadFile(fileName);
 
-                var codeModel = CodeModelDeserializer.CreateCodeModel(codeModelYaml);
+                var codeModel = CodeModelDeserializer.DeserializeCodeModel(codeModelYaml);
                 var fileName2 = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}-Serial.yaml";
-                var codeModelYamlSerial = codeModel.ToYaml();
+                var codeModelYamlSerial = codeModel.Serialize();
                 await autoRest.WriteFile(fileName2, codeModelYamlSerial, "source-file-csharp");
 
                 return true;
