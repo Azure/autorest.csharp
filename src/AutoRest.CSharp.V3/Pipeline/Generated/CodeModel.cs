@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace AutoRest.CSharp.V3.PipelineModels.Generated
+namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     #pragma warning disable // Disable all warnings
 

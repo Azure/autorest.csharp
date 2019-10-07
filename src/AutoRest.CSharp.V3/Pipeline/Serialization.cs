@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using AutoRest.CSharp.V3.Common.Utilities;
-using AutoRest.CSharp.V3.PipelineModels.Generated;
+using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.Utilities;
 
-namespace AutoRest.CSharp.V3.PipelineModels
+namespace AutoRest.CSharp.V3.Pipeline
 {
     internal static class Serialization
     {

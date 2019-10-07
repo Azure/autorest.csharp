@@ -4,7 +4,8 @@ using System.Reflection;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace AutoRest.CSharp.V3.PipelineModels.Generated
+// ReSharper disable once CheckNamespace
+namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal partial class CSharpLanguage
     {

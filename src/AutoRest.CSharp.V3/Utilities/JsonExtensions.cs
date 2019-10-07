@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoRest.CSharp.V3.Common.Utilities
+namespace AutoRest.CSharp.V3.Utilities
 {
     internal static class JsonExtensions
     {

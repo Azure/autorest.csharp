@@ -30,8 +30,4 @@
     <PackageReference Include="YamlDotNet" Version="8.0.0-emit-default-values0565" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="PipelineModels\Generated\" />
-  </ItemGroup>
-
 </Project>

@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.Common.JsonRpc;
-using AutoRest.CSharp.V3.Common.Utilities;
-using AutoRest.CSharp.V3.PipelineModels;
+using AutoRest.CSharp.V3.JsonRpc;
+using AutoRest.CSharp.V3.Pipeline;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AutoRest.CSharp.V3.Common.Utilities
+namespace AutoRest.CSharp.V3.Utilities
 {
     //https://stackoverflow.com/a/32406585/294804
     [SuppressMessage("ReSharper", "IdentifierTypo")]

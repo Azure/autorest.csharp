@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
-namespace AutoRest.CSharp.V3.Common.Utilities
+namespace AutoRest.CSharp.V3.Utilities
 {
     public static class DebuggerAwaiter
     {

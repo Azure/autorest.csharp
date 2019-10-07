@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace AutoRest.CSharp.V3.Common.Utilities
+namespace AutoRest.CSharp.V3.Utilities
 {
     internal static class JsonElementExtensions
     {

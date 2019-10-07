@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,7 +10,7 @@ namespace AutoRest.CodeModel
 {
     internal static class Program
     {
-        private const string Path = "AutoRest.CSharp.V3/PipelineModels/Generated";
+        private const string Path = "AutoRest.CSharp.V3/Pipeline/Generated";
         private static readonly string Namespace = Path.Replace("/", ".");
 
         private static void Main()
@@ -21,7 +20,6 @@ namespace AutoRest.CodeModel
 
             var schemaJsonLines = File.ReadAllLines("../code-model.json");
             var schemaJson = String.Join(Environment.NewLine, schemaJsonLines)
-                //var schemaJson = File.ReadAllText("../code-model.json")
                 // Fixes + and - enum values that cannot be generated into C# enum names
                 .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"")
                 // Makes Choices only have string values
@@ -56,8 +54,8 @@ namespace AutoRest.CodeModel
                 // Set properties to be single quoted
                 .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"");
 
-            var fileWithOrdering = Orderer.AddOrderInfo(cleanFile);
-            File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/Generated/CodeModel.cs", fileWithOrdering);
+            var fileWithOrdering = OrderCalculator.InsertOrderValues(cleanFile);
+            File.WriteAllText($"../../{Path}/CodeModel.cs", fileWithOrdering);
         }
     }
 }

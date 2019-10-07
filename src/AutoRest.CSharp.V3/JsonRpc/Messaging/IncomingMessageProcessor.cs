@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using AutoRest.CSharp.V3.Common.Utilities;
+using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
     internal delegate void IncomingRequestProcess(IncomingRequest request);
     internal delegate void IncomingResponseProcess(IncomingResponse request);

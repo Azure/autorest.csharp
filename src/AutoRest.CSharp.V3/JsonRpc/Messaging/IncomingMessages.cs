@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using System.Threading;
-using AutoRest.CSharp.V3.Common.Utilities;
+using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
     internal delegate bool ProcessAction(Connection connection, string pluginName, string sessionId);
 

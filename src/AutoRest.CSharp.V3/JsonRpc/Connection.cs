@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.Common.JsonRpc.Messaging;
-using AutoRest.CSharp.V3.Common.Utilities;
+using AutoRest.CSharp.V3.JsonRpc.Messaging;
+using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc
 {
     internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
 

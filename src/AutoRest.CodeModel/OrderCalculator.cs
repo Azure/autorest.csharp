@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.CodeModel
 {
-    internal static class Orderer
+    internal static class OrderCalculator
     {
         //https://github.com/Azure/perks/blob/8b2631ee1f4d0a66e2ab3ea24fb6e72e9bc372e7/codegen/yaml.ts#L8-L39
         private static readonly string[] Priority = {
@@ -64,7 +64,7 @@ namespace AutoRest.CodeModel
             }
         }
 
-        public static string AddOrderInfo(string cSharpCode)
+        public static string InsertOrderValues(string cSharpCode)
         {
             var lines = cSharpCode.ToLines().ToArray();
             // Parse and pair the class and parent class information

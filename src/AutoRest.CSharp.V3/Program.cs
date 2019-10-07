@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.V3.Common.JsonRpc;
-using AutoRest.CSharp.V3.Common.JsonRpc.Messaging;
+using AutoRest.CSharp.V3.JsonRpc;
+using AutoRest.CSharp.V3.JsonRpc.Messaging;
 
 namespace AutoRest.CSharp.V3
 {

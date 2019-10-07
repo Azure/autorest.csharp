@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AutoRest.CSharp.V3.Common.Utilities
+namespace AutoRest.CSharp.V3.Utilities
 {
     internal static class StringExtensions
     {

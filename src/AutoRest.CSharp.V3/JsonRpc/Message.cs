@@ -1,6 +1,6 @@
-﻿using AutoRest.CSharp.V3.Common.Utilities;
+﻿using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc
 {
     internal interface IMessage { }
     internal class Message : IMessage

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
-using AutoRest.CSharp.V3.Common.Utilities;
+using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.Common.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc
 {
     [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal class PeekableBinaryStream : IDisposable
