@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.PipelineModels.Generated
     internal partial class ApiVersion
     {
         /// <summary>the actual api version string used in the API</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "version", Order = 1)]
+        [YamlDotNet.Serialization.YamlMember(ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = "version", Order = 1)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Version { get; set; }
 

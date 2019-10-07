@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -14,10 +12,10 @@ using YamlDotNet.Serialization.Utilities;
 
 namespace AutoRest.CSharp.V3.PipelineModels
 {
-    internal static class CodeModelDeserializer
+    internal static class Serialization
     {
         private static KeyValuePair<string, Type> CreateTagPair(this Type type) => new KeyValuePair<string, Type>($"!{type.Name}", type);
-        private static readonly IEnumerable<Type> GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == "AutoRest.CSharp.V3.PipelineModels.Generated").ToArray();
+        private static readonly IEnumerable<Type> GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
         private static readonly IEnumerable<KeyValuePair<string, Type>> TagMap = GeneratedTypes.Where(t => t.IsClass).Select(CreateTagPair);
 
         private static BuilderSkeleton<TBuilder> WithTagMapping<TBuilder>(this BuilderSkeleton<TBuilder> builder, IEnumerable<KeyValuePair<string, Type>> mapping) where TBuilder : BuilderSkeleton<TBuilder>
@@ -35,7 +33,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
         public static CodeModel DeserializeCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
 
         private static ISerializer _serializer;
-        private static ISerializer Serializer => _serializer ??= new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
+        private static ISerializer Serializer => _serializer ??= new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
 
         public static string Serialize(this CodeModel codeModel) => Serializer.Serialize(codeModel);
 
@@ -66,7 +64,7 @@ namespace AutoRest.CSharp.V3.PipelineModels
 
             public object ReadYaml(IParser parser, Type type)
             {
-                var parsedEnum = parser.Expect<Scalar>();
+                var parsedEnum = parser.Consume<Scalar>();
                 var serializableValues = type.GetMembers()
                     .Select(m => new KeyValuePair<string, MemberInfo>(m.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault(), m))
                     .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);

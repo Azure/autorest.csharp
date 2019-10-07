@@ -41,12 +41,15 @@ namespace AutoRest.CSharp.V3
                 await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
                 var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml";
                 await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
-                //codeModelYaml = await autoRest.ReadFile(fileName);
 
-                var codeModel = CodeModelDeserializer.DeserializeCodeModel(codeModelYaml);
+                var codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
                 var fileName2 = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}-Serial.yaml";
                 var codeModelYamlSerial = codeModel.Serialize();
                 await autoRest.WriteFile(fileName2, codeModelYamlSerial, "source-file-csharp");
+                var codeModel2 = Serialization.DeserializeCodeModel(codeModelYamlSerial);
+                var codeModelYamlDeserial = codeModel2.Serialize();
+                var fileName3 = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}-Deserial.yaml";
+                await autoRest.WriteFile(fileName3, codeModelYamlDeserial, "source-file-csharp");
 
                 return true;
             }

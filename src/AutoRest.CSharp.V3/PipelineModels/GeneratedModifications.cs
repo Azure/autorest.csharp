@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.V3.PipelineModels.Generated
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.V3.PipelineModels.Generated
         [YamlMember(Alias = "discriminatorValue")]
         public string DiscriminatorValue { get; set; }
 
-        [YamlMember(Alias = "uid")]
+        [YamlMember(Alias = "uid", ScalarStyle = ScalarStyle.SingleQuoted)]
         public string Uid { get; set; }
 
         [YamlMember(Alias = "internal")]

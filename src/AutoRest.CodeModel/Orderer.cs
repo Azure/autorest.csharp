@@ -101,8 +101,8 @@ namespace AutoRest.CodeModel
                     // Convert the property line into alias names
                     .Select(p =>
                     {
-                        var match = Regex.Match(p.Line, @"YamlMember\(Alias = ""(.*)""");
-                        var alias = match.Success ? match.Groups[1].Value : String.Empty;
+                        var match = Regex.Match(p.Line, @"YamlMember\((.*)Alias = ""(.*)""");
+                        var alias = match.Success ? match.Groups[2].Value : String.Empty;
                         return (p.Index, p.Line, Alias: alias);
                     }))
                 // Order the properties within each class

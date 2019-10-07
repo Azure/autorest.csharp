@@ -17,5 +17,12 @@ namespace AutoRest.CodeModel
                 yield return line;
             }
         }
+
+        //https://stackoverflow.com/a/8809437/294804
+        public static string ReplaceFirst(this string text, string oldValue, string newValue)
+        {
+            var position = text.IndexOf(oldValue, StringComparison.Ordinal);
+            return position < 0 ? text : text.Substring(0, position) + newValue + text.Substring(position + oldValue.Length);
+        }
     }
 }

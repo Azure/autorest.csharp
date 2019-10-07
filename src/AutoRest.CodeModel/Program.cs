@@ -52,7 +52,9 @@ namespace AutoRest.CodeModel
                 .Replace("\"plus\"", "\"+\"")
                 .Replace("\"minus\"", "\"-\"")
                 // Weird generation issue workaround
-                .Replace($"{Namespace}.bool.True", "true");
+                .Replace($"{Namespace}.bool.True", "true")
+                // Set properties to be single quoted
+                .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"");
 
             var fileWithOrdering = Orderer.AddOrderInfo(cleanFile);
             File.WriteAllText("../../AutoRest.CSharp.V3/PipelineModels/Generated/CodeModel.cs", fileWithOrdering);
