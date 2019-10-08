@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3
 
                 var codeModelYaml = await autoRest.ReadFile(codeModelFile);
                 var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();
-                await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
+                //await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
                 var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml";
                 await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
 
