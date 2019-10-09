@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3
         public static async Task<bool> Start(AutoRestInterface autoRest)
         {
             // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
-            if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.debugger")).IsObject())
+            if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.debugger-attach")).IsObject())
             {
                 DebuggerAwaiter.Await();
             }
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3
 
                 var codeModelYaml = await autoRest.ReadFile(codeModelFile);
                 var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();
-                await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
+                //await autoRest.Message(new Message { Channel = Channel.Fatal, Text = inputFile });
                 var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml";
                 await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
 

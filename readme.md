@@ -5,7 +5,7 @@
 ```yaml
 test-item: "cheese"
 use-extension:
-  "@autorest/modelerfour": "~4.0.4"
+  "@autorest/modelerfour": "~4.0.20"
 
 pipeline:
   modelerfour:
