@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.V3.Utilities
         public static JsonProperty? GetPropertyOrNull(this IEnumerable<JsonProperty?> properties, string propertyName) =>
             properties.FirstOrDefault(p => p?.Name == propertyName);
 
-        public static TValue ToObject<TValue>(this JsonElement element, JsonSerializerOptions options = null) =>
+        public static TValue ToObject<TValue>(this JsonElement element, JsonSerializerOptions? options = null) =>
             JsonSerializer.Deserialize<TValue>(element.GetRawText(), options);
 
         public static JsonElement? Parse(this string jsonText)
@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.V3.Utilities
         public static JsonElement[] Unwrap(this JsonElement element) =>
             element.ValueKind == JsonValueKind.Array ? element.EnumerateArray().ToArray() : new[] { element };
 
-        public static string[] ToStringArray(this JsonElement? element) =>
+        public static string[]? ToStringArray(this JsonElement? element) =>
             element?.ValueKind == JsonValueKind.Array ? element.Value.EnumerateArray().Select(e => e.GetString()).ToArray() : null;
-        public static string ToStringValue(this JsonElement? element) =>
+        public static string? ToStringValue(this JsonElement? element) =>
             element?.ValueKind == JsonValueKind.String ? element.Value.GetString() : null;
         public static int? ToNumber(this JsonElement? element) =>
             element?.ValueKind == JsonValueKind.Number ? element.Value.GetInt32() : (int?)null;
@@ -39,11 +39,11 @@ namespace AutoRest.CSharp.V3.Utilities
         public static T ToType<T>(this JsonElement? element) =>
             typeof(T) switch
             {
-                var t when t == typeof(string) => (T)(object)element.ToStringValue(),
-                var t when t == typeof(string[]) => (T)(object)element.ToStringArray(),
-                var t when t == typeof(int?) => (T)(object)element.ToNumber(),
-                var t when t == typeof(bool?) => (T)(object)element.ToBoolean(),
-                var t when t == typeof(JsonElement?) => (T)(object)element,
+                var t when t == typeof(string) => (T)(object?)element.ToStringValue()!,
+                var t when t == typeof(string[]) => (T)(object?)element.ToStringArray()!,
+                var t when t == typeof(int?) => (T)(object?)element.ToNumber()!,
+                var t when t == typeof(bool?) => (T)(object?)element.ToBoolean()!,
+                var t when t == typeof(JsonElement?) => (T)(object?)element!,
                 _ => throw new NotSupportedException($"Type {typeof(T)} is not a supported response type.")
             };
     }

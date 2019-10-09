@@ -88,8 +88,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>per-serialization information for this Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serialization", Order = 44)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SerializationFormats Serialization { get; set; } = new SerializationFormats();
+        public SerializationFormats Serialization { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "uid", Order = 46)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -1280,18 +1279,15 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>responses that indicate a successful call</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "responses", Order = 9)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Response> Responses { get; set; } = new System.Collections.ObjectModel.Collection<Response>();
+        public System.Collections.Generic.ICollection<Response> Responses { get; set; }
 
         /// <summary>responses that indicate a failed call</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "exceptions", Order = 10)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Response> Exceptions { get; set; } = new System.Collections.ObjectModel.Collection<Response>();
+        public System.Collections.Generic.ICollection<Response> Exceptions { get; set; }
 
         /// <summary>the apiVersion to use for a given profile name</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "profile", Order = 5)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public DictionaryOfApiVersion Profile { get; set; } = new DictionaryOfApiVersion();
+        public DictionaryOfApiVersion Profile { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "$key", Order = 0)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2015,8 +2011,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>the Serialization Style used for the parameter.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "style", Order = 15)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public SerializationStyle Style { get; set; }
+        public SerializationStyle? Style { get; set; }
 
         /// <summary>when set, this indicates that the content of the parameter should not be subject to URI encoding rules.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "skipUriEncoding", Order = 11)]
@@ -2136,8 +2131,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>content returned by the service in the HTTP headers</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "headers", Order = 2)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Schema> Headers { get; set; } = new System.Collections.ObjectModel.Collection<Schema>();
+        public System.Collections.Generic.ICollection<Schema> Headers { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2199,8 +2193,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>per-serialization information for this Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serialization", Order = 8)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SerializationFormats Serialization { get; set; } = new SerializationFormats();
+        public SerializationFormats Serialization { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "uid", Order = 10)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2265,8 +2258,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>per-serialization information for this Schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serialization", Order = 8)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public SerializationFormats Serialization { get; set; } = new SerializationFormats();
+        public SerializationFormats Serialization { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "uid", Order = 10)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2330,8 +2322,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         /// <summary>all global parameters (ie, ImplementationLocation = client )</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "globalParameters", Order = 1)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Parameter> GlobalParameters { get; set; } = new System.Collections.ObjectModel.Collection<Parameter>();
+        public System.Collections.Generic.ICollection<Parameter> GlobalParameters { get; set; }
 
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language", Order = 5)]

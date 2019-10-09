@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
@@ -69,7 +71,13 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public void Add(string key, object value) => AddAndMap(key, value);
         public bool ContainsKey(string key) => _dictionary.ContainsKey(key);
         public bool Remove(string key) => _dictionary.Remove(key);
-        public bool TryGetValue(string key, out object value) => _dictionary.TryGetValue(key, out value);
+
+        public bool TryGetValue(string key, out object value)
+        {
+            var result = _dictionary.TryGetValue(key, out var outValue);
+            value = outValue ?? String.Empty;
+            return result;
+        }
 
         public object this[string key]
         {
@@ -81,3 +89,4 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public ICollection<object> Values => _dictionary.Values;
     }
 }
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.

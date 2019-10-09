@@ -70,7 +70,8 @@ namespace AutoRest.CSharp.V3.JsonRpc
             if (count > 0 && _currentByte.HasValue)
             {
                 // ReSharper disable once PossibleInvalidOperationException
-                buffer[index++] = PopCurrentByte().Value;
+                // ReSharper disable once PossibleNullReferenceException
+                buffer[index++] = PopCurrentByte()!.Value;
             }
             while (index < count)
             {
@@ -79,7 +80,7 @@ namespace AutoRest.CSharp.V3.JsonRpc
             return buffer;
         }
 
-        public string ReadAsciiLine()
+        public string? ReadAsciiLine()
         {
             var sb = new StringBuilder();
             byte? character;
@@ -98,10 +99,10 @@ namespace AutoRest.CSharp.V3.JsonRpc
             return sb.Length != 0 ? sb.ToString() : null;
         }
 
-        public IEnumerable<string> ReadAllAsciiLines(Predicate<string> condition = null)
+        public IEnumerable<string?> ReadAllAsciiLines(Predicate<string?>? condition = null)
         {
             condition ??= s => s == null;
-            string line;
+            string? line;
             while (condition(line = ReadAsciiLine()))
             {
                 yield return line;

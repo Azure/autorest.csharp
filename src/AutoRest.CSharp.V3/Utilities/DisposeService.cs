@@ -8,10 +8,10 @@ namespace AutoRest.CSharp.V3.Utilities
     internal class DisposeService<T> where T : IDisposable
     {
         private readonly T _disposee;
-        public Action<T> ManagedAction { get; set; }
-        public Action<T> UnmanagedAction { get; set; }
+        public Action<T>? ManagedAction { get; set; }
+        public Action<T>? UnmanagedAction { get; set; }
 
-        public DisposeService(T disposee, Action<T> managedAction = null, Action<T> unmanagedAction = null)
+        public DisposeService(T disposee, Action<T>? managedAction = null, Action<T>? unmanagedAction = null)
         {
             _disposee = disposee;
             ManagedAction = managedAction;
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.V3.Utilities
             var hasUnmanagedAction = UnmanagedAction != null;
             if (hasUnmanagedAction)
             {
-                UnmanagedAction(_disposee);
+                UnmanagedAction!(_disposee);
             }
             _isDisposed = true;
             if (isDisposing && hasUnmanagedAction)

@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
         {
             var headers = _stream.ReadAllAsciiLines(l => !l.IsNullOrWhiteSpace()).Select(l =>
             {
-                var parts = l.Split(":", 2).Select(p => p.Trim()).ToArray();
+                var parts = l!.Split(":", 2).Select(p => p.Trim()).ToArray();
                 return (Key: parts[0], Value: parts[1]);
             }).ToDictionary(h => h.Key, h => h.Value);
 

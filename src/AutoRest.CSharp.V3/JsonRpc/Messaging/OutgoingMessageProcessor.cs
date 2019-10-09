@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
         private readonly DisposeService<OutgoingMessageProcessor> _disposeService;
         private readonly Stream _stream;
         private readonly CancellationToken _cancellationToken;
-        private Semaphore _streamSemaphore = new Semaphore(1, 1);
+        private readonly Semaphore _streamSemaphore = new Semaphore(1, 1);
 
         public OutgoingMessageProcessor(Stream stream, CancellationToken cancellationToken)
         {
@@ -47,7 +47,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
         private void Disposer(OutgoingMessageProcessor processor)
         {
             _streamSemaphore?.Dispose();
-            _streamSemaphore = null;
         }
     }
 #pragma warning restore IDE0069 // Disposable fields should be disposed
