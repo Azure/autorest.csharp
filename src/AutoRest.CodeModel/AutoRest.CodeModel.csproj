@@ -10,6 +10,8 @@
     <!-- Some methods are marked async and don't have an await in them -->
     <NoWarn>1998</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

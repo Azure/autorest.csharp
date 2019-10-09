@@ -15,8 +15,8 @@ namespace AutoRest.CSharp.V3.JsonRpc
     internal sealed class Connection : IDisposable
     {
         private readonly DisposeService<Connection> _disposeService;
-        private Stream _outputStream;
-        private PeekableBinaryStream _inputStream;
+        private readonly Stream _outputStream;
+        private readonly PeekableBinaryStream _inputStream;
         private readonly Task _listener;
 
         public CancellationTokenSource CancellationTokenSource { get; private set; } = new CancellationTokenSource();
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.JsonRpc
         private readonly IncomingMessageProcessor _incomingMessageProcessor;
         private readonly OutgoingMessageProcessor _outgoingMessageProcessor;
 
-        public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction> incomingRequestActions = null)
+        public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction>? incomingRequestActions = null)
         {
             _disposeService = new DisposeService<Connection>(this, Disposer);
             _cancellationToken = CancellationTokenSource.Token;
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.V3.JsonRpc
 
         private async Task<bool> Listen()
         {
-            bool IsAlive() => !_cancellationToken.IsCancellationRequested && _outputStream != null && _inputStream != null;
+            bool IsAlive() => !_cancellationToken.IsCancellationRequested;
             while (IsAlive() && _incomingMessageProcessor.ProcessStream()) { }
             return false;
         }
@@ -52,12 +52,12 @@ namespace AutoRest.CSharp.V3.JsonRpc
         {
             Task.Factory.StartNew(() =>
             {
-                if (_incomingRequestActions.TryGetValue(request.Method, out var requestAction))
+                if (_incomingRequestActions.TryGetValue(request.Method ?? String.Empty, out var requestAction))
                 {
                     var result = requestAction(this, request);
                     if (!request.Id.IsNullOrEmpty())
                     {
-                        _outgoingMessageProcessor.Respond(request.Id, result).GetAwaiter().GetResult();
+                        _outgoingMessageProcessor.Respond(request.Id!, result).GetAwaiter().GetResult();
                     }
                 }
             }, _cancellationToken);
@@ -69,8 +69,8 @@ namespace AutoRest.CSharp.V3.JsonRpc
             {
                 if (!response.Id.IsNullOrEmpty())
                 {
-                    _responses.Remove(response.Id, out var responseTask);
-                    responseTask.TrySetResult(response.Result);
+                    _responses.Remove(response.Id!, out var responseTask);
+                    responseTask?.TrySetResult(response.Result ?? String.Empty);
                 }
             }, _cancellationToken);
         }
@@ -95,11 +95,8 @@ namespace AutoRest.CSharp.V3.JsonRpc
             foreach (var t in _responses.Values) { t.SetCanceled(); }
 
             _outputStream?.Dispose();
-            _outputStream = null;
             _inputStream?.Dispose();
-            _inputStream = null;
             CancellationTokenSource?.Dispose();
-            CancellationTokenSource = null;
         }
     }
 #pragma warning restore IDE0069 // Disposable fields should be disposed

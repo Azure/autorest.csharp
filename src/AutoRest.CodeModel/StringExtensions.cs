@@ -10,7 +10,7 @@ namespace AutoRest.CodeModel
         public static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)
         {
             using var sr = new StringReader(value);
-            string line;
+            string? line;
             while ((line = sr.ReadLine()) != null)
             {
                 if (removeEmptyLines && String.IsNullOrWhiteSpace(line)) continue;

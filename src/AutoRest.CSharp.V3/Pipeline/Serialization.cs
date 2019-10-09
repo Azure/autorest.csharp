@@ -27,32 +27,34 @@ namespace AutoRest.CSharp.V3.Pipeline
             return builder;
         }
 
-        private static IDeserializer _deserializer;
+        private static IDeserializer? _deserializer;
         private static IDeserializer Deserializer => _deserializer ??= new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
 
         public static CodeModel DeserializeCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
 
-        private static ISerializer _serializer;
+        private static ISerializer? _serializer;
         private static ISerializer Serializer => _serializer ??= new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
 
         public static string Serialize(this CodeModel codeModel) => Serializer.Serialize(codeModel);
 
         public static Dictionary<string, PropertyInfo> GetDeserializableProperties(this Type type) => type.GetProperties()
-            .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault(), p))
+            .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault() ?? String.Empty, p))
             .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
 
-        // Only allows deserialization of properties that are primitives or type Dictionary<object, object>. Does not support properties that are custom classes.
-        public static object DeserializeDictionary(this PropertyInfo info, object value)
+        // Only allows deserialization of properties that are primitives or type Dictionary<object, object?>. Does not support properties that are custom classes.
+        public static object? DeserializeDictionary(this PropertyInfo info, object value)
         {
-            if (!(value is Dictionary<object, object>)) return TypeConverter.ChangeType(value, info.PropertyType);
+            if (!(value is Dictionary<object, object?>)) return TypeConverter.ChangeType(value, info.PropertyType);
 
             var type = info.PropertyType;
             var properties = type.GetDeserializableProperties();
             var property = Activator.CreateInstance(type);
-            var matchedProperties = ((Dictionary<object, object>)value).Where(e => properties.ContainsKey(e.Key.ToString()));
+            var matchedProperties = ((Dictionary<object, object?>)value)
+                .Select(e => (Key: e.Key?.ToString() ?? String.Empty, e.Value))
+                .Where(e => properties.ContainsKey(e.Key));
             foreach (var (propKey, propValue) in matchedProperties)
             {
-                var innerInfo = properties[propKey.ToString()];
+                var innerInfo = properties[propKey];
                 innerInfo.SetValue(property, innerInfo.DeserializeDictionary(propValue));
             }
             return property;
@@ -76,10 +78,10 @@ namespace AutoRest.CSharp.V3.Pipeline
                 return Enum.Parse(type, serializableValues[parsedEnum.Value].Name);
             }
 
-            public void WriteYaml(IEmitter emitter, object value, Type type)
+            public void WriteYaml(IEmitter emitter, object? value, Type type)
             {
-                var enumMember = type.GetMember(value.ToString()).FirstOrDefault();
-                var yamlValue = enumMember?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault() ?? value.ToString();
+                var enumMember = type.GetMember(value?.ToString() ?? String.Empty).FirstOrDefault();
+                var yamlValue = enumMember?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault() ?? value?.ToString() ?? String.Empty;
                 emitter.Emit(new Scalar(yamlValue));
             }
         }
