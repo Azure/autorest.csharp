@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public class CodeBlock : IDisposable
         {
-            public Action _endBlockAction;
+            public Action? _endBlockAction;
 
             public CodeBlock(Action endBlockAction)
             {
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             public void EndBlock()
             {
-                Action action = _endBlockAction;
+                Action? action = _endBlockAction;
                 _endBlockAction = null;
                 if (action != null)
                 {
