@@ -6,30 +6,27 @@ using System.Text;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    public abstract class BaseCSharpWriter
+    internal abstract class BaseCSharpWriter
     {
-        private HashSet<string> _usings = new HashSet<string>();
+        private readonly HashSet<string> _usings = new HashSet<string>();
         public BaseCSharpWriter()
         {
         }
 
         public class CodeBlock : IDisposable
         {
-            public Action? _endBlockAction;
+            public Action? EndBlockAction;
 
             public CodeBlock(Action endBlockAction)
             {
-                _endBlockAction = endBlockAction;
+                EndBlockAction = endBlockAction;
             }
 
             public void EndBlock()
             {
-                Action? action = _endBlockAction;
-                _endBlockAction = null;
-                if (action != null)
-                {
-                    action();
-                }
+                var action = EndBlockAction;
+                EndBlockAction = null;
+                action?.Invoke();
             }
 
             public void Dispose()
@@ -94,7 +91,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void DocSummary(string summary)
         {
             Line("/// <summary>");
-            string[] summaryLines = summary.Split(Environment.NewLine);
+            var summaryLines = summary.Split(Environment.NewLine);
             foreach (var summaryLine in summaryLines)
             {
                 Line($"/// {summaryLine}");
@@ -132,11 +129,11 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
         public string TypeReference(string name)
         {
-            int index = name.LastIndexOf('.');
+            var index = name.LastIndexOf('.');
 
             if (index > 0)
             {
-                string ns = name.Substring(0, index);
+                var ns = name.Substring(0, index);
                 name = name.Substring(index + 1);
 
                 _usings.Add(ns);

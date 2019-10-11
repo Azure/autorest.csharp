@@ -11,23 +11,28 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal partial class CSharpLanguage
     {
+        [YamlDotNet.Serialization.YamlMember(Alias = "name", Order = 0)]
+        public string Name { get; set; }
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "type", Order = 1)]
+        public Type Type { get; set; }
     }
 
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {
         /// <summary>namespace of the implementation of this item</summary>
-        [YamlMember(Alias = "namespace")]
+        [YamlMember(Alias = "namespace", Order = 2)]
         public string Namespace { get; set; }
 
         /// <summary>if this is a child of a polymorphic class, this will have the value of the discriminator.</summary>
-        [YamlMember(Alias = "discriminatorValue")]
+        [YamlMember(Alias = "discriminatorValue", Order = 3)]
         public string DiscriminatorValue { get; set; }
 
-        [YamlMember(Alias = "uid", ScalarStyle = ScalarStyle.SingleQuoted)]
+        [YamlMember(Alias = "uid", Order = 4, ScalarStyle = ScalarStyle.SingleQuoted)]
         public string Uid { get; set; }
 
-        [YamlMember(Alias = "internal")]
+        [YamlMember(Alias = "internal", Order = 5)]
         public bool Internal { get; set; }
 
         [YamlIgnore]

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -13,7 +16,21 @@ namespace AutoRest.CSharp.V3
 {
     internal static class PluginProcessor
     {
-        public static string[] PluginNames { get; } = { "csharp-v3" };
+        //public static Dictionary<string, Func<IPlugin>> Plugins = new Dictionary<string, Func<IPlugin>>
+        //{
+        //    { SerializeTester.PluginName, () => new SerializeTester() },
+        //    { ModelCreator.PluginName, () => new ModelCreator() },
+        //    { SerializeTester.PluginName, () => new SerializeTester() },
+        //    { SerializeTester.PluginName, () => new SerializeTester() },
+        //};
+
+        //https://stackoverflow.com/a/26750/294804
+        private static readonly Type[] PluginTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => t.Namespace == typeof(IPlugin).Namespace && t.IsClass && !t.IsAbstract && typeof(IPlugin).IsAssignableFrom(t) && t.GetCustomAttribute<PluginNameAttribute>(true) != null)
+            .ToArray();
+        public static readonly Dictionary<string, Func<IPlugin>> Plugins = PluginTypes
+            .ToDictionary(pt => pt.GetCustomAttribute<PluginNameAttribute>(true)!.PluginName, pt => (Func<IPlugin>)(() => (IPlugin)Activator.CreateInstance(pt)!));
+        public static readonly string[] PluginNames = Plugins.Keys.ToArray();
 
         public static async Task<bool> Start(AutoRestInterface autoRest)
         {
@@ -49,15 +66,9 @@ namespace AutoRest.CSharp.V3
                 var codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
                 var configuration = Configuration.Create(autoRest);
 
-                await new ModelCreator(autoRest, codeModel, configuration).Execute();
+                await Plugins[autoRest.PluginName]().Execute(autoRest, codeModel, configuration);
+                //await new ModelCreator(autoRest, codeModel, configuration).Execute();
 
-
-                foreach (var schema in codeModel.Schemas.Objects)
-                {
-                    ModelWriter modelWriter = new ModelWriter();
-                    modelWriter.WriteObjectSchema(schema);
-                    await autoRest.WriteFile(schema.Language.Default.Name + ".cs", modelWriter.GetFormattedCode(), "source-file-csharp");
-                }
                 return true;
             }
             catch (Exception e)

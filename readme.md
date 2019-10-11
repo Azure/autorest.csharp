@@ -12,10 +12,10 @@ pipeline:
     input: openapi-document/multi-api/identity
   modelerfour/new-transform:
     input: modelerfour
-  csharp-v3:
+  model-creator:
     input: modelerfour/new-transform
-  csharp-v3/emitter:
-    input: csharp-v3
+  model-creator/emitter:
+    input: model-creator
     scope: output-scope
 
 output-scope:
