@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
@@ -50,6 +51,13 @@ namespace AutoRest.CSharp.V3
 
                 await new ModelCreator(autoRest, codeModel, configuration).Execute();
 
+
+                foreach (var schema in codeModel.Schemas.Objects)
+                {
+                    ModelWriter modelWriter = new ModelWriter();
+                    modelWriter.WriteObjectSchema(schema);
+                    await autoRest.WriteFile(schema.Language.Default.Name + ".cs", modelWriter.GetFormattedCode(), "source-file-csharp");
+                }
                 return true;
             }
             catch (Exception e)
