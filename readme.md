@@ -12,8 +12,10 @@ pipeline:
     input: openapi-document/multi-api/identity
   modelerfour/new-transform:
     input: modelerfour
-  model-creator:
+  type-identifier:
     input: modelerfour/new-transform
+  model-creator:
+    input: type-identifier
   model-creator/emitter:
     input: model-creator
     scope: output-scope

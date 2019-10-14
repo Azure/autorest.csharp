@@ -20,7 +20,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     foreach (var property in schema.Properties)
                     {
-                        AutoProperty("public", property.Schema.Type.ToString(), property.Language.Default.Name);
+                        var type = property.Schema.Language.Csharp?.TypeName ?? property.Schema.Type.ToString();
+                        AutoProperty("public", type, property.Language.Default.Name);
                     }
                 }
             }
