@@ -1,9 +1,4 @@
 ﻿using AutoRest.CSharp.V3.Pipeline.Generated;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -25,8 +20,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     foreach (var property in schema.Properties)
                     {
-                        AutoProperty("public", property.Schema.Type.ToString(), property.Language.Default.Name);
-
+                        var type = property.Schema.Language.Csharp?.Type?.TypeFullName ?? property.Schema.Type.ToString();
+                        AutoProperty("public", type, property.Language.Default.Name);
                     }
                 }
             }

@@ -3,7 +3,7 @@
     "AutoRest.CSharp.V3": {
       "commandName": "Executable",
       "executablePath": "node",
-      "commandLineArgs": "%appdata%/npm/node_modules/@autorest/autorest/entrypoints/app.js --debug --verbose --use:$(ProjectDir)../.. --input-file:$(ProjectDir)../../samples/xkcd/xkcd.yaml --csharp-v3.debugger",
+      "commandLineArgs": "%appdata%/npm/node_modules/@autorest/autorest/entrypoints/app.js --debug --verbose --use:$(ProjectDir)../.. --required:$(ProjectDir)../../samples/Xkcd/readme.md --model-creator.debugger",
       "workingDirectory": "$(ProjectDir)../.."
     }
   }

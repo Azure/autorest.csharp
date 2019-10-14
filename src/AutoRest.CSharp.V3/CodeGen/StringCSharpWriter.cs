@@ -1,17 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    public class StringCSharpWriter : BaseCSharpWriter
+    internal class StringCSharpWriter : BaseCSharpWriter
     {
-        private StringBuilder _builder;
+        private readonly StringBuilder _builder;
 
         public StringCSharpWriter()
         {

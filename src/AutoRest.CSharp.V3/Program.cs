@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.V3
     internal static class Program
     {
         private static bool HasServerArgument(IEnumerable<string> args) => args?.Any(a => a.Equals("--server", StringComparison.InvariantCultureIgnoreCase)) ?? false;
+        private static bool PluginStart(Connection connection, string pluginName, string sessionId) => PluginProcessor.Start(new AutoRestInterface(connection, pluginName, sessionId)).GetAwaiter().GetResult();
 
         public static int Main(string[] args)
         {
@@ -24,8 +25,6 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            static bool PluginStart(Connection c, string pn, string si) => PluginProcessor.Start(new AutoRestInterface(c, pn, si)).GetAwaiter().GetResult();
-            
             var connection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(),
                 new Dictionary<string, IncomingRequestAction>
                 {
@@ -33,7 +32,6 @@ namespace AutoRest.CSharp.V3
                     { nameof(IncomingMessages.Process),        (c, r) => r.Process(c, PluginStart) },
                     { nameof(IncomingMessages.Shutdown),       (c, r) => r.Shutdown(c.CancellationTokenSource) }
                 });
-
             connection.Start();
 
             Console.Error.WriteLine("Shutting Down");

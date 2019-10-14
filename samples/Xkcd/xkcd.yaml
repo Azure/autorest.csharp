@@ -24,11 +24,11 @@ info:
 externalDocs:
   url: 'https: //xkcd.com/json.html'
 securityDefinitions: {}
-produces:
+produces: 
   - application/json
-consumes:
+consumes: 
   - application/json
-
+  
 paths:
   /info.0.json:
     get:
