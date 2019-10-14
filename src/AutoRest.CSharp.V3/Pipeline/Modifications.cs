@@ -11,11 +11,32 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal partial class CSharpLanguage
     {
-        [YamlDotNet.Serialization.YamlMember(Alias = "name", Order = 0)]
-        public string Name { get; set; }
+        [YamlMember(Alias = "name", Order = 0)]
+        public string? Name { get; set; }
 
-        [YamlDotNet.Serialization.YamlMember(Alias = "type", Order = 1)]
-        public Type Type { get; set; }
+        private string? _typeName;
+        [YamlMember(Alias = "typeName", Order = 1)]
+        public string? TypeName
+        {
+            get => _typeName;
+            set
+            {
+                _typeName = value;
+                _type = _typeName != null ? Assembly.GetExecutingAssembly().GetType(_typeName) : null;
+            }
+        }
+
+        private Type? _type;
+        [YamlIgnore]
+        public Type? Type
+        {
+            get => _type;
+            set
+            {
+                _type = value;
+                _typeName = _type?.FullName;
+            }
+        }
     }
 
     /// <summary>language metadata specific to schema instances</summary>
