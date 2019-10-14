@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc;
+using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.Plugins
@@ -30,6 +29,11 @@ namespace AutoRest.CSharp.V3.Plugins
                 modelWriter.WriteObjectSchema(schema);
                 await autoRest.WriteFile($"models-cs/{schema.Language.Default.Name}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
             }
+
+            var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();
+            var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml";
+            var codeModelYaml = codeModel.Serialize();
+            await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
 
             return true;
         }

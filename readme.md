@@ -14,10 +14,10 @@ pipeline:
     input: modelerfour
   type-identifier:
     input: modelerfour/new-transform
-  serialize-tester:
+  model-creator:
     input: type-identifier
-  serialize-tester/emitter:
-    input: serialize-tester
+  model-creator/emitter:
+    input: model-creator
     scope: output-scope
 
 output-scope:
