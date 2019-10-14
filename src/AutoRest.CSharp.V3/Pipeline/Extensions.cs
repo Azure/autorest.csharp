@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                 .SelectMany(c => ((IEnumerable)c!).Cast<Schema>())
                 .ToArray();
 
-        public static Type? GetSimpleType(this AllSchemaTypes schemaType) => 
+        public static Type? GetFrameworkType(this AllSchemaTypes schemaType) =>
             schemaType switch
             {
                 AllSchemaTypes.And => null,
