@@ -351,5 +351,8 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-# Ignore default autorest generated folder in teh root only.
-/generated
+# Ignores generated files from samples
+samples/**/*.yaml
+!samples/Xkcd/xkcd.yaml
+samples/**/*.cs
+samples/**/*.txt
