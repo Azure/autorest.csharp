@@ -12,11 +12,7 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
-            //var simpleSchemaNodes = codeModel.Schemas.GetAllSchemaNodes()
-            //    .Select(s => (Schema: s, Type: s.Type.GetFrameworkType()))
-            //    .Where(st => st.Type != null);
-            var schemaNodes = codeModel.Schemas.GetAllSchemaNodes()
-                .Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType()));
+            var schemaNodes = codeModel.Schemas.GetAllSchemaNodes().Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType()));
             foreach (var (schema, frameworkType) in schemaNodes)
             {
                 schema.Language.Csharp ??= new CSharpLanguage();

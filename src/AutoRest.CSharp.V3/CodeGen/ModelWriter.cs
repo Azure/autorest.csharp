@@ -14,14 +14,16 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             Usings();
 
-            using (Namespace(schema.Language.Default.Namespace))
+            var schemaCs = schema.Language.Csharp;
+            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
             {
                 using (Class("public partial", schema.Language.Default.Name))
                 {
                     foreach (var property in schema.Properties)
                     {
-                        var type = property.Schema.Language.Csharp?.Type?.FullName ?? property.Schema.Type.ToString();
-                        AutoProperty("public", type, property.Language.Default.Name);
+                        var propertyCs = property.Schema.Language.Csharp;
+                        var type = propertyCs?.Type?.FullName ?? "[NO TYPE]";
+                        AutoProperty("public", type, property.SerializedName);
                     }
                 }
             }

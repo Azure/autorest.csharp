@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
@@ -25,20 +24,8 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
     internal class CSharpNamespace
     {
-        //private string? _base;
         [YamlMember(Alias = "base", Order = 0)]
         public string? Base { get; set; }
-        //public string? Base
-        //{
-        //    get => _base;
-        //    set
-        //    {
-        //        _base = value;
-        //        _fullName = ;
-        //        //_typeFullName = CreateFullName();
-        //        //_frameworkType = CreateFrameworkType();
-        //    }
-        //}
 
         [YamlMember(Alias = "category", Order = 1)]
         public string? Category { get; set; }
@@ -48,24 +35,10 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         [YamlIgnore]
         public string FullName => new [] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
-
-        //private string? _fullName;
-        //[YamlIgnore]
-        //public string? FullName
-        //{
-        //    get => _fullName;
-        //    set
-        //    {
-        //        _fullName = value;
-        //        //var parts = _typeFullName?.Split('.') ?? new string[0];
-        //        //_base = parts.Any() ? String.Join('.', parts.SkipLast(1)) : _base;
-        //    }
-        //}
     }
 
     internal class CSharpType
     {
-        //private string? CreateFullName() => _namespaceFull != null && _typeName != null ? String.Join('.', _namespaceFull, _typeName) : _typeFullName;
         private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Assembly.GetExecutingAssembly().GetType(FullName) : _frameworkType;
 
         private CSharpNamespace? _namespace;
@@ -80,41 +53,6 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             }
         }
 
-        //private string? _namespaceBase;
-        //[YamlMember(Alias = "namespaceBase", Order = 0)]
-        //public string? NamespaceBase
-        //{
-        //    get => _namespaceBase;
-        //    set
-        //    {
-        //        _namespaceBase = value;
-        //        _namespaceFull = ;
-        //        _typeFullName = CreateFullName();
-        //        _frameworkType = CreateFrameworkType();
-        //    }
-        //}
-
-        //[YamlMember(Alias = "category", Order = 1)]
-        //public string? Category { get; set; }
-
-        //[YamlMember(Alias = "apiVersion", Order = 2)]
-        //public string? ApiVersion { get; set; }
-
-        //private string? _namespaceFull;
-        //[YamlIgnore]
-        //public string? NamespaceFull
-        //{
-        //    get => _namespaceFull;
-        //    set
-        //    {
-        //        _namespaceFull = value;
-        //        var parts = _typeFullName?.Split('.') ?? new string[0];
-        //        _namespaceBase = parts.Any() ? String.Join('.', parts.SkipLast(1)) : _namespaceBase;
-        //        _typeName = parts.Any() ? parts.Last() : _typeName;
-        //        _frameworkType = CreateFrameworkType();
-        //    }
-        //}
-
         private string? _name;
         [YamlMember(Alias = "name", Order = 1)]
         public string? Name
@@ -126,34 +64,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
                 _frameworkType = CreateFrameworkType();
             }
         }
-        //public string? Name
-        //{
-        //    get => _name;
-        //    set
-        //    {
-        //        _name = value;
-        //        _typeFullName = CreateFullName();
-        //        _frameworkType = CreateFrameworkType();
-        //    }
-        //}
 
         [YamlIgnore]
         public string FullName => new[] { Namespace?.FullName, Name }.JoinIgnoreEmpty(".");
-
-        //private string? _typeFullName;
-        //[YamlIgnore]
-        //public string? TypeFullName
-        //{
-        //    get => _typeFullName;
-        //    set
-        //    {
-        //        _typeFullName = value;
-        //        var parts = _typeFullName?.Split('.') ?? new string[0];
-        //        _namespaceBase = parts.Any() ? String.Join('.', parts.SkipLast(1)) : _namespaceBase;
-        //        _typeName = parts.Any() ? parts.Last() : _typeName;
-        //        _frameworkType = CreateFrameworkType();
-        //    }
-        //}
 
         private Type? _frameworkType;
         [YamlIgnore]
