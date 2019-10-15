@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                 AllSchemaTypes.SealedChoice => null,
                 AllSchemaTypes.String => typeof(string),
                 AllSchemaTypes.Unixtime => typeof(DateTime),
-                AllSchemaTypes.Uri => typeof(string),
+                AllSchemaTypes.Uri => typeof(Uri),
                 AllSchemaTypes.Uuid => typeof(string),
                 AllSchemaTypes.Xor => null,
                 _ => null

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.V3.Utilities
 {
@@ -11,6 +13,9 @@ namespace AutoRest.CSharp.V3.Utilities
         public static string? NullIfEmpty(this string? text) => text.IsNullOrEmpty() ? null : text;
         public static string? NullIfWhiteSpace(this string? text) => text.IsNullOrWhiteSpace() ? null : text;
         public static string? EmptyIfNull(this string? text) => text ?? String.Empty;
+
+        public static string JoinIgnoreEmpty(this IEnumerable<string?> values, string? separator) => String.Join(separator, values.Where(v => !v.IsNullOrEmpty()));
+        public static string? RemoveNonWordCharacters(this string? text) => !text.IsNullOrEmpty() ? Regex.Replace(text, @"\W+", String.Empty) : text;
 
         //https://stackoverflow.com/a/41176852/294804
         public static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)
