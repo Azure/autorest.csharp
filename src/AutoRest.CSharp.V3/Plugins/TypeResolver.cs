@@ -15,9 +15,8 @@ namespace AutoRest.CSharp.V3.Plugins
             var schemaNodes = codeModel.Schemas.GetAllSchemaNodes().Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType()));
             foreach (var (schema, frameworkType) in schemaNodes)
             {
-                schema.Language.Csharp ??= new CSharpLanguage();
-                schema.Language.Csharp.Type ??= new CSharpType();
-                var type = schema.Language.Csharp.Type;
+                var cs = schema.Language.CSharp ??= new CSharpLanguage();
+                var type = cs.Type ??= new CSharpType();
 
                 if (frameworkType != null)
                 {
@@ -30,10 +29,8 @@ namespace AutoRest.CSharp.V3.Plugins
                 type.Namespace.Category = "Models";
                 var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
                 type.Namespace.ApiVersion = apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace;
-                type.Name = schema.Language.Default.Name.ToCleanName();
+                type.Name = cs.Name;
             }
-
-            await autoRest.WriteFile("CodeModel.yaml", codeModel.Serialize(), "source-file-csharp");
 
             return true;
         }

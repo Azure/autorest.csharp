@@ -52,7 +52,9 @@ namespace AutoRest.CodeModel
                 // Weird generation issue workaround
                 .Replace($"{Namespace}.bool.True", "true")
                 // Set properties to be single quoted
-                .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"");
+                .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"")
+                // Cases CSharp properly
+                .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp");
 
             var fileWithOrdering = OrderCalculator.InsertOrderValues(cleanFile);
             File.WriteAllText($"../../{Path}/CodeModel.cs", fileWithOrdering);

@@ -10,26 +10,27 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
         }
 
-        public void WriteObjectSchema(ObjectSchema schema)
-        {
-            FileHeader();
+        //public void WriteObjectSchema(ObjectSchema schema)
+        //{
+        //    FileHeader();
 
-            Usings();
+        //    Usings();
 
-            var schemaCs = schema.Language.Csharp;
-            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
-            {
-                using (Class("public partial", schema.Language.Default.Name.ToCleanName()))
-                {
-                    foreach (var property in schema.Properties)
-                    {
-                        var propertyCs = property.Schema.Language.Csharp;
-                        var type = propertyCs?.Type?.FullName ?? "[NO TYPE]";
-                        AutoProperty("public", type, property.SerializedName.ToCleanName());
-                    }
-                }
-            }
-        }
+        //    var schemaCs = schema.Language.CSharp;
+        //    using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+        //    {
+        //        using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
+        //        {
+        //            foreach (var property in schema.Properties)
+        //            {
+        //                var propertySchemaCs = property.Schema.Language.CSharp;
+        //                var type = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
+        //                var propertyCs = property.Language.CSharp;
+        //                AutoProperty("public", type, propertyCs?.Name ?? "[NO NAME]");
+        //            }
+        //        }
+        //    }
+        //}
 
         public void WriteSchema(Schema schema)
         {
@@ -37,18 +38,19 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             Usings();
 
-            var schemaCs = schema.Language.Csharp;
+            var schemaCs = schema.Language.CSharp;
             using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
             {
-                using (Class("public partial", schema.Language.Default.Name.ToCleanName()))
+                using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
                 {
                     if (schema is ObjectSchema objectSchema)
                     {
                         foreach (var property in objectSchema.Properties)
                         {
-                            var propertyCs = property.Schema.Language.Csharp;
-                            var type = propertyCs?.Type?.FullName ?? "[NO TYPE]";
-                            AutoProperty("public", type, property.SerializedName.ToCleanName());
+                            var propertySchemaCs = property.Schema.Language.CSharp;
+                            var type = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
+                            var propertyCs = property.Language.CSharp;
+                            AutoProperty("public", type, propertyCs?.Name ?? "[NO NAME]");
                         }
                     }
                 }

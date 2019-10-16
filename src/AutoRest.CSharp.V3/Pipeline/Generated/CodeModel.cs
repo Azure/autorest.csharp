@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public Language Default { get; set; } = new Language();
 
         [YamlDotNet.Serialization.YamlMember(Alias = "csharp", Order = 3)]
-        public CSharpLanguage Csharp { get; set; }
+        public CSharpLanguage CSharp { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "python", Order = 9)]
         public Language Python { get; set; }
