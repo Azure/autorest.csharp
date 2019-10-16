@@ -5,6 +5,7 @@ using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -37,7 +38,14 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var modelWriter = new ModelWriter();
                 modelWriter.WriteObjectSchema(schema);
-                await autoRest.WriteFile($"models-cs/{schema.Language.Default.Name}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"models-cs/{schema.Language.Default.Name.ToCleanName()}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
+            }
+
+            foreach (var schema in codeModel.Schemas.GetAllSchemaNodes())
+            {
+                var modelWriter = new ModelWriter();
+                modelWriter.WriteSchema(schema);
+                await autoRest.WriteFile($"all-cs/{schema.Language.Default.Name.ToCleanName()}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
             }
 
             var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CaseExtensions;
 
 namespace AutoRest.CSharp.V3.Utilities
 {
@@ -15,7 +17,13 @@ namespace AutoRest.CSharp.V3.Utilities
         public static string? EmptyIfNull(this string? text) => text ?? String.Empty;
 
         public static string JoinIgnoreEmpty(this IEnumerable<string?> values, string? separator) => String.Join(separator, values.Where(v => !v.IsNullOrEmpty()));
+
+        [return: NotNullIfNotNull("text")]
         public static string? RemoveNonWordCharacters(this string? text) => !text.IsNullOrEmpty() ? Regex.Replace(text, @"\W+", String.Empty) : text;
+        [return: NotNullIfNotNull("text")]
+        public static string? RemoveMiddleDotCharacters(this string? text) => text?.Replace("·", String.Empty);
+        [return: NotNullIfNotNull("name")]
+        public static string? ToCleanName(this string? name) => name?.ToPascalCase().RemoveMiddleDotCharacters();
 
         //https://stackoverflow.com/a/41176852/294804
         public static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)

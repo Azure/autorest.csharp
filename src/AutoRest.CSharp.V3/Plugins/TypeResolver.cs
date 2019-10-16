@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 type.Namespace.Category = "Models";
                 var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
                 type.Namespace.ApiVersion = apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace;
-                type.Name = schema.Language.Default.Name;
+                type.Name = schema.Language.Default.Name.ToCleanName();
             }
 
             await autoRest.WriteFile("CodeModel.yaml", codeModel.Serialize(), "source-file-csharp");
