@@ -12,14 +12,20 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal partial class CSharpLanguage
     {
-        [YamlMember(Alias = "name", Order = 0)]
+        [YamlMember(Alias = "uid", Order = 0)]
+        public string Uid { get; set; }
+
+        [YamlMember(Alias = "name", Order = 1)]
         public string? Name { get; set; }
 
-        [YamlMember(Alias = "description", Order = 1)]
+        [YamlMember(Alias = "description", Order = 2)]
         public string? Description { get; set; }
 
-        [YamlMember(Alias = "type", Order = 2)]
+        [YamlMember(Alias = "type", Order = 3)]
         public CSharpType? Type { get; set; }
+
+        [YamlIgnore]
+        public int SchemaOrder { get; set; }
     }
 
     internal class CSharpNamespace
