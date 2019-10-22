@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.V3
         public static async Task<bool> Start(AutoRestInterface autoRest)
         {
             // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
-            if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.debugger-attach")).IsObject())
+            if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach")).IsObject())
             {
                 DebuggerAwaiter.Await();
             }

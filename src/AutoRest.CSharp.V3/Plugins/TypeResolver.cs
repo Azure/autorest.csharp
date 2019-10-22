@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static void ProcessBranchOrder(Schema schema, int currentDepth)
         {
-            if (schema.Language.CSharp.SchemaOrder < currentDepth)
+            if (schema.Language.CSharp?.SchemaOrder < currentDepth)
             {
                 schema.Language.CSharp.SchemaOrder = currentDepth;
             }
