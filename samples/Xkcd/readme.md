@@ -4,6 +4,6 @@
 
 ``` yaml
 title: Xkcd
+require: $(this-folder)/../readme.samples.md
 input-file: xkcd.yaml
-output-folder: .
 ```

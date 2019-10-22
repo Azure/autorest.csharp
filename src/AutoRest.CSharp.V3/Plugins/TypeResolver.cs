@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
+using static AutoRest.CSharp.V3.Pipeline.Extensions;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -74,7 +76,7 @@ namespace AutoRest.CSharp.V3.Plugins
             // Schemas are by reference, so only need to update the value if the new value is greater than the current value
             // Order by reverse depth order
 
-            var schemaNodes = schemas.Select(s => (Schema: s, HasBranches: HasBranches(s))).ToArray();
+            var schemaNodes = schemas.Select(s => (Schema: s, HasBranches: HasBranches(s.GetType()))).ToArray();
             var leafNodes = schemaNodes.Where(sn => !sn.HasBranches).Select(sn => sn.Schema);
             foreach (var leafNode in leafNodes)
             {
@@ -90,13 +92,14 @@ namespace AutoRest.CSharp.V3.Plugins
             return schemas.OrderByDescending(s => s.Language.CSharp.SchemaOrder).ToArray();
         }
 
-        private static bool IsBranch(PropertyInfo propertyInfo) =>
-            propertyInfo.PropertyType == typeof(Schema) || propertyInfo.PropertyType.IsSubclassOf(typeof(Schema))
-            || (propertyInfo.PropertyType.IsGenericType
-                && (propertyInfo.PropertyType.GenericTypeArguments.First() == typeof(Schema) || propertyInfo.PropertyType.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
+        private static bool IsBranch(Type type) =>
+            type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
+            || (type.IsGenericType
+                && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
 
-        // TODO: This needs to check all properties, since schemas can be nested in non-schema properties
-        private static bool HasBranches(Schema schema) => schema.GetType().GetProperties().Any(IsBranch);
+        private static bool HasBranches(Type type) => type.GetProperties()
+            .Select(p => p.PropertyType)
+            .Any(t => IsBranch(t) || (GeneratedTypes.Contains(t) && HasBranches(t)));
 
         private static void ProcessBranchOrder(Schema schema, int currentDepth)
         {
@@ -107,10 +110,10 @@ namespace AutoRest.CSharp.V3.Plugins
 
             currentDepth++;
             var branchSchemas = schema.GetType().GetProperties()
-                .Where(IsBranch)
+                .Where(p => IsBranch(p.PropertyType))
                 .Select(p => (IsGeneric: p.PropertyType.IsGenericType, Value: p.GetValue(schema)))
                 .Where(tv => tv.Value != null)
-                .SelectMany(tv => tv.IsGeneric ? ((IEnumerable)tv.Value!).Cast<Schema>() : new[] {(Schema) tv.Value!});
+                .SelectMany(tv => tv.IsGeneric ? ((IEnumerable)tv.Value!).Cast<Schema>() : new[] {(Schema)tv.Value!});
             foreach (var branchSchema in branchSchemas)
             {
                 ProcessBranchOrder(branchSchema, currentDepth);
