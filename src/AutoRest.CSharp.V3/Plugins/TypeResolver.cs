@@ -103,6 +103,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static void ProcessBranchOrder(Schema schema, int currentDepth)
         {
+            // For now, CSharp won't be there sometimes because of https://github.com/Azure/autorest.modelerfour/issues/19
             if (schema.Language.CSharp?.SchemaOrder < currentDepth)
             {
                 schema.Language.CSharp.SchemaOrder = currentDepth;
@@ -124,6 +125,7 @@ namespace AutoRest.CSharp.V3.Plugins
             schema switch
             {
                 ArraySchema arraySchema => ArrayTypeInfo(arraySchema, configuration),
+                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, configuration),
                 _ => DefaultTypeInfo(schema, configuration)
             };
 
@@ -133,6 +135,19 @@ namespace AutoRest.CSharp.V3.Plugins
             return new CSharpType
             {
                 Name = $"ICollection<{elementType}>",
+                Namespace = new CSharpNamespace
+                {
+                    Base = "System.Collections.Generic"
+                }
+            };
+        }
+
+        private static CSharpType DictionaryTypeInfo(DictionarySchema schema, Configuration configuration)
+        {
+            var elementType = schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
+            return new CSharpType
+            {
+                Name = $"IDictionary<System.String, {elementType}>",
                 Namespace = new CSharpNamespace
                 {
                     Base = "System.Collections.Generic"
