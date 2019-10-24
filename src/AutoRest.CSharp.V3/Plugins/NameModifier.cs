@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var schema in schemaNodes)
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
-
                 cs.Name = schema.Language.Default.Name.ToCleanName();
                 cs.Description = schema.Language.Default.Description;
             }
@@ -25,8 +24,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var property in propertyNodes)
             {
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
-
-                cs.Name = property.SerializedName.ToCleanName();
+                cs.Name = property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
             }
 

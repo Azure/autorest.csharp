@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
@@ -17,16 +17,8 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
-            //var recordSet = codeModel.Schemas.Objects.First(o => o.Key == "RecordSet");
-
-            //var recordSet2 = codeModel.Schemas.Ands.First(a => a.Key == "RecordSet").AllOf.First(o => o.Key == "RecordSet");
-
-            //var test = recordSet.Uid == recordSet2.Uid;
-            //recordSet.Uid = "TACO";
-            //var test2 = recordSet.Uid == recordSet2.Uid;
-
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
-            AddUniqueIdentifier(allSchemas);
+            AddUniqueIdentifiers(allSchemas);
 
             var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType())).ToArray();
             var frameworkNodes = schemaNodes.Where(sn => sn.FrameworkType != null);
@@ -37,27 +29,19 @@ namespace AutoRest.CSharp.V3.Plugins
                 type.FrameworkType = frameworkType;
             }
 
-            // Order these by order value
             var nonFrameworkNodes = schemaNodes.Where(sn => sn.FrameworkType == null).Select(sn => sn.Schema).ToArray();
-            var orderedNodes = OrderUids(nonFrameworkNodes);
+            var orderedNodes = OrderUniqueIdentifiers(nonFrameworkNodes);
             foreach (var schema in orderedNodes)
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
-                cs.Type = AssignTypeInfo(schema, configuration);
-                //var type = cs.Type ??= new CSharpType();
-
-                //type.Namespace ??= new CSharpNamespace();
-                //type.Namespace.Base = configuration.Namespace.NullIfEmpty();
-                //type.Namespace.Category = "Models";
-                //var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
-                //type.Namespace.ApiVersion = apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace;
-                //type.Name = cs.Name;
+                cs.Type = CreateTypeInfo(schema, configuration);
             }
 
             return true;
         }
 
-        private static void AddUniqueIdentifier(Schema[] schemas)
+        // This unique identifier is because of https://github.com/Azure/autorest.modelerfour/issues/20
+        private static void AddUniqueIdentifiers(IEnumerable<Schema> schemas)
         {
             foreach (var (schema, index) in schemas.Select((s, i) => (Schema: s, Index: i)))
             {
@@ -66,47 +50,46 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static Schema[] OrderUids(Schema[] schemas)
+        private static Schema[] OrderUniqueIdentifiers(Schema[] schemas)
         {
-            // Default depth is 0
-            // Mark leaves as top (depth value 999)
-            // Pair uid with depth value (branches start at depth 1)
-            // /////////////////////If we encounter a leaf, do not change the value (999 will always be greater than the current depth)
-            // /////////////////////Group by uid, keep only a single uid with the highest depth value
-            // Schemas are by reference, so only need to update the value if the new value is greater than the current value
-            // Order by reverse depth order
-
             var schemaNodes = schemas.Select(s => (Schema: s, HasBranches: HasBranches(s.GetType()))).ToArray();
             var leafNodes = schemaNodes.Where(sn => !sn.HasBranches).Select(sn => sn.Schema);
             foreach (var leafNode in leafNodes)
             {
+                // Mark the leaves as 999 so they will be ordered first (when ordered by descending)
                 leafNode.Language.CSharp.SchemaOrder = 999;
             }
 
             var branchNodes = schemaNodes.Where(sn => sn.HasBranches).Select(sn => sn.Schema);
             foreach (var branchNode in branchNodes)
             {
-                ProcessBranchOrder(branchNode, 1);
+                ProcessBranchOrder(branchNode);
             }
 
+            // Because of how we mark the depth with higher values, order them by descending.
+            // Leaves will get processed first, then the deepest branches working up to the shallowest branches.
             return schemas.OrderByDescending(s => s.Language.CSharp.SchemaOrder).ToArray();
         }
 
         private static bool IsBranch(Type type) =>
             type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
-            || (type.IsGenericType
-                && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
+            || (type.IsGenericType && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
 
         private static bool HasBranches(Type type) => type.GetProperties()
             .Select(p => p.PropertyType)
             .Any(t => IsBranch(t) || (GeneratedTypes.Contains(t) && HasBranches(t)));
 
-        private static void ProcessBranchOrder(Schema schema, int currentDepth)
+        // Every branch will look through its children and mark the SchemaOrder as the currentDepth, if it is deeper than the previous depth.
+        // Since SchemaOrder starts at 0, it will always set a branches currentDepth to 1 on the first pass.
+        // Since the schemas are by reference, the SchemaOrder depth will always be the deepest value among all schema branches.
+        private static void ProcessBranchOrder(Schema schema, int currentDepth = 1)
         {
-            // For now, CSharp won't be there sometimes because of https://github.com/Azure/autorest.modelerfour/issues/19
-            if (schema.Language.CSharp?.SchemaOrder < currentDepth)
+            // CSharp won't be there for choiceType because of https://github.com/Azure/autorest.modelerfour/issues/19
+            // For now, we always check and create it if needed.
+            var cs = schema.Language.CSharp ??= new CSharpLanguage();
+            if (cs.SchemaOrder < currentDepth)
             {
-                schema.Language.CSharp.SchemaOrder = currentDepth;
+                cs.SchemaOrder = currentDepth;
             }
 
             currentDepth++;
@@ -121,39 +104,33 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static CSharpType AssignTypeInfo(Schema schema, Configuration configuration) =>
+        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration) =>
             schema switch
             {
-                ArraySchema arraySchema => ArrayTypeInfo(arraySchema, configuration),
-                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, configuration),
+                ArraySchema arraySchema => ArrayTypeInfo(arraySchema),
+                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema),
                 _ => DefaultTypeInfo(schema, configuration)
             };
 
-        private static CSharpType ArrayTypeInfo(ArraySchema schema, Configuration configuration)
-        {
-            var elementType = schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
-            return new CSharpType
+        private static CSharpType ArrayTypeInfo(ArraySchema schema) =>
+            new CSharpType
             {
-                Name = $"ICollection<{elementType}>",
+                Name = $"ICollection<{schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
                 Namespace = new CSharpNamespace
                 {
                     Base = "System.Collections.Generic"
                 }
             };
-        }
 
-        private static CSharpType DictionaryTypeInfo(DictionarySchema schema, Configuration configuration)
-        {
-            var elementType = schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
-            return new CSharpType
+        private static CSharpType DictionaryTypeInfo(DictionarySchema schema) =>
+            new CSharpType
             {
-                Name = $"IDictionary<System.String, {elementType}>",
+                Name = $"IDictionary<{typeof(string).FullName}, {schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
                 Namespace = new CSharpNamespace
                 {
                     Base = "System.Collections.Generic"
                 }
             };
-        }
 
         private static CSharpType DefaultTypeInfo(Schema schema, Configuration configuration)
         {
