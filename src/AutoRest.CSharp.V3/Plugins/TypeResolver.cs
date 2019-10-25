@@ -11,7 +11,6 @@ using static AutoRest.CSharp.V3.Pipeline.Extensions;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    // Maybe put some of this into a type resolution namespace
     [PluginName("type-resolver")]
     internal class TypeResolver : IPlugin
     {

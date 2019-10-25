@@ -85,10 +85,7 @@ namespace AutoRest.CSharp.V3.JsonRpc
             return (await response.Task.ConfigureAwait(false)).Parse().ToType<T>();
         }
 
-        public void Dispose()
-        {
-            _disposeService.Dispose(true);
-        }
+        public void Dispose() => _disposeService.Dispose(true);
 
         private void Disposer(Connection connection)
         {

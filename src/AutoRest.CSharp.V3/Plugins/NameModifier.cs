@@ -28,6 +28,15 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Description = property.Language.Default.Description;
             }
 
+            var choiceValueNodes = (codeModel.Schemas.Choices?.SelectMany(c => c.Choices) ?? Enumerable.Empty<ChoiceValue>())
+                .Concat(codeModel.Schemas.SealedChoices?.SelectMany(sc => sc.Choices) ?? Enumerable.Empty<ChoiceValue>());
+            foreach (var choiceValue in choiceValueNodes)
+            {
+                var cs = choiceValue.Language.CSharp ??= new CSharpLanguage();
+                cs.Name = choiceValue.Language.Default.Name.ToCleanName();
+                cs.Description = choiceValue.Language.Default.Description;
+            }
+
             return true;
         }
     }

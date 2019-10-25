@@ -1,38 +1,32 @@
-﻿using System;
+﻿using AutoRest.CSharp.V3.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
     internal abstract class BaseCSharpWriter
     {
         private readonly HashSet<string> _usings = new HashSet<string>();
-        public BaseCSharpWriter()
-        {
-        }
 
         public class CodeBlock : IDisposable
         {
+            private readonly DisposeService<CodeBlock> _disposeService;
             public Action? EndBlockAction;
 
             public CodeBlock(Action endBlockAction)
             {
+                _disposeService = new DisposeService<CodeBlock>(this, cb => EndBlock());
                 EndBlockAction = endBlockAction;
             }
 
             public void EndBlock()
             {
-                var action = EndBlockAction;
+                EndBlockAction?.Invoke();
                 EndBlockAction = null;
-                action?.Invoke();
             }
 
-            public void Dispose()
-            {
-                EndBlock();
-            }
+            public void Dispose() => _disposeService.Dispose(true);
         }
 
         public abstract void Line(string str = "");
@@ -50,14 +44,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         public virtual CodeBlock Scope(string start = "{", string end = "}")
         {
             Line(start);
-
             return new CodeBlock(() => EndScope(end));
         }
 
-        public void EndScope(string end = "}")
-        {
-            Line(end);
-        }
+        public void EndScope(string end = "}") => Line(end);
 
         public CodeBlock Namespace(string name)
         {
@@ -71,16 +61,23 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public CodeBlock Enum(string modifiers, string name)
+        {
+            Line($"{modifiers} enum {name}");
+            return Scope();
+        }
+
         public CodeBlock Method(string methodDeclaration)
         {
             Line(methodDeclaration);
             return Scope();
         }
 
-        public void AutoProperty(string modifiers, string type, string name)
-        {
-            Line($"{modifiers} {type} {name}" + "{ get; set; }");
-        }
+        public void AutoProperty(string modifiers, string type, string name) =>
+            Line($"{modifiers} {type} {name} {{ get; set; }}");
+
+        public void EnumValue(string name) =>
+            Line($"{name},");
 
         public CodeBlock Method(string modifiers, string type, string name, params string[] parameters)
         {
@@ -98,15 +95,11 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
             Line("/// </summary>");
         }
-        public void DocParam(string paramName, string paramSummary)
-        {
+        public void DocParam(string paramName, string paramSummary) =>
             Line($"/// <param name=\"{paramName}\">{paramSummary}</param>");
-        }
 
-        public void DocReturns(string returns)
-        {
+        public void DocReturns(string returns) =>
             Line($"/// <returns>{returns}</returns>");
-        }
 
         public void Usings(params string[] namespaces)
         {
