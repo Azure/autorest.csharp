@@ -4,6 +4,7 @@
 
 ``` yaml
 title: Storage
+require: $(this-folder)/../readme.samples.md
 input-file: DataLakeStorage.json
-output-folder: .
+namespace: Microsoft.Azure.Storage
 ```

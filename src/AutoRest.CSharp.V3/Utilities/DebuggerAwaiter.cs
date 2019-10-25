@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.V3.Utilities
 {
     public static class DebuggerAwaiter
     {
-        public static void Await()
+        public static void AwaitAttach()
         {
             while (!Debugger.IsAttached)
             {

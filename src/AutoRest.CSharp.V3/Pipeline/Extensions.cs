@@ -9,6 +9,7 @@ namespace AutoRest.CSharp.V3.Pipeline
 {
     internal static class Extensions
     {
+        public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
 
         private static readonly PropertyInfo[] SchemaCollectionProperties = typeof(Schemas).GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(pi => pi.PropertyType.IsGenericType
@@ -48,7 +49,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                 AllSchemaTypes.SealedChoice => null,
                 AllSchemaTypes.String => typeof(string),
                 AllSchemaTypes.Unixtime => typeof(DateTime),
-                AllSchemaTypes.Uri => typeof(string),
+                AllSchemaTypes.Uri => typeof(Uri),
                 AllSchemaTypes.Uuid => typeof(string),
                 AllSchemaTypes.Xor => null,
                 _ => null

@@ -459,27 +459,6 @@
       ],
       "type": "string"
     },
-    "Discriminator": {
-      "description": "Disciminator for polymorphic class hierarchy",
-      "type": "object",
-      "properties": {
-        "propertyName": {
-          "type": "string"
-        },
-        "mapping": {
-          "$ref": "#/definitions/Dictionary<string>"
-        },
-        "extensions": {
-          "$ref": "#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "propertyName"
-      ]
-    },
     "Value": {
       "description": "common base interface for properties, parameters and the like.",
       "type": "object",
@@ -559,6 +538,10 @@
         "serializedName": {
           "description": "the wire name of this property",
           "type": "string"
+        },
+        "isDiscriminator": {
+          "description": "if this property is used as a discriminator for a polymorphic type",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],
@@ -831,9 +814,9 @@
       "description": "a schema that represents a type with child properties.",
       "type": "object",
       "properties": {
-        "discriminator": {
-          "$ref": "#/definitions/Discriminator",
-          "description": "the definition of the polymorphic descriminator for this type"
+        "discriminatorProperty": {
+          "$ref": "#/definitions/Property",
+          "description": "the property of the polymorphic descriminator for this type, if there is one"
         },
         "properties": {
           "description": "the collection of properties that are in this object",
@@ -1369,6 +1352,9 @@
           "items": {
             "$ref": "#/definitions/ComplexSchema"
           }
+        },
+        "discriminatorValue": {
+          "type": "string"
         }
       },
       "defaultProperties": [],
@@ -2844,13 +2830,6 @@
       },
       "defaultProperties": []
     },
-    "Dictionary<string>": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "defaultProperties": []
-    },
     "ChoiceType": {
       "type": "object",
       "properties": {
@@ -2997,6 +2976,13 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/ApiVersion"
+      },
+      "defaultProperties": []
+    },
+    "Dictionary<string>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
       },
       "defaultProperties": []
     }

@@ -3,7 +3,6 @@
 
 ## Configuration
 ```yaml
-test-item: "cheese"
 use-extension:
   "@autorest/modelerfour": "~4.0.20"
 
@@ -12,10 +11,12 @@ pipeline:
     input: openapi-document/multi-api/identity
   modelerfour/new-transform:
     input: modelerfour
-  type-identifier:
+  name-modifier:
     input: modelerfour/new-transform
+  type-resolver:
+    input: name-modifier
   model-creator:
-    input: type-identifier
+    input: type-resolver
   model-creator/emitter:
     input: model-creator
     scope: output-scope

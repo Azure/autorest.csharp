@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -12,58 +12,67 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal partial class CSharpLanguage
     {
-        [YamlMember(Alias = "name", Order = 0)]
+        [YamlMember(Alias = "uid", Order = 0)]
+        public string Uid { get; set; }
+
+        [YamlMember(Alias = "name", Order = 1)]
         public string? Name { get; set; }
 
-        [YamlMember(Alias = "type", Order = 1)]
+        [YamlMember(Alias = "description", Order = 2)]
+        public string? Description { get; set; }
+
+        [YamlMember(Alias = "type", Order = 3)]
         public CSharpType? Type { get; set; }
+
+        [YamlIgnore]
+        public int SchemaOrder { get; set; }
+    }
+
+    internal class CSharpNamespace
+    {
+        [YamlMember(Alias = "base", Order = 0)]
+        public string? Base { get; set; }
+
+        [YamlMember(Alias = "category", Order = 1)]
+        public string? Category { get; set; }
+
+        [YamlMember(Alias = "apiVersion", Order = 2)]
+        public string? ApiVersion { get; set; }
+
+        [YamlIgnore]
+        public string FullName => new [] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 
     internal class CSharpType
     {
-        private string? CreateFullName() => _namespace != null && _typeName != null ? String.Join('.', _namespace, _typeName) : _typeFullName;
-        private Type? CreateFrameworkType() => _typeFullName != null ? Assembly.GetExecutingAssembly().GetType(_typeFullName) : _frameworkType;
+        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Assembly.GetExecutingAssembly().GetType(FullName) : _frameworkType;
 
-        private string? _namespace;
+        private CSharpNamespace? _namespace;
         [YamlMember(Alias = "namespace", Order = 0)]
-        public string? Namespace
+        public CSharpNamespace? Namespace
         {
             get => _namespace;
             set
             {
                 _namespace = value;
-                _typeFullName = CreateFullName();
                 _frameworkType = CreateFrameworkType();
             }
         }
 
-        private string? _typeName;
-        [YamlMember(Alias = "typeName", Order = 1)]
-        public string? TypeName
+        private string? _name;
+        [YamlMember(Alias = "name", Order = 1)]
+        public string? Name
         {
-            get => _typeName;
+            get => _name;
             set
             {
-                _typeName = value;
-                _typeFullName = CreateFullName();
+                _name = value;
                 _frameworkType = CreateFrameworkType();
             }
         }
 
-        private string? _typeFullName;
         [YamlIgnore]
-        public string? TypeFullName
-        {
-            get => _typeFullName;
-            set
-            {
-                _typeFullName = value;
-                var parts = _typeFullName?.Split('.') ?? new string[0];
-                _namespace = parts.Any() ? String.Join('.', parts.SkipLast(1)) : _namespace;
-                _typeName = parts.Any() ? parts.Last() : _typeName;
-                _frameworkType = CreateFrameworkType();
-            }
-        }
+        public string FullName => new[] { Namespace?.FullName, Name }.JoinIgnoreEmpty(".");
 
         private Type? _frameworkType;
         [YamlIgnore]
@@ -73,9 +82,13 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             set
             {
                 _frameworkType = value;
-                _namespace = _frameworkType != null ? _frameworkType.Namespace : _namespace;
-                _typeName = _frameworkType != null ? _frameworkType.Name : _namespace;
-                _typeFullName = _frameworkType != null ? _frameworkType.FullName : _namespace;
+                if (_frameworkType == null) return;
+
+                _namespace ??= new CSharpNamespace();
+                _namespace.Base = _frameworkType.Namespace;
+                _namespace.Category = null;
+                _namespace.ApiVersion = null;
+                _name = _frameworkType.Name;
             }
         }
     }

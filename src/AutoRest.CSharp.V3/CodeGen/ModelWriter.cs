@@ -4,29 +4,29 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class ModelWriter : StringCSharpWriter
     {
-        public ModelWriter()
-        {
-        }
-
-        public void WriteObjectSchema(ObjectSchema schema)
+        public void WriteSchema(Schema schema)
         {
             FileHeader();
 
             Usings();
 
-            using (Namespace(schema.Language.Default.Namespace))
+            var schemaCs = schema.Language.CSharp;
+            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
             {
-                using (Class("public partial", schema.Language.Default.Name))
+                using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
                 {
-                    foreach (var property in schema.Properties)
+                    if (schema is ObjectSchema objectSchema)
                     {
-                        var type = property.Schema.Language.Csharp?.Type?.TypeFullName ?? property.Schema.Type.ToString();
-                        AutoProperty("public", type, property.Language.Default.Name);
+                        foreach (var property in objectSchema.Properties)
+                        {
+                            var propertySchemaCs = property.Schema.Language.CSharp;
+                            var type = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
+                            var propertyCs = property.Language.CSharp;
+                            AutoProperty("public", type, propertyCs?.Name ?? "[NO NAME]");
+                        }
                     }
                 }
             }
-
         }
-
     }
 }
