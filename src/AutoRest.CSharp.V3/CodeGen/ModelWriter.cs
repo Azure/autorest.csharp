@@ -16,13 +16,17 @@ namespace AutoRest.CSharp.V3.CodeGen
         public bool WriteDefaultSchema(Schema schema)
         {
             FileHeader();
-            Usings();
-            var schemaCs = schema.Language.CSharp;
-            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+            using var _ = Usings();
+            var cs = schema.Language.CSharp;
+            //using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+            //{
+            //    using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
+            //    {
+            //    }
+            //}
+            using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
-                {
-                }
+                using (Class("public partial", cs)) { }
             }
             return true;
         }
@@ -30,18 +34,19 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteObjectSchema(ObjectSchema schema)
         {
             FileHeader();
-            Usings();
-            var schemaCs = schema.Language.CSharp;
-            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+            using var _ = Usings();
+            var cs = schema.Language.CSharp;
+            using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", schemaCs?.Name ?? "[NO NAME]"))
+                using (Class("public partial", cs))
                 {
                     foreach (var property in schema.Properties)
                     {
-                        var propertySchemaCs = property.Schema.Language.CSharp;
-                        var type = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
+                        
+                        //var type = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
                         var propertyCs = property.Language.CSharp;
-                        AutoProperty("public", type, propertyCs?.Name ?? "[NO NAME]");
+                        var propertySchemaCs = property.Schema.Language.CSharp;
+                        AutoProperty("public", propertySchemaCs?.Type, propertyCs);
                     }
                 }
             }
@@ -51,16 +56,16 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
         {
             FileHeader();
-            Usings();
-            var schemaCs = schema.Language.CSharp;
-            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+            using var _ = Usings();
+            var cs = schema.Language.CSharp;
+            using (Namespace(cs?.Type?.Namespace))
             {
-                using (Enum("public", schemaCs?.Name ?? "[NO NAME]"))
+                using (Enum("public", cs))
                 {
                     foreach (var choice in schema.Choices)
                     {
                         var choiceCs = choice.Language.CSharp;
-                        EnumValue(choiceCs?.Name ?? "[NO NAME]");
+                        EnumValue(choiceCs);
                     }
                 }
             }
@@ -70,16 +75,16 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteChoiceSchema(ChoiceSchema schema)
         {
             FileHeader();
-            Usings();
-            var schemaCs = schema.Language.CSharp;
-            using (Namespace(schemaCs?.Type?.Namespace?.FullName ?? "[NO NAMESPACE]"))
+            using var _ = Usings();
+            var cs = schema.Language.CSharp;
+            using (Namespace(cs?.Type?.Namespace))
             {
-                using (Enum("public", schemaCs?.Name ?? "[NO NAME]"))
+                using (Enum("public", cs))
                 {
                     foreach (var choice in schema.Choices)
                     {
                         var choiceCs = choice.Language.CSharp;
-                        EnumValue(choiceCs?.Name ?? "[NO NAME]");
+                        EnumValue(choiceCs);
                     }
                 }
             }
