@@ -2,6 +2,6 @@
   "name": "agoda-extension",
   "version": "1.0.0",
   "scripts": {
-    "start": "dotnet /tmp/out/autorest.csharp.dll --server"
+    "start": "dotnet /app/src/bin/netcoreapp2.0/autorest.csharp.dll --server"
   }
 }
