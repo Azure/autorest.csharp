@@ -114,7 +114,8 @@ namespace AutoRest.CSharp.V3.Plugins
         private static CSharpType ArrayTypeInfo(ArraySchema schema) =>
             new CSharpType
             {
-                Name = $"ICollection<{schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
+                Name = "ICollection",
+                SubType1 = schema.ElementType.Language.CSharp?.Type,
                 Namespace = new CSharpNamespace
                 {
                     Base = "System.Collections.Generic"
@@ -124,7 +125,12 @@ namespace AutoRest.CSharp.V3.Plugins
         private static CSharpType DictionaryTypeInfo(DictionarySchema schema) =>
             new CSharpType
             {
-                Name = $"IDictionary<{typeof(string).FullName}, {schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
+                Name = "IDictionary",
+                SubType1 = new CSharpType
+                {
+                    FrameworkType = typeof(string)
+                },
+                SubType2 = schema.ElementType.Language.CSharp?.Type,
                 Namespace = new CSharpNamespace
                 {
                     Base = "System.Collections.Generic"

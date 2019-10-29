@@ -1,4 +1,6 @@
-﻿using AutoRest.CSharp.V3.Pipeline.Generated;
+﻿using System.Linq;
+using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -56,17 +58,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
         {
             FileHeader();
-            using var _ = Usings();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
                 using (Enum("public", cs))
                 {
-                    foreach (var choice in schema.Choices)
-                    {
-                        var choiceCs = choice.Language.CSharp;
-                        EnumValue(choiceCs);
-                    }
+                    schema.Choices.Select(c => c.Language.CSharp)
+                        .ForEach(cc => EnumValue(cc), cc => EnumValue(cc, false));
                 }
             }
             return true;
@@ -75,17 +73,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteChoiceSchema(ChoiceSchema schema)
         {
             FileHeader();
-            using var _ = Usings();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
                 using (Enum("public", cs))
                 {
-                    foreach (var choice in schema.Choices)
-                    {
-                        var choiceCs = choice.Language.CSharp;
-                        EnumValue(choiceCs);
-                    }
+                    schema.Choices.Select(c => c.Language.CSharp)
+                        .ForEach(cc => EnumValue(cc), cc => EnumValue(cc, false));
                 }
             }
             return true;

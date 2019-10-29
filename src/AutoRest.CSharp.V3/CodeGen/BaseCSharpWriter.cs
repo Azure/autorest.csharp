@@ -59,9 +59,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         //    return Scope();
         //}
 
-        public void AutoProperty(string modifiers, CSharpType? type = null, CSharpLanguage? propertyCs = null) => Line($"{modifiers} {Type(type)} {propertyCs?.Name ?? "[NO PROPERTY NAME]"} {{ get; set; }}");
+        public void AutoProperty(string modifiers, CSharpType? type = null, CSharpLanguage? propertyCs = null) =>
+            Line($"{modifiers} {Type(type)} {propertyCs?.Name ?? "[NO PROPERTY NAME]"} {{ get; set; }}");
 
-        public void EnumValue(CSharpLanguage? choiceCs = null) => Line($"{choiceCs?.Name ?? "[NO NAME]"},");
+        public void EnumValue(CSharpLanguage? choiceCs = null, bool includeComma = true) => Line($"{choiceCs?.Name ?? "[NO NAME]"}{(includeComma ? "," : String.Empty)}");
 
         //public void DocSummary(string summary)
         //{
@@ -85,18 +86,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line(usingBlockSymbol);
             return new EndBlock(() =>
             {
-                //var usingLines = _usingNamespaces
-                //    .Where(un => un != null)
-                //    .Select(un => $"using {un!.FullName}")
-                //    //.Distinct().ToList().OrderBy(u => u, StringComparer.InvariantCulture).ThenBy(u => u.Length));
-                //    .Distinct().ToList();
-                //usingLines.Sort(new NaturalSort());
-                //var usingBlock = String.Join(Environment.NewLine,
-                //    _usingNamespaces
-                //        .Where(un => un != null)
-                //        .Select(un => $"using {un!.FullName};")
-                //        //.Distinct().ToList().OrderBy(u => u, StringComparer.InvariantCulture).ThenBy(u => u.Length));
-                //        .Distinct().ToList());
                 var usingLines = _usingNamespaces
                     .Where(un => un != null)
                     .Select(un => un!.FullName)
@@ -104,19 +93,19 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .OrderByDescending(ns => ns.StartsWith("System"))
                     .ThenBy(ns => ns, StringComparer.InvariantCulture)
                     .Select(ns => $"using {ns};");
-                        //.Distinct().ToList().OrderBy(u => u, StringComparer.InvariantCulture).ThenBy(u => u.Length)
-
-
                 var usingBlock = String.Join(Environment.NewLine, usingLines);
+                var removeLine = usingBlock.Any() ? String.Empty : Environment.NewLine;
                 var extraLine = usingBlock.Any() ? Environment.NewLine : String.Empty;
-                Replace(usingBlockSymbol, usingBlock + extraLine);
+                Replace(usingBlockSymbol + removeLine, usingBlock + extraLine);
             });
         }
 
         public string Type(CSharpType? type = null)
         {
             _usingNamespaces.Add(type?.Namespace);
-            return (UseTypeShortNames ? type?.Name : type?.FullName) ?? "[NO TYPE]";
+            _usingNamespaces.Add(type?.SubType1?.Namespace);
+            _usingNamespaces.Add(type?.SubType2?.Namespace);
+            return (UseTypeShortNames ? type?.GetComposedName() : type?.FullName) ?? "[NO TYPE]";
         }
     }
 }

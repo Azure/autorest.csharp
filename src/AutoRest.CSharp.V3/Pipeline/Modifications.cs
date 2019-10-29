@@ -71,8 +71,40 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             }
         }
 
+        [YamlMember(Alias = "subType1", Order = 2)]
+        public CSharpType? SubType1 { get; set; }
+
+        [YamlMember(Alias = "subType2", Order = 3)]
+        public CSharpType? SubType2 { get; set; }
+
+        public string GetComposedName(bool subTypesAsFullName = false) {
+            if ((SubType1 != null || SubType2 != null) && Name != null)
+            {
+                var subTypes = (subTypesAsFullName
+                        ? new[] {SubType1?.FullName, SubType2?.FullName}
+                        : new[] {SubType1?.GetComposedName(), SubType2?.GetComposedName()})
+                    .JoinIgnoreEmpty(", ");
+                return $"{Name}<{subTypes}>";
+            }
+            return Name ?? String.Empty;
+        }
+
+        //[YamlIgnore]
+        //public string FullComposedName
+        //{
+        //    get
+        //    {
+        //        if ((SubType1 != null || SubType2 != null) && Name != null)
+        //        {
+        //            var subTypes = new[] { SubType1?.FullComposedName, SubType2?.FullComposedName }.JoinIgnoreEmpty(", ");
+        //            return $"{Name}<{subTypes}>";
+        //        }
+        //        return Name ?? String.Empty;
+        //    }
+        //}
+
         [YamlIgnore]
-        public string FullName => new[] { Namespace?.FullName, Name }.JoinIgnoreEmpty(".");
+        public string FullName => new[] { Namespace?.FullName, GetComposedName(true) }.JoinIgnoreEmpty(".");
 
         private Type? _frameworkType;
         [YamlIgnore]
