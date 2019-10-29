@@ -18,7 +18,7 @@
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment().Replace("\n", "") : Model.Summary.EscapeXmlComment().Replace("\n", ""))
     if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
     {
 @:/// <see href="@Model.ExternalDocsUrl" />
