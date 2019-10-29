@@ -69,3 +69,5 @@ COPY build/autorestRunner.json /app/package.json
 COPY README.md /app/README.md
 
 RUN mkdir -p /output
+
+ENTRYPOINT ["autorest", "--use=/app"]
