@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  autorest-gen: 
+    image: autorest-gen
+    # build: .
+    environment: 
+      ENV_YML_FILE_URL: # YML PATH
+      ENV_OUTPUT_PATH: "/app/output"
+      ENV_NAMESPACE: "Agoda.BookingApi.GenClient"
+      ENV_VERSION: 2.0.1
+      ENV_KEY: # NUGET KEY
+    command: /app/build/create-project.sh
