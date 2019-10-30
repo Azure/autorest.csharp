@@ -61,27 +61,27 @@ namespace AutoRest.CSharp.V3.CodeGen
         //    return Scope();
         //}
 
-        private static string MethodDeclaration(string modifiers, string? name, string? returnType = null, params string[] parameters)
+        private static string MethodDeclaration(string? modifiers, string? returnType, string? name, params string[] parameters)
         {
             var headerText = new[] { modifiers, returnType, name ?? "[NO METHOD NAME]" }.JoinIgnoreEmpty(" ");
             var parametersText = parameters.JoinIgnoreEmpty(", ");
             return $"{headerText}({parametersText})";
         }
 
-        public DisposeAction Method(string modifiers, string? name, string? returnType = null, params string[] parameters)
+        public DisposeAction Method(string? modifiers, string? returnType, string? name, params string[] parameters)
         {
-            Line(MethodDeclaration(modifiers, name, returnType, parameters));
+            Line(MethodDeclaration(modifiers, returnType, name, parameters));
             return Scope();
         }
 
-        public void MethodExpression(string modifiers, string? name, string expression, string? returnType = null, params string[] parameters) =>
-            Line($"{MethodDeclaration(modifiers, name, returnType, parameters)} => {expression};");
+        public void MethodExpression(string? modifiers, string? returnType, string? name, string[]? parameters, string expression) =>
+            Line($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
         public void AutoProperty(string modifiers, CSharpType? type, string? name) =>
-            Line($"{modifiers} {Type(type)} {name ?? "[NO PROPERTY NAME]"} {{ get; set; }}");
+            Line($"{modifiers} {Pair(type, name)} {{ get; set; }}");
 
-        public void EnumValue(CSharpLanguage? choiceCs = null, bool includeComma = true) =>
-            Line($"{choiceCs?.Name ?? "[NO NAME]"}{(includeComma ? "," : String.Empty)}");
+        public void EnumValue(string? value, bool includeComma = true) =>
+            Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
         //public void DocSummary(string summary)
         //{
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         //public void DocReturns(string returns) =>
         //    Line($"/// <returns>{returns}</returns>");
 
-        public DisposeAction Usings()
+        public DisposeAction UsingStatements()
         {
             const string usingBlockIdentifier = "%%UsingBlock%%";
             Line(usingBlockIdentifier);
@@ -120,14 +120,22 @@ namespace AutoRest.CSharp.V3.CodeGen
             });
         }
 
-        public string Type(CSharpType? type = null)
+        public string Type(CSharpType? type)
         {
-            _usingNamespaces.Add(type?.KeywordName != null ? null : type?.Namespace);
-            _usingNamespaces.Add(type?.SubType1?.KeywordName != null ? null : type?.SubType1?.Namespace);
-            _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);
+            if (_useTypeShortNames)
+            {
+                _usingNamespaces.Add(type?.KeywordName != null ? null : type?.Namespace);
+                _usingNamespaces.Add(type?.SubType1?.KeywordName != null ? null : type?.SubType1?.Namespace);
+                _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);
+            }
             return (_useTypeShortNames ? type?.GetComposedName(typesAsKeywords: _useKeywords) : type?.FullName) ?? "[NO TYPE]";
         }
 
-        public string Type(Type? type = null) => Type(new CSharpType {FrameworkType = type});
+        public string Type(Type? type) => Type(new CSharpType {FrameworkType = type});
+        public string AttributeType(Type? type) => Type(type).Replace("Attribute", String.Empty);
+
+        public static string Pair(string? typeText, string? name) => $"{typeText ?? "[NO TYPE]"} {name ?? "[NO NAME]"}";
+        public string Pair(CSharpType? type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
+        public string Pair(Type? type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public bool WriteDefaultSchema(Schema schema)
         {
             FileHeader();
-            using var _ = Usings();
+            using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteObjectSchema(ObjectSchema schema)
         {
             FileHeader();
-            using var _ = Usings();
+            using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
@@ -54,8 +55,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Enum("public", cs?.Name))
                 {
-                    schema.Choices.Select(c => c.Language.CSharp)
-                        .ForEachLast(cc => EnumValue(cc), cc => EnumValue(cc, false));
+                    schema.Choices.Select(c => c.Language.CSharp).ForEachLast(cc => EnumValue(cc?.Name), cc => EnumValue(cc?.Name, false));
                 }
             }
             return true;
@@ -64,26 +64,51 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteChoiceSchema(ChoiceSchema schema)
         {
             FileHeader();
-            using var _ = Usings();
+            using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var csType = cs?.Type;
+            using (Namespace(csType?.Namespace))
             {
-                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = cs?.Type};
+                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
                 using (Struct("public readonly", cs?.Name, Type(implementType)))
                 {
+                    var stringText = Type(typeof(string));
                     foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
                     {
-                        Line($"internal const {Type(typeof(string))} {choiceCs.Name} = \"{choice.Value}\";");
+                        Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
                     }
-                    Line($"private readonly {Type(typeof(string))} _value;");
+                    Line($"private readonly {Pair(stringText, "_value")};");
                     Line();
 
-                    using (Method("public", cs?.Name))
+                    using (Method("public", null, cs?.Name, Pair(stringText, "value")))
                     {
                         Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
                     }
+                    Line();
 
+                    var csTypeText = Type(csType);
+                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
+                    {
+                        Line($"public static {Pair(csTypeText, choiceCs.Name)} {{ get; }} = new {csTypeText}({choiceCs.Name}Value);");
+                    }
+                    Line();
 
+                    var boolText = Type(typeof(bool));
+                    var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
+                    MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
+                    MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
+                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new []{Pair(stringText, "value")}, $"new {csTypeText}(value)");
+                    Line();
+
+                    var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
+                    Line(editorBrowsableNever);
+                    MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj")}, $"obj is {csTypeText} other && Equals(other)");
+                    MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "obj") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
+                    Line();
+
+                    Line(editorBrowsableNever);
+                    MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
+                    MethodExpression("public override", stringText, "ToString", null, "_value");
                 }
             }
             return true;
