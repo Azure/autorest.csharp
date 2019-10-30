@@ -22,10 +22,9 @@ cat >NuGet.config <<EOL
 </configuration>
 EOL
 
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Agoda.RoundRobin -v 1.2.24
 dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Newtonsoft.Json -v 11.0.2
 dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.44
+dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.71
 rm ./output-file-path/Class1.cs
 
 dotnet pack ./output-file-path/Agoda.Abc.YourName.csproj
