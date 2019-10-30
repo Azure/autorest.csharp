@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -9,8 +10,8 @@ namespace AutoRest.CSharp.V3.CodeGen
     {
         private readonly List<CSharpNamespace?> _usingNamespaces = new List<CSharpNamespace?>();
         private CSharpNamespace? _currentNamespace;
-        private bool _useTypeShortNames = true;
-        private bool _useKeywords = true;
+        private readonly bool _useTypeShortNames = true;
+        private readonly bool _useKeywords = true;
 
         public abstract void Line(string str = "");
         public abstract void Append(string str = "");
@@ -37,17 +38,16 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        public DisposeAction Class(string modifiers, CSharpLanguage? cs = null)
+        private DisposeAction Definition(string modifiers, string kind, string defaultName, CSharpLanguage? cs = null, string? implements = null)
         {
-            Line($"{modifiers} class {cs?.Name ?? "[NO TYPE NAME]"}");
+            var line = new[] {modifiers, kind, cs?.Name ?? defaultName, implements != null ? $": {implements}" : null}.JoinIgnoreEmpty(" ");
+            Line(line);
             return Scope();
         }
 
-        public DisposeAction Enum(string modifiers, CSharpLanguage? cs = null)
-        {
-            Line($"{modifiers} enum {cs?.Name ?? "[NO ENUM NAME]"}");
-            return Scope();
-        }
+        public DisposeAction Class(string modifiers, CSharpLanguage? cs = null, string? implements = null) => Definition(modifiers, "class", "[NO TYPE NAME]", cs, implements);
+        public DisposeAction Enum(string modifiers, CSharpLanguage? cs = null, string? implements = null) => Definition(modifiers, "enum", "[NO ENUM NAME]", cs, implements);
+        public DisposeAction Struct(string modifiers, CSharpLanguage? cs = null, string? implements = null) => Definition(modifiers, "struct", "[NO STRUCT NAME]", cs, implements);
 
         //public EndBlock Method(string methodDeclaration)
         //{
@@ -64,7 +64,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void AutoProperty(string modifiers, CSharpType? type = null, CSharpLanguage? propertyCs = null) =>
             Line($"{modifiers} {Type(type)} {propertyCs?.Name ?? "[NO PROPERTY NAME]"} {{ get; set; }}");
 
-        public void EnumValue(CSharpLanguage? choiceCs = null, bool includeComma = true) => Line($"{choiceCs?.Name ?? "[NO NAME]"}{(includeComma ? "," : String.Empty)}");
+        public void EnumValue(CSharpLanguage? choiceCs = null, bool includeComma = true) =>
+            Line($"{choiceCs?.Name ?? "[NO NAME]"}{(includeComma ? "," : String.Empty)}");
 
         //public void DocSummary(string summary)
         //{
@@ -110,5 +111,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);
             return (_useTypeShortNames ? type?.GetComposedName(typesAsKeywords: _useKeywords) : type?.FullName) ?? "[NO TYPE]";
         }
+
+        public string Type(Type? type = null) => Type(new CSharpType {FrameworkType = type});
     }
 }

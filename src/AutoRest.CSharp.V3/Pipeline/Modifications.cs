@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
@@ -108,7 +109,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
                 _namespace.Base = _frameworkType.Namespace;
                 _namespace.Category = null;
                 _namespace.ApiVersion = null;
-                _name = _frameworkType.Name;
+                _name = _frameworkType.Name.Split('`')[0];
+                SubType1 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 0 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[0] } : null;
+                SubType2 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 1 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[1] } : null;
             }
         }
 
