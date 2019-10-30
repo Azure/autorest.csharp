@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 
- dotnet new classlib -n Agoda.Abc.YourName -o ./output-file-path
+namespace="Agoda.BookingApi.GenClient"
+dotnet new classlib -n $namespace -o ./output-file-path
 cat >NuGet.config <<EOL
 <?xml version="1.0" encoding="utf-8"?><configuration><activePackageSource>
 <add key="All" value="(Aggregate source)" />
@@ -22,13 +23,13 @@ cat >NuGet.config <<EOL
 </configuration>
 EOL
 
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Agoda.RoundRobin -v 1.2.24
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Newtonsoft.Json -v 11.0.2
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
-dotnet add ./output-file-path/Agoda.Abc.YourName.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.44
+dotnet add ./output-file-path/$namespace.csproj package Agoda.RoundRobin -v 1.2.24
+dotnet add ./output-file-path/$namespace.csproj package Newtonsoft.Json -v 11.0.2
+dotnet add ./output-file-path/$namespace.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
+dotnet add ./output-file-path/$namespace.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.44
 rm ./output-file-path/Class1.cs
 
-dotnet pack ./output-file-path/Agoda.Abc.YourName.csproj
+dotnet pack ./output-file-path/$namespace.csproj
 
 # dotnet nuget push -s https://bk-lib-nuget.agodadev.io/api/symbols
 
