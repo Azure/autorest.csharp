@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
     internal abstract class BaseCSharpWriter
     {
         private readonly List<CSharpNamespace?> _usingNamespaces = new List<CSharpNamespace?>();
-        public bool UseTypeShortNames { get; set; } = true;
+        private CSharpNamespace? _currentNamespace;
+        private bool _useTypeShortNames = true;
+        private bool _useKeywords = true;
 
         public abstract void Line(string str = "");
         public abstract void Append(string str = "");
@@ -23,25 +24,26 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line();
         }
 
-        protected virtual EndBlock Scope(string start = "{", string end = "}")
+        protected virtual DisposeAction Scope(string start = "{", string end = "}")
         {
             Line(start);
-            return new EndBlock(() => Line(end));
+            return new DisposeAction(() => Line(end));
         }
 
-        public EndBlock Namespace(CSharpNamespace? @namespace = null)
+        public DisposeAction Namespace(CSharpNamespace? @namespace = null)
         {
+            _currentNamespace = @namespace;
             Line($"namespace {@namespace?.FullName ?? "[NO NAMESPACE]"}");
             return Scope();
         }
 
-        public EndBlock Class(string modifiers, CSharpLanguage? cs = null)
+        public DisposeAction Class(string modifiers, CSharpLanguage? cs = null)
         {
             Line($"{modifiers} class {cs?.Name ?? "[NO TYPE NAME]"}");
             return Scope();
         }
 
-        public EndBlock Enum(string modifiers, CSharpLanguage? cs = null)
+        public DisposeAction Enum(string modifiers, CSharpLanguage? cs = null)
         {
             Line($"{modifiers} enum {cs?.Name ?? "[NO ENUM NAME]"}");
             return Scope();
@@ -80,32 +82,33 @@ namespace AutoRest.CSharp.V3.CodeGen
         //public void DocReturns(string returns) =>
         //    Line($"/// <returns>{returns}</returns>");
 
-        public EndBlock Usings()
+        public DisposeAction Usings()
         {
-            const string usingBlockSymbol = "%%UsingBlock%%";
-            Line(usingBlockSymbol);
-            return new EndBlock(() =>
+            const string usingBlockIdentifier = "%%UsingBlock%%";
+            Line(usingBlockIdentifier);
+            return new DisposeAction(() =>
             {
                 var usingLines = _usingNamespaces
                     .Where(un => un != null)
                     .Select(un => un!.FullName)
                     .Distinct()
+                    .Where(ns => ns != _currentNamespace?.FullName)
                     .OrderByDescending(ns => ns.StartsWith("System"))
                     .ThenBy(ns => ns, StringComparer.InvariantCulture)
                     .Select(ns => $"using {ns};");
                 var usingBlock = String.Join(Environment.NewLine, usingLines);
                 var removeLine = usingBlock.Any() ? String.Empty : Environment.NewLine;
                 var extraLine = usingBlock.Any() ? Environment.NewLine : String.Empty;
-                Replace(usingBlockSymbol + removeLine, usingBlock + extraLine);
+                Replace(usingBlockIdentifier + removeLine, usingBlock + extraLine);
             });
         }
 
         public string Type(CSharpType? type = null)
         {
-            _usingNamespaces.Add(type?.Namespace);
-            _usingNamespaces.Add(type?.SubType1?.Namespace);
-            _usingNamespaces.Add(type?.SubType2?.Namespace);
-            return (UseTypeShortNames ? type?.GetComposedName() : type?.FullName) ?? "[NO TYPE]";
+            _usingNamespaces.Add(type?.KeywordName != null ? null : type?.Namespace);
+            _usingNamespaces.Add(type?.SubType1?.KeywordName != null ? null : type?.SubType1?.Namespace);
+            _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);
+            return (_useTypeShortNames ? type?.GetComposedName(typesAsKeywords: _useKeywords) : type?.FullName) ?? "[NO TYPE]";
         }
     }
 }

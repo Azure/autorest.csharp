@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
     internal class CSharpType
     {
-        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Assembly.GetExecutingAssembly().GetType(FullName) : _frameworkType;
+        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Type.GetType(FullName) : _frameworkType;
 
         private CSharpNamespace? _namespace;
         [YamlMember(Alias = "namespace", Order = 0)]
@@ -77,34 +77,22 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "subType2", Order = 3)]
         public CSharpType? SubType2 { get; set; }
 
-        public string GetComposedName(bool subTypesAsFullName = false) {
+        public string GetComposedName(bool subTypesAsFullName = false, bool typesAsKeywords = true)
+        {
+            var name = (typesAsKeywords ? KeywordName : null) ?? Name ?? String.Empty;
             if ((SubType1 != null || SubType2 != null) && Name != null)
             {
                 var subTypes = (subTypesAsFullName
                         ? new[] {SubType1?.FullName, SubType2?.FullName}
-                        : new[] {SubType1?.GetComposedName(), SubType2?.GetComposedName()})
+                        : new[] {SubType1?.GetComposedName(typesAsKeywords: typesAsKeywords), SubType2?.GetComposedName(typesAsKeywords: typesAsKeywords)})
                     .JoinIgnoreEmpty(", ");
-                return $"{Name}<{subTypes}>";
+                return $"{name}<{subTypes}>";
             }
-            return Name ?? String.Empty;
+            return name;
         }
 
-        //[YamlIgnore]
-        //public string FullComposedName
-        //{
-        //    get
-        //    {
-        //        if ((SubType1 != null || SubType2 != null) && Name != null)
-        //        {
-        //            var subTypes = new[] { SubType1?.FullComposedName, SubType2?.FullComposedName }.JoinIgnoreEmpty(", ");
-        //            return $"{Name}<{subTypes}>";
-        //        }
-        //        return Name ?? String.Empty;
-        //    }
-        //}
-
         [YamlIgnore]
-        public string FullName => new[] { Namespace?.FullName, GetComposedName(true) }.JoinIgnoreEmpty(".");
+        public string FullName => new[] { Namespace?.FullName, GetComposedName(true, false) }.JoinIgnoreEmpty(".");
 
         private Type? _frameworkType;
         [YamlIgnore]
@@ -123,6 +111,40 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
                 _name = _frameworkType.Name;
             }
         }
+
+        [YamlIgnore]
+        public string? KeywordName {
+            get
+            {
+                var hasElementType = FrameworkType?.HasElementType ?? false;
+                var frameworkType = hasElementType ? FrameworkType!.GetElementType() : FrameworkType;
+                var squareBrackets = hasElementType ? "[]" : String.Empty;
+                var keyword = GetKeywordMapping(frameworkType);
+                return keyword != null ? $"{keyword}{squareBrackets}" : null;
+            }
+        } 
+
+        //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/built-in-types-table
+        private static string? GetKeywordMapping(Type? type) =>
+            type switch
+            {
+                var t when t == typeof(bool) => "bool",
+                var t when t == typeof(byte) => "byte",
+                var t when t == typeof(sbyte) => "sbyte",
+                var t when t == typeof(short) => "short",
+                var t when t == typeof(ushort) => "ushort",
+                var t when t == typeof(int) => "int",
+                var t when t == typeof(uint) => "uint",
+                var t when t == typeof(long) => "long",
+                var t when t == typeof(ulong) => "ulong",
+                var t when t == typeof(char) => "char",
+                var t when t == typeof(double) => "double",
+                var t when t == typeof(float) => "float",
+                var t when t == typeof(object) => "object",
+                var t when t == typeof(decimal) => "decimal",
+                var t when t == typeof(string) => "string",
+                _ => null
+            };
     }
 
     /// <summary>language metadata specific to schema instances</summary>

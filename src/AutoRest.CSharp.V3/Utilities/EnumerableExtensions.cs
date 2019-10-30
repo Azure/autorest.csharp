@@ -5,7 +5,7 @@ namespace AutoRest.CSharp.V3.Utilities
 {
     internal static class EnumerableExtensions
     {
-        public static void ForEach<T>(this IEnumerable<T> collection, Action<T>? actionExceptLast = null, Action<T>? actionOnLast = null)
+        public static void ForEachLast<T>(this IEnumerable<T> collection, Action<T>? actionExceptLast = null, Action<T>? actionOnLast = null)
         {
             using var enumerator = collection.GetEnumerator();
             var isNotLast = enumerator.MoveNext();
@@ -15,6 +15,23 @@ namespace AutoRest.CSharp.V3.Utilities
                 isNotLast = enumerator.MoveNext();
                 var action = isNotLast ? actionExceptLast : actionOnLast;
                 action?.Invoke(current);
+            }
+        }
+
+        public static IEnumerable<TResult> SelectLast<T, TResult>(this IEnumerable<T> collection, Func<T, TResult>? selectorExceptLast = null, Func<T, TResult>? selectorOnLast = null)
+        {
+            using var enumerator = collection.GetEnumerator();
+            var isNotLast = enumerator.MoveNext();
+            while (isNotLast)
+            {
+                var current = enumerator.Current;
+                isNotLast = enumerator.MoveNext();
+                var selector = isNotLast ? selectorExceptLast : selectorOnLast;
+                //https://stackoverflow.com/a/32580613/294804
+                if (selector != null)
+                {
+                    yield return selector.Invoke(current);
+                }
             }
         }
     }

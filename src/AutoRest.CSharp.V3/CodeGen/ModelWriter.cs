@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 using (Enum("public", cs))
                 {
                     schema.Choices.Select(c => c.Language.CSharp)
-                        .ForEach(cc => EnumValue(cc), cc => EnumValue(cc, false));
+                        .ForEachLast(cc => EnumValue(cc), cc => EnumValue(cc, false));
                 }
             }
             return true;
@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 using (Enum("public", cs))
                 {
                     schema.Choices.Select(c => c.Language.CSharp)
-                        .ForEach(cc => EnumValue(cc), cc => EnumValue(cc, false));
+                        .ForEachLast(cc => EnumValue(cc), cc => EnumValue(cc, false));
                 }
             }
             return true;
