@@ -114,27 +114,17 @@ namespace AutoRest.CSharp.V3.Plugins
         private static CSharpType ArrayTypeInfo(ArraySchema schema) =>
             new CSharpType
             {
-                Name = "ICollection",
-                SubType1 = schema.ElementType.Language.CSharp?.Type,
-                Namespace = new CSharpNamespace
-                {
-                    Base = "System.Collections.Generic"
-                }
+                FrameworkType = typeof(ICollection<>),
+                SubType1 = schema.ElementType.Language.CSharp?.Type
             };
 
         private static CSharpType DictionaryTypeInfo(DictionarySchema schema) =>
             new CSharpType
             {
-                Name = "IDictionary",
-                SubType1 = new CSharpType
-                {
-                    FrameworkType = typeof(string)
-                },
-                SubType2 = schema.ElementType.Language.CSharp?.Type,
-                Namespace = new CSharpNamespace
-                {
-                    Base = "System.Collections.Generic"
-                }
+                // The generic type arguments are not used when assigning them via FrameworkType.
+                FrameworkType = typeof(IDictionary<string, object>),
+                SubType1 = new CSharpType { FrameworkType = typeof(string) },
+                SubType2 = schema.ElementType.Language.CSharp?.Type
             };
 
         private static CSharpType DefaultTypeInfo(Schema schema, Configuration configuration)

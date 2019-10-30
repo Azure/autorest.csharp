@@ -15,16 +15,16 @@ namespace AutoRest.CSharp.V3.Plugins
         {
             foreach (var schema in codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>())
             {
-                var modelWriter = new ModelWriter();
-                modelWriter.WriteSchema(schema);
-                await autoRest.WriteFile($"models-cs/{schema.Language.CSharp.Name}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
+                var writer = new SchemaWriter();
+                writer.WriteSchema(schema);
+                await autoRest.WriteFile($"models-cs/{schema.Language.CSharp.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
             }
 
             foreach (var schema in codeModel.Schemas.GetAllSchemaNodes())
             {
-                var modelWriter = new ModelWriter();
-                modelWriter.WriteSchema(schema);
-                await autoRest.WriteFile($"all-cs/{schema.Language.CSharp.Name}.cs", modelWriter.GetFormattedCode(), "source-file-csharp");
+                var writer = new SchemaWriter();
+                writer.WriteSchema(schema);
+                await autoRest.WriteFile($"all-cs/{schema.Language.CSharp.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
             }
 
             var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();

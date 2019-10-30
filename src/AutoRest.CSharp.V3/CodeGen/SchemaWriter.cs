@@ -5,7 +5,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class ModelWriter : StringCSharpWriter
+    internal class SchemaWriter : StringWriter
     {
         public bool WriteSchema(Schema schema) =>
             schema switch
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", cs)) { }
+                using (Class("public partial", cs?.Name)) { }
             }
             return true;
         }
@@ -35,13 +35,11 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", cs))
+                using (Class("public partial", cs?.Name))
                 {
-                    foreach (var property in schema.Properties)
+                    foreach (var (propertyCs, propertySchemaCs) in schema.Properties.Select(p => (p.Language.CSharp, p.Schema.Language.CSharp)))
                     {
-                        var propertyCs = property.Language.CSharp;
-                        var propertySchemaCs = property.Schema.Language.CSharp;
-                        AutoProperty("public", propertySchemaCs?.Type, propertyCs);
+                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name);
                     }
                 }
             }
@@ -54,7 +52,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Enum("public", cs))
+                using (Enum("public", cs?.Name))
                 {
                     schema.Choices.Select(c => c.Language.CSharp)
                         .ForEachLast(cc => EnumValue(cc), cc => EnumValue(cc, false));
@@ -71,15 +69,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             using (Namespace(cs?.Type?.Namespace))
             {
                 var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = cs?.Type};
-                using (Struct("public readonly", cs, Type(implementType)))
+                using (Struct("public readonly", cs?.Name, Type(implementType)))
                 {
-                    foreach (var choice in schema.Choices)
+                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
                     {
-                        var choiceCs = choice.Language.CSharp;
                         Line($"internal const {Type(typeof(string))} {choiceCs.Name} = \"{choice.Value}\";");
                     }
                     Line($"private readonly {Type(typeof(string))} _value;");
                     Line();
+
+                    using (Method("public", cs?.Name))
+                    {
+                        Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
+                    }
+
 
                 }
             }

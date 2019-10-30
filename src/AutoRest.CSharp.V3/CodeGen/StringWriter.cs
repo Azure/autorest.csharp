@@ -1,11 +1,11 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Text;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
-using System.Text;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class StringCSharpWriter : BaseCSharpWriter
+    internal class StringWriter : WriterBase
     {
         private readonly StringBuilder _builder = new StringBuilder();
 
@@ -14,9 +14,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         public override void Replace(string oldValue = "", string newValue = "") => _builder.Replace(oldValue, newValue);
         public override string GetFormattedCode()
         {
-            var ws = new AdhocWorkspace();
-            var cu = SyntaxFactory.ParseCompilationUnit(_builder.ToString());
-            return Formatter.Format(cu, ws).ToFullString();
+            var syntax = SyntaxFactory.ParseCompilationUnit(_builder.ToString());
+            return Formatter.Format(syntax, new AdhocWorkspace()).ToFullString();
         }
     }
 }
