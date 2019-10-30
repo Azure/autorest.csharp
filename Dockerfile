@@ -40,12 +40,9 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | b
 
 ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-# ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-# ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 RUN npm config set strict-ssl false
 RUN node -v
-RUN npm -v
 RUN npm install npm@6.12.0 -g
 RUN npm install -g autorest
 
@@ -69,5 +66,3 @@ COPY build/autorestRunner.json /app/package.json
 COPY README.md /app/README.md
 
 RUN mkdir -p /output
-
-ENTRYPOINT ["autorest", "--use=/app"]
