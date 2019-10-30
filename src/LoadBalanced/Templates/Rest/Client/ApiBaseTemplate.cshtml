@@ -103,6 +103,10 @@ namespace @Settings.Namespace
                 _ignoreSslPolicyErrors);
         }
 
+        public void UpdateBaseUrls(IEnumerable<string> baseUrls) {
+            _client.UpdateBaseUrl(baseUrls.ToArray());
+        }
+
         public virtual JsonSerializerSettings SerializationSettings =>
             _serializationSettings ?? (_serializationSettings =
                 new JsonSerializerSettings
