@@ -70,4 +70,4 @@ COPY README.md /app/README.md
 
 RUN mkdir -p /output
 
-ENTRYPOINT ["autorest", "--use=/app"]
+ENTRYPOINT ["autorest", "--use=/app", "--csharp", "--output-folder=/app/output"]
