@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
+        // CURRENTLY, INPUT SCHEMA
         private bool WriteObjectSchema(ObjectSchema schema)
         {
             FileHeader();
@@ -38,14 +39,35 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    foreach (var (propertyCs, propertySchemaCs) in schema.Properties.Select(p => (p.Language.CSharp, p.Schema.Language.CSharp)))
+                    var propertyInfos = schema.Properties.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                    foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
-                        if (propertySchemaCs?.IsLazy ?? false)
+                        if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false))
                         {
-                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.LazyType ?? propertySchemaCs.Type, propertyCs?.Name);
+                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name);
                             continue;
                         }
                         AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name);
+                    }
+
+                    if (propertyInfos.Any(pi => pi.Property.Required ?? false))
+                    {
+                        Line();
+                        var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
+                            .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
+                        var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
+                        using (Method("public", null, cs?.Name, parameters))
+                        {
+                            foreach (var ((_, propertyCs, propertySchemaCs), variableName, _) in requiredProperties)
+                            {
+                                if (propertySchemaCs?.IsLazy ?? false)
+                                {
+                                    Line($"{propertyCs?.Name} = new {propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type}({variableName});");
+                                    continue;
+                                }
+                                Line($"{propertyCs?.Name} = {variableName};");
+                            }
+                        }
                     }
                 }
             }

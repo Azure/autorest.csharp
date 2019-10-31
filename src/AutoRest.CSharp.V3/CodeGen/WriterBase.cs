@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.V3.CodeGen
     internal abstract class WriterBase
     {
         private readonly List<CSharpNamespace?> _usingNamespaces = new List<CSharpNamespace?>();
+        private readonly List<string> _classFields = new List<string>();
         private CSharpNamespace? _currentNamespace;
 
         private readonly bool _useTypeShortNames = true;
@@ -41,14 +42,28 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        private string DefinitionLine(string? access, string? modifiers, string kind, string defaultName, string? name, string? implements = null) =>
+            new[] { access ?? _definitionAccessDefault, modifiers, kind, name ?? defaultName, implements != null ? $": {implements}" : null }.JoinIgnoreEmpty(" ");
+
         private DisposeAction Definition(string? access, string? modifiers, string kind, string defaultName, string? name, string? implements = null)
         {
-            var line = new[] {access ?? _definitionAccessDefault, modifiers, kind, name ?? defaultName, implements != null ? $": {implements}" : null}.JoinIgnoreEmpty(" ");
-            Line(line);
+            Line(DefinitionLine(access, modifiers, kind, defaultName, name, implements));
             return Scope();
         }
 
-        public DisposeAction Class(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "class", "[NO TYPE NAME]", name, implements);
+        public DisposeAction Class(string? access, string? modifiers, string? name, string? implements = null) //=> Definition(access, modifiers, "class", "[NO TYPE NAME]", name, implements);
+        {
+            Line(DefinitionLine(access, modifiers, "class", "[NO TYPE NAME]", name, implements));
+            Line("{");
+            const string fieldBlockIdentifier = "%%ClassFieldBlock%%";
+            Line(fieldBlockIdentifier);
+            return new DisposeAction(() =>
+            {
+                var fields = _classFields.Any() ? String.Join(Environment.NewLine, _classFields) + Environment.NewLine + Environment.NewLine : String.Empty;
+                Replace(fieldBlockIdentifier + Environment.NewLine, fields);
+                _classFields.Clear();
+            });
+        }
         public DisposeAction Enum(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "enum", "[NO ENUM NAME]", name, implements);
         public DisposeAction Struct(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "struct", "[NO STRUCT NAME]", name, implements);
 
@@ -74,10 +89,11 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
-        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? lazyType, string? name)
+        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name)
         {
             var variable = $"_{name.ToVariableName()}";
-            Line($"private {Pair(lazyType, variable)};");
+            //Line($"private {Pair(concreteType, variable)};");
+            _classFields.Add($"private {Pair(concreteType, variable)};");
             Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
         }
 
@@ -110,11 +126,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .Where(ns => ns != _currentNamespace?.FullName)
                     .OrderByDescending(ns => ns.StartsWith("System"))
                     .ThenBy(ns => ns, StringComparer.InvariantCulture)
-                    .Select(ns => $"using {ns};");
-                var usingBlock = String.Join(Environment.NewLine, usingLines);
-                var removeLine = usingBlock.Any() ? String.Empty : Environment.NewLine;
-                var extraLine = usingBlock.Any() ? Environment.NewLine : String.Empty;
-                Replace(usingBlockIdentifier + removeLine, usingBlock + extraLine);
+                    .Select(ns => $"using {ns};")
+                    .ToArray();
+                var usingBlock = usingLines.Any() ? String.Join(Environment.NewLine, usingLines) + Environment.NewLine + Environment.NewLine : String.Empty;
+                //var usingBlock = String.Join(Environment.NewLine, usingLines);
+                //var removeLine = usingBlock.Any() ? String.Empty : Environment.NewLine;
+                //var extraLine = usingBlock.Any() ? Environment.NewLine : String.Empty;
+                Replace(usingBlockIdentifier + Environment.NewLine, usingBlock);
             });
         }
 

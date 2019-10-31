@@ -27,8 +27,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "isLazy", Order = 4)]
         public bool? IsLazy { get; set; }
 
-        [YamlMember(Alias = "lazyType", Order = 5)]
-        public CSharpType? LazyType { get; set; }
+        [YamlMember(Alias = "concreteType", Order = 5)]
+        public CSharpType? ConcreteType { get; set; }
+
+        [YamlMember(Alias = "inputType", Order = 6)]
+        public CSharpType? InputType { get; set; }
 
         [YamlIgnore]
         public int SchemaOrder { get; set; }
