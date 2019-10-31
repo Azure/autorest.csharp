@@ -7,8 +7,8 @@ services:
     environment: 
       ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_OUTPUT_PATH: "/app/output"
-      ENV_NAMESPACE: "Agoda.BookingApi.GenClient"
-      ENV_VERSION: 2.0.3
-      ENV_KEY: # NUGET KEY
+      ENV_NAMESPACE: ${NAMESPACE} 
+      ENV_VERSION: ${VERSION}
+      ENV_KEY: ${NUGET_KEY}
       ENV_SHOULD_PUSH_NUGET: "false"
     command: /app/build/create-project.sh
