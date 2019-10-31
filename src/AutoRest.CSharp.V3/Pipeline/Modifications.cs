@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
@@ -24,6 +23,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         [YamlMember(Alias = "type", Order = 3)]
         public CSharpType? Type { get; set; }
+
+        [YamlMember(Alias = "isLazy", Order = 4)]
+        public bool? IsLazy { get; set; }
+
+        [YamlMember(Alias = "lazyType", Order = 5)]
+        public CSharpType? LazyType { get; set; }
 
         [YamlIgnore]
         public int SchemaOrder { get; set; }

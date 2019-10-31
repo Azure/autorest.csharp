@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", cs?.Name)) { }
+                using (Class(null, "partial", cs?.Name)) { }
             }
             return true;
         }
@@ -36,10 +36,15 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("public partial", cs?.Name))
+                using (Class(null, "partial", cs?.Name))
                 {
                     foreach (var (propertyCs, propertySchemaCs) in schema.Properties.Select(p => (p.Language.CSharp, p.Schema.Language.CSharp)))
                     {
+                        if (propertySchemaCs?.IsLazy ?? false)
+                        {
+                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.LazyType ?? propertySchemaCs.Type, propertyCs?.Name);
+                            continue;
+                        }
                         AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name);
                     }
                 }
@@ -53,7 +58,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Enum("public", cs?.Name))
+                using (Enum(null, null, cs?.Name))
                 {
                     schema.Choices.Select(c => c.Language.CSharp).ForEachLast(cc => EnumValue(cc?.Name), cc => EnumValue(cc?.Name, false));
                 }
@@ -70,7 +75,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             using (Namespace(csType?.Namespace))
             {
                 var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
-                using (Struct("public readonly", cs?.Name, Type(implementType)))
+                using (Struct(null, "readonly", cs?.Name, Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
                     foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))

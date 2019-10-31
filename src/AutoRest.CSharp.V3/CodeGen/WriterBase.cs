@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -10,8 +11,10 @@ namespace AutoRest.CSharp.V3.CodeGen
     {
         private readonly List<CSharpNamespace?> _usingNamespaces = new List<CSharpNamespace?>();
         private CSharpNamespace? _currentNamespace;
+
         private readonly bool _useTypeShortNames = true;
         private readonly bool _useKeywords = true;
+        private readonly string _definitionAccessDefault = "public";
 
         public abstract void Line(string str = "");
         public abstract void Append(string str = "");
@@ -38,28 +41,16 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        private DisposeAction Definition(string modifiers, string kind, string defaultName, string? name, string? implements = null)
+        private DisposeAction Definition(string? access, string? modifiers, string kind, string defaultName, string? name, string? implements = null)
         {
-            var line = new[] {modifiers, kind, name ?? defaultName, implements != null ? $": {implements}" : null}.JoinIgnoreEmpty(" ");
+            var line = new[] {access ?? _definitionAccessDefault, modifiers, kind, name ?? defaultName, implements != null ? $": {implements}" : null}.JoinIgnoreEmpty(" ");
             Line(line);
             return Scope();
         }
 
-        public DisposeAction Class(string modifiers, string? name, string? implements = null) => Definition(modifiers, "class", "[NO TYPE NAME]", name, implements);
-        public DisposeAction Enum(string modifiers, string? name, string? implements = null) => Definition(modifiers, "enum", "[NO ENUM NAME]", name, implements);
-        public DisposeAction Struct(string modifiers, string? name, string? implements = null) => Definition(modifiers, "struct", "[NO STRUCT NAME]", name, implements);
-
-        //public EndBlock Method(string methodDeclaration)
-        //{
-        //    Line(methodDeclaration);
-        //    return Scope();
-        //}
-
-        //public EndBlock Method(string modifiers, string type, string name, params string[] parameters)
-        //{
-        //    Line($"{modifiers} {type} {name}({string.Join(", ", parameters)})");
-        //    return Scope();
-        //}
+        public DisposeAction Class(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "class", "[NO TYPE NAME]", name, implements);
+        public DisposeAction Enum(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "enum", "[NO ENUM NAME]", name, implements);
+        public DisposeAction Struct(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "struct", "[NO STRUCT NAME]", name, implements);
 
         private static string MethodDeclaration(string? modifiers, string? returnType, string? name, params string[] parameters)
         {
@@ -82,6 +73,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
+
+        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? lazyType, string? name)
+        {
+            var variable = $"_{name.ToVariableName()}";
+            Line($"private {Pair(lazyType, variable)};");
+            Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
+        }
 
         //public void DocSummary(string summary)
         //{

@@ -34,6 +34,11 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
                 cs.Type = CreateTypeInfo(schema, configuration);
+                if (schema is ArraySchema || schema is DictionarySchema)
+                {
+                    cs.IsLazy = true;
+                    cs.LazyType = CreateTypeInfo(schema, configuration, true);
+                }
             }
 
             return true;
@@ -103,26 +108,27 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration) =>
+        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration, bool isLazy = false) =>
             schema switch
             {
-                ArraySchema arraySchema => ArrayTypeInfo(arraySchema),
-                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema),
+                // TODO: Add 'when' condition here for output only types of each
+                ArraySchema arraySchema => ArrayTypeInfo(arraySchema, isLazy),
+                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, isLazy),
                 _ => DefaultTypeInfo(schema, configuration)
             };
 
-        private static CSharpType ArrayTypeInfo(ArraySchema schema) =>
+        private static CSharpType ArrayTypeInfo(ArraySchema schema, bool isLazy = false) =>
             new CSharpType
             {
-                FrameworkType = typeof(ICollection<>),
+                FrameworkType = isLazy ? typeof(List<>) : typeof(ICollection<>),
                 SubType1 = schema.ElementType.Language.CSharp?.Type
             };
 
-        private static CSharpType DictionaryTypeInfo(DictionarySchema schema) =>
+        private static CSharpType DictionaryTypeInfo(DictionarySchema schema, bool isLazy = false) =>
             new CSharpType
             {
                 // The generic type arguments are not used when assigning them via FrameworkType.
-                FrameworkType = typeof(IDictionary<string, object>),
+                FrameworkType = isLazy ? typeof(Dictionary<string, object>) : typeof(IDictionary<string, object>),
                 SubType1 = new CSharpType { FrameworkType = typeof(string) },
                 SubType2 = schema.ElementType.Language.CSharp?.Type
             };

@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.V3.Utilities
         public static string? RemoveMiddleDotCharacters(this string? text) => text?.Replace("·", String.Empty);
         [return: NotNullIfNotNull("name")]
         public static string? ToCleanName(this string? name) => name?.ToPascalCase().RemoveMiddleDotCharacters();
+        public static string? ToVariableName(this string? name) => name?.ToCamelCase();
 
         //https://stackoverflow.com/a/41176852/294804
         public static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)
