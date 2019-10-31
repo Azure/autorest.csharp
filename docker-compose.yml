@@ -2,8 +2,7 @@ version: "3"
 
 services:
   autorest-gen: 
-    image: library/autorest-gen:1.0.0
-    # build: .
+    image: reg-hk.agodadev.io/library/autorest-gen:1.0.0
     environment: 
       ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_OUTPUT_PATH: "/app/output"
