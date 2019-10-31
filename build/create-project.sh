@@ -4,7 +4,7 @@ OUTPUT_PATH=${ENV_OUTPUT_PATH}
 NAMESPACE=${ENV_NAMESPACE}
 INPUT_PATH=./input/swagger.yml
 
-mkdir input
+mkdir -p input
 curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH
@@ -38,7 +38,8 @@ rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
 
-# dotnet nuget push -s https://bk-lib-nuget.agodadev.io/api/symbols
-
-dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
-
+if [ "$ENV_SHOULD_PUSH_NUGET" = "true" ]; then
+  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
+else
+  echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
+fi
