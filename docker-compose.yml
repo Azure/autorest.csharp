@@ -2,7 +2,7 @@ version: "3"
 
 services:
   autorest-gen: 
-    image: autorest-gen:latest
+    image: autorest-gen:1.0.0
     # build: .
     environment: 
       ENV_YML_FILE_URL: ${SWAGGER_URL}
