@@ -62,7 +62,6 @@ COPY . ./
 RUN dotnet sln remove "agoda.csharp.client.test/agoda.csharp.client.test.csproj"
 RUN dotnet restore
 RUN dotnet build
-COPY build/autorestRunner.json /app/package.json
 COPY README.md /app/README.md
 
 RUN mkdir -p /output
