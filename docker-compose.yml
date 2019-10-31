@@ -9,6 +9,6 @@ services:
       ENV_OUTPUT_PATH: "/app/output"
       ENV_NAMESPACE: ${NAMESPACE} 
       ENV_VERSION: ${VERSION}
-      ENV_KEY: ${NUGET_KEY}
+      ENV_NUGET_KEY: ${NUGET_KEY}
       ENV_SHOULD_PUSH_NUGET: "false"
     command: /app/build/create-project.sh
