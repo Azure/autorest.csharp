@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "isNullable", Order = 7)]
         public bool? IsNullable { get; set; }
 
+        [YamlMember(Alias = "hasRequired", Order = 8)]
+        public bool? HasRequired { get; set; }
+
         [YamlIgnore]
         public int SchemaOrder { get; set; }
     }
