@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public bool WriteDefaultSchema(Schema schema)
         {
-            FileHeader();
+            Header();
             using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         // CURRENTLY, INPUT SCHEMA
         private bool WriteObjectSchema(ObjectSchema schema)
         {
-            FileHeader();
+            Header();
             using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
@@ -76,13 +76,38 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
         {
-            FileHeader();
+            Header();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
                 using (Enum(null, null, cs?.Name))
                 {
-                    schema.Choices.Select(c => c.Language.CSharp).ForEachLast(cc => EnumValue(cc?.Name), cc => EnumValue(cc?.Name, false));
+                    schema.Choices.Select(c => c.Language.CSharp).ForEachLast(ccs => EnumValue(ccs?.Name), ccs => EnumValue(ccs?.Name, false));
+                }
+                Line();
+                using (Class("internal", "static", $"{cs?.Name}Extensions"))
+                {
+                    var stringText = Type(typeof(string));
+                    var csTypeText = Type(cs?.Type);
+                    var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.Language.CSharp?.Name}", Serial: $"\"{c.Value}\"")).ToArray();
+                    var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
+
+                    var toSerialString = String.Join(Environment.NewLine, nameMap
+                        .Select(nm => $"{nm.Choice} => {nm.Serial},")
+                        .Append(exceptionEntry)
+                        .Append("}")
+                        .Prepend("{")
+                        .Prepend("value switch"));
+                    MethodExpression("public static", stringText, "ToSerialString", new[] { Pair($"this {csTypeText}", "value") }, toSerialString);
+                    Line();
+
+                    var toChoiceType = String.Join(Environment.NewLine, nameMap
+                        .Select(nm => $"{nm.Serial} => {nm.Choice},")
+                        .Append(exceptionEntry)
+                        .Append("}")
+                        .Prepend("{")
+                        .Prepend("value switch"));
+                    MethodExpression("public static", csTypeText, $"To{cs?.Name}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
             return true;
@@ -90,7 +115,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private bool WriteChoiceSchema(ChoiceSchema schema)
         {
-            FileHeader();
+            Header();
             using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             var csType = cs?.Type;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.CSharp.V3.Utilities
 {
@@ -7,7 +8,7 @@ namespace AutoRest.CSharp.V3.Utilities
     {
         public static void ForEachLast<T>(this IEnumerable<T> collection, Action<T>? actionExceptLast = null, Action<T>? actionOnLast = null) =>
             // ReSharper disable once IteratorMethodResultIsIgnored
-            collection.SelectLast(i => { actionExceptLast?.Invoke(i); return true; }, i => { actionOnLast?.Invoke(i); return true; });
+            collection.SelectLast(i => { actionExceptLast?.Invoke(i); return true; }, i => { actionOnLast?.Invoke(i); return true; }).ToArray();
 
         public static IEnumerable<TResult> SelectLast<T, TResult>(this IEnumerable<T> collection, Func<T, TResult>? selectorExceptLast = null, Func<T, TResult>? selectorOnLast = null)
         {

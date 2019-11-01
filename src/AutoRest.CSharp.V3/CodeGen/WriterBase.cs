@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public abstract void Replace(string oldValue = "", string newValue = "");
         public abstract string GetFormattedCode();
 
-        public virtual void FileHeader()
+        public virtual void Header()
         {
             Line("// Copyright (c) Microsoft Corporation. All rights reserved.");
             Line("// Licensed under the MIT License.");
