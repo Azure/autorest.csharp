@@ -128,9 +128,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .Select(ns => $"using {ns};")
                     .ToArray();
                 var usingBlock = usingLines.Any() ? String.Join(Environment.NewLine, usingLines) + Environment.NewLine + Environment.NewLine : String.Empty;
-                //var usingBlock = String.Join(Environment.NewLine, usingLines);
-                //var removeLine = usingBlock.Any() ? String.Empty : Environment.NewLine;
-                //var extraLine = usingBlock.Any() ? Environment.NewLine : String.Empty;
                 Replace(usingBlockIdentifier + Environment.NewLine, usingBlock);
             });
         }

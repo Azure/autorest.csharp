@@ -6,5 +6,5 @@
 title: AppConfiguration
 require: $(this-folder)/../readme.samples.md
 input-file: appconfiguration.json
-namespace: Microsoft.Azure.AppConfiguration
+namespace: Azure.AppConfiguration
 ```
