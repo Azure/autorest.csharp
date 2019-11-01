@@ -17,6 +17,11 @@ namespace @Settings.Namespace
     /// </summary>
     public partial interface I@(Model.Name) 
     {
+        @EmptyLine
+        /// <summary>
+        /// Updates the Server addresses in runtime
+        /// </summary>
+        void UpdateApiBaseUrls(IEnumerable<string> baseUrls);
 
         @EmptyLine
 

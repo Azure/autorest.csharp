@@ -103,7 +103,7 @@ namespace @Settings.Namespace
                 _ignoreSslPolicyErrors);
         }
 
-        public void UpdateBaseUrls(IEnumerable<string> baseUrls) {
+        public void UpdateApiBaseUrls(IEnumerable<string> baseUrls) {
             _client.UpdateBaseUrls(baseUrls.ToArray());
         }
 
