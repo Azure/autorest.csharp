@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name);
                             continue;
                         }
-                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name);
+                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
                     }
 
                     if (propertyInfos.Any(pi => pi.Property.Required ?? false))
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 if (propertySchemaCs?.IsLazy ?? false)
                                 {
-                                    Line($"{propertyCs?.Name} = new {propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type}({variableName});");
+                                    Line($"{propertyCs?.Name} = new {Type(propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type)}({variableName});");
                                     continue;
                                 }
                                 Line($"{propertyCs?.Name} = {variableName};");

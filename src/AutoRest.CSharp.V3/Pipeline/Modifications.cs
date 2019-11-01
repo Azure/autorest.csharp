@@ -33,6 +33,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "inputType", Order = 6)]
         public CSharpType? InputType { get; set; }
 
+        [YamlMember(Alias = "isNullable", Order = 7)]
+        public bool? IsNullable { get; set; }
+
         [YamlIgnore]
         public int SchemaOrder { get; set; }
     }

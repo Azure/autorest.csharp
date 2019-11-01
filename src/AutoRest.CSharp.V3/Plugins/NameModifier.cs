@@ -26,6 +26,16 @@ namespace AutoRest.CSharp.V3.Plugins
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
                 cs.Name = property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
+                cs.IsNullable = !(property.Required ?? false);
+            }
+
+            var parameterNodes = codeModel.OperationGroups.SelectMany(og => og.Operations).SelectMany(o => o.Request.Parameters);
+            foreach (var parameter in parameterNodes)
+            {
+                var cs = parameter.Language.CSharp ??= new CSharpLanguage();
+                cs.Name = parameter.Language.Default.Name.ToVariableName();
+                cs.Description = parameter.Language.Default.Description;
+                cs.IsNullable = !(parameter.Required ?? false);
             }
 
             var choiceValueNodes = (codeModel.Schemas.Choices?.SelectMany(c => c.Choices) ?? Enumerable.Empty<ChoiceValue>())
