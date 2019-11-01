@@ -17,14 +17,14 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var writer = new SchemaWriter();
                 writer.WriteSchema(schema);
-                await autoRest.WriteFile($"models-cs/{schema.Language.CSharp.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"models-cs/{schema.Language.CSharp?.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
             }
 
             foreach (var schema in codeModel.Schemas.GetAllSchemaNodes())
             {
                 var writer = new SchemaWriter();
                 writer.WriteSchema(schema);
-                await autoRest.WriteFile($"all-cs/{schema.Language.CSharp.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"all-cs/{schema.Language.CSharp?.Name}.cs", writer.GetFormattedCode(), "source-file-csharp");
             }
 
             var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();

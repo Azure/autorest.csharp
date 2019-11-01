@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var csTypeText = Type(csType);
                     foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
                     {
-                        Line($"public static {Pair(csTypeText, choiceCs.Name)} {{ get; }} = new {csTypeText}({choiceCs.Name}Value);");
+                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
                     }
                     Line();
 

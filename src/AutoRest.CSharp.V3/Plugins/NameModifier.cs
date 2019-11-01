@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var andNode in andNodes)
             {
                 var cs = andNode.Language.CSharp ??= new CSharpLanguage();
-                var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs.HasRequired ?? false);
+                var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs?.HasRequired ?? false);
                 if(hasRequiredObject)
                 {
                     cs.HasRequired = true;

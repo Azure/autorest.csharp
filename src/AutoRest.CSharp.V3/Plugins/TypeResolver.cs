@@ -62,7 +62,8 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var leafNode in leafNodes)
             {
                 // Mark the leaves as 999 so they will be ordered first (when ordered by descending)
-                leafNode.Language.CSharp.SchemaOrder = 999;
+                var cs = leafNode.Language.CSharp ??= new CSharpLanguage();
+                cs.SchemaOrder = 999;
             }
 
             var branchNodes = schemaNodes.Where(sn => sn.HasBranches).Select(sn => sn.Schema);
@@ -73,7 +74,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             // Because of how we mark the depth with higher values, order them by descending.
             // Leaves will get processed first, then the deepest branches working up to the shallowest branches.
-            return schemas.OrderByDescending(s => s.Language.CSharp.SchemaOrder).ToArray();
+            return schemas.OrderByDescending(s => s.Language.CSharp?.SchemaOrder ?? 0).ToArray();
         }
 
         private static bool IsBranch(Type type) =>
@@ -140,7 +141,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType
             {
-                Name = schema.Language.CSharp.Name,
+                Name = schema.Language.CSharp?.Name ?? schema.Language.Default.Name,
                 Namespace = new CSharpNamespace
                 {
                     Base = configuration.Namespace.NullIfEmpty(),
