@@ -39,7 +39,7 @@ rm $OUTPUT_PATH/Class1.cs
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
 
 if [ "$ENV_SHOULD_PUSH_NUGET" = "true" ]; then
-  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
+  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
 else
   echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
 fi
