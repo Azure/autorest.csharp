@@ -29,7 +29,6 @@ namespace AutoRest.CodeModel
             {
                 Namespace = Namespace,
                 HandleReferences = true,
-                GenerateOptionalPropertiesAsNullable = true,
                 TypeAccessModifier = "internal"
             };
             var rawFile = new CSharpGenerator(schema, settings).GenerateFile();
@@ -57,7 +56,16 @@ namespace AutoRest.CodeModel
                 .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp");
 
             var fileWithOrdering = OrderCalculator.InsertOrderValues(cleanFile);
-            File.WriteAllText($"../../{Path}/CodeModel.cs", fileWithOrdering);
+            var lines = fileWithOrdering.ToLines().ToArray();
+            var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))
+                .Select(ll =>
+                {
+                    var isNullableProperty = !ll.First.Contains("System.ComponentModel.DataAnnotations.Required") && ll.Second.Contains("{ get; set; }");
+                    return isNullableProperty ? Regex.Replace(ll.Second, @"( \w+ { get; set; })", "?$1") : ll.Second;
+                })
+                .SkipLast(1)
+                .Prepend(lines.First()));
+            File.WriteAllText($"../../{Path}/CodeModel.cs", fileWithNullable);
         }
     }
 }

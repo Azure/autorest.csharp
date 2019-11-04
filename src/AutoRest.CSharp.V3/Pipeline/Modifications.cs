@@ -24,6 +24,21 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "type", Order = 3)]
         public CSharpType? Type { get; set; }
 
+        [YamlMember(Alias = "isLazy", Order = 4)]
+        public bool? IsLazy { get; set; }
+
+        [YamlMember(Alias = "concreteType", Order = 5)]
+        public CSharpType? ConcreteType { get; set; }
+
+        [YamlMember(Alias = "inputType", Order = 6)]
+        public CSharpType? InputType { get; set; }
+
+        [YamlMember(Alias = "isNullable", Order = 7)]
+        public bool? IsNullable { get; set; }
+
+        [YamlMember(Alias = "hasRequired", Order = 8)]
+        public bool? HasRequired { get; set; }
+
         [YamlIgnore]
         public int SchemaOrder { get; set; }
     }
@@ -45,7 +60,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
     internal class CSharpType
     {
-        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Assembly.GetExecutingAssembly().GetType(FullName) : _frameworkType;
+        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Type.GetType(FullName) : _frameworkType;
 
         private CSharpNamespace? _namespace;
         [YamlMember(Alias = "namespace", Order = 0)]
@@ -71,8 +86,28 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             }
         }
 
+        [YamlMember(Alias = "subType1", Order = 2)]
+        public CSharpType? SubType1 { get; set; }
+
+        [YamlMember(Alias = "subType2", Order = 3)]
+        public CSharpType? SubType2 { get; set; }
+
+        public string GetComposedName(bool subTypesAsFullName = false, bool typesAsKeywords = true)
+        {
+            var name = (typesAsKeywords ? KeywordName : null) ?? Name ?? String.Empty;
+            if ((SubType1 != null || SubType2 != null) && Name != null)
+            {
+                var subTypes = (subTypesAsFullName
+                        ? new[] {SubType1?.FullName, SubType2?.FullName}
+                        : new[] {SubType1?.GetComposedName(typesAsKeywords: typesAsKeywords), SubType2?.GetComposedName(typesAsKeywords: typesAsKeywords)})
+                    .JoinIgnoreEmpty(", ");
+                return $"{name}<{subTypes}>";
+            }
+            return name;
+        }
+
         [YamlIgnore]
-        public string FullName => new[] { Namespace?.FullName, Name }.JoinIgnoreEmpty(".");
+        public string FullName => new[] { Namespace?.FullName, GetComposedName(true, false) }.JoinIgnoreEmpty(".");
 
         private Type? _frameworkType;
         [YamlIgnore]
@@ -88,9 +123,45 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
                 _namespace.Base = _frameworkType.Namespace;
                 _namespace.Category = null;
                 _namespace.ApiVersion = null;
-                _name = _frameworkType.Name;
+                _name = _frameworkType.Name.Split('`')[0];
+                SubType1 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 0 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[0] } : null;
+                SubType2 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 1 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[1] } : null;
             }
         }
+
+        [YamlIgnore]
+        public string? KeywordName {
+            get
+            {
+                var hasElementType = FrameworkType?.HasElementType ?? false;
+                var frameworkType = hasElementType ? FrameworkType!.GetElementType() : FrameworkType;
+                var squareBrackets = hasElementType ? "[]" : String.Empty;
+                var keyword = GetKeywordMapping(frameworkType);
+                return keyword != null ? $"{keyword}{squareBrackets}" : null;
+            }
+        } 
+
+        //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/built-in-types-table
+        private static string? GetKeywordMapping(Type? type) =>
+            type switch
+            {
+                var t when t == typeof(bool) => "bool",
+                var t when t == typeof(byte) => "byte",
+                var t when t == typeof(sbyte) => "sbyte",
+                var t when t == typeof(short) => "short",
+                var t when t == typeof(ushort) => "ushort",
+                var t when t == typeof(int) => "int",
+                var t when t == typeof(uint) => "uint",
+                var t when t == typeof(long) => "long",
+                var t when t == typeof(ulong) => "ulong",
+                var t when t == typeof(char) => "char",
+                var t when t == typeof(double) => "double",
+                var t when t == typeof(float) => "float",
+                var t when t == typeof(object) => "object",
+                var t when t == typeof(decimal) => "decimal",
+                var t when t == typeof(string) => "string",
+                _ => null
+            };
     }
 
     /// <summary>language metadata specific to schema instances</summary>

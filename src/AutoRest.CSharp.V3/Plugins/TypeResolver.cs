@@ -11,7 +11,6 @@ using static AutoRest.CSharp.V3.Pipeline.Extensions;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    // Maybe put some of this into a type resolution namespace
     [PluginName("type-resolver")]
     internal class TypeResolver : IPlugin
     {
@@ -35,6 +34,12 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
                 cs.Type = CreateTypeInfo(schema, configuration);
+                if (schema is ArraySchema || schema is DictionarySchema)
+                {
+                    cs.IsLazy = true;
+                    cs.ConcreteType = CreateTypeInfo(schema, configuration, true);
+                    cs.InputType = CreateTypeInfo(schema, configuration, false, true);
+                }
             }
 
             return true;
@@ -57,7 +62,8 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var leafNode in leafNodes)
             {
                 // Mark the leaves as 999 so they will be ordered first (when ordered by descending)
-                leafNode.Language.CSharp.SchemaOrder = 999;
+                var cs = leafNode.Language.CSharp ??= new CSharpLanguage();
+                cs.SchemaOrder = 999;
             }
 
             var branchNodes = schemaNodes.Where(sn => sn.HasBranches).Select(sn => sn.Schema);
@@ -68,7 +74,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             // Because of how we mark the depth with higher values, order them by descending.
             // Leaves will get processed first, then the deepest branches working up to the shallowest branches.
-            return schemas.OrderByDescending(s => s.Language.CSharp.SchemaOrder).ToArray();
+            return schemas.OrderByDescending(s => s.Language.CSharp?.SchemaOrder ?? 0).ToArray();
         }
 
         private static bool IsBranch(Type type) =>
@@ -104,32 +110,30 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration) =>
+        // TODO: Clean this type selection mechanism up
+        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
-                ArraySchema arraySchema => ArrayTypeInfo(arraySchema),
-                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema),
+                // TODO: Add 'when' condition here for output only types of each
+                ArraySchema arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
+                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
                 _ => DefaultTypeInfo(schema, configuration)
             };
 
-        private static CSharpType ArrayTypeInfo(ArraySchema schema) =>
+        private static CSharpType ArrayTypeInfo(ArraySchema schema, bool useConcrete = false, bool useInput = false) =>
             new CSharpType
             {
-                Name = $"ICollection<{schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
-                Namespace = new CSharpNamespace
-                {
-                    Base = "System.Collections.Generic"
-                }
+                FrameworkType = useConcrete ? typeof(List<>) : (useInput ? typeof(IEnumerable<>) : typeof(ICollection<>)),
+                SubType1 = schema.ElementType.Language.CSharp?.Type
             };
 
-        private static CSharpType DictionaryTypeInfo(DictionarySchema schema) =>
+        private static CSharpType DictionaryTypeInfo(DictionarySchema schema, bool useConcrete = false) =>
             new CSharpType
             {
-                Name = $"IDictionary<{typeof(string).FullName}, {schema.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]"}>",
-                Namespace = new CSharpNamespace
-                {
-                    Base = "System.Collections.Generic"
-                }
+                // The generic type arguments are not used when assigning them via FrameworkType.
+                FrameworkType = useConcrete ? typeof(Dictionary<string, object>) : typeof(IDictionary<string, object>),
+                SubType1 = new CSharpType { FrameworkType = typeof(string) },
+                SubType2 = schema.ElementType.Language.CSharp?.Type
             };
 
         private static CSharpType DefaultTypeInfo(Schema schema, Configuration configuration)
@@ -137,7 +141,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType
             {
-                Name = schema.Language.CSharp.Name,
+                Name = schema.Language.CSharp?.Name ?? schema.Language.Default.Name,
                 Namespace = new CSharpNamespace
                 {
                     Base = configuration.Namespace.NullIfEmpty(),

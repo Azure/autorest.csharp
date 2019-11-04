@@ -1,10 +1,10 @@
-# Storage
+# AppConfiguration
 ### AutoRest Configuration
 > see https://aka.ms/autorest
 
 ``` yaml
-title: Storage
+title: AppConfiguration
 require: $(this-folder)/../readme.samples.md
-input-file: DataLakeStorage.json
-namespace: Microsoft.Azure.Storage
+input-file: appconfiguration.json
+namespace: Azure.AppConfiguration
 ```
