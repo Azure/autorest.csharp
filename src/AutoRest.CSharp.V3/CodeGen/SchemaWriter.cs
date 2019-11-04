@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var propertyInfos = schema.Properties.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                     foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
-                        if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs.HasRequired ?? false))
+                        if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
                         {
                             LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
                             continue;
