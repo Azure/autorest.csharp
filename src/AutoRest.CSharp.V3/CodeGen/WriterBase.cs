@@ -89,11 +89,11 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable) =>
             Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; set; }}");
 
-        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name)
+        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name, bool? isNullable)
         {
             var variable = $"_{name.ToVariableName()}";
-            _classFields.Add($"private {Pair(concreteType, variable)};");
-            Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
+            _classFields.Add($"private {Pair(concreteType, variable, isNullable)};");
+            Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable})!;");
         }
 
         //public void DocSummary(string summary)

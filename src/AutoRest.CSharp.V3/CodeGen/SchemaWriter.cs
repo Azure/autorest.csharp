@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs.HasRequired ?? false))
                         {
-                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name);
+                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
                             continue;
                         }
                         AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
@@ -125,11 +125,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                 using (Struct(null, "readonly", cs?.Name, Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
+                    var nullableStringText = Type(typeof(string), true);
                     foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
                     {
                         Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
                     }
-                    Line($"private readonly {Pair(stringText, "_value")};");
+                    Line($"private readonly {Pair(nullableStringText, "_value")};");
                     Line();
 
                     using (Method("public", null, cs?.Name, Pair(stringText, "value")))
@@ -154,13 +155,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
                     Line(editorBrowsableNever);
-                    MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj")}, $"obj is {csTypeText} other && Equals(other)");
+                    MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
                     MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "obj") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
                     Line();
 
                     Line(editorBrowsableNever);
                     MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
-                    MethodExpression("public override", stringText, "ToString", null, "_value");
+                    MethodExpression("public override", nullableStringText, "ToString", null, "_value");
                 }
             }
             return true;
