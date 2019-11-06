@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Simplification;
 namespace AutoRest.CSharp.V3.Plugins.PostGen
 {
     // From Roslyn FAQ: https://github.com/dotnet/roslyn/blob/56f605c41915317ccdb925f66974ee52282609e7/src/Samples/CSharp/APISampleUnitTests/FAQ.cs
-    public class SimplifyNamesRewriter : CSharpSyntaxRewriter
+    internal class SimplifyNamesRewriter : CSharpSyntaxRewriter
     {
         public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node) => base.VisitNamespaceDeclaration(node.AddSimplifierAnnotation());
         public override SyntaxNode VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node) => base.VisitLocalDeclarationStatement(node.AddSimplifierAnnotation());

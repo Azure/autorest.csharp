@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
@@ -16,8 +17,11 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
+            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Type resolve started" });
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
+            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Got schema nodes" });
             AddUniqueIdentifiers(allSchemas);
+            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Added Uids" });
 
             var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType())).ToArray();
             var frameworkNodes = schemaNodes.Where(sn => sn.FrameworkType != null);
@@ -29,7 +33,7 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             var nonFrameworkNodes = schemaNodes.Where(sn => sn.FrameworkType == null).Select(sn => sn.Schema).ToArray();
-            var orderedNodes = OrderUniqueIdentifiers(nonFrameworkNodes);
+            var orderedNodes = OrderUniqueIdentifiers(nonFrameworkNodes, autoRest);
             foreach (var schema in orderedNodes)
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
@@ -55,9 +59,9 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static Schema[] OrderUniqueIdentifiers(Schema[] schemas)
+        private static Schema[] OrderUniqueIdentifiers(Schema[] schemas, AutoRestInterface autoRest)
         {
-            var schemaNodes = schemas.Select(s => (Schema: s, HasBranches: HasBranches(s.GetType()))).ToArray();
+            var schemaNodes = schemas.Select(s => (Schema: s, HasBranches: HasBranches(s, s.GetType(), autoRest))).ToArray();
             var leafNodes = schemaNodes.Where(sn => !sn.HasBranches).Select(sn => sn.Schema);
             foreach (var leafNode in leafNodes)
             {
@@ -77,13 +81,58 @@ namespace AutoRest.CSharp.V3.Plugins
             return schemas.OrderByDescending(s => s.Language.CSharp?.SchemaOrder ?? 0).ToArray();
         }
 
-        private static bool IsBranch(Type type) =>
-            type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
+        private static bool IsBranch(Type type) => type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
             || (type.IsGenericType && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
 
-        private static bool HasBranches(Type type) => type.GetProperties()
-            .Select(p => p.PropertyType)
-            .Any(t => IsBranch(t) || (GeneratedTypes.Contains(t) && HasBranches(t)));
+        private static bool HasBranches(Schema? schema, Type type, AutoRestInterface autoRest) =>
+            type.GetProperties()
+            .Select(p => {
+                var text = $"{schema?.Key}: {p.PropertyType.Name} {p.Name}";
+                autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
+                return (Type: p.PropertyType, Prop: p);
+            })
+            .Where(t => t.Type != typeof(Languages))
+            .Any(t => IsBranch(t.Type) || (/*t.Type != typeof(CSharpLanguage) &&*/ GeneratedTypes.Contains(t.Type) && HasBranches(schema, t.Type, autoRest)));
+
+        //private static bool HasBranches(Schema? schema, Type type, AutoRestInterface autoRest)
+        //{
+        //    //var currentType = type;
+        //    var items = new Queue<(Type Type, Schema? Schema)>(new (Type, Schema?)[] { (type, schema) });
+        //    while (items.Count > 0)
+        //    {
+        //        var current = items.Dequeue();
+        //        if (current.Schema == null) continue;
+        //        var currentItems = current.Type.GetProperties()
+        //        .Select(p =>
+        //        {
+        //            var text = $"{current.Schema?.Key}: {p.PropertyType.Name} {p.Name}";
+        //            autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
+        //            return (Type: p.PropertyType, Prop: p);
+        //        })
+        //        .ToArray();
+        //        if (currentItems.Any(i => IsBranch(i.Type))) return true;
+        //        foreach(var ci in currentItems.Where(ci => ci.Type != typeof(CSharpLanguage) && GeneratedTypes.Contains(ci.Type)))
+        //        {
+        //            var text = $"!! {schema?.Key}: {ci.Type.Name}";
+        //            autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
+        //            //items.Enqueue((ci.Type, current.Schema != null ? ci.Prop.GetValue(current.Schema) as Schema : null));
+        //            items.Enqueue((ci.Type, schema));
+        //        }
+        //    }
+
+        //    return false;
+
+        //    //return type.GetProperties()
+        //    //.Select(p =>
+        //    //{
+        //    //    var text = $"{p.PropertyType.Name} {p.Name}: {schema?.Key}";
+        //    //    autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
+        //    //    return (Type: p.PropertyType, Prop: p);
+        //    //})
+        //    //.Any(t => IsBranch(t.Type) || (GeneratedTypes.Contains(t.Type) && HasBranches(schema != null ? t.Prop.GetValue(schema) as Schema : null, t.Type, autoRest)));
+        //}
+
+
 
         // Every branch will look through its children and mark the SchemaOrder as the currentDepth, if it is deeper than the previous depth.
         // Since SchemaOrder starts at 0, it will always set a branches currentDepth to 1 on the first pass.

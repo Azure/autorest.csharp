@@ -11,6 +11,11 @@ pipeline:
     input: openapi-document/multi-api/identity
   modelerfour/new-transform:
     input: modelerfour
+  # serialize-tester:
+  #   input: modelerfour/new-transform
+  # serialize-tester/emitter:
+  #   input: serialize-tester
+  #   scope: output-scope
   name-modifier:
     input: modelerfour/new-transform
   type-resolver:

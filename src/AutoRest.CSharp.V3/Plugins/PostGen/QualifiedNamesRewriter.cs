@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.V3.Plugins.PostGen
 {
-    public class QualifiedNamesRewriter : CSharpSyntaxRewriter
+    internal class QualifiedNamesRewriter : CSharpSyntaxRewriter
     {
         private readonly HashSet<string> _leftOfNames = new HashSet<string>();
         private readonly HashSet<string> _fullNames = new HashSet<string>();

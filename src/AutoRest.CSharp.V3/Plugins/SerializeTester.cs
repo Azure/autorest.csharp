@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             var codeModelYaml = await autoRest.ReadFile(codeModelFile);
             var inputFile = (await autoRest.GetValue<string[]>("input-file")).FirstOrDefault();
-            var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}.yaml";
+            var fileName = $"CodeModel-{Path.GetFileNameWithoutExtension(inputFile)}-Temp.yaml";
             await autoRest.WriteFile(fileName, codeModelYaml, "source-file-csharp");
 
             var codeModel = Serialization.DeserializeCodeModel(codeModelYaml);

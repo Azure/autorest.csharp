@@ -64,12 +64,13 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             public bool Accepts(Type type) => type.IsEnum;
 
+            private static string? GetEnumValue(MemberInfo? memberInfo) =>
+                memberInfo?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault();
+
             public object ReadYaml(IParser parser, Type type)
             {
                 var parsedEnum = parser.Consume<Scalar>();
-                var serializableValues = type.GetMembers()
-                    .Select(m => new KeyValuePair<string, MemberInfo>(m.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault(), m))
-                    .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
+                var serializableValues = type.GetMembers().Select(m => (Value: GetEnumValue(m) ?? String.Empty, Info: m)).Where(pa => !pa.Value.IsNullOrEmpty()).ToDictionary(pa => pa.Value, pa => pa.Info);
                 if (!serializableValues.ContainsKey(parsedEnum.Value))
                 {
                     throw new YamlException(parsedEnum.Start, parsedEnum.End, $"Value '{parsedEnum.Value}' not found in enum '{type.Name}'");
@@ -81,7 +82,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             public void WriteYaml(IEmitter emitter, object? value, Type type)
             {
                 var enumMember = type.GetMember(value?.ToString() ?? String.Empty).FirstOrDefault();
-                var yamlValue = enumMember?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault() ?? value?.ToString() ?? String.Empty;
+                var yamlValue = GetEnumValue(enumMember) ?? value?.ToString() ?? String.Empty;
                 emitter.Emit(new Scalar(yamlValue));
             }
         }

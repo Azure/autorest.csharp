@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.V3.Plugins.PostGen
 {
-    public class UsingsRewriter : CSharpSyntaxRewriter
+    internal class UsingsRewriter : CSharpSyntaxRewriter
     {
         private static readonly SyntaxTrivia LeadingTrivia = SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, "    ");
         private static readonly SyntaxTrivia TrailingTrivia = SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, "\r\n");
@@ -54,12 +54,14 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
                 .WithUsings(Sort(node.Usings)));
         }
 
-        internal static SyntaxList<UsingDirectiveSyntax> Sort(SyntaxList<UsingDirectiveSyntax> directives) =>
+        private static readonly IEqualityComparer<UsingDirectiveSyntax> UsingDirectiveSyntaxComparer =
+            EqualityComparerFactory.Create<UsingDirectiveSyntax>(uds => uds.Name.ToString().GetHashCode(), (uds1, uds2) => uds1.Name.ToString().Equals(uds2.Name.ToString()));
+        public static SyntaxList<UsingDirectiveSyntax> Sort(SyntaxList<UsingDirectiveSyntax> directives) =>
             SyntaxFactory.List(
                 directives.
                     OrderBy(x => x.StaticKeyword.IsKind(SyntaxKind.StaticKeyword) ? 1 : x.Alias == null ? 0 : 2).
                     ThenBy(x => x.Alias?.ToString()).
                     ThenBy(x => x.Name.ToString())
-                    .Distinct(EqualityComparerFactory.Create<UsingDirectiveSyntax>(_ => 0, (uds1, uds2) => uds1.Name.ToString().Equals(uds2.Name.ToString()))));
+                    .Distinct(UsingDirectiveSyntaxComparer));
     }
 }

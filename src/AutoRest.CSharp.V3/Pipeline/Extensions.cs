@@ -15,7 +15,8 @@ namespace AutoRest.CSharp.V3.Pipeline
             .Where(pi => pi.PropertyType.IsGenericType
                          && pi.PropertyType.IsInterface
                          && pi.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>)
-                         && pi.PropertyType.GenericTypeArguments.First().IsSubclassOf(typeof(Schema)))
+                         && (pi.PropertyType.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))
+                            || pi.PropertyType.GenericTypeArguments.First() == typeof(Schema)))
             .ToArray();
         public static Schema[] GetAllSchemaNodes(this Schemas schemasNode) => SchemaCollectionProperties
                 .Select(pi => pi.GetValue(schemasNode))
