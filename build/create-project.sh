@@ -5,6 +5,8 @@ NAMESPACE=${ENV_NAMESPACE}
 INPUT_PATH=./input/swagger.yml
 
 mkdir -p input
+rm -rf input/*
+rm -rf $OUTPUT_PATH/*
 curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH
@@ -33,7 +35,7 @@ EOL
 
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Newtonsoft.Json -v 11.0.2
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
-dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.71
+dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.72
 rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
