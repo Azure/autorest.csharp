@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.Pipeline
         public static Type? GetFrameworkType(this AllSchemaTypes schemaType) =>
             schemaType switch
             {
-                AllSchemaTypes.And => null,
+                AllSchemaTypes.Any => null,
                 AllSchemaTypes.Array => null,
                 AllSchemaTypes.Boolean => typeof(bool),
                 AllSchemaTypes.ByteArray => typeof(byte[]),

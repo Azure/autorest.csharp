@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
@@ -17,11 +18,8 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
-            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Type resolve started" });
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
-            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Got schema nodes" });
             AddUniqueIdentifiers(allSchemas);
-            await autoRest.Message(new Message { Channel = Channel.Fatal, Text = "Added Uids" });
 
             var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType())).ToArray();
             var frameworkNodes = schemaNodes.Where(sn => sn.FrameworkType != null);
@@ -81,18 +79,21 @@ namespace AutoRest.CSharp.V3.Plugins
             return schemas.OrderByDescending(s => s.Language.CSharp?.SchemaOrder ?? 0).ToArray();
         }
 
+        private static readonly string[] SchemaPropertyNames = typeof(Schema).GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(p => p.Name).ToArray();
+
         private static bool IsBranch(Type type) => type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
             || (type.IsGenericType && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
 
         private static bool HasBranches(Schema? schema, Type type, AutoRestInterface autoRest) =>
-            type.GetProperties()
-            .Select(p => {
-                var text = $"{schema?.Key}: {p.PropertyType.Name} {p.Name}";
-                autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
-                return (Type: p.PropertyType, Prop: p);
-            })
-            .Where(t => t.Type != typeof(Languages))
-            .Any(t => IsBranch(t.Type) || (/*t.Type != typeof(CSharpLanguage) &&*/ GeneratedTypes.Contains(t.Type) && HasBranches(schema, t.Type, autoRest)));
+            type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                // Ignore properties that are part of Schema itself. Only consider properties of any derived types to Schema.
+                .Where(p => !SchemaPropertyNames.Contains(p.Name))
+                .Select(p => {
+                    var text = $"{schema?.Key}: {p.PropertyType.Name} {p.Name}";
+                    autoRest.Message(new Message { Channel = Channel.Fatal, Text = text }).GetAwaiter().GetResult();
+                    return (Type: p.PropertyType, Prop: p);
+                })
+                .Any(t => IsBranch(t.Type) || (GeneratedTypes.Contains(t.Type) && HasBranches(schema, t.Type, autoRest)));
 
         //private static bool HasBranches(Schema? schema, Type type, AutoRestInterface autoRest)
         //{
@@ -148,7 +149,7 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             currentDepth++;
-            var branchSchemas = schema.GetType().GetProperties()
+            var branchSchemas = schema.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => IsBranch(p.PropertyType))
                 .Select(p => (IsGeneric: p.PropertyType.IsGenericType, Value: p.GetValue(schema)))
                 .Where(tv => tv.Value != null)
