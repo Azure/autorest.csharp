@@ -16,14 +16,19 @@ pipeline:
   # serialize-tester/emitter:
   #   input: serialize-tester
   #   scope: output-scope
-  name-modifier:
+  cs-namer:
     input: modelerfour/new-transform
-  type-resolver:
-    input: name-modifier
-  model-creator:
-    input: type-resolver
-  model-creator/emitter:
-    input: model-creator
+  cs-typer:
+    input: cs-namer
+  cs-modeler:
+    input: cs-typer
+  cs-modeler/emitter:
+    input: cs-modeler
+    scope: output-scope
+  cs-asseter:
+    input: cs-typer
+  cs-asseter/emitter:
+    input: cs-asseter
     scope: output-scope
 
 output-scope:

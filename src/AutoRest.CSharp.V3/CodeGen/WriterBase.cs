@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public abstract void Line(string str = "");
         public abstract void Append(string str = "");
         public abstract void Replace(string oldValue = "", string newValue = "");
-        public abstract string GetFormattedCode();
+        public abstract string ToFormattedCode();
 
         public virtual void Header()
         {

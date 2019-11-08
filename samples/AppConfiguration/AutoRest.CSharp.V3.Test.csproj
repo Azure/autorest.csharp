@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyName>AutoRest.CSharp.V3</AssemblyName>
-    <RootNamespace>AutoRest.CSharp.V3</RootNamespace>
+    <AssemblyName>AutoRest.CSharp.V3.Test</AssemblyName>
+    <RootNamespace>AutoRest.CSharp.V3.Test</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>../../bin</OutputPath>
+    <OutputPath>bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
     <!-- Some methods are marked async and don't have an await in them -->
     <NoWarn>1998</NoWarn>
@@ -29,9 +29,8 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
-    <PackageReference Include="YamlDotNet" Version="8.0.0-emit-default-values0565" />
-    <PackageReference Include="CaseExtensions" Version="1.0.3" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
 
 </Project>
+

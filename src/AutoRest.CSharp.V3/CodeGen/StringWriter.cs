@@ -12,10 +12,12 @@ namespace AutoRest.CSharp.V3.CodeGen
         public override void Line(string str = "") => _builder.AppendLine(str);
         public override void Append(string str = "") => _builder.Append(str);
         public override void Replace(string oldValue = "", string newValue = "") => _builder.Replace(oldValue, newValue);
-        public override string GetFormattedCode()
+        public override string ToFormattedCode()
         {
-            var syntax = SyntaxFactory.ParseCompilationUnit(_builder.ToString());
+            var syntax = SyntaxFactory.ParseCompilationUnit(ToString());
             return Formatter.Format(syntax, new AdhocWorkspace()).ToFullString();
         }
+
+        public override string? ToString() => _builder.ToString();
     }
 }

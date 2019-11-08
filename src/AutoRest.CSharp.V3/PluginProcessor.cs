@@ -35,7 +35,6 @@ namespace AutoRest.CSharp.V3
 
                 var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
                 var codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
-                await autoRest.Message(new Message { Channel = Channel.Fatal, Text = $"{autoRest.PluginName}: Code model deserialized" });
                 var configuration = Configuration.Create(autoRest);
 
                 var plugin = Plugins[autoRest.PluginName]();

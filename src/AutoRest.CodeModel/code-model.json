@@ -200,6 +200,9 @@
         },
         "objectivec": {
           "$ref": "#/definitions/Language"
+        },
+        "sputnik": {
+          "$ref": "#/definitions/Language"
         }
       },
       "defaultProperties": [],
@@ -1093,7 +1096,7 @@
       "description": "a schema that represents a constant value",
       "type": "object",
       "properties": {
-        "constantSchema": {
+        "valueType": {
           "$ref": "#/definitions/Schema",
           "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
         },
@@ -1106,12 +1109,12 @@
       "additionalProperties": false,
       "required": [
         "$key",
-        "constantSchema",
         "description",
         "language",
         "protocol",
         "type",
-        "value"
+        "value",
+        "valueType"
       ],
       "allOf": [
         {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoRest.CSharp.V3.JsonRpc;
+﻿using AutoRest.CSharp.V3.JsonRpc;
 
 namespace AutoRest.CSharp.V3
 {

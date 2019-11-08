@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

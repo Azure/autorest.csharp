@@ -7,8 +7,10 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    [PluginName("name-modifier")]
-    internal class NameModifier : IPlugin
+    // ReSharper disable once StringLiteralTypo
+    [PluginName("cs-namer")]
+    // ReSharper disable once IdentifierTypo
+    internal class Namer : IPlugin
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
