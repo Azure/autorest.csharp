@@ -24,11 +24,12 @@ namespace AutoRest.CSharp.V3.JsonRpc
         public Task<string> ProtectFiles(string path) => ProcessRequest<string>(requestId => OutgoingMessages.ProtectFiles(requestId, _sessionId, path));
         public Task Message(IMessage message) => _connection.Notification(OutgoingMessages.Message(_sessionId, message));
 
-        // Convenience Interfaces
         public Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null) =>
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+
+        // Convenience Interfaces
         public Task Message(string text, Channel channel = Channel.Warning) => Message(new Message { Channel = channel, Text = text });
 
         private Task<T> ProcessRequest<T>(Func<string, string> requestMethod)

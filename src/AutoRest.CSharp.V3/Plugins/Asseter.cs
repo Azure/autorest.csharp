@@ -14,8 +14,8 @@ namespace AutoRest.CSharp.V3.Plugins
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             var writer = new CsProjWriter();
-            writer.WriteCsProj();
-            await autoRest.WriteFile("AutoRest.CSharp.V3.Test.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
+            writer.WriteCsProj(configuration);
+            await autoRest.WriteFile($"{configuration.Namespace}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
 
             return true;
         }

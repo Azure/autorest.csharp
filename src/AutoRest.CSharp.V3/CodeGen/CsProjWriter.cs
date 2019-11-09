@@ -2,15 +2,15 @@
 {
     internal class CsProjWriter : StringWriter
     {
-        public bool WriteCsProj()
+        public bool WriteCsProj(Configuration configuration)
         {
-            Line(@"<Project Sdk=""Microsoft.NET.Sdk"">
+            Line($@"<Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyName>AutoRest.CSharp.V3.Test</AssemblyName>
-    <RootNamespace>AutoRest.CSharp.V3.Test</RootNamespace>
+    <AssemblyName>{configuration.Namespace}</AssemblyName>
+    <RootNamespace>{configuration.Namespace}</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
@@ -19,6 +19,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <Nullable>enable</Nullable>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
   <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"">

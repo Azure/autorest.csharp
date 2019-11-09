@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "~4.0.20"
+  "@autorest/modelerfour": "~4.0.35"
 
 pipeline:
   modelerfour:
@@ -30,10 +30,11 @@ pipeline:
   cs-asseter/emitter:
     input: cs-asseter
     scope: output-scope
-
   # cs-asseter/emitter/command:
-  #   input: cs-asseter/emitter
-  #   run: dotnet build AutoRest.CSharp.V3.Test.csproj
+  #   input:
+  #   - cs-modeler/emitter
+  #   - cs-asseter/emitter
+  #   run: dotnet build $(namespace).csproj
 
 output-scope:
   output-artifact: source-file-csharp

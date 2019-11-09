@@ -948,7 +948,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual constant value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value", Order = 48)]
         [System.ComponentModel.DataAnnotations.Required]
-        public ConstantValue Value { get; set; } = new ConstantValue();
+        public string Value { get; set; } = string.Empty;
     }
 
     /// <summary>a schema that represents a boolean value</summary>

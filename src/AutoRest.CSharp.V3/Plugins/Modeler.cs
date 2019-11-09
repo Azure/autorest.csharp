@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             // CodeModel for debugging
-            await autoRest.WriteFile($"CodeModel-{await autoRest.GetValue<string>("title")}.yaml", codeModel.Serialize(), "source-file-csharp");
+            await autoRest.WriteFile($"CodeModel-{configuration.Title}.yaml", codeModel.Serialize(), "source-file-csharp");
 
             return true;
         }

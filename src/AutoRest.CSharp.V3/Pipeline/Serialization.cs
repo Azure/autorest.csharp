@@ -27,12 +27,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             return builder;
         }
 
+        // Cannot cache deserializer as parallel plugins will access it and cause failures.
         private static IDeserializer Deserializer => new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
-
         public static CodeModel DeserializeCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
 
-        private static ISerializer Serializer => new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
-
+        // Cannot cache serializer as parallel plugins will access it and cause failures.
+        // https://github.com/aaubry/YamlDotNet/pull/353/files#diff-86074b6acff29ccad667aca741f62ac5R83
+        private static ISerializer Serializer => new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).WithMaximumRecursion(1000).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
         public static string Serialize(this CodeModel codeModel) => Serializer.Serialize(codeModel);
 
         public static Dictionary<string, PropertyInfo> GetDeserializableProperties(this Type type) => type.GetProperties()
