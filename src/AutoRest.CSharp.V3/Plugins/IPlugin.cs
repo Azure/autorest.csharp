@@ -9,6 +9,7 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration);
         bool ReserializeCodeModel => true;
+        bool DeserializeCodeModel => true;
     }
 
     [AttributeUsage(AttributeTargets.Class)]

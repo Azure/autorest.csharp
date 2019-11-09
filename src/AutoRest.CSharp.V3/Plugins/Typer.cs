@@ -25,8 +25,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (schema, frameworkType) in frameworkNodes)
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
-                var type = cs.Type ??= new CSharpType();
-                type.FrameworkType = frameworkType;
+                cs.Type = frameworkType;
             }
 
             var nonFrameworkNodes = schemaNodes.Where(sn => sn.FrameworkType == null).Select(sn => sn.Schema).ToArray();

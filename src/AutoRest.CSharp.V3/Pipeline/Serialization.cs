@@ -27,13 +27,11 @@ namespace AutoRest.CSharp.V3.Pipeline
             return builder;
         }
 
-        private static IDeserializer? _deserializer;
-        private static IDeserializer Deserializer => _deserializer ??= new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
+        private static IDeserializer Deserializer => new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
 
         public static CodeModel DeserializeCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
 
-        private static ISerializer? _serializer;
-        private static ISerializer Serializer => _serializer ??= new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
+        private static ISerializer Serializer => new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
 
         public static string Serialize(this CodeModel codeModel) => Serializer.Serialize(codeModel);
 

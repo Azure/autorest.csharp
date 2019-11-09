@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoRest.CSharp.V3.CodeGen
+﻿namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class CsProjWriter : StringWriter
     {
@@ -11,7 +7,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line(@"<Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>AutoRest.CSharp.V3.Test</AssemblyName>
     <RootNamespace>AutoRest.CSharp.V3.Test</RootNamespace>

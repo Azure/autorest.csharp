@@ -31,6 +31,10 @@ pipeline:
     input: cs-asseter
     scope: output-scope
 
+  # cs-asseter/emitter/command:
+  #   input: cs-asseter/emitter
+  #   run: dotnet build AutoRest.CSharp.V3.Test.csproj
+
 output-scope:
   output-artifact: source-file-csharp
 ```

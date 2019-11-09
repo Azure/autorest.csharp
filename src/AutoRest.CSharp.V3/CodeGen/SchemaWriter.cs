@@ -78,6 +78,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
         {
             Header();
+            using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
