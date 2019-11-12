@@ -42,6 +42,23 @@ namespace AutoRest.CSharp.V3.Plugins
                 }
             }
 
+            var operationGroups = codeModel.OperationGroups;
+            foreach (var operationGroup in operationGroups)
+            {
+                var cs = operationGroup.Language.CSharp ??= new CSharpLanguage();
+                var apiVersion = operationGroup.Operations.Where(o => o.ApiVersions != null).SelectMany(o => o.ApiVersions).FirstOrDefault()?.Version.RemoveNonWordCharacters();
+                cs.Type = new CSharpType
+                {
+                    Name = operationGroup.Language.CSharp?.Name ?? operationGroup.Language.Default.Name,
+                    Namespace = new CSharpNamespace
+                    {
+                        Base = configuration.Namespace.NullIfEmpty(),
+                        Category = "Operations",
+                        ApiVersion = apiVersion != null ? $"V{apiVersion}" : null
+                    }
+                };
+            }
+
             return true;
         }
 

@@ -331,26 +331,26 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
         Flag = 13,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"group")]
+        Group = 14,
+
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 14,
+        Integer = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 15,
+        Not = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 16,
+        Number = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 17,
+        Object = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 18,
+        OdataQuery = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 19,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"parameter-group")]
-        ParameterGroup = 20,
+        Or = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
         SealedChoice = 21,
@@ -538,26 +538,26 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
         Flag = 13,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"group")]
+        Group = 14,
+
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 14,
+        Integer = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 15,
+        Not = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 16,
+        Number = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 17,
+        Object = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 18,
+        OdataQuery = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 19,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"parameter-group")]
-        ParameterGroup = 20,
+        Or = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
         SealedChoice = 21,
@@ -712,7 +712,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class NumberSchema : PrimitiveSchema
     {
         /// <summary>precision (# of bits?) of the number</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "precision", Order = 43)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "precision", Order = 42)]
         public double? Precision { get; set; }
 
         /// <summary>if present, the number must be an exact multiple of this value</summary>
@@ -749,7 +749,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public double? MinLength { get; set; }
 
         /// <summary>a regular expression that the string must be validated against</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 40)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 39)]
         public string? Pattern { get; set; }
     }
 
@@ -773,16 +773,6 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>if the elements in the array should be unique</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "uniqueItems", Order = 47)]
         public bool? UniqueItems { get; set; }
-    }
-
-    /// <summary>a schema that represents a set of parameters.</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class ParameterGroupSchema : ComplexSchema
-    {
-        /// <summary>the collection of properties that are in this object</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "parameters", Order = 38)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Parameter> Parameters { get; set; } = new System.Collections.ObjectModel.Collection<Parameter>();
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -813,6 +803,13 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public DictionaryOfComplexSchema All { get; set; } = new DictionaryOfComplexSchema();
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class GroupSchema : Schema
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "properties", Order = 43)]
+        public System.Collections.Generic.ICollection<Property>? Properties { get; set; }
+    }
+
     /// <summary>a schema that represents a type with child properties.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class ObjectSchema : ComplexSchema
@@ -833,7 +830,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlDotNet.Serialization.YamlMember(Alias = "minProperties", Order = 34)]
         public double? MinProperties { get; set; }
 
-        [YamlDotNet.Serialization.YamlMember(Alias = "parents", Order = 39)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "parents", Order = 38)]
         public Relations? Parents { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "children", Order = 10)]
@@ -948,7 +945,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual constant value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value", Order = 48)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Value { get; set; } = string.Empty;
+        public ConstantValue Value { get; set; } = new ConstantValue();
     }
 
     /// <summary>a schema that represents a boolean value</summary>
@@ -976,7 +973,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public double? MinLength { get; set; }
 
         /// <summary>a regular expression that the string must be validated against</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 41)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 40)]
         public string? Pattern { get; set; }
     }
 
@@ -993,7 +990,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public double? MinLength { get; set; }
 
         /// <summary>a regular expression that the string must be validated against</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 42)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "pattern", Order = 41)]
         public string? Pattern { get; set; }
     }
 
@@ -1104,7 +1101,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public System.Collections.Generic.ICollection<BooleanSchema>? Booleans { get; set; }
 
         /// <summary>a number value</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "numbers", Order = 14)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "numbers", Order = 15)]
         public System.Collections.Generic.ICollection<NumberSchema>? Numbers { get; set; }
 
         /// <summary>an object of some type</summary>
@@ -1156,7 +1153,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public System.Collections.Generic.ICollection<CredentialSchema>? Credentials { get; set; }
 
         /// <summary>OData Query</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "odataQueries", Order = 15)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "odataQueries", Order = 16)]
         public System.Collections.Generic.ICollection<ODataQuerySchema>? OdataQueries { get; set; }
 
         /// <summary>- this is essentially can be thought of as an 'enum'
@@ -1174,7 +1171,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlDotNet.Serialization.YamlMember(Alias = "constants", Order = 8)]
         public System.Collections.Generic.ICollection<ConstantSchema>? Constants { get; set; }
 
-        [YamlDotNet.Serialization.YamlMember(Alias = "ors", Order = 16)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "ors", Order = 17)]
         public System.Collections.Generic.ICollection<OrSchema>? Ors { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "xors", Order = 25)]
@@ -1188,8 +1185,8 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlDotNet.Serialization.YamlMember(Alias = "unknowns", Order = 22)]
         public System.Collections.Generic.ICollection<Schema>? Unknowns { get; set; }
 
-        [YamlDotNet.Serialization.YamlMember(Alias = "parameterGroups", Order = 17)]
-        public System.Collections.Generic.ICollection<ParameterGroupSchema>? ParameterGroups { get; set; }
+        [YamlDotNet.Serialization.YamlMember(Alias = "groups", Order = 14)]
+        public System.Collections.Generic.ICollection<GroupSchema>? Groups { get; set; }
     }
 
     /// <summary>contact information</summary>
@@ -2024,16 +2021,16 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class HttpParameter : Protocol
     {
         /// <summary>the location that this parameter is placed in the http request</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "in", Order = 5)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "in", Order = 6)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public ParameterLocation In { get; set; }
 
         /// <summary>the Serialization Style used for the parameter.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "style", Order = 16)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "style", Order = 17)]
         public SerializationStyle? Style { get; set; }
 
         /// <summary>when set, this indicates that the content of the parameter should not be subject to URI encoding rules.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "skipUriEncoding", Order = 14)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "skipUriEncoding", Order = 15)]
         public bool? SkipUriEncoding { get; set; }
     }
 
@@ -2058,7 +2055,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public HttpMethod Method { get; set; }
 
         /// <summary>each method must have one or more servers that it is connected to.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "servers", Order = 12)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "servers", Order = 13)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<HttpServer> Servers { get; set; } = new System.Collections.ObjectModel.Collection<HttpServer>();
     }
@@ -2067,12 +2064,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class HttpWithBodyRequest : HttpRequest
     {
         /// <summary>a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType", Order = 6)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType", Order = 7)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public KnownMediaType KnownMediaType { get; set; }
 
         /// <summary>must contain at least one media type to send for the body</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes", Order = 8)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes", Order = 9)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<string> MediaTypes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
     }
@@ -2090,7 +2087,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>indicates that the HTTP Request should be a multipart request
         ///
         /// ie, that it has multiple requests in a single request.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "multipart", Order = 10)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "multipart", Order = 11)]
         public bool? Multipart { get; set; }
     }
 
@@ -2136,26 +2133,46 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class HttpHeader
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "header", Order = 1)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Header { get; set; }
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "schema", Order = 0)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public Schema Schema { get; set; } = new Schema();
+
+        /// <summary>additional metadata extensions dictionary</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "extensions", Order = 2)]
+        public DictionaryOfAny? Extensions { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class HttpResponse : Protocol
     {
         /// <summary>the possible HTTP status codes that this response MUST match one of.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "statusCodes", Order = 15)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "statusCodes", Order = 16)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<StatusCodes> StatusCodes { get; set; } = new System.Collections.ObjectModel.Collection<StatusCodes>();
 
         /// <summary>canonical response type (ie, 'json')</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType", Order = 7)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType", Order = 8)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public KnownMediaType KnownMediaType { get; set; }
 
         /// <summary>the possible media types that this response MUST match one of</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes", Order = 9)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes", Order = 10)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<string> MediaTypes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
 
         /// <summary>content returned by the service in the HTTP headers</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "headers", Order = 4)]
-        public System.Collections.Generic.ICollection<Schema>? Headers { get; set; }
+        [YamlDotNet.Serialization.YamlMember(Alias = "headers", Order = 5)]
+        public System.Collections.Generic.ICollection<HttpHeader>? Headers { get; set; }
+
+        /// <summary>sets of HTTP headers grouped together into a single schema</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "headerGroups", Order = 4)]
+        public System.Collections.Generic.ICollection<GroupSchema>? HeaderGroups { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2171,12 +2188,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class HttpModel : Protocol
     {
         /// <summary>a collection of server definitions for the service</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "servers", Order = 13)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "servers", Order = 14)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<HttpServer> Servers { get; set; } = new System.Collections.ObjectModel.Collection<HttpServer>();
 
         /// <summary>a collection of security requirements for the service</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "security", Order = 11)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "security", Order = 12)]
         public System.Collections.Generic.ICollection<SecurityRequirement>? Security { get; set; }
     }
 

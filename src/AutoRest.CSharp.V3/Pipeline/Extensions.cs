@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Object => null,
             AllSchemaTypes.OdataQuery => CSharpTypes[typeof(string)],
             AllSchemaTypes.Or => null,
-            AllSchemaTypes.ParameterGroup => null,
+            AllSchemaTypes.Group => null,
             AllSchemaTypes.SealedChoice => null,
             AllSchemaTypes.String => CSharpTypes[typeof(string)],
             AllSchemaTypes.Unixtime => CSharpTypes[typeof(DateTime)],

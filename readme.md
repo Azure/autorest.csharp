@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "~4.0.35"
+  "@autorest/modelerfour": "~4.0.39"
 
 pipeline:
   modelerfour:
@@ -25,16 +25,22 @@ pipeline:
   cs-modeler/emitter:
     input: cs-modeler
     scope: output-scope
+  cs-operator:
+    input: cs-typer
+  cs-operator/emitter:
+    input: cs-operator
+    scope: output-scope
   cs-asseter:
     input: cs-typer
   cs-asseter/emitter:
     input: cs-asseter
     scope: output-scope
-  # cs-asseter/emitter/command:
-  #   input:
-  #   - cs-modeler/emitter
-  #   - cs-asseter/emitter
-  #   run: dotnet build $(namespace).csproj
+  cs-asseter/emitter/command:
+    input:
+    - cs-modeler/emitter
+    - cs-operator/emitter
+    - cs-asseter/emitter
+    run: dotnet build $(namespace).csproj --verbosity quiet /nologo
 
 output-scope:
   output-artifact: source-file-csharp

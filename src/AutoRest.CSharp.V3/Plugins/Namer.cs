@@ -55,6 +55,14 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Description = choiceValue.Language.Default.Description;
             }
 
+            var operationGroups = codeModel.OperationGroups;
+            foreach (var operationGroup in operationGroups)
+            {
+                var cs = operationGroup.Language.CSharp ??= new CSharpLanguage();
+                var name = operationGroup.Language.Default.Name.ToCleanName();
+                cs.Name = !name.IsNullOrEmpty() ? name : "All";
+            }
+
             //var andNodes = codeModel.Schemas.Ands ?? Enumerable.Empty<AndSchema>();
             //foreach (var andNode in andNodes)
             //{

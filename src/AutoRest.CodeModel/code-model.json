@@ -356,13 +356,13 @@
         "dictionary",
         "duration",
         "flag",
+        "group",
         "integer",
         "not",
         "number",
         "object",
         "odata-query",
         "or",
-        "parameter-group",
         "sealed-choice",
         "string",
         "unixtime",
@@ -444,13 +444,13 @@
         "dictionary",
         "duration",
         "flag",
+        "group",
         "integer",
         "not",
         "number",
         "object",
         "odata-query",
         "or",
-        "parameter-group",
         "sealed-choice",
         "string",
         "unixtime",
@@ -806,34 +806,6 @@
         }
       ]
     },
-    "ParameterGroupSchema": {
-      "description": "a schema that represents a set of parameters.",
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "description": "the collection of properties that are in this object",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Parameter"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "parameters",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComplexSchema"
-        }
-      ]
-    },
     "Relations": {
       "type": "object",
       "properties": {
@@ -876,6 +848,31 @@
         "all",
         "immediate",
         "property"
+      ]
+    },
+    "GroupSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
       ]
     },
     "ObjectSchema": {
@@ -1656,10 +1653,10 @@
             "$ref": "#/definitions/Schema"
           }
         },
-        "parameterGroups": {
+        "groups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParameterGroupSchema"
+            "$ref": "#/definitions/GroupSchema"
           }
         }
       },
@@ -2693,6 +2690,27 @@
         "servers"
       ]
     },
+    "HttpHeader": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "string"
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "schema"
+      ]
+    },
     "HttpResponse": {
       "type": "object",
       "properties": {
@@ -2782,7 +2800,14 @@
           "description": "content returned by the service in the HTTP headers",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Schema"
+            "$ref": "#/definitions/HttpHeader"
+          }
+        },
+        "headerGroups": {
+          "description": "sets of HTTP headers grouped together into a single schema",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupSchema"
           }
         }
       },
