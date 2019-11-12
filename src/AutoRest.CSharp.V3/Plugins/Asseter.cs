@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Plugins
         {
             var writer = new CsProjWriter();
             writer.WriteCsProj(configuration);
-            await autoRest.WriteFile($"{configuration.Namespace}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
+            await autoRest.WriteFile($"{configuration.Title}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
 
             return true;
         }

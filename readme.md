@@ -40,7 +40,7 @@ pipeline:
     - cs-modeler/emitter
     - cs-operator/emitter
     - cs-asseter/emitter
-    run: dotnet build $(namespace).csproj --verbosity quiet /nologo
+    run: dotnet build $(title).csproj --verbosity quiet /nologo
 
 output-scope:
   output-artifact: source-file-csharp
