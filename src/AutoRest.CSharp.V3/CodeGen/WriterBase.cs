@@ -81,6 +81,19 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public DisposeAction Try()
+        {
+            Line("try");
+            return Scope();
+        }
+
+        public DisposeAction Catch(params string[] parameters)
+        {
+            var parametersText = parameters.JoinIgnoreEmpty(", ");
+            Line($"catch{(parameters.Length > 0 ? $"({parametersText})" : String.Empty)}");
+            return Scope();
+        }
+
         public void MethodExpression(string? modifiers, string? returnType, string? name, string[]? parameters, string expression) =>
             Line($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 

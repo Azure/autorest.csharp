@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
             AddUniqueIdentifiers(allSchemas);
 
-            var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType())).ToArray();
+            var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.ToFrameworkCSharpType())).ToArray();
             var frameworkNodes = schemaNodes.Where(sn => sn.FrameworkType != null);
             foreach (var (schema, frameworkType) in frameworkNodes)
             {
@@ -57,6 +57,12 @@ namespace AutoRest.CSharp.V3.Plugins
                         ApiVersion = apiVersion != null ? $"V{apiVersion}" : null
                     }
                 };
+                var serverVariables = operationGroup.Operations.SelectMany(o => (o.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>());
+                foreach (var serverVariable in serverVariables)
+                {
+                    var serverVariableCs = serverVariable.Language.CSharp ??= new CSharpLanguage();
+                    serverVariableCs.Type = AllSchemaTypes.String.ToFrameworkCSharpType();
+                }
             }
 
             return true;

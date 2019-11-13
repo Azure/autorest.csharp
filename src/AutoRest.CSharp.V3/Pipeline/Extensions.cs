@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Pipeline
 {
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), new CSharpType { FrameworkType = typeof(Uri) } }
         };
 
-        public static CSharpType? GetFrameworkType(this AllSchemaTypes schemaType) => schemaType switch
+        public static CSharpType? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Any => null,
             AllSchemaTypes.Array => null,
@@ -66,6 +67,19 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Uri => CSharpTypes[typeof(Uri)],
             AllSchemaTypes.Uuid => CSharpTypes[typeof(string)],
             AllSchemaTypes.Xor => null,
+            _ => null
+        };
+
+        public static RequestMethod? ToCoreRequestMethod(this HttpMethod method) => method switch
+        {
+            HttpMethod.Delete => (RequestMethod?)RequestMethod.Delete,
+            HttpMethod.Get => RequestMethod.Get,
+            HttpMethod.Head => RequestMethod.Head,
+            HttpMethod.Options => null,
+            HttpMethod.Patch => RequestMethod.Patch,
+            HttpMethod.Post => RequestMethod.Post,
+            HttpMethod.Put => RequestMethod.Put,
+            HttpMethod.Trace => null,
             _ => null
         };
     }
