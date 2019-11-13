@@ -63,8 +63,8 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Name = $"{(!name.IsNullOrEmpty() ? name : "All")}Operations";
                 foreach (var operation in operationGroup.Operations)
                 {
-                    var opcs = operation.Language.CSharp ??= new CSharpLanguage();
-                    opcs.Name = $"{operation.Language.Default.Name.ToCleanName()}Async";
+                    var operationCs = operation.Language.CSharp ??= new CSharpLanguage();
+                    operationCs.Name = $"{operation.Language.Default.Name.ToCleanName()}Async";
                 }
             }
 

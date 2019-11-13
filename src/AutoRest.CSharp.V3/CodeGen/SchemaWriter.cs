@@ -39,8 +39,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    var propertyInfos = (schema.Properties?.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp))
-                                         ?? Enumerable.Empty<(Property, CSharpLanguage?, CSharpLanguage?)>()).ToArray();
+                    var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                        .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                     foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
                         if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
