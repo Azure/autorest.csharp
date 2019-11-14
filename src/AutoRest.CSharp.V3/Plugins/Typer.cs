@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
@@ -11,8 +12,8 @@ using static AutoRest.CSharp.V3.Pipeline.Extensions;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    [PluginName("type-resolver")]
-    internal class TypeResolver : IPlugin
+    [PluginName("cs-typer")]
+    internal class Typer : IPlugin
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
@@ -24,8 +25,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (schema, frameworkType) in frameworkNodes)
             {
                 var cs = schema.Language.CSharp ??= new CSharpLanguage();
-                var type = cs.Type ??= new CSharpType();
-                type.FrameworkType = frameworkType;
+                cs.Type = frameworkType;
             }
 
             var nonFrameworkNodes = schemaNodes.Where(sn => sn.FrameworkType == null).Select(sn => sn.Schema).ToArray();
@@ -77,13 +77,20 @@ namespace AutoRest.CSharp.V3.Plugins
             return schemas.OrderByDescending(s => s.Language.CSharp?.SchemaOrder ?? 0).ToArray();
         }
 
+        private static readonly string[] SchemaPropertyNames = typeof(Schema).GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(p => p.Name).ToArray();
+
         private static bool IsBranch(Type type) =>
-            type == typeof(Schema) || type.IsSubclassOf(typeof(Schema))
+            type == typeof(Schema)
+            || type.IsSubclassOf(typeof(Schema))
             || (type.IsGenericType && (type.GenericTypeArguments.First() == typeof(Schema) || type.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))));
 
-        private static bool HasBranches(Type type) => type.GetProperties()
-            .Select(p => p.PropertyType)
-            .Any(t => IsBranch(t) || (GeneratedTypes.Contains(t) && HasBranches(t)));
+        private static bool HasBranches(Type type) =>
+            type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                // Ignore properties that are part of Schema itself. Only consider properties of any derived types to Schema.
+                .Where(p => !SchemaPropertyNames.Contains(p.Name))
+                .Select(p => p.PropertyType)
+                // Recursively walks generated type properties to find any schemas.
+                .Any(t => IsBranch(t) || (GeneratedTypes.Contains(t) && HasBranches(t)));
 
         // Every branch will look through its children and mark the SchemaOrder as the currentDepth, if it is deeper than the previous depth.
         // Since SchemaOrder starts at 0, it will always set a branches currentDepth to 1 on the first pass.
@@ -99,7 +106,7 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             currentDepth++;
-            var branchSchemas = schema.GetType().GetProperties()
+            var branchSchemas = schema.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => IsBranch(p.PropertyType))
                 .Select(p => (IsGeneric: p.PropertyType.IsGenericType, Value: p.GetValue(schema)))
                 .Where(tv => tv.Value != null)

@@ -7,8 +7,10 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    [PluginName("name-modifier")]
-    internal class NameModifier : IPlugin
+    // ReSharper disable once StringLiteralTypo
+    [PluginName("cs-namer")]
+    // ReSharper disable once IdentifierTypo
+    internal class Namer : IPlugin
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
@@ -53,16 +55,16 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Description = choiceValue.Language.Default.Description;
             }
 
-            var andNodes = codeModel.Schemas.Ands ?? Enumerable.Empty<AndSchema>();
-            foreach (var andNode in andNodes)
-            {
-                var cs = andNode.Language.CSharp ??= new CSharpLanguage();
-                var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs?.HasRequired ?? false);
-                if(hasRequiredObject)
-                {
-                    cs.HasRequired = true;
-                }
-            }
+            //var andNodes = codeModel.Schemas.Ands ?? Enumerable.Empty<AndSchema>();
+            //foreach (var andNode in andNodes)
+            //{
+            //    var cs = andNode.Language.CSharp ??= new CSharpLanguage();
+            //    var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs?.HasRequired ?? false);
+            //    if(hasRequiredObject)
+            //    {
+            //        cs.HasRequired = true;
+            //    }
+            //}
 
             return true;
         }

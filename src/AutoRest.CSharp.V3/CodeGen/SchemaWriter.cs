@@ -39,7 +39,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    var propertyInfos = schema.Properties.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                    var propertyInfos = (schema.Properties?.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp))
+                                         ?? Enumerable.Empty<(Property, CSharpLanguage?, CSharpLanguage?)>()).ToArray();
                     foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
                         if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
@@ -77,6 +78,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
         {
             Header();
+            using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
@@ -156,7 +158,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
                     Line(editorBrowsableNever);
                     MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
-                    MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "obj") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
+                    MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
                     Line();
 
                     Line(editorBrowsableNever);

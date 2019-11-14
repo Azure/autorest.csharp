@@ -22,9 +22,12 @@ namespace AutoRest.CSharp.V3.Utilities
         public static string? RemoveNonWordCharacters(this string? text) => !text.IsNullOrEmpty() ? Regex.Replace(text, @"\W+", String.Empty) : text;
         [return: NotNullIfNotNull("text")]
         public static string? RemoveMiddleDotCharacters(this string? text) => text?.Replace("·", String.Empty);
+        [return: NotNullIfNotNull("text")]
+        public static string? PrependUnderscoreIfNumbers(this string? text) => Regex.IsMatch(text ?? String.Empty, @"^\d") ? $"_{text}" : text;
+
         [return: NotNullIfNotNull("name")]
-        public static string? ToCleanName(this string? name) => name?.ToPascalCase().RemoveMiddleDotCharacters();
-        public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveMiddleDotCharacters();
+        public static string? ToCleanName(this string? name) => name?.ToPascalCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
+        public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
 
         //https://stackoverflow.com/a/41176852/294804
         public static IEnumerable<string> ToLines(this string value, bool removeEmptyLines = false)

@@ -27,14 +27,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             return builder;
         }
 
-        private static IDeserializer? _deserializer;
-        private static IDeserializer Deserializer => _deserializer ??= new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
-
+        // Cannot cache deserializer as parallel plugins will access it and cause failures.
+        private static IDeserializer Deserializer => new DeserializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).Build();
         public static CodeModel DeserializeCodeModel(string yaml) => Deserializer.Deserialize<CodeModel>(yaml);
 
-        private static ISerializer? _serializer;
-        private static ISerializer Serializer => _serializer ??= new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
-
+        // Cannot cache serializer as parallel plugins will access it and cause failures.
+        // https://github.com/aaubry/YamlDotNet/pull/353/files#diff-86074b6acff29ccad667aca741f62ac5R83
+        private static ISerializer Serializer => new SerializerBuilder().WithTagMapping(TagMap).WithTypeConverter(new YamlStringEnumConverter()).WithMaximumRecursion(1000).ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull).Build();
         public static string Serialize(this CodeModel codeModel) => Serializer.Serialize(codeModel);
 
         public static Dictionary<string, PropertyInfo> GetDeserializableProperties(this Type type) => type.GetProperties()
@@ -64,12 +63,13 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             public bool Accepts(Type type) => type.IsEnum;
 
+            private static string? GetEnumValue(MemberInfo? memberInfo) =>
+                memberInfo?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault();
+
             public object ReadYaml(IParser parser, Type type)
             {
                 var parsedEnum = parser.Consume<Scalar>();
-                var serializableValues = type.GetMembers()
-                    .Select(m => new KeyValuePair<string, MemberInfo>(m.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault(), m))
-                    .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
+                var serializableValues = type.GetMembers().Select(m => (Value: GetEnumValue(m) ?? String.Empty, Info: m)).Where(pa => !pa.Value.IsNullOrEmpty()).ToDictionary(pa => pa.Value, pa => pa.Info);
                 if (!serializableValues.ContainsKey(parsedEnum.Value))
                 {
                     throw new YamlException(parsedEnum.Start, parsedEnum.End, $"Value '{parsedEnum.Value}' not found in enum '{type.Name}'");
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             public void WriteYaml(IEmitter emitter, object? value, Type type)
             {
                 var enumMember = type.GetMember(value?.ToString() ?? String.Empty).FirstOrDefault();
-                var yamlValue = enumMember?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault() ?? value?.ToString() ?? String.Empty;
+                var yamlValue = GetEnumValue(enumMember) ?? value?.ToString() ?? String.Empty;
                 emitter.Emit(new Scalar(yamlValue));
             }
         }

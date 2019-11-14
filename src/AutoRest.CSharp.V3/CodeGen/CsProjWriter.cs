@@ -1,12 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿namespace AutoRest.CSharp.V3.CodeGen
+{
+    internal class CsProjWriter : StringWriter
+    {
+        public bool WriteCsProj(Configuration configuration)
+        {
+            Line($@"<Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyName>AutoRest.CSharp.V3</AssemblyName>
-    <RootNamespace>AutoRest.CSharp.V3</RootNamespace>
+    <AssemblyName>{configuration.Namespace}</AssemblyName>
+    <RootNamespace>{configuration.Namespace}</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>../../bin</OutputPath>
+    <OutputPath>bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
     <!-- Some methods are marked async and don't have an await in them -->
     <NoWarn>1998</NoWarn>
@@ -17,12 +23,12 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"">
     <DelaySign>false</DelaySign>
     <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
     <SignAssembly>true</SignAssembly>
     <DelaySign>true</DelaySign>
     <AssemblyOriginatorKeyFile>MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
@@ -30,10 +36,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
-    <PackageReference Include="YamlDotNet" Version="8.0.0-emit-default-values0565" />
-    <PackageReference Include="CaseExtensions" Version="1.0.3" />
+    <PackageReference Include=""Azure.Core"" Version=""1.0.0"" />
+    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
   </ItemGroup>
 
 </Project>
+");
+
+            return true;
+        }
+    }
+}

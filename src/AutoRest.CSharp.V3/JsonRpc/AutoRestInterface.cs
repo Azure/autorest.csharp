@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.V3.JsonRpc
             _sessionId = sessionId;
         }
 
+        // Basic Interfaces
         public Task<string> ReadFile(string filename) => ProcessRequest<string>(requestId => OutgoingMessages.ReadFile(requestId, _sessionId, filename));
         public Task<T> GetValue<T>(string key) => ProcessRequest<T>(requestId => OutgoingMessages.GetValue(requestId, _sessionId, key));
         public Task<string[]> ListInputs(string? artifactType = null) => ProcessRequest<string[]>(requestId => OutgoingMessages.ListInputs(requestId, _sessionId, artifactType));
@@ -27,6 +28,9 @@ namespace AutoRest.CSharp.V3.JsonRpc
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+
+        // Convenience Interfaces
+        public Task Message(string text, Channel channel = Channel.Warning) => Message(new Message { Channel = channel, Text = text });
 
         private Task<T> ProcessRequest<T>(Func<string, string> requestMethod)
         {

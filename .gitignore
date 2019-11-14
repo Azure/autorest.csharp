@@ -356,3 +356,5 @@ samples/**/*.yaml
 !samples/Xkcd/xkcd.yaml
 samples/**/*.cs
 samples/**/*.txt
+samples/**/*.csproj
+samples/**/*.sln

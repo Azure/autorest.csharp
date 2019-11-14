@@ -94,9 +94,6 @@
           "$ref": "#/definitions/SerializationFormats",
           "description": "per-serialization information for this Schema"
         },
-        "uid": {
-          "type": "string"
-        },
         "$key": {
           "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
           "type": "string"
@@ -136,8 +133,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ]
     },
     "ExternalDocumentation": {
@@ -203,6 +199,9 @@
           "$ref": "#/definitions/Language"
         },
         "objectivec": {
+          "$ref": "#/definitions/Language"
+        },
+        "sputnik": {
           "$ref": "#/definitions/Language"
         }
       },
@@ -332,6 +331,9 @@
         },
         "protobuf": {
           "$ref": "#/definitions/SerializationFormat"
+        },
+        "binary": {
+          "$ref": "#/definitions/SerializationFormat"
         }
       },
       "defaultProperties": [],
@@ -340,8 +342,9 @@
     "SchemaType": {
       "description": "possible schema types that indicate the type of schema.",
       "enum": [
-        "and",
+        "any",
         "array",
+        "binary",
         "boolean",
         "byte-array",
         "char",
@@ -361,7 +364,6 @@
         "or",
         "parameter-group",
         "sealed-choice",
-        "stream",
         "string",
         "unixtime",
         "unknown",
@@ -373,7 +375,6 @@
     },
     "CompoundSchemaTypes": {
       "enum": [
-        "and",
         "or",
         "xor"
       ],
@@ -420,7 +421,6 @@
     },
     "ObjectSchemaTypes": {
       "enum": [
-        "and",
         "dictionary",
         "object",
         "or"
@@ -430,8 +430,9 @@
     "AllSchemaTypes": {
       "description": "all schema types",
       "enum": [
-        "and",
+        "any",
         "array",
+        "binary",
         "boolean",
         "byte-array",
         "char",
@@ -481,9 +482,6 @@
         "description": {
           "type": "string"
         },
-        "uid": {
-          "type": "string"
-        },
         "summary": {
           "description": "a short description",
           "type": "string"
@@ -523,8 +521,7 @@
         "description",
         "language",
         "protocol",
-        "schema",
-        "uid"
+        "schema"
       ]
     },
     "Property": {
@@ -552,8 +549,7 @@
         "language",
         "protocol",
         "schema",
-        "serializedName",
-        "uid"
+        "serializedName"
       ],
       "allOf": [
         {
@@ -584,8 +580,7 @@
         "description",
         "language",
         "protocol",
-        "schema",
-        "uid"
+        "schema"
       ],
       "allOf": [
         {
@@ -604,6 +599,24 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
+    "AnySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
     "ValueSchema": {
       "description": "schema types that are non-object or complex types",
       "type": "object",
@@ -615,8 +628,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -635,8 +647,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -655,8 +666,25 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
+    "BinarySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "$key",
+        "description",
+        "language",
+        "protocol",
+        "type"
       ],
       "allOf": [
         {
@@ -701,8 +729,7 @@
         "language",
         "precision",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -734,8 +761,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -772,8 +798,7 @@
         "elementType",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -801,8 +826,7 @@
         "language",
         "parameters",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -810,12 +834,56 @@
         }
       ]
     },
+    "Relations": {
+      "type": "object",
+      "properties": {
+        "immediate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplexSchema"
+          }
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplexSchema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "all",
+        "immediate"
+      ]
+    },
+    "Discriminator": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "$ref": "#/definitions/Property"
+        },
+        "immediate": {
+          "$ref": "#/definitions/Dictionary<ComplexSchema>"
+        },
+        "all": {
+          "$ref": "#/definitions/Dictionary<ComplexSchema>"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "all",
+        "immediate",
+        "property"
+      ]
+    },
     "ObjectSchema": {
       "description": "a schema that represents a type with child properties.",
       "type": "object",
       "properties": {
-        "discriminatorProperty": {
-          "$ref": "#/definitions/Property",
+        "discriminator": {
+          "$ref": "#/definitions/Discriminator",
           "description": "the property of the polymorphic descriminator for this type, if there is one"
         },
         "properties": {
@@ -832,6 +900,15 @@
         "minProperties": {
           "description": "minimum number of properties permitted",
           "type": "number"
+        },
+        "parents": {
+          "$ref": "#/definitions/Relations"
+        },
+        "children": {
+          "$ref": "#/definitions/Relations"
+        },
+        "discriminatorValue": {
+          "type": "string"
         }
       },
       "defaultProperties": [],
@@ -841,8 +918,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -903,8 +979,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -937,8 +1012,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -987,8 +1061,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1023,7 +1096,7 @@
       "description": "a schema that represents a constant value",
       "type": "object",
       "properties": {
-        "constantSchema": {
+        "valueType": {
           "$ref": "#/definitions/Schema",
           "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
         },
@@ -1036,13 +1109,12 @@
       "additionalProperties": false,
       "required": [
         "$key",
-        "constantSchema",
         "description",
         "language",
         "protocol",
         "type",
-        "uid",
-        "value"
+        "value",
+        "valueType"
       ],
       "allOf": [
         {
@@ -1061,8 +1133,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1081,8 +1152,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1114,8 +1184,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1147,8 +1216,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1167,8 +1235,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1187,8 +1254,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1217,8 +1283,7 @@
         "format",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1237,8 +1302,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1257,8 +1321,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1287,8 +1350,7 @@
         "format",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1307,8 +1369,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1333,40 +1394,7 @@
         "elementType",
         "language",
         "protocol",
-        "type",
-        "uid"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComplexSchema"
-        }
-      ]
-    },
-    "AndSchema": {
-      "description": "an AND relationship between several schemas",
-      "type": "object",
-      "properties": {
-        "allOf": {
-          "description": "the set of schemas that this schema is composed of.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComplexSchema"
-          }
-        },
-        "discriminatorValue": {
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "allOf",
-        "description",
-        "language",
-        "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1394,8 +1422,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1423,8 +1450,7 @@
         "language",
         "oneOf",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1449,8 +1475,7 @@
         "language",
         "not",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ],
       "allOf": [
         {
@@ -1606,12 +1631,6 @@
             "$ref": "#/definitions/ConstantSchema"
           }
         },
-        "ands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AndSchema"
-          }
-        },
         "ors": {
           "type": "array",
           "items": {
@@ -1622,6 +1641,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/XorSchema"
+          }
+        },
+        "binaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BinarySchema"
           }
         },
         "unknowns": {
@@ -1747,12 +1772,12 @@
         }
       ]
     },
-    "StreamResponse": {
-      "description": "a response where the content should be treated as a stream instead of a value or object",
+    "BinaryResponse": {
+      "description": "a response where the content should be treated as a binary instead of a value or object",
       "type": "object",
       "properties": {
-        "stream": {
-          "description": "indicates that this response is a stream",
+        "binary": {
+          "description": "indicates that this response is a binary stream",
           "type": "boolean",
           "enum": [
             true
@@ -1762,9 +1787,9 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
+        "binary",
         "language",
-        "protocol",
-        "stream"
+        "protocol"
       ],
       "allOf": [
         {
@@ -1826,9 +1851,6 @@
         "description": {
           "type": "string"
         },
-        "uid": {
-          "type": "string"
-        },
         "summary": {
           "description": "a short description",
           "type": "string"
@@ -1868,8 +1890,7 @@
         "description",
         "language",
         "protocol",
-        "request",
-        "uid"
+        "request"
       ]
     },
     "Request": {
@@ -1945,6 +1966,7 @@
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
       "enum": [
+        "binary",
         "deepObject",
         "form",
         "json",
@@ -2542,15 +2564,23 @@
     "HttpWithBodyRequest": {
       "type": "object",
       "properties": {
-        "mediaType": {
-          "description": "must set a media type for the body",
-          "type": "string"
+        "knownMediaType": {
+          "$ref": "#/definitions/KnownMediaType",
+          "description": "a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))"
+        },
+        "mediaTypes": {
+          "description": "must contain at least one media type to send for the body",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "mediaType",
+        "knownMediaType",
+        "mediaTypes",
         "method",
         "path",
         "servers"
@@ -2561,10 +2591,10 @@
         }
       ]
     },
-    "HttpStreamRequest": {
+    "HttpBinaryRequest": {
       "type": "object",
       "properties": {
-        "stream": {
+        "binary": {
           "type": "boolean",
           "enum": [
             true
@@ -2574,11 +2604,12 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "mediaType",
+        "binary",
+        "knownMediaType",
+        "mediaTypes",
         "method",
         "path",
-        "servers",
-        "stream"
+        "servers"
       ],
       "allOf": [
         {
@@ -2595,22 +2626,15 @@
           "enum": [
             true
           ]
-        },
-        "parts": {
-          "description": "the multiple request parts that make up this request ?? is this right?",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Request"
-          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "mediaType",
+        "knownMediaType",
+        "mediaTypes",
         "method",
         "multipart",
-        "parts",
         "path",
         "servers"
       ],
@@ -2631,15 +2655,16 @@
           ],
           "default": true
         },
-        "parts": {
-          "description": "the multiple request parts that make up this request ?? is this right?",
-          "type": "array",
-          "items": {},
-          "default": []
+        "knownMediaType": {
+          "$ref": "#/definitions/KnownMediaType",
+          "description": "a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))"
         },
-        "mediaType": {
-          "description": "must set a media type for the body",
-          "type": "string"
+        "mediaTypes": {
+          "description": "must contain at least one media type to send for the body",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "path": {
           "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
@@ -2660,10 +2685,10 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "mediaType",
+        "knownMediaType",
+        "mediaTypes",
         "method",
         "multipart",
-        "parts",
         "path",
         "servers"
       ]
@@ -2742,6 +2767,10 @@
             ]
           }
         },
+        "knownMediaType": {
+          "$ref": "#/definitions/KnownMediaType",
+          "description": "canonical response type (ie, 'json')"
+        },
         "mediaTypes": {
           "description": "the possible media types that this response MUST match one of",
           "type": "array",
@@ -2760,6 +2789,7 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
+        "knownMediaType",
         "mediaTypes",
         "statusCodes"
       ],
@@ -2769,11 +2799,11 @@
         }
       ]
     },
-    "HttpStreamResponse": {
+    "HttpBinaryResponse": {
       "type": "object",
       "properties": {
-        "stream": {
-          "description": "stream responses",
+        "binary": {
+          "description": "binary responses",
           "type": "boolean",
           "enum": [
             true
@@ -2783,9 +2813,10 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
+        "binary",
+        "knownMediaType",
         "mediaTypes",
-        "statusCodes",
-        "stream"
+        "statusCodes"
       ],
       "allOf": [
         {
@@ -2830,6 +2861,13 @@
       },
       "defaultProperties": []
     },
+    "Dictionary<ComplexSchema>": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ComplexSchema"
+      },
+      "defaultProperties": []
+    },
     "ChoiceType": {
       "type": "object",
       "properties": {
@@ -2854,9 +2892,6 @@
         "serialization": {
           "$ref": "#/definitions/SerializationFormats",
           "description": "per-serialization information for this Schema"
-        },
-        "uid": {
-          "type": "string"
         },
         "$key": {
           "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
@@ -2897,8 +2932,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ]
     },
     "ConstantType": {
@@ -2926,9 +2960,6 @@
           "$ref": "#/definitions/SerializationFormats",
           "description": "per-serialization information for this Schema"
         },
-        "uid": {
-          "type": "string"
-        },
         "$key": {
           "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
           "type": "string"
@@ -2968,8 +2999,7 @@
         "description",
         "language",
         "protocol",
-        "type",
-        "uid"
+        "type"
       ]
     },
     "Dictionary<ApiVersion>": {
@@ -2985,6 +3015,18 @@
         "type": "string"
       },
       "defaultProperties": []
+    },
+    "KnownMediaType": {
+      "enum": [
+        "binary",
+        "form",
+        "json",
+        "multipart",
+        "text",
+        "unknown",
+        "xml"
+      ],
+      "type": "string"
     }
   },
   "description": "the model that contains all the information required to generate a service api",

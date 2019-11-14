@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public abstract void Line(string str = "");
         public abstract void Append(string str = "");
         public abstract void Replace(string oldValue = "", string newValue = "");
-        public abstract string GetFormattedCode();
+        public abstract string ToFormattedCode();
 
         public virtual void Header()
         {
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        public DisposeAction Class(string? access, string? modifiers, string? name, string? implements = null) //=> Definition(access, modifiers, "class", "[NO TYPE NAME]", name, implements);
+        public DisposeAction Class(string? access, string? modifiers, string? name, string? implements = null)
         {
             Line(DefinitionLine(access, modifiers, "class", "[NO TYPE NAME]", name, implements));
             Line("{");
@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var fields = _classFields.Any() ? String.Join(Environment.NewLine, _classFields) + Environment.NewLine + Environment.NewLine : String.Empty;
                 Replace(fieldBlockIdentifier + Environment.NewLine, fields);
                 _classFields.Clear();
+                Line("}");
             });
         }
         public DisposeAction Enum(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "enum", "[NO ENUM NAME]", name, implements);
@@ -93,7 +94,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             var variable = $"_{name.ToVariableName()}";
             _classFields.Add($"private {Pair(concreteType, variable, isNullable)};");
-            Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable})!;");
+            Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
         }
 
         //public void DocSummary(string summary)

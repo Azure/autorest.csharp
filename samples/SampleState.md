@@ -1,0 +1,11 @@
+- AppConfiguration: Working
+- Billing: Unrecognized schema type: 'integer' - https://github.com/Azure/autorest.modelerfour/issues/33
+- Dns: Working
+- KeyVault: 'Contacts': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
+- Media: The type or namespace name 'ResourceType' could not be found - Need to implement ConstantSchema
+- Redis: 'ScheduleEntries': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
+- Storage.Blobs: Working
+- Storage.DataLake: Working
+- Storage.Files: Working
+- Storage.Queues: Working
+- Xkcd: Working

@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -30,14 +31,17 @@ namespace AutoRest.CSharp.V3
             }
             try
             {
-                var codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-                if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
-
-                var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-                var codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
-                var configuration = Configuration.Create(autoRest);
-
                 var plugin = Plugins[autoRest.PluginName]();
+                var codeModel = new CodeModel();
+                if (plugin.DeserializeCodeModel)
+                {
+                    var codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+                    if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
+
+                    var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+                    codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
+                }
+                var configuration = Configuration.Create(autoRest);
                 await plugin.Execute(autoRest, codeModel, configuration);
                 if (plugin.ReserializeCodeModel)
                 {
