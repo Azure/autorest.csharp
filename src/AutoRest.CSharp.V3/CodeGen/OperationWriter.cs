@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         var endPart = isNullable ? " }" : String.Empty;
                         if (methodCall != null)
                         {
-                            Line($"{ifCondition}{methodCall}(\"{parameter.Language.Default.Name}\", {parameterCs?.Name});{endPart}");
+                            Line($"{ifCondition}{methodCall}(\"{parameter.Language.Default.Name}\", {parameterCs?.Name}.ToString() ?? {Type(typeof(string))}.Empty);{endPart}");
                         }
                     }
                 }

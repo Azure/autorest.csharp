@@ -1,23 +1,23 @@
-﻿using System;
+﻿using AutoRest.CSharp.V3.Pipeline.Generated;
+using System;
 using System.ComponentModel;
 using System.Linq;
-using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class SchemaWriter : StringWriter
+    internal class SerializationWriter : StringWriter
     {
-        public bool WriteSchema(Schema schema) =>
+        public bool WriteSerialization(Schema schema) =>
             schema switch
             {
                 ObjectSchema objectSchema => WriteObjectSchema(objectSchema),
-                SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSchema(sealedChoiceSchema),
+                SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSerialization(sealedChoiceSchema),
                 ChoiceSchema choiceSchema => WriteChoiceSchema(choiceSchema),
-                _ => WriteDefaultSchema(schema)
+                _ => WriteDefaultSerialization(schema)
             };
 
-        public bool WriteDefaultSchema(Schema schema)
+        public bool WriteDefaultSerialization(Schema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -75,16 +75,36 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
+        private bool WriteSealedChoiceSerialization(SealedChoiceSchema schema)
         {
             Header();
             using var _ = UsingStatements();
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Enum(null, null, cs?.Name))
+                using (Class("internal", "static", $"{cs?.Name}Extensions"))
                 {
-                    schema.Choices.Select(c => c.Language.CSharp).ForEachLast(ccs => EnumValue(ccs?.Name), ccs => EnumValue(ccs?.Name, false));
+                    var stringText = Type(typeof(string));
+                    var csTypeText = Type(cs?.Type);
+                    var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.Language.CSharp?.Name}", Serial: $"\"{c.Value}\"")).ToArray();
+                    var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
+
+                    var toSerialString = String.Join(Environment.NewLine, nameMap
+                        .Select(nm => $"{nm.Choice} => {nm.Serial},")
+                        .Append(exceptionEntry)
+                        .Append("}")
+                        .Prepend("{")
+                        .Prepend("value switch"));
+                    MethodExpression("public static", stringText, "ToSerialString", new[] { Pair($"this {csTypeText}", "value") }, toSerialString);
+                    Line();
+
+                    var toChoiceType = String.Join(Environment.NewLine, nameMap
+                        .Select(nm => $"{nm.Serial} => {nm.Choice},")
+                        .Append(exceptionEntry)
+                        .Append("}")
+                        .Prepend("{")
+                        .Prepend("value switch"));
+                    MethodExpression("public static", csTypeText, $"To{cs?.Name}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
             return true;
@@ -98,7 +118,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var csType = cs?.Type;
             using (Namespace(csType?.Namespace))
             {
-                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
+                var implementType = new CSharpType { FrameworkType = typeof(IEquatable<>), SubType1 = csType };
                 using (Struct(null, "readonly", cs?.Name, Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
@@ -124,15 +144,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line();
 
                     var boolText = Type(typeof(bool));
-                    var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
+                    var leftRightParams = new[] { Pair(csTypeText, "left"), Pair(csTypeText, "right") };
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
                     MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
-                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new []{Pair(stringText, "value")}, $"new {csTypeText}(value)");
+                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new[] { Pair(stringText, "value") }, $"new {csTypeText}(value)");
                     Line();
 
                     var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
                     Line(editorBrowsableNever);
-                    MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
+                    MethodExpression("public override", boolText, "Equals", new[] { Pair(typeof(object), "obj", true) }, $"obj is {csTypeText} other && Equals(other)");
                     MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
                     Line();
 
