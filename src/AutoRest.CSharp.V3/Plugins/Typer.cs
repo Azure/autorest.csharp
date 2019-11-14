@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.V3.Plugins
                         ApiVersion = apiVersion != null ? $"V{apiVersion}" : null
                     }
                 };
-                var serverVariables = operationGroup.Operations.SelectMany(o => (o.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>());
+                var serverVariables = operationGroup.Operations.SelectMany(o => (o.Request.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>());
                 foreach (var serverVariable in serverVariables)
                 {
                     var serverVariableCs = serverVariable.Language.CSharp ??= new CSharpLanguage();

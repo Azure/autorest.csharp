@@ -65,11 +65,13 @@ namespace AutoRest.CSharp.V3.Plugins
                 {
                     var operationCs = operation.Language.CSharp ??= new CSharpLanguage();
                     operationCs.Name = operation.Language.Default.Name.ToCleanName();
-                    var serverVariables = (operation.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>();
+                    operationCs.Description = operation.Language.Default.Description;
+                    var serverVariables = (operation.Request.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>();
                     foreach (var serverVariable in serverVariables)
                     {
                         var serverVariableCs = serverVariable.Language.CSharp ??= new CSharpLanguage();
-                        serverVariableCs.Name = serverVariable.Language.Default.Name.ToCleanName();
+                        serverVariableCs.Name = serverVariable.Language.Default.Name.ToVariableName();
+                        serverVariableCs.Description = serverVariable.Language.Default.Description;
                     }
                 }
             }

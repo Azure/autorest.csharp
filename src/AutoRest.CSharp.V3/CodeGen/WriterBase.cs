@@ -94,6 +94,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public DisposeAction If(string condition)
+        {
+            Line($"if({condition})");
+            return Scope();
+        }
+
         public void MethodExpression(string? modifiers, string? returnType, string? name, string[]? parameters, string expression) =>
             Line($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
