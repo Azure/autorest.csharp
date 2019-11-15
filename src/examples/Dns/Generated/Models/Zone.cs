@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -34,6 +35,13 @@ namespace Azure.Dns.Models.V20180501
             if (Etag != null)
             {
                 writer.WriteString("etag", Etag);
+
+                //writer.WriteBoolean("thing", true);
+                //writer.WriteBooleanValue(true);
+                //writer.Write
+                //writer.
+                //var thing = new DateTime();
+                //writer.WriteStringValue(thing.);
             }
             //Properties?.Serialize(writer);
             if (Properties != null)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Pipeline
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                 .SelectMany(c => ((IEnumerable)c!).Cast<Schema>())
                 .ToArray();
 
-        // Cache the CSharpType so they become references in the YAML
+        // Cache the CSharpType so they become references in the YAML.
         private static readonly Dictionary<Type, CSharpType> CSharpTypes = new Dictionary<Type, CSharpType>
         {
             { typeof(bool), new CSharpType { FrameworkType = typeof(bool) } },
@@ -82,5 +83,44 @@ namespace AutoRest.CSharp.V3.Pipeline
             HttpMethod.Trace => null,
             _ => null
         };
+
+        //private static string? TypeSerializers(Type? type) => type switch
+        //{
+        //    typeof(bool) => ,
+        //    typeof(char) => ,
+        //    typeof(int) => ,
+        //    typeof(double) => ,
+        //    typeof(string) => ,
+        //    typeof(byte[]) => ,
+        //    typeof(DateTime) => ,
+        //    typeof(TimeSpan) => ,
+        //    typeof(Uri) => ,
+        //    _ => null
+        //};
+
+        //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, string?>>
+        {
+            { typeof(bool), (vn, sn, n, a) => a ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(char), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString(\"{sn}\", {vn});" },
+            { typeof(int), (vn, sn, n, a) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(double), (vn, sn, n, a) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(string), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString(\"{sn}\", {vn});" },
+            { typeof(byte[]), (vn, sn, n, a) => null },
+            { typeof(DateTime), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" },
+            { typeof(TimeSpan), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" },
+            { typeof(Uri), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" }
+        };
+
+        public static string? ToSerializeCall(this Property property, bool asArray = false)
+        {
+            var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
+            var isObject = property.Schema is ObjectSchema;
+            var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+            var name = (asArray ? "item" : null) ?? (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+            var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
+            var serializedName = property.Language.Default.Name;
+            return isObject ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, propertyCs?.IsNullable ?? false, asArray) : null);
+        }
     }
 }

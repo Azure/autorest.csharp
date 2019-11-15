@@ -2,7 +2,10 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
+using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Utilities;
+using Microsoft.Identity.Client;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -11,13 +14,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         public bool WriteSerialization(Schema schema) =>
             schema switch
             {
-                ObjectSchema objectSchema => WriteObjectSchema(objectSchema),
+                ObjectSchema objectSchema => WriteObjectSerialization(objectSchema),
                 SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSerialization(sealedChoiceSchema),
-                ChoiceSchema choiceSchema => WriteChoiceSchema(choiceSchema),
+                //ChoiceSchema choiceSchema => WriteChoiceSchema(choiceSchema),
                 _ => WriteDefaultSerialization(schema)
             };
 
-        public bool WriteDefaultSerialization(Schema schema)
+        private bool WriteDefaultSerialization(Schema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -30,7 +33,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         // CURRENTLY, INPUT SCHEMA
-        private bool WriteObjectSchema(ObjectSchema schema)
+        private bool WriteObjectSerialization(ObjectSchema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -39,37 +42,65 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                        .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                    foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                    using (Method("public", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer"), Pair(typeof(bool), "includeName = true")))
                     {
-                        if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
+                        using (If("includeName"))
                         {
-                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
-                            continue;
+                            Line($"writer.WriteStartObject(\"{schema.Language.Default.Name}\");");
                         }
-                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
-                    }
-
-                    if (propertyInfos.Any(pi => pi.Property.Required ?? false))
-                    {
-                        Line();
-                        var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
-                            .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
-                        var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
-                        using (Method("public", null, cs?.Name, parameters))
+                        using (Else())
                         {
-                            foreach (var ((_, propertyCs, propertySchemaCs), variableName, _) in requiredProperties)
+                            Line("writer.WriteStartObject();");
+                        }
+
+                        var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                            .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                        foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                        {
+                            var isObject = property.Schema is ObjectSchema;
+                            var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                            var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+                            using (propertyCs?.IsNullable ?? false ? If($"{name} != null") : new DisposeAction())
                             {
-                                if (propertySchemaCs?.IsLazy ?? false)
-                                {
-                                    Line($"{propertyCs?.Name} = new {Type(propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type)}({variableName});");
-                                    continue;
-                                }
-                                Line($"{propertyCs?.Name} = {variableName};");
+                                Line(property.ToSerializeCall() ?? $"// {property.Schema.GetType().Name} {propertyCs?.Name}: Not Implemented");
                             }
                         }
+
+
+                        Line("writer.WriteEndObject();");
                     }
+
+                    //var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                    //    .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                    //foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                    //{
+                    //    if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
+                    //    {
+                    //        LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
+                    //        continue;
+                    //    }
+                    //    AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
+                    //}
+
+                    //if (propertyInfos.Any(pi => pi.Property.Required ?? false))
+                    //{
+                    //    Line();
+                    //    var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
+                    //        .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
+                    //    var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
+                    //    using (Method("public", null, cs?.Name, parameters))
+                    //    {
+                    //        foreach (var ((_, propertyCs, propertySchemaCs), variableName, _) in requiredProperties)
+                    //        {
+                    //            if (propertySchemaCs?.IsLazy ?? false)
+                    //            {
+                    //                Line($"{propertyCs?.Name} = new {Type(propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type)}({variableName});");
+                    //                continue;
+                    //            }
+                    //            Line($"{propertyCs?.Name} = {variableName};");
+                    //        }
+                    //    }
+                    //}
                 }
             }
             return true;
