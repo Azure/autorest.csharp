@@ -99,28 +99,40 @@ namespace AutoRest.CSharp.V3.Pipeline
         //};
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
-        private static readonly Dictionary<Type, Func<string, string?, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, string?>>
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
         {
-            { typeof(bool), (vn, sn, n, a) => a ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(char), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString(\"{sn}\", {vn});" },
-            { typeof(int), (vn, sn, n, a) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(double), (vn, sn, n, a) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber(\"{sn}\", {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(string), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString(\"{sn}\", {vn});" },
-            { typeof(byte[]), (vn, sn, n, a) => null },
-            { typeof(DateTime), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" },
-            { typeof(TimeSpan), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" },
-            { typeof(Uri), (vn, sn, n, a) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString(\"{sn}\", {vn}.ToString());" }
+            { typeof(bool), (vn, sn, n, a, q) => a ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(char), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(int), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(double), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(string), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(byte[]), (vn, sn, n, a, q) => null },
+            { typeof(DateTime), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(TimeSpan), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(Uri), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
         };
 
-        public static string? ToSerializeCall(this Property property, bool asArray = false)
+        //public static string? ToSerializeCall(this Property property, string name, string serializedName, bool asArray = false)
+        //{
+        //    //var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
+        //    //var isObject = property.Schema is ObjectSchema;
+        //    //var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+        //    //var name = (asArray ? "item" : null) ?? (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+        //    //var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
+        //    //var serializedName = property.Language.Default.Name;
+        //    return isObject ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, propertyCs?.IsNullable ?? false, asArray) : null);
+        //}
+
+        public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
         {
-            var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
-            var isObject = property.Schema is ObjectSchema;
-            var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-            var name = (asArray ? "item" : null) ?? (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-            var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
-            var serializedName = property.Language.Default.Name;
-            return isObject ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, propertyCs?.IsNullable ?? false, asArray) : null);
+            //var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
+            //var isObject = property.Schema is ObjectSchema;
+            //var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+            //var name = (asArray ? "item" : null) ?? (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+            //var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
+            //var serializedName = property.Language.Default.Name;
+            var type = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            return schema is ObjectSchema ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
         }
     }
 }

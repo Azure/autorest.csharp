@@ -32,6 +32,32 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
+        private void WriteProperty(Schema schema, string name, string serializedName, bool isNullable)
+        {
+            if (schema is ArraySchema array)
+            {
+                Line($"writer.WriteStartArray(\"{serializedName}\");");
+                using (ForEach($"var item in {name}"))
+                {
+                    Line(array.ElementType.ToSerializeCall("item", serializedName, isNullable, true) ?? $"// {array.ElementType.GetType().Name}: Not Implemented");
+                }
+                Line("writer.WriteEndArray();");
+                return;
+            }
+            if (schema is DictionarySchema dictionary)
+            {
+                Line($"writer.WriteStartObject(\"{serializedName}\");");
+                using (ForEach($"var item in {name}"))
+                {
+                    Line(dictionary.ElementType.ToSerializeCall("item.Value", "item.Key", isNullable, false, false) ?? $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
+                }
+                Line("writer.WriteEndObject();");
+                return;
+            }
+
+            Line(schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {schema.GetType().Name} {name}: Not Implemented");
+        }
+
         // CURRENTLY, INPUT SCHEMA
         private bool WriteObjectSerialization(ObjectSchema schema)
         {
@@ -57,12 +83,21 @@ namespace AutoRest.CSharp.V3.CodeGen
                             .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                         foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                         {
-                            var isObject = property.Schema is ObjectSchema;
-                            var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                            //var isObject = property.Schema is ObjectSchema;
+                            //var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                            //var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+
+
+                            ////var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
+                            //var isObject = property.Schema is ObjectSchema;
+                            var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
                             var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-                            using (propertyCs?.IsNullable ?? false ? If($"{name} != null") : new DisposeAction())
+                            var serializedName = property.Language.Default.Name;
+                            var isNullable = propertyCs?.IsNullable ?? false;
+                            using (isNullable ? If($"{name} != null") : new DisposeAction())
                             {
-                                Line(property.ToSerializeCall() ?? $"// {property.Schema.GetType().Name} {propertyCs?.Name}: Not Implemented");
+                                //Line(property.ToSerializeCall() ?? $"// {property.Schema.GetType().Name} {name}: Not Implemented");
+                                WriteProperty(property.Schema, name, serializedName, isNullable);
                             }
                         }
 
