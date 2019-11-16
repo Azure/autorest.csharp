@@ -119,6 +119,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         }
 
                         var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                            //TODO: Implement ConstantSchema
+                            .Where(p => !(p.Schema is ConstantSchema))
                             .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                         foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                         {
@@ -142,6 +144,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         using (ForEach("var property in element.EnumerateObject()"))
                         {
                             var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                                //TODO: Implement ConstantSchema
+                                .Where(p => !(p.Schema is ConstantSchema))
                                 .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                             foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                             {

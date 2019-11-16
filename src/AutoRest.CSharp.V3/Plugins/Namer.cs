@@ -27,7 +27,8 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (objectSchema, property) in propertyNodes)
             {
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
-                cs.Name = property.Language.Default.Name.ToCleanName();
+                //TODO: Hack for https://github.com/Azure/autorest.modelerfour/issues/48
+                cs.Name = property.Language.Default.Name == "null" ? "NullProperty" : property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
                 cs.IsNullable = !(property.Required ?? false);
                 if(property.Required ?? false)

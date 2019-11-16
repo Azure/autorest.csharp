@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         //using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         //var root = document.RootElement;
-                        Line("using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                        Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         //Response.FromValue(result, response)
                         Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText)}, response);");
                     }
