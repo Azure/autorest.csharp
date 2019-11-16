@@ -48,11 +48,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                             LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
                             continue;
                         }
-                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
+                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable, property.Required ?? false);
                     }
 
                     if (propertyInfos.Any(pi => pi.Property.Required ?? false))
                     {
+                        Line();
+                        Line("#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
+                        using (Method("private", null, cs?.Name))
+                        {
+                        }
+                        Line("#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
+
                         Line();
                         var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
                             .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
@@ -99,7 +106,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             using (Namespace(csType?.Namespace))
             {
                 var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
-                using (Struct(null, "readonly", cs?.Name, Type(implementType)))
+                using (Struct(null, "readonly partial", cs?.Name, Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
                     var nullableStringText = Type(typeof(string), true);

@@ -112,17 +112,6 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
         };
 
-        //public static string? ToSerializeCall(this Property property, string name, string serializedName, bool asArray = false)
-        //{
-        //    //var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
-        //    //var isObject = property.Schema is ObjectSchema;
-        //    //var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-        //    //var name = (asArray ? "item" : null) ?? (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-        //    //var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
-        //    //var serializedName = property.Language.Default.Name;
-        //    return isObject ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, propertyCs?.IsNullable ?? false, asArray) : null);
-        //}
-
         public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
         {
             //var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
@@ -133,6 +122,26 @@ namespace AutoRest.CSharp.V3.Pipeline
             //var serializedName = property.Language.Default.Name;
             var type = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
             return schema is ObjectSchema ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
+        }
+
+        //TODO: Figure out the rest of these.
+        private static readonly Dictionary<Type, Func<string, string?>> TypeDeserializers = new Dictionary<Type, Func<string, string?>>
+        {
+            { typeof(bool), n => $"{n}.GetBoolean()" },
+            { typeof(char), n => $"{n}.GetString()" },
+            { typeof(int), n => $"{n}.GetInt32()" },
+            { typeof(double), n => $"{n}.GetDouble()" },
+            { typeof(string), n => $"{n}.GetString()" },
+            { typeof(byte[]), n => null },
+            { typeof(DateTime), n => $"{n}.GetDateTime()" },
+            { typeof(TimeSpan), n => null },
+            { typeof(Uri), n => null } // Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
+        };
+
+        public static string? ToDeserializeCall(this Schema schema, string name, string typeText) //bool isNullable, bool asArray = false, bool quotedSerializedName = true)
+        {
+            var type = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            return schema is ObjectSchema ? $"{typeText}.Deserialize({name})" : (TypeDeserializers.ContainsKey(type) ? TypeDeserializers[type](name) : null);
         }
     }
 }

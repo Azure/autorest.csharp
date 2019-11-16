@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 ObjectSchema objectSchema => WriteObjectSerialization(objectSchema),
                 SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSerialization(sealedChoiceSchema),
-                //ChoiceSchema choiceSchema => WriteChoiceSchema(choiceSchema),
+                ChoiceSchema choiceSchema => WriteChoiceSerialization(choiceSchema),
                 _ => WriteDefaultSerialization(schema)
             };
 
@@ -58,6 +58,45 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line(schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
+        private void ReadProperty(Schema schema, string name, string typeText)
+        {
+            if (schema is ArraySchema array)
+            {
+                //Line($"result.{name} = new {Type(concreteType)}();");
+                using (ForEach("var item in property.Value.EnumerateArray()"))
+                {
+                    //TODO: Hack for property name/type name clashing
+                    //var elementTypeText = Type(array.ElementType.Language.CSharp?.Type);
+                    var elementTypeText = array.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
+                    var createText = array.ElementType.ToDeserializeCall("item", elementTypeText);
+                    Line(createText != null ? $"result.{name}.Add({createText});" : $"// {array.ElementType.GetType().Name}: Not Implemented");
+                }
+                return;
+            }
+            if (schema is DictionarySchema dictionary)
+            {
+                //Line($"writer.WriteStartObject(\"{serializedName}\");");
+                //using (ForEach($"var item in {name}"))
+                //{
+                //    Line(dictionary.ElementType.ToSerializeCall("item.Value", "item.Key", isNullable, false, false) ?? $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
+                //}
+                //Line("writer.WriteEndObject();");
+                //return;
+                using (ForEach("var item in property.Value.EnumerateObject()"))
+                {
+                    //TODO: Hack for property name/type name clashing
+                    //var elementTypeText = Type(dictionary.ElementType.Language.CSharp?.Type);
+                    var elementTypeText = dictionary.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
+                    var createText = dictionary.ElementType.ToDeserializeCall("item.Value", elementTypeText);
+                    Line(createText != null ? $"result.{name}.Add(item.Name, {createText});" : $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
+                }
+                return;
+            }
+
+            var callText = schema.ToDeserializeCall("property.Value", typeText);
+            Line(callText != null ? $"result.{name} = {callText};" : $"// {schema.GetType().Name} {name}: Not Implemented");
+        }
+
         // CURRENTLY, INPUT SCHEMA
         private bool WriteObjectSerialization(ObjectSchema schema)
         {
@@ -68,7 +107,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    using (Method("public", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer"), Pair(typeof(bool), "includeName = true")))
+                    using (Method("internal", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer"), Pair(typeof(bool), "includeName = true")))
                     {
                         using (If("includeName"))
                         {
@@ -83,59 +122,72 @@ namespace AutoRest.CSharp.V3.CodeGen
                             .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                         foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                         {
-                            //var isObject = property.Schema is ObjectSchema;
-                            //var hasField = isObject && (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-                            //var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-
-
-                            ////var (propertyCs, propertySchemaCs) = (property.Language.CSharp, property.Schema.Language.CSharp);
-                            //var isObject = property.Schema is ObjectSchema;
                             var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
                             var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
                             var serializedName = property.Language.Default.Name;
                             var isNullable = propertyCs?.IsNullable ?? false;
                             using (isNullable ? If($"{name} != null") : new DisposeAction())
                             {
-                                //Line(property.ToSerializeCall() ?? $"// {property.Schema.GetType().Name} {name}: Not Implemented");
                                 WriteProperty(property.Schema, name, serializedName, isNullable);
                             }
                         }
 
-
                         Line("writer.WriteEndObject();");
                     }
 
-                    //var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                    //    .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                    //foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
-                    //{
-                    //    if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
-                    //    {
-                    //        LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
-                    //        continue;
-                    //    }
-                    //    AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
-                    //}
+                    var typeText = Type(cs?.Type);
+                    using (Method("internal static", typeText, "Deserialize", Pair(typeof(JsonElement), "element")))
+                    {
+                        Line($"var result = new {typeText}();");
+                        using (ForEach("var property in element.EnumerateObject()"))
+                        {
+                            var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                                .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                            foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                            {
+                                //var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                                //var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
 
-                    //if (propertyInfos.Any(pi => pi.Property.Required ?? false))
-                    //{
-                    //    Line();
-                    //    var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
-                    //        .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
-                    //    var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
-                    //    using (Method("public", null, cs?.Name, parameters))
-                    //    {
-                    //        foreach (var ((_, propertyCs, propertySchemaCs), variableName, _) in requiredProperties)
-                    //        {
-                    //            if (propertySchemaCs?.IsLazy ?? false)
-                    //            {
-                    //                Line($"{propertyCs?.Name} = new {Type(propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type)}({variableName});");
-                    //                continue;
-                    //            }
-                    //            Line($"{propertyCs?.Name} = {variableName};");
-                    //        }
-                    //    }
-                    //}
+                                var name = propertyCs?.Name ?? "[NO NAME]";
+                                var serializedName = property.Language.Default.Name;
+                                //var isNullable = propertyCs?.IsNullable ?? false;
+                                //var concreteType = propertySchemaCs?.ConcreteType;
+                                using (If($"property.NameEquals(\"{serializedName}\")"))
+                                {
+                                    //TODO: Hack for property name/type name clashing
+                                    //var propertyType = Type(property.Schema.Language.CSharp?.Type);
+                                    var propertyType = property.Schema.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
+                                    ReadProperty(property.Schema, name, propertyType);
+                                    Line("continue;");
+                                }
+                            }
+                        }
+                        Line("return result;");
+                        //using (If("includeName"))
+                        //{
+                        //    Line($"writer.WriteStartObject(\"{schema.Language.Default.Name}\");");
+                        //}
+                        //using (Else())
+                        //{
+                        //    Line("writer.WriteStartObject();");
+                        //}
+
+                        //var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                        //    .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                        //foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                        //{
+                        //    var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                        //    var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
+                        //    var serializedName = property.Language.Default.Name;
+                        //    var isNullable = propertyCs?.IsNullable ?? false;
+                        //    using (isNullable ? If($"{name} != null") : new DisposeAction())
+                        //    {
+                        //        WriteProperty(property.Schema, name, serializedName, isNullable);
+                        //    }
+                        //}
+
+                        //Line("writer.WriteEndObject();");
+                    }
                 }
             }
             return true;
@@ -176,7 +228,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        private bool WriteChoiceSchema(ChoiceSchema schema)
+        private bool WriteChoiceSerialization(ChoiceSchema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -184,47 +236,46 @@ namespace AutoRest.CSharp.V3.CodeGen
             var csType = cs?.Type;
             using (Namespace(csType?.Namespace))
             {
-                var implementType = new CSharpType { FrameworkType = typeof(IEquatable<>), SubType1 = csType };
-                using (Struct(null, "readonly", cs?.Name, Type(implementType)))
+                using (Struct(null, "readonly partial", cs?.Name))
                 {
-                    var stringText = Type(typeof(string));
-                    var nullableStringText = Type(typeof(string), true);
-                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
-                    {
-                        Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
-                    }
-                    Line($"private readonly {Pair(nullableStringText, "_value")};");
-                    Line();
+                    //var stringText = Type(typeof(string));
+                    //var nullableStringText = Type(typeof(string), true);
+                    //foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
+                    //{
+                    //    Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
+                    //}
+                    //Line($"private readonly {Pair(nullableStringText, "_value")};");
+                    //Line();
 
-                    using (Method("public", null, cs?.Name, Pair(stringText, "value")))
-                    {
-                        Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
-                    }
-                    Line();
+                    //using (Method("public", null, cs?.Name, Pair(stringText, "value")))
+                    //{
+                    //    Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
+                    //}
+                    //Line();
 
-                    var csTypeText = Type(csType);
-                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
-                    {
-                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
-                    }
-                    Line();
+                    //var csTypeText = Type(csType);
+                    //foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
+                    //{
+                    //    Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
+                    //}
+                    //Line();
 
-                    var boolText = Type(typeof(bool));
-                    var leftRightParams = new[] { Pair(csTypeText, "left"), Pair(csTypeText, "right") };
-                    MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
-                    MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
-                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new[] { Pair(stringText, "value") }, $"new {csTypeText}(value)");
-                    Line();
+                    //var boolText = Type(typeof(bool));
+                    //var leftRightParams = new[] { Pair(csTypeText, "left"), Pair(csTypeText, "right") };
+                    //MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
+                    //MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
+                    //MethodExpression("public static implicit", null, $"operator {csTypeText}", new[] { Pair(stringText, "value") }, $"new {csTypeText}(value)");
+                    //Line();
 
-                    var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
-                    Line(editorBrowsableNever);
-                    MethodExpression("public override", boolText, "Equals", new[] { Pair(typeof(object), "obj", true) }, $"obj is {csTypeText} other && Equals(other)");
-                    MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
-                    Line();
+                    //var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
+                    //Line(editorBrowsableNever);
+                    //MethodExpression("public override", boolText, "Equals", new[] { Pair(typeof(object), "obj", true) }, $"obj is {csTypeText} other && Equals(other)");
+                    //MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
+                    //Line();
 
-                    Line(editorBrowsableNever);
-                    MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
-                    MethodExpression("public override", nullableStringText, "ToString", null, "_value");
+                    //Line(editorBrowsableNever);
+                    //MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
+                    //MethodExpression("public override", nullableStringText, "ToString", null, "_value");
                 }
             }
             return true;

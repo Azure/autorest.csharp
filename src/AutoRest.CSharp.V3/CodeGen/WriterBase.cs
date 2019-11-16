@@ -118,8 +118,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
-        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable) =>
-            Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; set; }}");
+        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable, bool isRequired = false) =>
+            Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; {(isRequired ? "private " : String.Empty)}set; }}");
 
         public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name, bool? isNullable)
         {

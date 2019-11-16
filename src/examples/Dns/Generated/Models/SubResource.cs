@@ -12,6 +12,21 @@ namespace Azure.Dns.Models.V20180501
 
     public partial class SubResource
     {
+        internal static SubResource Deserialize(JsonElement element)
+        {
+            var result = new SubResource();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("id"))
+                {
+                    result.Id = property.Value.GetString();
+                    continue;
+                }
+                //property.Value.GetDateTime()
+            }
+            return result;
+        }
+
         public void Serialize(Utf8JsonWriter writer, bool includeName = true)
         {
             if (includeName)

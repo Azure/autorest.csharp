@@ -23,6 +23,57 @@ namespace Azure.Dns.Models.V20180501
 
     public partial class ZoneProperties
     {
+        internal static ZoneProperties Deserialize(JsonElement element)
+        {
+            var result = new ZoneProperties();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("maxNumberOfRecordSets"))
+                {
+                    result.MaxNumberOfRecordSets = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("numberOfRecordSets"))
+                {
+                    result.NumberOfRecordSets = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("nameServers"))
+                {
+                    //result._nameServers = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.NameServers.Add(item.GetString());
+                    }
+                    continue;
+                }
+                if (property.NameEquals("zoneType"))
+                {
+                    result.ZoneType = property.Value.ToString();
+                    continue;
+                }
+                if (property.NameEquals("registrationVirtualNetworks"))
+                {
+                    //result._registrationVirtualNetworks = new List<SubResource>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.RegistrationVirtualNetworks.Add(SubResource.Deserialize(item));
+                    }
+                    continue;
+                }
+                if (property.NameEquals("resolutionVirtualNetworks"))
+                {
+                    //result._resolutionVirtualNetworks = new List<SubResource>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.ResolutionVirtualNetworks.Add(SubResource.Deserialize(item));
+                    }
+                    continue;
+                }
+            }
+            return result;
+        }
+
         public void Serialize(Utf8JsonWriter writer, bool includeName = true)
         {
             if (includeName)

@@ -15,7 +15,32 @@ namespace Azure.Dns.Models.V20180501
 
     public partial class Zone
     {
-        public void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal static Zone Deserialize(JsonElement element)
+        {
+            var result = new Zone();
+            foreach (var property in element.EnumerateObject())
+            {
+                //var value = property.Name switch
+                //{
+                //    "etag" => property.Value,
+                //    "zone" => property.Value,
+                //    _ => (JsonElement?)null
+                //};
+                if (property.NameEquals("etag"))
+                {
+                    result.Etag = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("zone"))
+                {
+                    result.Properties = ZoneProperties.Deserialize(property.Value);
+                    continue;
+                }
+            }
+            return result;
+        }
+
+        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
         {
             //var buffer = new ArrayBufferWriter<byte>();
             //using var writer = new Utf8JsonWriter(buffer);
