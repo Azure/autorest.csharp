@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             //var type = propertySchemaCs?.Type?.FrameworkType ?? typeof(void);
             //var serializedName = property.Language.Default.Name;
             var type = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
-            return schema is ObjectSchema ? $"{name}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
+            return schema is ObjectSchema ? $"{name}{(isNullable ? "?" : String.Empty)}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
         }
 
         //TODO: Figure out the rest of these.

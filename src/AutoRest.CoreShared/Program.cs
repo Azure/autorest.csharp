@@ -19,10 +19,12 @@ namespace AutoRest.CodeModel
                 .Replace("object result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());", "object? result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());")
                 .Replace("return (int)result == 2", "return result is int resultInt && resultInt == 2");
             File.WriteAllText($"../../{Path}/DiagnosticScope.cs", cleanFile);
+            File.WriteAllText($"../../AutoRest.CSharp.V3/Azure.Core.Shared/DiagnosticScope.cs", cleanFile);
 
             cachePath = "../cache/ArrayBufferWriter.cs";
             webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/core/Azure.Core/src/Shared/ArrayBufferWriter.cs", cachePath);
             File.WriteAllText($"../../{Path}/ArrayBufferWriter.cs", File.ReadAllText(cachePath));
+            File.WriteAllText($"../../AutoRest.CSharp.V3/Azure.Core.Shared/ArrayBufferWriter.cs", File.ReadAllText(cachePath));
         }
     }
 }
