@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.XPath;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
@@ -17,12 +16,6 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class OperationWriter : StringWriter
     {
-        //public bool WriteOperationGroup(OperationGroup operationGroup) =>
-        //    operationGroup switch
-        //    {
-        //        _ => WriteDefaultOperationGroup(operationGroup)
-        //    };
-
         public bool WriteOperationGroup(OperationGroup operationGroup)
         {
             Header();
@@ -33,8 +26,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "static", cs?.Name))
                 {
-                    //var exceptionText = Type(typeof(Exception));
-                    //var stringType = new CSharpType { FrameworkType = typeof(string) };
                     operationGroup.Operations.ForEachLast(o => WriteOperation(o, @namespace), o => WriteOperation(o, @namespace, false));
                 }
             }
@@ -51,6 +42,58 @@ namespace AutoRest.CSharp.V3.CodeGen
             ParameterLocation.Uri => null,
             _ => null
         };
+
+        private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string path, (string Name, string SerializedName)?[] parameterInfos)
+        {
+            var index = 0;
+            var currentPart = new List<char>();
+            while (index < path.Length)
+            {
+                if (path[index] == '{')
+                {
+                    var innerPart = new List<char>();
+                    var innerIndex = index + 1;
+                    while (innerIndex < path.Length)
+                    {
+                        if (path[innerIndex] == '}')
+                        {
+                            var innerString = new string(innerPart.ToArray());
+                            var pathParameter = parameterInfos.FirstOrDefault(pi => pi?.SerializedName == innerString);
+                            if (pathParameter != null)
+                            {
+                                if (currentPart.Any())
+                                {
+                                    yield return (new string(currentPart.ToArray()), true);
+                                }
+
+                                var name = pathParameter.Value.Name;
+                                yield return (name ?? "[NO NAME]", false);
+                                currentPart.Clear();
+                                innerPart.Clear();
+                                break;
+                            }
+                        }
+                        innerPart.Add(path[innerIndex]);
+                        innerIndex++;
+                    }
+
+                    if (innerPart.Any())
+                    {
+                        currentPart.Add('{');
+                        currentPart.AddRange(innerPart);
+                    }
+                    index = innerIndex + 1;
+                    continue;
+                }
+                currentPart.Add(path[index]);
+                index++;
+            }
+
+            if (currentPart.Any())
+            {
+                yield return (new string(currentPart.ToArray()), true);
+            }
+        }
 
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
@@ -110,84 +153,17 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line($"request.Method = {Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
                     var path = (operation.Request.Protocol.Http as HttpRequest)?.Path ?? String.Empty;
-                    var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path).Select(p => new {p.Parameter, p.ParameterCs, p.ParameterSchemaCs}).ToArray();
-                    var index = 0;
-                    var currentPart = new List<char>();
-                    var parts = new List<(string Text, bool Quote)>();
-                    while (index < path.Length)
-                    {
-                        if (path[index] == '{')
-                        {
-                            var innerPart = new List<char>();
-                            var innerIndex = index + 1;
-                            while (innerIndex < path.Length)
-                            {
-                                if (path[innerIndex] == '}')
-                                {
-                                    var innerString = new string(innerPart.ToArray());
-                                    var pathParameter = pathParameters.FirstOrDefault(p => p.Parameter.Language.Default.Name == innerString);
-                                    if (pathParameter != null)
-                                    {
-                                        if (currentPart.Any())
-                                        {
-                                            parts.Add((new string(currentPart.ToArray()), true));
-                                        }
+                    var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path)
+                        .Select(p => (p.ParameterCs?.Name, SerializedName: p.Parameter.Language.Default.Name) as (string Name, string SerializedName)?).ToArray();
+                    var pathParts = GetPathParts(path, pathParameters);
 
-                                        var name = pathParameter.ParameterCs?.Name;
-                                        //parts.Add((name != null ? $"{name}.ToString()" : "[NO NAME]", false));
-                                        parts.Add((name ?? "[NO NAME]", false));
-                                        //index = innerIndex + 1;
-                                        currentPart.Clear();
-                                        innerPart.Clear();
-                                        break;
-                                    }
-                                }
-                                innerPart.Add(path[innerIndex]);
-                                innerIndex++;
-                            }
-
-                            if (innerPart.Any())
-                            {
-                                //parts.Add((new string(currentPart.ToArray()), true));
-                                //parts.Add((new string(innerPart.ToArray()), true));
-                                currentPart.Add('{');
-                                currentPart.AddRange(innerPart);
-                                //index++;
-                            }
-                            index = innerIndex + 1;
-                            continue;
-                        }
-                        currentPart.Add(path[index]);
-                        index++;
-                    }
-
-                    if (currentPart.Any())
-                    {
-                        parts.Add((new string(currentPart.ToArray()), true));
-                    }
-
-
-                    var urlText = String.Join(String.Empty, parts.Select(p => p.Quote ? p.Text : $"{{{p.Text}}}"));
+                    //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
+                    var urlText = String.Join(String.Empty, pathParts.Select(p => p.IsLiteral ? p.Text : $"{{{p.Text}}}"));
                     Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
-                    //foreach (var (text, quote) in parts)
-                    //{
-                    //    //TODO: Determine when to escape strings
-                    //    Line($"request.Uri.AppendPath({(quote ? $"\"{text}\"" : text)}, false);");
-                    //}
-
-                    //foreach (var (parameter, parameterCs, parameterSchemaCs, location) in parameters.Where(p => p.Location == ParameterLocation.Path))
-                    //{
-
-                    //}
-
-
-                    //Line("request.Uri.Reset(uri);");
 
                     //TODO: prefilter parameters
                     foreach (var (parameter, parameterCs, parameterSchemaCs, location) in parameters.OrderBy(p => p.Location))
                     {
-                        //body: add model serialization code
-
                         var methodCall = ParameterMethodCall(location);
                         var isNullable = parameterCs?.IsNullable ?? false;
                         var ifCondition = isNullable ? $"if ({parameterCs?.Name} != null) {{ " : String.Empty;
@@ -224,14 +200,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("cancellationToken.ThrowIfCancellationRequested();");
 
 
-                    //TODO: Do multiple response code
+                    //TODO: Do multiple response codes
                     if (schemaResponse != null)
                     {
-                        //using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        //var root = document.RootElement;
                         Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                        //Response.FromValue(result, response)
-                        Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText)}, response);");
+                        //TODO: Do not default to string type
+                        Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText, responseType.Name ?? "[NO TYPE NAME]") ?? $"{Type(typeof(string))}.Empty"}, response);");
                     }
                     //TODO: Do not default to string type
                     else

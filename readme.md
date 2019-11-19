@@ -4,20 +4,20 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "~4.0.39"
+  "@autorest/modelerfour": "~4.0.51"
 
 pipeline:
-  modelerfour:
-    input: openapi-document/multi-api/identity
-  modelerfour/new-transform:
-    input: modelerfour
+  # modelerfour:
+  #   input: openapi-document/multi-api/identity
+  # modelerfour/new-transform:
+  #   input: modelerfour
   # serialize-tester:
   #   input: modelerfour/new-transform
   # serialize-tester/emitter:
   #   input: serialize-tester
   #   scope: output-scope
   cs-namer:
-    input: modelerfour/new-transform
+    input: modelerfour/identity
   cs-typer:
     input: cs-namer
   cs-modeler:

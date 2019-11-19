@@ -1,11 +1,9 @@
 ﻿using AutoRest.CSharp.V3.Pipeline.Generated;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.Identity.Client;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -58,42 +56,36 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line(schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
-        private void ReadProperty(Schema schema, string name, string typeText)
+        private void ReadProperty(Schema schema, string name, string typeText, string typeName)
         {
             if (schema is ArraySchema array)
             {
-                //Line($"result.{name} = new {Type(concreteType)}();");
                 using (ForEach("var item in property.Value.EnumerateArray()"))
                 {
+                    var elementType = array.ElementType.Language.CSharp?.Type;
+                    var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
-                    //var elementTypeText = Type(array.ElementType.Language.CSharp?.Type);
-                    var elementTypeText = array.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
-                    var createText = array.ElementType.ToDeserializeCall("item", elementTypeText);
+                    var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
+                    var createText = array.ElementType.ToDeserializeCall("item", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add({createText});" : $"// {array.ElementType.GetType().Name}: Not Implemented");
                 }
                 return;
             }
             if (schema is DictionarySchema dictionary)
             {
-                //Line($"writer.WriteStartObject(\"{serializedName}\");");
-                //using (ForEach($"var item in {name}"))
-                //{
-                //    Line(dictionary.ElementType.ToSerializeCall("item.Value", "item.Key", isNullable, false, false) ?? $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
-                //}
-                //Line("writer.WriteEndObject();");
-                //return;
                 using (ForEach("var item in property.Value.EnumerateObject()"))
                 {
+                    var elementType = dictionary.ElementType.Language.CSharp?.Type;
+                    var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
-                    //var elementTypeText = Type(dictionary.ElementType.Language.CSharp?.Type);
-                    var elementTypeText = dictionary.ElementType.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
-                    var createText = dictionary.ElementType.ToDeserializeCall("item.Value", elementTypeText);
+                    var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
+                    var createText = dictionary.ElementType.ToDeserializeCall("item.Value", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add(item.Name, {createText});" : $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
                 }
                 return;
             }
 
-            var callText = schema.ToDeserializeCall("property.Value", typeText);
+            var callText = schema.ToDeserializeCall("property.Value", typeText, typeName);
             Line(callText != null ? $"result.{name} = {callText};" : $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
@@ -158,10 +150,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 //var concreteType = propertySchemaCs?.ConcreteType;
                                 using (If($"property.NameEquals(\"{serializedName}\")"))
                                 {
+                                    var propertyType = propertySchemaCs?.Type;
+                                    var propertyTypeName = propertyType?.Name ?? "[NO TYPE NAME]";
                                     //TODO: Hack for property name/type name clashing
+                                    var propertyTypeText = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
-                                    var propertyType = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
-                                    ReadProperty(property.Schema, name, propertyType);
+                                    ReadProperty(property.Schema, name, propertyTypeText, propertyTypeName);
                                     Line("continue;");
                                 }
                             }
