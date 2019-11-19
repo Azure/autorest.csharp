@@ -94,14 +94,6 @@
           "$ref": "#/definitions/SerializationFormats",
           "description": "per-serialization information for this Schema"
         },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
         "apiVersions": {
           "description": "API versions that this applies to. Undefined means all versions",
           "type": "array",
@@ -129,8 +121,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "type"
@@ -288,6 +278,133 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
+    "SchemaType": {
+      "description": "possible schema types that indicate the type of schema.",
+      "enum": [
+        "any",
+        "array",
+        "binary",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "conditional",
+        "constant",
+        "credential",
+        "date",
+        "date-time",
+        "dictionary",
+        "duration",
+        "flag",
+        "group",
+        "integer",
+        "not",
+        "number",
+        "object",
+        "odata-query",
+        "or",
+        "sealed-choice",
+        "sealed-conditional",
+        "string",
+        "unixtime",
+        "unknown",
+        "uri",
+        "uuid",
+        "xor"
+      ],
+      "type": "string"
+    },
+    "CompoundSchemaTypes": {
+      "enum": [
+        "or",
+        "xor"
+      ],
+      "type": "string"
+    },
+    "PrimitiveSchemaTypes": {
+      "enum": [
+        "boolean",
+        "char",
+        "credential",
+        "date",
+        "date-time",
+        "duration",
+        "integer",
+        "number",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid"
+      ],
+      "type": "string"
+    },
+    "ValueSchemaTypes": {
+      "enum": [
+        "array",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "conditional",
+        "credential",
+        "date",
+        "date-time",
+        "duration",
+        "flag",
+        "integer",
+        "number",
+        "sealed-choice",
+        "sealed-conditional",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid"
+      ],
+      "type": "string"
+    },
+    "ObjectSchemaTypes": {
+      "enum": [
+        "dictionary",
+        "object",
+        "or"
+      ],
+      "type": "string"
+    },
+    "AllSchemaTypes": {
+      "description": "all schema types",
+      "enum": [
+        "any",
+        "array",
+        "binary",
+        "boolean",
+        "byte-array",
+        "char",
+        "choice",
+        "conditional",
+        "constant",
+        "credential",
+        "date",
+        "date-time",
+        "dictionary",
+        "duration",
+        "flag",
+        "group",
+        "integer",
+        "not",
+        "number",
+        "object",
+        "odata-query",
+        "or",
+        "sealed-choice",
+        "sealed-conditional",
+        "string",
+        "unixtime",
+        "uri",
+        "uuid",
+        "xor"
+      ],
+      "type": "string"
+    },
     "XmlSerlializationFormat": {
       "type": "object",
       "properties": {
@@ -339,126 +456,443 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
-    "SchemaType": {
-      "description": "possible schema types that indicate the type of schema.",
-      "enum": [
-        "any",
-        "array",
-        "binary",
-        "boolean",
-        "byte-array",
-        "char",
-        "choice",
-        "constant",
-        "credential",
-        "date",
-        "date-time",
-        "dictionary",
-        "duration",
-        "flag",
-        "group",
-        "integer",
-        "not",
-        "number",
-        "object",
-        "odata-query",
-        "or",
-        "sealed-choice",
-        "string",
-        "unixtime",
-        "unknown",
-        "uri",
-        "uuid",
-        "xor"
-      ],
-      "type": "string"
+    "SerializationFormat": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
     },
-    "CompoundSchemaTypes": {
-      "enum": [
-        "or",
-        "xor"
+    "ValueSchema": {
+      "description": "schema types that are non-object or complex types",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
       ],
-      "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
     },
-    "PrimitiveSchemaTypes": {
-      "enum": [
-        "boolean",
-        "char",
-        "credential",
-        "date",
-        "date-time",
-        "duration",
-        "integer",
-        "number",
-        "string",
-        "unixtime",
-        "uri",
-        "uuid"
+    "PrimitiveSchema": {
+      "description": "Schema types that are primitive language values",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
       ],
-      "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
     },
-    "ValueSchemaTypes": {
-      "enum": [
-        "array",
-        "boolean",
-        "byte-array",
-        "char",
-        "choice",
-        "credential",
-        "date",
-        "date-time",
-        "duration",
-        "flag",
-        "integer",
-        "number",
-        "sealed-choice",
-        "string",
-        "unixtime",
-        "uri",
-        "uuid"
+    "ComplexSchema": {
+      "description": "schema types that can be objects",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
       ],
-      "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
     },
-    "ObjectSchemaTypes": {
-      "enum": [
-        "dictionary",
-        "object",
-        "or"
+    "StringSchema": {
+      "description": "a Schema that represents a string value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
       ],
-      "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
     },
-    "AllSchemaTypes": {
-      "description": "all schema types",
-      "enum": [
-        "any",
-        "array",
-        "binary",
-        "boolean",
-        "byte-array",
-        "char",
-        "choice",
-        "constant",
-        "credential",
-        "date",
-        "date-time",
-        "dictionary",
-        "duration",
-        "flag",
-        "group",
-        "integer",
-        "not",
-        "number",
-        "object",
-        "odata-query",
-        "or",
-        "sealed-choice",
-        "string",
-        "unixtime",
-        "uri",
-        "uuid",
-        "xor"
+    "ODataQuerySchema": {
+      "description": "a schema that represents a ODataQuery value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
       ],
-      "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
+    "CredentialSchema": {
+      "description": "a schema that represents a Credential value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "UriSchema": {
+      "description": "a schema that represents a Uri value",
+      "type": "object",
+      "properties": {
+        "maxLength": {
+          "description": "the maximum length of the string",
+          "type": "number"
+        },
+        "minLength": {
+          "description": "the minimum length of the string",
+          "type": "number"
+        },
+        "pattern": {
+          "description": "a regular expression that the string must be validated against",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "UuidSchema": {
+      "description": "a schema that represents a Uuid value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "ChoiceSchema": {
+      "description": "a schema that represents a choice of several values (ie, an 'enum')",
+      "type": "object",
+      "properties": {
+        "choiceType": {
+          "$ref": "#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the choices"
+        },
+        "choices": {
+          "description": "the possible choices for in the set",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChoiceValue"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "choiceType",
+        "choices",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ChoiceValue": {
+      "description": "an individual choice in a ChoiceSchema",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Languages",
+          "description": "per-language information for this value"
+        },
+        "value": {
+          "description": "the actual value",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "extensions": {
+          "$ref": "#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "value"
+      ]
+    },
+    "SealedChoiceSchema": {
+      "description": "a schema that represents a choice of several values (ie, an 'enum')",
+      "type": "object",
+      "properties": {
+        "choiceType": {
+          "$ref": "#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the choices"
+        },
+        "choices": {
+          "description": "the possible choices for in the set",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChoiceValue"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "choiceType",
+        "choices",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ArraySchema": {
+      "description": "a Schema that represents and array of values",
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "$ref": "#/definitions/Schema",
+          "description": "elementType of the array"
+        },
+        "maxItems": {
+          "description": "maximum number of elements in the array",
+          "type": "number"
+        },
+        "minItems": {
+          "description": "minimum number of elements in the array",
+          "type": "number"
+        },
+        "uniqueItems": {
+          "description": "if the elements in the array should be unique",
+          "type": "boolean"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "elementType",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ByteArraySchema": {
+      "description": "a schema that represents a ByteArray value",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "date-time format",
+          "enum": [
+            "base64url",
+            "byte"
+          ],
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "DictionarySchema": {
+      "description": "a schema that represents a key-value collection",
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "$ref": "#/definitions/Schema",
+          "description": "the element type of the dictionary. (Keys are always strings)"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "elementType",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComplexSchema"
+        }
+      ]
+    },
+    "BooleanSchema": {
+      "description": "a schema that represents a boolean value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "CharSchema": {
+      "description": "a schema that represents a Char value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "NumberSchema": {
+      "description": "a Schema that represents a Number value",
+      "type": "object",
+      "properties": {
+        "precision": {
+          "description": "precision (# of bits?) of the number",
+          "type": "number"
+        },
+        "multipleOf": {
+          "description": "if present, the number must be an exact multiple of this value",
+          "type": "number"
+        },
+        "maximum": {
+          "description": "if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)",
+          "type": "number"
+        },
+        "exclusiveMaximum": {
+          "description": "if present, the value must be lower than maximum",
+          "type": "boolean"
+        },
+        "minimum": {
+          "description": "if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)",
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "description": "if present, the value must be higher than minimum",
+          "type": "boolean"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "precision",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
     },
     "Value": {
       "description": "common base interface for properties, parameters and the like.",
@@ -476,11 +910,11 @@
           "description": "can null be passed in instead",
           "type": "boolean"
         },
-        "$key": {
-          "type": "string"
+        "assumedValue": {
+          "description": "the value that the remote will assume if this value is not present"
         },
-        "description": {
-          "type": "string"
+        "clientDefaultValue": {
+          "description": "the value that the client should provide if the consumer doesn't provide one"
         },
         "summary": {
           "description": "a short description",
@@ -517,8 +951,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "schema"
@@ -544,8 +976,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "schema",
@@ -554,255 +984,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Value"
-        }
-      ]
-    },
-    "ImplementationLocation": {
-      "enum": [
-        "Client",
-        "Method"
-      ],
-      "type": "string"
-    },
-    "Parameter": {
-      "description": "a definition of an discrete input for an operation",
-      "type": "object",
-      "properties": {
-        "implementation": {
-          "$ref": "#/definitions/ImplementationLocation",
-          "description": "suggested implementation location for this parameter"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "schema"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Value"
-        }
-      ]
-    },
-    "SerializationFormat": {
-      "type": "object",
-      "properties": {
-        "extensions": {
-          "$ref": "#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
-    },
-    "AnySchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "ValueSchema": {
-      "description": "schema types that are non-object or complex types",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "PrimitiveSchema": {
-      "description": "Schema types that are primitive language values",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "ComplexSchema": {
-      "description": "schema types that can be objects",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "BinarySchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "NumberSchema": {
-      "description": "a Schema that represents a Number value",
-      "type": "object",
-      "properties": {
-        "precision": {
-          "description": "precision (# of bits?) of the number",
-          "type": "number"
-        },
-        "multipleOf": {
-          "description": "if present, the number must be an exact multiple of this value",
-          "type": "number"
-        },
-        "maximum": {
-          "description": "if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)",
-          "type": "number"
-        },
-        "exclusiveMaximum": {
-          "description": "if present, the value must be lower than maximum",
-          "type": "boolean"
-        },
-        "minimum": {
-          "description": "if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)",
-          "type": "number"
-        },
-        "exclusiveMinimum": {
-          "description": "if present, the value must be higher than minimum",
-          "type": "boolean"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "precision",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "StringSchema": {
-      "description": "a Schema that represents a string value",
-      "type": "object",
-      "properties": {
-        "maxLength": {
-          "description": "the maximum length of the string",
-          "type": "number"
-        },
-        "minLength": {
-          "description": "the minimum length of the string",
-          "type": "number"
-        },
-        "pattern": {
-          "description": "a regular expression that the string must be validated against",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "ArraySchema": {
-      "description": "a Schema that represents and array of values",
-      "type": "object",
-      "properties": {
-        "elementType": {
-          "$ref": "#/definitions/Schema",
-          "description": "elementType of the array"
-        },
-        "maxItems": {
-          "description": "maximum number of elements in the array",
-          "type": "number"
-        },
-        "minItems": {
-          "description": "minimum number of elements in the array",
-          "type": "number"
-        },
-        "uniqueItems": {
-          "description": "if the elements in the array should be unique",
-          "type": "boolean"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValueSchema"
         }
       ]
     },
@@ -863,8 +1044,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "type"
@@ -911,8 +1090,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "type"
@@ -923,15 +1100,137 @@
         }
       ]
     },
-    "ChoiceValue": {
-      "description": "an individual choice in a ChoiceSchema",
+    "DurationSchema": {
+      "description": "a schema that represents a Duration value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "DateTimeSchema": {
+      "description": "a schema that represents a DateTime value",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "date-time format",
+          "enum": [
+            "date-time",
+            "date-time-rfc1123"
+          ],
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "DateSchema": {
+      "description": "a schema that represents a Date value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "UnixTimeSchema": {
+      "description": "a schema that represents a UnixTime value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "ConditionalSchema": {
+      "description": "a schema that represents a value dependent on another",
+      "type": "object",
+      "properties": {
+        "conditionalType": {
+          "$ref": "#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the conditional"
+        },
+        "conditions": {
+          "description": "the possible conditinal values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalValue"
+          }
+        },
+        "sourceValue": {
+          "$ref": "#/definitions/Value",
+          "description": "the source value that drives the target value (property or parameter)"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "conditionalType",
+        "conditions",
+        "language",
+        "protocol",
+        "sourceValue",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ConditionalValue": {
+      "description": "an individual value in a ConditionalSchema",
       "type": "object",
       "properties": {
         "language": {
           "$ref": "#/definitions/Languages",
           "description": "per-language information for this value"
         },
-        "value": {
+        "target": {
+          "description": "the actual value",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "source": {
           "description": "the actual value",
           "type": [
             "string",
@@ -948,67 +1247,38 @@
       "additionalProperties": false,
       "required": [
         "language",
-        "value"
+        "source",
+        "target"
       ]
     },
-    "ChoiceSchema": {
-      "description": "a schema that represents a choice of several values (ie, an 'enum')",
+    "SealedConditionalSchema": {
+      "description": "a schema that represents a value dependent on another (not overridable)",
       "type": "object",
       "properties": {
-        "choiceType": {
-          "$ref": "#/definitions/StringSchema",
-          "description": "the primitive type for the choices"
+        "conditionalType": {
+          "$ref": "#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the condition"
         },
-        "choices": {
-          "description": "the possible choices for in the set",
+        "conditions": {
+          "description": "the possible conditional values",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ChoiceValue"
+            "$ref": "#/definitions/ConditionalValue"
           }
+        },
+        "sourceValue": {
+          "$ref": "#/definitions/Value",
+          "description": "the source value that drives the target value"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "choiceType",
-        "choices",
-        "description",
+        "conditionalType",
+        "conditions",
         "language",
         "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "SealedChoiceSchema": {
-      "description": "a schema that represents a choice of several values (ie, an 'enum')",
-      "type": "object",
-      "properties": {
-        "choiceType": {
-          "$ref": "#/definitions/StringSchema",
-          "description": "the primitive type for the choices"
-        },
-        "choices": {
-          "description": "the possible choices for in the set",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChoiceValue"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "choiceType",
-        "choices",
-        "description",
-        "language",
-        "protocol",
+        "sourceValue",
         "type"
       ],
       "allOf": [
@@ -1053,9 +1323,7 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
         "choices",
-        "description",
         "language",
         "protocol",
         "type"
@@ -1105,8 +1373,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "type",
@@ -1116,286 +1382,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "BooleanSchema": {
-      "description": "a schema that represents a boolean value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "ODataQuerySchema": {
-      "description": "a schema that represents a ODataQuery value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
-    },
-    "CredentialSchema": {
-      "description": "a schema that represents a Credential value",
-      "type": "object",
-      "properties": {
-        "maxLength": {
-          "description": "the maximum length of the string",
-          "type": "number"
-        },
-        "minLength": {
-          "description": "the minimum length of the string",
-          "type": "number"
-        },
-        "pattern": {
-          "description": "a regular expression that the string must be validated against",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "UriSchema": {
-      "description": "a schema that represents a Uri value",
-      "type": "object",
-      "properties": {
-        "maxLength": {
-          "description": "the maximum length of the string",
-          "type": "number"
-        },
-        "minLength": {
-          "description": "the minimum length of the string",
-          "type": "number"
-        },
-        "pattern": {
-          "description": "a regular expression that the string must be validated against",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "UuidSchema": {
-      "description": "a schema that represents a Uuid value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "DurationSchema": {
-      "description": "a schema that represents a Duration value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "DateTimeSchema": {
-      "description": "a schema that represents a DateTime value",
-      "type": "object",
-      "properties": {
-        "format": {
-          "description": "date-time format",
-          "enum": [
-            "date-time",
-            "date-time-rfc1123"
-          ],
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "DateSchema": {
-      "description": "a schema that represents a Date value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "CharSchema": {
-      "description": "a schema that represents a Char value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "ByteArraySchema": {
-      "description": "a schema that represents a ByteArray value",
-      "type": "object",
-      "properties": {
-        "format": {
-          "description": "date-time format",
-          "enum": [
-            "base64url",
-            "byte"
-          ],
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "UnixTimeSchema": {
-      "description": "a schema that represents a UnixTime value",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "DictionarySchema": {
-      "description": "a schema that represents a key-value collection",
-      "type": "object",
-      "properties": {
-        "elementType": {
-          "$ref": "#/definitions/Schema",
-          "description": "the element type of the dictionary. (Keys are always strings)"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComplexSchema"
         }
       ]
     },
@@ -1414,9 +1400,7 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
         "anyOf",
-        "description",
         "language",
         "protocol",
         "type"
@@ -1442,8 +1426,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "oneOf",
         "protocol",
@@ -1467,10 +1449,24 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "not",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
+    "BinarySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
         "protocol",
         "type"
       ],
@@ -1603,16 +1599,30 @@
           }
         },
         "choices": {
-          "description": "- this is essentially can be thought of as an 'enum' \nthat is a choice between one of several strings",
+          "description": "- this is essentially can be thought of as an 'enum' \nthat is a choice between one of several items, but an unspecified value is permitted.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChoiceSchema"
           }
         },
         "sealedChoices": {
+          "description": "- this is essentially can be thought of as an 'enum'\nthat is a choice between one of several items, but an unknown value is not allowed.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SealedChoiceSchema"
+          }
+        },
+        "conditionals": {
+          "description": "ie, when 'profile' is 'production', use '2018-01-01' for apiversion",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalSchema"
+          }
+        },
+        "sealedConditionals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SealedConditionalSchema"
           }
         },
         "flags": {
@@ -1661,10 +1671,7 @@
         }
       },
       "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "strings"
-      ]
+      "additionalProperties": false
     },
     "email": {
       "type": "string"
@@ -1751,6 +1758,36 @@
       "additionalProperties": false,
       "required": [
         "title"
+      ]
+    },
+    "ImplementationLocation": {
+      "enum": [
+        "Client",
+        "Context",
+        "Method"
+      ],
+      "type": "string"
+    },
+    "Parameter": {
+      "description": "a definition of an discrete input for an operation",
+      "type": "object",
+      "properties": {
+        "implementation": {
+          "$ref": "#/definitions/ImplementationLocation",
+          "description": "suggested implementation location for this parameter"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Value"
+        }
       ]
     },
     "Response": {
@@ -1842,12 +1879,6 @@
           "$ref": "#/definitions/Dictionary<ApiVersion>",
           "description": "the apiVersion to use for a given profile name"
         },
-        "$key": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
         "summary": {
           "description": "a short description",
           "type": "string"
@@ -1883,8 +1914,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "request"
@@ -1960,6 +1989,22 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
+    "AnySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
       "enum": [
@@ -2013,6 +2058,7 @@
         "body",
         "cookie",
         "header",
+        "none",
         "path",
         "query",
         "uri"
@@ -2091,82 +2137,6 @@
         510,
         511,
         "default"
-      ]
-    },
-    "HttpServer": {
-      "description": "An object representing a Server.\n\nIf the uri supports template substitution, then the variables are required.",
-      "type": "object",
-      "properties": {
-        "language": {
-          "$ref": "#/definitions/Languages",
-          "description": "per-language information for this aspect"
-        },
-        "url": {
-          "description": "base url for the server",
-          "type": "string"
-        },
-        "variables": {
-          "description": "an optional collection of variables for server templating",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerVariable"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "url"
-      ]
-    },
-    "ServerVariable": {
-      "description": "An object representing a Server Variable for server URL template substitution.",
-      "type": "object",
-      "properties": {
-        "language": {
-          "$ref": "#/definitions/Languages",
-          "description": "per-language information for this aspect"
-        },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
-        "apiVersions": {
-          "description": "API versions that this applies to. Undefined means all versions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersion"
-          }
-        },
-        "deprecated": {
-          "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
-        },
-        "schema": {
-          "$ref": "#/definitions/ValueSchema",
-          "description": "the schema type for the server variable"
-        },
-        "default": {
-          "description": "The default value to use for substitution, which SHALL be sent if an alternate value is not supplied.",
-          "type": "string"
-        },
-        "required": {
-          "description": "if the value is marked 'required'.",
-          "type": "boolean"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "schema"
       ]
     },
     "Scheme": {
@@ -2536,21 +2506,13 @@
         "method": {
           "$ref": "#/definitions/HttpMethod",
           "description": "the HTTP Method used to process this operation"
-        },
-        "servers": {
-          "description": "each method must have one or more servers that it is connected to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HttpServer"
-          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
         "method",
-        "path",
-        "servers"
+        "path"
       ],
       "allOf": [
         {
@@ -2579,8 +2541,7 @@
         "knownMediaType",
         "mediaTypes",
         "method",
-        "path",
-        "servers"
+        "path"
       ],
       "allOf": [
         {
@@ -2605,8 +2566,7 @@
         "knownMediaType",
         "mediaTypes",
         "method",
-        "path",
-        "servers"
+        "path"
       ],
       "allOf": [
         {
@@ -2632,8 +2592,7 @@
         "mediaTypes",
         "method",
         "multipart",
-        "path",
-        "servers"
+        "path"
       ],
       "allOf": [
         {
@@ -2670,13 +2629,6 @@
         "method": {
           "$ref": "#/definitions/HttpMethod",
           "description": "the HTTP Method used to process this operation"
-        },
-        "servers": {
-          "description": "each method must have one or more servers that it is connected to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HttpServer"
-          }
         }
       },
       "defaultProperties": [],
@@ -2686,8 +2638,7 @@
         "mediaTypes",
         "method",
         "multipart",
-        "path",
-        "servers"
+        "path"
       ]
     },
     "HttpHeader": {
@@ -2853,13 +2804,6 @@
       "description": "code model metadata for HTTP protocol",
       "type": "object",
       "properties": {
-        "servers": {
-          "description": "a collection of server definitions for the service",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HttpServer"
-          }
-        },
         "security": {
           "description": "a collection of security requirements for the service",
           "type": "array",
@@ -2870,9 +2814,6 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "servers"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Protocol"
@@ -2892,73 +2833,6 @@
         "$ref": "#/definitions/ComplexSchema"
       },
       "defaultProperties": []
-    },
-    "ChoiceType": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "$ref": "#/definitions/Languages",
-          "description": "per-language information for Schema"
-        },
-        "type": {
-          "$ref": "#/definitions/AllSchemaTypes",
-          "description": "the schema type"
-        },
-        "summary": {
-          "description": "a short description",
-          "type": "string"
-        },
-        "example": {
-          "description": "example information"
-        },
-        "defaultValue": {
-          "description": "If the value isn't sent on the wire, the service will assume this"
-        },
-        "serialization": {
-          "$ref": "#/definitions/SerializationFormats",
-          "description": "per-serialization information for this Schema"
-        },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
-        "apiVersions": {
-          "description": "API versions that this applies to. Undefined means all versions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersion"
-          }
-        },
-        "deprecated": {
-          "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
-        },
-        "externalDocs": {
-          "$ref": "#/definitions/ExternalDocumentation",
-          "description": "External Documentation Links"
-        },
-        "protocol": {
-          "$ref": "#/definitions/Protocols",
-          "description": "per-protocol information for this aspect"
-        },
-        "extensions": {
-          "$ref": "#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "$key",
-        "description",
-        "language",
-        "protocol",
-        "type"
-      ]
     },
     "ConstantType": {
       "type": "object",
@@ -2985,14 +2859,6 @@
           "$ref": "#/definitions/SerializationFormats",
           "description": "per-serialization information for this Schema"
         },
-        "$key": {
-          "description": "common name of the aspect -- in OAI3 this was typically the key in the parent dictionary",
-          "type": "string"
-        },
-        "description": {
-          "description": "description of the aspect.",
-          "type": "string"
-        },
         "apiVersions": {
           "description": "API versions that this applies to. Undefined means all versions",
           "type": "array",
@@ -3020,8 +2886,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "$key",
-        "description",
         "language",
         "protocol",
         "type"

@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 {
                                     //TODO: Hack for property name/type name clashing
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
-                                    var propertyType = property.Schema.Language.CSharp?.Type?.FullName ?? "[NO TYPE]";
+                                    var propertyType = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
                                     ReadProperty(property.Schema, name, propertyType);
                                     Line("continue;");
                                 }
