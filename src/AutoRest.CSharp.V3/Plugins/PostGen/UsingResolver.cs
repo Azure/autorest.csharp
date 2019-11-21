@@ -13,6 +13,7 @@ using System.Net;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using System.Net.Http;
+using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 
 namespace AutoRest.CSharp.V3.Plugins.PostGen
 {

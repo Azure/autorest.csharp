@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc.Messaging;
 
-namespace AutoRest.CSharp.V3.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
     internal class AutoRestInterface
     {

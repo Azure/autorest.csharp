@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Text.Json;
+using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging

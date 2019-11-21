@@ -3,11 +3,11 @@
 
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
-    internal class PositionStringPath : IPosition
+    internal class PositionIntPath : IPosition
     {
-        public string[]? Path { get; set; } = null;
+        public int[]? Path { get; set; } = null;
 
         public override string ToString() => $@"{{{Path.TextOrEmpty($@"""path"":{Path.ToJsonArray()}")}}}";
     }

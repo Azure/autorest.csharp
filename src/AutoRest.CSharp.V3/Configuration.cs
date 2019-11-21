@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.V3.JsonRpc;
+using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 
 namespace AutoRest.CSharp.V3
 {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc.Messaging;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
     internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
 
