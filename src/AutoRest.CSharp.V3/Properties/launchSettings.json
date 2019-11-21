@@ -2,8 +2,8 @@
   "profiles": {
     "AutoRest.CSharp.V3": {
       "commandName": "Executable",
-      "executablePath": "$(APPDATA)\\npm\\autorest.cmd",
-      "commandLineArgs": "--cs-modeler.attach $(ProjectDir)../../samples/Xkcd/readme.md"
+      "executablePath": "$(APPDATA)\\npm\\npx.cmd",
+      "commandLineArgs": "autorest-beta --cs-modeler.attach $(ProjectDir)../../samples/Xkcd/readme.md"
     }
   }
 }
