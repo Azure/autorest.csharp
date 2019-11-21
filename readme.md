@@ -4,15 +4,11 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.0.52"
+  "@autorest/modelerfour": "4.1.58"
 
 pipeline:
-  # modelerfour:
-  #   input: openapi-document/multi-api/identity
-  # modelerfour/new-transform:
-  #   input: modelerfour
   # serialize-tester:
-  #   input: modelerfour/new-transform
+  #   input: modelerfour/identity
   # serialize-tester/emitter:
   #   input: serialize-tester
   #   scope: output-scope

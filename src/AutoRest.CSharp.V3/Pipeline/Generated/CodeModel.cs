@@ -817,11 +817,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public Schema Schema { get; set; } = new Schema();
 
         /// <summary>if the value is marked 'required'.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "required", Order = 10)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "required", Order = 11)]
         public bool? Required { get; set; }
 
         /// <summary>can null be passed in instead</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "nullable", Order = 8)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "nullable", Order = 9)]
         public bool? Nullable { get; set; }
 
         /// <summary>the value that the remote will assume if this value is not present</summary>
@@ -833,7 +833,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public object? ClientDefaultValue { get; set; }
 
         /// <summary>a short description</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "summary", Order = 12)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "summary", Order = 13)]
         public string? Summary { get; set; }
 
         /// <summary>API versions that this applies to. Undefined means all versions</summary>
@@ -849,17 +849,17 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public ExternalDocumentation? ExternalDocs { get; set; }
 
         /// <summary>per-language information for this aspect</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "language", Order = 14)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "language", Order = 15)]
         [System.ComponentModel.DataAnnotations.Required]
         public Languages Language { get; set; } = new Languages();
 
         /// <summary>per-protocol information for this aspect</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "protocol", Order = 15)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "protocol", Order = 16)]
         [System.ComponentModel.DataAnnotations.Required]
         public Protocols Protocol { get; set; } = new Protocols();
 
         /// <summary>additional metadata extensions dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "extensions", Order = 13)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "extensions", Order = 14)]
         public DictionaryOfAny? Extensions { get; set; }
     }
 
@@ -868,16 +868,24 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class Property : Value
     {
         /// <summary>if the property is marked read-only (ie, not intended to be sent to the service)</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "readOnly", Order = 9)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "readOnly", Order = 10)]
         public bool? ReadOnly { get; set; }
 
         /// <summary>the wire name of this property</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "serializedName", Order = 11)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "serializedName", Order = 12)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string SerializedName { get; set; }
 
+        /// <summary>when a property is flattened, the property will be the set of serialized names to get to that target property.
+        ///
+        /// If flattenedName is present, then this property is a flattened property.
+        ///
+        /// (ie, ['properties','name'] )</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "flattenedNames", Order = 6)]
+        public System.Collections.Generic.ICollection<string>? FlattenedNames { get; set; }
+
         /// <summary>if this property is used as a discriminator for a polymorphic type</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "isDiscriminator", Order = 7)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "isDiscriminator", Order = 8)]
         public bool? IsDiscriminator { get; set; }
     }
 
@@ -1334,7 +1342,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     internal partial class Parameter : Value
     {
         /// <summary>suggested implementation location for this parameter</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "implementation", Order = 6)]
+        [YamlDotNet.Serialization.YamlMember(Alias = "implementation", Order = 7)]
         public ImplementationLocation? Implementation { get; set; }
     }
 
@@ -2065,6 +2073,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Path { get; set; }
 
+        /// <summary>the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "uri", Order = 16)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Uri { get; set; }
+
         /// <summary>the HTTP Method used to process this operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "method", Order = 1)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2131,6 +2144,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlDotNet.Serialization.YamlMember(Alias = "path", Order = 0)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Path { get; set; }
+
+        /// <summary>the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "uri", Order = 5)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Uri { get; set; }
 
         /// <summary>the HTTP Method used to process this operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "method", Order = 1)]

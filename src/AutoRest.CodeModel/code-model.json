@@ -968,6 +968,13 @@
           "description": "the wire name of this property",
           "type": "string"
         },
+        "flattenedNames": {
+          "description": "when a property is flattened, the property will be the set of serialized names to get to that target property.\n\nIf flattenedName is present, then this property is a flattened property.\n\n(ie, ['properties','name'] )",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isDiscriminator": {
           "description": "if this property is used as a discriminator for a polymorphic type",
           "type": "boolean"
@@ -2503,6 +2510,10 @@
           "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
           "type": "string"
         },
+        "uri": {
+          "description": "the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.",
+          "type": "string"
+        },
         "method": {
           "$ref": "#/definitions/HttpMethod",
           "description": "the HTTP Method used to process this operation"
@@ -2512,7 +2523,8 @@
       "additionalProperties": false,
       "required": [
         "method",
-        "path"
+        "path",
+        "uri"
       ],
       "allOf": [
         {
@@ -2541,7 +2553,8 @@
         "knownMediaType",
         "mediaTypes",
         "method",
-        "path"
+        "path",
+        "uri"
       ],
       "allOf": [
         {
@@ -2566,7 +2579,8 @@
         "knownMediaType",
         "mediaTypes",
         "method",
-        "path"
+        "path",
+        "uri"
       ],
       "allOf": [
         {
@@ -2592,7 +2606,8 @@
         "mediaTypes",
         "method",
         "multipart",
-        "path"
+        "path",
+        "uri"
       ],
       "allOf": [
         {
@@ -2626,6 +2641,10 @@
           "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
           "type": "string"
         },
+        "uri": {
+          "description": "the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.",
+          "type": "string"
+        },
         "method": {
           "$ref": "#/definitions/HttpMethod",
           "description": "the HTTP Method used to process this operation"
@@ -2638,7 +2657,8 @@
         "mediaTypes",
         "method",
         "multipart",
-        "path"
+        "path",
+        "uri"
       ]
     },
     "HttpHeader": {

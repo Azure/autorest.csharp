@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
                 .Select(p => (Parameter: p, ParameterCs: p.Language.CSharp, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
-                //TODO: Handle these schemas properly
+                //TODO: Handle these schemas properly, ConstantSchema and BinarySchema
                 .Where(p => !(p.Parameter.Schema is ConstantSchema) && !(p.Parameter.Schema is BinarySchema) && !((p.Parameter.Schema as ArraySchema)?.ElementType is ConstantSchema))
                 .ToArray();
 
@@ -156,10 +156,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var method = httpRequest?.Method.ToCoreRequestMethod() ?? RequestMethod.Get;
                     Line($"request.Method = {Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
-                    var path = (operation.Request.Protocol.Http as HttpRequest)?.Path ?? String.Empty;
-                    var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path)
+                    var uri = httpRequest?.Uri ?? String.Empty;
+                    var path = httpRequest?.Path ?? String.Empty;
+                    var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Uri)
                         .Select(p => (p.ParameterCs?.Name, SerializedName: p.Parameter.Language.Default.Name) as (string Name, string SerializedName)?).ToArray();
-                    var pathParts = GetPathParts(path, pathParameters);
+                    var pathParts = GetPathParts(uri + path, pathParameters);
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
