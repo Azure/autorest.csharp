@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "~4.0.52"
+  "@autorest/modelerfour": "4.0.52"
 
 pipeline:
   # modelerfour:

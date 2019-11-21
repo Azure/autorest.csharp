@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _ => null
         };
 
+        //TODO: This is written very... code smelly. Clean up.
         private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string path, (string Name, string SerializedName)?[] parameterInfos)
         {
             var index = 0;
@@ -96,23 +97,32 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        //TODO: Clean this up. It is written quickly and has a lot of parts that can be extracted from it.
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
             var operationCs = operation.Language.CSharp;
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
-            //TODO: Do not default to string type
-            var responseType = schemaResponse?.Schema.Language.CSharp?.Type ?? new CSharpType { FrameworkType = typeof(string) };
-            var responseTypeText = Type(responseType);
-            var returnType = new CSharpType
-            {
-                FrameworkType = typeof(ValueTask<>),
-                SubType1 = new CSharpType
+            var hasResponse = schemaResponse != null;
+            var responseType = schemaResponse?.Schema.Language.CSharp?.Type;
+            var returnType = hasResponse ?
+                new CSharpType
                 {
-                    FrameworkType = typeof(Response<>),
-                    SubType1 = responseType
-                }
-            };
+                    FrameworkType = typeof(ValueTask<>),
+                    SubType1 = new CSharpType
+                    {
+                        FrameworkType = typeof(Response<>),
+                        SubType1 = responseType
+                    }
+                } :
+                new CSharpType
+                {
+                    FrameworkType = typeof(ValueTask<>),
+                    SubType1 = new CSharpType
+                    {
+                        FrameworkType = typeof(Response)
+                    }
+                };
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
@@ -152,6 +162,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var pathParts = GetPathParts(path, pathParameters);
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
+                    //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                     var urlText = String.Join(String.Empty, pathParts.Select(p => p.IsLiteral ? p.Text : $"{{{p.Text}}}"));
                     Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
 
@@ -193,9 +204,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
                     Line("cancellationToken.ThrowIfCancellationRequested();");
 
-
                     //TODO: Do multiple status codes
-                    if (schemaResponse != null)
+                    if (hasResponse)
                     {
                         Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
 
@@ -204,22 +214,20 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         using (Switch("response.Status"))
                         {
-                            var statusCodes = (schemaResponse.Protocol.Http as HttpResponse)?.StatusCodes ?? Enumerable.Empty<StatusCodes>().ToList();
+                            var statusCodes = (schemaResponse!.Protocol.Http as HttpResponse)?.StatusCodes ?? Enumerable.Empty<StatusCodes>().ToList();
                             foreach (var statusCode in statusCodes)
                             {
                                 Line($"case {statusCode.GetEnumMemberValue()}:");
                             }
-                            //TODO: Do not default to string type
-                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText, responseType.Name ?? "[NO TYPE NAME]") ?? $"{Type(typeof(string))}.Empty"}, response);");
+                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", Type(responseType), responseType?.Name ?? "[NO TYPE NAME]")}, response);");
                             Line("default:");
                             //TODO: Handle actual exception responses
                             Line($"throw new {Type(typeof(Exception))}();");
                         }
                     }
-                    //TODO: Do not default to string type
                     else
                     {
-                        Line($"return {Type(typeof(Response))}.FromValue({Type(typeof(string))}.Empty, response);");
+                        Line("return response;");
                     }
                 }
 
