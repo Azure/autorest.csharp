@@ -14,9 +14,12 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
-            var writer = new CsProjWriter();
-            writer.WriteCsProj(configuration);
-            await autoRest.WriteFile($"{configuration.Title}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
+            if (configuration.IncludeCsProj)
+            {
+                var writer = new CsProjWriter();
+                writer.WriteCsProj(configuration);
+                await autoRest.WriteFile($"{configuration.Title}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
+            }
 
             var assetDirectory = Path.Join(Directory.GetCurrentDirectory(), "src/assets").Replace("\\", "/");
             foreach (var asset in Directory.GetFiles(assetDirectory, "*.cs", SearchOption.AllDirectories))

@@ -97,16 +97,11 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
         };
 
-        //public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
-        //{
-        //    var type = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
-        //    return schema is ObjectSchema ? $"{name}{(isNullable ? "?" : String.Empty)}.Serialize(writer);" : (TypeSerializers.ContainsKey(type) ? TypeSerializers[type](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
-        //}
-
         private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> SchemaSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
         {
             { typeof(ObjectSchema), (vn, sn, n, a, q) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer);" },
-            { typeof(SealedChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" }
+            { typeof(SealedChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
+            { typeof(ChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" }
         };
 
         public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
@@ -135,7 +130,8 @@ namespace AutoRest.CSharp.V3.Pipeline
         private static readonly Dictionary<Type, Func<string, string, string, string?>> SchemaDeserializers = new Dictionary<Type, Func<string, string, string, string?>>
         {
             { typeof(ObjectSchema), (n, tt, tn) => $"{tt}.Deserialize({n})" },
-            { typeof(SealedChoiceSchema), (n, tt, tn) => $"{n}.GetString().To{tn}()" }
+            { typeof(SealedChoiceSchema), (n, tt, tn) => $"{n}.GetString().To{tn}()" },
+            { typeof(ChoiceSchema), (n, tt, tn) => $"{n}.GetString()" }
         };
 
         public static string? ToDeserializeCall(this Schema schema, string name, string typeText, string typeName)

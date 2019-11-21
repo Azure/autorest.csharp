@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
+            //TODO: Redo this entire processing logic. It is quite complex.
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
             AddUniqueIdentifiers(allSchemas);
 
@@ -57,18 +58,12 @@ namespace AutoRest.CSharp.V3.Plugins
                         ApiVersion = apiVersion != null ? $"V{apiVersion}" : null
                     }
                 };
-                //var serverVariables = operationGroup.Operations.SelectMany(o => (o.Request.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>());
-                //foreach (var serverVariable in serverVariables)
-                //{
-                //    var serverVariableCs = serverVariable.Language.CSharp ??= new CSharpLanguage();
-                //    serverVariableCs.Type = AllSchemaTypes.String.ToFrameworkCSharpType();
-                //}
             }
 
             return true;
         }
 
-        // This unique identifier is because of https://github.com/Azure/autorest.modelerfour/issues/20
+        // This unique identifier to objectively compare schemas for processing.
         private static void AddUniqueIdentifiers(IEnumerable<Schema> schemas)
         {
             foreach (var (schema, index) in schemas.Select((s, i) => (Schema: s, Index: i)))

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (objectSchema, property) in propertyNodes)
             {
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
-                //TODO: Hack for https://github.com/Azure/autorest.modelerfour/issues/48
+                //TODO: Hack for https://github.com/Azure/autorest.csharp/issues/243
                 cs.Name = property.Language.Default.Name == "null" ? "NullProperty" : property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
                 cs.IsNullable = !(property.Required ?? false);
@@ -67,26 +67,8 @@ namespace AutoRest.CSharp.V3.Plugins
                     var operationCs = operation.Language.CSharp ??= new CSharpLanguage();
                     operationCs.Name = operation.Language.Default.Name.ToCleanName();
                     operationCs.Description = operation.Language.Default.Description;
-                    //var serverVariables = (operation.Request.Protocol.Http as HttpRequest)?.Servers.Where(s => s.Variables != null).SelectMany(s => s.Variables) ?? Enumerable.Empty<ServerVariable>();
-                    //foreach (var serverVariable in serverVariables)
-                    //{
-                    //    var serverVariableCs = serverVariable.Language.CSharp ??= new CSharpLanguage();
-                    //    serverVariableCs.Name = serverVariable.Language.Default.Name.ToVariableName();
-                    //    serverVariableCs.Description = serverVariable.Language.Default.Description;
-                    //}
                 }
             }
-
-            //var andNodes = codeModel.Schemas.Ands ?? Enumerable.Empty<AndSchema>();
-            //foreach (var andNode in andNodes)
-            //{
-            //    var cs = andNode.Language.CSharp ??= new CSharpLanguage();
-            //    var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs?.HasRequired ?? false);
-            //    if(hasRequiredObject)
-            //    {
-            //        cs.HasRequired = true;
-            //    }
-            //}
 
             return true;
         }

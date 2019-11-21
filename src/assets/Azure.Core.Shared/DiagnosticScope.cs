@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Azure.Core.Pipeline
 {
-    internal readonly struct DiagnosticScope : IDisposable
+    public readonly struct DiagnosticScope : IDisposable
     {
         private readonly DiagnosticActivity? _activity;
 

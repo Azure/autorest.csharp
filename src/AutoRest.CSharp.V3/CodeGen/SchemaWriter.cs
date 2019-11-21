@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        // CURRENTLY, INPUT SCHEMA
+        //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private bool WriteObjectSchema(ObjectSchema schema)
         {
             Header();
@@ -112,10 +112,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     var stringText = Type(typeof(string));
                     var nullableStringText = Type(typeof(string), true);
-                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
-                    {
-                        Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
-                    }
                     Line($"private readonly {Pair(nullableStringText, "_value")};");
                     Line();
 
@@ -126,12 +122,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line();
 
                     var csTypeText = Type(csType);
-                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
-                    {
-                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
-                    }
-                    Line();
-
                     var boolText = Type(typeof(bool));
                     var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");

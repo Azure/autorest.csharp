@@ -32,7 +32,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        private static string? ParameterMethodCall(ParameterLocation? location) => location switch
+        //TODO: Implement the rest of these
+        private static string? ParameterSetMethodCall(ParameterLocation? location) => location switch
         {
             ParameterLocation.Body => (string?)null,
             ParameterLocation.Cookie => null,
@@ -98,6 +99,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
             var operationCs = operation.Language.CSharp;
+            //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
             //TODO: Do not default to string type
             var responseType = schemaResponse?.Schema.Language.CSharp?.Type ?? new CSharpType { FrameworkType = typeof(string) };
@@ -113,21 +115,13 @@ namespace AutoRest.CSharp.V3.CodeGen
             };
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
-            //var httpServer = httpRequest?.Servers.FirstOrDefault();
-            //var serverParameters = (httpServer?.Variables ?? Enumerable.Empty<ServerVariable>()).ToArray();
-            //var serverParametersText = serverParameters.Select(sv => Pair(sv.Language.CSharp?.Type, sv.Language.CSharp?.Name));
-
-            var pipelineType = typeof(HttpPipeline);
-            var clientDiagnostics = new CSharpType { FrameworkType = pipelineType, Name = "ClientDiagnostics" };
-
-            var parameters = //(globalParameters ?? Enumerable.Empty<Parameter>())
-                (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
+            var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
                 .Select(p => (Parameter: p, ParameterCs: p.Language.CSharp, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
+                //TODO: Handle these schemas properly
                 .Where(p => !(p.Parameter.Schema is ConstantSchema) && !(p.Parameter.Schema is BinarySchema) && !((p.Parameter.Schema as ArraySchema)?.ElementType is ConstantSchema))
                 .ToArray();
 
-            var parametersText = new[] { /*Pair(clientDiagnostics, "clientDiagnostics"),*/ /*Pair(typeof(Uri), "uri"),*/ Pair(pipelineType, "pipeline") }
-                //.Concat(serverParametersText)
+            var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(parameters.OrderBy(p => (p.ParameterCs?.IsNullable ?? false) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, parameterCs, parameterSchemaCs, _) = p;
@@ -141,10 +135,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             var methodName = operationCs?.Name ?? "[NO NAME]";
             using (Method("public static async", Type(returnType), $"{methodName}Async", parametersText))
             {
-                Line($"//using {Type(clientDiagnostics)} scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
+                Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
                 //TODO: Implement attribute logic
-                Line("//scope.AddAttribute(\"key\", name)");
-                Line("//scope.Start()");
+                //Line("scope.AddAttribute(\"key\", name);");
+                Line("scope.Start();");
 
                 using (Try())
                 {
@@ -161,20 +155,21 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var urlText = String.Join(String.Empty, pathParts.Select(p => p.IsLiteral ? p.Text : $"{{{p.Text}}}"));
                     Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
 
-                    //TODO: prefilter parameters
-                    foreach (var (parameter, parameterCs, parameterSchemaCs, location) in parameters.OrderBy(p => p.Location))
+                    var settableParameters = parameters
+                        .OrderBy(p => p.Location)
+                        .Select(p => (p.ParameterCs?.Name, SerializedName: p.Parameter.Language.Default.Name, MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
+                        .Where(p => p.MethodCall != null)
+                        .ToArray();
+                    foreach (var (name, serializedName, methodCall, isNullable) in settableParameters)
                     {
-                        var methodCall = ParameterMethodCall(location);
-                        var isNullable = parameterCs?.IsNullable ?? false;
-                        var ifCondition = isNullable ? $"if ({parameterCs?.Name} != null) {{ " : String.Empty;
-                        var endPart = isNullable ? " }" : String.Empty;
-                        if (methodCall != null)
+                        using (isNullable ? If($"{name} != null") : new DisposeAction())
                         {
-                            Line($"{ifCondition}{methodCall}(\"{parameter.Language.Default.Name}\", {parameterCs?.Name}.ToString()!);{endPart}");
+                            Line($"{methodCall}(\"{serializedName}\", {name}.ToString()!);");
                         }
                     }
-                    var body = parameters.Select(p => p.Parameter).FirstOrDefault(p => (p.Protocol.Http as HttpParameter)?.In == ParameterLocation.Body);
-                    if (body != null)
+
+                    var bodyParameter = parameters.Select(p => p.Parameter).FirstOrDefault(p => (p.Protocol.Http as HttpParameter)?.In == ParameterLocation.Body);
+                    if (bodyParameter != null)
                     {
                         var bufferWriter = new CSharpType
                         {
@@ -187,12 +182,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
-                        var (parameter, parameterCs) = (body, body.Language.CSharp);
+                        var (parameter, parameterCs) = (bodyParameter, bodyParameter.Language.CSharp);
                         var name = parameterCs?.Name ?? "[NO NAME]";
                         var serializedName = parameter.Language.Default.Name;
                         var isNullable = parameterCs?.IsNullable ?? false;
                         Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
-                        //Line($"");
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
                     }
@@ -200,12 +194,27 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("cancellationToken.ThrowIfCancellationRequested();");
 
 
-                    //TODO: Do multiple response codes
+                    //TODO: Do multiple status codes
                     if (schemaResponse != null)
                     {
                         Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                        //TODO: Do not default to string type
-                        Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText, responseType.Name ?? "[NO TYPE NAME]") ?? $"{Type(typeof(string))}.Empty"}, response);");
+
+                        //TODO: Handle multiple exceptions
+                        //var schemaException = operation.Exceptions?.FirstOrDefault() as SchemaResponse;
+
+                        using (Switch("response.Status"))
+                        {
+                            var statusCodes = (schemaResponse.Protocol.Http as HttpResponse)?.StatusCodes ?? Enumerable.Empty<StatusCodes>().ToList();
+                            foreach (var statusCode in statusCodes)
+                            {
+                                Line($"case {statusCode.GetEnumMemberValue()}:");
+                            }
+                            //TODO: Do not default to string type
+                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", responseTypeText, responseType.Name ?? "[NO TYPE NAME]") ?? $"{Type(typeof(string))}.Empty"}, response);");
+                            Line("default:");
+                            //TODO: Handle actual exception responses
+                            Line($"throw new {Type(typeof(Exception))}();");
+                        }
                     }
                     //TODO: Do not default to string type
                     else
@@ -215,12 +224,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
 
                 var exceptionParameter = Pair(typeof(Exception), "e");
-                using (Catch())
+                using (Catch(exceptionParameter))
                 {
-                    Line("//scope.Failed(e);");
+                    Line("scope.Failed(e);");
                     Line("throw;");
                 }
-                //Line($"throw new {Type(typeof(Exception))}();");
             }
 
             if(includeBlankLine) Line();

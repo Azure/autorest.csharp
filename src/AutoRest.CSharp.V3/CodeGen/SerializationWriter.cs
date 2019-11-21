@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line(callText != null ? $"result.{name} = {callText};" : $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
-        // CURRENTLY, INPUT SCHEMA
+        //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private bool WriteObjectSerialization(ObjectSchema schema)
         {
             Header();
@@ -141,50 +141,21 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                             foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                             {
-                                //var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-                                //var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-
                                 var name = propertyCs?.Name ?? "[NO NAME]";
                                 var serializedName = property.Language.Default.Name;
-                                //var isNullable = propertyCs?.IsNullable ?? false;
-                                //var concreteType = propertySchemaCs?.ConcreteType;
                                 using (If($"property.NameEquals(\"{serializedName}\")"))
                                 {
                                     var propertyType = propertySchemaCs?.Type;
                                     var propertyTypeName = propertyType?.Name ?? "[NO TYPE NAME]";
                                     //TODO: Hack for property name/type name clashing
-                                    var propertyTypeText = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
+                                    var propertyTypeText = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
                                     ReadProperty(property.Schema, name, propertyTypeText, propertyTypeName);
                                     Line("continue;");
                                 }
                             }
                         }
                         Line("return result;");
-                        //using (If("includeName"))
-                        //{
-                        //    Line($"writer.WriteStartObject(\"{schema.Language.Default.Name}\");");
-                        //}
-                        //using (Else())
-                        //{
-                        //    Line("writer.WriteStartObject();");
-                        //}
-
-                        //var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                        //    .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                        //foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
-                        //{
-                        //    var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-                        //    var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-                        //    var serializedName = property.Language.Default.Name;
-                        //    var isNullable = propertyCs?.IsNullable ?? false;
-                        //    using (isNullable ? If($"{name} != null") : new DisposeAction())
-                        //    {
-                        //        WriteProperty(property.Schema, name, serializedName, isNullable);
-                        //    }
-                        //}
-
-                        //Line("writer.WriteEndObject();");
                     }
                 }
             }
@@ -236,44 +207,18 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Struct(null, "readonly partial", cs?.Name))
                 {
-                    //var stringText = Type(typeof(string));
-                    //var nullableStringText = Type(typeof(string), true);
-                    //foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
-                    //{
-                    //    Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
-                    //}
-                    //Line($"private readonly {Pair(nullableStringText, "_value")};");
-                    //Line();
+                    var stringText = Type(typeof(string));
+                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
+                    {
+                        Line($"private const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
+                    }
+                    Line();
 
-                    //using (Method("public", null, cs?.Name, Pair(stringText, "value")))
-                    //{
-                    //    Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
-                    //}
-                    //Line();
-
-                    //var csTypeText = Type(csType);
-                    //foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
-                    //{
-                    //    Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
-                    //}
-                    //Line();
-
-                    //var boolText = Type(typeof(bool));
-                    //var leftRightParams = new[] { Pair(csTypeText, "left"), Pair(csTypeText, "right") };
-                    //MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
-                    //MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
-                    //MethodExpression("public static implicit", null, $"operator {csTypeText}", new[] { Pair(stringText, "value") }, $"new {csTypeText}(value)");
-                    //Line();
-
-                    //var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
-                    //Line(editorBrowsableNever);
-                    //MethodExpression("public override", boolText, "Equals", new[] { Pair(typeof(object), "obj", true) }, $"obj is {csTypeText} other && Equals(other)");
-                    //MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
-                    //Line();
-
-                    //Line(editorBrowsableNever);
-                    //MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
-                    //MethodExpression("public override", nullableStringText, "ToString", null, "_value");
+                    var csTypeText = Type(csType);
+                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
+                    {
+                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
+                    }
                 }
             }
             return true;

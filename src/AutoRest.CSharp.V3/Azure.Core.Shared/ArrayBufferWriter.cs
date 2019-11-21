@@ -10,7 +10,7 @@ namespace Azure.Core
     /// <summary>
     /// Represents a heap-based, array-backed output sink into which <typeparam name="T"/> data can be written.
     /// </summary>
-    internal sealed class ArrayBufferWriter<T> : IBufferWriter<T>
+    public sealed class ArrayBufferWriter<T> : IBufferWriter<T>
     {
         private T[] _buffer;
         private const int DefaultInitialBufferSize = 256;

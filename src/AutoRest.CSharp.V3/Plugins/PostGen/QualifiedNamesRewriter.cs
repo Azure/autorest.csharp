@@ -13,8 +13,6 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
     {
         private readonly HashSet<string> _leftOfNames = new HashSet<string>();
         private readonly HashSet<string> _fullNames = new HashSet<string>();
-        //private readonly HashSet<QualifiedNameSyntax> _nodes =
-        //    new HashSet<QualifiedNameSyntax>(EqualityComparerFactory.Create<QualifiedNameSyntax>(qns => qns.ToString().GetHashCode(), (qns1, qns2) => qns1.ToString().Equals(qns2.ToString())));
 
         public string[] GetNames(SyntaxNode node)
         {
