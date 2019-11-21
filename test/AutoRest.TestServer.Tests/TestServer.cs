@@ -27,7 +27,7 @@ namespace AutoRest.TestServer.Tests
             var wiremockJar = Directory.GetFiles(wiremock, "*.jar").Single();
             var root = Path.Combine(nodeModules, "@autorest", "test-server");
 
-            var processStartInfo = new ProcessStartInfo("C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath\\java.exe", $"-jar {wiremockJar} --root-dir {root} --port 0");
+            var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port 0");
             // Use random port
             processStartInfo.Environment["PORT"] = "0";
             processStartInfo.RedirectStandardOutput = true;
