@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.V3", "src\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CodeModel", "src\AutoRest.CodeModel\AutoRest.CodeModel.csproj", "{FD9339E6-A987-4506-977F-C294A31D0D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{931B7AFD-D777-4990-A9DA-14A4C434021F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.TestServer.Tests", "test\AutoRest.TestServer.Tests\AutoRest.TestServer.Tests.csproj", "{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FD9339E6-A987-4506-977F-C294A31D0D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD9339E6-A987-4506-977F-C294A31D0D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD9339E6-A987-4506-977F-C294A31D0D53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{931B7AFD-D777-4990-A9DA-14A4C434021F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{931B7AFD-D777-4990-A9DA-14A4C434021F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{931B7AFD-D777-4990-A9DA-14A4C434021F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{931B7AFD-D777-4990-A9DA-14A4C434021F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
