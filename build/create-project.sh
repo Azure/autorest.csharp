@@ -35,7 +35,7 @@ EOL
 
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Newtonsoft.Json -v 11.0.2
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
-dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.72
+dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.74
 rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
