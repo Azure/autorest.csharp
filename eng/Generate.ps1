@@ -22,5 +22,5 @@ $paths = "$repoRoot\samples\Xkcd\readme.md", "$repoRoot\samples\Dns\readme.md"
 
 foreach ($path in $paths)
 {
-    Invoke-Block { autorest  --debug --verbose --input-file:$path }
+    Invoke-Block { autorest-beta --debug --verbose --input-file:$path }
 }
