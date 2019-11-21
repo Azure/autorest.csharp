@@ -4,7 +4,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Simplification;
 
 namespace AutoRest.CSharp.V3.Plugins.PostGen
 {
@@ -23,10 +22,5 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
         public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node) => base.VisitMemberAccessExpression(node.AddSimplifierAnnotation());
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node) => base.VisitIdentifierName(node.AddSimplifierAnnotation());
         public override SyntaxNode VisitGenericName(GenericNameSyntax node) => base.VisitGenericName(node.AddSimplifierAnnotation());
-    }
-
-    internal static class RoslynExtensions
-    {
-        public static T AddSimplifierAnnotation<T>(this T node) where T : SyntaxNode => node.WithAdditionalAnnotations(Simplifier.Annotation);
     }
 }

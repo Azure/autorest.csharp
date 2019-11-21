@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -13,7 +16,8 @@ namespace AutoRest.CodeModel
             string? line;
             while ((line = sr.ReadLine()) != null)
             {
-                if (removeEmptyLines && String.IsNullOrWhiteSpace(line)) continue;
+                if (removeEmptyLines && String.IsNullOrWhiteSpace(line))
+                    continue;
                 yield return line;
             }
         }

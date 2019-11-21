@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
             //    solution = solution.AddDocument(DocumentId.CreateNewId(projectId), file, SourceText.From(await files[file]));
             //}
 
-            // Simplify docs and add to 
+            // Simplify docs and add to
             foreach (var document in solution.Projects.SelectMany(p => p.Documents))
             {
                 var newRoot = await document.GetSyntaxRootAsync();
@@ -63,11 +63,11 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
                 newRoot = new SimplifyNamesRewriter().Visit(newRoot);
                 var doc = document.WithSyntaxRoot(newRoot);
 
-                // reduce the code 
+                // reduce the code
                 var text = Simplifier.ReduceAsync(doc)
                     .Result.GetTextAsync()
                     .Result.ToString()
-                    // get rid of any BOMs 
+                    // get rid of any BOMs
                     .Trim('\x00EF', '\x00BB', '\x00BF', '\uFEFF', '\u200B');
 
 

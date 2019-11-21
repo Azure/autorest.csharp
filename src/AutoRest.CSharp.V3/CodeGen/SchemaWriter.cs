@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
@@ -152,12 +155,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
                     MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
-                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new []{Pair(stringText, "value")}, $"new {csTypeText}(value)");
+                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new[]{Pair(stringText, "value")}, $"new {csTypeText}(value)");
                     Line();
 
                     var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
                     Line(editorBrowsableNever);
-                    MethodExpression("public override", boolText, "Equals", new []{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
+                    MethodExpression("public override", boolText, "Equals", new[]{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
                     MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
                     Line();
 

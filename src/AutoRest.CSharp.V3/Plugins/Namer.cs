@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.Pipeline;
@@ -30,7 +33,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Name = property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
                 cs.IsNullable = !(property.Required ?? false);
-                if(property.Required ?? false)
+                if (property.Required ?? false)
                 {
                     var objectCs = objectSchema.Language.CSharp ??= new CSharpLanguage();
                     objectCs.HasRequired = true;

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +15,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class TestServer: IDisposable
+    public class TestServer : IDisposable
     {
         private Process _process;
 
@@ -41,7 +44,7 @@ namespace AutoRest.TestServer.Tests
                 if (s?.StartsWith(portPhrase) == true)
                 {
                     Client = new HttpClient()
-                    { 
+                    {
                         BaseAddress = new Uri($"http://localhost:{s.Substring(portPhrase.Length).Trim()}")
                     };
                     return;
@@ -59,7 +62,7 @@ namespace AutoRest.TestServer.Tests
         {
             var assemblyFile = new DirectoryInfo(typeof(TestServer).Assembly.Location);
             var directory = assemblyFile.Parent;
-            
+
             do
             {
                 var testServerDirectory = Path.Combine(directory.FullName, "node_modules");

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -6,6 +9,7 @@ using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
+#pragma warning disable SA1402
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Pipeline.Generated
@@ -55,7 +59,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public string? ApiVersion { get; set; }
 
         [YamlIgnore]
-        public string FullName => new [] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
+        public string FullName => new[]{ Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 
     internal class CSharpType
@@ -139,7 +143,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
                 var keyword = GetKeywordMapping(frameworkType);
                 return keyword != null ? $"{keyword}{squareBrackets}" : null;
             }
-        } 
+        }
 
         //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/built-in-types-table
         private static string? GetKeywordMapping(Type? type) =>
