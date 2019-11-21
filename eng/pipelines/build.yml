@@ -20,7 +20,7 @@ jobs:
         inputs:
           version: "$(DotNetCoreSDKVersion)"
       - script: |
-          dotnet build AutoRest.CSharp.V3.sln -warnaserror
+          dotnet test AutoRest.CSharp.V3.sln -warnaserror
         displayName: "Build"
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
