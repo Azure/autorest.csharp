@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Plugins
     // ReSharper disable once IdentifierTypo
     internal class Namer : IPlugin
     {
-        public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             var schemaNodes = codeModel.Schemas.GetAllSchemaNodes();
             foreach (var schema in schemaNodes)
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.V3.Plugins
             //    }
             //}
 
-            return true;
+            return Task.FromResult(true);
         }
     }
 }

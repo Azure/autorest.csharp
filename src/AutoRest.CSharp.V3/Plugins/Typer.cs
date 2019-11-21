@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3.Plugins
     [PluginName("cs-typer")]
     internal class Typer : IPlugin
     {
-        public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
             AddUniqueIdentifiers(allSchemas);
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 }
             }
 
-            return true;
+            return Task.FromResult(true);
         }
 
         // This unique identifier is because of https://github.com/Azure/autorest.modelerfour/issues/20

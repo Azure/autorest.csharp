@@ -44,11 +44,11 @@ namespace AutoRest.CSharp.V3.JsonRpc
 
         public void Start() => _listener.GetAwaiter().GetResult();
 
-        private async Task<bool> Listen()
+        private Task<bool> Listen()
         {
             bool IsAlive() => !_cancellationToken.IsCancellationRequested;
             while (IsAlive() && _incomingMessageProcessor.ProcessStream()) { }
-            return false;
+            return Task.FromResult(false);
         }
 
         private void HandleIncomingRequest(IncomingRequest request)

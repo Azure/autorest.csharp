@@ -177,14 +177,14 @@ namespace AutoRest.TestServer.Tests
             }
 
             [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-            static extern IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
+            private static extern IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
 
             [DllImport("kernel32.dll")]
-            static extern bool SetInformationJobObject(IntPtr job, JobObjectInfoType infoType,
+            private static extern bool SetInformationJobObject(IntPtr job, JobObjectInfoType infoType,
                 IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);
 
             [DllImport("kernel32.dll", SetLastError = true)]
-            static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);
+            private static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);
 
             private enum JobObjectInfoType
             {
