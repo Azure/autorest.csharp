@@ -50,6 +50,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/integer"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -102,6 +103,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/long"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -154,6 +156,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/float"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -206,6 +209,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/double"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -258,6 +262,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/bool"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -310,6 +315,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/string"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -362,6 +368,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/date"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -414,6 +421,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/datetime"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -466,6 +474,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/datetimerfc1123"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -518,6 +527,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/duration"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -570,6 +580,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/byte"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);

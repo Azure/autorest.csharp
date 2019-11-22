@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task PutMbcs()
         {
-            await using var server = TestServerSession.Start(true);
+            await using var server = TestServerSession.Start("string_mbcs");
 
             var clientDiagnostics = new ClientDiagnostics(new DefaultAzureCredentialOptions());
             var pipeline = HttpPipelineBuilder.Build(new DefaultAzureCredentialOptions());

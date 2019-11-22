@@ -49,6 +49,7 @@ namespace BodyString.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/null"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteStringValue("");
@@ -101,6 +102,7 @@ namespace BodyString.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/empty"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteStringValue("");
@@ -153,6 +155,7 @@ namespace BodyString.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/mbcs"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -205,6 +208,7 @@ namespace BodyString.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/whitespace"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
@@ -311,6 +315,7 @@ namespace BodyString.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/base64UrlEncoding"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteBase64String("stringBody", stringBody);

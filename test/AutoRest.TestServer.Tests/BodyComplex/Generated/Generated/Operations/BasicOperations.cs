@@ -50,8 +50,8 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/basic/valid"));
-                request.Uri.AppendQuery("ApiVersion", "2016-02-29".ToString()!);
-                request.Headers.Add(HttpHeader.Common.JsonContentType);
+                request.Uri.AppendQuery("api-version", "2016-02-29".ToString()!);
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
