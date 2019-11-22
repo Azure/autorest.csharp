@@ -84,33 +84,34 @@ namespace AutoRest.CSharp.V3.Pipeline
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
-        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>>
         {
-            { typeof(bool), (vn, sn, n, a, q) => a ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(char), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
-            { typeof(int), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(double), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(string), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
-            { typeof(byte[]), (vn, sn, n, a, q) => null },
-            { typeof(DateTime), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
-            { typeof(TimeSpan), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
-            { typeof(Uri), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
+            { typeof(bool), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(char), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(int), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(double), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(string), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(byte[]), (vn, sn, n, a, q, ipn) => null },
+            { typeof(DateTime), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(TimeSpan), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(Uri), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
         };
 
-        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> SchemaSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>> SchemaSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>>
         {
-            { typeof(ObjectSchema), (vn, sn, n, a, q) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer);" },
-            { typeof(SealedChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
-            { typeof(ChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" }
+            { typeof(ObjectSchema), (vn, sn, n, a, q, ipn) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer, {(ipn ? "true" : "false")});" },
+            { typeof(SealedChoiceSchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
+            { typeof(ChoiceSchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" },
+            { typeof(ByteArraySchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteBase64StringValue({vn});" : $"writer.WriteBase64String({(q ? $"\"{sn}\"" : sn)}, {vn});" }
         };
 
-        public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
+        public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
         {
             var schemaType = schema.GetType();
             var frameworkType = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
             return SchemaSerializers.ContainsKey(schemaType)
-                ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName)
-                : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
+                ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName)
+                : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName) : null);
         }
 
         //TODO: Figure out the rest of these.
@@ -131,7 +132,8 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             { typeof(ObjectSchema), (n, tt, tn) => $"{tt}.Deserialize({n})" },
             { typeof(SealedChoiceSchema), (n, tt, tn) => $"{n}.GetString().To{tn}()" },
-            { typeof(ChoiceSchema), (n, tt, tn) => $"{n}.GetString()" }
+            { typeof(ChoiceSchema), (n, tt, tn) => $"new {tt}({n}.GetString())" },
+            { typeof(ByteArraySchema), (n, tt, tn) => $"{n}.GetBytesFromBase64()" }
         };
 
         public static string? ToDeserializeCall(this Schema schema, string name, string typeText, string typeName)
@@ -141,6 +143,12 @@ namespace AutoRest.CSharp.V3.Pipeline
             return SchemaDeserializers.ContainsKey(schemaType)
                 ? SchemaDeserializers[schemaType](name, typeText, typeName)
                 : (TypeDeserializers.ContainsKey(frameworkType) ? TypeDeserializers[frameworkType](name) : null);
+        }
+
+        public static string ToValueString(this ConstantSchema schema)
+        {
+            var value = schema.Value.Value;
+            return $"{((value is string || value == null) ? $"\"{value}\"" : value)}";
         }
     }
 }

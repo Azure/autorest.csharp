@@ -19,7 +19,7 @@ namespace BodyComplex.Models.V20160229
             }
             if (Field != null)
             {
-                // ByteArraySchema Field: Not Implemented
+                writer.WriteBase64String("field", Field);
             }
             writer.WriteEndObject();
         }
@@ -30,7 +30,7 @@ namespace BodyComplex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    // ByteArraySchema Field: Not Implemented
+                    result.Field = property.Value.GetBytesFromBase64();
                     continue;
                 }
             }

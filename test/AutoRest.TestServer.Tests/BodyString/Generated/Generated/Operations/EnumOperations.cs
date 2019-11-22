@@ -8,28 +8,28 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using BodyComplex.Models.V20160229;
+using BodyString.Models.V100;
 
-namespace BodyComplex.Operations.V20160229
+namespace BodyString.Operations.V100
 {
-    public static class DictionaryOperations
+    public static class EnumOperations
     {
-        public static async ValueTask<Response<DictionaryWrapper>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Colors>> GetNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.GetValid");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.GetNotExpandable");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/valid"));
+                request.Uri.Reset(new Uri($"{host}/string/enum/notExpandable"));
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DictionaryWrapper.Deserialize(document.RootElement), response);
+                        return Response.FromValue(new Colors(document.RootElement.GetString()), response);
                     default:
                         throw new Exception();
                 }
@@ -41,18 +41,18 @@ namespace BodyComplex.Operations.V20160229
             }
         }
 
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DictionaryWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.PutValid");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.PutNotExpandable");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/valid"));
+                request.Uri.Reset(new Uri($"{host}/string/enum/notExpandable"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                writer.WriteString("stringBody", stringBody.ToString());
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -66,22 +66,22 @@ namespace BodyComplex.Operations.V20160229
             }
         }
 
-        public static async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Colors>> GetReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.GetReferenced");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/empty"));
+                request.Uri.Reset(new Uri($"{host}/string/enum/Referenced"));
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DictionaryWrapper.Deserialize(document.RootElement), response);
+                        return Response.FromValue(new Colors(document.RootElement.GetString()), response);
                     default:
                         throw new Exception();
                 }
@@ -93,18 +93,18 @@ namespace BodyComplex.Operations.V20160229
             }
         }
 
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DictionaryWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.PutReferenced");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/empty"));
+                request.Uri.Reset(new Uri($"{host}/string/enum/Referenced"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                writer.WriteString("enumStringBody", enumStringBody.ToString());
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -118,22 +118,22 @@ namespace BodyComplex.Operations.V20160229
             }
         }
 
-        public static async ValueTask<Response<DictionaryWrapper>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.GetNull");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.GetReferencedConstant");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/null"));
+                request.Uri.Reset(new Uri($"{host}/string/enum/ReferencedConstant"));
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DictionaryWrapper.Deserialize(document.RootElement), response);
+                        return Response.FromValue(RefColorConstant.Deserialize(document.RootElement), response);
                     default:
                         throw new Exception();
                 }
@@ -145,25 +145,23 @@ namespace BodyComplex.Operations.V20160229
             }
         }
 
-        public static async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, RefColorConstant enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BodyComplex.Operations.V20160229.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("BodyString.Operations.V100.PutReferencedConstant");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/dictionary/typed/notprovided"));
+                request.Method = RequestMethod.Put;
+                request.Uri.Reset(new Uri($"{host}/string/enum/ReferencedConstant"));
+                var buffer = new ArrayBufferWriter<byte>();
+                await using var writer = new Utf8JsonWriter(buffer);
+                enumStringBody.Serialize(writer, false);
+                writer.Flush();
+                request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(DictionaryWrapper.Deserialize(document.RootElement), response);
-                    default:
-                        throw new Exception();
-                }
+                return response;
             }
             catch (Exception e)
             {

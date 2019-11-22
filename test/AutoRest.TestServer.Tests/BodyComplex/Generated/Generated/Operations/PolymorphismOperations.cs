@@ -52,7 +52,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/valid"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -185,7 +185,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/complicated"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -210,7 +210,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/missingdiscriminator"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -242,7 +242,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/missingrequired/invalid"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);

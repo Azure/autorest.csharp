@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 using Azure.Identity;
 using BodyComplex.Models.V20160229;
@@ -16,10 +17,28 @@ namespace AutoRest.TestServer.Tests
 
             var clientDiagnostics = new ClientDiagnostics(new DefaultAzureCredentialOptions());
             var pipeline = HttpPipelineBuilder.Build(new DefaultAzureCredentialOptions());
-            var result = BasicOperations.GetValidAsync(clientDiagnostics, pipeline, host: server.Client.BaseAddress.ToString().TrimEnd('/')).GetAwaiter().GetResult();
-            Assert.AreEqual(result.Value.Name, "abc");
-            Assert.AreEqual(result.Value.Id, 2);
-            Assert.AreEqual(result.Value.Color, CMYKColors.YELLOW);
+            var result = BasicOperations.GetValidAsync(clientDiagnostics, pipeline, server.Client.BaseAddress.ToString().TrimEnd('/')).GetAwaiter().GetResult();
+            Assert.AreEqual("abc", result.Value.Name);
+            Assert.AreEqual(2, result.Value.Id);
+            Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
+        }
+
+        [Test]
+        [Ignore("Needs media type, and still failing after that")]
+        public async Task PutValid()
+        {
+            await using var server = TestServerSession.Start(true);
+
+            var clientDiagnostics = new ClientDiagnostics(new DefaultAzureCredentialOptions());
+            var pipeline = HttpPipelineBuilder.Build(new DefaultAzureCredentialOptions());
+            var basic = new Basic
+            {
+                Name = "abc",
+                Id = 2,
+                Color = CMYKColors.YELLOW
+            };
+            var result = BasicOperations.PutValidAsync(clientDiagnostics, pipeline, basic, server.Client.BaseAddress.ToString().TrimEnd('/')).GetAwaiter().GetResult();
+            Assert.AreEqual(200, result.Status);
         }
     }
 }

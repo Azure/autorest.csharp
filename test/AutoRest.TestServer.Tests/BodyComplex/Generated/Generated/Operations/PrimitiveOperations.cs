@@ -52,7 +52,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/integer"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/long"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -156,7 +156,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/float"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -208,7 +208,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/double"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -260,7 +260,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/bool"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -312,7 +312,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/string"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -364,7 +364,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/date"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -416,7 +416,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/datetime"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -468,7 +468,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/datetimerfc1123"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -520,7 +520,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/duration"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -572,7 +572,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/primitive/byte"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);

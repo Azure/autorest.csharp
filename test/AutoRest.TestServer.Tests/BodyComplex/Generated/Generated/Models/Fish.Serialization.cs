@@ -28,7 +28,7 @@ namespace BodyComplex.Models.V20160229
                 writer.WriteStartArray("siblings");
                 foreach (var item in _siblings)
                 {
-                    item?.Serialize(writer);
+                    item?.Serialize(writer, true);
                 }
                 writer.WriteEndArray();
             }

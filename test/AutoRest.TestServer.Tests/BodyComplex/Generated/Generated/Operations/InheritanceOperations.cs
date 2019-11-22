@@ -52,7 +52,7 @@ namespace BodyComplex.Operations.V20160229
                 request.Uri.Reset(new Uri($"{host}/complex/inheritance/valid"));
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer);
+                complexBody.Serialize(writer, false);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
