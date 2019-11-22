@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "isNullable", Order = 7)]
         public bool? IsNullable { get; set; }
 
+        //TODO: This likely can be removed as it was originally for AndSchema logic.
         [YamlMember(Alias = "hasRequired", Order = 8)]
         public bool? HasRequired { get; set; }
 

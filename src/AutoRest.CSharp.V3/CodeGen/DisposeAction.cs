@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.V3.CodeGen
     {
         private readonly DisposeService<DisposeAction> _disposeService;
 
-        public DisposeAction(Action? action)
+        public DisposeAction(Action? action = null)
         {
             _disposeService = new DisposeService<DisposeAction>(this, cb => action?.Invoke());
         }

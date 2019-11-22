@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" Version=""1.0.0"" />
+    <PackageReference Include=""Azure.Identity"" Version=""1.0.0"" />
     <PackageReference Include=""NUnit"" Version=""3.12.0"" />
   </ItemGroup>
 

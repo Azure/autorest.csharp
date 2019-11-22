@@ -21,10 +21,11 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
+            //TODO: Redo this entire processing logic. It is quite complex.
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
             AddUniqueIdentifiers(allSchemas);
 
-            var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.GetFrameworkType())).ToArray();
+            var schemaNodes = allSchemas.Select(s => (Schema: s, FrameworkType: s.Type.ToFrameworkCSharpType())).ToArray();
             var frameworkNodes = schemaNodes.Where(sn => sn.FrameworkType != null);
             foreach (var (schema, frameworkType) in frameworkNodes)
             {
@@ -46,10 +47,27 @@ namespace AutoRest.CSharp.V3.Plugins
                 }
             }
 
+            var operationGroups = codeModel.OperationGroups;
+            foreach (var operationGroup in operationGroups)
+            {
+                var cs = operationGroup.Language.CSharp ??= new CSharpLanguage();
+                var apiVersion = operationGroup.Operations.Where(o => o.ApiVersions != null).SelectMany(o => o.ApiVersions).FirstOrDefault()?.Version.RemoveNonWordCharacters();
+                cs.Type = new CSharpType
+                {
+                    Name = operationGroup.Language.CSharp?.Name ?? operationGroup.Language.Default.Name,
+                    Namespace = new CSharpNamespace
+                    {
+                        Base = configuration.Namespace.NullIfEmpty(),
+                        Category = "Operations",
+                        ApiVersion = apiVersion != null ? $"V{apiVersion}" : null
+                    }
+                };
+            }
+
             return Task.FromResult(true);
         }
 
-        // This unique identifier is because of https://github.com/Azure/autorest.modelerfour/issues/20
+        // This unique identifier to objectively compare schemas for processing.
         private static void AddUniqueIdentifiers(IEnumerable<Schema> schemas)
         {
             foreach (var (schema, index) in schemas.Select((s, i) => (Schema: s, Index: i)))

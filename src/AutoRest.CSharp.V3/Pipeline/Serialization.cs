@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
@@ -43,6 +42,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             .Select(p => new KeyValuePair<string, PropertyInfo>(p.GetCustomAttributes<YamlMemberAttribute>(true).Select(yma => yma.Alias).FirstOrDefault() ?? String.Empty, p))
             .Where(pa => !pa.Key.IsNullOrEmpty()).ToDictionary(pa => pa.Key, pa => pa.Value);
 
+        //TODO: Handle custom type dictionaries.
         // Only allows deserialization of properties that are primitives or type Dictionary<object, object?>. Does not support properties that are custom classes.
         public static object? DeserializeDictionary(this PropertyInfo info, object value)
         {
@@ -66,13 +66,10 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             public bool Accepts(Type type) => type.IsEnum;
 
-            private static string? GetEnumValue(MemberInfo? memberInfo) =>
-                memberInfo?.GetCustomAttributes<EnumMemberAttribute>(true).Select(ema => ema.Value).FirstOrDefault();
-
             public object ReadYaml(IParser parser, Type type)
             {
                 var parsedEnum = parser.Consume<Scalar>();
-                var serializableValues = type.GetMembers().Select(m => (Value: GetEnumValue(m) ?? String.Empty, Info: m)).Where(pa => !pa.Value.IsNullOrEmpty()).ToDictionary(pa => pa.Value, pa => pa.Info);
+                var serializableValues = type.GetMembers().Select(m => (Value: m.GetEnumMemberValue() ?? String.Empty, Info: m)).Where(pa => !pa.Value.IsNullOrEmpty()).ToDictionary(pa => pa.Value, pa => pa.Info);
                 if (!serializableValues.ContainsKey(parsedEnum.Value))
                 {
                     throw new YamlException(parsedEnum.Start, parsedEnum.End, $"Value '{parsedEnum.Value}' not found in enum '{type.Name}'");
@@ -83,8 +80,7 @@ namespace AutoRest.CSharp.V3.Pipeline
 
             public void WriteYaml(IEmitter emitter, object? value, Type type)
             {
-                var enumMember = type.GetMember(value?.ToString() ?? String.Empty).FirstOrDefault();
-                var yamlValue = GetEnumValue(enumMember) ?? value?.ToString() ?? String.Empty;
+                var yamlValue = value.GetEnumMemberValue() ?? value?.ToString() ?? String.Empty;
                 emitter.Emit(new Scalar(yamlValue));
             }
         }
