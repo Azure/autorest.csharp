@@ -27,7 +27,8 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (objectSchema, property) in propertyNodes)
             {
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
-                cs.Name = property.Language.Default.Name.ToCleanName();
+                //TODO: Hack for https://github.com/Azure/autorest.csharp/issues/243
+                cs.Name = property.Language.Default.Name == "null" ? "NullProperty" : property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
                 cs.IsNullable = !(property.Required ?? false);
                 if(property.Required ?? false)
@@ -55,16 +56,19 @@ namespace AutoRest.CSharp.V3.Plugins
                 cs.Description = choiceValue.Language.Default.Description;
             }
 
-            //var andNodes = codeModel.Schemas.Ands ?? Enumerable.Empty<AndSchema>();
-            //foreach (var andNode in andNodes)
-            //{
-            //    var cs = andNode.Language.CSharp ??= new CSharpLanguage();
-            //    var hasRequiredObject = andNode.AllOf.OfType<ObjectSchema>().Select(os => os.Language.CSharp).Any(ocs => ocs?.HasRequired ?? false);
-            //    if(hasRequiredObject)
-            //    {
-            //        cs.HasRequired = true;
-            //    }
-            //}
+            var operationGroups = codeModel.OperationGroups;
+            foreach (var operationGroup in operationGroups)
+            {
+                var cs = operationGroup.Language.CSharp ??= new CSharpLanguage();
+                var name = operationGroup.Language.Default.Name.ToCleanName();
+                cs.Name = $"{(!name.IsNullOrEmpty() ? name : "All")}Operations";
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var operationCs = operation.Language.CSharp ??= new CSharpLanguage();
+                    operationCs.Name = operation.Language.Default.Name.ToCleanName();
+                    operationCs.Description = operation.Language.Default.Description;
+                }
+            }
 
             return true;
         }

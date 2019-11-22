@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Pipeline
 {
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                 .SelectMany(c => ((IEnumerable)c!).Cast<Schema>())
                 .ToArray();
 
-        // Cache the CSharpType so they become references in the YAML
+        // Cache the CSharpType so they become references in the YAML.
         private static readonly Dictionary<Type, CSharpType> CSharpTypes = new Dictionary<Type, CSharpType>
         {
             { typeof(bool), new CSharpType { FrameworkType = typeof(bool) } },
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), new CSharpType { FrameworkType = typeof(Uri) } }
         };
 
-        public static CSharpType? GetFrameworkType(this AllSchemaTypes schemaType) => schemaType switch
+        public static CSharpType? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Any => null,
             AllSchemaTypes.Array => null,
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Object => null,
             AllSchemaTypes.OdataQuery => CSharpTypes[typeof(string)],
             AllSchemaTypes.Or => null,
-            AllSchemaTypes.ParameterGroup => null,
+            AllSchemaTypes.Group => null,
             AllSchemaTypes.SealedChoice => null,
             AllSchemaTypes.String => CSharpTypes[typeof(string)],
             AllSchemaTypes.Unixtime => CSharpTypes[typeof(DateTime)],
@@ -68,5 +69,78 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Xor => null,
             _ => null
         };
+
+        public static RequestMethod? ToCoreRequestMethod(this HttpMethod method) => method switch
+        {
+            HttpMethod.Delete => (RequestMethod?)RequestMethod.Delete,
+            HttpMethod.Get => RequestMethod.Get,
+            HttpMethod.Head => RequestMethod.Head,
+            HttpMethod.Options => null,
+            HttpMethod.Patch => RequestMethod.Patch,
+            HttpMethod.Post => RequestMethod.Post,
+            HttpMethod.Put => RequestMethod.Put,
+            HttpMethod.Trace => null,
+            _ => null
+        };
+
+        //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
+        {
+            { typeof(bool), (vn, sn, n, a, q) => a ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(char), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(int), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(double), (vn, sn, n, a, q) => a ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
+            { typeof(string), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
+            { typeof(byte[]), (vn, sn, n, a, q) => null },
+            { typeof(DateTime), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(TimeSpan), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
+            { typeof(Uri), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
+        };
+
+        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, string?>> SchemaSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, string?>>
+        {
+            { typeof(ObjectSchema), (vn, sn, n, a, q) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer);" },
+            { typeof(SealedChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
+            { typeof(ChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" }
+        };
+
+        public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
+        {
+            var schemaType = schema.GetType();
+            var frameworkType = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            return SchemaSerializers.ContainsKey(schemaType)
+                ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName)
+                : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName) : null);
+        }
+
+        //TODO: Figure out the rest of these.
+        private static readonly Dictionary<Type, Func<string, string?>> TypeDeserializers = new Dictionary<Type, Func<string, string?>>
+        {
+            { typeof(bool), n => $"{n}.GetBoolean()" },
+            { typeof(char), n => $"{n}.GetString()" },
+            { typeof(int), n => $"{n}.GetInt32()" },
+            { typeof(double), n => $"{n}.GetDouble()" },
+            { typeof(string), n => $"{n}.GetString()" },
+            { typeof(byte[]), n => null },
+            { typeof(DateTime), n => $"{n}.GetDateTime()" },
+            { typeof(TimeSpan), n => null },
+            { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
+        };
+
+        private static readonly Dictionary<Type, Func<string, string, string, string?>> SchemaDeserializers = new Dictionary<Type, Func<string, string, string, string?>>
+        {
+            { typeof(ObjectSchema), (n, tt, tn) => $"{tt}.Deserialize({n})" },
+            { typeof(SealedChoiceSchema), (n, tt, tn) => $"{n}.GetString().To{tn}()" },
+            { typeof(ChoiceSchema), (n, tt, tn) => $"{n}.GetString()" }
+        };
+
+        public static string? ToDeserializeCall(this Schema schema, string name, string typeText, string typeName)
+        {
+            var schemaType = schema.GetType();
+            var frameworkType = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            return SchemaDeserializers.ContainsKey(schemaType)
+                ? SchemaDeserializers[schemaType](name, typeText, typeName)
+                : (TypeDeserializers.ContainsKey(frameworkType) ? TypeDeserializers[frameworkType](name) : null);
+        }
     }
 }

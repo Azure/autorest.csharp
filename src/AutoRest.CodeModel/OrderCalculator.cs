@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.CodeModel
 {
+    // This is used to put the correct order information into the model.
+    // Otherwise, you cannot compare the input YAML to an output YAML, because everything will be ordered entirely different.
     internal static class OrderCalculator
     {
         //https://github.com/Azure/perks/blob/8b2631ee1f4d0a66e2ab3ea24fb6e72e9bc372e7/codegen/yaml.ts#L8-L39

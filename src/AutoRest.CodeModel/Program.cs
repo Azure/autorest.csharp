@@ -53,9 +53,7 @@ namespace AutoRest.CodeModel
                 // Set properties to be single quoted
                 .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"")
                 // Cases CSharp properly
-                .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp")
-                // Fix for https://github.com/Azure/autorest.modelerfour/issues/37
-                .Replace("ConstantValue Value { get; set; } = new ConstantValue()", "string Value { get; set; } = string.Empty");
+                .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp");
 
             var fileWithOrdering = OrderCalculator.InsertOrderValues(cleanFile);
             var lines = fileWithOrdering.ToLines().ToArray();

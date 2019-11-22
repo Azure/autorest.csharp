@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private readonly List<string> _classFields = new List<string>();
         private CSharpNamespace? _currentNamespace;
 
+        //TODO: Make these into configuration values
         private readonly bool _useTypeShortNames = true;
         private readonly bool _useKeywords = true;
         private readonly string _definitionAccessDefault = "public";
@@ -81,14 +82,51 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public DisposeAction Try()
+        {
+            Line("try");
+            return Scope();
+        }
+
+        public DisposeAction Catch(params string[] parameters)
+        {
+            var parametersText = parameters.JoinIgnoreEmpty(", ");
+            Line($"catch{(parameters.Length > 0 ? $"({parametersText})" : String.Empty)}");
+            return Scope();
+        }
+
+        public DisposeAction If(string condition)
+        {
+            Line($"if({condition})");
+            return Scope();
+        }
+
+        public DisposeAction Else()
+        {
+            Line("else");
+            return Scope();
+        }
+
+        public DisposeAction ForEach(string statement)
+        {
+            Line($"foreach({statement})");
+            return Scope();
+        }
+
+        public DisposeAction Switch(string value)
+        {
+            Line($"switch({value})");
+            return Scope();
+        }
+
         public void MethodExpression(string? modifiers, string? returnType, string? name, string[]? parameters, string expression) =>
             Line($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
-        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable) =>
-            Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; set; }}");
+        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable, bool isRequired = false) =>
+            Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; {(isRequired ? "private " : String.Empty)}set; }}");
 
         public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name, bool? isNullable)
         {
@@ -97,6 +135,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
         }
 
+        //TODO: Determine implementation for documentation
         //public void DocSummary(string summary)
         //{
         //    Line("/// <summary>");
@@ -137,6 +176,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             if (_useTypeShortNames)
             {
+                //TODO: Does not recursively dig for types from subtypes
                 _usingNamespaces.Add(type?.KeywordName != null ? null : type?.Namespace);
                 _usingNamespaces.Add(type?.SubType1?.KeywordName != null ? null : type?.SubType1?.Namespace);
                 _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);

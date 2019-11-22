@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        // CURRENTLY, INPUT SCHEMA
+        //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private bool WriteObjectSchema(ObjectSchema schema)
         {
             Header();
@@ -39,8 +39,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", cs?.Name))
                 {
-                    var propertyInfos = (schema.Properties?.Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp))
-                                         ?? Enumerable.Empty<(Property, CSharpLanguage?, CSharpLanguage?)>()).ToArray();
+                    var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
+                        //TODO: Implement ConstantSchema
+                        .Where(p => !(p.Schema is ConstantSchema))
+                        .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                     foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
                         if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
@@ -48,11 +50,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                             LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
                             continue;
                         }
-                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable);
+                        AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable, property.Required ?? false);
                     }
 
                     if (propertyInfos.Any(pi => pi.Property.Required ?? false))
                     {
+                        Line();
+                        Line("#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
+                        using (Method("private", null, cs?.Name))
+                        {
+                        }
+                        Line("#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
+
                         Line();
                         var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
                             .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
@@ -86,31 +95,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     schema.Choices.Select(c => c.Language.CSharp).ForEachLast(ccs => EnumValue(ccs?.Name), ccs => EnumValue(ccs?.Name, false));
                 }
-                Line();
-                using (Class("internal", "static", $"{cs?.Name}Extensions"))
-                {
-                    var stringText = Type(typeof(string));
-                    var csTypeText = Type(cs?.Type);
-                    var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.Language.CSharp?.Name}", Serial: $"\"{c.Value}\"")).ToArray();
-                    var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
-
-                    var toSerialString = String.Join(Environment.NewLine, nameMap
-                        .Select(nm => $"{nm.Choice} => {nm.Serial},")
-                        .Append(exceptionEntry)
-                        .Append("}")
-                        .Prepend("{")
-                        .Prepend("value switch"));
-                    MethodExpression("public static", stringText, "ToSerialString", new[] { Pair($"this {csTypeText}", "value") }, toSerialString);
-                    Line();
-
-                    var toChoiceType = String.Join(Environment.NewLine, nameMap
-                        .Select(nm => $"{nm.Serial} => {nm.Choice},")
-                        .Append(exceptionEntry)
-                        .Append("}")
-                        .Prepend("{")
-                        .Prepend("value switch"));
-                    MethodExpression("public static", csTypeText, $"To{cs?.Name}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
-                }
             }
             return true;
         }
@@ -124,14 +108,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             using (Namespace(csType?.Namespace))
             {
                 var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
-                using (Struct(null, "readonly", cs?.Name, Type(implementType)))
+                using (Struct(null, "readonly partial", cs?.Name, Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
                     var nullableStringText = Type(typeof(string), true);
-                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
-                    {
-                        Line($"internal const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
-                    }
                     Line($"private readonly {Pair(nullableStringText, "_value")};");
                     Line();
 
@@ -142,12 +122,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line();
 
                     var csTypeText = Type(csType);
-                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
-                    {
-                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
-                    }
-                    Line();
-
                     var boolText = Type(typeof(bool));
                     var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
