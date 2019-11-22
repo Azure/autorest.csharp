@@ -5,7 +5,7 @@
 - CognitiveServices.TextAnalytics: TypeError: Invalid Version: 3.0-Preview.1 - https://github.com/Azure/autorest.modelerfour/issues/41
 - Dns: Working
 - KeyVault: 'Contacts': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
-- Media: The type or namespace name 'ResourceType' could not be found - https://github.com/Azure/autorest.csharp/issues/234
+- Media: Many errors
 - Redis: 'ScheduleEntries': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
 - Storage.Blobs: `blob` and `containerName` path parameters are not declared in their operations as parameters
 - Storage.DataLake: Working

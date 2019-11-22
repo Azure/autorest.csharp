@@ -1130,29 +1130,20 @@ schemas: !Schemas
               namespace: !CSharpNamespace
                 base: System.Collections.Generic
               name: IDictionary
-              subType1: !CSharpType
-                namespace: !CSharpNamespace
-                  base: System
-                name: String
+              subType1: *o0
               subType2: *o0
             isLazy: true
             concreteType: !CSharpType
               namespace: !CSharpNamespace
                 base: System.Collections.Generic
               name: Dictionary
-              subType1: !CSharpType
-                namespace: !CSharpNamespace
-                  base: System
-                name: String
+              subType1: *o0
               subType2: *o0
             inputType: !CSharpType
               namespace: !CSharpNamespace
                 base: System.Collections.Generic
               name: IDictionary
-              subType1: !CSharpType
-                namespace: !CSharpNamespace
-                  base: System
-                name: String
+              subType1: *o0
               subType2: *o0
         protocol: !Protocols {}
       serializedName: defaultProgram
@@ -1513,27 +1504,18 @@ schemas: !Schemas
                       namespace: !CSharpNamespace
                         base: System.Collections.Generic
                       name: IDictionary
-                      subType1: !CSharpType
-                        namespace: !CSharpNamespace
-                          base: System
-                        name: String
+                      subType1: *o0
                     isLazy: true
                     concreteType: !CSharpType
                       namespace: !CSharpNamespace
                         base: System.Collections.Generic
                       name: Dictionary
-                      subType1: !CSharpType
-                        namespace: !CSharpNamespace
-                          base: System
-                        name: String
+                      subType1: *o0
                     inputType: !CSharpType
                       namespace: !CSharpNamespace
                         base: System.Collections.Generic
                       name: IDictionary
-                      subType1: !CSharpType
-                        namespace: !CSharpNamespace
-                          base: System
-                        name: String
+                      subType1: *o0
                 protocol: !Protocols {}
               - *o11
               - *o12
@@ -2582,12 +2564,7 @@ schemas: !Schemas
               uid: schema:95
               name: MyKind
               description: MISSING·SCHEMA-DESCRIPTION-CHOICE
-              type: !CSharpType
-                namespace: !CSharpNamespace
-                  base: BodyComplex
-                  category: Models
-                  apiVersion: V20160229
-                name: MyKind
+              type: *o0
           protocol: !Protocols {}
         isDiscriminator: true
         required: true
@@ -2749,11 +2726,7 @@ schemas: !Schemas
         uid: schema:94
         name: ApiVersion20160229
         description: Api Version (2016-02-29)
-        type: !CSharpType
-          namespace: !CSharpNamespace
-            base: BodyComplex
-            category: Models
-          name: ApiVersion20160229
+        type: *o0
     protocol: !Protocols {}
   - *o43
   dates:
@@ -2902,7 +2875,7 @@ operationGroups:
             name: ApiVersion
             description: Api Version
           csharp: !CSharpLanguage
-            name: apiVersion
+            name: ApiVersion
             description: Api Version
             isNullable: false
         protocol: !Protocols

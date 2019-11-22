@@ -97,6 +97,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        private static string GetWritableName(Parameter parameter, CSharpLanguage? parameterCs) => parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameterCs?.Name ?? "[NO NAME]";
+
         //TODO: Clean this up. It is written quickly and has a lot of parts that can be extracted from it.
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
@@ -133,7 +135,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(parameters
-                    .Where(p => !(p.Parameter.Schema is ConstantSchema) && !((p.Parameter.Schema as ArraySchema)?.ElementType is ConstantSchema))
+                    .Where(p => !(p.Parameter.Schema is ConstantSchema))
                     .OrderBy(p => (p.ParameterCs?.IsNullable ?? false) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, parameterCs, parameterSchemaCs, _) = p;
@@ -161,7 +163,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var uri = httpRequest?.Uri ?? String.Empty;
                     var path = httpRequest?.Path ?? String.Empty;
                     var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Uri)
-                        .Select(p => (p.ParameterCs?.Name, SerializedName: p.Parameter.Language.Default.Name) as (string Name, string SerializedName)?).ToArray();
+                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: p.Parameter.Language.Default.Name) as (string Name, string SerializedName)?).ToArray();
                     var pathParts = GetPathParts(uri + path, pathParameters);
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
@@ -171,7 +173,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     var settableParameters = parameters
                         .OrderBy(p => p.Location)
-                        .Select(p => (p.ParameterCs?.Name, SerializedName: p.Parameter.Language.Default.Name, MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
+                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: p.Parameter.Language.Default.Name, MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
                         .Where(p => p.MethodCall != null)
                         .ToArray();
                     foreach (var (name, serializedName, methodCall, isNullable) in settableParameters)
@@ -198,10 +200,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
                         var (parameter, parameterCs) = (bodyParameter, bodyParameter.Language.CSharp);
-                        var name = parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameterCs?.Name ?? "[NO NAME]";
+                        var name = GetWritableName(parameter, parameterCs);
                         var serializedName = parameter.Language.Default.Name;
                         var isNullable = parameterCs?.IsNullable ?? false;
-                        Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
+                        Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable, includePropertyName: false) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
                     }

@@ -1,0 +1,1570 @@
+!CodeModel
+schemas: !Schemas
+  objects:
+  - &o8 !ObjectSchema
+    type: object
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    properties:
+    - !Property
+      schema: &o3 !NumberSchema
+        type: integer
+        precision: 32
+        language: !Languages
+          default: !Language
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          csharp: !CSharpLanguage
+            uid: schema:0
+            name: TypeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            type: !CSharpType
+              namespace: !CSharpNamespace
+                base: System
+              name: Int32
+        protocol: !Protocols {}
+      serializedName: status
+      language: !Languages
+        default: !Language
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        csharp: !CSharpLanguage
+          name: Status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          isNullable: true
+      protocol: !Protocols {}
+    - !Property
+      schema: &o4 !StringSchema
+        type: string
+        apiVersions:
+        - !ApiVersion
+          version: '1.0.0'
+        language: !Languages
+          default: !Language
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+          csharp: !CSharpLanguage
+            uid: schema:4
+            name: ErrorMessage
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            type: &o0 !CSharpType
+              namespace: !CSharpNamespace
+                base: System
+              name: String
+        protocol: !Protocols {}
+      serializedName: message
+      language: !Languages
+        default: !Language
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+        csharp: !CSharpLanguage
+          name: Message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          isNullable: true
+      protocol: !Protocols {}
+    language: !Languages
+      default: !Language
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+      csharp: !CSharpLanguage
+        uid: schema:1
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        type: !CSharpType
+          namespace: !CSharpNamespace
+            base: BodyString
+            category: Models
+            apiVersion: V100
+          name: Error
+    protocol: !Protocols {}
+  - &o15 !ObjectSchema
+    type: object
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    properties:
+    - !Property
+      schema: &o2 !ConstantSchema
+        type: constant
+        apiVersions:
+        - !ApiVersion
+          version: '1.0.0'
+        value: !ConstantValue
+          value: green-color
+          language: !Languages
+            default: !Language
+              name: ''
+              description: ''
+        valueType: &o1 !StringSchema
+          type: string
+          language: !Languages
+            default: !Language
+              name: string
+              description: simple string
+            csharp: !CSharpLanguage
+              uid: schema:3
+              name: String
+              description: simple string
+              type: *o0
+          protocol: !Protocols {}
+        language: !Languages
+          default: !Language
+            name: ColorConstant
+            description: Referenced Color Constant Description.
+          csharp: !CSharpLanguage
+            uid: schema:13
+            name: ColorConstant
+            description: Referenced Color Constant Description.
+            type: *o0
+        protocol: !Protocols {}
+      required: true
+      serializedName: ColorConstant
+      language: !Languages
+        default: !Language
+          name: ColorConstant
+          description: Referenced Color Constant Description.
+        csharp: !CSharpLanguage
+          name: ColorConstant
+          description: Referenced Color Constant Description.
+          isNullable: false
+      protocol: !Protocols {}
+    - !Property
+      schema: &o5 !StringSchema
+        type: string
+        apiVersions:
+        - !ApiVersion
+          version: '1.0.0'
+        language: !Languages
+          default: !Language
+            name: RefColorConstant-field1
+            description: Sample string.
+          csharp: !CSharpLanguage
+            uid: schema:5
+            name: RefColorConstantField1
+            description: Sample string.
+            type: *o0
+        protocol: !Protocols {}
+      required: false
+      serializedName: field1
+      language: !Languages
+        default: !Language
+          name: field1
+          description: Sample string.
+        csharp: !CSharpLanguage
+          name: Field1
+          description: Sample string.
+          isNullable: true
+      protocol: !Protocols {}
+    language: !Languages
+      default: !Language
+        name: RefColorConstant
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+      csharp: !CSharpLanguage
+        uid: schema:2
+        name: RefColorConstant
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        type: !CSharpType
+          namespace: !CSharpNamespace
+            base: BodyString
+            category: Models
+            apiVersion: V100
+          name: RefColorConstant
+        hasRequired: true
+    protocol: !Protocols {}
+  choices:
+  - &o14 !ChoiceSchema
+    choices:
+    - !ChoiceValue
+      value: red color
+      language: !Languages
+        default: !Language
+          name: red color
+          description: ''
+        csharp: !CSharpLanguage
+          name: RedColor
+          description: ''
+    - !ChoiceValue
+      value: green-color
+      language: !Languages
+        default: !Language
+          name: green-color
+          description: ''
+        csharp: !CSharpLanguage
+          name: GreenColor
+          description: ''
+    - !ChoiceValue
+      value: blue_color
+      language: !Languages
+        default: !Language
+          name: blue_color
+          description: ''
+        csharp: !CSharpLanguage
+          name: BlueColor
+          description: ''
+    type: choice
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    choiceType: *o1
+    language: !Languages
+      default: !Language
+        name: Colors
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+      csharp: !CSharpLanguage
+        uid: schema:8
+        name: Colors
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        type: !CSharpType
+          namespace: !CSharpNamespace
+            base: BodyString
+            category: Models
+            apiVersion: V100
+          name: Colors
+    protocol: !Protocols {}
+  byteArrays:
+  - &o13 !ByteArraySchema
+    type: byte-array
+    format: base64url
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    language: !Languages
+      default: !Language
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+      csharp: !CSharpLanguage
+        uid: schema:7
+        name: ByteArray
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+        type: !CSharpType
+          namespace: !CSharpNamespace
+            base: System
+          name: Byte[]
+    protocol: !Protocols {}
+  constants:
+  - &o7 !ConstantSchema
+    type: constant
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    value: !ConstantValue
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+    valueType: *o1
+    language: !Languages
+      default: !Language
+        name: Constant0
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+      csharp: !CSharpLanguage
+        uid: schema:9
+        name: Constant0
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        type: *o0
+    protocol: !Protocols {}
+  - &o9 !ConstantSchema
+    type: constant
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    value: !ConstantValue
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+    valueType: *o1
+    language: !Languages
+      default: !Language
+        name: Constant1
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+      csharp: !CSharpLanguage
+        uid: schema:10
+        name: Constant1
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        type: *o0
+    protocol: !Protocols {}
+  - &o10 !ConstantSchema
+    type: constant
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    value: !ConstantValue
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+    valueType: *o1
+    language: !Languages
+      default: !Language
+        name: Constant2
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+      csharp: !CSharpLanguage
+        uid: schema:11
+        name: Constant2
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        type: *o0
+    protocol: !Protocols {}
+  - &o11 !ConstantSchema
+    type: constant
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    value: !ConstantValue
+      value: '    Now is the time for all good men to come to the aid of their country    '
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+    valueType: *o1
+    language: !Languages
+      default: !Language
+        name: Constant3
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+      csharp: !CSharpLanguage
+        uid: schema:12
+        name: Constant3
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        type: *o0
+    protocol: !Protocols {}
+  - *o2
+  numbers:
+  - *o3
+  strings:
+  - *o1
+  - *o4
+  - *o5
+  - &o12 !StringSchema
+    type: string
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    language: !Languages
+      default: !Language
+        name: string
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+      csharp: !CSharpLanguage
+        uid: schema:6
+        name: String
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        type: *o0
+    protocol: !Protocols {}
+globalParameters:
+- &o6 !Parameter
+  schema: *o1
+  clientDefaultValue: http://localhost:3000
+  implementation: Client
+  required: true
+  language: !Languages
+    default: !Language
+      name: $host
+      description: server parameter
+    csharp: !CSharpLanguage
+      name: host
+      description: server parameter
+      isNullable: false
+  protocol: !Protocols
+    http: !HttpParameter
+      in: uri
+info: !Info
+  description: Test Infrastructure for AutoRest Swagger BAT
+  title: BodyString
+operationGroups:
+- !OperationGroup
+  $key: string
+  operations:
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o7
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getNull
+        description: Get null string value value
+      csharp: !CSharpLanguage
+        name: GetNull
+        description: Get null string value value
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o7
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: StringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/null
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putNull
+        description: Set string value null
+      csharp: !CSharpLanguage
+        name: PutNull
+        description: Set string value null
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o9
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getEmpty
+        description: Get empty string value value ''
+      csharp: !CSharpLanguage
+        name: GetEmpty
+        description: Get empty string value value ''
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o9
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: StringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/empty
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putEmpty
+        description: Set string value empty ''
+      csharp: !CSharpLanguage
+        name: PutEmpty
+        description: Set string value empty ''
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/mbcs
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o10
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getMbcs
+        description: Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+      csharp: !CSharpLanguage
+        name: GetMbcs
+        description: Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o10
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: StringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/mbcs
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putMbcs
+        description: Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+      csharp: !CSharpLanguage
+        name: PutMbcs
+        description: Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/whitespace
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o11
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getWhitespace
+        description: Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+      csharp: !CSharpLanguage
+        name: GetWhitespace
+        description: Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o11
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: StringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/whitespace
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putWhitespace
+        description: Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+      csharp: !CSharpLanguage
+        name: PutWhitespace
+        description: Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/notProvided
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o12
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getNotProvided
+        description: Get String value when no string value is sent in response payload
+      csharp: !CSharpLanguage
+        name: GetNotProvided
+        description: Get String value when no string value is sent in response payload
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/base64Encoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o13
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getBase64Encoded
+        description: Get value that is base64 encoded
+      csharp: !CSharpLanguage
+        name: GetBase64Encoded
+        description: Get value that is base64 encoded
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/base64UrlEncoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o13
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getBase64UrlEncoded
+        description: Get value that is base64url encoded
+      csharp: !CSharpLanguage
+        name: GetBase64UrlEncoded
+        description: Get value that is base64url encoded
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o13
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: stringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/base64UrlEncoding
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putBase64UrlEncoded
+        description: Put value that is base64url encoded
+      csharp: !CSharpLanguage
+        name: PutBase64UrlEncoded
+        description: Put value that is base64url encoded
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/nullBase64UrlEncoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o13
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getNullBase64UrlEncoded
+        description: Get null value that is expected to be base64url encoded
+      csharp: !CSharpLanguage
+        name: GetNullBase64UrlEncoded
+        description: Get null value that is expected to be base64url encoded
+    protocol: !Protocols {}
+  language: !Languages
+    default: !Language
+      name: string
+      description: ''
+    csharp: !CSharpLanguage
+      name: StringOperations
+      type: !CSharpType
+        namespace: !CSharpNamespace
+          base: BodyString
+          category: Operations
+          apiVersion: V100
+        name: StringOperations
+  protocol: !Protocols {}
+- !OperationGroup
+  $key: enum
+  operations:
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/enum/notExpandable
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o14
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getNotExpandable
+        description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+      csharp: !CSharpLanguage
+        name: GetNotExpandable
+        description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o14
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: stringBody
+        language: !Languages
+          default: !Language
+            name: stringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: stringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/enum/notExpandable
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putNotExpandable
+        description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+      csharp: !CSharpLanguage
+        name: PutNotExpandable
+        description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/enum/Referenced
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o14
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getReferenced
+        description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+      csharp: !CSharpLanguage
+        name: GetReferenced
+        description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o14
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: enumStringBody
+        language: !Languages
+          default: !Language
+            name: enumStringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: enumStringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/enum/Referenced
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putReferenced
+        description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+      csharp: !CSharpLanguage
+        name: PutReferenced
+        description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpRequest
+          path: /string/enum/ReferencedConstant
+          method: get
+          uri: '{$host}'
+    responses:
+    - !SchemaResponse
+      schema: *o15
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !Languages
+      default: !Language
+        name: getReferencedConstant
+        description: Get value 'green-color' from the constant.
+      csharp: !CSharpLanguage
+        name: GetReferencedConstant
+        description: Get value 'green-color' from the constant.
+    protocol: !Protocols {}
+  - !Operation
+    apiVersions:
+    - !ApiVersion
+      version: '1.0.0'
+    request: !Request
+      parameters:
+      - *o6
+      - !Parameter
+        schema: *o15
+        implementation: Method
+        required: true
+        extensions: !DictionaryOfAny
+          x-ms-requestBody-name: enumStringBody
+        language: !Languages
+          default: !Language
+            name: enumStringBody
+            description: ''
+          csharp: !CSharpLanguage
+            name: enumStringBody
+            description: ''
+            isNullable: false
+        protocol: !Protocols
+          http: !HttpParameter
+            in: body
+            style: json
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpWithBodyRequest
+          path: /string/enum/ReferencedConstant
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !Response
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: binary
+          mediaTypes: []
+          statusCodes:
+          - 200
+    exceptions:
+    - !SchemaResponse
+      schema: *o8
+      language: !Languages
+        default: !Language
+          name: ''
+          description: ''
+      protocol: !Protocols
+        http: !HttpResponse
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions: !DictionaryOfAny
+      x-ms-requestBody-index: 0
+    language: !Languages
+      default: !Language
+        name: putReferencedConstant
+        description: Sends value 'green-color' from a constant
+      csharp: !CSharpLanguage
+        name: PutReferencedConstant
+        description: Sends value 'green-color' from a constant
+    protocol: !Protocols {}
+  language: !Languages
+    default: !Language
+      name: enum
+      description: ''
+    csharp: !CSharpLanguage
+      name: EnumOperations
+      type: !CSharpType
+        namespace: !CSharpNamespace
+          base: BodyString
+          category: Operations
+          apiVersion: V100
+        name: EnumOperations
+  protocol: !Protocols {}
+language: !Languages
+  default: !Language
+    name: ''
+    description: ''
+protocol: !Protocols
+  http: !HttpModel {}

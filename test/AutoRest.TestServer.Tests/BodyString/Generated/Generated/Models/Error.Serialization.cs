@@ -3,44 +3,43 @@
 
 using System.Text.Json;
 
-namespace BodyComplex.Models.V20160229
+namespace BodyString.Models.V100
 {
-    public partial class MyBaseType
+    public partial class Error
     {
         internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
         {
             if (includeName)
             {
-                writer.WriteStartObject("MyBaseType");
+                writer.WriteStartObject("Error");
             }
             else
             {
                 writer.WriteStartObject();
             }
-            writer.WriteString("kind", Kind);
-            if (PropB1 != null)
+            if (Status != null)
             {
-                writer.WriteString("propB1", PropB1);
+                writer.WriteNumber("status", Status.Value);
             }
-            if (Helper != null)
+            if (Message != null)
             {
-                Helper?.Serialize(writer, true);
+                writer.WriteString("message", Message);
             }
             writer.WriteEndObject();
         }
-        internal static MyBaseType Deserialize(JsonElement element)
+        internal static Error Deserialize(JsonElement element)
         {
-            var result = new MyBaseType();
+            var result = new Error();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("propB1"))
+                if (property.NameEquals("status"))
                 {
-                    result.PropB1 = property.Value.GetString();
+                    result.Status = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("helper"))
+                if (property.NameEquals("message"))
                 {
-                    result.Helper = BodyComplex.Models.V20160229.MyBaseHelperType.Deserialize(property.Value);
+                    result.Message = property.Value.GetString();
                     continue;
                 }
             }

@@ -22,6 +22,7 @@ namespace AutoRest.CodeModel
                 .Replace("internal readonly struct DiagnosticScope", "public readonly struct DiagnosticScope");
             File.WriteAllText($"../../{Path}/DiagnosticScope.cs", cleanFile);
             File.WriteAllText($"../../AutoRest.CSharp.V3/Azure.Core.Shared/DiagnosticScope.cs", cleanFile);
+            File.WriteAllText($"../../../test/AutoRest.TestServer.Tests/Azure.Core.Shared/DiagnosticScope.cs", cleanFile);
 
             cachePath = "../cache/ArrayBufferWriter.cs";
             webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/core/Azure.Core/src/Shared/ArrayBufferWriter.cs", cachePath);
@@ -31,6 +32,7 @@ namespace AutoRest.CodeModel
                 .Replace("internal sealed class ArrayBufferWriter", "public sealed class ArrayBufferWriter");
             File.WriteAllText($"../../{Path}/ArrayBufferWriter.cs", cleanFile);
             File.WriteAllText($"../../AutoRest.CSharp.V3/Azure.Core.Shared/ArrayBufferWriter.cs", cleanFile);
+            File.WriteAllText($"../../../test/AutoRest.TestServer.Tests/Azure.Core.Shared/ArrayBufferWriter.cs", cleanFile);
 
             cachePath = "../cache/ClientDiagnostics.cs";
             webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/core/Azure.Core/src/Shared/ClientDiagnostics.cs", cachePath);
@@ -41,6 +43,7 @@ namespace AutoRest.CodeModel
                 .Replace("options.GetType().Namespace", "options.GetType().Namespace!");
             File.WriteAllText($"../../{Path}/ClientDiagnostics.cs", cleanFile);
             File.WriteAllText($"../../AutoRest.CSharp.V3/Azure.Core.Shared/ClientDiagnostics.cs", cleanFile);
+            File.WriteAllText($"../../../test/AutoRest.TestServer.Tests/Azure.Core.Shared/ClientDiagnostics.cs", cleanFile);
         }
     }
 }
