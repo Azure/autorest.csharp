@@ -18,15 +18,13 @@
     <ArtifactsDir Condition="'$(ArtifactsDir)' == ''">$(RepoRoot)artifacts\</ArtifactsDir>
     <ArtifactsObjDir>$(ArtifactsDir)obj\</ArtifactsObjDir>
     <ArtifactsBinDir>$(ArtifactsDir)bin\</ArtifactsBinDir>
-    <!-- Temporary doesn't include $(Configuration) so package.json can work -->
-    <ArtifactsPackagesDir>$(ArtifactsDir)packages\</ArtifactsPackagesDir>
+    <ArtifactsPackagesDir>$(ArtifactsDir)packages\$(Configuration)\</ArtifactsPackagesDir>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutDirName Condition="'$(OutDirName)' == ''">$(MSBuildProjectName)</OutDirName>
 
     <BaseOutputPath Condition="'$(BaseOutputPath)' == ''">$([System.IO.Path]::GetFullPath('$(ArtifactsBinDir)$(OutDirName)\'))</BaseOutputPath>
-    <!-- Temporary doesn't include $(Configuration) so package.json can work -->
-    <OutputPath Condition="'$(PlatformName)' == 'AnyCPU'">$(BaseOutputPath)\</OutputPath>
-    <OutputPath Condition="'$(PlatformName)' != 'AnyCPU'">$(BaseOutputPath)$(PlatformName)\</OutputPath>
+    <OutputPath Condition="'$(PlatformName)' == 'AnyCPU'">$(BaseOutputPath)$(Configuration)\</OutputPath>
+    <OutputPath Condition="'$(PlatformName)' != 'AnyCPU'">$(BaseOutputPath)$(PlatformName)\$(Configuration)\</OutputPath>
 
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''">$([System.IO.Path]::GetFullPath('$(ArtifactsObjDir)$(OutDirName)\'))</BaseIntermediateOutputPath>
     <IntermediateOutputPath Condition="'$(PlatformName)' == 'AnyCPU'">$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
