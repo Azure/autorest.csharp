@@ -25,14 +25,17 @@ namespace AutoRest.CSharp.V3.Plugins
                 await autoRest.WriteFile($"{configuration.Title}.csproj", writer.ToString() ?? String.Empty, "source-file-csharp");
             }
 
-            var assetDirectory = Path.Join(Directory.GetCurrentDirectory(), "src/assets").Replace("\\", "/");
-            foreach (var asset in Directory.GetFiles(assetDirectory, "*.cs", SearchOption.AllDirectories))
+            if (configuration.IncludeAssets)
             {
-                var directory = Path.GetDirectoryName(asset)?.Replace("\\", "/").Replace(assetDirectory, String.Empty);
-                var fileName = Path.GetFileName(asset);
-                var outputPath = Path.Join("Generated", directory, fileName).Replace("\\", "/");
-                var contents = File.ReadAllText(asset);
-                await autoRest.WriteFile(outputPath, contents, "source-file-csharp");
+                var assetDirectory = Path.Join(Directory.GetCurrentDirectory(), "src/assets").Replace("\\", "/");
+                foreach (var asset in Directory.GetFiles(assetDirectory, "*.cs", SearchOption.AllDirectories))
+                {
+                    var directory = Path.GetDirectoryName(asset)?.Replace("\\", "/").Replace(assetDirectory, String.Empty);
+                    var fileName = Path.GetFileName(asset);
+                    var outputPath = Path.Join("Generated", directory, fileName).Replace("\\", "/");
+                    var contents = File.ReadAllText(asset);
+                    await autoRest.WriteFile(outputPath, contents, "source-file-csharp");
+                }
             }
 
             return true;

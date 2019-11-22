@@ -26,7 +26,7 @@ namespace BodyComplex.Models.V20160229
                 writer.WriteStartArray("hates");
                 foreach (var item in _hates)
                 {
-                    item?.Serialize(writer);
+                    item?.Serialize(writer, true);
                 }
                 writer.WriteEndArray();
             }

@@ -3,34 +3,35 @@
 
 using System.Text.Json;
 
-namespace BodyComplex.Models.V20160229
+namespace BodyString.Models.V100
 {
-    public partial class Sawshark
+    public partial class RefColorConstant
     {
         internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
         {
             if (includeName)
             {
-                writer.WriteStartObject("sawshark");
+                writer.WriteStartObject("RefColorConstant");
             }
             else
             {
                 writer.WriteStartObject();
             }
-            if (Picture != null)
+            writer.WriteString("ColorConstant", ColorConstant);
+            if (Field1 != null)
             {
-                writer.WriteBase64String("picture", Picture);
+                writer.WriteString("field1", Field1);
             }
             writer.WriteEndObject();
         }
-        internal static Sawshark Deserialize(JsonElement element)
+        internal static RefColorConstant Deserialize(JsonElement element)
         {
-            var result = new Sawshark();
+            var result = new RefColorConstant();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("picture"))
+                if (property.NameEquals("field1"))
                 {
-                    result.Picture = property.Value.GetBytesFromBase64();
+                    result.Field1 = property.Value.GetString();
                     continue;
                 }
             }

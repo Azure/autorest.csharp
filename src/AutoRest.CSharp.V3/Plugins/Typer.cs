@@ -140,19 +140,27 @@ namespace AutoRest.CSharp.V3.Plugins
         }
 
         // TODO: Clean this type selection mechanism up
-        private static CSharpType CreateTypeInfo(Schema schema, Configuration configuration, bool useConcrete = false, bool useInput = false) =>
+        private static CSharpType? CreateTypeInfo(Schema schema, Configuration configuration, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
                 // TODO: Add 'when' condition here for output only types of each
                 ArraySchema arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
                 DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
+                ConstantSchema constantSchema => ConstantTypeInfo(constantSchema),
                 _ => DefaultTypeInfo(schema, configuration)
             };
+
+        // Need types to be cached for YAML references to work properly (needs same instance)
+        private static readonly Type ListType = typeof(List<>);
+        private static readonly Type IEnumerableType = typeof(IEnumerable<>);
+        private static readonly Type ICollectionType = typeof(ICollection<>);
+        private static readonly Type DictionaryType = typeof(Dictionary<string, object>);
+        private static readonly Type IDictionaryType = typeof(IDictionary<string, object>);
 
         private static CSharpType ArrayTypeInfo(ArraySchema schema, bool useConcrete = false, bool useInput = false) =>
             new CSharpType
             {
-                FrameworkType = useConcrete ? typeof(List<>) : (useInput ? typeof(IEnumerable<>) : typeof(ICollection<>)),
+                FrameworkType = useConcrete ? ListType : (useInput ? IEnumerableType : ICollectionType),
                 SubType1 = schema.ElementType.Language.CSharp?.Type
             };
 
@@ -160,10 +168,12 @@ namespace AutoRest.CSharp.V3.Plugins
             new CSharpType
             {
                 // The generic type arguments are not used when assigning them via FrameworkType.
-                FrameworkType = useConcrete ? typeof(Dictionary<string, object>) : typeof(IDictionary<string, object>),
-                SubType1 = new CSharpType { FrameworkType = typeof(string) },
+                FrameworkType = useConcrete ? DictionaryType : IDictionaryType,
+                SubType1 = AllSchemaTypes.String.ToFrameworkCSharpType(),
                 SubType2 = schema.ElementType.Language.CSharp?.Type
             };
+
+        private static CSharpType ConstantTypeInfo(ConstantSchema schema) => schema.ValueType.Language.CSharp?.Type ?? AllSchemaTypes.String.ToFrameworkCSharpType()!;
 
         private static CSharpType DefaultTypeInfo(Schema schema, Configuration configuration)
         {

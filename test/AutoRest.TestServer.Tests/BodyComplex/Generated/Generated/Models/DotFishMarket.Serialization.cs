@@ -19,27 +19,27 @@ namespace BodyComplex.Models.V20160229
             }
             if (SampleSalmon != null)
             {
-                SampleSalmon?.Serialize(writer);
+                SampleSalmon?.Serialize(writer, true);
             }
             if (_salmons != null)
             {
                 writer.WriteStartArray("salmons");
                 foreach (var item in _salmons)
                 {
-                    item?.Serialize(writer);
+                    item?.Serialize(writer, true);
                 }
                 writer.WriteEndArray();
             }
             if (SampleFish != null)
             {
-                SampleFish?.Serialize(writer);
+                SampleFish?.Serialize(writer, true);
             }
             if (_fishes != null)
             {
                 writer.WriteStartArray("fishes");
                 foreach (var item in _fishes)
                 {
-                    item?.Serialize(writer);
+                    item?.Serialize(writer, true);
                 }
                 writer.WriteEndArray();
             }
