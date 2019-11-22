@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 using Azure.Identity;
-using BodyComplex.Models.V20160229;
-using BodyComplex.Operations.V20160229;
+using body_complex.Models.V20160229;
+using body_complex.Operations.V20160229;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -15,9 +15,9 @@ namespace AutoRest.TestServer.Tests
         {
             await using var server = TestServerSession.Start("complex_basic_valid");
 
-            var clientDiagnostics = new ClientDiagnostics(new DefaultAzureCredentialOptions());
-            var pipeline = HttpPipelineBuilder.Build(new DefaultAzureCredentialOptions());
-            var result = BasicOperations.GetValidAsync(clientDiagnostics, pipeline, server.Client.BaseAddress.ToString().TrimEnd('/')).GetAwaiter().GetResult();
+            var clientDiagnostics = new ClientDiagnostics(new TestOptions());
+            var pipeline = HttpPipelineBuilder.Build(new TestOptions());
+            var result = BasicOperations.GetValidAsync(clientDiagnostics, pipeline, server.Host).GetAwaiter().GetResult();
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
             Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
@@ -29,15 +29,15 @@ namespace AutoRest.TestServer.Tests
         {
             await using var server = TestServerSession.Start(true);
 
-            var clientDiagnostics = new ClientDiagnostics(new DefaultAzureCredentialOptions());
-            var pipeline = HttpPipelineBuilder.Build(new DefaultAzureCredentialOptions());
+            var clientDiagnostics = new ClientDiagnostics(new TestOptions());
+            var pipeline = HttpPipelineBuilder.Build(new TestOptions());
             var basic = new Basic
             {
                 Name = "abc",
                 Id = 2,
                 Color = CMYKColors.YELLOW
             };
-            var result = BasicOperations.PutValidAsync(clientDiagnostics, pipeline, basic, server.Client.BaseAddress.ToString().TrimEnd('/')).GetAwaiter().GetResult();
+            var result = BasicOperations.PutValidAsync(clientDiagnostics, pipeline, basic, server.Host).GetAwaiter().GetResult();
             Assert.AreEqual(200, result.Status);
         }
     }

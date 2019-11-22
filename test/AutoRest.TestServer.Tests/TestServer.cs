@@ -20,6 +20,7 @@ namespace AutoRest.TestServer.Tests
         private Process _process;
 
         public HttpClient Client { get; private set; }
+        public string Host { get; private set; }
 
 
         public void StartProcess()
@@ -43,9 +44,10 @@ namespace AutoRest.TestServer.Tests
                 var s = _process.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) == true)
                 {
+                    Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
                     Client = new HttpClient()
                     {
-                        BaseAddress = new Uri($"http://localhost:{s.Substring(portPhrase.Length).Trim()}")
+                        BaseAddress = new Uri(Host)
                     };
                     return;
                 }
