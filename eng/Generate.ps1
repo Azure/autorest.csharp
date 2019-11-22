@@ -22,5 +22,5 @@ $paths = "$repoRoot\samples\Xkcd\readme.md", "$repoRoot\samples\Dns\readme.md"
 
 foreach ($path in $paths)
 {
-    Invoke-Block { npx autorest-beta --version=3.0.6122 --debug --verbose $path }
+    Invoke-Block { npx autorest-beta --debug --verbose $path }
 }
