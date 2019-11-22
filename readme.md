@@ -5,6 +5,7 @@
 ```yaml
 use-extension:
   "@autorest/modelerfour": "4.1.58"
+include-csproj: true
 
 pipeline:
   # serialize-tester:
@@ -31,13 +32,17 @@ pipeline:
   cs-asseter/emitter:
     input: cs-asseter
     scope: output-scope
+
+output-scope:
+  output-artifact: source-file-csharp
+```
+
+```yaml $(include-csproj)
+pipeline:
   cs-asseter/emitter/command:
     input:
     - cs-modeler/emitter
     - cs-operator/emitter
     - cs-asseter/emitter
     run: dotnet build $(title).csproj --verbosity quiet /nologo
-
-output-scope:
-  output-artifact: source-file-csharp
 ```
