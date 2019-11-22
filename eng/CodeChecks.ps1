@@ -10,12 +10,7 @@ param (
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
 
-$root = "$PSScriptRoot/../sdk"
-if ($ServiceDirectory) {
-    $root += '/' + $ServiceDirectory
-}
-
-$repoRoot = Resolve-Path "$root"
+$repoRoot = Resolve-Path "$PSScriptRoot/.."
 
 [string[]] $errors = @()
 
