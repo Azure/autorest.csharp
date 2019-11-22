@@ -28,7 +28,9 @@ jobs:
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          DOTNET_MULTILEVEL_LOOKUP: 0      
+          DOTNET_MULTILEVEL_LOOKUP: 0
+      - pwsh: .\eng\CodeChecks.ps1
+        displayName: "Check if code is up-to-date"
       - script: |
           dotnet test AutoRest.CSharp.V3.sln
         displayName: "Test"
@@ -36,8 +38,3 @@ jobs:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
-      - script: |
-          npm install -g @autorest/autorest
-        displayName: "Install autorest-beta"
-      - pwsh: eng\Generate.ps1
-        displayName: "Run autorest"

@@ -358,5 +358,4 @@ samples/**/*.cs
 samples/**/*.txt
 samples/**/*.csproj
 samples/**/*.sln
-test/**/Generated/**/*.cs
-test/**/Generated/**/*.yaml
+test/**/*.yaml

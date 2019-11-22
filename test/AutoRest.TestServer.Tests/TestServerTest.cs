@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         {
             await using var session = TestServerSession.Start();
 
-            var response = await session.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
+            var response = await session.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();
 
             var coverage = await session.Server.GetUnmatchedRequests();
@@ -34,7 +34,7 @@ namespace AutoRest.TestServer.Tests
         {
             var server = TestServerSession.Start();
 
-            await server.Client.PutAsync("/string/nullaa", new ByteArrayContent(Array.Empty<byte>()));
+            await server.Server.Client.PutAsync("/string/nullaa", new ByteArrayContent(Array.Empty<byte>()));
 
             Assert.ThrowsAsync<InvalidOperationException>(async () => await server.DisposeAsync());
         }
@@ -44,7 +44,7 @@ namespace AutoRest.TestServer.Tests
         {
             var server = TestServerSession.Start("string_empty");
 
-            await server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
+            await server.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
 
             Assert.ThrowsAsync<InvalidOperationException>(async () => await server.DisposeAsync());
         }
@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests
         {
             await using var server = TestServerSession.Start("string_null");
 
-            var response = await server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
+            var response = await server.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();
         }
     }

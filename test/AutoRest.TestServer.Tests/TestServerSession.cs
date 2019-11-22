@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
         private readonly string[] _expectedCoverage;
 
         public TestServer Server { get; private set; }
-        public HttpClient Client => Server.Client;
+        public string Host => Server.Host;
 
         private TestServerSession(TestServer server, bool allowUnmatched, string[] expectedCoverage)
         {
