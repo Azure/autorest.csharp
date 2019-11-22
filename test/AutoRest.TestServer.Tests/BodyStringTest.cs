@@ -63,5 +63,33 @@ namespace AutoRest.TestServer.Tests
             var result = StringOperations.PutEmptyAsync(ClientDiagnostics, Pipeline, server.Host).GetAwaiter().GetResult();
             Assert.AreEqual(200, result.Status);
         }
+
+        [Test]
+        public async Task GetWhitespace()
+        {
+            await using var server = TestServerSession.Start("string_whitespace");
+
+            var result = StringOperations.GetWhitespaceAsync(ClientDiagnostics, Pipeline, server.Host).GetAwaiter().GetResult();
+            Assert.AreEqual("    Now is the time for all good men to come to the aid of their country    ", result.Value);
+        }
+
+        [Test]
+        public async Task PutWhitespace()
+        {
+            await using var server = TestServerSession.Start("string_whitespace");
+
+            var result = StringOperations.PutWhitespaceAsync(ClientDiagnostics, Pipeline, server.Host).GetAwaiter().GetResult();
+            Assert.AreEqual(200, result.Status);
+        }
+
+        [Test]
+        [Ignore("Deserializer fails")]
+        public async Task GetNotProvided()
+        {
+            await using var server = TestServerSession.Start("string_notprovided");
+
+            var result = StringOperations.GetNotProvidedAsync(ClientDiagnostics, Pipeline, server.Host).GetAwaiter().GetResult();
+            Assert.AreEqual("", result.Value);
+        }
     }
 }
