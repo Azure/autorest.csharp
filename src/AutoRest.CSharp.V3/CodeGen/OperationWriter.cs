@@ -102,6 +102,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static string GetWritableName(Parameter parameter, CSharpLanguage? parameterCs) => parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameterCs?.Name ?? "[NO NAME]";
 
+        private static string GetSerializedName(Parameter parameter) => parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name;
+
         //TODO: Clean this up. It is written quickly and has a lot of parts that can be extracted from it.
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
@@ -163,20 +165,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var method = httpRequest?.Method.ToCoreRequestMethod() ?? RequestMethod.Get;
                     Line($"request.Method = {Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
+                    //TODO: Redesign this since uri is now a separate value
                     var uri = httpRequest?.Uri ?? String.Empty;
                     var path = httpRequest?.Path ?? String.Empty;
                     var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Uri)
-                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: p.Parameter.Language.Default.Name) as (string Name, string SerializedName)?).ToArray();
+                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: GetSerializedName(p.Parameter)) as (string Name, string SerializedName)?).ToArray();
                     var pathParts = GetPathParts(uri + path, pathParameters);
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
+                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
                     var urlText = String.Join(String.Empty, pathParts.Select(p => p.IsLiteral ? p.Text : $"{{{p.Text}}}"));
                     Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
 
                     var settableParameters = parameters
                         .OrderBy(p => p.Location)
-                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: p.Parameter.Language.Default.Name, MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
+                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: GetSerializedName(p.Parameter), MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
                         .Where(p => p.MethodCall != null)
                         .ToArray();
                     foreach (var (name, serializedName, methodCall, isNullable) in settableParameters)
@@ -186,6 +190,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                             //TODO: Determine conditions in which to ToString() or not
                             Line($"{methodCall}(\"{serializedName}\", {name}.ToString()!);");
                         }
+                    }
+
+                    var mediaTypes = (httpRequest as HttpWithBodyRequest)?.MediaTypes;
+                    if (mediaTypes?.Any() ?? false)
+                    {
+                        var methodCall = ParameterSetMethodCall(ParameterLocation.Header);
+                        Line($"{methodCall}(\"Content-Type\", \"{mediaTypes.First()}\");");
                     }
 
                     var bodyParameter = parameters.Select(p => p.Parameter).FirstOrDefault(p => (p.Protocol.Http as HttpParameter)?.In == ParameterLocation.Body);

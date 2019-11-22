@@ -22,16 +22,15 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        [Ignore("Needs media type, and still failing after that")]
         public async Task PutValid()
         {
-            await using var server = TestServerSession.Start(true);
+            await using var server = TestServerSession.Start("complex_basic_valid");
 
             var basic = new Basic
             {
                 Name = "abc",
                 Id = 2,
-                Color = CMYKColors.YELLOW
+                Color = CMYKColors.Magenta
             };
             var result = BasicOperations.PutValidAsync(ClientDiagnostics, Pipeline, basic, server.Host).GetAwaiter().GetResult();
             Assert.AreEqual(200, result.Status);

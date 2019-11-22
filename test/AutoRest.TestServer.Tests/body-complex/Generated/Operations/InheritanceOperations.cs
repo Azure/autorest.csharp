@@ -50,6 +50,7 @@ namespace body_complex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/inheritance/valid"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);

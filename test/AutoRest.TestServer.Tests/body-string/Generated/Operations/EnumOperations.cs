@@ -50,6 +50,7 @@ namespace body_string.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/enum/notExpandable"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteString("stringBody", stringBody.ToString());
@@ -102,6 +103,7 @@ namespace body_string.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/enum/Referenced"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 writer.WriteString("enumStringBody", enumStringBody.ToString());
@@ -154,6 +156,7 @@ namespace body_string.Operations.V100
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/string/enum/ReferencedConstant"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 enumStringBody.Serialize(writer, false);
