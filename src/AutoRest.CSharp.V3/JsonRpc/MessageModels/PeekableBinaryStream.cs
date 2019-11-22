@@ -1,11 +1,14 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
     [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal class PeekableBinaryStream : IDisposable

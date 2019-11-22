@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -7,7 +10,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc.Messaging;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc
+namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
     internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
 
@@ -41,11 +44,11 @@ namespace AutoRest.CSharp.V3.JsonRpc
 
         public void Start() => _listener.GetAwaiter().GetResult();
 
-        private async Task<bool> Listen()
+        private Task<bool> Listen()
         {
             bool IsAlive() => !_cancellationToken.IsCancellationRequested;
             while (IsAlive() && _incomingMessageProcessor.ProcessStream()) { }
-            return false;
+            return Task.FromResult(false);
         }
 
         private void HandleIncomingRequest(IncomingRequest request)
