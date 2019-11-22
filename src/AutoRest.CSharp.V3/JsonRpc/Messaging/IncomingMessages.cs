@@ -1,6 +1,9 @@
-﻿using System;
-using System.Text.Json;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.Threading;
+using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
@@ -23,20 +26,5 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
             tokenSource.Cancel();
             return String.Empty;
         }
-    }
-
-    internal class IncomingRequest
-    {
-        public string JsonRpc { get; } = "2.0";
-        public string? Method { get; set; }
-        public JsonElement? Params { get; set; }
-        public string? Id { get; set; }
-    }
-
-    internal class IncomingResponse
-    {
-        public string JsonRpc { get; } = "2.0";
-        public string? Result { get; set; }
-        public string? Id { get; set; }
     }
 }

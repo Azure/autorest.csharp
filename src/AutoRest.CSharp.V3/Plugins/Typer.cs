@@ -1,10 +1,14 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.JsonRpc;
+using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
@@ -15,7 +19,7 @@ namespace AutoRest.CSharp.V3.Plugins
     [PluginName("cs-typer")]
     internal class Typer : IPlugin
     {
-        public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             //TODO: Redo this entire processing logic. It is quite complex.
             var allSchemas = codeModel.Schemas.GetAllSchemaNodes();
@@ -60,7 +64,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 };
             }
 
-            return true;
+            return Task.FromResult(true);
         }
 
         // This unique identifier to objectively compare schemas for processing.

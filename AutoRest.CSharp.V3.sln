@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.V3", "src\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CodeModel", "src\AutoRest.CodeModel\AutoRest.CodeModel.csproj", "{FD9339E6-A987-4506-977F-C294A31D0D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.TestServer.Tests", "test\AutoRest.TestServer.Tests\AutoRest.TestServer.Tests.csproj", "{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TestServer.Tests", "test\AutoRest.TestServer.Tests\AutoRest.TestServer.Tests.csproj", "{C0EC4E09-EB17-4C6B-AB31-F14E5C834D7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37E859E7-8CCE-426B-8232-35B2C1503230}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CoreShared", "src\AutoRest.CoreShared\AutoRest.CoreShared.csproj", "{9DB44A43-CFD6-4868-844F-70A25834AE3D}"
 EndProject
 Global

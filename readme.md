@@ -5,7 +5,6 @@
 ```yaml
 use-extension:
   "@autorest/modelerfour": "4.1.60"
-include-csproj: true
 
 pipeline:
   # serialize-tester:

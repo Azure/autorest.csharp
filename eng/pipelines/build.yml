@@ -23,8 +23,15 @@ jobs:
           npm install
         displayName: "Install packages"
       - script: |
-          dotnet test AutoRest.CSharp.V3.sln -warnaserror
+          dotnet build AutoRest.CSharp.V3.sln
         displayName: "Build"
+        env:
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_MULTILEVEL_LOOKUP: 0      
+      - script: |
+          dotnet test AutoRest.CSharp.V3.sln
+        displayName: "Test"
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -32,6 +39,5 @@ jobs:
       - script: |
           npm install -g @autorest/autorest
         displayName: "Install autorest-beta"
-      - script: |
-          autorest-beta --debug --verbose --use:$(Build.SourcesDirectory) --input-file:$(Build.SourcesDirectory)\samples\xkcd\xkcd.yaml
-        displayName: "Run autorest on xkcd"
+      - pwsh: eng\Generate.ps1
+        displayName: "Run autorest"
