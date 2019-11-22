@@ -1,11 +1,13 @@
 - AppConfiguration: Working
 - Billing: Unrecognized schema type: 'integer' - https://github.com/Azure/autorest.modelerfour/issues/33
+- BodyComplex: Working
+- BodyString: Working
 - CognitiveServices.TextAnalytics: TypeError: Invalid Version: 3.0-Preview.1 - https://github.com/Azure/autorest.modelerfour/issues/41
 - Dns: Working
 - KeyVault: 'Contacts': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
 - Media: The type or namespace name 'ResourceType' could not be found - https://github.com/Azure/autorest.csharp/issues/234
 - Redis: 'ScheduleEntries': member names cannot be the same as their enclosing type - https://github.com/Azure/autorest.csharp/issues/203
-- Storage.Blobs: Working
+- Storage.Blobs: `blob` and `containerName` path parameters are not declared in their operations as parameters
 - Storage.DataLake: Working
 - Storage.Files: 'Range' is an ambiguous reference between 'Azure.Storage.Files.Models.V20190202.Range' and 'System.Range' - https://github.com/Azure/autorest.csharp/issues/203
 - Storage.Queues: Working

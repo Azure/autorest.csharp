@@ -101,7 +101,8 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             { typeof(ObjectSchema), (vn, sn, n, a, q) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer);" },
             { typeof(SealedChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
-            { typeof(ChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" }
+            { typeof(ChoiceSchema), (vn, sn, n, a, q) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" },
+            { typeof(ByteArraySchema), (vn, sn, n, a, q) => a ? $"writer.WriteBase64StringValue({vn});" : $"writer.WriteBase64String({(q ? $"\"{sn}\"" : sn)}, {vn});" }
         };
 
         public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true)
@@ -131,7 +132,8 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             { typeof(ObjectSchema), (n, tt, tn) => $"{tt}.Deserialize({n})" },
             { typeof(SealedChoiceSchema), (n, tt, tn) => $"{n}.GetString().To{tn}()" },
-            { typeof(ChoiceSchema), (n, tt, tn) => $"{n}.GetString()" }
+            { typeof(ChoiceSchema), (n, tt, tn) => $"new {tt}({n}.GetString())" },
+            { typeof(ByteArraySchema), (n, tt, tn) => $"{n}.GetBytesFromBase64()" }
         };
 
         public static string? ToDeserializeCall(this Schema schema, string name, string typeText, string typeName)
@@ -141,6 +143,12 @@ namespace AutoRest.CSharp.V3.Pipeline
             return SchemaDeserializers.ContainsKey(schemaType)
                 ? SchemaDeserializers[schemaType](name, typeText, typeName)
                 : (TypeDeserializers.ContainsKey(frameworkType) ? TypeDeserializers[frameworkType](name) : null);
+        }
+
+        public static string ToValueString(this ConstantSchema schema)
+        {
+            var value = schema.Value.Value;
+            return $"{((value is string || value == null) ? $"\"{value}\"" : value)}";
         }
     }
 }

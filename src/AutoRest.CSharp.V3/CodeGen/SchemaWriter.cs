@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -40,11 +41,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                 using (Class(null, "partial", cs?.Name))
                 {
                     var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                        //TODO: Implement ConstantSchema
-                        .Where(p => !(p.Schema is ConstantSchema))
                         .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
                     foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
                     {
+                        if (property.Schema is ConstantSchema constantSchema)
+                        {
+                            //TODO: Determine if type can use 'const' field instead of 'static' property
+                            Line($"public static {Pair(constantSchema.ValueType.Language.CSharp?.Type, propertyCs?.Name)} {{ get; }} = {constantSchema.ToValueString()};");
+                            continue;
+                        }
                         if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(propertySchemaCs?.HasRequired ?? false))
                         {
                             LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, propertyCs?.Name, propertyCs?.IsNullable);
@@ -53,7 +58,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         AutoProperty("public", propertySchemaCs?.Type, propertyCs?.Name, propertyCs?.IsNullable, property.Required ?? false);
                     }
 
-                    if (propertyInfos.Any(pi => pi.Property.Required ?? false))
+                    var filteredPropertyInfos = propertyInfos.Where(p => !(p.Property.Schema is ConstantSchema)).ToArray();
+                    if (filteredPropertyInfos.Any(pi => pi.Property.Required ?? false))
                     {
                         Line();
                         Line("#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
@@ -63,7 +69,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         Line("#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
 
                         Line();
-                        var requiredProperties = propertyInfos.Where(pi => pi.Property.Required ?? false)
+                        var requiredProperties = filteredPropertyInfos.Where(pi => pi.Property.Required ?? false)
                             .Select(pi => (Info: pi, VariableName: pi.PropertyCs?.Name.ToVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
                         var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
                         using (Method("public", null, cs?.Name, parameters))

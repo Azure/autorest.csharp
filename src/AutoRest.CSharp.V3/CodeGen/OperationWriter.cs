@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        //TODO: Implement the rest of these
+        //TODO: Implement Cookie (Body, Path, and Uri are handled differently)
         private static string? ParameterSetMethodCall(ParameterLocation? location) => location switch
         {
             ParameterLocation.Body => (string?)null,
@@ -103,8 +103,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             var operationCs = operation.Language.CSharp;
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
-            var hasResponse = schemaResponse != null;
             var responseType = schemaResponse?.Schema.Language.CSharp?.Type;
+            var hasResponse = responseType != null;
             var returnType = hasResponse ?
                 new CSharpType
                 {
@@ -127,12 +127,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
                 .Select(p => (Parameter: p, ParameterCs: p.Language.CSharp, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
-                //TODO: Handle these schemas properly, ConstantSchema and BinarySchema
-                .Where(p => !(p.Parameter.Schema is ConstantSchema) && !(p.Parameter.Schema is BinarySchema) && !((p.Parameter.Schema as ArraySchema)?.ElementType is ConstantSchema))
+                //TODO: Handle BinarySchema properly
+                .Where(p => !(p.Parameter.Schema is BinarySchema))
                 .ToArray();
 
             var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
-                .Concat(parameters.OrderBy(p => (p.ParameterCs?.IsNullable ?? false) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
+                .Concat(parameters
+                    .Where(p => !(p.Parameter.Schema is ConstantSchema) && !((p.Parameter.Schema as ArraySchema)?.ElementType is ConstantSchema))
+                    .OrderBy(p => (p.ParameterCs?.IsNullable ?? false) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, parameterCs, parameterSchemaCs, _) = p;
                         var pair = Pair(parameterSchemaCs?.InputType ?? parameterSchemaCs?.Type, parameterCs?.Name, parameterCs?.IsNullable);
@@ -176,6 +178,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         using (isNullable ? If($"{name} != null") : new DisposeAction())
                         {
+                            //TODO: Determine conditions in which to ToString() or not
                             Line($"{methodCall}(\"{serializedName}\", {name}.ToString()!);");
                         }
                     }
@@ -195,7 +198,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
                         var (parameter, parameterCs) = (bodyParameter, bodyParameter.Language.CSharp);
-                        var name = parameterCs?.Name ?? "[NO NAME]";
+                        var name = parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameterCs?.Name ?? "[NO NAME]";
                         var serializedName = parameter.Language.Default.Name;
                         var isNullable = parameterCs?.IsNullable ?? false;
                         Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");

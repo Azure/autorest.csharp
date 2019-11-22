@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var (objectSchema, property) in propertyNodes)
             {
                 var cs = property.Language.CSharp ??= new CSharpLanguage();
-                //TODO: Hack for https://github.com/Azure/autorest.csharp/issues/243
+                //TODO: Hack for null value https://github.com/Azure/autorest.csharp/issues/243
                 cs.Name = property.Language.Default.Name == "null" ? "NullProperty" : property.Language.Default.Name.ToCleanName();
                 cs.Description = property.Language.Default.Description;
                 cs.IsNullable = !(property.Required ?? false);
@@ -42,7 +42,8 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var parameter in parameterNodes)
             {
                 var cs = parameter.Language.CSharp ??= new CSharpLanguage();
-                cs.Name = parameter.Language.Default.Name.ToVariableName();
+                var name = parameter.Language.Default.Name;
+                cs.Name = parameter.Schema is ConstantSchema ? name.ToCleanName() : name.ToVariableName();
                 cs.Description = parameter.Language.Default.Description;
                 cs.IsNullable = !(parameter.Required ?? false);
             }
