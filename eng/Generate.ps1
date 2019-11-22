@@ -16,10 +16,16 @@ function Invoke-Block([scriptblock]$cmd) {
     }
 }
 
-$repoRoot = "$PSScriptRoot\..\"
-$paths = "$repoRoot\samples\Xkcd\readme.md", "$repoRoot\samples\Dns\readme.md"
+$repoRoot = "$PSScriptRoot\.."
+$testServerTestProject = Resolve-Path "$repoRoot\test\AutoRest.TestServer.Tests"
+$testConfiguration = Resolve-Path "$testServerTestProject\readme.md"
+$testServerSwagerPath = Resolve-Path "$repoRoot\node_modules\@autorest\test-server\__files\swagger"
+$paths = "body-string", "body-complex"
 
 foreach ($path in $paths)
 {
-    Invoke-Block { npx autorest-beta --debug --verbose $path }
+    $outputFolder = "$testServerTestProject\$path";
+    $inputFile = "$testServerSwagerPath\$path.json"
+    $namespace = $path.Replace('-', '_')
+    Invoke-Block { npx autorest-beta --debug --verbose $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace }
 }
