@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.1.58"
+  "@autorest/modelerfour": "4.1.60"
 include-csproj: true
 
 pipeline:

@@ -50,6 +50,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/valid"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -183,6 +184,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/complicated"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -208,6 +210,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/missingdiscriminator"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);
@@ -240,6 +243,7 @@ namespace BodyComplex.Operations.V20160229
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}/complex/polymorphism/missingrequired/invalid"));
+                request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer, false);

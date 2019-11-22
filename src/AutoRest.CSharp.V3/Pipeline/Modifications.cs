@@ -170,17 +170,20 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     {
         /// <summary>namespace of the implementation of this item</summary>
         [YamlMember(Alias = "namespace", Order = 2)]
-        public string Namespace { get; set; }
+        public string? Namespace { get; set; }
 
         /// <summary>if this is a child of a polymorphic class, this will have the value of the discriminator.</summary>
         [YamlMember(Alias = "discriminatorValue", Order = 3)]
-        public string DiscriminatorValue { get; set; }
+        public string? DiscriminatorValue { get; set; }
 
         [YamlMember(Alias = "uid", Order = 4, ScalarStyle = ScalarStyle.SingleQuoted)]
-        public string Uid { get; set; }
+        public string? Uid { get; set; }
 
         [YamlMember(Alias = "internal", Order = 5)]
-        public bool Internal { get; set; }
+        public bool? Internal { get; set; }
+
+        [YamlMember(Alias = "serializedName", Order = 6)]
+        public string? SerializedName { get; set; }
 
         [YamlIgnore]
         public IDictionary<string, object> AdditionalProperties = new Dictionary<string, object>();
