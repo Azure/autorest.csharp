@@ -1,6 +1,5 @@
 $ErrorActionPreference = "Stop"
 
-
 function Invoke-Block([scriptblock]$cmd) {
     $cmd | Out-String | Write-Verbose
     & $cmd

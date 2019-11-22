@@ -1,4 +1,7 @@
-﻿using AutoRest.CSharp.V3.Pipeline.Generated;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using System;
 using System.Linq;
 using System.Text.Json;
