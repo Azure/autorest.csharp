@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class BodyStringTest: TestServerTestBase
+    public class BodyStringTest : TestServerTestBase
     {
         [Test]
         public async Task GetMbcs()
