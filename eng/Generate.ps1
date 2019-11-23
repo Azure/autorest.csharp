@@ -21,7 +21,7 @@ $repoRoot = "$PSScriptRoot\.."
 $testServerTestProject = Resolve-Path "$repoRoot\test\AutoRest.TestServer.Tests"
 $testConfiguration = Resolve-Path "$testServerTestProject\readme.md"
 $testServerSwaggerPath = Resolve-Path "$repoRoot\node_modules\@autorest\test-server\__files\swagger"
-$paths = 'body-string', 'body-complex', 'custom-baseUrl'
+$paths = 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options'
 $debugFlags = if($NoDebug) { '' } else { '--debug --verbose' }
 
 foreach ($path in $paths)
