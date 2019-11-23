@@ -63,7 +63,7 @@ finally {
         Write-Host -f Red "error : $err"
     }
 
-    if ($errors) {
+    if ($errors.Length -ne 0) {
         exit 1
     }
 }
