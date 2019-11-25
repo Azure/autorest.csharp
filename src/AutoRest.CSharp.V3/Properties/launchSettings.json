@@ -3,7 +3,7 @@
     "AutoRest.CSharp.V3": {
       "commandName": "Executable",
       "executablePath": "$(APPDATA)\\npm\\npx.cmd",
-      "commandLineArgs": "npx autorest-beta --debug --verbose D:\\github\\azure\\autorest.csharp\\test\\AutoRest.TestServer.Tests\\readme.md --output-folder=D:\\github\\azure\\autorest.csharp\\test\\AutoRest.TestServer.Tests\\body-complex --input-file=D:\\github\\azure\\autorest.csharp\\node_modules\\@autorest\\test-server\\__files\\swagger\\body-complex.json --title=body-complex --namespace=body_complex "
+      "commandLineArgs": "npx autorest-beta --debug --verbose $(SolutionDir)\\test\\AutoRest.TestServer.Tests\\readme.md --output-folder=$(SolutionDir)\\test\\AutoRest.TestServer.Tests\\body-string --input-file=$(SolutionDir)\\node_modules\\@autorest\\test-server\\__files\\swagger\\body-string.json --title=body-string --namespace=body_string"
     }
   }
 }
