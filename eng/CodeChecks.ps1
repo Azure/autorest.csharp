@@ -45,7 +45,7 @@ try {
     }
 
     Write-Host "git diff"
-    & git diff --ignore-space-at-eol --exit-code
+    & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
     if ($LastExitCode -ne 0) {
         $status = git status -s | Out-String
         $status = $status -replace "`n","`n    "
@@ -63,7 +63,8 @@ finally {
         Write-Host -f Red "error : $err"
     }
 
-    if ($errors) {
+    if ($errors.Length -ne 0) {
         exit 1
     }
+    exit 0
 }
