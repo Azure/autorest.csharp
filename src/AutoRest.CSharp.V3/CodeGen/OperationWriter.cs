@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var @namespace = cs?.Type?.Namespace;
             using (Namespace(@namespace))
             {
-                using (Class(null, "static", cs?.Name))
+                using (Class(null, "static", operationGroup.CSharpName()))
                 {
                     operationGroup.Operations.ForEachLast(o => WriteOperation(o, @namespace), o => WriteOperation(o, @namespace, false));
                 }
@@ -100,14 +101,13 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private static string GetWritableName(Parameter parameter, CSharpLanguage? parameterCs) => parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameterCs?.Name ?? "[NO NAME]";
+        private static string GetWritableName(Parameter parameter) => parameter.Schema is ConstantSchema constantSchema ? constantSchema.ToValueString() : parameter.CSharpName() ?? "[NO NAME]";
 
         private static string GetSerializedName(Parameter parameter) => parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name;
 
         //TODO: Clean this up. It is written quickly and has a lot of parts that can be extracted from it.
         private void WriteOperation(Operation operation, CSharpNamespace? @namespace, bool includeBlankLine = true)
         {
-            var operationCs = operation.Language.CSharp;
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
             var responseType = schemaResponse?.Schema.Language.CSharp?.Type;
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
-                .Select(p => (Parameter: p, ParameterCs: p.Language.CSharp, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
+                .Select(p => (Parameter: p, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
                 //TODO: Handle BinarySchema properly
                 .Where(p => !(p.Parameter.Schema is BinarySchema))
                 .ToArray();
@@ -141,17 +141,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(parameters
                     .Where(p => !(p.Parameter.Schema is ConstantSchema))
-                    .OrderBy(p => (p.ParameterCs?.IsNullable ?? false) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
+                    .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
-                        var (parameter, parameterCs, parameterSchemaCs, _) = p;
-                        var pair = Pair(parameterSchemaCs?.InputType ?? parameterSchemaCs?.Type, parameterCs?.Name, parameterCs?.IsNullable);
-                        var shouldBeDefaulted = (parameterCs?.IsNullable ?? false) || (parameter.ClientDefaultValue != null);
+                        var (parameter, parameterSchemaCs, _) = p;
+                        var pair = Pair(parameterSchemaCs?.InputType ?? parameterSchemaCs?.Type, parameter.CSharpName(), parameter?.IsNullable());
+                        var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.ClientDefaultValue != null ? $"\"{parameter.ClientDefaultValue}\"" : "default")}" : pair;
                     }))
                 .Append($"{Pair(typeof(CancellationToken), "cancellationToken")} = default").ToArray();
 
-            var methodName = operationCs?.Name ?? "[NO NAME]";
+            var methodName = operation.CSharpName();
             using (Method("public static async", Type(returnType), $"{methodName}Async", parametersText))
             {
                 Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var uri = httpRequest?.Uri ?? String.Empty;
                     var path = httpRequest?.Path ?? String.Empty;
                     var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Uri)
-                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: GetSerializedName(p.Parameter)) as (string Name, string SerializedName)?).ToArray();
+                        .Select(p => (Name: GetWritableName(p.Parameter), SerializedName: GetSerializedName(p.Parameter)) as (string Name, string SerializedName)?).ToArray();
                     var pathParts = GetPathParts(uri + path, pathParameters);
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     var settableParameters = parameters
                         .OrderBy(p => p.Location)
-                        .Select(p => (Name: GetWritableName(p.Parameter, p.ParameterCs), SerializedName: GetSerializedName(p.Parameter), MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.ParameterCs?.IsNullable ?? false))
+                        .Select(p => (Name: GetWritableName(p.Parameter), SerializedName: GetSerializedName(p.Parameter), MethodCall: ParameterSetMethodCall(p.Location), IsNullable: p.Parameter.IsNullable()))
                         .Where(p => p.MethodCall != null)
                         .ToArray();
                     foreach (var (name, serializedName, methodCall, isNullable) in settableParameters)
@@ -213,10 +213,10 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
-                        var (parameter, parameterCs) = (bodyParameter, bodyParameter.Language.CSharp);
-                        var name = GetWritableName(parameter, parameterCs);
+                        var parameter = bodyParameter;
+                        var name = GetWritableName(parameter);
                         var serializedName = parameter.Language.Default.Name;
-                        var isNullable = parameterCs?.IsNullable ?? false;
+                        var isNullable = bodyParameter?.IsNullable() ?? false;
                         Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable, includePropertyName: false) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");

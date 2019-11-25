@@ -14,9 +14,9 @@ namespace body_complex.Models.V20160229
         }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
-        public DotFish(string fishType)
+        public DotFish(string fishtype)
         {
-            FishType = fishType;
+            FishType = fishtype;
         }
     }
 }

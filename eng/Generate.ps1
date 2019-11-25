@@ -27,5 +27,8 @@ foreach ($path in $paths)
     $outputFolder = "$testServerTestProject\$path";
     $inputFile = "$testServerSwagerPath\$path.json"
     $namespace = $path.Replace('-', '_')
-    Invoke-Block { npx autorest-beta --debug --verbose $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace }
+    Invoke-Block { 
+        Write-Host ">" npx autorest-beta --debug --verbose $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+        npx autorest-beta --debug --verbose $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+    }
 }

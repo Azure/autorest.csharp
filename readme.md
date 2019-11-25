@@ -12,10 +12,8 @@ pipeline:
   # serialize-tester/emitter:
   #   input: serialize-tester
   #   scope: output-scope
-  cs-namer:
-    input: modelerfour/identity
   cs-typer:
-    input: cs-namer
+    input: modelerfour/identity
   cs-modeler:
     input: cs-typer
   cs-modeler/emitter:

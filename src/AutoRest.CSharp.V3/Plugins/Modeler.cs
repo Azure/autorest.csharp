@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
             foreach (var schema in schemas)
             {
-                var name = schema.Language.CSharp?.Name ?? "[NO NAME]";
+                var name = schema.CSharpName() ?? "[NO NAME]";
                 var writer = new SchemaWriter();
                 writer.WriteSchema(schema);
                 await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");

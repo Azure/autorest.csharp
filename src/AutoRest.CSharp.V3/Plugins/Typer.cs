@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 var apiVersion = operationGroup.Operations.Where(o => o.ApiVersions != null).SelectMany(o => o.ApiVersions).FirstOrDefault()?.Version.RemoveNonWordCharacters();
                 cs.Type = new CSharpType
                 {
-                    Name = operationGroup.Language.CSharp?.Name ?? operationGroup.Language.Default.Name,
+                    Name = operationGroup.CSharpName() ?? operationGroup.Language.Default.Name,
                     Namespace = new CSharpNamespace
                     {
                         Base = configuration.Namespace.NullIfEmpty(),
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType
             {
-                Name = schema.Language.CSharp?.Name ?? schema.Language.Default.Name,
+                Name = schema.CSharpName() ?? schema.Language.Default.Name,
                 Namespace = new CSharpNamespace
                 {
                     Base = configuration.Namespace.NullIfEmpty(),
