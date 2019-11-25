@@ -19,30 +19,17 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [YamlMember(Alias = "uid", Order = 0)]
         public string Uid { get; set; }
 
-        [YamlMember(Alias = "name", Order = 1)]
-        public string? Name { get; set; }
-
-        [YamlMember(Alias = "description", Order = 2)]
-        public string? Description { get; set; }
-
-        [YamlMember(Alias = "type", Order = 3)]
+        [YamlMember(Alias = "type", Order = 2)]
         public CSharpType? Type { get; set; }
 
-        [YamlMember(Alias = "isLazy", Order = 4)]
+        [YamlMember(Alias = "isLazy", Order = 3)]
         public bool? IsLazy { get; set; }
 
-        [YamlMember(Alias = "concreteType", Order = 5)]
+        [YamlMember(Alias = "concreteType", Order = 4)]
         public CSharpType? ConcreteType { get; set; }
 
-        [YamlMember(Alias = "inputType", Order = 6)]
+        [YamlMember(Alias = "inputType", Order = 5)]
         public CSharpType? InputType { get; set; }
-
-        [YamlMember(Alias = "isNullable", Order = 7)]
-        public bool? IsNullable { get; set; }
-
-        //TODO: This likely can be removed as it was originally for AndSchema logic.
-        [YamlMember(Alias = "hasRequired", Order = 8)]
-        public bool? HasRequired { get; set; }
 
         [YamlIgnore]
         public int SchemaOrder { get; set; }

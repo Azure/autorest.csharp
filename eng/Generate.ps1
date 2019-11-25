@@ -17,18 +17,24 @@ function Invoke-Block([scriptblock]$cmd) {
     }
 }
 
-$repoRoot = "$PSScriptRoot\.."
-$testServerTestProject = Resolve-Path "$repoRoot\test\AutoRest.TestServer.Tests"
-$testConfiguration = Resolve-Path "$testServerTestProject\readme.md"
-$testServerSwaggerPath = Resolve-Path "$repoRoot\node_modules\@autorest\test-server\__files\swagger"
+$repoRoot = Resolve-Path "$PSScriptRoot\.."
+$testServerTestProject = "$repoRoot\test\AutoRest.TestServer.Tests"
+$testConfiguration = "$testServerTestProject\readme.md"
+$testServerSwaggerPath = "$repoRoot\node_modules\@autorest\test-server\__files\swagger"
 $paths = 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options'
-$debugFlags = if($NoDebug) { '' } else { '--debug --verbose' }
+$debugFlags = if (!$NoDebug) { '--debug','--verbose' }
 
 foreach ($path in $paths)
 {
     $outputFolder = "$testServerTestProject\$path";
     $inputFile = "$testServerSwaggerPath\$path.json"
     $namespace = $path.Replace('-', '_')
-    $autoRestCommand = [scriptblock]::Create("npx autorest-beta $debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace")
-    Invoke-Block $autoRestCommand
+    Invoke-Block { 
+        $command = "npx autorest-beta $debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace"
+        $command = $command.Replace($repoRoot, "`$(SolutionDir)")
+
+        Write-Host ">" $command
+
+        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+    }
 }

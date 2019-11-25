@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Pipeline;
+using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -28,7 +29,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class(null, "partial", cs?.Name)) { }
+                using (Class(null, "partial", schema.CSharpName())) { }
             }
             return true;
         }
@@ -100,7 +101,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class(null, "partial", cs?.Name))
+                using (Class(null, "partial", schema.CSharpName()))
                 {
                     using (Method("internal", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer"), Pair(typeof(bool), "includeName = true")))
                     {
@@ -114,13 +115,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                         }
 
                         var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                            .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                        foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                            .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                        foreach (var (property, propertySchemaCs) in propertyInfos)
                         {
                             var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
-                            var name = (hasField ? $"_{propertyCs?.Name.ToVariableName()}" : null) ?? propertyCs?.Name ?? "[NO NAME]";
-                            var serializedName = property.Language.Default.Name;
-                            var isNullable = propertyCs?.IsNullable ?? false;
+                            var name = (hasField ? $"_{property.CSharpVariableName()}" : null) ?? property?.CSharpName() ?? "[NO NAME]";
+
+                            var serializedName = property!.Language.Default.Name;
+                            var isNullable = property.IsNullable();
                             using (isNullable ? If($"{name} != null") : new DisposeAction())
                             {
                                 WriteProperty(property.Schema, name, serializedName, isNullable);
@@ -139,10 +141,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                             var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
                                 // Do not deserialize constant properties
                                 .Where(p => !(p.Schema is ConstantSchema))
-                                .Select(p => (Property: p, PropertyCs: p.Language.CSharp, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                            foreach (var (property, propertyCs, propertySchemaCs) in propertyInfos)
+                                .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
+                            foreach (var (property, propertySchemaCs) in propertyInfos)
                             {
-                                var name = propertyCs?.Name ?? "[NO NAME]";
+                                var name = property.CSharpName();
                                 var serializedName = property.Language.Default.Name;
                                 using (If($"property.NameEquals(\"{serializedName}\")"))
                                 {
@@ -170,11 +172,11 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = schema.Language.CSharp;
             using (Namespace(cs?.Type?.Namespace))
             {
-                using (Class("internal", "static", $"{cs?.Name}Extensions"))
+                using (Class("internal", "static", $"{schema.CSharpName()}Extensions"))
                 {
                     var stringText = Type(typeof(string));
                     var csTypeText = Type(cs?.Type);
-                    var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.Language.CSharp?.Name}", Serial: $"\"{c.Value}\"")).ToArray();
+                    var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.CSharpName()}", Serial: $"\"{c.Value}\"")).ToArray();
                     var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
 
                     var toSerialString = String.Join(Environment.NewLine, nameMap
@@ -192,7 +194,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         .Append("}")
                         .Prepend("{")
                         .Prepend("value switch"));
-                    MethodExpression("public static", csTypeText, $"To{cs?.Name}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
+                    MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
             return true;
@@ -206,19 +208,19 @@ namespace AutoRest.CSharp.V3.CodeGen
             var csType = cs?.Type;
             using (Namespace(csType?.Namespace))
             {
-                using (Struct(null, "readonly partial", cs?.Name))
+                using (Struct(null, "readonly partial", schema.CSharpName()))
                 {
                     var stringText = Type(typeof(string));
-                    foreach (var (choice, choiceCs) in schema.Choices.Select(c => (c, c.Language.CSharp)))
+                    foreach (var choice in schema.Choices.Select(c => c))
                     {
-                        Line($"private const {Pair(stringText, $"{choiceCs.Name}Value")} = \"{choice.Value}\";");
+                        Line($"private const {Pair(stringText, $"{choice.CSharpName()}Value")} = \"{choice.Value}\";");
                     }
                     Line();
 
                     var csTypeText = Type(csType);
-                    foreach (var choiceCs in schema.Choices.Select(c => c.Language.CSharp))
+                    foreach (var choice in schema.Choices)
                     {
-                        Line($"public static {Pair(csTypeText, choiceCs?.Name)} {{ get; }} = new {csTypeText}({choiceCs?.Name}Value);");
+                        Line($"public static {Pair(csTypeText, choice?.CSharpName())} {{ get; }} = new {csTypeText}({choice?.CSharpName()}Value);");
                     }
                 }
             }

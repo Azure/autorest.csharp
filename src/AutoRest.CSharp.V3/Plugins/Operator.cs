@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var writer = new OperationWriter();
                 writer.WriteOperationGroup(operationGroup);
-                await autoRest.WriteFile($"Generated/Operations/{operationGroup.Language.CSharp?.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"Generated/Operations/{operationGroup.CSharpName()}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 
             return true;
