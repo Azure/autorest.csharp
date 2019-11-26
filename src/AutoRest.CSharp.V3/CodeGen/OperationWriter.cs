@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
-                .Select(p => (Parameter: p, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
+                .Select(p => (Parameter: p, Location: (p.Protocol.Http as HttpParameter)?.In))
                 //TODO: Handle BinarySchema properly
                 .Where(p => !(p.Parameter.Schema is BinarySchema))
                 .ToArray();
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .Where(p => !(p.Parameter.Schema is ConstantSchema))
                     .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
-                        var (parameter, parameterSchemaCs, _) = p;
+                        var (parameter, _) = p;
                         var pair = Pair(_typeFactory.CreateInputType(parameter.Schema) ?? _typeFactory.CreateType(parameter.Schema), parameter.CSharpName(), parameter?.IsNullable());
                         var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
                         //TODO: This will only work if the parameter is a string parameter

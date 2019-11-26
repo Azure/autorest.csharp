@@ -121,9 +121,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                             Line("writer.WriteStartObject();");
                         }
 
-                        var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                            .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                        foreach (var (property, propertySchemaCs) in propertyInfos)
+                        var propertyInfos = schema.Properties ?? Enumerable.Empty<Property>();
+                        foreach (var property in propertyInfos)
                         {
                             var hasField = property.Schema.IsLazy() && !(property.Required ?? false);
                             var name = (hasField ? $"_{property.CSharpVariableName()}" : null) ?? property?.CSharpName() ?? "[NO NAME]";
@@ -147,9 +146,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         {
                             var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
                                 // Do not deserialize constant properties
-                                .Where(p => !(p.Schema is ConstantSchema))
-                                .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                            foreach (var (property, propertySchemaCs) in propertyInfos)
+                                .Where(p => !(p.Schema is ConstantSchema)).ToArray();
+                            foreach (var property in propertyInfos)
                             {
                                 var name = property.CSharpName();
                                 var serializedName = property.Language.Default.Name;
