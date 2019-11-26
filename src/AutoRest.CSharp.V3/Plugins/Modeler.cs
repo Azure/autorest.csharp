@@ -4,7 +4,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.CodeGen;
-using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
@@ -16,27 +15,26 @@ namespace AutoRest.CSharp.V3.Plugins
     {
         public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
-            // Every schema for debugging
-            //foreach (var schema in codeModel.Schemas.GetAllSchemaNodes())
-            //{
-            //    var writer = new SchemaWriter();
-            //    writer.WriteSchema(schema);
-            //    await autoRest.WriteFile($"All/{schema.Language.CSharp?.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
-            //}
-
             var schemas = (codeModel.Schemas.Choices ?? Enumerable.Empty<ChoiceSchema>()).Cast<Schema>()
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
             foreach (var schema in schemas)
             {
                 var name = schema.CSharpName() ?? "[NO NAME]";
-                var writer = new SchemaWriter();
+                var writer = new SchemaWriter(new TypeFactory(configuration.Namespace));
                 writer.WriteSchema(schema);
                 await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");
 
-                var serializeWriter = new SerializationWriter();
+                var serializeWriter = new SerializationWriter(new TypeFactory(configuration.Namespace));
                 serializeWriter.WriteSerialization(schema);
                 await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializeWriter.ToFormattedCode(), "source-file-csharp");
+            }
+
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                var writer = new OperationWriter(new TypeFactory(configuration.Namespace));
+                writer.WriteOperationGroup(operationGroup);
+                await autoRest.WriteFile($"Generated/Operations/{operationGroup.CSharpName()}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 
             // CodeModel for debugging
@@ -44,7 +42,5 @@ namespace AutoRest.CSharp.V3.Plugins
 
             return true;
         }
-
-        public bool ReserializeCodeModel => false;
     }
 }

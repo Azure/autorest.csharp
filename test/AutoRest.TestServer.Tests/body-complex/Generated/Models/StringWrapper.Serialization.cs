@@ -27,7 +27,7 @@ namespace body_complex.Models.V20160229
             }
             if (NullProperty != null)
             {
-                writer.WriteString("", NullProperty);
+                writer.WriteString("null", NullProperty);
             }
             writer.WriteEndObject();
         }
@@ -46,7 +46,7 @@ namespace body_complex.Models.V20160229
                     result.Empty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals(""))
+                if (property.NameEquals("null"))
                 {
                     result.NullProperty = property.Value.GetString();
                     continue;

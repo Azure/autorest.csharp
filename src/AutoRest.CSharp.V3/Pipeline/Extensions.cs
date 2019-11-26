@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Plugins;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Pipeline
@@ -108,10 +109,10 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(ByteArraySchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteBase64StringValue({vn});" : $"writer.WriteBase64String({(q ? $"\"{sn}\"" : sn)}, {vn});" }
         };
 
-        public static string? ToSerializeCall(this Schema schema, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        public static string? ToSerializeCall(this Schema schema, TypeFactory typeFactory, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
         {
             var schemaType = schema.GetType();
-            var frameworkType = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            var frameworkType = typeFactory.CreateType(schema)?.FrameworkType ?? typeof(void);
             return SchemaSerializers.ContainsKey(schemaType)
                 ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName)
                 : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName) : null);
@@ -139,10 +140,10 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(ByteArraySchema), (n, tt, tn) => $"{n}.GetBytesFromBase64()" }
         };
 
-        public static string? ToDeserializeCall(this Schema schema, string name, string typeText, string typeName)
+        public static string? ToDeserializeCall(this Schema schema, TypeFactory typeFactory, string name, string typeText, string typeName)
         {
             var schemaType = schema.GetType();
-            var frameworkType = schema.Language.CSharp?.Type?.FrameworkType ?? typeof(void);
+            var frameworkType = typeFactory.CreateType(schema)?.FrameworkType ?? typeof(void);
             return SchemaDeserializers.ContainsKey(schemaType)
                 ? SchemaDeserializers[schemaType](name, typeText, typeName)
                 : (TypeDeserializers.ContainsKey(frameworkType) ? TypeDeserializers[frameworkType](name) : null);

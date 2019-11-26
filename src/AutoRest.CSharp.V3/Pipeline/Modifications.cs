@@ -9,44 +9,20 @@ using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
+#pragma warning disable SA1649
 #pragma warning disable SA1402
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
-    internal partial class CSharpLanguage
-    {
-        [YamlMember(Alias = "uid", Order = 0)]
-        public string Uid { get; set; }
-
-        [YamlMember(Alias = "type", Order = 2)]
-        public CSharpType? Type { get; set; }
-
-        [YamlMember(Alias = "isLazy", Order = 3)]
-        public bool? IsLazy { get; set; }
-
-        [YamlMember(Alias = "concreteType", Order = 4)]
-        public CSharpType? ConcreteType { get; set; }
-
-        [YamlMember(Alias = "inputType", Order = 5)]
-        public CSharpType? InputType { get; set; }
-
-        [YamlIgnore]
-        public int SchemaOrder { get; set; }
-    }
-
     internal class CSharpNamespace
     {
-        [YamlMember(Alias = "base", Order = 0)]
         public string? Base { get; set; }
 
-        [YamlMember(Alias = "category", Order = 1)]
         public string? Category { get; set; }
 
-        [YamlMember(Alias = "apiVersion", Order = 2)]
         public string? ApiVersion { get; set; }
 
-        [YamlIgnore]
         public string FullName => new[]{ Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 
@@ -55,7 +31,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Type.GetType(FullName) : _frameworkType;
 
         private CSharpNamespace? _namespace;
-        [YamlMember(Alias = "namespace", Order = 0)]
+
         public CSharpNamespace? Namespace
         {
             get => _namespace;
@@ -67,7 +43,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         }
 
         private string? _name;
-        [YamlMember(Alias = "name", Order = 1)]
+
         public string? Name
         {
             get => _name;
@@ -78,10 +54,8 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             }
         }
 
-        [YamlMember(Alias = "subType1", Order = 2)]
         public CSharpType? SubType1 { get; set; }
 
-        [YamlMember(Alias = "subType2", Order = 3)]
         public CSharpType? SubType2 { get; set; }
 
         public string GetComposedName(bool subTypesAsFullName = false, bool typesAsKeywords = true)
@@ -98,11 +72,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             return name;
         }
 
-        [YamlIgnore]
         public string FullName => new[] { Namespace?.FullName, GetComposedName(true, false) }.JoinIgnoreEmpty(".");
 
         private Type? _frameworkType;
-        [YamlIgnore]
         public Type? FrameworkType
         {
             get => _frameworkType;
@@ -121,7 +93,6 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             }
         }
 
-        [YamlIgnore]
         public string? KeywordName {
             get
             {

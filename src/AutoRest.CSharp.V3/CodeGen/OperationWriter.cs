@@ -20,12 +20,19 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class OperationWriter : StringWriter
     {
+        private readonly TypeFactory _typeFactory;
+
+        public OperationWriter(TypeFactory typeFactory)
+        {
+            _typeFactory = typeFactory;
+        }
+
         public bool WriteOperationGroup(OperationGroup operationGroup)
         {
             Header();
             using var _ = UsingStatements();
-            var cs = operationGroup.Language.CSharp;
-            var @namespace = cs?.Type?.Namespace;
+            var cs = _typeFactory.CreateType(operationGroup);
+            var @namespace = cs.Namespace;
             using (Namespace(@namespace))
             {
                 using (Class(null, "static", operationGroup.CSharpName()))
@@ -110,10 +117,15 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
-            var responseType = schemaResponse?.Schema.Language.CSharp?.Type;
-            var hasResponse = responseType != null;
-            var returnType = hasResponse ?
-                new CSharpType
+            CSharpType returnType;
+            CSharpType responseType = null;
+            bool hasResponse = false;
+
+            if (schemaResponse != null)
+            {
+                hasResponse = true;
+                responseType = _typeFactory.CreateType(schemaResponse?.Schema);
+                returnType = new CSharpType
                 {
                     FrameworkType = typeof(ValueTask<>),
                     SubType1 = new CSharpType
@@ -121,8 +133,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                         FrameworkType = typeof(Response<>),
                         SubType1 = responseType
                     }
-                } :
-                new CSharpType
+                };
+            }
+            else
+            {
+                returnType = new CSharpType
                 {
                     FrameworkType = typeof(ValueTask<>),
                     SubType1 = new CSharpType
@@ -130,10 +145,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                         FrameworkType = typeof(Response)
                     }
                 };
+            }
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var parameters = (operation.Request.Parameters ?? Enumerable.Empty<Parameter>())
-                .Select(p => (Parameter: p, ParameterSchemaCs: p.Schema.Language.CSharp, Location: (p.Protocol.Http as HttpParameter)?.In))
+                .Select(p => (Parameter: p, Location: (p.Protocol.Http as HttpParameter)?.In))
                 //TODO: Handle BinarySchema properly
                 .Where(p => !(p.Parameter.Schema is BinarySchema))
                 .ToArray();
@@ -143,8 +159,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .Where(p => !(p.Parameter.Schema is ConstantSchema))
                     .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
-                        var (parameter, parameterSchemaCs, _) = p;
-                        var pair = Pair(parameterSchemaCs?.InputType ?? parameterSchemaCs?.Type, parameter.CSharpName(), parameter?.IsNullable());
+                        var (parameter, _) = p;
+                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema) ?? _typeFactory.CreateType(parameter.Schema), parameter.CSharpName(), parameter?.IsNullable());
                         var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.ClientDefaultValue != null ? $"\"{parameter.ClientDefaultValue}\"" : "default")}" : pair;
@@ -217,7 +233,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         var name = GetWritableName(parameter);
                         var serializedName = parameter.Language.Default.Name;
                         var isNullable = bodyParameter?.IsNullable() ?? false;
-                        Line(parameter.Schema.ToSerializeCall(name, serializedName, isNullable, includePropertyName: false) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
+                        Line(parameter.Schema.ToSerializeCall(_typeFactory, name, serializedName, isNullable, includePropertyName: false) ?? $"// {parameter.Schema.GetType().Name} {name}: Not Implemented");
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
                     }
@@ -239,7 +255,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 Line($"case {statusCode.GetEnumMemberValue()}:");
                             }
-                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall("document.RootElement", Type(responseType), responseType?.Name ?? "[NO TYPE NAME]")}, response);");
+                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall(_typeFactory, "document.RootElement", Type(responseType), responseType?.Name ?? "[NO TYPE NAME]")}, response);");
                             Line("default:");
                             //TODO: Handle actual exception responses
                             Line($"throw new {Type(typeof(Exception))}();");

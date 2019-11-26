@@ -13,6 +13,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class SerializationWriter : StringWriter
     {
+        private readonly TypeFactory _typeFactory;
+
+        public SerializationWriter(TypeFactory typeFactory)
+        {
+            _typeFactory = typeFactory;
+        }
+
         public bool WriteSerialization(Schema schema) =>
             schema switch
             {
@@ -26,8 +33,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs?.Namespace))
             {
                 using (Class(null, "partial", schema.CSharpName())) { }
             }
@@ -41,7 +48,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Line($"writer.WriteStartArray(\"{serializedName}\");");
                 using (ForEach($"var item in {name}"))
                 {
-                    Line(array.ElementType.ToSerializeCall("item", serializedName, isNullable, true) ?? $"// {array.ElementType.GetType().Name}: Not Implemented");
+                    Line(array.ElementType.ToSerializeCall(_typeFactory, "item", serializedName, isNullable, true) ?? $"// {array.ElementType.GetType().Name}: Not Implemented");
                 }
                 Line("writer.WriteEndArray();");
                 return;
@@ -51,13 +58,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Line($"writer.WriteStartObject(\"{serializedName}\");");
                 using (ForEach($"var item in {name}"))
                 {
-                    Line(dictionary.ElementType.ToSerializeCall("item.Value", "item.Key", isNullable, false, false) ?? $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
+                    Line(dictionary.ElementType.ToSerializeCall(_typeFactory, "item.Value", "item.Key", isNullable, false, false) ?? $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
                 }
                 Line("writer.WriteEndObject();");
                 return;
             }
 
-            Line(schema.ToSerializeCall(name, serializedName, isNullable) ?? $"// {schema.GetType().Name} {name}: Not Implemented");
+            Line(schema.ToSerializeCall(_typeFactory, name, serializedName, isNullable) ?? $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
         private void ReadProperty(Schema schema, string name, string typeText, string typeName)
@@ -66,11 +73,11 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (ForEach("var item in property.Value.EnumerateArray()"))
                 {
-                    var elementType = array.ElementType.Language.CSharp?.Type;
+                    var elementType = _typeFactory.CreateType(array.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
                     var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
-                    var createText = array.ElementType.ToDeserializeCall("item", elementTypeText, elementTypeName);
+                    var createText = array.ElementType.ToDeserializeCall(_typeFactory, "item", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add({createText});" : $"// {array.ElementType.GetType().Name}: Not Implemented");
                 }
                 return;
@@ -79,17 +86,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (ForEach("var item in property.Value.EnumerateObject()"))
                 {
-                    var elementType = dictionary.ElementType.Language.CSharp?.Type;
+                    var elementType = _typeFactory.CreateType(dictionary.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
                     var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
-                    var createText = dictionary.ElementType.ToDeserializeCall("item.Value", elementTypeText, elementTypeName);
+                    var createText = dictionary.ElementType.ToDeserializeCall(_typeFactory, "item.Value", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add(item.Name, {createText});" : $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
                 }
                 return;
             }
 
-            var callText = schema.ToDeserializeCall("property.Value", typeText, typeName);
+            var callText = schema.ToDeserializeCall(_typeFactory, "property.Value", typeText, typeName);
             Line(callText != null ? $"result.{name} = {callText};" : $"// {schema.GetType().Name} {name}: Not Implemented");
         }
 
@@ -98,8 +105,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs.Namespace))
             {
                 using (Class(null, "partial", schema.CSharpName()))
                 {
@@ -114,11 +121,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                             Line("writer.WriteStartObject();");
                         }
 
-                        var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                            .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                        foreach (var (property, propertySchemaCs) in propertyInfos)
+                        var propertyInfos = schema.Properties ?? Enumerable.Empty<Property>();
+                        foreach (var property in propertyInfos)
                         {
-                            var hasField = (propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false);
+                            var hasField = property.Schema.IsLazy() && !(property.Required ?? false);
                             var name = (hasField ? $"_{property.CSharpVariableName()}" : null) ?? property?.CSharpName() ?? "[NO NAME]";
 
                             var serializedName = property!.Language.Default.Name;
@@ -132,7 +138,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         Line("writer.WriteEndObject();");
                     }
 
-                    var typeText = Type(cs?.Type);
+                    var typeText = Type(cs);
                     using (Method("internal static", typeText, "Deserialize", Pair(typeof(JsonElement), "element")))
                     {
                         Line($"var result = new {typeText}();");
@@ -140,20 +146,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                         {
                             var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
                                 // Do not deserialize constant properties
-                                .Where(p => !(p.Schema is ConstantSchema))
-                                .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                            foreach (var (property, propertySchemaCs) in propertyInfos)
+                                .Where(p => !(p.Schema is ConstantSchema)).ToArray();
+                            foreach (var property in propertyInfos)
                             {
                                 var name = property.CSharpName();
                                 var serializedName = property.Language.Default.Name;
                                 using (If($"property.NameEquals(\"{serializedName}\")"))
                                 {
-                                    var propertyType = propertySchemaCs?.Type;
+                                    var propertyType = _typeFactory.CreateType(property.Schema);
                                     var propertyTypeName = propertyType?.Name ?? "[NO TYPE NAME]";
                                     //TODO: Hack for property name/type name clashing
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
-                                    var propertyTypeText = propertySchemaCs?.Type?.FullName ?? "[NO TYPE]";
-                                    ReadProperty(property.Schema, name, propertyTypeText, propertyTypeName);
+                                    ReadProperty(property.Schema, name, propertyType.FullName, propertyTypeName);
                                     Line("continue;");
                                 }
                             }
@@ -169,13 +173,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs.Namespace))
             {
                 using (Class("internal", "static", $"{schema.CSharpName()}Extensions"))
                 {
                     var stringText = Type(typeof(string));
-                    var csTypeText = Type(cs?.Type);
+                    var csTypeText = Type(cs);
                     var nameMap = schema.Choices.Select(c => (Choice: $"{csTypeText}.{c.CSharpName()}", Serial: $"\"{c.Value}\"")).ToArray();
                     var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
 
@@ -204,9 +208,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            var csType = cs?.Type;
-            using (Namespace(csType?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs?.Namespace))
             {
                 using (Struct(null, "readonly partial", schema.CSharpName()))
                 {
@@ -217,7 +220,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                     Line();
 
-                    var csTypeText = Type(csType);
+                    var csTypeText = Type(cs);
                     foreach (var choice in schema.Choices)
                     {
                         Line($"public static {Pair(csTypeText, choice?.CSharpName())} {{ get; }} = new {csTypeText}({choice?.CSharpName()}Value);");
