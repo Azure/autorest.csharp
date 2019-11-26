@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.V3.Plugins.PostGen
         };
         //public Task Run() => Run(Settings.Instance.FileSystemOutput);
 
-        public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public async Task<bool> Execute(IAutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             //var fs = new MemoryFileSystem();
             string[] skipNamespace = (await autoRest.GetValue<string[]>("skip-simplifier-on-namespace"));

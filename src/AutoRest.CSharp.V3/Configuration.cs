@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3
         private Configuration() { }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
-        public static Configuration Create(AutoRestInterface autoRest) =>
+        public static Configuration Create(IAutoRestInterface autoRest) =>
             new Configuration
             {
                 OutputPath = autoRest.GetValue<string?>("output-folder").GetAwaiter().GetResult() ?? "Generated",

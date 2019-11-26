@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.Plugins
     // ReSharper disable once IdentifierTypo
     internal class Asseter : IPlugin
     {
-        public async Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public async Task<bool> Execute(IAutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
         {
             if (configuration.IncludeCsProj)
             {
