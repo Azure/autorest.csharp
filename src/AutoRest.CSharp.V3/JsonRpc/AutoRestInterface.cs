@@ -7,7 +7,7 @@ using AutoRest.CSharp.V3.JsonRpc.Messaging;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
-    internal class AutoRestInterface
+    internal class AutoRestInterface : IAutoRestInterface
     {
         private readonly Connection _connection;
         private readonly string _sessionId;
@@ -31,6 +31,11 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
             _connection.Notification(OutgoingMessages.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
+
+        public Task Fatal(string text)
+        {
+            return Message(text, Channel.Fatal);
+        }
 
         // Convenience Interfaces
         public Task Message(string text, Channel channel = Channel.Warning) => Message(new Message { Channel = channel, Text = text });

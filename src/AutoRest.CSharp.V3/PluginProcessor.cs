@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3
             .ToDictionary(pt => pt.GetCustomAttribute<PluginNameAttribute>(true)!.PluginName, pt => (Func<IPlugin>)(() => (IPlugin)Activator.CreateInstance(pt)!));
         public static readonly string[] PluginNames = Plugins.Keys.ToArray();
 
-        public static async Task<bool> Start(AutoRestInterface autoRest)
+        public static async Task<bool> Start(IAutoRestInterface autoRest)
         {
             // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
             if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach")).IsObject())
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.V3
             }
             catch (Exception e)
             {
-                await autoRest.Message(new Message { Channel = Channel.Fatal, Text = e.ToString() });
+                await autoRest.Fatal(e.ToString());
                 return false;
             }
         }
