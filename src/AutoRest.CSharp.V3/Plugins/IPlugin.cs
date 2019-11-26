@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.V3.Plugins
     internal interface IPlugin
     {
         Task<bool> Execute(AutoRestInterface autoRest, CodeModel codeModel, Configuration configuration);
-        bool ReserializeCodeModel => true;
         bool DeserializeCodeModel => true;
     }
 

@@ -13,6 +13,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal class SchemaWriter : StringWriter
     {
+        private readonly TypeFactory _typeFactory;
+
+        public SchemaWriter(TypeFactory typeFactory)
+        {
+            _typeFactory = typeFactory;
+        }
+
         public bool WriteSchema(Schema schema) =>
             schema switch
             {
@@ -26,8 +33,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs.Namespace))
             {
                 using (Class(null, "partial", schema.CSharpName())) { }
             }
@@ -39,27 +46,27 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs?.Namespace))
             {
                 using (Class(null, "partial", schema.CSharpName()))
                 {
                     var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
                         .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                    foreach (var (property, propertySchemaCs) in propertyInfos)
+                    foreach (var (property, _) in propertyInfos)
                     {
                         if (property.Schema is ConstantSchema constantSchema)
                         {
                             //TODO: Determine if type can use 'const' field instead of 'static' property
-                            Line($"public static {Pair(constantSchema.ValueType.Language.CSharp?.Type, property.CSharpName())} {{ get; }} = {constantSchema.ToValueString()};");
+                            Line($"public static {Pair(_typeFactory.CreateType(constantSchema.ValueType), property.CSharpName())} {{ get; }} = {constantSchema.ToValueString()};");
                             continue;
                         }
-                        if ((propertySchemaCs?.IsLazy ?? false) && !(property.Required ?? false) && !(property.Required ?? false))
+                        if ((property.Schema.IsLazy()) && !(property.Required ?? false) && !(property.Required ?? false))
                         {
-                            LazyProperty("public", propertySchemaCs!.Type, propertySchemaCs.ConcreteType ?? propertySchemaCs.Type, property.CSharpName(), property.IsNullable());
+                            LazyProperty("public", _typeFactory.CreateType(property.Schema), _typeFactory.CreateConcreteType(property.Schema), property.CSharpName(), property.IsNullable());
                             continue;
                         }
-                        AutoProperty("public", propertySchemaCs?.Type, property.CSharpName(), property.IsNullable(), property.Required ?? false);
+                        AutoProperty("public", _typeFactory.CreateType(property.Schema), property.CSharpName(), property.IsNullable(), property.Required ?? false);
                     }
 
                     var filteredPropertyInfos = propertyInfos.Where(p => !(p.Property.Schema is ConstantSchema)).ToArray();
@@ -74,18 +81,18 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         Line();
                         var requiredProperties = filteredPropertyInfos.Where(pi => pi.Property.Required ?? false)
-                            .Select(pi => (Info: pi, VariableName: pi.Property.CSharpVariableName(), InputType: pi.PropertySchemaCs?.InputType ?? pi.PropertySchemaCs?.Type)).ToArray();
+                            .Select(pi => (Info: pi, VariableName: pi.Property.CSharpVariableName(), InputType: _typeFactory.CreateInputType(pi.Property.Schema))).ToArray();
                         var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
                         using (Method("public", null, schema.CSharpName(), parameters))
                         {
-                            foreach (var ((pproperty, propertySchemaCs), variableName, _) in requiredProperties)
+                            foreach (var ((property, _), variableName, _) in requiredProperties)
                             {
-                                if (propertySchemaCs?.IsLazy ?? false)
+                                if (property.Schema.IsLazy())
                                 {
-                                    Line($"{pproperty.CSharpName()} = new {Type(propertySchemaCs!.ConcreteType ?? propertySchemaCs.Type)}({variableName});");
+                                    Line($"{property.CSharpName()} = new {Type(_typeFactory.CreateConcreteType(property.Schema))}({variableName});");
                                     continue;
                                 }
-                                Line($"{pproperty.CSharpName()} = {variableName};");
+                                Line($"{property.CSharpName()} = {variableName};");
                             }
                         }
                     }
@@ -98,8 +105,8 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            using (Namespace(cs?.Type?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs.Namespace))
             {
                 using (Enum(null, null, schema.CSharpName()))
                 {
@@ -113,11 +120,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             Header();
             using var _ = UsingStatements();
-            var cs = schema.Language.CSharp;
-            var csType = cs?.Type;
-            using (Namespace(csType?.Namespace))
+            var cs = _typeFactory.CreateType(schema);
+            using (Namespace(cs.Namespace))
             {
-                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = csType};
+                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = cs};
                 using (Struct(null, "readonly partial", schema.CSharpName(), Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
@@ -131,7 +137,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                     Line();
 
-                    var csTypeText = Type(csType);
+                    var csTypeText = Type(cs);
                     var boolText = Type(typeof(bool));
                     var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
