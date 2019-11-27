@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.JsonRpc.Messaging;
 
@@ -18,6 +17,11 @@ namespace AutoRest.CSharp.V3
 
         public static int Main(string[] args)
         {
+            if (args.Contains("--standalone"))
+            {
+                return RunStandalone(args);
+            }
+
             if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
             {
                 Debugger.Launch();
@@ -40,6 +44,11 @@ namespace AutoRest.CSharp.V3
 
             Console.Error.WriteLine("Shutting Down");
             return 0;
+        }
+
+        private static int RunStandalone(string[] args)
+        {
+            return PluginProcessor.Start(new StandaloneAutoRestInterface(args)).GetAwaiter().GetResult() ? 0 : 1;
         }
     }
 }

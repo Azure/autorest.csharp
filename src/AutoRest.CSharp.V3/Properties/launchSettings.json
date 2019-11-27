@@ -5,6 +5,10 @@
       "executablePath": "$(APPDATA)\\npm\\npx.cmd",
       "commandLineArgs": "npx autorest-beta  $(SolutionDir)\\test\\AutoRest.TestServer.Tests\\readme.md --output-folder=$(SolutionDir)\\test\\AutoRest.TestServer.Tests\\body-string --input-file=$(SolutionDir)\\node_modules\\@autorest\\test-server\\__files\\swagger\\body-string.json --title=body-string --namespace=body_string --cs-modeler.attach",
       "nativeDebugging": true
+    },
+    "Standalone": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=D:/github/azure/autorest.csharp/test/AutoRest.TestServer.Tests/body-string/CodeModel-body-string.yaml --plugin=cs-modeler --base-path=D:/github/azure/autorest.csharp/test/AutoRest.TestServer.Tests/body-string/ --namespace=body_string"
     }
   }
 }
