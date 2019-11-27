@@ -16,9 +16,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         private readonly List<string> _classFields = new List<string>();
         private CSharpNamespace? _currentNamespace;
 
-        //TODO: Make these into configuration values
-        private readonly bool _useTypeShortNames = true;
-        private readonly bool _useKeywords = true;
         private readonly string _definitionAccessDefault = "public";
 
         public abstract void Line(string str = "");
@@ -128,13 +125,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
-        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool? isNullable, bool isRequired = false) =>
-            Line($"{modifiers} {Pair(type, name, isNullable)} {{ get; {(isRequired ? "private " : String.Empty)}set; }}");
+        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool isRequired = false) =>
+            Line($"{modifiers} {Pair(type, name)} {{ get; {(isRequired ? "private " : String.Empty)}set; }}");
 
-        public void LazyProperty(string modifiers, CSharpType? type, CSharpType? concreteType, string? name, bool? isNullable)
+        public void LazyProperty(string modifiers, CSharpType type, CSharpType concreteType, string? name)
         {
             var variable = $"_{name.ToVariableName()}";
-            _classFields.Add($"private {Pair(concreteType, variable, isNullable)};");
+            _classFields.Add($"private {Pair(concreteType, variable)};");
             Line($"{modifiers} {Pair(type, name)} => {Type(typeof(LazyInitializer))}.EnsureInitialized(ref {variable});");
         }
 
@@ -175,25 +172,16 @@ namespace AutoRest.CSharp.V3.CodeGen
             });
         }
 
-        public string Type(CSharpType? type, bool? isNullable = false)
+        public string Type(CSharpType type)
         {
-            if (_useTypeShortNames)
-            {
-                //TODO: Does not recursively dig for types from subtypes
-                _usingNamespaces.Add(type?.KeywordName != null ? null : type?.Namespace);
-                _usingNamespaces.Add(type?.SubType1?.KeywordName != null ? null : type?.SubType1?.Namespace);
-                _usingNamespaces.Add(type?.SubType2?.KeywordName != null ? null : type?.SubType2?.Namespace);
-            }
-            var typeText = _useTypeShortNames ? type?.GetComposedName(typesAsKeywords: _useKeywords) : type?.FullName;
-            var nullMark = (isNullable ?? false) ? "?" : String.Empty;
-            return (typeText != null ? typeText + nullMark : null) ?? "[NO TYPE]";
+            return type.GetComposedName();
         }
 
-        public string Type(Type? type, bool? isNullable = false) => Type(new CSharpType {FrameworkType = type}, isNullable);
+        public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
         public string AttributeType(Type? type) => Type(type).Replace("Attribute", String.Empty);
 
         public static string Pair(string? typeText, string? name) => $"{typeText ?? "[NO TYPE]"} {name ?? "[NO NAME]"}";
-        public string Pair(CSharpType? type, string? name, bool? isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
-        public string Pair(Type? type, string? name, bool? isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
+        public string Pair(CSharpType? type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
+        public string Pair(Type? type, string? name, bool isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
     }
 }

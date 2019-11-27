@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
@@ -17,114 +18,78 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     internal class CSharpNamespace
     {
+        public CSharpNamespace(string? @base, string? category = null, string? apiVersion = null)
+        {
+            Base = @base;
+            Category = category;
+            ApiVersion = apiVersion;
+        }
+
         public string? Base { get; set; }
 
         public string? Category { get; set; }
 
         public string? ApiVersion { get; set; }
 
-        public string FullName => new[]{ Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
+        public string FullName => new[] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 
     internal class CSharpType
     {
-        private Type? CreateFrameworkType() => Namespace?.FullName != null && Name != null ? Type.GetType(FullName) : _frameworkType;
-
-        private CSharpNamespace? _namespace;
-
-        public CSharpNamespace? Namespace
+        public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
         {
-            get => _namespace;
-            set
-            {
-                _namespace = value;
-                _frameworkType = CreateFrameworkType();
-            }
         }
 
-        private string? _name;
-
-        public string? Name
+        public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
         {
-            get => _name;
-            set
-            {
-                _name = value;
-                _frameworkType = CreateFrameworkType();
-            }
+            Namespace ??= new CSharpNamespace(type.Namespace);
+            Name = type.Name;
+            IsNullable = isNullable;
+            Arguments = arguments;
+            IsValueType = type.IsValueType;
         }
 
-        public CSharpType? SubType1 { get; set; }
-
-        public CSharpType? SubType2 { get; set; }
-
-        public string GetComposedName(bool subTypesAsFullName = false, bool typesAsKeywords = true)
+        public CSharpType(CSharpNamespace ns, string name, bool isValueType = false, bool isNullable = false)
         {
-            var name = (typesAsKeywords ? KeywordName : null) ?? Name ?? String.Empty;
-            if ((SubType1 != null || SubType2 != null) && Name != null)
+            Name = name;
+            IsValueType = isValueType;
+            IsNullable = isNullable;
+            Namespace = ns;
+        }
+
+        public CSharpNamespace? Namespace { get; }
+
+        public string? Name { get; }
+        public bool IsValueType { get; }
+
+        public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
+
+        public string GetComposedName(bool fullName = false)
+        {
+            var name = fullName ? Namespace.FullName + "." + Name : Name;
+
+            if (Arguments.Any())
             {
-                var subTypes = (subTypesAsFullName
-                        ? new[] {SubType1?.FullName, SubType2?.FullName}
-                        : new[] {SubType1?.GetComposedName(typesAsKeywords: typesAsKeywords), SubType2?.GetComposedName(typesAsKeywords: typesAsKeywords)})
-                    .JoinIgnoreEmpty(", ");
-                return $"{name}<{subTypes}>";
+                var subTypes = Arguments.Select(a => a.GetComposedName(fullName)).JoinIgnoreEmpty(", ");
+                name += $"<{subTypes}>";
             }
+
+            if (IsNullable)
+            {
+                name += "?";
+            }
+
             return name;
         }
 
-        public string FullName => new[] { Namespace?.FullName, GetComposedName(true, false) }.JoinIgnoreEmpty(".");
+        public Type? FrameworkType { get; }
 
-        private Type? _frameworkType;
-        public Type? FrameworkType
+        public bool IsNullable { get; }
+
+        public CSharpType WithNullable(bool isNullable)
         {
-            get => _frameworkType;
-            set
-            {
-                _frameworkType = value;
-                if (_frameworkType == null) return;
-
-                _namespace ??= new CSharpNamespace();
-                _namespace.Base = _frameworkType.Namespace;
-                _namespace.Category = null;
-                _namespace.ApiVersion = null;
-                _name = _frameworkType.Name.Split('`')[0];
-                SubType1 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 0 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[0] } : null;
-                SubType2 = _frameworkType.IsGenericType && _frameworkType.GenericTypeArguments.Length > 1 ? new CSharpType { FrameworkType = _frameworkType.GenericTypeArguments[1] } : null;
-            }
+            return new CSharpType(Namespace, Name, IsValueType, isNullable);
         }
-
-        public string? KeywordName {
-            get
-            {
-                var hasElementType = FrameworkType?.HasElementType ?? false;
-                var frameworkType = hasElementType ? FrameworkType!.GetElementType() : FrameworkType;
-                var squareBrackets = hasElementType ? "[]" : String.Empty;
-                var keyword = GetKeywordMapping(frameworkType);
-                return keyword != null ? $"{keyword}{squareBrackets}" : null;
-            }
-        }
-
-        //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/built-in-types-table
-        private static string? GetKeywordMapping(Type? type) =>
-            type switch
-            {
-                var t when t == typeof(bool) => "bool",
-                var t when t == typeof(byte) => "byte",
-                var t when t == typeof(sbyte) => "sbyte",
-                var t when t == typeof(short) => "short",
-                var t when t == typeof(ushort) => "ushort",
-                var t when t == typeof(int) => "int",
-                var t when t == typeof(uint) => "uint",
-                var t when t == typeof(long) => "long",
-                var t when t == typeof(ulong) => "ulong",
-                var t when t == typeof(char) => "char",
-                var t when t == typeof(double) => "double",
-                var t when t == typeof(float) => "float",
-                var t when t == typeof(object) => "object",
-                var t when t == typeof(decimal) => "decimal",
-                var t when t == typeof(string) => "string",
-                _ => null
-            };
     }
 
     /// <summary>language metadata specific to schema instances</summary>

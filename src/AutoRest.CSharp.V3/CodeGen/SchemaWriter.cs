@@ -3,7 +3,9 @@
 
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
@@ -20,29 +22,25 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteSchema(Schema schema) =>
-            schema switch
-            {
-                ObjectSchema objectSchema => WriteObjectSchema(objectSchema),
-                SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSchema(sealedChoiceSchema),
-                ChoiceSchema choiceSchema => WriteChoiceSchema(choiceSchema),
-                _ => WriteDefaultSchema(schema)
-            };
-
-        public bool WriteDefaultSchema(Schema schema)
+        public void WriteSchema(ClientEntity entity)
         {
-            Header();
-            using var _ = UsingStatements();
-            var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs.Namespace))
+            switch (entity)
             {
-                using (Class(null, "partial", schema.CSharpName())) { }
+                case ClientModel.ClientModel objectSchema:
+                    WriteObjectSchema(objectSchema);
+                    break;
+                case ClientEnum e when e.GenerationOptions.IsStringBased:
+                    WriteSealedChoiceSchema(e);
+                    break;
+                case ClientEnum e when !e.GenerationOptions.IsStringBased:
+                    WriteChoiceSchema(e);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
-            return true;
         }
 
-        //TODO: This is currently input schemas only. Does not handle output-style schemas.
-        private bool WriteObjectSchema(ObjectSchema schema)
+        private void WriteObjectSchema(ClientModel.ClientModel schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -51,83 +49,75 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", schema.CSharpName()))
                 {
-                    var propertyInfos = (schema.Properties ?? Enumerable.Empty<Property>())
-                        .Select(p => (Property: p, PropertySchemaCs: p.Schema.Language.CSharp)).ToArray();
-                    foreach (var (property, _) in propertyInfos)
+                    var propertyInfos = schema.Properties;
+                    foreach (var property in propertyInfos)
                     {
-                        if (property.Schema is ConstantSchema constantSchema)
+                        if (property is ClientModelConstant constant)
                         {
                             //TODO: Determine if type can use 'const' field instead of 'static' property
-                            Line($"public static {Pair(_typeFactory.CreateType(constantSchema.ValueType), property.CSharpName())} {{ get; }} = {constantSchema.ToValueString()};");
+                            Line($"public static {Pair(_typeFactory.CreateType(constant.Type), property.CSharpName())} {{ get; }} = {constant.Value.ToValueString()};");
                             continue;
                         }
-                        if ((property.Schema.IsLazy()) && !(property.Required ?? false) && !(property.Required ?? false))
-                        {
-                            LazyProperty("public", _typeFactory.CreateType(property.Schema), _typeFactory.CreateConcreteType(property.Schema), property.CSharpName(), property.IsNullable());
-                            continue;
-                        }
-                        AutoProperty("public", _typeFactory.CreateType(property.Schema), property.CSharpName(), property.IsNullable(), property.Required ?? false);
+                        AutoProperty("public", _typeFactory.CreateType(property.Type), property.CSharpName(), property.IsMutable);
                     }
 
-                    var filteredPropertyInfos = propertyInfos.Where(p => !(p.Property.Schema is ConstantSchema)).ToArray();
-                    if (filteredPropertyInfos.Any(pi => pi.Property.Required ?? false))
+                    var requiredProperties = propertyInfos.Where(pi => !pi.IsMutable);
+                    var parameters = requiredProperties.Select(rp => Pair(_typeFactory.CreateInputType(rp.Type), rp.CSharpVariableName())).ToArray();
+                    using (Method("public", null, schema.CSharpName(), parameters))
                     {
-                        Line();
-                        Line("#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
-                        using (Method("private", null, schema.CSharpName()))
+                        foreach (var property in requiredProperties)
                         {
-                        }
-                        Line("#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.");
-
-                        Line();
-                        var requiredProperties = filteredPropertyInfos.Where(pi => pi.Property.Required ?? false)
-                            .Select(pi => (Info: pi, VariableName: pi.Property.CSharpVariableName(), InputType: _typeFactory.CreateInputType(pi.Property.Schema))).ToArray();
-                        var parameters = requiredProperties.Select(rp => Pair(rp.InputType, rp.VariableName)).ToArray();
-                        using (Method("public", null, schema.CSharpName(), parameters))
-                        {
-                            foreach (var ((property, _), variableName, _) in requiredProperties)
+                            var variableName = property.CSharpVariableName();
+                            if (NeedsInitialization(property.Type))
                             {
-                                if (property.Schema.IsLazy())
-                                {
-                                    Line($"{property.CSharpName()} = new {Type(_typeFactory.CreateConcreteType(property.Schema))}({variableName});");
-                                    continue;
-                                }
-                                Line($"{property.CSharpName()} = {variableName};");
+                                Line($"{property.CSharpName()} = new {Type(_typeFactory.CreateConcreteType(property.Type))}({variableName});");
+                                continue;
                             }
+                            Line($"{property.CSharpName()} = {variableName};");
                         }
                     }
                 }
             }
-            return true;
         }
 
-        private bool WriteSealedChoiceSchema(SealedChoiceSchema schema)
+        private bool NeedsInitialization(ClientTypeReference reference)
+        {
+            if (reference is CollectionTypeReference || reference is DictionaryTypeReference)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void WriteSealedChoiceSchema(ClientEnum schema)
         {
             Header();
             using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
             using (Namespace(cs.Namespace))
             {
-                using (Enum(null, null, schema.CSharpName()))
+                using (Enum(null, null, cs.Name))
                 {
-                    schema.Choices.Select(c => c).ForEachLast(ccs => EnumValue(ccs.CSharpName()), ccs => EnumValue(ccs.CSharpName(), false));
+                    schema.Values.Select(c => c).ForEachLast(ccs => EnumValue(ccs.Value.Value.ToString()), ccs => EnumValue(ccs.Value.Value.ToString(), false));
                 }
             }
-            return true;
         }
 
-        private bool WriteChoiceSchema(ChoiceSchema schema)
+        private void WriteChoiceSchema(ClientEnum schema)
         {
             Header();
             using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
             using (Namespace(cs.Namespace))
             {
-                var implementType = new CSharpType {FrameworkType = typeof(IEquatable<>), SubType1 = cs};
+                var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (Struct(null, "readonly partial", schema.CSharpName(), Type(implementType)))
                 {
                     var stringText = Type(typeof(string));
                     var nullableStringText = Type(typeof(string), true);
+                    var csTypeText = Type(cs);
+
                     Line($"private readonly {Pair(nullableStringText, "_value")};");
                     Line();
 
@@ -137,7 +127,17 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                     Line();
 
-                    var csTypeText = Type(cs);
+                    foreach (var choice in schema.Values.Select(c => c))
+                    {
+                        Line($"private const {Pair(stringText, $"{choice.CSharpName()}Value")} = \"{choice.Value}\";");
+                    }
+                    Line();
+
+                    foreach (var choice in schema.Values)
+                    {
+                        Line($"public static {Pair(csTypeText, choice?.CSharpName())} {{ get; }} = new {csTypeText}({choice?.CSharpName()}Value);");
+                    }
+
                     var boolText = Type(typeof(bool));
                     var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
                     MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
@@ -156,7 +156,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     MethodExpression("public override", nullableStringText, "ToString", null, "_value");
                 }
             }
-            return true;
         }
     }
 }

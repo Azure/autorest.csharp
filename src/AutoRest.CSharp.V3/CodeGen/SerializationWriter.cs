@@ -25,7 +25,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 ObjectSchema objectSchema => WriteObjectSerialization(objectSchema),
                 SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSerialization(sealedChoiceSchema),
-                ChoiceSchema choiceSchema => WriteChoiceSerialization(choiceSchema),
                 _ => WriteDefaultSerialization(schema)
             };
 
@@ -76,7 +75,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var elementType = _typeFactory.CreateType(array.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
-                    var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
+                    var elementTypeText = elementType?.GetComposedName() ?? "[NO TYPE]";
                     var createText = array.ElementType.ToDeserializeCall(_typeFactory, "item", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add({createText});" : $"// {array.ElementType.GetType().Name}: Not Implemented");
                 }
@@ -89,7 +88,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var elementType = _typeFactory.CreateType(dictionary.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
                     //TODO: Hack for property name/type name clashing
-                    var elementTypeText = elementType?.FullName ?? "[NO TYPE]";
+                    var elementTypeText = elementType?.GetComposedName() ?? "[NO TYPE]";
                     var createText = dictionary.ElementType.ToDeserializeCall(_typeFactory, "item.Value", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add(item.Name, {createText});" : $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
                 }
@@ -157,7 +156,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                     var propertyTypeName = propertyType?.Name ?? "[NO TYPE NAME]";
                                     //TODO: Hack for property name/type name clashing
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
-                                    ReadProperty(property.Schema, name, propertyType.FullName, propertyTypeName);
+                                    ReadProperty(property.Schema, name, propertyType.GetComposedName(), propertyTypeName);
                                     Line("continue;");
                                 }
                             }
@@ -199,32 +198,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                         .Prepend("{")
                         .Prepend("value switch"));
                     MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
-                }
-            }
-            return true;
-        }
-
-        private bool WriteChoiceSerialization(ChoiceSchema schema)
-        {
-            Header();
-            using var _ = UsingStatements();
-            var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs?.Namespace))
-            {
-                using (Struct(null, "readonly partial", schema.CSharpName()))
-                {
-                    var stringText = Type(typeof(string));
-                    foreach (var choice in schema.Choices.Select(c => c))
-                    {
-                        Line($"private const {Pair(stringText, $"{choice.CSharpName()}Value")} = \"{choice.Value}\";");
-                    }
-                    Line();
-
-                    var csTypeText = Type(cs);
-                    foreach (var choice in schema.Choices)
-                    {
-                        Line($"public static {Pair(csTypeText, choice?.CSharpName())} {{ get; }} = new {csTypeText}({choice?.CSharpName()}Value);");
-                    }
                 }
             }
             return true;
