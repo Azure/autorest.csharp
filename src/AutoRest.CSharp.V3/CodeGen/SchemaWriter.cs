@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
@@ -22,25 +21,25 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteSchema(ClientEntity entity)
+        public void WriteSchema(ClientModel.ClientModel model)
         {
-            switch (entity)
+            switch (model)
             {
-                case ClientModel.ClientModel objectSchema:
+                case ClientObject objectSchema:
                     WriteObjectSchema(objectSchema);
                     break;
-                case ClientEnum e when e.GenerationOptions.IsStringBased:
-                    WriteSealedChoiceSchema(e);
-                    break;
-                case ClientEnum e when !e.GenerationOptions.IsStringBased:
+                case ClientEnum e when e.IsStringBased:
                     WriteChoiceSchema(e);
+                    break;
+                case ClientEnum e when !e.IsStringBased:
+                    WriteSealedChoiceSchema(e);
                     break;
                 default:
                     throw new NotImplementedException();
             }
         }
 
-        private void WriteObjectSchema(ClientModel.ClientModel schema)
+        private void WriteObjectSchema(ClientModel.ClientObject schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -49,32 +48,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", schema.CSharpName()))
                 {
-                    var propertyInfos = schema.Properties;
-                    foreach (var property in propertyInfos)
+                    foreach (var constant in schema.Constants)
                     {
-                        if (property is ClientModelConstant constant)
-                        {
-                            //TODO: Determine if type can use 'const' field instead of 'static' property
-                            Line($"public static {Pair(_typeFactory.CreateType(constant.Type), property.CSharpName())} {{ get; }} = {constant.Value.ToValueString()};");
-                            continue;
-                        }
-                        AutoProperty("public", _typeFactory.CreateType(property.Type), property.CSharpName(), property.IsMutable);
+                        //TODO: Determine if type can use 'const' field instead of 'static' property
+                        Line($"public static {Pair(_typeFactory.CreateType(constant.Type), constant.Name)} {{ get; }} = {constant.Value.ToValueString()};");
                     }
 
-                    var requiredProperties = propertyInfos.Where(pi => !pi.IsMutable);
-                    var parameters = requiredProperties.Select(rp => Pair(_typeFactory.CreateInputType(rp.Type), rp.CSharpVariableName())).ToArray();
-                    using (Method("public", null, schema.CSharpName(), parameters))
+                    foreach (var property in schema.Properties)
                     {
-                        foreach (var property in requiredProperties)
-                        {
-                            var variableName = property.CSharpVariableName();
-                            if (NeedsInitialization(property.Type))
-                            {
-                                Line($"{property.CSharpName()} = new {Type(_typeFactory.CreateConcreteType(property.Type))}({variableName});");
-                                continue;
-                            }
-                            Line($"{property.CSharpName()} = {variableName};");
-                        }
+                        var initializer = NeedsInitialization(property.Type) ? $" = new {Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
+
+                        AutoProperty("public", _typeFactory.CreateType(property.Type), property.Name, property.IsReadOnly, initializer);
                     }
                 }
             }
@@ -99,7 +83,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Enum(null, null, cs.Name))
                 {
-                    schema.Values.Select(c => c).ForEachLast(ccs => EnumValue(ccs.Value.Value.ToString()), ccs => EnumValue(ccs.Value.Value.ToString(), false));
+                    schema.Values.Select(c => c).ForEachLast(ccs => EnumValue(ccs.Name), ccs => EnumValue(ccs.Name, false));
                 }
             }
         }
@@ -129,13 +113,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var choice in schema.Values.Select(c => c))
                     {
-                        Line($"private const {Pair(stringText, $"{choice.CSharpName()}Value")} = \"{choice.Value}\";");
+                        Line($"private const {Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
                     }
                     Line();
 
                     foreach (var choice in schema.Values)
                     {
-                        Line($"public static {Pair(csTypeText, choice?.CSharpName())} {{ get; }} = new {csTypeText}({choice?.CSharpName()}Value);");
+                        Line($"public static {Pair(csTypeText, choice?.Name)} {{ get; }} = new {csTypeText}({choice?.Name}Value);");
                     }
 
                     var boolText = Type(typeof(bool));

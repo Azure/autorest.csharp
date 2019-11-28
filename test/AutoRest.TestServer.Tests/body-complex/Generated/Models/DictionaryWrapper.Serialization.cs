@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -17,10 +18,10 @@ namespace body_complex.Models.V20160229
             {
                 writer.WriteStartObject();
             }
-            if (_defaultProgram != null)
+            if (DefaultProgram != null)
             {
                 writer.WriteStartObject("defaultProgram");
-                foreach (var item in _defaultProgram)
+                foreach (var item in DefaultProgram)
                 {
                     writer.WriteString(item.Key, item.Value);
                 }

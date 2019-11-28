@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         public static string CSharpVariableName(this Property property) => property.Language.Default.Name.ToVariableName();
 
-        public static string CSharpVariableName(this ClientModelProperty property) => property.Name.ToVariableName();
+        public static string CSharpVariableName(this ClientObjectProperty property) => property.Name.ToVariableName();
 
         public static string CSharpName(this Parameter parameter) => parameter.Schema is ConstantSchema ?
             parameter.Language.Default.Name.ToCleanName() :
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.V3.Plugins
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this IClientTypeProvider operation) =>
+        public static string CSharpName(this ISchemaTypeProvider operation) =>
             operation.Name.ToCleanName();
 
         public static bool IsLazy(this Schema operation) => operation is ArraySchema || operation is DictionarySchema;

@@ -12,34 +12,33 @@ namespace AutoRest.CSharp.V3.Pipeline
 {
     internal static class Extensions
     {
-
-        public static CSharpType? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
+        public static Type? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Any => null,
             AllSchemaTypes.Array => null,
-            AllSchemaTypes.Boolean => new CSharpType(typeof(bool)),
-            AllSchemaTypes.ByteArray => new CSharpType(typeof(byte[])),
-            AllSchemaTypes.Char => new CSharpType(typeof(char)),
+            AllSchemaTypes.Boolean => typeof(bool),
+            AllSchemaTypes.ByteArray => typeof(byte[]),
+            AllSchemaTypes.Char => typeof(char),
             AllSchemaTypes.Choice => null,
             AllSchemaTypes.Constant => null,
             AllSchemaTypes.Credential => null,
-            AllSchemaTypes.Date => new CSharpType(typeof(DateTime)),
-            AllSchemaTypes.DateTime => new CSharpType(typeof(DateTime)),
+            AllSchemaTypes.Date => typeof(DateTime),
+            AllSchemaTypes.DateTime => typeof(DateTime),
             AllSchemaTypes.Dictionary => null,
-            AllSchemaTypes.Duration => new CSharpType(typeof(TimeSpan)),
+            AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => new CSharpType(typeof(int)),
+            AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => new CSharpType(typeof(double)),
+            AllSchemaTypes.Number => typeof(double),
             AllSchemaTypes.Object => null,
-            AllSchemaTypes.OdataQuery => new CSharpType(typeof(string)),
+            AllSchemaTypes.OdataQuery => typeof(string),
             AllSchemaTypes.Or => null,
             AllSchemaTypes.Group => null,
             AllSchemaTypes.SealedChoice => null,
-            AllSchemaTypes.String => new CSharpType(typeof(string)),
-            AllSchemaTypes.Unixtime => new CSharpType(typeof(DateTime)),
-            AllSchemaTypes.Uri => new CSharpType(typeof(Uri)),
-            AllSchemaTypes.Uuid => new CSharpType(typeof(string)),
+            AllSchemaTypes.String => typeof(string),
+            AllSchemaTypes.Unixtime => typeof(DateTime),
+            AllSchemaTypes.Uri => typeof(Uri),
+            AllSchemaTypes.Uuid => typeof(string),
             AllSchemaTypes.Xor => null,
             _ => null
         };

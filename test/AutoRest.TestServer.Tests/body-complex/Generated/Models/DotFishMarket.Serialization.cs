@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -21,10 +22,10 @@ namespace body_complex.Models.V20160229
             {
                 SampleSalmon?.Serialize(writer, true);
             }
-            if (_salmons != null)
+            if (Salmons != null)
             {
                 writer.WriteStartArray("salmons");
-                foreach (var item in _salmons)
+                foreach (var item in Salmons)
                 {
                     item?.Serialize(writer, true);
                 }
@@ -34,10 +35,10 @@ namespace body_complex.Models.V20160229
             {
                 SampleFish?.Serialize(writer, true);
             }
-            if (_fishes != null)
+            if (Fishes != null)
             {
                 writer.WriteStartArray("fishes");
-                foreach (var item in _fishes)
+                foreach (var item in Fishes)
                 {
                     item?.Serialize(writer, true);
                 }
@@ -52,27 +53,27 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("sampleSalmon"))
                 {
-                    result.SampleSalmon = body_complex.Models.V20160229.DotSalmon.Deserialize(property.Value);
+                    result.SampleSalmon = DotSalmon.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Salmons.Add(body_complex.Models.V20160229.DotSalmon.Deserialize(item));
+                        result.Salmons.Add(DotSalmon.Deserialize(item));
                     }
                     continue;
                 }
                 if (property.NameEquals("sampleFish"))
                 {
-                    result.SampleFish = body_complex.Models.V20160229.DotFish.Deserialize(property.Value);
+                    result.SampleFish = DotFish.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fishes.Add(body_complex.Models.V20160229.DotFish.Deserialize(item));
+                        result.Fishes.Add(DotFish.Deserialize(item));
                     }
                     continue;
                 }

@@ -252,7 +252,7 @@ namespace body_string.Operations.V100
             }
         }
 
-        public static async ValueTask<Response<byte[]>> GetBase64EncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Byte[]>> GetBase64EncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("body_string.Operations.V100.GetBase64Encoded");
             scope.Start();
@@ -279,7 +279,7 @@ namespace body_string.Operations.V100
             }
         }
 
-        public static async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Byte[]>> GetBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("body_string.Operations.V100.GetBase64UrlEncoded");
             scope.Start();
@@ -306,7 +306,7 @@ namespace body_string.Operations.V100
             }
         }
 
-        public static async ValueTask<Response> PutBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, byte[] stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("body_string.Operations.V100.PutBase64UrlEncoded");
             scope.Start();
@@ -332,7 +332,7 @@ namespace body_string.Operations.V100
             }
         }
 
-        public static async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Byte[]>> GetNullBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("body_string.Operations.V100.GetNullBase64UrlEncoded");
             scope.Start();

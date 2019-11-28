@@ -15,6 +15,13 @@ namespace body_string.Models.V100
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        private const string RedColorValue = "red color";
+        private const string GreenColorValue = "green-color";
+        private const string BlueColorValue = "blue_color";
+
+        public static Colors RedColor { get; } = new Colors(RedColorValue);
+        public static Colors GreenColor { get; } = new Colors(GreenColorValue);
+        public static Colors BlueColor { get; } = new Colors(BlueColorValue);
         public static bool operator ==(Colors left, Colors right) => left.Equals(right);
         public static bool operator !=(Colors left, Colors right) => !left.Equals(right);
         public static implicit operator Colors(string value) => new Colors(value);

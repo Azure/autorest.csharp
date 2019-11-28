@@ -20,24 +20,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteSerialization(Schema schema) =>
-            schema switch
-            {
-                ObjectSchema objectSchema => WriteObjectSerialization(objectSchema),
-                SealedChoiceSchema sealedChoiceSchema => WriteSealedChoiceSerialization(sealedChoiceSchema),
-                _ => WriteDefaultSerialization(schema)
-            };
-
-        private bool WriteDefaultSerialization(Schema schema)
+        public void WriteSerialization(Schema schema)
         {
-            Header();
-            using var _ = UsingStatements();
-            var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs?.Namespace))
+            switch (schema)
             {
-                using (Class(null, "partial", schema.CSharpName())) { }
+                case ObjectSchema objectSchema:
+                    WriteObjectSerialization(objectSchema);
+                    break;
+                case SealedChoiceSchema sealedChoiceSchema:
+                    WriteSealedChoiceSerialization(sealedChoiceSchema);
+                    break;
             }
-            return true;
         }
 
         private void WriteProperty(Schema schema, string name, string serializedName, bool isNullable)
@@ -74,8 +67,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     var elementType = _typeFactory.CreateType(array.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
-                    //TODO: Hack for property name/type name clashing
-                    var elementTypeText = elementType?.GetComposedName() ?? "[NO TYPE]";
+                    var elementTypeText = Type(elementType);
                     var createText = array.ElementType.ToDeserializeCall(_typeFactory, "item", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add({createText});" : $"// {array.ElementType.GetType().Name}: Not Implemented");
                 }
@@ -87,8 +79,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     var elementType = _typeFactory.CreateType(dictionary.ElementType);
                     var elementTypeName = elementType?.Name ?? "[NO TYPE NAME]";
-                    //TODO: Hack for property name/type name clashing
-                    var elementTypeText = elementType?.GetComposedName() ?? "[NO TYPE]";
+                    var elementTypeText = Type(elementType);
                     var createText = dictionary.ElementType.ToDeserializeCall(_typeFactory, "item.Value", elementTypeText, elementTypeName);
                     Line(createText != null ? $"result.{name}.Add(item.Name, {createText});" : $"// {dictionary.ElementType.GetType().Name}: Not Implemented");
                 }
@@ -100,7 +91,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: This is currently input schemas only. Does not handle output-style schemas.
-        private bool WriteObjectSerialization(ObjectSchema schema)
+        private void WriteObjectSerialization(ObjectSchema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -123,8 +114,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         var propertyInfos = schema.Properties ?? Enumerable.Empty<Property>();
                         foreach (var property in propertyInfos)
                         {
-                            var hasField = property.Schema.IsLazy() && !(property.Required ?? false);
-                            var name = (hasField ? $"_{property.CSharpVariableName()}" : null) ?? property?.CSharpName() ?? "[NO NAME]";
+                            var name = property?.CSharpName() ?? "[NO NAME]";
 
                             var serializedName = property!.Language.Default.Name;
                             var isNullable = property.IsNullable();
@@ -156,7 +146,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                     var propertyTypeName = propertyType?.Name ?? "[NO TYPE NAME]";
                                     //TODO: Hack for property name/type name clashing
                                     //var propertyType = Type(property.Schema.Language.CSharp?.Type);
-                                    ReadProperty(property.Schema, name, propertyType.GetComposedName(), propertyTypeName);
+                                    ReadProperty(property.Schema, name, Type(propertyType), propertyTypeName);
                                     Line("continue;");
                                 }
                             }
@@ -165,10 +155,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                 }
             }
-            return true;
         }
 
-        private bool WriteSealedChoiceSerialization(SealedChoiceSchema schema)
+        private void WriteSealedChoiceSerialization(SealedChoiceSchema schema)
         {
             Header();
             using var _ = UsingStatements();
@@ -200,7 +189,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
-            return true;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("helper"))
                 {
-                    result.Helper = body_complex.Models.V20160229.MyBaseHelperType.Deserialize(property.Value);
+                    result.Helper = MyBaseHelperType.Deserialize(property.Value);
                     continue;
                 }
             }

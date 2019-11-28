@@ -8,7 +8,6 @@ using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -21,10 +20,9 @@ namespace AutoRest.CSharp.V3.Plugins
             _namespace = @namespace;
         }
 
-        public CSharpType CreateType(IClientTypeProvider clientTypeProvider)
+        public CSharpType CreateType(ISchemaTypeProvider clientTypeProvider)
         {
-            clientTypeProvider = clientTypeProvider ?? throw new ArgumentNullException(nameof(clientTypeProvider));
-            return new CSharpType(new CSharpNamespace(_namespace.NullIfEmpty()), clientTypeProvider.CSharpName());
+            return DefaultTypeInfo(clientTypeProvider.Schema);
         }
 
         public CSharpType CreateType(Schema schema)
@@ -33,7 +31,6 @@ namespace AutoRest.CSharp.V3.Plugins
 
             return CreateTypeInfo(schema);
         }
-
 
         public CSharpType? CreateInputType(Schema schema)
         {
@@ -57,7 +54,7 @@ namespace AutoRest.CSharp.V3.Plugins
         private CSharpType? CreateTypeInfo(Schema schema, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
-                { } s when s.Type.ToFrameworkCSharpType() is { } t => t,
+                Schema s when s.Type.ToFrameworkCSharpType() is Type t => new CSharpType(t),
                 ArraySchema arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
                 DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
                 ConstantSchema constantSchema => ConstantTypeInfo(constantSchema),
@@ -77,9 +74,9 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private CSharpType DictionaryTypeInfo(DictionarySchema schema,
             bool useConcrete = false) =>
-            new CSharpType(useConcrete ? DictionaryType : IDictionaryType, AllSchemaTypes.String.ToFrameworkCSharpType(), CreateTypeInfo(schema.ElementType));
+            new CSharpType(useConcrete ? DictionaryType : IDictionaryType, new CSharpType(typeof(string)), CreateTypeInfo(schema.ElementType));
 
-        private CSharpType ConstantTypeInfo(ConstantSchema schema) => CreateTypeInfo(schema.ValueType) ?? AllSchemaTypes.String.ToFrameworkCSharpType()!;
+        private CSharpType ConstantTypeInfo(ConstantSchema schema) => CreateTypeInfo(schema.ValueType) ?? new CSharpType(typeof(string));
 
         private CSharpType DefaultTypeInfo(Schema schema)
         {
@@ -99,17 +96,13 @@ namespace AutoRest.CSharp.V3.Plugins
             return CreateTypeInfo(clientTypeProvider, useConcrete: true);
         }
 
-        public CSharpType? CreateInputType(ClientTypeReference clientTypeProvider)
-        {
-            return CreateTypeInfo(clientTypeProvider, useInput: true);
-        }
-
         private CSharpType? CreateTypeInfo(ClientTypeReference schema, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
                 CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
                 DictionaryTypeReference dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
                 SchemaTypeReference schemaTypeReference => DefaultTypeInfo(schemaTypeReference),
+                FrameworkTypeReference frameworkTypeReference => new CSharpType(frameworkTypeReference.Type, isNullable: frameworkTypeReference.IsNullable),
                 _ => throw new NotImplementedException()
             };
 
@@ -127,7 +120,8 @@ namespace AutoRest.CSharp.V3.Plugins
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType(
                 new CSharpNamespace(_namespace.NullIfEmpty(), "Models", apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace),
-                schema.CSharpName() ?? schema.Language.Default.Name);
+                schema.CSharpName() ?? schema.Language.Default.Name,
+                isNullable: schemaReference.IsNullable);
         }
 
     }

@@ -16,6 +16,15 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
+
+    internal partial class ObjectSchema
+    {
+        public ObjectSchema()
+        {
+            Properties = Array.Empty<Property>();
+        }
+    }
+
     internal class CSharpNamespace
     {
         public CSharpNamespace(string? @base, string? category = null, string? apiVersion = null)
@@ -34,6 +43,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public string FullName => new[] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 
+
     internal class CSharpType
     {
         public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
@@ -43,10 +53,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
         {
             Namespace ??= new CSharpNamespace(type.Namespace);
-            Name = type.Name;
+            Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
             IsNullable = isNullable;
             Arguments = arguments;
             IsValueType = type.IsValueType;
+            FrameworkType = type;
         }
 
         public CSharpType(CSharpNamespace ns, string name, bool isValueType = false, bool isNullable = false)
@@ -61,26 +72,9 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         public string? Name { get; }
         public bool IsValueType { get; }
+        public bool IsBuiltin { get; }
 
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
-
-        public string GetComposedName(bool fullName = false)
-        {
-            var name = fullName ? Namespace.FullName + "." + Name : Name;
-
-            if (Arguments.Any())
-            {
-                var subTypes = Arguments.Select(a => a.GetComposedName(fullName)).JoinIgnoreEmpty(", ");
-                name += $"<{subTypes}>";
-            }
-
-            if (IsNullable)
-            {
-                name += "?";
-            }
-
-            return name;
-        }
 
         public Type? FrameworkType { get; }
 
@@ -88,8 +82,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         public CSharpType WithNullable(bool isNullable)
         {
-            return new CSharpType(Namespace, Name, IsValueType, isNullable);
+            return FrameworkType != null ?
+                new CSharpType(FrameworkType, isNullable, Arguments) :
+                new CSharpType(Namespace, Name, IsValueType, isNullable);
         }
+
     }
 
     /// <summary>language metadata specific to schema instances</summary>

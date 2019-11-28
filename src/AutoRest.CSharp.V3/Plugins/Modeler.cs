@@ -46,26 +46,58 @@ namespace AutoRest.CSharp.V3.Plugins
             return true;
         }
 
-        private ClientEntity BuildEntity(Schema schema)
+        private ClientModel.ClientModel BuildEntity(Schema schema)
         {
             switch (schema)
             {
                 case SealedChoiceSchema sealedChoiceSchema:
-                    return new ClientEnum(sealedChoiceSchema.CSharpName(), sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value))))
+                    return new ClientEnum(sealedChoiceSchema,
+                        sealedChoiceSchema.CSharpName(),
+                        sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value, new FrameworkTypeReference(typeof(string))))))
                     {
-                        GenerationOptions = { IsStringBased = false }
+                        IsStringBased = false
                     };
-                case ChoiceSchema sealedChoiceSchema:
-                    return new ClientEnum(sealedChoiceSchema.CSharpName(), sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value))))
+                case ChoiceSchema choiceSchema:
+                    return new ClientEnum(choiceSchema,
+                        choiceSchema.CSharpName(),
+                        choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value, new FrameworkTypeReference(typeof(string))))))
                     {
-                        GenerationOptions = { IsStringBased = true }
+                        IsStringBased = true
                     };
                 case ObjectSchema objectSchema:
-                    return new ClientModel.ClientModel(objectSchema.CSharpName(), objectSchema.Properties.Select(
-                        property => new ClientModelDataProperty(property.CSharpName(), new SchemaTypeReference(property.Schema), !(property.ReadOnly ?? false))));
+                    return new ClientModel.ClientObject(objectSchema, objectSchema.CSharpName(),
+                        objectSchema.Properties.Where(p => !(p.Schema is ConstantSchema)).Select(CreateProperty),
+                        objectSchema.Properties.Where(p=>p.Schema is ConstantSchema).Select(CreateConstant));
             }
 
             throw new NotImplementedException();
+        }
+
+        private static ClientObjectConstant CreateConstant(Property property)
+        {
+            var constantSchema = (ConstantSchema)property.Schema;
+            FrameworkTypeReference type = (FrameworkTypeReference)CreateType(constantSchema.ValueType, false);
+            return new ClientObjectConstant(property.CSharpName(), type, new ClientConstant(constantSchema.Value.Value, type));
+        }
+
+        private static ClientObjectProperty CreateProperty(Property property)
+        {
+            return new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy());
+        }
+
+        private static ClientTypeReference CreateType(Schema schema, bool isNullable)
+        {
+            switch (schema)
+            {
+                case ArraySchema array:
+                    return new CollectionTypeReference(CreateType(array.ElementType, false));
+                case DictionarySchema dictionary:
+                    return new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable));
+                case Schema s when s.Type.ToFrameworkCSharpType() is Type type:
+                    return new FrameworkTypeReference(type, isNullable);
+                default:
+                    return new SchemaTypeReference(schema, isNullable);
+            }
         }
     }
 }

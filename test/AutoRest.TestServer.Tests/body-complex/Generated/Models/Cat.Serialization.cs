@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -21,10 +22,10 @@ namespace body_complex.Models.V20160229
             {
                 writer.WriteString("color", Color);
             }
-            if (_hates != null)
+            if (Hates != null)
             {
                 writer.WriteStartArray("hates");
-                foreach (var item in _hates)
+                foreach (var item in Hates)
                 {
                     item?.Serialize(writer, true);
                 }
@@ -46,7 +47,7 @@ namespace body_complex.Models.V20160229
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(body_complex.Models.V20160229.Dog.Deserialize(item));
+                        result.Hates.Add(Dog.Deserialize(item));
                     }
                     continue;
                 }
