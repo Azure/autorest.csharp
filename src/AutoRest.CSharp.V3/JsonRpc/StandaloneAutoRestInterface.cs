@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
                 return Task.FromResult((T)Convert.ChangeType(stringValue, typeof(T)));
             }
 
-            return Task.FromResult(default(T));
+            return Task.FromResult(default(T)!);
         }
 
         public Task<string[]> ListInputs(string? artifactType = null)

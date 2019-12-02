@@ -118,13 +118,13 @@ namespace AutoRest.CSharp.V3.CodeGen
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
             CSharpType returnType;
-            CSharpType responseType = null;
+            CSharpType? responseType = null;
             bool hasResponse = false;
 
             if (schemaResponse != null)
             {
                 hasResponse = true;
-                responseType = _typeFactory.CreateType(schemaResponse?.Schema);
+                responseType = _typeFactory.CreateType(schemaResponse.Schema);
                 returnType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType));
             }
             else
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, _) = p;
-                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema).WithNullable(parameter?.IsNullable() ?? false), parameter.CSharpName());
+                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema).WithNullable(parameter?.IsNullable() ?? false), parameter!.CSharpName());
                         var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.ClientDefaultValue != null ? $"\"{parameter.ClientDefaultValue}\"" : "default")}" : pair;
@@ -233,7 +233,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 Line($"case {statusCode.GetEnumMemberValue()}:");
                             }
-                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall(_typeFactory, "document.RootElement", Type(responseType), responseType?.Name ?? "[NO TYPE NAME]")}, response);");
+                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall(_typeFactory, "document.RootElement", Type(responseType!), responseType!.Name ?? "[NO TYPE NAME]")}, response);");
                             Line("default:");
                             //TODO: Handle actual exception responses
                             Line($"throw new {Type(typeof(Exception))}();");

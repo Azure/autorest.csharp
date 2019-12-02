@@ -68,11 +68,10 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             Namespace = ns;
         }
 
-        public CSharpNamespace? Namespace { get; }
+        public CSharpNamespace Namespace { get; }
 
-        public string? Name { get; }
+        public string Name { get; }
         public bool IsValueType { get; }
-        public bool IsBuiltin { get; }
 
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
 

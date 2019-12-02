@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void EnumValue(string? value, bool includeComma = true) =>
             Line($"{value ?? "[NO VALUE]"}{(includeComma ? "," : String.Empty)}");
 
-        public void AutoProperty(string modifiers, CSharpType? type, string? name, bool isReadOnly = false, string? initializer = null) =>
+        public void AutoProperty(string modifiers, CSharpType type, string? name, bool isReadOnly = false, string? initializer = null) =>
             Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? String.Empty : "set; ")}}}{initializer}");
 
         //TODO: Determine implementation for documentation
@@ -194,11 +194,11 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
-        public string AttributeType(Type? type) => Type(type).Replace("Attribute", String.Empty);
+        public string AttributeType(Type type) => Type(type).Replace("Attribute", String.Empty);
 
         public static string Pair(string? typeText, string? name) => $"{typeText ?? "[NO TYPE]"} {name ?? "[NO NAME]"}";
-        public string Pair(CSharpType? type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
-        public string Pair(Type? type, string? name, bool isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
+        public string Pair(CSharpType type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
+        public string Pair(Type type, string? name, bool isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
 
         private static string? GetKeywordMapping(Type? type) =>
             type switch

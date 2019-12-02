@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.V3.Plugins
             return CreateTypeInfo(schema);
         }
 
-        public CSharpType? CreateInputType(Schema schema)
+        public CSharpType CreateInputType(Schema schema)
         {
             if (!(schema is ArraySchema || schema is DictionarySchema))
             {
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.V3.Plugins
         }
 
         // TODO: Clean this type selection mechanism up
-        private CSharpType? CreateTypeInfo(Schema schema, bool useConcrete = false, bool useInput = false) =>
+        private CSharpType CreateTypeInfo(Schema schema, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
                 Schema s when s.Type.ToFrameworkCSharpType() is Type t => new CSharpType(t),
