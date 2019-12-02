@@ -7,20 +7,13 @@ namespace body_string.Models.V100
 {
     public partial class RefColorConstant
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("RefColorConstant");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            writer.WriteString("ColorConstant", ColorConstant);
+            writer.WriteStartObject();
             if (Field1 != null)
             {
-                writer.WriteString("field1", Field1);
+                writer.WritePropertyName("field1");
+                writer.WriteStringValue(Field1);
             }
             writer.WriteEndObject();
         }
