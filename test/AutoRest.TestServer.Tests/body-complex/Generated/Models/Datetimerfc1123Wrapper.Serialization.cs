@@ -1,29 +1,25 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class Datetimerfc1123Wrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("datetimerfc1123-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field != null)
             {
-                writer.WriteString("field", Field.ToString());
+                writer.WritePropertyName("field");
+                writer.WriteStringValue(Field.ToString());
             }
             if (Now != null)
             {
-                writer.WriteString("now", Now.ToString());
+                writer.WritePropertyName("now");
+                writer.WriteStringValue(Now.ToString());
             }
             writer.WriteEndObject();
         }

@@ -2,10 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using Azure.Core;
@@ -14,72 +13,43 @@ namespace AutoRest.CSharp.V3.Pipeline
 {
     internal static class Extensions
     {
-        public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
-
-        private static readonly PropertyInfo[] SchemaCollectionProperties = typeof(Schemas).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(pi => pi.PropertyType.IsGenericType
-                         && pi.PropertyType.IsInterface
-                         && pi.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>)
-                         && (pi.PropertyType.GenericTypeArguments.First().IsSubclassOf(typeof(Schema))
-                            || pi.PropertyType.GenericTypeArguments.First() == typeof(Schema)))
-            .ToArray();
-        public static Schema[] GetAllSchemaNodes(this Schemas schemasNode) => SchemaCollectionProperties
-                .Select(pi => pi.GetValue(schemasNode))
-                .Where(c => c != null)
-                .SelectMany(c => ((IEnumerable)c!).Cast<Schema>())
-                .ToArray();
-
-        // Cache the CSharpType so they become references in the YAML.
-        private static readonly Dictionary<Type, CSharpType> CSharpTypes = new Dictionary<Type, CSharpType>
-        {
-            { typeof(bool), new CSharpType { FrameworkType = typeof(bool) } },
-            { typeof(char), new CSharpType { FrameworkType = typeof(char) } },
-            { typeof(int), new CSharpType { FrameworkType = typeof(int) } },
-            { typeof(double), new CSharpType { FrameworkType = typeof(double) } },
-            { typeof(string), new CSharpType { FrameworkType = typeof(string) } },
-            { typeof(byte[]), new CSharpType { FrameworkType = typeof(byte[]) } },
-            { typeof(DateTime), new CSharpType { FrameworkType = typeof(DateTime) } },
-            { typeof(TimeSpan), new CSharpType { FrameworkType = typeof(TimeSpan) } },
-            { typeof(Uri), new CSharpType { FrameworkType = typeof(Uri) } }
-        };
-
-        public static CSharpType? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
+        public static Type? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Any => null,
             AllSchemaTypes.Array => null,
-            AllSchemaTypes.Boolean => CSharpTypes[typeof(bool)],
-            AllSchemaTypes.ByteArray => CSharpTypes[typeof(byte[])],
-            AllSchemaTypes.Char => CSharpTypes[typeof(char)],
+            AllSchemaTypes.Boolean => typeof(bool),
+            AllSchemaTypes.ByteArray => typeof(byte[]),
+            AllSchemaTypes.Char => typeof(char),
             AllSchemaTypes.Choice => null,
             AllSchemaTypes.Constant => null,
             AllSchemaTypes.Credential => null,
-            AllSchemaTypes.Date => CSharpTypes[typeof(DateTime)],
-            AllSchemaTypes.DateTime => CSharpTypes[typeof(DateTime)],
+            AllSchemaTypes.Date => typeof(DateTime),
+            AllSchemaTypes.DateTime => typeof(DateTime),
             AllSchemaTypes.Dictionary => null,
-            AllSchemaTypes.Duration => CSharpTypes[typeof(TimeSpan)],
+            AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => CSharpTypes[typeof(int)],
+            AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => CSharpTypes[typeof(double)],
+            AllSchemaTypes.Number => typeof(double),
             AllSchemaTypes.Object => null,
-            AllSchemaTypes.OdataQuery => CSharpTypes[typeof(string)],
+            AllSchemaTypes.OdataQuery => typeof(string),
             AllSchemaTypes.Or => null,
             AllSchemaTypes.Group => null,
             AllSchemaTypes.SealedChoice => null,
-            AllSchemaTypes.String => CSharpTypes[typeof(string)],
-            AllSchemaTypes.Unixtime => CSharpTypes[typeof(DateTime)],
-            AllSchemaTypes.Uri => CSharpTypes[typeof(Uri)],
-            AllSchemaTypes.Uuid => CSharpTypes[typeof(string)],
+            AllSchemaTypes.String => typeof(string),
+            AllSchemaTypes.Unixtime => typeof(DateTime),
+            AllSchemaTypes.Uri => typeof(Uri),
+            AllSchemaTypes.Uuid => typeof(string),
             AllSchemaTypes.Xor => null,
             _ => null
         };
 
         public static RequestMethod? ToCoreRequestMethod(this HttpMethod method) => method switch
         {
-            HttpMethod.Delete => (RequestMethod?)RequestMethod.Delete,
+            HttpMethod.Delete => RequestMethod.Delete,
             HttpMethod.Get => RequestMethod.Get,
             HttpMethod.Head => RequestMethod.Head,
-            HttpMethod.Options => null,
+            HttpMethod.Options => (RequestMethod?)null,
             HttpMethod.Patch => RequestMethod.Patch,
             HttpMethod.Post => RequestMethod.Post,
             HttpMethod.Put => RequestMethod.Put,
@@ -103,20 +73,11 @@ namespace AutoRest.CSharp.V3.Pipeline
 
         private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>> SchemaSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>>
         {
-            { typeof(ObjectSchema), (vn, sn, n, a, q, ipn) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer, {(ipn ? "true" : "false")});" },
+            { typeof(ObjectSchema), (vn, sn, n, a, q, ipn) => $"{vn}{(n ? "?" : String.Empty)}.Serialize(writer);" },
             { typeof(SealedChoiceSchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToSerialString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToSerialString());" },
             { typeof(ChoiceSchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteStringValue({vn}{(n ? "?" : String.Empty)}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? "?" : String.Empty)}.ToString());" },
             { typeof(ByteArraySchema), (vn, sn, n, a, q, ipn) => a ? $"writer.WriteBase64StringValue({vn});" : $"writer.WriteBase64String({(q ? $"\"{sn}\"" : sn)}, {vn});" }
         };
-
-        public static string? ToSerializeCall(this Schema schema, TypeFactory typeFactory, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
-        {
-            var schemaType = schema.GetType();
-            var frameworkType = typeFactory.CreateType(schema)?.FrameworkType ?? typeof(void);
-            return SchemaSerializers.ContainsKey(schemaType)
-                ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName)
-                : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName) : null);
-        }
 
         //TODO: Figure out the rest of these.
         private static readonly Dictionary<Type, Func<string, string?>> TypeDeserializers = new Dictionary<Type, Func<string, string?>>
@@ -128,7 +89,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(string), n => $"{n}.GetString()" },
             { typeof(byte[]), n => null },
             { typeof(DateTime), n => $"{n}.GetDateTime()" },
-            { typeof(TimeSpan), n => null },
+            { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
             { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
@@ -140,6 +101,15 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(ByteArraySchema), (n, tt, tn) => $"{n}.GetBytesFromBase64()" }
         };
 
+        public static string? ToSerializeCall(this Schema schema, TypeFactory typeFactory, string name, string serializedName, bool isNullable, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        {
+            var schemaType = schema.GetType();
+            var frameworkType = typeFactory.CreateType(schema)?.FrameworkType ?? typeof(void);
+            return SchemaSerializers.ContainsKey(schemaType)
+                ? SchemaSerializers[schemaType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName)
+                : (TypeSerializers.ContainsKey(frameworkType) ? TypeSerializers[frameworkType](name, serializedName, isNullable, asArray, quotedSerializedName, includePropertyName) : null);
+        }
+
         public static string? ToDeserializeCall(this Schema schema, TypeFactory typeFactory, string name, string typeText, string typeName)
         {
             var schemaType = schema.GetType();
@@ -149,9 +119,100 @@ namespace AutoRest.CSharp.V3.Pipeline
                 : (TypeDeserializers.ContainsKey(frameworkType) ? TypeDeserializers[frameworkType](name) : null);
         }
 
+        public static void ToSerializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        {
+            if (includePropertyName)
+            {
+                writer.Append("writer.WritePropertyName(");
+                writer.Append("\"");
+                writer.Append(serializedName);
+                writer.Append("\"");
+                writer.Append(");");
+                writer.Line();
+            }
+
+            if (type is SchemaTypeReference schemaTypeReference)
+            {
+                var implementationType = typeFactory.ResolveReference(schemaTypeReference);
+
+                if (implementationType is ClientObject)
+                {
+                    writer.Append(name);
+                    if (type.IsNullable)
+                    {
+                        writer.Append("?");
+                    }
+                    writer.Append(".Serialize(writer);");
+                    return;
+                }
+
+                writer.Append("writer.WriteStringValue(");
+                switch (implementationType)
+                {
+                    case ClientEnum e when e.IsStringBased:
+                        writer.Append(name);
+                        writer.Append(".ToString()");
+                        break;
+                    case ClientEnum e when !e.IsStringBased:
+                        writer.Append(name);
+                        if (type.IsNullable)
+                        {
+                            writer.Append(".Value");
+                        }
+                        writer.Append(".ToSerialString()");
+                        break;
+                }
+                writer.Append(");");
+                writer.Line();
+            }
+            else
+            {
+                var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
+                writer.Line(TypeSerializers[frameworkType](name, serializedName, type.IsNullable, asArray, quotedSerializedName, false) ?? "writer.WriteNullValue();");
+            }
+        }
+
+        public static void ToDeserializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string typeText, string typeName)
+        {
+            CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
+            if (type is SchemaTypeReference schemaTypeReference)
+            {
+                var implementationType = typeFactory.ResolveReference(schemaTypeReference);
+
+                switch (implementationType)
+                {
+                    case ClientObject _:
+                        writer.Append(writer.Type(cSharpType));
+                        writer.Append($".Deserialize({name})");
+                        return;
+                    case ClientEnum e when e.IsStringBased:
+                        writer.Append(writer.Type(cSharpType));
+                        writer.Append($".Parse({name})");
+                        return;
+                    case ClientEnum e when !e.IsStringBased:
+                        writer.Append($"{name}");
+                        writer.Append(".GetString().To");
+                        writer.Append(writer.Type(cSharpType));
+                        writer.Append($"()");
+                        return;
+                }
+            }
+            else
+            {
+                var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
+                writer.Append(TypeDeserializers[frameworkType](name) ?? "null");
+            }
+        }
+
         public static string ToValueString(this ConstantSchema schema)
         {
             var value = schema.Value.Value;
+            return $"{((value is string || value == null) ? $"\"{value}\"" : value)}";
+        }
+
+        public static string ToValueString(this ClientConstant schema)
+        {
+            var value = schema.Value;
             return $"{((value is string || value == null) ? $"\"{value}\"" : value)}";
         }
     }

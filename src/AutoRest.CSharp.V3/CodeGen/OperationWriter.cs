@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -118,33 +119,18 @@ namespace AutoRest.CSharp.V3.CodeGen
             //TODO: Handle multiple responses
             var schemaResponse = operation.Responses?.FirstOrDefault() as SchemaResponse;
             CSharpType returnType;
-            CSharpType responseType = null;
+            CSharpType? responseType = null;
             bool hasResponse = false;
 
             if (schemaResponse != null)
             {
                 hasResponse = true;
-                responseType = _typeFactory.CreateType(schemaResponse?.Schema);
-                returnType = new CSharpType
-                {
-                    FrameworkType = typeof(ValueTask<>),
-                    SubType1 = new CSharpType
-                    {
-                        FrameworkType = typeof(Response<>),
-                        SubType1 = responseType
-                    }
-                };
+                responseType = _typeFactory.CreateType(schemaResponse.Schema);
+                returnType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType));
             }
             else
             {
-                returnType = new CSharpType
-                {
-                    FrameworkType = typeof(ValueTask<>),
-                    SubType1 = new CSharpType
-                    {
-                        FrameworkType = typeof(Response)
-                    }
-                };
+                returnType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
             }
 
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
@@ -160,8 +146,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, _) = p;
-                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema) ?? _typeFactory.CreateType(parameter.Schema), parameter.CSharpName(), parameter?.IsNullable());
-                        var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
+                        Debug.Assert(parameter != null);
+                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema).WithNullable(parameter.IsNullable()), parameter.CSharpName());
+                        var shouldBeDefaulted = parameter.IsNullable() || parameter.ClientDefaultValue != null;
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.ClientDefaultValue != null ? $"\"{parameter.ClientDefaultValue}\"" : "default")}" : pair;
                     }))
@@ -218,14 +205,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var bodyParameter = parameters.Select(p => p.Parameter).FirstOrDefault(p => (p.Protocol.Http as HttpParameter)?.In == ParameterLocation.Body);
                     if (bodyParameter != null)
                     {
-                        var bufferWriter = new CSharpType
-                        {
-                            FrameworkType = typeof(ArrayBufferWriter<>),
-                            SubType1 = new CSharpType
-                            {
-                                FrameworkType = typeof(byte)
-                            }
-                        };
+                        var bufferWriter = new CSharpType(typeof(ArrayBufferWriter<>), new CSharpType(typeof(byte)));
 
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
@@ -255,7 +235,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 Line($"case {statusCode.GetEnumMemberValue()}:");
                             }
-                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall(_typeFactory, "document.RootElement", Type(responseType), responseType?.Name ?? "[NO TYPE NAME]")}, response);");
+                            Line($"return {Type(typeof(Response))}.FromValue({schemaResponse.Schema.ToDeserializeCall(_typeFactory, "document.RootElement", Type(responseType!), responseType!.Name ?? "[NO TYPE NAME]")}, response);");
                             Line("default:");
                             //TODO: Handle actual exception responses
                             Line($"throw new {Type(typeof(Exception))}();");

@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class BooleanWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("boolean-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (FieldTrue != null)
             {
-                writer.WriteBoolean("field_true", FieldTrue.Value);
+                writer.WritePropertyName("field_true");
+                writer.WriteBooleanValue(FieldTrue.Value);
             }
             if (FieldFalse != null)
             {
-                writer.WriteBoolean("field_false", FieldFalse.Value);
+                writer.WritePropertyName("field_false");
+                writer.WriteBooleanValue(FieldFalse.Value);
             }
             writer.WriteEndObject();
         }

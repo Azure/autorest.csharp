@@ -159,7 +159,7 @@ namespace body_string.Operations.V100
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                enumStringBody.Serialize(writer, false);
+                enumStringBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);

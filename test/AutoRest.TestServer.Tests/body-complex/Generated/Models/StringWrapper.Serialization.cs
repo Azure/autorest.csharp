@@ -7,27 +7,23 @@ namespace body_complex.Models.V20160229
 {
     public partial class StringWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("string-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field != null)
             {
-                writer.WriteString("field", Field);
+                writer.WritePropertyName("field");
+                writer.WriteStringValue(Field);
             }
             if (Empty != null)
             {
-                writer.WriteString("empty", Empty);
+                writer.WritePropertyName("empty");
+                writer.WriteStringValue(Empty);
             }
             if (NullProperty != null)
             {
-                writer.WriteString("null", NullProperty);
+                writer.WritePropertyName("null");
+                writer.WriteStringValue(NullProperty);
             }
             writer.WriteEndObject();
         }

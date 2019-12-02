@@ -7,42 +7,33 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotFishMarket
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("DotFishMarket");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (SampleSalmon != null)
             {
-                SampleSalmon?.Serialize(writer, true);
+                writer.WritePropertyName("sampleSalmon");
+                SampleSalmon?.Serialize(writer);
             }
-            if (_salmons != null)
+            writer.WriteStartArray("salmons");
+            foreach (var item in Salmons)
             {
-                writer.WriteStartArray("salmons");
-                foreach (var item in _salmons)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("salmons");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             if (SampleFish != null)
             {
-                SampleFish?.Serialize(writer, true);
+                writer.WritePropertyName("sampleFish");
+                SampleFish?.Serialize(writer);
             }
-            if (_fishes != null)
+            writer.WriteStartArray("fishes");
+            foreach (var item in Fishes)
             {
-                writer.WriteStartArray("fishes");
-                foreach (var item in _fishes)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("fishes");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static DotFishMarket Deserialize(JsonElement element)
@@ -52,27 +43,27 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("sampleSalmon"))
                 {
-                    result.SampleSalmon = body_complex.Models.V20160229.DotSalmon.Deserialize(property.Value);
+                    result.SampleSalmon = DotSalmon.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Salmons.Add(body_complex.Models.V20160229.DotSalmon.Deserialize(item));
+                        result.Salmons.Add(DotSalmon.Deserialize(item));
                     }
                     continue;
                 }
                 if (property.NameEquals("sampleFish"))
                 {
-                    result.SampleFish = body_complex.Models.V20160229.DotFish.Deserialize(property.Value);
+                    result.SampleFish = DotFish.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fishes.Add(body_complex.Models.V20160229.DotFish.Deserialize(item));
+                        result.Fishes.Add(DotFish.Deserialize(item));
                     }
                     continue;
                 }

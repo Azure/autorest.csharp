@@ -7,20 +7,15 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotFish
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("DotFish");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            writer.WriteString("fish.type", FishType);
+            writer.WriteStartObject();
+            writer.WritePropertyName("fish.type");
+            writer.WriteStringValue(FishType);
             if (Species != null)
             {
-                writer.WriteString("species", Species);
+                writer.WritePropertyName("species");
+                writer.WriteStringValue(Species);
             }
             writer.WriteEndObject();
         }

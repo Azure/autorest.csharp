@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class Error
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("Error");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Status != null)
             {
-                writer.WriteNumber("status", Status.Value);
+                writer.WritePropertyName("status");
+                writer.WriteNumberValue(Status.Value);
             }
             if (Message != null)
             {
-                writer.WriteString("message", Message);
+                writer.WritePropertyName("message");
+                writer.WriteStringValue(Message);
             }
             writer.WriteEndObject();
         }

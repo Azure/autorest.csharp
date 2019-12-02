@@ -7,16 +7,9 @@ namespace body_complex.Models.V20160229
 {
     public partial class Cookiecuttershark
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("cookiecuttershark");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             writer.WriteEndObject();
         }
         internal static Cookiecuttershark Deserialize(JsonElement element)

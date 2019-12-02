@@ -1,25 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class ByteWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("byte-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field != null)
             {
-                writer.WriteBase64String("field", Field);
+                writer.WritePropertyName("field");
+                writer.WriteNullValue();
             }
             writer.WriteEndObject();
         }
@@ -30,7 +25,7 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    result.Field = property.Value.GetBytesFromBase64();
+                    result.Field = null;
                     continue;
                 }
             }

@@ -7,19 +7,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class Siamese
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("siamese");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Breed != null)
             {
-                writer.WriteString("breed", Breed);
+                writer.WritePropertyName("breed");
+                writer.WriteStringValue(Breed);
             }
             writer.WriteEndObject();
         }

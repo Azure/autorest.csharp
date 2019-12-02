@@ -7,29 +7,21 @@ namespace body_complex.Models.V20160229
 {
     public partial class Cat
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("cat");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Color != null)
             {
-                writer.WriteString("color", Color);
+                writer.WritePropertyName("color");
+                writer.WriteStringValue(Color);
             }
-            if (_hates != null)
+            writer.WriteStartArray("hates");
+            foreach (var item in Hates)
             {
-                writer.WriteStartArray("hates");
-                foreach (var item in _hates)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("hates");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Cat Deserialize(JsonElement element)
@@ -46,7 +38,7 @@ namespace body_complex.Models.V20160229
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(body_complex.Models.V20160229.Dog.Deserialize(item));
+                        result.Hates.Add(Dog.Deserialize(item));
                     }
                     continue;
                 }

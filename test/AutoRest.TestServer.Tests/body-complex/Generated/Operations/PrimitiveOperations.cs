@@ -53,7 +53,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -106,7 +106,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -159,7 +159,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -212,7 +212,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -265,7 +265,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -318,7 +318,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -371,7 +371,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -424,7 +424,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -477,7 +477,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -530,7 +530,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -583,7 +583,7 @@ namespace body_complex.Operations.V20160229
                 request.Headers.SetValue("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                complexBody.Serialize(writer, false);
+                complexBody.Serialize(writer);
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);

@@ -7,25 +7,16 @@ namespace body_complex.Models.V20160229
 {
     public partial class ArrayWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
+            writer.WriteStartObject();
+            writer.WriteStartArray("array");
+            foreach (var item in Array)
             {
-                writer.WriteStartObject("array-wrapper");
+                writer.WritePropertyName("array");
+                writer.WriteStringValue(item);
             }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            if (_array != null)
-            {
-                writer.WriteStartArray("array");
-                foreach (var item in _array)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static ArrayWrapper Deserialize(JsonElement element)

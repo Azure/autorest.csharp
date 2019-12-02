@@ -8,7 +8,7 @@
     },
     "Standalone": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=D:/github/azure/autorest.csharp/test/AutoRest.TestServer.Tests/body-string/CodeModel-body-string.yaml --plugin=cs-modeler --base-path=D:/github/azure/autorest.csharp/test/AutoRest.TestServer.Tests/body-string/ --namespace=body_string"
+      "commandLineArgs": "--standalone --input-codemodel=d:\\github\\azure\\autorest.csharp\\test\\AutoRest.TestServer.Tests\\body-complex\\CodeModel-body-complex.yaml --plugin=cs-modeler --base-path=D:/github/azure/autorest.csharp/test/AutoRest.TestServer.Tests/body-complex/ --namespace=body_complex"
     }
   }
 }
