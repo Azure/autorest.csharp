@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             HttpMethod.Delete => RequestMethod.Delete,
             HttpMethod.Get => RequestMethod.Get,
             HttpMethod.Head => RequestMethod.Head,
-            HttpMethod.Options => null,
+            HttpMethod.Options => (RequestMethod?)null,
             HttpMethod.Patch => RequestMethod.Patch,
             HttpMethod.Post => RequestMethod.Post,
             HttpMethod.Put => RequestMethod.Put,

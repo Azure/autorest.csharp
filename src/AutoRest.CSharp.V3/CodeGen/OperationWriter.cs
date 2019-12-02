@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -145,8 +146,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     .OrderBy(p => (p.Parameter.IsNullable()) || (p.Parameter.ClientDefaultValue != null)).Select(p =>
                     {
                         var (parameter, _) = p;
-                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema).WithNullable(parameter?.IsNullable() ?? false), parameter!.CSharpName());
-                        var shouldBeDefaulted = (parameter?.IsNullable() ?? false) || (parameter!.ClientDefaultValue != null);
+                        Debug.Assert(parameter != null);
+                        var pair = Pair(_typeFactory.CreateInputType(parameter.Schema).WithNullable(parameter.IsNullable()), parameter.CSharpName());
+                        var shouldBeDefaulted = parameter.IsNullable() || parameter.ClientDefaultValue != null;
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.ClientDefaultValue != null ? $"\"{parameter.ClientDefaultValue}\"" : "default")}" : pair;
                     }))
