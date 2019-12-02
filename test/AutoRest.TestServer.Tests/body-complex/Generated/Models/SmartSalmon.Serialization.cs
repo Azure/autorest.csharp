@@ -7,19 +7,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class SmartSalmon
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("smart_salmon");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (CollegeDegree != null)
             {
-                writer.WriteString("college_degree", CollegeDegree);
+                writer.WritePropertyName("college_degree");
+                writer.WriteStringValue(CollegeDegree);
             }
             writer.WriteEndObject();
         }

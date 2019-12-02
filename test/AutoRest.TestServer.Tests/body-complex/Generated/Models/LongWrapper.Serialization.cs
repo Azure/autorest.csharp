@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class LongWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("long-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field1 != null)
             {
-                writer.WriteNumber("field1", Field1.Value);
+                writer.WritePropertyName("field1");
+                writer.WriteNumberValue(Field1.Value);
             }
             if (Field2 != null)
             {
-                writer.WriteNumber("field2", Field2.Value);
+                writer.WritePropertyName("field2");
+                writer.WriteNumberValue(Field2.Value);
             }
             writer.WriteEndObject();
         }

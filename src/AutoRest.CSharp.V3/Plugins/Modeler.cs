@@ -20,22 +20,27 @@ namespace AutoRest.CSharp.V3.Plugins
             var schemas = (codeModel.Schemas.Choices ?? Enumerable.Empty<ChoiceSchema>()).Cast<Schema>()
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
-            foreach (var schema in schemas)
-            {
-                var name = schema.CSharpName() ?? "[NO NAME]";
-                var writer = new SchemaWriter(new TypeFactory(configuration.Namespace));
-                var entity = BuildEntity(schema);
-                writer.WriteSchema(entity);
-                await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");
 
-                var serializeWriter = new SerializationWriter(new TypeFactory(configuration.Namespace));
-                serializeWriter.WriteSerialization(schema);
+            var entities = schemas.Select(BuildEntity).ToArray();
+            var typeProviders = entities.OfType<ISchemaTypeProvider>().ToArray();
+            var typeFactory = new TypeFactory(configuration.Namespace, typeProviders);
+
+            foreach (var entity in entities)
+            {
+                var name = entity.Name;
+                var writer = new SchemaWriter(typeFactory);
+                writer.WriteSchema(entity);
+
+                var serializeWriter = new SerializationWriter(typeFactory);
+                serializeWriter.WriteSerialization(entity);
+
+                await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");
                 await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializeWriter.ToFormattedCode(), "source-file-csharp");
             }
 
             foreach (var operationGroup in codeModel.OperationGroups)
             {
-                var writer = new OperationWriter(new TypeFactory(configuration.Namespace));
+                var writer = new OperationWriter(typeFactory);
                 writer.WriteOperationGroup(operationGroup);
                 await autoRest.WriteFile($"Generated/Operations/{operationGroup.CSharpName()}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
@@ -82,7 +87,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static ClientObjectProperty CreateProperty(Property property)
         {
-            return new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy());
+            return new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName);
         }
 
         private static ClientTypeReference CreateType(Schema schema, bool isNullable)

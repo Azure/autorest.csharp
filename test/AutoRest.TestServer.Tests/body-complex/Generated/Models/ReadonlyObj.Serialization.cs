@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class ReadonlyObj
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("readonly-obj");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Id != null)
             {
-                writer.WriteString("id", Id);
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
             }
             if (Size != null)
             {
-                writer.WriteNumber("size", Size.Value);
+                writer.WritePropertyName("size");
+                writer.WriteNumberValue(Size.Value);
             }
             writer.WriteEndObject();
         }

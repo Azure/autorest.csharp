@@ -8,19 +8,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class Sawshark
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("sawshark");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Picture != null)
             {
-                writer.WriteBase64String("picture", Picture);
+                writer.WritePropertyName("picture");
+                writer.WriteNullValue();
             }
             writer.WriteEndObject();
         }
@@ -31,7 +25,7 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("picture"))
                 {
-                    result.Picture = property.Value.GetBytesFromBase64();
+                    result.Picture = null;
                     continue;
                 }
             }

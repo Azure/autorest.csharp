@@ -7,24 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyBaseType
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("MyBaseType");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            writer.WriteString("kind", Kind);
+            writer.WriteStartObject();
             if (PropB1 != null)
             {
-                writer.WriteString("propB1", PropB1);
+                writer.WritePropertyName("propB1");
+                writer.WriteStringValue(PropB1);
             }
             if (Helper != null)
             {
-                Helper?.Serialize(writer, true);
+                writer.WritePropertyName("helper");
+                Helper?.Serialize(writer);
             }
             writer.WriteEndObject();
         }

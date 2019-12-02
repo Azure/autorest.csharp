@@ -1,32 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class ArrayWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
+            writer.WriteStartObject();
+            writer.WriteStartArray("array");
+            foreach (var item in Array)
             {
-                writer.WriteStartObject("array-wrapper");
+                writer.WritePropertyName("array");
+                writer.WriteStringValue(item);
             }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            if (Array != null)
-            {
-                writer.WriteStartArray("array");
-                foreach (var item in Array)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static ArrayWrapper Deserialize(JsonElement element)

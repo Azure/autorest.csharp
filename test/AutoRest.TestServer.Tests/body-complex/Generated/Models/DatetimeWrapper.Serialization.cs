@@ -8,23 +8,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class DatetimeWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("datetime-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field != null)
             {
-                writer.WriteString("field", Field.ToString());
+                writer.WritePropertyName("field");
+                writer.WriteStringValue(Field.ToString());
             }
             if (Now != null)
             {
-                writer.WriteString("now", Now.ToString());
+                writer.WritePropertyName("now");
+                writer.WriteStringValue(Now.ToString());
             }
             writer.WriteEndObject();
         }

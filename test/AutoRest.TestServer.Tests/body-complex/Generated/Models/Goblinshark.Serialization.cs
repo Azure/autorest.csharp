@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class Goblinshark
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("goblinshark");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Jawsize != null)
             {
-                writer.WriteNumber("jawsize", Jawsize.Value);
+                writer.WritePropertyName("jawsize");
+                writer.WriteNumberValue(Jawsize.Value);
             }
             if (Color != null)
             {
-                writer.WriteString("color", Color?.ToSerialString());
+                writer.WritePropertyName("color");
+                writer.WriteStringValue(Color.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

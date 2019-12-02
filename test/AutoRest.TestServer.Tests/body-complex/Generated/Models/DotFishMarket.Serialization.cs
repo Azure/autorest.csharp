@@ -1,49 +1,39 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class DotFishMarket
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("DotFishMarket");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (SampleSalmon != null)
             {
-                SampleSalmon?.Serialize(writer, true);
+                writer.WritePropertyName("sampleSalmon");
+                SampleSalmon?.Serialize(writer);
             }
-            if (Salmons != null)
+            writer.WriteStartArray("salmons");
+            foreach (var item in Salmons)
             {
-                writer.WriteStartArray("salmons");
-                foreach (var item in Salmons)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("salmons");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             if (SampleFish != null)
             {
-                SampleFish?.Serialize(writer, true);
+                writer.WritePropertyName("sampleFish");
+                SampleFish?.Serialize(writer);
             }
-            if (Fishes != null)
+            writer.WriteStartArray("fishes");
+            foreach (var item in Fishes)
             {
-                writer.WriteStartArray("fishes");
-                foreach (var item in Fishes)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("fishes");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static DotFishMarket Deserialize(JsonElement element)

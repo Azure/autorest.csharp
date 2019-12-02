@@ -3,7 +3,8 @@
 
 namespace AutoRest.CSharp.V3.ClientModel
 {
-    internal class ClientModel
+    internal abstract class ClientModel
     {
+        public abstract string Name { get; }
     }
 }

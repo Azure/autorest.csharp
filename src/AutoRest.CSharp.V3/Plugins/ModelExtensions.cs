@@ -12,10 +12,6 @@ namespace AutoRest.CSharp.V3.Plugins
         public static bool IsNullable(this Parameter parameter) => !(parameter.Required ?? false);
         public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);
 
-        public static string CSharpVariableName(this Property property) => property.Language.Default.Name.ToVariableName();
-
-        public static string CSharpVariableName(this ClientObjectProperty property) => property.Name.ToVariableName();
-
         public static string CSharpName(this Parameter parameter) => parameter.Schema is ConstantSchema ?
             parameter.Language.Default.Name.ToCleanName() :
             parameter.Language.Default.Name.ToVariableName();

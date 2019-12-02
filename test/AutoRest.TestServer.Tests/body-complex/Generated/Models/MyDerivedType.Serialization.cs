@@ -7,19 +7,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyDerivedType
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("MyDerivedType");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (PropD1 != null)
             {
-                writer.WriteString("propD1", PropD1);
+                writer.WritePropertyName("propD1");
+                writer.WriteStringValue(PropD1);
             }
             writer.WriteEndObject();
         }

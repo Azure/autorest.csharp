@@ -7,19 +7,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyBaseHelperType
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("MyBaseHelperType");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (PropBH1 != null)
             {
-                writer.WriteString("propBH1", PropBH1);
+                writer.WritePropertyName("propBH1");
+                writer.WriteStringValue(PropBH1);
             }
             writer.WriteEndObject();
         }

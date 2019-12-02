@@ -1,38 +1,31 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class Fish
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("Fish");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            writer.WriteString("fishtype", Fishtype);
+            writer.WriteStartObject();
+            writer.WritePropertyName("fishtype");
+            writer.WriteStringValue(Fishtype);
             if (Species != null)
             {
-                writer.WriteString("species", Species);
+                writer.WritePropertyName("species");
+                writer.WriteStringValue(Species);
             }
-            writer.WriteNumber("length", Length);
-            if (Siblings != null)
+            writer.WritePropertyName("length");
+            writer.WriteNumberValue(Length);
+            writer.WriteStartArray("siblings");
+            foreach (var item in Siblings)
             {
-                writer.WriteStartArray("siblings");
-                foreach (var item in Siblings)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("siblings");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Fish Deserialize(JsonElement element)

@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class Pet
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("pet");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Id != null)
             {
-                writer.WriteNumber("id", Id.Value);
+                writer.WritePropertyName("id");
+                writer.WriteNumberValue(Id.Value);
             }
             if (Name != null)
             {
-                writer.WriteString("name", Name);
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
             }
             writer.WriteEndObject();
         }

@@ -14,10 +14,12 @@ namespace AutoRest.CSharp.V3.Plugins
     internal class TypeFactory
     {
         private readonly string _namespace;
+        private readonly ISchemaTypeProvider[] _schemaTypes;
 
-        public TypeFactory(string @namespace)
+        public TypeFactory(string @namespace, ISchemaTypeProvider[] schemaTypes)
         {
             _namespace = @namespace;
+            _schemaTypes = schemaTypes;
         }
 
         public CSharpType CreateType(ISchemaTypeProvider clientTypeProvider)
@@ -86,17 +88,22 @@ namespace AutoRest.CSharp.V3.Plugins
                 schema.CSharpName() ?? schema.Language.Default.Name);
         }
 
-        public CSharpType? CreateType(ClientTypeReference clientTypeProvider)
+        public CSharpType CreateType(ClientTypeReference clientTypeProvider)
         {
             return CreateTypeInfo(clientTypeProvider);
         }
 
-        public CSharpType? CreateConcreteType(ClientTypeReference clientTypeProvider)
+        public CSharpType CreateConcreteType(ClientTypeReference clientTypeProvider)
         {
             return CreateTypeInfo(clientTypeProvider, useConcrete: true);
         }
 
-        private CSharpType? CreateTypeInfo(ClientTypeReference schema, bool useConcrete = false, bool useInput = false) =>
+        public ISchemaTypeProvider ResolveReference(SchemaTypeReference reference)
+        {
+            return _schemaTypes.Single(s => s.Schema == reference.Schema);
+        }
+
+        private CSharpType CreateTypeInfo(ClientTypeReference schema, bool useConcrete = false, bool useInput = false) =>
             schema switch
             {
                 CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
@@ -116,11 +123,12 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
         {
-            var schema = schemaReference.Schema;
+            var type = ResolveReference(schemaReference);
+            var schema = type.Schema;
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType(
                 new CSharpNamespace(_namespace.NullIfEmpty(), "Models", apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace),
-                schema.CSharpName() ?? schema.Language.Default.Name,
+                type.Name,
                 isNullable: schemaReference.IsNullable);
         }
 

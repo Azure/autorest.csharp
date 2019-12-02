@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.ClientModel
             Constants = new List<ClientObjectConstant>(constants);
         }
 
-        public string Name { get; }
+        public override string Name { get; }
         public Schema Schema { get; }
 
         public IList<ClientObjectConstant> Constants { get; }

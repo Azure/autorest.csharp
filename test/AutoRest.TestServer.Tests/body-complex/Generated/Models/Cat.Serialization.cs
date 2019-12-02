@@ -1,36 +1,27 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class Cat
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("cat");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Color != null)
             {
-                writer.WriteString("color", Color);
+                writer.WritePropertyName("color");
+                writer.WriteStringValue(Color);
             }
-            if (Hates != null)
+            writer.WriteStartArray("hates");
+            foreach (var item in Hates)
             {
-                writer.WriteStartArray("hates");
-                foreach (var item in Hates)
-                {
-                    item?.Serialize(writer, true);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("hates");
+                item.Serialize(writer);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Cat Deserialize(JsonElement element)

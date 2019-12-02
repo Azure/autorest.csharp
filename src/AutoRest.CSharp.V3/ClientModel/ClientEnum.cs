@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.V3.ClientModel
 
         public bool IsStringBased { get; set; }
         public Schema Schema { get; }
-        public string Name { get; }
+        public override string Name { get; }
         public IList<ClientEnumValue> Values { get; }
     }
 }

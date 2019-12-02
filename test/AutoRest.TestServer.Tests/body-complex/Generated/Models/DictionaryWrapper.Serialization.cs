@@ -1,32 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
     public partial class DictionaryWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
+            writer.WriteStartObject();
+            writer.WriteStartObject("defaultProgram");
+            foreach (var item in DefaultProgram)
             {
-                writer.WriteStartObject("dictionary-wrapper");
+                writer.WritePropertyName("item.Key");
+                writer.WriteStringValue(item.Value);
             }
-            else
-            {
-                writer.WriteStartObject();
-            }
-            if (DefaultProgram != null)
-            {
-                writer.WriteStartObject("defaultProgram");
-                foreach (var item in DefaultProgram)
-                {
-                    writer.WriteString(item.Key, item.Value);
-                }
-                writer.WriteEndObject();
-            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
         internal static DictionaryWrapper Deserialize(JsonElement element)

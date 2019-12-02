@@ -7,19 +7,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class Dog
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("dog");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Food != null)
             {
-                writer.WriteString("food", Food);
+                writer.WritePropertyName("food");
+                writer.WriteStringValue(Food);
             }
             writer.WriteEndObject();
         }

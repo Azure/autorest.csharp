@@ -8,19 +8,13 @@ namespace body_complex.Models.V20160229
 {
     public partial class DurationWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("duration-wrapper");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Field != null)
             {
-                writer.WriteString("field", Field.ToString());
+                writer.WritePropertyName("field");
+                writer.WriteStringValue(Field.ToString());
             }
             writer.WriteEndObject();
         }
@@ -31,7 +25,7 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    // DurationSchema Field: Not Implemented
+                    result.Field = TimeSpan.Parse(property.Value.GetString());
                     continue;
                 }
             }

@@ -8,21 +8,16 @@ namespace body_complex.Models.V20160229
 {
     public partial class Shark
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("shark");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Age != null)
             {
-                writer.WriteNumber("age", Age.Value);
+                writer.WritePropertyName("age");
+                writer.WriteNumberValue(Age.Value);
             }
-            writer.WriteString("birthday", Birthday.ToString());
+            writer.WritePropertyName("birthday");
+            writer.WriteStringValue(Birthday.ToString());
             writer.WriteEndObject();
         }
         internal static Shark Deserialize(JsonElement element)

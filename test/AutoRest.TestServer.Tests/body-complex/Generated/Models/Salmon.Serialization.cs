@@ -7,23 +7,18 @@ namespace body_complex.Models.V20160229
 {
     public partial class Salmon
     {
-        internal void Serialize(Utf8JsonWriter writer, bool includeName = true)
+        internal void Serialize(Utf8JsonWriter writer)
         {
-            if (includeName)
-            {
-                writer.WriteStartObject("salmon");
-            }
-            else
-            {
-                writer.WriteStartObject();
-            }
+            writer.WriteStartObject();
             if (Location != null)
             {
-                writer.WriteString("location", Location);
+                writer.WritePropertyName("location");
+                writer.WriteStringValue(Location);
             }
             if (Iswild != null)
             {
-                writer.WriteBoolean("iswild", Iswild.Value);
+                writer.WritePropertyName("iswild");
+                writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WriteEndObject();
         }
