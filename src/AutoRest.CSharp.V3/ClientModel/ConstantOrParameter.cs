@@ -26,5 +26,8 @@ namespace AutoRest.CSharp.V3.ClientModel
 
         public ClientConstant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
         public ServiceClientMethodParameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
+
+        public static implicit operator ConstantOrParameter(ClientConstant constant) => new ConstantOrParameter(constant);
+        public static implicit operator ConstantOrParameter(ServiceClientMethodParameter parameter) => new ConstantOrParameter(parameter);
     }
 }

@@ -12,16 +12,16 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class SchemaWriter : StringWriter
+    internal class ModelWriter : StringWriter
     {
         private readonly TypeFactory _typeFactory;
 
-        public SchemaWriter(TypeFactory typeFactory)
+        public ModelWriter(TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
         }
 
-        public void WriteSchema(ClientModel.ClientModel model)
+        public void WrtiteModel(ClientModel.ClientModel model)
         {
             switch (model)
             {

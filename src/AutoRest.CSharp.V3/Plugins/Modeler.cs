@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.CodeGen;
@@ -23,28 +25,29 @@ namespace AutoRest.CSharp.V3.Plugins
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
-            var entities = schemas.Select(BuildEntity).ToArray();
-            var typeProviders = entities.OfType<ISchemaTypeProvider>().ToArray();
+            var models = schemas.Select(BuildModel).ToArray();
+            var clients = codeModel.OperationGroups.Select(BuildClient).ToArray();
+
+            var typeProviders = models.OfType<ISchemaTypeProvider>().ToArray();
             var typeFactory = new TypeFactory(configuration.Namespace, typeProviders);
 
-            foreach (var entity in entities)
+            foreach (var model in models)
             {
-                var name = entity.Name;
-                var writer = new SchemaWriter(typeFactory);
-                writer.WriteSchema(entity);
+                var name = model.Name;
+                var writer = new ModelWriter(typeFactory);
+                writer.WrtiteModel(model);
 
                 var serializeWriter = new SerializationWriter(typeFactory);
-                serializeWriter.WriteSerialization(entity);
+                serializeWriter.WriteSerialization(model);
 
                 await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");
                 await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializeWriter.ToFormattedCode(), "source-file-csharp");
             }
 
-            var clients = codeModel.OperationGroups.Select(BuildClient);
             foreach (var client in clients)
             {
-                var writer = new OperationWriter(typeFactory);
-                writer.WriteOperationGroup(client);
+                var writer = new ClientWriter(typeFactory);
+                writer.WriteClient(client);
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 
@@ -68,59 +71,6 @@ namespace AutoRest.CSharp.V3.Plugins
             return new ServiceClient(arg.CSharpName(), methods.ToArray());
         }
 
-        //TODO: This is written very... code smelly. Clean up.
-        private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string path)
-        {
-            var index = 0;
-            var currentPart = new List<char>();
-            while (index < path.Length)
-            {
-                if (path[index] == '{')
-                {
-                    var innerPart = new List<char>();
-                    var innerIndex = index + 1;
-                    while (innerIndex < path.Length)
-                    {
-                        if (path[innerIndex] == '}')
-                        {
-                            var innerString = new string(innerPart.ToArray());
-                            var pathParameter = innerString;
-                            if (pathParameter != null)
-                            {
-                                if (currentPart.Any())
-                                {
-                                    yield return (new string(currentPart.ToArray()), true);
-                                }
-
-                                var name = pathParameter;
-                                yield return (name ?? "[NO NAME]", false);
-                                currentPart.Clear();
-                                innerPart.Clear();
-                                break;
-                            }
-                        }
-                        innerPart.Add(path[innerIndex]);
-                        innerIndex++;
-                    }
-
-                    if (innerPart.Any())
-                    {
-                        currentPart.Add('{');
-                        currentPart.AddRange(innerPart);
-                    }
-                    index = innerIndex + 1;
-                    continue;
-                }
-                currentPart.Add(path[index]);
-                index++;
-            }
-
-            if (currentPart.Any())
-            {
-                yield return (new string(currentPart.ToArray()), true);
-            }
-        }
-
         private ClientMethod? BuildMethod(Operation operation)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
@@ -136,27 +86,25 @@ namespace AutoRest.CSharp.V3.Plugins
 
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
-                string defaultName = requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name;
-                ConstantOrParameter? constantOrParameter;
+                string defaultName = requestParameter.Language.Default.Name;
+                string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
+                ConstantOrParameter ? constantOrParameter;
 
-                if (requestParameter.Schema is ConstantSchema constant)
+                switch (requestParameter.Schema)
                 {
-                    constantOrParameter = new ConstantOrParameter(new ClientConstant(constant.Value.Value, (FrameworkTypeReference) CreateType(constant.ValueType, false)));
-                }
-                else if (requestParameter.Schema is BinarySchema)
-                {
-                    // skip
-                    continue;
-                }
-                else
-                {
-                    constantOrParameter = new ConstantOrParameter(new ServiceClientMethodParameter(
-                        requestParameter.CSharpName(),
-                        CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                        requestParameter.ClientDefaultValue != null ?
-                            new ClientConstant(requestParameter.ClientDefaultValue, new FrameworkTypeReference(typeof(object))) :
-                            (ClientConstant?)null));
-
+                    case ConstantSchema constant:
+                        constantOrParameter = new ClientConstant(constant.Value.Value, (FrameworkTypeReference) CreateType(constant.ValueType, false));
+                        break;
+                    case BinarySchema _:
+                        // skip
+                        continue;
+                    default:
+                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
+                            CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+                            requestParameter.ClientDefaultValue != null ?
+                                new ClientConstant(requestParameter.ClientDefaultValue, new FrameworkTypeReference(typeof(object))) :
+                                (ClientConstant?)null);
+                        break;
                 }
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
@@ -164,10 +112,10 @@ namespace AutoRest.CSharp.V3.Plugins
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(KeyValuePair.Create(defaultName, constantOrParameter.Value));
+                            headers.Add(KeyValuePair.Create(serializedName, constantOrParameter.Value));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(KeyValuePair.Create(defaultName, constantOrParameter.Value));
+                            query.Add(KeyValuePair.Create(serializedName, constantOrParameter.Value));
                             break;
                         case ParameterLocation.Body:
                             body = constantOrParameter;
@@ -191,29 +139,16 @@ namespace AutoRest.CSharp.V3.Plugins
             List<ConstantOrParameter> uri = new List<ConstantOrParameter>();
             if (httpRequest != null)
             {
-                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Uri ?? string.Empty))
+                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Uri))
                 {
-                    if (isLiteral)
-                    {
-                        host.Add(new ConstantOrParameter(StringConstant(text)));
-                    }
-                    else
-                    {
-                        host.Add(parameters[text]);
-                    }
+                    host.Add(isLiteral ? StringConstant(text) : parameters[text]);
                 }
 
-                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Path ?? string.Empty))
+                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Path))
                 {
-                    if (isLiteral)
-                    {
-                        uri.Add(new ConstantOrParameter(StringConstant(text)));
-                    }
-                    else
-                    {
-                        uri.Add(parameters[text]);
-                    }
+                    uri.Add(isLiteral ? StringConstant(text) : parameters[text]);
                 }
+
                 var request = new ClientMethodRequest(
                     httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
                     host.ToArray(),
@@ -259,21 +194,19 @@ namespace AutoRest.CSharp.V3.Plugins
             return new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
         }
 
-        private ClientModel.ClientModel BuildEntity(Schema schema)
+        private ClientModel.ClientModel BuildModel(Schema schema)
         {
             switch (schema)
             {
                 case SealedChoiceSchema sealedChoiceSchema:
-                    return new ClientEnum(sealedChoiceSchema,
-                        sealedChoiceSchema.CSharpName(),
-                        sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value, new FrameworkTypeReference(typeof(string))))))
+                    return new ClientEnum(sealedChoiceSchema, sealedChoiceSchema.CSharpName(),
+                        sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))))
                     {
                         IsStringBased = false
                     };
                 case ChoiceSchema choiceSchema:
-                    return new ClientEnum(choiceSchema,
-                        choiceSchema.CSharpName(),
-                        choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), new ClientConstant(c.Value, new FrameworkTypeReference(typeof(string))))))
+                    return new ClientEnum(choiceSchema,  choiceSchema.CSharpName(),
+                        choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))))
                     {
                         IsStringBased = true
                     };
@@ -314,6 +247,59 @@ namespace AutoRest.CSharp.V3.Plugins
                     return new FrameworkTypeReference(type, isNullable);
                 default:
                     return new SchemaTypeReference(schema, isNullable);
+            }
+        }
+
+        private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
+        {
+            if (path == null)
+            {
+                yield break;
+            }
+
+            var index = 0;
+            var currentPart = new StringBuilder();
+            var innerPart = new StringBuilder();
+            while (index < path.Length)
+            {
+                if (path[index] == '{')
+                {
+                    var innerIndex = index + 1;
+                    while (innerIndex < path.Length)
+                    {
+                        if (path[innerIndex] == '}')
+                        {
+                            if (currentPart.Length > 0)
+                            {
+                                yield return (currentPart.ToString(), true);
+                                currentPart.Clear();
+                            }
+
+                            yield return (innerPart.ToString(), false);
+                            innerPart.Clear();
+
+                            break;
+                        }
+
+                        innerPart.Append(path[innerIndex]);
+                        innerIndex++;
+                    }
+
+                    if (innerPart.Length > 0)
+                    {
+                        currentPart.Append('{');
+                        currentPart.Append(innerPart);
+                    }
+                    index = innerIndex + 1;
+                    continue;
+                }
+                currentPart.Append(path[index]);
+                index++;
+            }
+
+            if (currentPart.Length > 0)
+            {
+                yield return (currentPart.ToString(), true);
             }
         }
     }
