@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
                 if (!parameters.ContainsKey(text))
                 {
-                    parameters[text] = StringConstant(text + "-notfound");
+                    parameters[text] = StringConstant(text);
                 }
                 host.Add(isLiteral ? StringConstant(text) : parameters[text]);
             }

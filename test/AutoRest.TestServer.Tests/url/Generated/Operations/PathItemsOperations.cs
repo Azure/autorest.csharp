@@ -22,7 +22,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath-notfound", false);
+                request.Uri.AppendPath("globalStringPath", false);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
                 request.Uri.AppendPath(pathItemStringPath.ToString()!);
                 request.Uri.AppendPath("/localStringPath/", false);
@@ -56,7 +56,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath-notfound", false);
+                request.Uri.AppendPath("globalStringPath", false);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
                 request.Uri.AppendPath(pathItemStringPath.ToString()!);
                 request.Uri.AppendPath("/localStringPath/", false);
@@ -90,7 +90,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath-notfound", false);
+                request.Uri.AppendPath("globalStringPath", false);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
                 request.Uri.AppendPath(pathItemStringPath.ToString()!);
                 request.Uri.AppendPath("/localStringPath/", false);
@@ -124,7 +124,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath-notfound", false);
+                request.Uri.AppendPath("globalStringPath", false);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
                 request.Uri.AppendPath(pathItemStringPath.ToString()!);
                 request.Uri.AppendPath("/localStringPath/", false);
