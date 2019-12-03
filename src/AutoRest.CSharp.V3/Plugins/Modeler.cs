@@ -179,6 +179,7 @@ namespace AutoRest.CSharp.V3.Plugins
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
+                // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
                 if (!parameters.ContainsKey(text))
                 {
                     parameters[text] = StringConstant(text + "-notfound");
