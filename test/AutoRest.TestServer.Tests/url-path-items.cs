@@ -1,32 +1,126 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using url;
+using url.Models.V100;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class UrlPathItemsTests: TestServerTestBase
+    public class UrlQueryTests: TestServerTestBase
     {
         [Test]
-        [Ignore("globalStringQuery not generated")]
-        public Task GetAllWithValuesAsync() => TestStatus("unknown", async host =>
-            await PathItemsOperations.GetAllWithValuesAsync(ClientDiagnostics, Pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: "localStringQuery", host));
+        public Task GetBooleanTrueAsync() => TestStatus("queries_bool_true", async (host, pipeline) => await QueriesOperations.GetBooleanTrueAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
-        [Ignore("globalStringQuery not generated")]
-        public Task GetLocalPathItemQueryNullAsync() => TestStatus("unknown", async host =>
-            await PathItemsOperations.GetLocalPathItemQueryNullAsync(ClientDiagnostics, Pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: null, host));
+        public Task GetBooleanFalseAsync() => TestStatus("queries_bool_false", async (host, pipeline) => await QueriesOperations.GetBooleanFalseAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
-        [Ignore("query order mismatch")]
-        public Task GetGlobalQueryNullAsync() => TestStatus("unknown", async host =>
-            await PathItemsOperations.GetGlobalQueryNullAsync(ClientDiagnostics, Pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: "localStringQuery", host));
+        public Task GetBooleanNullAsync() => TestStatus("queries_bool_null", async (host, pipeline) => await QueriesOperations.GetBooleanNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        public Task GetGlobalAndLocalQueryNullAsync() => TestStatus("pathitem_nullable_globalstringpath_globalstringpath_pathitemstringpath_pathitemstringpath_localstringpath_localstringpath_null_pathitemstringquery_null", async host =>
-            await PathItemsOperations.GetGlobalAndLocalQueryNullAsync(ClientDiagnostics, Pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: null, host));
+        public Task GetIntOneMillionAsync() => TestStatus("queries_int_1000000", async (host, pipeline) => await QueriesOperations.GetIntOneMillionAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task GetIntNegativeOneMillionAsync() => TestStatus("queries_int_-1000000", async (host, pipeline) => await QueriesOperations.GetIntNegativeOneMillionAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task GetIntNullAsync() => TestStatus("queries_int_null", async (host, pipeline) => await QueriesOperations.GetIntNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        public Task GetTenBillionAsync() => TestStatus("queries_long_10000000000", async (host, pipeline) => await QueriesOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task GetNegativeTenBillionAsync() => TestStatus("queries_long_-10000000000", async (host, pipeline) => await QueriesOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task GetLongNullAsync() => TestStatus("queries_long_null", async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        [Ignore("we don't escape enough")]
+        public Task FloatScientificPositiveAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task FloatScientificNegativeAsync() => TestStatus("queries_float_-1034e-20", async (host, pipeline) => await QueriesOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task FloatNullAsync() => TestStatus("queries_float_null", async (host, pipeline) => await QueriesOperations.FloatNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        public Task DoubleDecimalPositiveAsync() => TestStatus("queries_double_9999999999", async (host, pipeline) => await QueriesOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task DoubleDecimalNegativeAsync() => TestStatus("queries_double_-9999999999", async (host, pipeline) => await QueriesOperations.DoubleDecimalNegativeAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task DoubleNullAsync() => TestStatus("queries_double_null", async (host, pipeline) => await QueriesOperations.DoubleNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        [Ignore("queries_string_unicode recording missing https://github.com/Azure/autorest.test-server/issues/17")]
+        public Task StringUnicodeAsync() => TestStatus("StringUnicodeAsync", async (host, pipeline) => await QueriesOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task StringUrlEncodedAsync() => TestStatus("queries_string_begin-_end", async (host, pipeline) => await QueriesOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task StringEmptyAsync() => TestStatus("queries_string_empty", async (host, pipeline) => await QueriesOperations.StringEmptyAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task StringNullAsync() => TestStatus("queries_string_null", async (host, pipeline) => await QueriesOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        public Task EnumValidAsync() => TestStatus("queries_enum_green-color", async (host, pipeline) => await QueriesOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host: host));
+
+        [Test]
+        public Task EnumNullAsync() => TestStatus("queries_enum_null", async (host, pipeline) => await QueriesOperations.EnumNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        [Ignore("byte[] not supported")]
+        public Task ByteMultiByteAsync() => TestStatus("ByteMultiByteAsync", async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[0], host: host));
+
+        [Test]
+        public Task ByteEmptyAsync() => TestStatus("queries_byte_empty", async (host, pipeline) => await QueriesOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        [Ignore("null ref")]
+        public Task ByteNullAsync() => TestStatus("ByteNullAsync", async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        public Task DateValidAsync() => TestStatus("queries_date_2012-01-01", async (host, pipeline) => await QueriesOperations.DateValidAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task DateNullAsync() => TestStatus("queries_date_null", async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        [Ignore("we don't escape enough")]
+        public Task DateTimeValidAsync() => TestStatus("DateTimeValidAsync", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
+
+        [Test]
+        public Task DateTimeNullAsync() => TestStatus("queries_datetime_null", async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringCsvValidAsync() => TestStatus("ArrayStringCsvValidAsync", async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringCsvNullAsync() => TestStatus("ArrayStringCsvNullAsync", async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringCsvEmptyAsync() => TestStatus("ArrayStringCsvEmptyAsync", async (host, pipeline) => await QueriesOperations.ArrayStringCsvEmptyAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringSsvValidAsync() => TestStatus("ArrayStringSsvValidAsync", async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringTsvValidAsync() => TestStatus("ArrayStringTsvValidAsync", async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+
+        [Test]
+        [Ignore("CSV not supported")]
+        public Task ArrayStringPipesValidAsync() => TestStatus("ArrayStringPipesValidAsync", async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
     }
 }
