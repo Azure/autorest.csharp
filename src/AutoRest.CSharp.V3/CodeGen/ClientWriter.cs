@@ -9,8 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
-using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -92,11 +90,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("var request = pipeline.CreateRequest();");
                     var method = operation.Request.Method;
                     Line($"request.Method = {Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
-
-                    //TODO: Redesign this since uri is now a separate value
-                    //var path = httpRequest?.Path ?? String.Empty;
-                    //var pathParameters = parameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Uri)
-                    //    .Select(p => (Name: GetWritableName(p.Parameter), SerializedName: GetSerializedName(p.Parameter)) as (string Name, string SerializedName)?).ToArray();
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
