@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.CodeGen;
@@ -176,7 +175,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 return new ClientMethod(
                     operation.CSharpName(),
                     request,
-                    parameters.Values.Where(p => !p.IsConstant).Select(p => p.Parameter).ToArray(),
+                    parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
                     responseType
                 );
             }
@@ -212,8 +211,8 @@ namespace AutoRest.CSharp.V3.Plugins
                     };
                 case ObjectSchema objectSchema:
                     return new ClientObject(objectSchema, objectSchema.CSharpName(),
-                        objectSchema.Properties.Where(p => !(p.Schema is ConstantSchema)).Select(CreateProperty),
-                        objectSchema.Properties.Where(p=>p.Schema is ConstantSchema).Select(CreateConstant));
+                        objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
+                        objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
             }
 
             throw new NotImplementedException();
