@@ -55,11 +55,13 @@ namespace AutoRest.TestServer.Tests
             return server;
         }
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync() => DisposeAsync(false);
+
+        public async ValueTask DisposeAsync(bool ignoreChecks)
         {
             try
             {
-                if (!_allowUnmatched)
+                if (!ignoreChecks && !_allowUnmatched)
                 {
                     var unmatched = await Server.GetUnmatchedRequests();
                     if (unmatched.Any())
@@ -68,7 +70,7 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
 
-                if (_expectedCoverage != null)
+                if (!ignoreChecks && _expectedCoverage != null)
                 {
                     var matched = await Server.GetMatchedStubs();
                     foreach (var expectedStub in _expectedCoverage)
@@ -84,15 +86,21 @@ namespace AutoRest.TestServer.Tests
             {
 
                 await Server.ResetAsync();
+                bool disposeServer = true;
                 lock (_serverCacheLock)
                 {
                     if (_serverCache == null)
                     {
                         _serverCache = Server;
                         Server = null;
+                        disposeServer = false;
                     }
                 }
-                Server?.Dispose();
+
+                if (disposeServer)
+                {
+                    Server?.Dispose();
+                }
             }
         }
     }

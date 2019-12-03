@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using System.Threading.Tasks;
 using custom_baseUrl;
 using NUnit.Framework;
@@ -8,12 +10,7 @@ namespace AutoRest.TestServer.Tests
     public class custom_baseURL : TestServerTestBase
     {
         [Test]
-        public async Task GetEmpty()
-        {
-            await using var server = TestServerSession.Start("customuri");
-
-            var result = PathsOperations.GetEmptyAsync(ClientDiagnostics, Pipeline, string.Empty, server.Host.Replace("http://", string.Empty)).GetAwaiter().GetResult();
-            Assert.AreEqual(200, result.Status);
-        }
+        public Task GetEmpty() => TestStatus("customuri", async host =>
+            await PathsOperations.GetEmptyAsync(ClientDiagnostics, Pipeline, string.Empty, host.Replace("http://", string.Empty)));
     }
 }
