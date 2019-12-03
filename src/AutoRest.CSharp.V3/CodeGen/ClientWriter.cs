@@ -19,16 +19,16 @@ using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class OperationWriter : StringWriter
+    internal class ClientWriter : StringWriter
     {
         private readonly TypeFactory _typeFactory;
 
-        public OperationWriter(TypeFactory typeFactory)
+        public ClientWriter(TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
         }
 
-        public bool WriteOperationGroup(ServiceClient operationGroup)
+        public bool WriteClient(ServiceClient operationGroup)
         {
             Header();
             using var _ = UsingStatements();
