@@ -49,8 +49,12 @@ namespace AutoRest.TestServer.Tests
         public Task ByteNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, new byte[0], host));
 
         [Test]
-        [Ignore("Wrong url")]
+        [Ignore("Might not apply")]
         public Task DateNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.DateNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+
+        [Test]
+        [Ignore("Might not apply")]
+        public Task EnumNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.EnumNullAsync(ClientDiagnostics, pipeline, new UriColor(), host));
 
         [Test]
         [Ignore("Wrong url")]
@@ -81,5 +85,20 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task GetBooleanFalseAsync() => TestStatus("paths_bool_false_false", async (host, pipeline) => await PathsOperations.GetBooleanFalseAsync(ClientDiagnostics, pipeline, host));
+        
+        [Test]
+        public Task GetNegativeTenBillionAsync() => TestStatus("GetNegativeTenBillionAsync", async (host, pipeline) => await PathsOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host));
+
+        [Test]
+        public Task FloatScientificPositiveAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await PathsOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host));
+
+        [Test]
+        public Task FloatScientificNegativeAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await PathsOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host));
+
+        [Test]
+        public Task DoubleDecimalNegativeAsync() => TestStatus("DoubleDecimalNegativeAsync", async (host, pipeline) => await PathsOperations.DoubleDecimalNegativeAsync(ClientDiagnostics, pipeline, host));
+
+        [Test]
+        public Task DoubleDecimalPositiveAsync() => TestStatus("DoubleDecimalPositiveAsync", async (host, pipeline) => await PathsOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host));
     }
 }
