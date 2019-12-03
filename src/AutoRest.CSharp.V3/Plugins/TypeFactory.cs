@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModel;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -22,47 +21,6 @@ namespace AutoRest.CSharp.V3.Plugins
             _schemaTypes = schemaTypes;
         }
 
-        public CSharpType CreateType(ISchemaTypeProvider clientTypeProvider)
-        {
-            return DefaultTypeInfo(clientTypeProvider.Schema);
-        }
-
-        public CSharpType CreateType(Schema schema)
-        {
-            schema = schema ?? throw new ArgumentNullException(nameof(schema));
-
-            return CreateTypeInfo(schema);
-        }
-
-        public CSharpType CreateInputType(Schema schema)
-        {
-            if (!(schema is ArraySchema || schema is DictionarySchema))
-            {
-                return CreateType(schema);
-            }
-
-            return CreateTypeInfo(schema, false, true);
-        }
-
-        public CSharpType CreateType(OperationGroup operationGroup)
-        {
-            var apiVersion = operationGroup.Operations.Where(o => o.ApiVersions != null).SelectMany(o => o.ApiVersions).FirstOrDefault()?.Version.RemoveNonWordCharacters();
-            return new CSharpType(
-                new CSharpNamespace(_namespace.NullIfEmpty(), "Operations", apiVersion != null ? $"V{apiVersion}" : operationGroup.Language.Default.Namespace),
-                operationGroup.CSharpName() ?? operationGroup.Language.Default.Name);
-        }
-
-        // TODO: Clean this type selection mechanism up
-        private CSharpType CreateTypeInfo(Schema schema, bool useConcrete = false, bool useInput = false) =>
-            schema switch
-            {
-                Schema s when s.Type.ToFrameworkCSharpType() is Type t => new CSharpType(t),
-                ArraySchema arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
-                DictionarySchema dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
-                ConstantSchema constantSchema => ConstantTypeInfo(constantSchema),
-                _ => DefaultTypeInfo(schema)
-            };
-
         // Need types to be cached for YAML references to work properly (needs same instance)
         private readonly Type ListType = typeof(List<>);
         private readonly Type IEnumerableType = typeof(IEnumerable<>);
@@ -70,22 +28,9 @@ namespace AutoRest.CSharp.V3.Plugins
         private readonly Type DictionaryType = typeof(Dictionary<string, object>);
         private readonly Type IDictionaryType = typeof(IDictionary<string, object>);
 
-        private CSharpType ArrayTypeInfo(ArraySchema schema, bool useConcrete = false, bool useInput = false) =>
-            new CSharpType(useConcrete ? ListType : (useInput ? IEnumerableType : ICollectionType),
-                CreateTypeInfo(schema.ElementType));
-
-        private CSharpType DictionaryTypeInfo(DictionarySchema schema,
-            bool useConcrete = false) =>
-            new CSharpType(useConcrete ? DictionaryType : IDictionaryType, new CSharpType(typeof(string)), CreateTypeInfo(schema.ElementType));
-
-        private CSharpType ConstantTypeInfo(ConstantSchema schema) => CreateTypeInfo(schema.ValueType) ?? new CSharpType(typeof(string));
-
-        private CSharpType DefaultTypeInfo(Schema schema)
+        public CSharpType CreateType(ISchemaTypeProvider typeProvider)
         {
-            var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
-            return new CSharpType(
-                new CSharpNamespace(_namespace.NullIfEmpty(), "Models", apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace),
-                schema.CSharpName() ?? schema.Language.Default.Name);
+            return CreateTypeInfo(new SchemaTypeReference(typeProvider.Schema, false));
         }
 
         public CSharpType CreateType(ClientTypeReference clientTypeProvider)
@@ -96,6 +41,11 @@ namespace AutoRest.CSharp.V3.Plugins
         public CSharpType CreateConcreteType(ClientTypeReference clientTypeProvider)
         {
             return CreateTypeInfo(clientTypeProvider, useConcrete: true);
+        }
+
+        public CSharpType CreateInputType(ClientTypeReference clientTypeProvider)
+        {
+            return CreateTypeInfo(clientTypeProvider, useInput: true);
         }
 
         public ISchemaTypeProvider ResolveReference(SchemaTypeReference reference)
@@ -109,6 +59,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
                 DictionaryTypeReference dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
                 SchemaTypeReference schemaTypeReference => DefaultTypeInfo(schemaTypeReference),
+                BinaryTypeReference binary => new CSharpType(typeof(byte[]), isNullable: binary.IsNullable),
                 FrameworkTypeReference frameworkTypeReference => new CSharpType(frameworkTypeReference.Type, isNullable: frameworkTypeReference.IsNullable),
                 _ => throw new NotImplementedException()
             };
@@ -132,5 +83,12 @@ namespace AutoRest.CSharp.V3.Plugins
                 isNullable: schemaReference.IsNullable);
         }
 
+        public CSharpType CreateType(ServiceClient clientTypeProvider)
+        {
+            return new CSharpType(
+                new CSharpNamespace(_namespace.NullIfEmpty()),
+                clientTypeProvider.Name,
+                isNullable: false);
+        }
     }
 }
