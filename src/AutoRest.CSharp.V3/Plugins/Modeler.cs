@@ -73,8 +73,15 @@ namespace AutoRest.CSharp.V3.Plugins
         private ClientMethod? BuildMethod(Operation operation)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
+
+
             var response = operation.Responses.FirstOrDefault();
             var httpResponse = response?.Protocol.Http as HttpResponse;
+
+            if (httpRequest == null || httpResponse == null)
+            {
+                return null;
+            }
 
             Dictionary<string, ConstantOrParameter> parameters = new Dictionary<string, ConstantOrParameter>();
 
@@ -134,53 +141,48 @@ namespace AutoRest.CSharp.V3.Plugins
                 }
             }
 
-            List<ConstantOrParameter> host = new List<ConstantOrParameter>();
-            List<ConstantOrParameter> uri = new List<ConstantOrParameter>();
-            if (httpRequest != null)
+            var request = new ClientMethodRequest(
+                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                ToParts(httpRequest.Uri, parameters),
+                ToParts(httpRequest.Path, parameters),
+                query.ToArray(),
+                headers.ToArray(),
+                httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                body
+            );
+
+            ClientTypeReference? responseType = null;
+
+            if (response is SchemaResponse schemaResponse)
             {
-                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Uri))
+                if (schemaResponse.Schema is ConstantSchema constantSchema)
                 {
-                    host.Add(isLiteral ? StringConstant(text) : parameters[text]);
+                    responseType = CreateType(constantSchema.ValueType, isNullable: false);
                 }
-
-                foreach ((string text, bool isLiteral) in GetPathParts(httpRequest.Path))
+                else
                 {
-                    uri.Add(isLiteral ? StringConstant(text) : parameters[text]);
+                    responseType = CreateType(schemaResponse.Schema, isNullable: false);
                 }
-
-                var request = new ClientMethodRequest(
-                    httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                    host.ToArray(),
-                    uri.ToArray(),
-                    query.ToArray(),
-                    headers.ToArray(),
-                    httpResponse?.StatusCodes.Select(ToStatusCode).ToArray() ?? Array.Empty<int>(),
-                    body
-                );
-
-                ClientTypeReference? responseType = null;
-
-                if (response is SchemaResponse schemaResponse)
-                {
-                    if (schemaResponse.Schema is ConstantSchema constantSchema)
-                    {
-                        responseType = CreateType(constantSchema.ValueType, isNullable: false);
-                    }
-                    else
-                    {
-                        responseType = CreateType(schemaResponse.Schema, isNullable: false);
-                    }
-                }
-
-                return new ClientMethod(
-                    operation.CSharpName(),
-                    request,
-                    parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
-                    responseType
-                );
             }
 
-            return null;
+            return new ClientMethod(
+                operation.CSharpName(),
+                request,
+                parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
+                responseType
+            );
+
+        }
+
+        private ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        {
+            List<ConstantOrParameter> host = new List<ConstantOrParameter>();
+            foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
+            {
+                host.Add(isLiteral ? StringConstant(text) : parameters[text]);
+            }
+
+            return host.ToArray();
         }
 
         private int ToStatusCode(StatusCodes arg)
