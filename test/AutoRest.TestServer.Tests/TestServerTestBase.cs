@@ -13,20 +13,26 @@ namespace AutoRest.TestServer.Tests
     public class TestServerTestBase
     {
         public static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
-        public static HttpPipeline Pipeline = HttpPipelineBuilder.Build(new TestOptions() { Transport = new HttpClientTransport(new HttpClient() { Timeout = TimeSpan.FromSeconds(5)})});
+        private static HttpPipeline Pipeline = new HttpPipeline(
+            new HttpClientTransport(
+                new HttpClient(new SocketsHttpHandler() { PooledConnectionLifetime = TimeSpan.Zero })
+                {
+                    Timeout = TimeSpan.FromSeconds(5)
+                }));
 
-        public static Task TestStatus(string scenario, Func<string, Task<Response>> test) => Test(scenario, async host =>
+        public static Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
         {
-            var response = await test(host);
+            var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status);
         });
 
-        public static async Task Test(string scenario, Func<string, Task> test)
+        public static async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
         {
             var server = TestServerSession.Start(scenario);
+
             try
             {
-                await test(server.Host);
+                await test(server.Host, Pipeline);
             }
             catch (Exception ex)
             {

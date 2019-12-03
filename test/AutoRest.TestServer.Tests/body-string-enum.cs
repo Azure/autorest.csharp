@@ -11,14 +11,14 @@ namespace AutoRest.TestServer.Tests
     public class BodyStringEnumTest : TestServerTestBase
     {
         [Test]
-        public Task GetNotExpandable() => Test("string_enum_notexpandable", async host =>
+        public Task GetNotExpandable() => Test("string_enum_notexpandable", async (host, pipeline) =>
         {
-            var result = await EnumOperations.GetNotExpandableAsync(ClientDiagnostics, Pipeline, host);
+            var result = await EnumOperations.GetNotExpandableAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual(Colors.RedColor, result.Value);
         });
 
         [Test]
-        public Task PutNotExpandable() => TestStatus("string_enum_notexpandable", async host =>
-            await EnumOperations.PutNotExpandableAsync(ClientDiagnostics, Pipeline, Colors.RedColor, host));
+        public Task PutNotExpandable() => TestStatus("string_enum_notexpandable", async (host, pipeline) =>
+            await EnumOperations.PutNotExpandableAsync(ClientDiagnostics, pipeline, Colors.RedColor, host));
     }
 }

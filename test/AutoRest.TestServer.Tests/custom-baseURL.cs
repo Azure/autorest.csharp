@@ -10,7 +10,7 @@ namespace AutoRest.TestServer.Tests
     public class custom_baseURL : TestServerTestBase
     {
         [Test]
-        public Task GetEmpty() => TestStatus("customuri", async host =>
-            await PathsOperations.GetEmptyAsync(ClientDiagnostics, Pipeline, string.Empty, host.Replace("http://", string.Empty)));
+        public Task GetEmpty() => TestStatus("customuri", async (host, pipeline) =>
+            await PathsOperations.GetEmptyAsync(ClientDiagnostics, pipeline, string.Empty, host.Replace("http://", string.Empty)));
     }
 }

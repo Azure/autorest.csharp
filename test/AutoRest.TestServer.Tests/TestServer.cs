@@ -79,9 +79,9 @@ namespace AutoRest.TestServer.Tests
             throw new InvalidOperationException($"Cannot find 'node_modules' in parent directories of {typeof(TestServer).Assembly.Location}.");
         }
 
-        public async Task<string[]> GetUnmatchedRequests()
+        public async Task<string[]> GetRequests()
         {
-            var coverageString = await Client.GetStringAsync("/__admin/requests/unmatched");
+            var coverageString = await Client.GetStringAsync("/__admin/requests");
             var coverageDocument = JsonDocument.Parse(coverageString);
 
             return coverageDocument.RootElement.GetProperty("requests").EnumerateArray().Select(request => request.ToString()).ToArray();
@@ -89,7 +89,9 @@ namespace AutoRest.TestServer.Tests
 
         public async Task ResetAsync()
         {
-            var response = await Client.PostAsync("/__admin/requests/reset", new ByteArrayContent(Array.Empty<byte>()));
+            ByteArrayContent emptyContent = new ByteArrayContent(Array.Empty<byte>());
+
+            using var response = await Client.PostAsync("/__admin/reset", emptyContent);
             response.EnsureSuccessStatusCode();
         }
 

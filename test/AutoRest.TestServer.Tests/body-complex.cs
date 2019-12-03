@@ -11,16 +11,16 @@ namespace AutoRest.TestServer.Tests
     public class BodyComplexTest: TestServerTestBase
     {
         [Test]
-        public Task GetValid() => Test("complex_basic_valid", async host =>
+        public Task GetValid() => Test("complex_basic_valid", async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetValidAsync(ClientDiagnostics, Pipeline, host);
+            var result = await BasicOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
             Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
         });
 
         [Test]
-        public Task PutValid() => Test("complex_basic_valid", async host =>
+        public Task PutValid() => Test("complex_basic_valid", async (host, pipeline) =>
         {
             var basic = new Basic
             {
@@ -28,7 +28,7 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Color = CMYKColors.Magenta
             };
-            var result = await BasicOperations.PutValidAsync(ClientDiagnostics, Pipeline, basic, host);
+            var result = await BasicOperations.PutValidAsync(ClientDiagnostics, pipeline, basic, host);
             Assert.AreEqual(200, result.Status);
         });
     }

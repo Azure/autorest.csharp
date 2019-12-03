@@ -61,18 +61,19 @@ namespace AutoRest.TestServer.Tests
         {
             try
             {
+                var matched = await Server.GetMatchedStubs();
+
                 if (!ignoreChecks && !_allowUnmatched)
                 {
-                    var unmatched = await Server.GetUnmatchedRequests();
-                    if (unmatched.Any())
+                    var requests = await Server.GetRequests();
+                    if (matched.Contains("not-found"))
                     {
-                        throw new InvalidOperationException($"Unexpected unmatched requests {string.Join(Environment.NewLine, unmatched)}");
+                        throw new InvalidOperationException($"Some requests were not matched {string.Join(Environment.NewLine, requests)}");
                     }
                 }
 
                 if (!ignoreChecks && _expectedCoverage != null)
                 {
-                    var matched = await Server.GetMatchedStubs();
                     foreach (var expectedStub in _expectedCoverage)
                     {
                         if (!matched.Contains(expectedStub))

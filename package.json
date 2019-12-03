@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "@autorest/autorest": "^3.0.6122",
-    "@autorest/test-server": "3.0.26"
+    "@autorest/test-server": "3.0.27"
   }
 }
