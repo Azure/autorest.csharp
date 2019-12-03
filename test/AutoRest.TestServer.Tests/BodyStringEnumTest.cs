@@ -20,7 +20,6 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        [Ignore("serializer fails")]
         public async Task PutNotExpandable()
         {
             await using var server = TestServerSession.Start("string_enum_notexpandable");

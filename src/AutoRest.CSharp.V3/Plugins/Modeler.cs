@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 var name = model.Name;
                 var writer = new ModelWriter(typeFactory);
-                writer.WrtiteModel(model);
+                writer.WriteModel(model);
 
                 var serializeWriter = new SerializationWriter(typeFactory);
                 serializeWriter.WriteSerialization(model);
