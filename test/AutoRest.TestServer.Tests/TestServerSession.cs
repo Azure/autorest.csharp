@@ -55,7 +55,9 @@ namespace AutoRest.TestServer.Tests
             return server;
         }
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync() => DisposeAsync(false);
+
+        public async ValueTask DisposeAsync(bool ignoreChecks)
         {
             try
             {

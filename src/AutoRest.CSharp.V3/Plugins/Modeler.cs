@@ -179,6 +179,10 @@ namespace AutoRest.CSharp.V3.Plugins
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
+                if (!parameters.ContainsKey(text))
+                {
+                    parameters[text] = StringConstant(text + "-notfound");
+                }
                 host.Add(isLiteral ? StringConstant(text) : parameters[text]);
             }
 
