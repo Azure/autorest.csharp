@@ -7,6 +7,6 @@ namespace body_complex.Models.V20160229
 {
     public partial class Sawshark
     {
-        public Byte[]? Picture { get; set; }
+        public Byte[] Picture { get; set; }
     }
 }

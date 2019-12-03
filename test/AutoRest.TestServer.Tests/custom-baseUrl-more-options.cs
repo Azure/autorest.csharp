@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using custom_baseUrl_more_options.Operations.V100;
+using custom_baseUrl_more_options;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
         {
             await using var server = TestServerSession.Start("customuri_test12_key1");
 
-            var result = PathsOperations.GetEmptyAsync(ClientDiagnostics, Pipeline, server.Host, string.Empty, "key1", "test12", string.Empty, "v1").GetAwaiter().GetResult();
+            var result = PathsOperations.GetEmptyAsync(ClientDiagnostics, Pipeline, vault: server.Host, string.Empty, "key1", "test12", "v1", dnsSuffix: string.Empty).GetAwaiter().GetResult();
             Assert.AreEqual(200, result.Status);
         }
     }

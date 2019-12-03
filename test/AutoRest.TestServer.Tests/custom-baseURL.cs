@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using custom_baseUrl.Operations.V100;
+using custom_baseUrl;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

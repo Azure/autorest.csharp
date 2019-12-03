@@ -8,19 +8,23 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl_more_options.Operations.V100
+namespace custom_baseUrl_more_options
 {
     public static class PathsOperations
     {
-        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string dnsSuffix = "host", string? keyVersion = default, CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.Operations.V100.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.GetEmpty");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{vault}{secret}{dnsSuffix}/customuri/{subscriptionId}/{keyName}"));
+                request.Uri.Reset(new Uri($"{vault}{secret}{dnsSuffix}"));
+                request.Uri.AppendPath("/customuri/", false);
+                request.Uri.AppendPath(subscriptionId.ToString()!);
+                request.Uri.AppendPath("/", false);
+                request.Uri.AppendPath(keyName.ToString()!);
                 if (keyVersion != null)
                 {
                     request.Uri.AppendQuery("keyVersion", keyVersion.ToString()!);

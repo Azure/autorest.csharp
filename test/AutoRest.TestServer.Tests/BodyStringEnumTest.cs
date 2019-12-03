@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using body_string;
 using body_string.Models.V100;
-using body_string.Operations.V100;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

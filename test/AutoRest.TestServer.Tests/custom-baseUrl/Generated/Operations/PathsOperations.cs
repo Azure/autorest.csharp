@@ -8,19 +8,20 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl.Operations.V100
+namespace custom_baseUrl
 {
     public static class PathsOperations
     {
         public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string accountName, string host = "host", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("custom_baseUrl.Operations.V100.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"http://{accountName}{host}/customuri"));
+                request.Uri.Reset(new Uri($"http://{accountName}{host}"));
+                request.Uri.AppendPath("/customuri", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;

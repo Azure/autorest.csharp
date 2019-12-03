@@ -10,19 +10,20 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using body_complex.Models.V20160229;
 
-namespace body_complex.Operations.V20160229
+namespace body_complex
 {
     public static class FlattencomplexOperations
     {
         public static async ValueTask<Response<MyBaseType>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetValid");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/flatten/valid"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/flatten/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);

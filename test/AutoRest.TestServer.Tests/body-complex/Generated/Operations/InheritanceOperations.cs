@@ -10,19 +10,20 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using body_complex.Models.V20160229;
 
-namespace body_complex.Operations.V20160229
+namespace body_complex
 {
     public static class InheritanceOperations
     {
         public static async ValueTask<Response<Siamese>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetValid");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/inheritance/valid"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/inheritance/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -40,17 +41,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Siamese complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutValid");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/inheritance/valid"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/inheritance/valid", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);

@@ -10,19 +10,20 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using body_complex.Models.V20160229;
 
-namespace body_complex.Operations.V20160229
+namespace body_complex
 {
     public static class PrimitiveOperations
     {
         public static async ValueTask<Response<IntWrapper>> GetIntAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetInt");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetInt");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/integer"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/integer", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -40,17 +41,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutIntAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IntWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutInt");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutInt");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/integer"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/integer", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -66,16 +67,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<LongWrapper>> GetLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetLong");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetLong");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/long"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/long", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -93,17 +94,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, LongWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutLong");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutLong");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/long"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/long", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -119,16 +120,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<FloatWrapper>> GetFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetFloat");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetFloat");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/float"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/float", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -146,17 +147,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, FloatWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutFloat");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutFloat");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/float"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/float", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -172,16 +173,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetDouble");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDouble");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/double"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/double", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -199,17 +200,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DoubleWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutDouble");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutDouble");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/double"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/double", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -225,16 +226,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<BooleanWrapper>> GetBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetBool");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetBool");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/bool"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/bool", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -252,17 +253,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, BooleanWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutBool");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutBool");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/bool"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/bool", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -278,16 +279,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<StringWrapper>> GetStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetString");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetString");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/string"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/string", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -305,17 +306,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, StringWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutString");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutString");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/string"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/string", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -331,16 +332,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<DateWrapper>> GetDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetDate");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDate");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/date"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/date", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -358,17 +359,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutDate");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutDate");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/date"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/date", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -384,16 +385,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetDateTime");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTime");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/datetime"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/datetime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -411,17 +412,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DatetimeWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutDateTime");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutDateTime");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/datetime"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/datetime", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -437,16 +438,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetDateTimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTimeRfc1123");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/datetimerfc1123"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -464,17 +465,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutDateTimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Datetimerfc1123Wrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutDateTimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutDateTimeRfc1123");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/datetimerfc1123"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -490,16 +491,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<DurationWrapper>> GetDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetDuration");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDuration");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/duration"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/duration", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -517,17 +518,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DurationWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutDuration");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutDuration");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/duration"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/duration", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);
@@ -543,16 +544,16 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response<ByteWrapper>> GetByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.GetByte");
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetByte");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/byte"));
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/byte", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -570,17 +571,17 @@ namespace body_complex.Operations.V20160229
                 throw;
             }
         }
-
         public static async ValueTask<Response> PutByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ByteWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.Operations.V20160229.PutByte");
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutByte");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}/complex/primitive/byte"));
-                request.Headers.SetValue("Content-Type", "application/json");
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/complex/primitive/byte", false);
+                request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);

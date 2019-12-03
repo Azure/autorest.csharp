@@ -11,11 +11,8 @@ namespace body_complex.Models.V20160229
         internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Picture != null)
-            {
-                writer.WritePropertyName("picture");
-                writer.WriteNullValue();
-            }
+            writer.WritePropertyName("picture");
+            writer.WriteBase64StringValue(Picture);
             writer.WriteEndObject();
         }
         internal static Sawshark Deserialize(JsonElement element)
@@ -25,7 +22,7 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("picture"))
                 {
-                    result.Picture = null;
+                    result.Picture = property.Value.GetBytesFromBase64();
                     continue;
                 }
             }
