@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -21,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WrtiteModel(ClientModel.ClientModel model)
+        public void WriteModel(ClientModel.ClientModel model)
         {
             switch (model)
             {
@@ -39,7 +38,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteObjectSchema(ClientModel.ClientObject schema)
+        private void WriteObjectSchema(ClientObject schema)
         {
             Header();
             using var _ = UsingStatements();

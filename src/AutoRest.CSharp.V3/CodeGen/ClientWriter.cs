@@ -9,8 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
-using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
