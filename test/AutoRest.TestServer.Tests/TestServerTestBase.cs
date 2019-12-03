@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
@@ -12,7 +13,7 @@ namespace AutoRest.TestServer.Tests
     public class TestServerTestBase
     {
         public static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
-        public static HttpPipeline Pipeline = HttpPipelineBuilder.Build(new TestOptions());
+        public static HttpPipeline Pipeline = HttpPipelineBuilder.Build(new TestOptions() { Transport = new HttpClientTransport(new HttpClient() { Timeout = TimeSpan.FromSeconds(5)})});
 
         public static Task TestStatus(string scenario, Func<string, Task<Response>> test) => Test(scenario, async host =>
         {
@@ -27,9 +28,18 @@ namespace AutoRest.TestServer.Tests
             {
                 await test(server.Host);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await server.DisposeAsync(true);
+                try
+                {
+                    await server.DisposeAsync();
+                }
+                catch (Exception disposeException)
+                {
+                    throw new AggregateException(ex, disposeException);
+                }
+
+                throw;
             }
 
             await server.DisposeAsync();
