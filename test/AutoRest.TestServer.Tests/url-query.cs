@@ -96,7 +96,7 @@ namespace AutoRest.TestServer.Tests
         public Task DateNullAsync() => TestStatus("UrlQueriesDateNull", async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        public Task DateTimeValidAsync() => TestStatus("queries_datetime_2012-01-01t010101z", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
+        public Task DateTimeValidAsync() => TestStatus("UrlQueriesDateTimeValid", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
         public Task DateTimeNullAsync() => TestStatus("UrlQueriesDateTimeNull", async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));
