@@ -3,11 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModel;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.Pipeline.Generated;
-using AutoRest.CSharp.V3.Plugins;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Pipeline

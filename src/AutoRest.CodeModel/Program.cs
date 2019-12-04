@@ -19,9 +19,9 @@ namespace AutoRest.CodeModel
         private static void Main()
         {
             using var webClient = new WebClient();
-            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../code-model.json");
+            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../../../../../src/AutoRest.CodeModel/code-model.json");
 
-            var schemaJsonLines = File.ReadAllLines("../code-model.json");
+            var schemaJsonLines = File.ReadAllLines("../../../../../src/AutoRest.CodeModel/code-model.json");
             var schemaJson = String.Join(Environment.NewLine, schemaJsonLines)
                 // Fixes + and - enum values that cannot be generated into C# enum names
                 .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"")
@@ -58,8 +58,7 @@ namespace AutoRest.CodeModel
                 // Cases CSharp properly
                 .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp");
 
-            var fileWithOrdering = OrderCalculator.InsertOrderValues(cleanFile);
-            var lines = fileWithOrdering.ToLines().ToArray();
+            var lines = cleanFile.ToLines().ToArray();
             var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))
                 .Select(ll =>
                 {
@@ -68,7 +67,7 @@ namespace AutoRest.CodeModel
                 })
                 .SkipLast(1)
                 .Prepend(lines.First()));
-            File.WriteAllText($"../../{Path}/CodeModel.cs", fileWithNullable);
+            File.WriteAllText($"../../../../../src/{Path}/CodeModel.cs", fileWithNullable);
         }
     }
 }

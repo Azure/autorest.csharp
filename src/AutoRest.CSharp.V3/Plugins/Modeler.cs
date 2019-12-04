@@ -50,31 +50,15 @@ namespace AutoRest.CSharp.V3.Plugins
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 
-            // CodeModel for debugging
-            await autoRest.WriteFile($"CodeModel-{configuration.Title}.yaml", codeModel.Serialize(), "source-file-csharp");
-
             return true;
         }
 
-        private ServiceClient BuildClient(OperationGroup arg)
-        {
-            List<ClientMethod> methods = new List<ClientMethod>();
-            foreach (Operation operation in arg.Operations)
-            {
-                var method = BuildMethod(operation);
-                if (method != null)
-                {
-                    methods.Add(method);
-                }
-            }
-            return new ServiceClient(arg.CSharpName(), methods.ToArray());
-        }
+        private static ServiceClient BuildClient(OperationGroup arg) =>
+            new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where(method => method != null).ToArray()!);
 
-        private ClientMethod? BuildMethod(Operation operation)
+        private static ClientMethod? BuildMethod(Operation operation)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
-
-
             var response = operation.Responses.FirstOrDefault();
             var httpResponse = response?.Protocol.Http as HttpResponse;
 
@@ -84,17 +68,15 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             Dictionary<string, ConstantOrParameter> parameters = new Dictionary<string, ConstantOrParameter>();
-
             List<KeyValuePair<string, ConstantOrParameter>> query = new List<KeyValuePair<string, ConstantOrParameter>>();
             List<KeyValuePair<string, ConstantOrParameter>> headers = new List<KeyValuePair<string, ConstantOrParameter>>();
 
             ConstantOrParameter? body = null;
-
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                ConstantOrParameter ? constantOrParameter;
+                ConstantOrParameter? constantOrParameter;
 
                 switch (requestParameter.Schema)
                 {
@@ -135,10 +117,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
             {
-                foreach (string mediaType in httpWithBodyRequest.MediaTypes)
-                {
-                    headers.Add(KeyValuePair.Create("Content-Type", new ConstantOrParameter(StringConstant(mediaType))));
-                }
+                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => KeyValuePair.Create("Content-Type", new ConstantOrParameter(StringConstant(mediaType)))));
             }
 
             var request = new ClientMethodRequest(
@@ -152,17 +131,10 @@ namespace AutoRest.CSharp.V3.Plugins
             );
 
             ClientTypeReference? responseType = null;
-
             if (response is SchemaResponse schemaResponse)
             {
-                if (schemaResponse.Schema is ConstantSchema constantSchema)
-                {
-                    responseType = CreateType(constantSchema.ValueType, isNullable: false);
-                }
-                else
-                {
-                    responseType = CreateType(schemaResponse.Schema, isNullable: false);
-                }
+                var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
+                responseType = CreateType(schema, isNullable: false);
             }
 
             return new ClientMethod(
@@ -171,15 +143,14 @@ namespace AutoRest.CSharp.V3.Plugins
                 parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
                 responseType
             );
-
         }
 
-        private ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
         {
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
-                // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
+                //TODO: WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
                 if (!parameters.ContainsKey(text))
                 {
                     parameters[text] = StringConstant(text);
@@ -190,40 +161,22 @@ namespace AutoRest.CSharp.V3.Plugins
             return host.ToArray();
         }
 
-        private int ToStatusCode(StatusCodes arg)
-        {
-            return int.Parse(arg.ToString().Trim('_'));
-        }
+        private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
 
-        private ClientConstant StringConstant(string s)
-        {
-            return new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
-        }
+        private static ClientConstant StringConstant(string s) => new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
 
-        private ClientModel.ClientModel BuildModel(Schema schema)
+        private static ClientModel.ClientModel BuildModel(Schema schema) => schema switch
         {
-            switch (schema)
-            {
-                case SealedChoiceSchema sealedChoiceSchema:
-                    return new ClientEnum(sealedChoiceSchema, sealedChoiceSchema.CSharpName(),
-                        sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))))
-                    {
-                        IsStringBased = false
-                    };
-                case ChoiceSchema choiceSchema:
-                    return new ClientEnum(choiceSchema,  choiceSchema.CSharpName(),
-                        choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))))
-                    {
-                        IsStringBased = true
-                    };
-                case ObjectSchema objectSchema:
-                    return new ClientObject(objectSchema, objectSchema.CSharpName(),
-                        objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
-                        objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
-            }
-
-            throw new NotImplementedException();
-        }
+            SealedChoiceSchema sealedChoiceSchema => (ClientModel.ClientModel)new ClientEnum(sealedChoiceSchema,
+                sealedChoiceSchema.CSharpName(),
+                sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value)))) {IsStringBased = false},
+            ChoiceSchema choiceSchema => new ClientEnum(choiceSchema, choiceSchema.CSharpName(),
+                choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value)))) {IsStringBased = true},
+            ObjectSchema objectSchema => new ClientObject(objectSchema, objectSchema.CSharpName(),
+                objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
+                objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant)),
+            _ => throw new NotImplementedException()
+        };
 
         private static ClientObjectConstant CreateConstant(Property property)
         {
@@ -232,30 +185,22 @@ namespace AutoRest.CSharp.V3.Plugins
             return new ClientObjectConstant(property.CSharpName(), type, new ClientConstant(constantSchema.Value.Value, type));
         }
 
-        private static ClientObjectProperty CreateProperty(Property property)
-        {
-            return new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName);
-        }
+        private static ClientObjectProperty CreateProperty(Property property) =>
+            new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName);
 
-        private static ClientTypeReference CreateType(Schema schema, bool isNullable)
+        private static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
-            switch (schema)
-            {
-                case BinarySchema _:
-                case ByteArraySchema _:
-                case Schema s when s.Type == AllSchemaTypes.Binary:
-                    return new BinaryTypeReference(false);
-                case ArraySchema array:
-                    return new CollectionTypeReference(CreateType(array.ElementType, false));
-                case DictionarySchema dictionary:
-                    return new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable));
-                case Schema s when s.Type.ToFrameworkCSharpType() is Type type:
-                    return new FrameworkTypeReference(type, isNullable);
-                default:
-                    return new SchemaTypeReference(schema, isNullable);
-            }
-        }
+            BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(false),
+            ByteArraySchema _ => new BinaryTypeReference(false),
+            { Type: AllSchemaTypes.Binary } => new BinaryTypeReference(false),
+            ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false)),
+            DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable)),
+            //https://devblogs.microsoft.com/dotnet/do-more-with-patterns-in-c-8-0/
+            { } s when s.Type.ToFrameworkCSharpType() is { } type => new FrameworkTypeReference(type, isNullable),
+            _ => new SchemaTypeReference(schema, isNullable)
+        };
 
+        //TODO: Refactor as this is written quite... ugly.
         private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
         {
             if (path == null)

@@ -11,7 +11,6 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {

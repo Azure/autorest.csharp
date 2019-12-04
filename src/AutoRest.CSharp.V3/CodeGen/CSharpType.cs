@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         public CSharpNamespace Namespace { get; }
 
         public string Name { get; }
+
         public bool IsValueType { get; }
 
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
@@ -46,6 +47,5 @@ namespace AutoRest.CSharp.V3.CodeGen
                 new CSharpType(FrameworkType, isNullable, Arguments) :
                 new CSharpType(Namespace, Name, IsValueType, isNullable);
         }
-
     }
 }

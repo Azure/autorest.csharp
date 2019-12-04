@@ -63,15 +63,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private bool NeedsInitialization(ClientTypeReference reference)
-        {
-            if (reference is CollectionTypeReference || reference is DictionaryTypeReference)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        private static bool NeedsInitialization(ClientTypeReference reference) => reference is CollectionTypeReference || reference is DictionaryTypeReference;
 
         private void WriteSealedChoiceSchema(ClientEnum schema)
         {

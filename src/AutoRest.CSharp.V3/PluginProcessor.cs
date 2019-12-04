@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
