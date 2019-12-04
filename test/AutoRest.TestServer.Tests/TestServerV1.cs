@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests
             var nodeModules = TestServerV2.FindNodeModulesDirectory();
             var startup = Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver", "startup", "www.js");
 
-            var processStartInfo = new ProcessStartInfo("node", @"d:\github\azure\autorest.testserver\startup\www.js");
+            var processStartInfo = new ProcessStartInfo("node", startup);
 
             // Use random port
             processStartInfo.Environment["PORT"] = "0";
