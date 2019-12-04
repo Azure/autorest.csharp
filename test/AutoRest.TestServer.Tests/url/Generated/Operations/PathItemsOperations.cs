@@ -22,19 +22,19 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", false);
+                request.Uri.AppendPath("globalStringPath", true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!);
+                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!);
+                request.Uri.AppendPath(localStringPath.ToString()!, true);
                 request.Uri.AppendPath("/globalStringQuery/pathItemStringQuery/localStringQuery", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -56,19 +56,19 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", false);
+                request.Uri.AppendPath("globalStringPath", true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!);
+                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!);
+                request.Uri.AppendPath(localStringPath.ToString()!, true);
                 request.Uri.AppendPath("/null/pathItemStringQuery/localStringQuery", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -90,19 +90,19 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", false);
+                request.Uri.AppendPath("globalStringPath", true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!);
+                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!);
+                request.Uri.AppendPath(localStringPath.ToString()!, true);
                 request.Uri.AppendPath("/null/pathItemStringQuery/null", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -124,19 +124,19 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", false);
+                request.Uri.AppendPath("globalStringPath", true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!);
+                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!);
+                request.Uri.AppendPath(localStringPath.ToString()!, true);
                 request.Uri.AppendPath("/globalStringQuery/null/null", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
