@@ -4,4 +4,5 @@
 use: $(this-folder)/../
 output-folder: $(title)
 clear-output-folder: true
+include-csproj: true
 ```

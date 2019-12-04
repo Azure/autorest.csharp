@@ -8,11 +8,12 @@ namespace AutoRest.CSharp.V3.ClientModel
 {
     internal class ClientEnum : ClientModel, ISchemaTypeProvider
     {
-        public ClientEnum(Schema schema, string name, IEnumerable<ClientEnumValue> values)
+        public ClientEnum(Schema schema, string name, IEnumerable<ClientEnumValue> values, bool isStringBased = false)
         {
             Schema = schema;
             Name = name;
             Values = new List<ClientEnumValue>(values);
+            IsStringBased = isStringBased;
         }
 
         public bool IsStringBased { get; set; }

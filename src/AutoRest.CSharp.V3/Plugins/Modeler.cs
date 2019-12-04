@@ -176,16 +176,27 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static ClientConstant StringConstant(string s) => new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
 
+        private static ClientModel.ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
+            sealedChoiceSchema,
+            sealedChoiceSchema.CSharpName(),
+            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))));
+
+        private static ClientModel.ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
+            choiceSchema,
+            choiceSchema.CSharpName(),
+            choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))),
+            true);
+
+        private static ClientModel.ClientModel BuildClientObject(ObjectSchema objectSchema) => new ClientObject(
+            objectSchema, objectSchema.CSharpName(),
+            objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
+            objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
+
         private static ClientModel.ClientModel BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (ClientModel.ClientModel)new ClientEnum(sealedChoiceSchema,
-                sealedChoiceSchema.CSharpName(),
-                sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value)))) {IsStringBased = false},
-            ChoiceSchema choiceSchema => new ClientEnum(choiceSchema, choiceSchema.CSharpName(),
-                choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value)))) {IsStringBased = true},
-            ObjectSchema objectSchema => new ClientObject(objectSchema, objectSchema.CSharpName(),
-                objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
-                objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant)),
+            SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
+            ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),
+            ObjectSchema objectSchema => BuildClientObject(objectSchema),
             _ => throw new NotImplementedException()
         };
 
