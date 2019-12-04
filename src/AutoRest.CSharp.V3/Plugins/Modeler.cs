@@ -179,11 +179,6 @@ namespace AutoRest.CSharp.V3.Plugins
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
-                // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
-                if (!parameters.ContainsKey(text))
-                {
-                    parameters[text] = StringConstant(text);
-                }
                 host.Add(isLiteral ? StringConstant(text) : parameters[text]);
             }
 
@@ -195,6 +190,11 @@ namespace AutoRest.CSharp.V3.Plugins
             List<PathSegment> host = new List<PathSegment>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
+                // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
+                if (!isLiteral && !parameters.ContainsKey(text))
+                {
+                    parameters[text] = StringConstant(text);
+                }
                 host.Add(new PathSegment(isLiteral ? StringConstant(text) : parameters[text], !isLiteral));
             }
 
