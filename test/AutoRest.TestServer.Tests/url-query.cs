@@ -96,6 +96,7 @@ namespace AutoRest.TestServer.Tests
         public Task DateNullAsync() => TestStatus("UrlQueriesDateNull", async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task DateTimeValidAsync() => TestStatus("UrlQueriesDateTimeValid", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
