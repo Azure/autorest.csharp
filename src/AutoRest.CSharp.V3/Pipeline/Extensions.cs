@@ -83,102 +83,142 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
+        private static void WriteSerializeClientObject(WriterBase writer, string name, bool isNullable)
+        {
+            writer.Append(name);
+            writer.Append(isNullable ? "?" : string.Empty);
+            writer.Line(".Serialize(writer);");
+        }
+
+        private static void WriteSerializeClientEnum(WriterBase writer, string name, bool isNullable, bool isStringBased)
+        {
+            writer.Append("writer.WriteStringValue(");
+            writer.Append(name);
+            writer.Append((!isStringBased && isNullable) ? ".Value" : string.Empty);
+            writer.Append(isStringBased ? ".ToString()" : ".ToSerialString()");
+            writer.Line(");");
+        }
+
+        private static void WriteSerializeSchemaTypeReference(WriterBase writer, SchemaTypeReference type, TypeFactory typeFactory, string name)
+        {
+            switch (typeFactory.ResolveReference(type))
+            {
+                case ClientObject _:
+                    WriteSerializeClientObject(writer, name, type.IsNullable);
+                    return;
+                case ClientEnum clientEnum:
+                    WriteSerializeClientEnum(writer, name, type.IsNullable, clientEnum.IsStringBased);
+                    return;
+                default:
+                    writer.Line("// Serialization of this type is not supported");
+                    return;
+            }
+        }
+
+        private static void WriteSerializeBinaryTypeReference(WriterBase writer, string name)
+        {
+            writer.Append("writer.WriteBase64StringValue(");
+            writer.Append(name);
+            writer.Line(");");
+        }
+
+        private static void WriteSerializeDefault(WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        {
+            var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
+            writer.Line(TypeSerializers[frameworkType](name, serializedName, type.IsNullable, asArray, quotedSerializedName, false) ?? "writer.WriteNullValue();");
+        }
+
         public static void ToSerializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
         {
             if (includePropertyName)
             {
-                writer.Append("writer.WritePropertyName(");
-                writer.Append("\"");
+                writer.Append("writer.WritePropertyName(\"");
                 writer.Append(serializedName);
-                writer.Append("\"");
-                writer.Append(");");
-                writer.Line();
+                writer.Line("\");");
             }
 
-            if (type is SchemaTypeReference schemaTypeReference)
+            switch (type)
             {
-                var implementationType = typeFactory.ResolveReference(schemaTypeReference);
-
-                if (implementationType is ClientObject)
-                {
-                    writer.Append(name);
-                    if (type.IsNullable)
-                    {
-                        writer.Append("?");
-                    }
-                    writer.Append(".Serialize(writer);");
-                    writer.Line();
+                case SchemaTypeReference schemaTypeReference:
+                    WriteSerializeSchemaTypeReference(writer, schemaTypeReference, typeFactory, name);
                     return;
-                }
+                case BinaryTypeReference _:
+                    WriteSerializeBinaryTypeReference(writer, name);
+                    return;
+                default:
+                    WriteSerializeDefault(writer, type, typeFactory, name, serializedName, asArray, quotedSerializedName, includePropertyName);
+                    return;
+            }
+        }
 
-                writer.Append("writer.WriteStringValue(");
-                switch (implementationType)
-                {
-                    case ClientEnum e when e.IsStringBased:
-                        writer.Append(name);
-                        writer.Append(".ToString()");
-                        break;
-                    case ClientEnum e when !e.IsStringBased:
-                        writer.Append(name);
-                        if (type.IsNullable)
-                        {
-                            writer.Append(".Value");
-                        }
-                        writer.Append(".ToSerialString()");
-                        break;
-                }
-                writer.Append(");");
-                writer.Line();
-            }
-            else if (type is BinaryTypeReference)
+        private static void WriteDeserializeClientObject(WriterBase writer, CSharpType cSharpType, string name)
+        {
+            writer.Append(writer.Type(cSharpType));
+            writer.Append(".Deserialize(");
+            writer.Append(name);
+            writer.Append(")");
+        }
+
+        private static void WriteDeserializeClientEnum(WriterBase writer, CSharpType cSharpType, string name, bool isStringBased)
+        {
+            if (isStringBased)
             {
-                writer.Append("writer.WriteBase64StringValue(");
+                writer.Append("new ");
+                writer.Append(writer.Type(cSharpType));
+                writer.Append("(");
                 writer.Append(name);
-                writer.Append(");");
-                writer.Line();
+                writer.Append(".GetString())");
+                return;
             }
-            else
+
+            writer.Append(name);
+            writer.Append(".GetString().To");
+            writer.Append(writer.Type(cSharpType));
+            writer.Append("()");
+        }
+
+        private static void WriteDeserializeSchemaTypeReference(WriterBase writer, CSharpType cSharpType, SchemaTypeReference type, TypeFactory typeFactory, string name)
+        {
+            switch (typeFactory.ResolveReference(type))
             {
-                var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
-                writer.Line(TypeSerializers[frameworkType](name, serializedName, type.IsNullable, asArray, quotedSerializedName, false) ?? "writer.WriteNullValue();");
+                case ClientObject _:
+                    WriteDeserializeClientObject(writer, cSharpType, name);
+                    return;
+                case ClientEnum clientEnum:
+                    WriteDeserializeClientEnum(writer, cSharpType, name, clientEnum.IsStringBased);
+                    return;
+                default:
+                    writer.Append("/* Deserialization of this type is not supported */");
+                    return;
             }
+        }
+
+        private static void WriteDeserializeBinaryTypeReference(WriterBase writer, string name)
+        {
+            writer.Append(name);
+            writer.Append(".GetBytesFromBase64()");
+        }
+
+        private static void WriteDeserializeDefault(WriterBase writer, CSharpType cSharpType, string name)
+        {
+            var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
+            writer.Append(TypeDeserializers[frameworkType](name) ?? "null");
         }
 
         public static void ToDeserializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string typeText, string typeName)
         {
             CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
-            if (type is SchemaTypeReference schemaTypeReference)
+            switch (type)
             {
-                var implementationType = typeFactory.ResolveReference(schemaTypeReference);
-
-                switch (implementationType)
-                {
-                    case ClientObject _:
-                        writer.Append(writer.Type(cSharpType));
-                        writer.Append($".Deserialize({name})");
-                        return;
-                    case ClientEnum e when e.IsStringBased:
-                        writer.Append($"new ");
-                        writer.Append(writer.Type(cSharpType));
-                        writer.Append($"({name}.GetString())");
-                        return;
-                    case ClientEnum e when !e.IsStringBased:
-                        writer.Append($"{name}");
-                        writer.Append(".GetString().To");
-                        writer.Append(writer.Type(cSharpType));
-                        writer.Append("()");
-                        return;
-                }
-            }
-            else if (type is BinaryTypeReference)
-            {
-                writer.Append($"{name}");
-                writer.Append(".GetBytesFromBase64()");
-            }
-            else
-            {
-                var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
-                writer.Append(TypeDeserializers[frameworkType](name) ?? "null");
+                case SchemaTypeReference schemaTypeReference:
+                    WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, name);
+                    return;
+                case BinaryTypeReference _:
+                    WriteDeserializeBinaryTypeReference(writer, name);
+                    return;
+                default:
+                    WriteDeserializeDefault(writer, cSharpType, name);
+                    return;
             }
         }
 

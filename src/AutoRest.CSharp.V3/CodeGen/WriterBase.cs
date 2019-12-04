@@ -165,21 +165,16 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public string Type(CSharpType type)
         {
-            string name;
-
-            if (type.FrameworkType != null && GetKeywordMapping(type.FrameworkType) is string keyword)
+            string? mappedName = GetKeywordMapping(type.FrameworkType);
+            string name = mappedName ?? type.Name;
+            if (mappedName == null)
             {
-                name = keyword;
-            }
-            else
-            {
-                name = type.Name;
                 _usingNamespaces.Add(type.Namespace);
             }
 
             if (type.Arguments.Any())
             {
-                var subTypes = type.Arguments.Select(a => Type(a)).JoinIgnoreEmpty(", ");
+                var subTypes = type.Arguments.Select(Type).JoinIgnoreEmpty(", ");
                 name += $"<{subTypes}>";
             }
 
@@ -198,25 +193,25 @@ namespace AutoRest.CSharp.V3.CodeGen
         public string Pair(CSharpType type, string? name) => $"{Type(type)} {name ?? "[NO NAME]"}";
         public string Pair(Type type, string? name, bool isNullable = false) => $"{Type(type, isNullable)} {name ?? "[NO NAME]"}";
 
-        private static string? GetKeywordMapping(Type? type) =>
-            type switch
-            {
-                var t when t == typeof(bool) => "bool",
-                var t when t == typeof(byte) => "byte",
-                var t when t == typeof(sbyte) => "sbyte",
-                var t when t == typeof(short) => "short",
-                var t when t == typeof(ushort) => "ushort",
-                var t when t == typeof(int) => "int",
-                var t when t == typeof(uint) => "uint",
-                var t when t == typeof(long) => "long",
-                var t when t == typeof(ulong) => "ulong",
-                var t when t == typeof(char) => "char",
-                var t when t == typeof(double) => "double",
-                var t when t == typeof(float) => "float",
-                var t when t == typeof(object) => "object",
-                var t when t == typeof(decimal) => "decimal",
-                var t when t == typeof(string) => "string",
-                _ => null
-            };
+        private static string? GetKeywordMapping(Type? type) => type switch
+        {
+            null => null,
+            var t when t == typeof(bool) => "bool",
+            var t when t == typeof(byte) => "byte",
+            var t when t == typeof(sbyte) => "sbyte",
+            var t when t == typeof(short) => "short",
+            var t when t == typeof(ushort) => "ushort",
+            var t when t == typeof(int) => "int",
+            var t when t == typeof(uint) => "uint",
+            var t when t == typeof(long) => "long",
+            var t when t == typeof(ulong) => "ulong",
+            var t when t == typeof(char) => "char",
+            var t when t == typeof(double) => "double",
+            var t when t == typeof(float) => "float",
+            var t when t == typeof(object) => "object",
+            var t when t == typeof(decimal) => "decimal",
+            var t when t == typeof(string) => "string",
+            _ => null
+        };
     }
 }

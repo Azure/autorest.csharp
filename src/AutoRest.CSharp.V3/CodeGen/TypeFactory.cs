@@ -20,13 +20,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             _schemaTypes = schemaTypes;
         }
 
-        // Need types to be cached for YAML references to work properly (needs same instance)
-        private readonly Type ListType = typeof(List<>);
-        private readonly Type IEnumerableType = typeof(IEnumerable<>);
-        private readonly Type ICollectionType = typeof(ICollection<>);
-        private readonly Type DictionaryType = typeof(Dictionary<string, object>);
-        private readonly Type IDictionaryType = typeof(IDictionary<string, object>);
-
         public CSharpType CreateType(ISchemaTypeProvider typeProvider) => CreateTypeInfo(new SchemaTypeReference(typeProvider.Schema, false));
         public CSharpType CreateType(ClientTypeReference clientTypeProvider) => CreateTypeInfo(clientTypeProvider);
         public CSharpType CreateConcreteType(ClientTypeReference clientTypeProvider) => CreateTypeInfo(clientTypeProvider, useConcrete: true);
@@ -45,11 +38,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         };
 
         private CSharpType ArrayTypeInfo(CollectionTypeReference schema, bool useConcrete = false, bool useInput = false) =>
-            new CSharpType(useConcrete ? ListType : (useInput ? IEnumerableType : ICollectionType),
-                CreateTypeInfo(schema.ItemType));
+            new CSharpType(useConcrete ? typeof(List<>) : (useInput ? typeof(IEnumerable<>) : typeof(ICollection<>)),CreateTypeInfo(schema.ItemType));
 
         private CSharpType DictionaryTypeInfo(DictionaryTypeReference schema, bool useConcrete = false) =>
-            new CSharpType(useConcrete ? DictionaryType : IDictionaryType, CreateTypeInfo(schema.KeyType), CreateTypeInfo(schema.ValueType));
+            new CSharpType(useConcrete ? typeof(Dictionary<string, object>) : typeof(IDictionary<string, object>), CreateTypeInfo(schema.KeyType), CreateTypeInfo(schema.ValueType));
 
         private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
         {
@@ -62,9 +54,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 isNullable: schemaReference.IsNullable);
         }
 
-        public CSharpType CreateType(ServiceClient clientTypeProvider) => new CSharpType(
-            new CSharpNamespace(_namespace.NullIfEmpty()),
-            clientTypeProvider.Name,
-            isNullable: false);
+        public CSharpType CreateType(ServiceClient clientTypeProvider) =>
+            new CSharpType(new CSharpNamespace(_namespace.NullIfEmpty()), clientTypeProvider.Name, isNullable: false);
     }
 }

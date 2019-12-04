@@ -41,11 +41,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public bool IsNullable { get; }
 
-        public CSharpType WithNullable(bool isNullable)
-        {
-            return FrameworkType != null ?
-                new CSharpType(FrameworkType, isNullable, Arguments) :
-                new CSharpType(Namespace, Name, IsValueType, isNullable);
-        }
+        public CSharpType WithNullable(bool isNullable) => FrameworkType != null
+            ? new CSharpType(FrameworkType, isNullable, Arguments)
+            : new CSharpType(Namespace, Name, IsValueType, isNullable);
     }
 }
