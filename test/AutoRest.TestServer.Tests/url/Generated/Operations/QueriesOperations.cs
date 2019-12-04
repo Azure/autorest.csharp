@@ -24,7 +24,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/bool/true", false);
-                request.Uri.AppendQuery("boolQuery", "true");
+                request.Uri.AppendQuery("boolQuery", "true", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -45,7 +45,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/bool/false", false);
-                request.Uri.AppendQuery("boolQuery", "false");
+                request.Uri.AppendQuery("boolQuery", "false", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -68,7 +68,7 @@ namespace url
                 request.Uri.AppendPath("/queries/bool/null", false);
                 if (boolQuery != null)
                 {
-                    request.Uri.AppendQuery("boolQuery", boolQuery.ToString()!);
+                    request.Uri.AppendQuery("boolQuery", boolQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -90,7 +90,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/int/1000000", false);
-                request.Uri.AppendQuery("intQuery", "1000000");
+                request.Uri.AppendQuery("intQuery", "1000000", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -111,7 +111,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/int/-1000000", false);
-                request.Uri.AppendQuery("intQuery", "-1000000");
+                request.Uri.AppendQuery("intQuery", "-1000000", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -134,7 +134,7 @@ namespace url
                 request.Uri.AppendPath("/queries/int/null", false);
                 if (intQuery != null)
                 {
-                    request.Uri.AppendQuery("intQuery", intQuery.ToString()!);
+                    request.Uri.AppendQuery("intQuery", intQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -156,7 +156,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/long/10000000000", false);
-                request.Uri.AppendQuery("longQuery", "10000000000");
+                request.Uri.AppendQuery("longQuery", "10000000000", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -177,7 +177,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/long/-10000000000", false);
-                request.Uri.AppendQuery("longQuery", "-10000000000");
+                request.Uri.AppendQuery("longQuery", "-10000000000", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -200,7 +200,7 @@ namespace url
                 request.Uri.AppendPath("/queries/long/null", false);
                 if (longQuery != null)
                 {
-                    request.Uri.AppendQuery("longQuery", longQuery.ToString()!);
+                    request.Uri.AppendQuery("longQuery", longQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -222,7 +222,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/float/1.034E+20", false);
-                request.Uri.AppendQuery("floatQuery", "103400000000000000000");
+                request.Uri.AppendQuery("floatQuery", "103400000000000000000", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -243,7 +243,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/float/-1.034E-20", false);
-                request.Uri.AppendQuery("floatQuery", "-1.034e-20");
+                request.Uri.AppendQuery("floatQuery", "-1.034e-20", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -266,7 +266,7 @@ namespace url
                 request.Uri.AppendPath("/queries/float/null", false);
                 if (floatQuery != null)
                 {
-                    request.Uri.AppendQuery("floatQuery", floatQuery.ToString()!);
+                    request.Uri.AppendQuery("floatQuery", floatQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -288,7 +288,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/double/9999999.999", false);
-                request.Uri.AppendQuery("doubleQuery", "9999999.999");
+                request.Uri.AppendQuery("doubleQuery", "9999999.999", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -309,7 +309,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/double/-9999999.999", false);
-                request.Uri.AppendQuery("doubleQuery", "-9999999.999");
+                request.Uri.AppendQuery("doubleQuery", "-9999999.999", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -332,7 +332,7 @@ namespace url
                 request.Uri.AppendPath("/queries/double/null", false);
                 if (doubleQuery != null)
                 {
-                    request.Uri.AppendQuery("doubleQuery", doubleQuery.ToString()!);
+                    request.Uri.AppendQuery("doubleQuery", doubleQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -354,7 +354,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/string/unicode/", false);
-                request.Uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩");
+                request.Uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -375,7 +375,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
-                request.Uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end");
+                request.Uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -396,7 +396,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/string/empty", false);
-                request.Uri.AppendQuery("stringQuery", "");
+                request.Uri.AppendQuery("stringQuery", "", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -419,7 +419,7 @@ namespace url
                 request.Uri.AppendPath("/queries/string/null", false);
                 if (stringQuery != null)
                 {
-                    request.Uri.AppendQuery("stringQuery", stringQuery.ToString()!);
+                    request.Uri.AppendQuery("stringQuery", stringQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -443,7 +443,7 @@ namespace url
                 request.Uri.AppendPath("/queries/enum/green%20color", false);
                 if (enumQuery != null)
                 {
-                    request.Uri.AppendQuery("enumQuery", enumQuery.ToString()!);
+                    request.Uri.AppendQuery("enumQuery", enumQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -467,7 +467,7 @@ namespace url
                 request.Uri.AppendPath("/queries/enum/null", false);
                 if (enumQuery != null)
                 {
-                    request.Uri.AppendQuery("enumQuery", enumQuery.ToString()!);
+                    request.Uri.AppendQuery("enumQuery", enumQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -489,7 +489,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/byte/multibyte", false);
-                request.Uri.AppendQuery("byteQuery", byteQuery.ToString()!);
+                request.Uri.AppendQuery("byteQuery", byteQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -510,7 +510,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/byte/empty", false);
-                request.Uri.AppendQuery("byteQuery", "");
+                request.Uri.AppendQuery("byteQuery", "", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -531,7 +531,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/byte/null", false);
-                request.Uri.AppendQuery("byteQuery", byteQuery.ToString()!);
+                request.Uri.AppendQuery("byteQuery", byteQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -552,7 +552,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/date/2012-01-01", false);
-                request.Uri.AppendQuery("dateQuery", "2012-01-01");
+                request.Uri.AppendQuery("dateQuery", "2012-01-01", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -575,7 +575,7 @@ namespace url
                 request.Uri.AppendPath("/queries/date/null", false);
                 if (dateQuery != null)
                 {
-                    request.Uri.AppendQuery("dateQuery", dateQuery.ToString()!);
+                    request.Uri.AppendQuery("dateQuery", dateQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -597,7 +597,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-                request.Uri.AppendQuery("dateTimeQuery", "2012-01-01T01:01:01Z");
+                request.Uri.AppendQuery("dateTimeQuery", "2012-01-01T01:01:01Z", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -620,7 +620,7 @@ namespace url
                 request.Uri.AppendPath("/queries/datetime/null", false);
                 if (dateTimeQuery != null)
                 {
-                    request.Uri.AppendQuery("dateTimeQuery", dateTimeQuery.ToString()!);
+                    request.Uri.AppendQuery("dateTimeQuery", dateTimeQuery.ToString()!, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -642,7 +642,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/csv/string/valid", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -663,7 +663,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/csv/string/null", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -684,7 +684,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/csv/string/empty", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -705,7 +705,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/ssv/string/valid", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -726,7 +726,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/tsv/string/valid", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -747,7 +747,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/pipes/string/valid", false);
-                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!);
+                request.Uri.AppendQuery("arrayQuery", arrayQuery.ToString()!, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;

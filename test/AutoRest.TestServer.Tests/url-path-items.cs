@@ -21,8 +21,7 @@ namespace AutoRest.TestServer.Tests
             await PathItemsOperations.GetLocalPathItemQueryNullAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: null, host));
 
         [Test]
-        [Ignore("query order mismatch")]
-        public Task GetGlobalQueryNullAsync() => TestStatus("unknown", async (host, pipeline) =>
+        public Task GetGlobalQueryNullAsync() => TestStatus("pathitem_nullable_globalstringpath_globalstringpath_pathitemstringpath_pathitemstringpath_localstringpath_localstringpath_null_pathitemstringquery_localstringquery", async (host, pipeline) =>
             await PathItemsOperations.GetGlobalQueryNullAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: "localStringQuery", host));
 
         [Test]

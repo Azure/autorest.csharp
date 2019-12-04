@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetLongNullAsync() => TestStatus("queries_long_null", async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("we don't escape enough")]
+        [Ignore("Wrong float format")]
         public Task FloatScientificPositiveAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -93,8 +93,7 @@ namespace AutoRest.TestServer.Tests
         public Task DateNullAsync() => TestStatus("queries_date_null", async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("we don't escape enough")]
-        public Task DateTimeValidAsync() => TestStatus("DateTimeValidAsync", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
+        public Task DateTimeValidAsync() => TestStatus("queries_datetime_2012-01-01t010101z", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
         public Task DateTimeNullAsync() => TestStatus("queries_datetime_null", async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));

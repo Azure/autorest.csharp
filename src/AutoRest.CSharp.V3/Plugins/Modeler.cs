@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             Dictionary<string, ConstantOrParameter> parameters = new Dictionary<string, ConstantOrParameter>();
 
-            List<KeyValuePair<string, ConstantOrParameter>> query = new List<KeyValuePair<string, ConstantOrParameter>>();
+            List<QueryParameter> query = new List<QueryParameter>();
             List<KeyValuePair<string, ConstantOrParameter>> headers = new List<KeyValuePair<string, ConstantOrParameter>>();
 
             ConstantOrParameter? body = null;
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.V3.Plugins
                             headers.Add(KeyValuePair.Create(serializedName, constantOrParameter.Value));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(KeyValuePair.Create(serializedName, constantOrParameter.Value));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true));
                             break;
                         case ParameterLocation.Body:
                             body = constantOrParameter;
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var request = new ClientMethodRequest(
                 httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
                 ToParts(httpRequest.Uri, parameters),
-                ToParts(httpRequest.Path, parameters),
+                ToPathParts(httpRequest.Path, parameters),
                 query.ToArray(),
                 headers.ToArray(),
                 httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
@@ -185,6 +185,22 @@ namespace AutoRest.CSharp.V3.Plugins
                     parameters[text] = StringConstant(text);
                 }
                 host.Add(isLiteral ? StringConstant(text) : parameters[text]);
+            }
+
+            return host.ToArray();
+        }
+
+        private PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        {
+            List<PathSegment> host = new List<PathSegment>();
+            foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
+            {
+                // WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
+                if (!parameters.ContainsKey(text))
+                {
+                    parameters[text] = StringConstant(text);
+                }
+                host.Add(new PathSegment(isLiteral ? StringConstant(text) : parameters[text], !isLiteral));
             }
 
             return host.ToArray();
