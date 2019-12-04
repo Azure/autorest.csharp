@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AutoRest.TestServer.Tests
@@ -11,45 +10,77 @@ namespace AutoRest.TestServer.Tests
     public class TestServerSession : IAsyncDisposable
     {
         private static readonly object _serverCacheLock = new object();
-        private static TestServer _serverCache;
+        private static ITestServer _serverV1Cache;
+        private static ITestServer _serverV2Cache;
 
+        private readonly TestServerVersion _version;
         private readonly bool _allowUnmatched;
         private readonly string[] _expectedCoverage;
 
-        public TestServer Server { get; private set; }
+        public ITestServer Server { get; private set; }
         public string Host => Server.Host;
 
-        private TestServerSession(TestServer server, bool allowUnmatched, string[] expectedCoverage)
+        private TestServerSession(TestServerVersion version, bool allowUnmatched, string[] expectedCoverage)
         {
-            Server = server;
+            _version = version;
             _allowUnmatched = allowUnmatched;
             _expectedCoverage = expectedCoverage;
+            Server = GetServer();
         }
 
-        public static TestServerSession Start(params string[] expectedCoverage)
+        public static TestServerSession Start(TestServerVersion version, params string[] expectedCoverage)
         {
-            return Start(false, expectedCoverage);
+            return Start(version, false, expectedCoverage);
         }
 
-        public static TestServerSession Start(bool allowUnmatched, params string[] expectedCoverage)
+        public static TestServerSession Start(TestServerVersion version, bool allowUnmatched, params string[] expectedCoverage)
         {
-            var server = new TestServerSession(GetServer(), allowUnmatched, expectedCoverage);
+            if (version == TestServerVersion.V2)
+            {
+                // we only use v1 for coverage
+                expectedCoverage = Array.Empty<string>();
+            }
+            var server = new TestServerSession(version, allowUnmatched, expectedCoverage);
             return server;
         }
 
-        private static TestServer GetServer()
+        private ref ITestServer GetServerCache()
         {
-            TestServer server;
+            switch (_version)
+            {
+                case TestServerVersion.V1:
+                    return ref _serverV1Cache;
+                case TestServerVersion.V2:
+                    return ref _serverV2Cache;
+            }
+            throw new NotImplementedException();
+        }
+
+        private ITestServer CreateServer()
+        {
+            switch (_version)
+            {
+                case TestServerVersion.V1:
+                    return new TestServerV1();
+                case TestServerVersion.V2:
+                    return new TestServerV2();
+            }
+            throw new NotImplementedException();
+        }
+
+        private ITestServer GetServer()
+        {
+            ITestServer server;
             lock (_serverCacheLock)
             {
-                server = _serverCache;
-                _serverCache = null;
+                ref var cache = ref GetServerCache();
+                server = cache;
+                cache = null;
             }
 
             if (server == null)
             {
-                server = new TestServer();
-                server.StartProcess();
+                server = CreateServer();
             }
 
             return server;
@@ -85,23 +116,28 @@ namespace AutoRest.TestServer.Tests
             }
             finally
             {
-
                 await Server.ResetAsync();
-                bool disposeServer = true;
-                lock (_serverCacheLock)
-                {
-                    if (_serverCache == null)
-                    {
-                        _serverCache = Server;
-                        Server = null;
-                        disposeServer = false;
-                    }
-                }
+                Return();
+            }
+        }
 
-                if (disposeServer)
+        private void Return()
+        {
+            bool disposeServer = true;
+            lock (_serverCacheLock)
+            {
+                ref var cache = ref GetServerCache();
+                if (cache == null)
                 {
-                    Server?.Dispose();
+                    cache = Server;
+                    Server = null;
+                    disposeServer = false;
                 }
+            }
+
+            if (disposeServer)
+            {
+                Server?.Dispose();
             }
         }
     }
