@@ -548,7 +548,7 @@ namespace url
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/date/2012-01-01", false);

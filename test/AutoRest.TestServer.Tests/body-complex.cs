@@ -10,8 +10,10 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyComplexTest: TestServerTestBase
     {
+        public BodyComplexTest(TestServerVersion version) : base(version) { }
+
         [Test]
-        public Task GetValid() => Test("complex_basic_valid", async (host, pipeline) =>
+        public Task GetValid() => Test("getComplexBasicValid", async (host, pipeline) =>
         {
             var result = await BasicOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual("abc", result.Value.Name);
@@ -20,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task PutValid() => Test("complex_basic_valid", async (host, pipeline) =>
+        public Task PutValid() => Test("putComplexBasicValid", async (host, pipeline) =>
         {
             var basic = new Basic
             {

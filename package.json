@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "@autorest/autorest": "^3.0.6122",
-    "@autorest/test-server": "3.0.27"
-  }
+    "@autorest/test-server": "3.0.27",
+    "@microsoft.azure/autorest.testserver": "^2.7.0"
+  },
+  "dependencies": {}
 }
