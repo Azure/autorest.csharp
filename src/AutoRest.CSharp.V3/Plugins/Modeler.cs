@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.V3.Plugins
             return host.ToArray();
         }
 
-        private PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
         {
             List<PathSegment> host = new List<PathSegment>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
