@@ -99,13 +99,14 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var segment in operation.Request.PathSegments)
                     {
-                        if (segment.IsConstant)
+                        var value = segment.Value;
+                        if (value.IsConstant)
                         {
-                            Line($"request.Uri.AppendPath(\"{segment.Constant.Value}\", false);");
+                            Line($"request.Uri.AppendPath(\"{value.Constant.Value}\", {segment.Escape.ToString().ToLower()});");
                         }
                         else
                         {
-                            Line($"request.Uri.AppendPath({segment.Parameter.Name}.ToString()!);");
+                            Line($"request.Uri.AppendPath({value.Parameter.Name}.ToString()!, {segment.Escape.ToString().ToLower()});");
                         }
                     }
 
@@ -127,20 +128,21 @@ namespace AutoRest.CSharp.V3.CodeGen
                         }
                     }
 
-                    foreach (var pair in operation.Request.Query)
+                    foreach (var queryParameter in operation.Request.Query)
                     {
-                        if (pair.Value.IsConstant)
+                        ConstantOrParameter value = queryParameter.Value;
+                        if (value.IsConstant)
                         {
-                            Line($"request.Uri.AppendQuery(\"{pair.Key}\", \"{pair.Value.Constant.Value}\");");
+                            Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", \"{value.Constant.Value}\", {queryParameter.Escape.ToString().ToLower()});");
                         }
                         else
                         {
-                            var parameter = pair.Value.Parameter;
+                            var parameter = value.Parameter;
 
                             using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
                             {
                                 //TODO: Determine conditions in which to ToString() or not
-                                Line($"request.Uri.AppendQuery(\"{pair.Key}\", {parameter.Name}.ToString()!);");
+                                Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", {parameter.Name}.ToString()!, {queryParameter.Escape.ToString().ToLower()});");
                             }
                         }
                     }

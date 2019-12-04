@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.ClientModel
 {
     internal class ClientMethodRequest
     {
-        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, ConstantOrParameter[] pathSegments, KeyValuePair<string, ConstantOrParameter>[] query, KeyValuePair<string, ConstantOrParameter>[] headers, int[] successfulStatusCodes, ConstantOrParameter? body)
+        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, KeyValuePair<string, ConstantOrParameter>[] headers, int[] successfulStatusCodes, ConstantOrParameter? body)
         {
             Method = method;
             HostSegments = hostSegments;
@@ -21,8 +21,8 @@ namespace AutoRest.CSharp.V3.ClientModel
 
         public RequestMethod Method { get; }
         public ConstantOrParameter[] HostSegments { get; }
-        public ConstantOrParameter[] PathSegments { get; }
-        public KeyValuePair<string, ConstantOrParameter>[] Query { get; }
+        public PathSegment[] PathSegments { get; }
+        public QueryParameter[] Query { get; }
         public KeyValuePair<string, ConstantOrParameter>[] Headers { get; }
         public int[] SuccessfulStatusCodes { get; set; }
         public ConstantOrParameter? Body { get; set; }

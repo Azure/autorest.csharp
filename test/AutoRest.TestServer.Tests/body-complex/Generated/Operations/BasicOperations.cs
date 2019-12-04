@@ -52,7 +52,7 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/valid", false);
                 request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("api-version", "2016-02-29");
+                request.Uri.AppendQuery("api-version", "2016-02-29", true);
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
                 complexBody.Serialize(writer);

@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetLongNullAsync() => TestStatus("UrlQueriesLongNull", async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("we don't escape enough")]
+        [Ignore("Wrong float format")]
         public Task FloatScientificPositiveAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -96,8 +96,8 @@ namespace AutoRest.TestServer.Tests
         public Task DateNullAsync() => TestStatus("UrlQueriesDateNull", async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("we don't escape enough")]
-        public Task DateTimeValidAsync() => TestStatus("DateTimeValidAsync", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
+        public Task DateTimeValidAsync() => TestStatus("UrlQueriesDateTimeValid", async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
         public Task DateTimeNullAsync() => TestStatus("UrlQueriesDateTimeNull", async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));

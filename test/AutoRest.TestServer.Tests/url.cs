@@ -92,7 +92,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetNegativeTenBillionAsync() => TestStatus("UrlPathsLongNegative", async (host, pipeline) => await PathsOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("We don't escape enough")]
+        [Ignore("Wrong float format")]
         public Task FloatScientificPositiveAsync() => TestStatus("FloatScientificPositiveAsync", async (host, pipeline) => await PathsOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
