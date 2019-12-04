@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests
             {
                 try
                 {
-                    await server.DisposeAsync(true);
+                    await server.DisposeAsync();
                 }
                 catch (Exception disposeException)
                 {
@@ -51,7 +51,7 @@ namespace AutoRest.TestServer.Tests
                 throw;
             }
 
-            await server.DisposeAsync(true);
+            await server.DisposeAsync();
         }
     }
 }
