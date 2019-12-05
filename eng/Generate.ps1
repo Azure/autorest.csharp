@@ -38,6 +38,6 @@ foreach ($path in $paths)
     Write-Host ">" $command
 
     Invoke-Block {
-        & npx autorest-beta  $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace 2> $null
+        & cmd /c "npx autorest-beta  $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace 2>&1"
     }
 }
