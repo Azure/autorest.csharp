@@ -1,4 +1,4 @@
-param($name, [switch]$NoDebug)
+param($name, [switch]$noDebug)
 $ErrorActionPreference = 'Stop'
 
 function Invoke-Block([scriptblock]$cmd) {
@@ -17,28 +17,45 @@ function Invoke-Block([scriptblock]$cmd) {
     }
 }
 
-$repoRoot = Resolve-Path "$PSScriptRoot\.."
-$testServerTestProject = "$repoRoot\test\AutoRest.TestServer.Tests"
-$testConfiguration = "$testServerTestProject\readme.md"
-$testServerSwaggerPath = "$repoRoot\node_modules\@microsoft.azure\autorest.testserver\swagger"
-$paths = 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options'
-if ($name)
-{
-    $paths = $name
-}
-$debugFlags = if (!$NoDebug) { '--debug','--verbose' }
+function Invoke-AutoRest($debugFlags, $testConfiguration, $outputFolder, $inputFile, $name, $namespace, $repoRoot) {
+    Invoke-Block {
+        $outputFlag = if($outputFolder) { "--output-folder=$outputFolder" } else { '' }
+        $inputFlag = if($inputFile) { "--input-file=$inputFile" } else { '' }
+        $titleFlag = if($name) { "--title=$name" } else { '' }
+        $namespaceFlag = if($namespace) { "--namespace=$namespace" } else { '' }
+        $command = "npx autorest-beta $debugFlags $testConfiguration $outputFlag $inputFlag $titleFlag $namespaceFlag"
+        $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
-foreach ($path in $paths)
-{
-    $outputFolder = "$testServerTestProject\$path";
-    $inputFile = "$testServerSwaggerPath\$path.json"
-    $namespace = $path.Replace('-', '_')
-    Invoke-Block { 
-        $command = "npx autorest-beta $debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace"
-        $command = $command.Replace($repoRoot, "`$(SolutionDir)")
-
-        Write-Host ">" $command
-
-        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+        Write-Host ">" $commandText
+        Invoke-Expression $command
     }
+}
+
+# General configuration
+$repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
+$debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
+
+# Test server test configuration
+$testServerTestProject = Join-Path $repoRoot 'test' 'AutoRest.TestServer.Tests'
+$testConfiguration = Join-Path $testServerTestProject 'readme.md'
+$testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
+$testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options' }
+
+foreach ($testName in $testNames)
+{
+    $outputFolder = Join-Path $testServerTestProject $testName
+    $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+    $namespace = $testName.Replace('-', '_')
+    Invoke-AutoRest $debugFlags $testConfiguration $outputFolder $inputFile $testName $namespace $repoRoot
+}
+
+# Sample configuration
+$sampleDirectory = Join-Path $repoRoot 'samples'
+$projectNames = 'AppConfiguration'
+
+foreach ($projectName in $projectNames)
+{
+    $projectDirectory = Join-Path $sampleDirectory $projectName
+    $configurationPath = Join-Path $projectDirectory 'readme.md'
+    Invoke-AutoRest $debugFlags $configurationPath -repoRoot $repoRoot
 }
