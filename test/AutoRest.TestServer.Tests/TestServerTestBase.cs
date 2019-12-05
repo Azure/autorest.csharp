@@ -44,7 +44,7 @@ namespace AutoRest.TestServer.Tests
                 List<string> missingScenarios = new List<string>();
                 foreach (string scenario in scenarios)
                 {
-                    if (!methods.Contains(scenario))
+                    if (!methods.Contains(scenario, StringComparer.CurrentCultureIgnoreCase))
                     {
                         missingScenarios.Add(scenario);
                     }
@@ -67,6 +67,11 @@ namespace AutoRest.TestServer.Tests
             var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
         });
+
+        public Task Test(Func<string, HttpPipeline, Task> test)
+        {
+            return Test(TestContext.CurrentContext.Test.Name, test);
+        }
 
         public async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
         {
