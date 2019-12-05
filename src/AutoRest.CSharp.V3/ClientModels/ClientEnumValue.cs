@@ -1,18 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.CSharp.V3.ClientModel
+namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ServiceClient
+    internal class ClientEnumValue
     {
-        public ServiceClient(string name, ClientMethod[] methods)
+        public ClientEnumValue(string name, ClientConstant value)
         {
             Name = name;
-            Methods = methods;
+            Value = value;
         }
 
         public string Name { get; }
-
-        public ClientMethod[] Methods { get; }
+        public ClientConstant Value { get; }
     }
 }

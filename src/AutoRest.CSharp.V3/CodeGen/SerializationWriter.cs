@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 using System.Text.Json;
-using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
 
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteSerialization(ClientModel.ClientModel schema)
+        public void WriteSerialization(ClientModel schema)
         {
             switch (schema)
             {

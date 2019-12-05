@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AutoRest.CSharp.V3.ClientModel
+namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class FrameworkTypeReference: ClientTypeReference
     {

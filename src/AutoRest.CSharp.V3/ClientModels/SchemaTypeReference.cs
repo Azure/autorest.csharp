@@ -1,12 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.CSharp.V3.ClientModel
+using AutoRest.CSharp.V3.Pipeline.Generated;
+
+namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class BinaryTypeReference : ClientTypeReference
+    internal class SchemaTypeReference: ClientTypeReference
     {
-        public BinaryTypeReference(bool isNullable)
+        public Schema Schema { get; }
+
+        public SchemaTypeReference(Schema schema, bool isNullable)
         {
+            Schema = schema;
             IsNullable = isNullable;
         }
 
