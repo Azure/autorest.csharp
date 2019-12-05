@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../../src/assets/**/*.cs"/>
+    <Compile Include="../../src/assets/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
 </Project>
