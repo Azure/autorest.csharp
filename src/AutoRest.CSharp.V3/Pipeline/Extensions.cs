@@ -94,7 +94,10 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             writer.Append("writer.WriteStringValue(");
             writer.Append(name);
-            writer.Append((!isStringBased && isNullable) ? ".Value" : string.Empty);
+            if (!isStringBased && isNullable)
+            {
+                writer.Append(".Value");
+            }
             writer.Append(isStringBased ? ".ToString()" : ".ToSerialString()");
             writer.Line(");");
         }
