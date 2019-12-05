@@ -52,9 +52,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesFloatNull() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        public Task FloatNullAsync() => Test("UrlQueriesFloatNull", async (host, pipeline) => await QueriesOperations.FloatNullAsync(ClientDiagnostics, pipeline, null, host: host));
-
-        [Test]
         public Task UrlQueriesDoublePositive() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]

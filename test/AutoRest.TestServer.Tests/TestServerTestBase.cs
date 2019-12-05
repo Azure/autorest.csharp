@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests
             return TestStatus(TestContext.CurrentContext.Test.Name, test);
         }
 
-        public Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
+        private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests
             return Test(TestContext.CurrentContext.Test.Name, test);
         }
 
-        public async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
+        private async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
         {
             var server = TestServerSession.Start(_version, scenario);
 

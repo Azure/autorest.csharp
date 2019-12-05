@@ -22,15 +22,15 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlPathsStringUrlEncoded() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await PathsOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlStringNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.StringNullAsync(ClientDiagnostics, pipeline, "", host));
+        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringNullAsync(ClientDiagnostics, pipeline, "", host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlStringUnicodeAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlStringUnicodeAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         [Ignore("Wrong url")]
@@ -38,37 +38,37 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlPathsStringBase64Url() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.Base64UrlAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
+        public Task UrlPathsStringBase64Url() => TestStatus(async (host, pipeline) => await PathsOperations.Base64UrlAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
 
         [Test]
         public Task UrlPathsByteEmpty() => TestStatus(async (host, pipeline) => await PathsOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlPathsByteMultiByte() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
+        public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlByteNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, new byte[0], host));
+        public Task UrlByteNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, new byte[0], host));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlUrlDateNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.DateNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+        public Task UrlUrlDateNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.DateNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlEnumNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.EnumNullAsync(ClientDiagnostics, pipeline, new UriColor(), host));
+        public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.EnumNullAsync(ClientDiagnostics, pipeline, new UriColor(), host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlDateTimeNullAsync() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+        public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
 
         [Test]
         public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateValidAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         [Ignore("Wrong url")]
-        public Task UrlPathsDateTimeValid() => TestStatus("unknown", async (host, pipeline) => await PathsOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await PathsOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host));
