@@ -26,7 +26,6 @@ if ($name)
 {
     $paths = $name
 }
-$debugFlags = if (!$NoDebug) { '--debug','--verbose' }
 
 foreach ($path in $paths)
 {
@@ -39,6 +38,6 @@ foreach ($path in $paths)
     Write-Host ">" $command
 
     Invoke-Block {
-        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace 
     }
 }
