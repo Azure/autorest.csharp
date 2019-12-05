@@ -5,25 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AutoRest.TestServer.Tests
 {
     public class TestServerV1 : IDisposable, ITestServer
     {
-        private Process _process;
-        private List<string> _lines = new List<string>();
+        private static Regex _scenariosRegex = new Regex("(coverage|optionalCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
 
+        private Process _process;
         public HttpClient Client { get; }
         public string Host { get; }
 
         public TestServerV1()
         {
             var portPhrase = "Server started at port ";
-            var nodeModules = TestServerV2.FindNodeModulesDirectory();
-            var startup = Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver", "startup", "www.js");
+            var startup = Path.Combine(GetBaseDirectory(), "startup", "www.js");
 
             var processStartInfo = new ProcessStartInfo("node", startup);
 
@@ -56,6 +57,25 @@ namespace AutoRest.TestServer.Tests
                 throw new InvalidOperationException($"Unable to detect server port {_process.StandardOutput.ReadToEnd()} {_process.StandardError.ReadToEnd()}");
             }
 
+        }
+
+        public static string[] GetScenariosForRoute(string name)
+        {
+            var scenarios = _scenariosRegex.Matches(File.ReadAllText(Path.Combine(GetBaseDirectory(), "routes", name + ".js")))
+                .Select(m => m.Groups["name"].Value).ToArray();
+
+            if (!scenarios.Any())
+            {
+                throw new InvalidOperationException("No scenarios found");
+            }
+
+            return scenarios;
+        }
+
+        private static string GetBaseDirectory()
+        {
+            var nodeModules = TestServerV2.FindNodeModulesDirectory();
+            return Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
         }
 
         private void ReadOutput()
