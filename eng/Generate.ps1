@@ -33,12 +33,12 @@ foreach ($path in $paths)
     $outputFolder = "$testServerTestProject\$path";
     $inputFile = "$testServerSwaggerPath\$path.json"
     $namespace = $path.Replace('-', '_')
-  
+
     $command = "npx autorest-beta $debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace"
     $command = $command.Replace($repoRoot, "`$(SolutionDir)")
     Write-Host ">" $command
 
     Invoke-Block { 
-        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
+        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder111 --input-file=$inputFile --title=$path --namespace=$namespace
     }
 }
