@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen

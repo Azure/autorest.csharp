@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;

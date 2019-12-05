@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
@@ -176,23 +176,23 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static ClientConstant StringConstant(string s) => new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
 
-        private static ClientModel.ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
+        private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
             sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))));
 
-        private static ClientModel.ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
+        private static ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
             choiceSchema,
             choiceSchema.CSharpName(),
             choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), StringConstant(c.Value))),
             true);
 
-        private static ClientModel.ClientModel BuildClientObject(ObjectSchema objectSchema) => new ClientObject(
+        private static ClientModel BuildClientObject(ObjectSchema objectSchema) => new ClientObject(
             objectSchema, objectSchema.CSharpName(),
             objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
             objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
 
-        private static ClientModel.ClientModel BuildModel(Schema schema) => schema switch
+        private static ClientModel BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
             ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),

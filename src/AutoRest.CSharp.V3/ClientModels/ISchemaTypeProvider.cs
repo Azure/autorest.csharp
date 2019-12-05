@@ -3,7 +3,7 @@
 
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
-namespace AutoRest.CSharp.V3.ClientModel
+namespace AutoRest.CSharp.V3.ClientModels
 {
     internal interface ISchemaTypeProvider
     {

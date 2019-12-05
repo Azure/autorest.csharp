@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace AutoRest.CSharp.V3.ClientModel
+namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethodRequest
     {

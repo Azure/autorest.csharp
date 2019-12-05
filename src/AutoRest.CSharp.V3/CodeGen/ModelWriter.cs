@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using AutoRest.CSharp.V3.ClientModel;
+using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteModel(ClientModel.ClientModel model)
+        public void WriteModel(ClientModel model)
         {
             switch (model)
             {
