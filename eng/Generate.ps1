@@ -41,6 +41,6 @@ foreach ($path in $paths)
 
 
     Invoke-Block { 
-        & cmd /c "$command"
+        & cmd /c "$command 2>&1"
     }
 }
