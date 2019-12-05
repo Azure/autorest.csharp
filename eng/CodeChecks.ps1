@@ -24,8 +24,6 @@ function LogError([string]$message) {
 
 function Invoke-Block([scriptblock]$cmd) {
     $cmd | Out-String | Write-Verbose
-    try
-    {
         & $cmd
 
         # Need to check both of these cases for errors as they represent different items
@@ -38,17 +36,11 @@ function Invoke-Block([scriptblock]$cmd) {
             }
             throw "Command failed to execute: $cmd"
         }
-    }
-    catch
-    {
-        LogError $_.Exception.ToString()
-    }
 }
 
-try {
     Write-Host "Generate test clients"
     Invoke-Block {
-        . $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
+        & $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
     }
 
     Write-Host "git diff"
@@ -58,6 +50,7 @@ try {
         $status = $status -replace "`n","`n    "
         LogError "Generated code is not up to date. You may need to run eng\generate.ps1"
     }
+try {
 }
 finally {
     Write-Host ""
