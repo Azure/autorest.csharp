@@ -109,7 +109,13 @@ namespace AutoRest.TestServer.Tests
             foreach (var request in coverageDocument.RootElement.EnumerateObject())
             {
                 var mapping = request.Name;
-                if (request.Value.GetInt32() != 0)
+                int value = request.Value.GetInt32();
+                // HeaderParameterProtectedKey is always matched
+                if (mapping == "HeaderParameterProtectedKey" && value == 1)
+                {
+                    continue;
+                }
+                if (value != 0)
                 {
                     results.Add(mapping);
                 }
