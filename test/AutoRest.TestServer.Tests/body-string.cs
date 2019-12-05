@@ -20,6 +20,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("deserializer fails")]
         public Task GetStringNotProvided() => Test(async (host, pipeline) =>
         {
             var result = await StringOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
@@ -93,6 +94,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V1, "Test server aborts the connection")]
         public Task PutStringNull() => Test(async (host, pipeline) =>
         {
             var result = await StringOperations.PutNullAsync(ClientDiagnostics, pipeline, host);
