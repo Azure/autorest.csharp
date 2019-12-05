@@ -33,7 +33,6 @@ jobs:
         displayName: "Verify generated code"
         inputs:
           filePath: "eng/CodeChecks.ps1"
-          pwsh: true
           failOnStderr:  false
       - script: |
           dotnet test AutoRest.CSharp.V3.sln
