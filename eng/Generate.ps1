@@ -1,4 +1,4 @@
-param($name, [switch]$NoDebug)
+param($name)
 $ErrorActionPreference = 'Stop'
 
 function Invoke-Block([scriptblock]$cmd) {
@@ -33,11 +33,11 @@ foreach ($path in $paths)
     $inputFile = "$testServerSwaggerPath\$path.json"
     $namespace = $path.Replace('-', '_')
 
-    $command = "npx autorest-beta $debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace"
+    $command = "npx autorest-beta  $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace"
     $command = $command.Replace($repoRoot, "`$(SolutionDir)")
     Write-Host ">" $command
 
-    Invoke-Block {
-        npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace 
+    Invoke-Block { 
+        & npx autorest-beta  $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace
     }
 }
