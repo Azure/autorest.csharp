@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Error
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Status != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static Error Deserialize(JsonElement element)
+        public static Error Deserialize(JsonElement element)
         {
             var result = new Error();
             foreach (var property in element.EnumerateObject())

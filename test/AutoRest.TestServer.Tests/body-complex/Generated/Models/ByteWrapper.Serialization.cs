@@ -8,14 +8,14 @@ namespace body_complex.Models.V20160229
 {
     public partial class ByteWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("field");
             writer.WriteBase64StringValue(Field);
             writer.WriteEndObject();
         }
-        internal static ByteWrapper Deserialize(JsonElement element)
+        public static ByteWrapper Deserialize(JsonElement element)
         {
             var result = new ByteWrapper();
             foreach (var property in element.EnumerateObject())

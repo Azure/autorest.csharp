@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Salmon
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Location != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static Salmon Deserialize(JsonElement element)
+        public static Salmon Deserialize(JsonElement element)
         {
             var result = new Salmon();
             foreach (var property in element.EnumerateObject())

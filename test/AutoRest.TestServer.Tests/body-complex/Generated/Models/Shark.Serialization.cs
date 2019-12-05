@@ -8,7 +8,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Shark
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Age != null)
@@ -20,7 +20,7 @@ namespace body_complex.Models.V20160229
             writer.WriteStringValue(Birthday.ToString());
             writer.WriteEndObject();
         }
-        internal static Shark Deserialize(JsonElement element)
+        public static Shark Deserialize(JsonElement element)
         {
             var result = new Shark();
             foreach (var property in element.EnumerateObject())

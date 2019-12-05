@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class ArrayWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WriteStartArray("array");
@@ -19,7 +19,7 @@ namespace body_complex.Models.V20160229
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        internal static ArrayWrapper Deserialize(JsonElement element)
+        public static ArrayWrapper Deserialize(JsonElement element)
         {
             var result = new ArrayWrapper();
             foreach (var property in element.EnumerateObject())

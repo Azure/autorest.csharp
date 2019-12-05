@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Goblinshark
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Jawsize != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static Goblinshark Deserialize(JsonElement element)
+        public static Goblinshark Deserialize(JsonElement element)
         {
             var result = new Goblinshark();
             foreach (var property in element.EnumerateObject())

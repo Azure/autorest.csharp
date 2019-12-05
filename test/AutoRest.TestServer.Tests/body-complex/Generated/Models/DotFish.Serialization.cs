@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotFish
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type");
@@ -19,7 +19,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static DotFish Deserialize(JsonElement element)
+        public static DotFish Deserialize(JsonElement element)
         {
             var result = new DotFish();
             foreach (var property in element.EnumerateObject())

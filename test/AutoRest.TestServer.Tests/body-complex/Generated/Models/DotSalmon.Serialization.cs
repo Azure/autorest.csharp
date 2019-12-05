@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotSalmon
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Location != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static DotSalmon Deserialize(JsonElement element)
+        public static DotSalmon Deserialize(JsonElement element)
         {
             var result = new DotSalmon();
             foreach (var property in element.EnumerateObject())

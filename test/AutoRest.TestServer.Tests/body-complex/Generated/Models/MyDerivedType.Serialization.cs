@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyDerivedType
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (PropD1 != null)
@@ -17,7 +17,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static MyDerivedType Deserialize(JsonElement element)
+        public static MyDerivedType Deserialize(JsonElement element)
         {
             var result = new MyDerivedType();
             foreach (var property in element.EnumerateObject())

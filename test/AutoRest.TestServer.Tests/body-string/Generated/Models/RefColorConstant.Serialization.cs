@@ -7,7 +7,7 @@ namespace body_string.Models.V100
 {
     public partial class RefColorConstant
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field1 != null)
@@ -17,7 +17,7 @@ namespace body_string.Models.V100
             }
             writer.WriteEndObject();
         }
-        internal static RefColorConstant Deserialize(JsonElement element)
+        public static RefColorConstant Deserialize(JsonElement element)
         {
             var result = new RefColorConstant();
             foreach (var property in element.EnumerateObject())

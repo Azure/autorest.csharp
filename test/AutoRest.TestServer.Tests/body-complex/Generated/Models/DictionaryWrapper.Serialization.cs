@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DictionaryWrapper
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WriteStartObject("defaultProgram");
@@ -19,7 +19,7 @@ namespace body_complex.Models.V20160229
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
-        internal static DictionaryWrapper Deserialize(JsonElement element)
+        public static DictionaryWrapper Deserialize(JsonElement element)
         {
             var result = new DictionaryWrapper();
             foreach (var property in element.EnumerateObject())

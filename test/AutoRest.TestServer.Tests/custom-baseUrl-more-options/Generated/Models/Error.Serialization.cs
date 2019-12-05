@@ -7,7 +7,7 @@ namespace custom_baseUrl_more_options.Models.V100
 {
     public partial class Error
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Status != null)
@@ -22,7 +22,7 @@ namespace custom_baseUrl_more_options.Models.V100
             }
             writer.WriteEndObject();
         }
-        internal static Error Deserialize(JsonElement element)
+        public static Error Deserialize(JsonElement element)
         {
             var result = new Error();
             foreach (var property in element.EnumerateObject())

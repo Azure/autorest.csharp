@@ -8,14 +8,14 @@ namespace body_complex.Models.V20160229
 {
     public partial class Sawshark
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("picture");
             writer.WriteBase64StringValue(Picture);
             writer.WriteEndObject();
         }
-        internal static Sawshark Deserialize(JsonElement element)
+        public static Sawshark Deserialize(JsonElement element)
         {
             var result = new Sawshark();
             foreach (var property in element.EnumerateObject())

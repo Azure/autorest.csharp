@@ -8,7 +8,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Datetimerfc1123Wrapper
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        public void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field != null)
@@ -23,7 +23,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static Datetimerfc1123Wrapper Deserialize(JsonElement element)
+        public static Datetimerfc1123Wrapper Deserialize(JsonElement element)
         {
             var result = new Datetimerfc1123Wrapper();
             foreach (var property in element.EnumerateObject())
