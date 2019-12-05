@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.CodeGen;
-using AutoRest.CSharp.V3.JsonRpc;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 

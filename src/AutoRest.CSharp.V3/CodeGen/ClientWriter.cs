@@ -49,20 +49,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
-            CSharpType returnType;
-            CSharpType? responseType = null;
-            bool hasResponse = false;
-
-            if (schemaResponse != null)
-            {
-                hasResponse = true;
-                responseType = _typeFactory.CreateType(schemaResponse);
-                returnType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType));
-            }
-            else
-            {
-                returnType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
-            }
+            CSharpType? responseType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
+            CSharpType returnType = schemaResponse != null && responseType != null
+                ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
+                : new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
 
             var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(operation.Parameters
@@ -100,14 +90,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     foreach (var segment in operation.Request.PathSegments)
                     {
                         var value = segment.Value;
-                        if (value.IsConstant)
-                        {
-                            Line($"request.Uri.AppendPath(\"{value.Constant.Value}\", {segment.Escape.ToString().ToLower()});");
-                        }
-                        else
-                        {
-                            Line($"request.Uri.AppendPath({value.Parameter.Name}.ToString()!, {segment.Escape.ToString().ToLower()});");
-                        }
+                        Line(value.IsConstant
+                            ? $"request.Uri.AppendPath(\"{value.Constant.Value}\", {segment.Escape.ToString().ToLower()});"
+                            : $"request.Uri.AppendPath({value.Parameter.Name}.ToString()!, {segment.Escape.ToString().ToLower()});");
                     }
 
                     foreach (var pair in operation.Request.Headers)
@@ -115,35 +100,32 @@ namespace AutoRest.CSharp.V3.CodeGen
                         if (pair.Value.IsConstant)
                         {
                             Line($"request.Headers.Add(\"{pair.Key}\", \"{pair.Value.Constant.Value}\");");
+                            continue;
                         }
-                        else
-                        {
-                            var parameter = pair.Value.Parameter;
 
-                            using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
-                            {
-                                //TODO: Determine conditions in which to ToString() or not
-                                Line($"request.Headers.Add(\"{pair.Key}\", {parameter.Name}.ToString()!);");
-                            }
+                        var parameter = pair.Value.Parameter;
+                        using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
+                        {
+                            //TODO: Determine conditions in which to ToString() or not
+                            Line($"request.Headers.Add(\"{pair.Key}\", {parameter.Name}.ToString()!);");
                         }
                     }
 
+                    //TODO: Duplicate code between query and header parameter processing logic
                     foreach (var queryParameter in operation.Request.Query)
                     {
                         ConstantOrParameter value = queryParameter.Value;
                         if (value.IsConstant)
                         {
                             Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", \"{value.Constant.Value}\", {queryParameter.Escape.ToString().ToLower()});");
+                            continue;
                         }
-                        else
-                        {
-                            var parameter = value.Parameter;
 
-                            using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
-                            {
-                                //TODO: Determine conditions in which to ToString() or not
-                                Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", {parameter.Name}.ToString()!, {queryParameter.Escape.ToString().ToLower()});");
-                            }
+                        var parameter = value.Parameter;
+                        using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
+                        {
+                            //TODO: Determine conditions in which to ToString() or not
+                            Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", {parameter.Name}.ToString()!, {queryParameter.Escape.ToString().ToLower()});");
                         }
                     }
 
@@ -155,15 +137,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                         Line($"var buffer = new {Type(bufferWriter)}();");
                         Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
 
-                        if (body.IsConstant)
-                        {
-                            this.ToSerializeCall(body.Constant.Type, _typeFactory, body.Constant.ToValueString(), "", includePropertyName: false);
-                        }
-                        else
-                        {
-                            ServiceClientMethodParameter parameter = body.Parameter;
-                            this.ToSerializeCall(parameter.Type, _typeFactory, parameter.Name, "", includePropertyName: false);
-                        }
+                        var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
+                        var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
+                        this.ToSerializeCall(type, _typeFactory, name, "", includePropertyName: false);
 
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
@@ -172,34 +148,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
                     Line("cancellationToken.ThrowIfCancellationRequested();");
 
-                    //TODO: Do multiple status codes
-                    if (hasResponse)
-                    {
-                        Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-
-                        //TODO: Handle multiple exceptions
-                        //var schemaException = operation.Exceptions?.FirstOrDefault() as SchemaResponse;
-
-                        using (Switch("response.Status"))
-                        {
-                            var statusCodes = operation.Request.SuccessfulStatusCodes;
-                            foreach (var statusCode in statusCodes)
-                            {
-                                Line($"case {statusCode}:");
-                            }
-
-                            Append($"return {Type(typeof(Response))}.FromValue(");
-                            this.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", Type(responseType!), responseType!.Name ?? "[NO TYPE NAME]");
-                            Line(", response);");
-                            Line("default:");
-                            //TODO: Handle actual exception responses
-                            Line($"throw new {Type(typeof(Exception))}();");
-                        }
-                    }
-                    else
-                    {
-                        Line("return response;");
-                    }
+                    Action writeReturnText = schemaResponse != null && responseType != null
+                        ? (Action)(() => WriteStatusCodeSwitch(schemaResponse, responseType, operation))
+                        : () => Line("return response;");
+                    writeReturnText();
                 }
 
                 var exceptionParameter = Pair(typeof(Exception), "e");
@@ -208,6 +160,31 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("scope.Failed(e);");
                     Line("throw;");
                 }
+            }
+        }
+
+        //TODO: Do multiple status codes
+        private void WriteStatusCodeSwitch(ClientTypeReference schemaResponse, CSharpType responseType, ClientMethod operation)
+        {
+            Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+
+            //TODO: Handle multiple exceptions
+            //var schemaException = operation.Exceptions?.FirstOrDefault() as SchemaResponse;
+
+            using (Switch("response.Status"))
+            {
+                var statusCodes = operation.Request.SuccessfulStatusCodes;
+                foreach (var statusCode in statusCodes)
+                {
+                    Line($"case {statusCode}:");
+                }
+
+                Append($"return {Type(typeof(Response))}.FromValue(");
+                this.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
+                Line(", response);");
+                Line("default:");
+                //TODO: Handle actual exception responses
+                Line($"throw new {Type(typeof(Exception))}();");
             }
         }
     }

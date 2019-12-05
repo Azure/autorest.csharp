@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
@@ -25,13 +24,10 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
                 {
                     name = name.Substring(2);
                 }
+                _arguments[name] = parts[1];
                 if (parts.Length == 1)
                 {
                     _arguments[name] = "true";
-                }
-                else
-                {
-                    _arguments[name] = parts[1];
                 }
             }
 
@@ -47,15 +43,8 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             return File.ReadAllTextAsync(filename);
         }
 
-        public Task<T> GetValue<T>(string key)
-        {
-            if (_arguments.TryGetValue(key, out var stringValue))
-            {
-                return Task.FromResult((T)Convert.ChangeType(stringValue, typeof(T)));
-            }
-
-            return Task.FromResult(default(T)!);
-        }
+        public Task<T> GetValue<T>(string key) =>
+            _arguments.TryGetValue(key, out var stringValue) ? Task.FromResult((T)Convert.ChangeType(stringValue, typeof(T))) : Task.FromResult(default(T)!);
 
         public Task<string[]> ListInputs(string? artifactType = null)
         {

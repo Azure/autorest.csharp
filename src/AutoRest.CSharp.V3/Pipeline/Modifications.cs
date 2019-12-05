@@ -4,10 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.V3.Utilities;
-using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
@@ -16,7 +13,6 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
-
     internal partial class ObjectSchema
     {
         public ObjectSchema()
@@ -24,24 +20,25 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
             Properties = Array.Empty<Property>();
         }
     }
+
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {
         /// <summary>namespace of the implementation of this item</summary>
-        [YamlMember(Alias = "namespace", Order = 2)]
+        [YamlMember(Alias = "namespace")]
         public string? Namespace { get; set; }
 
         /// <summary>if this is a child of a polymorphic class, this will have the value of the discriminator.</summary>
-        [YamlMember(Alias = "discriminatorValue", Order = 3)]
+        [YamlMember(Alias = "discriminatorValue")]
         public string? DiscriminatorValue { get; set; }
 
-        [YamlMember(Alias = "uid", Order = 4, ScalarStyle = ScalarStyle.SingleQuoted)]
+        [YamlMember(Alias = "uid")]
         public string? Uid { get; set; }
 
-        [YamlMember(Alias = "internal", Order = 5)]
+        [YamlMember(Alias = "internal")]
         public bool? Internal { get; set; }
 
-        [YamlMember(Alias = "serializedName", Order = 6)]
+        [YamlMember(Alias = "serializedName")]
         public string? SerializedName { get; set; }
 
         [YamlIgnore]
