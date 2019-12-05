@@ -38,7 +38,7 @@ foreach ($path in $paths)
     $command = $command.Replace($repoRoot, "`$(SolutionDir)")
     Write-Host ">" $command
 
-    Invoke-Block { 
+    Invoke-Block {
         npx autorest-beta @debugFlags $testConfiguration --output-folder=$outputFolder --input-file=$inputFile --title=$path --namespace=$namespace 2> $null
     }
 }

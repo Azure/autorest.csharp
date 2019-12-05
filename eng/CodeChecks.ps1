@@ -41,7 +41,7 @@ function Invoke-Block([scriptblock]$cmd) {
     }
     catch
     {
-        LogError $_
+        LogError $_.Exception.ToString()
     }
 }
 
