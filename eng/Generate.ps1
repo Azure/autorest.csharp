@@ -21,7 +21,7 @@ $repoRoot = Resolve-Path "$PSScriptRoot\.."
 $testServerTestProject = "$repoRoot\test\AutoRest.TestServer.Tests"
 $testConfiguration = "$testServerTestProject\readme.md"
 $testServerSwaggerPath = "$repoRoot\node_modules\@microsoft.azure\autorest.testserver\swagger"
-$paths = 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options'
+$paths = 'url', 'body-string', 'custom-baseUrl', 'custom-baseUrl-more-options', 'body-complex'
 if ($name)
 {
     $paths = $name
