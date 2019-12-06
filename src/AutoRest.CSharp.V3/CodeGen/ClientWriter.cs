@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteClient(ServiceClient operationGroup, string rootNamespace)
+        public bool WriteClient(ServiceClient operationGroup)
         {
             Header();
             using var _ = UsingStatements();
@@ -38,14 +38,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     foreach (var method in operationGroup.Methods)
                     {
-                        WriteOperation(method, cs.Namespace, rootNamespace);
+                        WriteOperation(method, cs.Namespace);
                     }
                 }
             }
             return true;
         }
 
-        private void WriteOperation(ClientMethod operation, CSharpNamespace? @namespace, string rootNamespace)
+        private void WriteOperation(ClientMethod operation, CSharpNamespace? @namespace)
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
