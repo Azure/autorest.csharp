@@ -17,8 +17,7 @@ namespace AutoRest.CSharp.V3.CodeGen
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
-    <!-- Some methods are marked async and don't have an await in them -->
-    <NoWarn>1998</NoWarn>
+    <NoWarn>SA1649</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <Nullable>enable</Nullable>

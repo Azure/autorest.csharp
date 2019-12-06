@@ -56,6 +56,9 @@ namespace AutoRest.CSharp.V3.Plugins
         private static ServiceClient BuildClient(OperationGroup arg) =>
             new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where(method => method != null).ToArray()!);
 
+        private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter) =>
+            requestParameter.ClientDefaultValue != null ? new ClientConstant(requestParameter.ClientDefaultValue, new FrameworkTypeReference(typeof(object))) : (ClientConstant?)null;
+
         private static ClientMethod? BuildMethod(Operation operation)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
@@ -81,17 +84,27 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = new ClientConstant(constant.Value.Value, (FrameworkTypeReference) CreateType(constant.ValueType, false));
+                        constantOrParameter = new ClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, false));
                         break;
                     case BinarySchema _:
                         // skip
                         continue;
+                    //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
+                    case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
+                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
+                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false)),
+                            CreateDefaultValueConstant(requestParameter));
+                        break;
+                    //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
+                    case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
+                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
+                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false)),
+                            CreateDefaultValueConstant(requestParameter));
+                        break;
                     default:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
                             CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                            requestParameter.ClientDefaultValue != null ?
-                                new ClientConstant(requestParameter.ClientDefaultValue, new FrameworkTypeReference(typeof(object))) :
-                                (ClientConstant?)null);
+                            CreateDefaultValueConstant(requestParameter));
                         break;
                 }
 
@@ -210,6 +223,7 @@ namespace AutoRest.CSharp.V3.Plugins
         private static ClientObjectProperty CreateProperty(Property property) =>
             new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName);
 
+        //TODO: Handle nullability properly
         private static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
             BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(false),
