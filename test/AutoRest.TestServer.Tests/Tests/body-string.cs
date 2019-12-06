@@ -6,7 +6,7 @@ using body_string;
 using body_string.Models.V100;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class BodyStringTest : TestServerTestBase
     {

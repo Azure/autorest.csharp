@@ -7,7 +7,7 @@ using header;
 using header.Models.V100;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     [IgnoreOnTestServer(TestServerVersion.V2, "Too many missing or too strict recordings")]
     public class HeaderTests : TestServerTestBase

@@ -4,7 +4,7 @@
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class custom_baseURL : TestServerTestBase
     {

@@ -7,7 +7,7 @@ using NUnit.Framework;
 using url;
 using url.Models.V100;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class UrlTests: TestServerTestBase
     {

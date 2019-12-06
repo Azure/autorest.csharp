@@ -6,7 +6,7 @@ using body_complex;
 using body_complex.Models.V20160229;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class BodyComplexTest: TestServerTestBase
     {

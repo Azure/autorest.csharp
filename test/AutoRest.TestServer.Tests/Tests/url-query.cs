@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
-using Azure;
 using NUnit.Framework;
 using url;
 using url.Models.V100;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class UrlQueryTests: TestServerTestBase
     {

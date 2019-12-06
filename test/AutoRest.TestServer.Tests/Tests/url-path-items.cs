@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using url;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Tests
 {
     public class UrlPathItemsTests: TestServerTestBase
     {

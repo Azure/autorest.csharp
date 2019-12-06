@@ -16,11 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../../src/assets/**/*.cs" />
-    <Compile Include="../TestServerProjects/**/*.cs" Exclude="../TestServerProjects/**/Azure.Core.Shared/*.cs" />
+    <Folder Include="Tests" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tests/" />
+    <Compile Include="../../src/assets/**/*.cs" />
+    <Compile Include="../TestServerProjects/**/*.cs" Exclude="../TestServerProjects/**/Azure.Core.Shared/*.cs" LinkBase="TestServerProjects" />
   </ItemGroup>
+
 </Project>
