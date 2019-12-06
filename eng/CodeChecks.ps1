@@ -24,17 +24,24 @@ function LogError([string]$message) {
 
 function Invoke-Block([scriptblock]$cmd) {
     $cmd | Out-String | Write-Verbose
-    & $cmd
+    try
+    {
+        & $cmd
 
-    # Need to check both of these cases for errors as they represent different items
-    # - $?: did the powershell script block throw an error
-    # - $lastexitcode: did a windows command executed by the script block end in error
-    if ((-not $?) -or ($lastexitcode -ne 0)) {
-        if ($error -ne $null)
-        {
-            Write-Warning $error[0]
+        # Need to check both of these cases for errors as they represent different items
+        # - $?: did the powershell script block throw an error
+        # - $lastexitcode: did a windows command executed by the script block end in error
+        if ((-not $?) -or ($lastexitcode -ne 0)) {
+            if ($error -ne $null)
+            {
+                Write-Warning $error[0]
+            }
+            throw "Command failed to execute: $cmd"
         }
-        throw "Command failed to execute: $cmd"
+    }
+    catch
+    {
+        LogError $_
     }
 }
 

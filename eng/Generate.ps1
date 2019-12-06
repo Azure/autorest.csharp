@@ -27,7 +27,8 @@ function Invoke-AutoRest($debugFlags, $testConfiguration, $outputFolder, $inputF
         $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
         Write-Host ">" $commandText
-        Invoke-Expression $command
+        
+        & cmd /c "$command 2>&1"
     }
 }
 
