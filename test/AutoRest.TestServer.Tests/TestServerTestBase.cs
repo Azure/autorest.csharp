@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
     {
         private readonly TestServerVersion _version;
         private readonly string? _coverageFile;
-        //public static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
+        public static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
 
         public TestServerTestBase(TestServerVersion version): this(version, null)
         {

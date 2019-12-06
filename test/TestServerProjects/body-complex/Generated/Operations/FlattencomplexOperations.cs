@@ -14,8 +14,10 @@ namespace body_complex
 {
     public static class FlattencomplexOperations
     {
-        public static async ValueTask<Response<MyBaseType>> GetValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<MyBaseType>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -33,8 +35,9 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }

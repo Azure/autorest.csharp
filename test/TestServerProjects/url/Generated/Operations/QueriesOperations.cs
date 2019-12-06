@@ -14,8 +14,10 @@ namespace url
 {
     public static class QueriesOperations
     {
-        public static async ValueTask<Response> GetBooleanTrueAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetBooleanTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetBooleanTrue");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -27,13 +29,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetBooleanFalseAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetBooleanFalseAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetBooleanFalse");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -45,13 +50,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetBooleanNullAsync(HttpPipeline pipeline, bool? boolQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetBooleanNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, bool? boolQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetBooleanNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -66,13 +74,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetIntOneMillionAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetIntOneMillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetIntOneMillion");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -84,13 +95,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetIntNegativeOneMillionAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetIntNegativeOneMillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetIntNegativeOneMillion");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -102,13 +116,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetIntNullAsync(HttpPipeline pipeline, int? intQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetIntNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int? intQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetIntNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -123,13 +140,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetTenBillionAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetTenBillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetTenBillion");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -141,13 +161,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetNegativeTenBillionAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetNegativeTenBillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetNegativeTenBillion");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -159,13 +182,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetLongNullAsync(HttpPipeline pipeline, int? longQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetLongNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int? longQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.GetLongNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -180,13 +206,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> FloatScientificPositiveAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> FloatScientificPositiveAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.FloatScientificPositive");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -198,13 +227,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> FloatScientificNegativeAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> FloatScientificNegativeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.FloatScientificNegative");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -216,13 +248,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> FloatNullAsync(HttpPipeline pipeline, double? floatQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> FloatNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double? floatQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.FloatNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -237,13 +272,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DoubleDecimalPositiveAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DoubleDecimalPositiveAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DoubleDecimalPositive");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -255,13 +293,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DoubleDecimalNegativeAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DoubleDecimalNegativeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DoubleDecimalNegative");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -273,13 +314,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DoubleNullAsync(HttpPipeline pipeline, double? doubleQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DoubleNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double? doubleQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DoubleNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -294,13 +338,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> StringUnicodeAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> StringUnicodeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.StringUnicode");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -312,13 +359,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> StringUrlEncodedAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> StringUrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.StringUrlEncoded");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -330,13 +380,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> StringEmptyAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> StringEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.StringEmpty");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -348,13 +401,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> StringNullAsync(HttpPipeline pipeline, string? stringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> StringNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string? stringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.StringNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -369,13 +425,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> EnumValidAsync(HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> EnumValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.EnumValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -390,13 +449,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> EnumNullAsync(HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> EnumNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.EnumNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -411,13 +473,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ByteMultiByteAsync(HttpPipeline pipeline, Byte[] byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ByteMultiByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ByteMultiByte");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -429,13 +494,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ByteEmptyAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ByteEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ByteEmpty");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -447,13 +515,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ByteNullAsync(HttpPipeline pipeline, Byte[] byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ByteNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ByteNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -465,13 +536,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DateValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DateValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -483,13 +557,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DateNullAsync(HttpPipeline pipeline, DateTime? dateQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime? dateQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DateNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -504,13 +581,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DateTimeValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateTimeValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DateTimeValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -522,13 +602,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> DateTimeNullAsync(HttpPipeline pipeline, DateTime? dateTimeQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime? dateTimeQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.DateTimeNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -543,13 +626,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvValidAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -561,13 +647,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvNullAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvNull");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -579,13 +668,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvEmptyAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvEmpty");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -597,13 +689,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringSsvValidAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringSsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringSsvValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -615,13 +710,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringTsvValidAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringTsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringTsvValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -633,13 +731,16 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringPipesValidAsync(HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringPipesValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("url.ArrayStringPipesValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -651,8 +752,9 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }

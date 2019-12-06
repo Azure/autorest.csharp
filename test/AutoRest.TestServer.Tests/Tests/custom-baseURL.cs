@@ -12,10 +12,10 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task CustomBaseUri() => TestStatus(async (host, pipeline) =>
-            await custom_baseUrl.PathsOperations.GetEmptyAsync(pipeline, string.Empty, host.Replace("http://", string.Empty)));
+            await custom_baseUrl.PathsOperations.GetEmptyAsync(ClientDiagnostics, pipeline, string.Empty, host.Replace("http://", string.Empty)));
 
         [Test]
         public Task CustomBaseUriMoreOptions() => TestStatus(async (host, pipeline) =>
-            await global::custom_baseUrl_more_options.PathsOperations.GetEmptyAsync(pipeline, vault: host, string.Empty, "key1", "test12", "v1", dnsSuffix: string.Empty));
+            await global::custom_baseUrl_more_options.PathsOperations.GetEmptyAsync(ClientDiagnostics, pipeline, vault: host, string.Empty, "key1", "test12", "v1", dnsSuffix: string.Empty));
     }
 }

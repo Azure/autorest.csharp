@@ -14,8 +14,10 @@ namespace body_complex
 {
     public static class PolymorphismOperations
     {
-        public static async ValueTask<Response<Fish>> GetValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Fish>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -33,13 +35,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -56,13 +61,16 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<DotFish>> GetDotSyntaxAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<DotFish>> GetDotSyntaxAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetDotSyntax");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -80,13 +88,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithDiscriminator");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -104,13 +115,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithoutDiscriminator");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -128,13 +142,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<Salmon>> GetComplicatedAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Salmon>> GetComplicatedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.GetComplicated");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -152,13 +169,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutComplicatedAsync(HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutComplicatedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutComplicated");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -175,13 +195,16 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutMissingDiscriminator");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -205,13 +228,16 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidMissingRequiredAsync(HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutValidMissingRequiredAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("body_complex.PutValidMissingRequired");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -228,8 +254,9 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }

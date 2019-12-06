@@ -12,8 +12,10 @@ namespace custom_baseUrl
 {
     public static class PathsOperations
     {
-        public static async ValueTask<Response> GetEmptyAsync(HttpPipeline pipeline, string accountName, string host = "host", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string accountName, string host = "host", CancellationToken cancellationToken = default)
         {
+            using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");
+            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -24,8 +26,9 @@ namespace custom_baseUrl
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch
+            catch (Exception e)
             {
+                scope.Failed(e);
                 throw;
             }
         }
