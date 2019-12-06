@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerSession : IAsyncDisposable
     {

@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV2 : IDisposable, ITestServer
     {

@@ -2,10 +2,11 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using url;
 
-namespace AutoRest.TestServer.Tests.Tests
+namespace AutoRest.TestServer.Tests
 {
     public class UrlPathItemsTests: TestServerTestBase
     {

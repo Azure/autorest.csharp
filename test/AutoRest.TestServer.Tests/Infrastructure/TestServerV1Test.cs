@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1Test
     {

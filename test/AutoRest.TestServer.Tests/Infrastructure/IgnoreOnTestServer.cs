@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
     public class IgnoreOnTestServer : NUnitAttribute, IApplyToTest
