@@ -71,14 +71,15 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
         });
 
-        public Task Test(Func<string, HttpPipeline, Task> test)
+        public Task Test(Func<string, HttpPipeline, Task> test, bool ignoreScenario = false)
         {
-            return Test(TestContext.CurrentContext.Test.Name, test);
+            return Test(TestContext.CurrentContext.Test.Name, test, ignoreScenario);
         }
 
-        private async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
+        private async Task Test(string scenario, Func<string, HttpPipeline, Task> test, bool ignoreScenario = false)
         {
-            var server = TestServerSession.Start(_version, scenario);
+            var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
+            var server = TestServerSession.Start(_version, scenarioParameter);
 
             try
             {
