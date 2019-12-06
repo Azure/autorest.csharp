@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.V3.Plugins
                     var fileName = Path.GetFileName(asset);
                     var outputPath = Path.Join("Generated", directory, fileName).Replace("\\", "/");
                     var contents = File.ReadAllText(asset);
-                    //contents = contents.Replace("namespace Azure.Core", $"namespace {configuration.Namespace}");
                     await autoRest.WriteFile(outputPath, contents, "source-file-csharp");
                 }
             }
