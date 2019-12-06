@@ -12,7 +12,7 @@ using url.Models.V100;
 
 namespace url
 {
-    public static class QueriesOperations
+    internal static class QueriesOperations
     {
         public static async ValueTask<Response> GetBooleanTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {

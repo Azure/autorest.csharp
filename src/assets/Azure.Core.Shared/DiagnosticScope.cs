@@ -1,7 +1,7 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#nullable enable
+#pragma warning disable CS8600, CS8604, CS8605
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Azure.Core.Pipeline
 {
-    public readonly struct DiagnosticScope : IDisposable
+    internal readonly struct DiagnosticScope : IDisposable
     {
         private readonly DiagnosticActivity? _activity;
 
@@ -37,7 +37,7 @@ namespace Azure.Core.Pipeline
         {
             if (_activity != null && value != null)
             {
-                AddAttribute(name, value.ToString()!);
+                AddAttribute(name, value.ToString());
             }
         }
 
@@ -138,9 +138,9 @@ namespace Azure.Core.Pipeline
         {
             if (s_getIdFormatMethod == null) return false;
 
-            object? result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());
+            object result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());
 
-            return result is int resultInt && resultInt == 2 /* ActivityIdFormat.W3C */;
+            return (int)result == 2 /* ActivityIdFormat.W3C */;
         }
 
         public static bool TryGetTraceState(this Activity activity, out string? traceState)

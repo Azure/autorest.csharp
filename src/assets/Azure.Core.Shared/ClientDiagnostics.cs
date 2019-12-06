@@ -1,14 +1,14 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Diagnostics;
 
-#nullable enable
+#pragma warning disable CS8600, CS8604, CS8605
 
 namespace Azure.Core.Pipeline
 {
 #pragma warning disable CA1001 // Types that own disposable fields should be disposable
-    public sealed class ClientDiagnostics
+    internal sealed class ClientDiagnostics
 #pragma warning restore CA1001 // Types that own disposable fields should be disposable
     {
         private readonly DiagnosticListener? _source;
@@ -24,7 +24,7 @@ namespace Azure.Core.Pipeline
             }
         }
 
-        public ClientDiagnostics(ClientOptions options) : this(options.GetType().Namespace!, options.Diagnostics.IsDistributedTracingEnabled)
+        public ClientDiagnostics(ClientOptions options) : this(options.GetType().Namespace, options.Diagnostics.IsDistributedTracingEnabled)
         {
         }
 

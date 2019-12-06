@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
-    <Compile Include="../TestServerProjects/**/*.cs" Exclude="../TestServerProjects/**/obj/**/*.cs" LinkBase="TestServerProjects" />
+    <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
   </ItemGroup>
 
 </Project>

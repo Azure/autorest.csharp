@@ -11,7 +11,7 @@ using header.Models.V100;
 
 namespace header
 {
-    public static class HeaderOperations
+    internal static class HeaderOperations
     {
         public static async ValueTask<Response> ParamExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string userAgent, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
