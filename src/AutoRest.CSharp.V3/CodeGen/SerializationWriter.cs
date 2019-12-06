@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (Class(null, "partial", model.CSharpName()))
                 {
-                    using (Method("public", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer")))
+                    using (Method("internal", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer")))
                     {
                          Line("writer.WriteStartObject();");
 
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
 
                     var typeText = Type(cs);
-                    using (Method("public static", typeText, "Deserialize", Pair(typeof(JsonElement), "element")))
+                    using (Method("internal static", typeText, "Deserialize", Pair(typeof(JsonElement), "element")))
                     {
                         Line($"var result = new {typeText}();");
                         using (ForEach("var property in element.EnumerateObject()"))
@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (Namespace(cs.Namespace))
             {
-                using (Class("public", "static", $"{schema.CSharpName()}Extensions"))
+                using (Class("internal", "static", $"{schema.CSharpName()}Extensions"))
                 {
                     var stringText = Type(typeof(string));
                     var csTypeText = Type(cs);

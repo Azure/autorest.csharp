@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DoubleWrapper
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field1 != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static DoubleWrapper Deserialize(JsonElement element)
+        internal static DoubleWrapper Deserialize(JsonElement element)
         {
             var result = new DoubleWrapper();
             foreach (var property in element.EnumerateObject())

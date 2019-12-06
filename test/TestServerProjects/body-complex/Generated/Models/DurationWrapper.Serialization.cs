@@ -8,7 +8,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DurationWrapper
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field != null)
@@ -18,7 +18,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static DurationWrapper Deserialize(JsonElement element)
+        internal static DurationWrapper Deserialize(JsonElement element)
         {
             var result = new DurationWrapper();
             foreach (var property in element.EnumerateObject())

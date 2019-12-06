@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class FloatWrapper
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field1 != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static FloatWrapper Deserialize(JsonElement element)
+        internal static FloatWrapper Deserialize(JsonElement element)
         {
             var result = new FloatWrapper();
             foreach (var property in element.EnumerateObject())

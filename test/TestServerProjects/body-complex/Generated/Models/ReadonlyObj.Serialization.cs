@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class ReadonlyObj
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Id != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static ReadonlyObj Deserialize(JsonElement element)
+        internal static ReadonlyObj Deserialize(JsonElement element)
         {
             var result = new ReadonlyObj();
             foreach (var property in element.EnumerateObject())

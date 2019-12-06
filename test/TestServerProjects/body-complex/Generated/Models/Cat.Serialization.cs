@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Cat
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Color != null)
@@ -24,7 +24,7 @@ namespace body_complex.Models.V20160229
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        public static Cat Deserialize(JsonElement element)
+        internal static Cat Deserialize(JsonElement element)
         {
             var result = new Cat();
             foreach (var property in element.EnumerateObject())

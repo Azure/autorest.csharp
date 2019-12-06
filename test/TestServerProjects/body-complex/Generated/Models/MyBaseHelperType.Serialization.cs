@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyBaseHelperType
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (PropBH1 != null)
@@ -17,7 +17,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static MyBaseHelperType Deserialize(JsonElement element)
+        internal static MyBaseHelperType Deserialize(JsonElement element)
         {
             var result = new MyBaseHelperType();
             foreach (var property in element.EnumerateObject())

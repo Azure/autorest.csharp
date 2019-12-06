@@ -5,7 +5,7 @@ using System;
 
 namespace body_complex.Models.V20160229
 {
-    public static class GoblinSharkColorExtensions
+    internal static class GoblinSharkColorExtensions
     {
         public static string ToSerialString(this GoblinSharkColor value) => value switch
         {

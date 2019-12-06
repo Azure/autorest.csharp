@@ -8,7 +8,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DateWrapper
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Field != null)
@@ -23,7 +23,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static DateWrapper Deserialize(JsonElement element)
+        internal static DateWrapper Deserialize(JsonElement element)
         {
             var result = new DateWrapper();
             foreach (var property in element.EnumerateObject())

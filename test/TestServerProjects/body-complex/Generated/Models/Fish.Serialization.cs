@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Fish
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype");
@@ -28,7 +28,7 @@ namespace body_complex.Models.V20160229
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        public static Fish Deserialize(JsonElement element)
+        internal static Fish Deserialize(JsonElement element)
         {
             var result = new Fish();
             foreach (var property in element.EnumerateObject())

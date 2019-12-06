@@ -7,7 +7,7 @@ namespace body_string.Models.V100
 {
     public partial class Error
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Status != null)
@@ -22,7 +22,7 @@ namespace body_string.Models.V100
             }
             writer.WriteEndObject();
         }
-        public static Error Deserialize(JsonElement element)
+        internal static Error Deserialize(JsonElement element)
         {
             var result = new Error();
             foreach (var property in element.EnumerateObject())

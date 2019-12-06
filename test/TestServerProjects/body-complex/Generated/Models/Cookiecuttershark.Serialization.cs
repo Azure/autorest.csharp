@@ -7,12 +7,12 @@ namespace body_complex.Models.V20160229
 {
     public partial class Cookiecuttershark
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }
-        public static Cookiecuttershark Deserialize(JsonElement element)
+        internal static Cookiecuttershark Deserialize(JsonElement element)
         {
             var result = new Cookiecuttershark();
             foreach (var property in element.EnumerateObject())

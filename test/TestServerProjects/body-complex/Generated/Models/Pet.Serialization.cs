@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Pet
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Id != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static Pet Deserialize(JsonElement element)
+        internal static Pet Deserialize(JsonElement element)
         {
             var result = new Pet();
             foreach (var property in element.EnumerateObject())

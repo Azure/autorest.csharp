@@ -5,7 +5,7 @@ using System;
 
 namespace body_complex.Models.V20160229
 {
-    public static class CMYKColorsExtensions
+    internal static class CMYKColorsExtensions
     {
         public static string ToSerialString(this CMYKColors value) => value switch
         {

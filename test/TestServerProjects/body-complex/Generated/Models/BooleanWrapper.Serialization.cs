@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class BooleanWrapper
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (FieldTrue != null)
@@ -22,7 +22,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static BooleanWrapper Deserialize(JsonElement element)
+        internal static BooleanWrapper Deserialize(JsonElement element)
         {
             var result = new BooleanWrapper();
             foreach (var property in element.EnumerateObject())

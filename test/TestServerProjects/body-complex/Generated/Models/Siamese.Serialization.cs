@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Siamese
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Breed != null)
@@ -17,7 +17,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static Siamese Deserialize(JsonElement element)
+        internal static Siamese Deserialize(JsonElement element)
         {
             var result = new Siamese();
             foreach (var property in element.EnumerateObject())

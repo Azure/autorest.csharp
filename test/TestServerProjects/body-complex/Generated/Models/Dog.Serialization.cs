@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class Dog
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Food != null)
@@ -17,7 +17,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        public static Dog Deserialize(JsonElement element)
+        internal static Dog Deserialize(JsonElement element)
         {
             var result = new Dog();
             foreach (var property in element.EnumerateObject())

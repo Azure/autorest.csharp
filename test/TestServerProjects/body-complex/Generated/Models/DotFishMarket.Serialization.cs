@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotFishMarket
     {
-        public void Serialize(Utf8JsonWriter writer)
+        internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (SampleSalmon != null)
@@ -36,7 +36,7 @@ namespace body_complex.Models.V20160229
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        public static DotFishMarket Deserialize(JsonElement element)
+        internal static DotFishMarket Deserialize(JsonElement element)
         {
             var result = new DotFishMarket();
             foreach (var property in element.EnumerateObject())
