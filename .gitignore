@@ -359,4 +359,3 @@ samples/**/*.txt
 samples/**/*.csproj
 samples/**/*.sln
 test/**/*.yaml
-test/TestServerProjects/**/Generated/Azure.Core.Shared/*.cs
