@@ -480,7 +480,7 @@ namespace AutoRest.TestServer.Tests
               };
              */
 
-            //Assert.AreEqual("persian", result.Value.Breed);
+            //Assert.AreEqual("salmon", result.Value.Fishtype);
         });
 
         [Test]
@@ -527,97 +527,434 @@ namespace AutoRest.TestServer.Tests
             var value = new Fish
             {
                 Fishtype = "salmon",
-                //location = "alaska",
+                //Location = "alaska",
             };
             return await PolymorphismOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) =>
+        {
+            var result = await PolymorphismOperations.GetComplicatedAsync(ClientDiagnostics, pipeline, host);
+            /*
+               var rawSalmon = {
+                 'fishtype': 'smart_salmon',
+                 'location': 'alaska',
+                 'iswild': true,
+                 'species': 'king',
+                 'additionalProperty1': 1,
+                 'additionalProperty2': false,
+                 'additionalProperty3': "hello",
+                 'additionalProperty4': { a: 1, b: 2 },
+                 'additionalProperty5': [1, 3],
+                 'length': 1.0,
+                 'siblings': [
+                   {
+                     'fishtype': 'shark',
+                     'age': 6,
+                     'birthday': '2012-01-05T01:00:00Z',
+                     'length': 20.0,
+                     'species': 'predator',
+                   },
+                   {
+                     'fishtype': 'sawshark',
+                     'age': 105,
+                     'birthday': '1900-01-05T01:00:00Z',
+                     'length': 10.0,
+                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                     'species': 'dangerous',
+                   },
+                   {
+                     'fishtype': 'goblin',
+                     'age': 1,
+                     'birthday': '2015-08-08T00:00:00Z',
+                     'length': 30.0,
+                     'species': 'scary',
+                     'jawsize': 5,
+                     'color':'pinkish-gray'
+                   }
+                 ]
+               };
+             */
+
+            //Assert.AreEqual("smart_salmon", result.Value.Fishtype);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task PutComplexPolymorphismComplicated() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task PutComplexPolymorphismComplicated() => TestStatus(async (host, pipeline) =>
+        {
+            /*
+               var rawSalmon = {
+                 'fishtype': 'smart_salmon',
+                 'location': 'alaska',
+                 'iswild': true,
+                 'species': 'king',
+                 'additionalProperty1': 1,
+                 'additionalProperty2': false,
+                 'additionalProperty3': "hello",
+                 'additionalProperty4': { a: 1, b: 2 },
+                 'additionalProperty5': [1, 3],
+                 'length': 1.0,
+                 'siblings': [
+                   {
+                     'fishtype': 'shark',
+                     'age': 6,
+                     'birthday': '2012-01-05T01:00:00Z',
+                     'length': 20.0,
+                     'species': 'predator',
+                   },
+                   {
+                     'fishtype': 'sawshark',
+                     'age': 105,
+                     'birthday': '1900-01-05T01:00:00Z',
+                     'length': 10.0,
+                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                     'species': 'dangerous',
+                   },
+                   {
+                     'fishtype': 'goblin',
+                     'age': 1,
+                     'birthday': '2015-08-08T00:00:00Z',
+                     'length': 30.0,
+                     'species': 'scary',
+                     'jawsize': 5,
+                     'color':'pinkish-gray'
+                   }
+                 ]
+               };
+             */
+            var value = new Salmon
+            {
+                //Fishtype = "smart_salmon",
+                Location = "alaska"
+            };
+            return await PolymorphismOperations.PutComplicatedAsync(ClientDiagnostics, pipeline, value, host);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task PutComplexPolymorphismNoDiscriminator() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task PutComplexPolymorphismNoDiscriminator() => Test(async (host, pipeline) =>
+        {
+            /*
+                var regularSalmonWithoutDiscriminator = {
+                'location': 'alaska',
+                'iswild': true,
+                'species': 'king',
+                'length': 1.0,
+                'siblings': [
+                  {
+                    'fishtype': 'shark',
+                    'age': 6,
+                    'birthday': '2012-01-05T01:00:00Z',
+                    'length': 20.0,
+                    'species': 'predator',
+                  },
+                  {
+                    'fishtype': 'sawshark',
+                    'age': 105,
+                    'birthday': '1900-01-05T01:00:00Z',
+                    'length': 10.0,
+                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                    'species': 'dangerous',
+                  },
+                  {
+                    'fishtype': 'goblin',
+                    'age': 1,
+                    'birthday': '2015-08-08T00:00:00Z',
+                    'length': 30.0,
+                    'species': 'scary',
+                    'jawsize': 5,
+                    'color':'pinkish-gray'
+                  }
+                ]
+              };
+             */
+            var value = new Salmon
+            {
+                //Fishtype = "smart_salmon",
+                Location = "alaska"
+            };
+            var result = await PolymorphismOperations.PutMissingDiscriminatorAsync(ClientDiagnostics, pipeline, value, host);
+            Assert.AreEqual(200, result.GetRawResponse().Status);
+            //Assert.AreEqual("alaska", result.Value.Location);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task GetComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
+        {
+            var result = await PolymorphismOperations.GetDotSyntaxAsync(ClientDiagnostics, pipeline, host);
+            /*
+              var dotSalmon = {
+                'fish.type': 'DotSalmon',
+                'location': 'sweden',
+                'iswild': true,
+                'species': 'king',
+              };
+             */
+
+            //Assert.AreEqual("DotSalmon", result.Value.Fish.Type);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task PutComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
+        {
+            var result = await PolymorphismOperations.GetComposedWithDiscriminatorAsync(ClientDiagnostics, pipeline, host);
+            /*
+              var dotFishMarketWithDiscriminator = {
+                'sampleSalmon': {
+                  'fish.type': 'DotSalmon',
+                  'location': 'sweden',
+                  'iswild': false,
+                  'species': 'king',
+                },
+                'salmons': [
+                  {
+                    'fish.type': 'DotSalmon',
+                    'location': 'sweden',
+                    'iswild': false,
+                    'species': 'king',
+                  },
+                  {
+                    'fish.type': 'DotSalmon',
+                    'location': 'atlantic',
+                    'iswild': true,
+                    'species': 'king',
+                  }
+                ],
+                'sampleFish': {
+                  'fish.type': 'DotSalmon',
+                  'location': 'australia',
+                  'iswild': false,
+                  'species': 'king',
+                },
+                'fishes': [
+                  {
+                    'fish.type': 'DotSalmon',
+                    'location': 'australia',
+                    'iswild': false,
+                    'species': 'king',
+                  },
+                  {
+                    'fish.type': 'DotSalmon',
+                    'location': 'canada',
+                    'iswild': true,
+                    'species': 'king',
+                  }
+                ]
+              }
+             */
+
+            //Assert.AreEqual("DotSalmon", result.Value.SampleSalmon.Fish.Type);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task PutComplexReadOnlyPropertyValid() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
+        {
+            var result = await PolymorphismOperations.GetComposedWithoutDiscriminatorAsync(ClientDiagnostics, pipeline, host);
+            /*
+              var dotFishMarketWithoutDiscriminator = {
+                'sampleSalmon': {
+                  'location': 'sweden',
+                  'iswild': false,
+                  'species': 'king',
+                },
+                'salmons': [
+                  {
+                    'location': 'sweden',
+                    'iswild': false,
+                    'species': 'king',
+                  },
+                  {
+                    'location': 'atlantic',
+                    'iswild': true,
+                    'species': 'king',
+                  }
+                ],
+                'sampleFish': {
+                  'location': 'australia',
+                  'iswild': false,
+                  'species': 'king',
+                },
+                'fishes': [
+                  {
+                    'location': 'australia',
+                    'iswild': false,
+                    'species': 'king',
+                  },
+                  {
+                    'location': 'canada',
+                    'iswild': true,
+                    'species': 'king',
+                  }
+                ]
+              }
+             */
+
+            //Assert.AreEqual("sweden", result.Value.SampleSalmon.Location);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task GetComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) =>
+        {
+            var result = await PolymorphicrecursiveOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            /*
+                var bigfishRaw = {
+                "fishtype": "salmon",
+                "location": "alaska",
+                "iswild": true,
+                "species": "king",
+                "length": 1,
+                "siblings": [
+                  {
+                    "fishtype": "shark",
+                    "age": 6,
+                    'birthday': '2012-01-05T01:00:00Z',
+                    "species": "predator",
+                    "length": 20,
+                    "siblings": [
+                      {
+                        "fishtype": "salmon",
+                        "location": "atlantic",
+                        "iswild": true,
+                        "species": "coho",
+                        "length": 2,
+                        "siblings": [
+                          {
+                            "fishtype": "shark",
+                            "age": 6,
+                            'birthday': '2012-01-05T01:00:00Z',
+                            "species": "predator",
+                            "length": 20
+                          },
+                          {
+                            "fishtype": "sawshark",
+                            "age": 105,
+                            'birthday': '1900-01-05T01:00:00Z',
+                            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                            "species": "dangerous",
+                            "length": 10
+                          }
+                        ]
+                      },
+                      {
+                        "fishtype": "sawshark",
+                        "age": 105,
+                        'birthday': '1900-01-05T01:00:00Z',
+                        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                        "species": "dangerous",
+                        "length": 10,
+                        "siblings": []
+                      }
+                    ]
+                  },
+                  {
+                    "fishtype": "sawshark",
+                    "age": 105,
+                    'birthday': '1900-01-05T01:00:00Z',
+                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                    "species": "dangerous",
+                    "length": 10, "siblings": []
+                  }
+                ]
+              };
+             */
+
+            //Assert.AreEqual("salmon", result.Value.Fishtype);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
+        {
+            /*
+                var bigfishRaw = {
+                "fishtype": "salmon",
+                "location": "alaska",
+                "iswild": true,
+                "species": "king",
+                "length": 1,
+                "siblings": [
+                  {
+                    "fishtype": "shark",
+                    "age": 6,
+                    'birthday': '2012-01-05T01:00:00Z',
+                    "species": "predator",
+                    "length": 20,
+                    "siblings": [
+                      {
+                        "fishtype": "salmon",
+                        "location": "atlantic",
+                        "iswild": true,
+                        "species": "coho",
+                        "length": 2,
+                        "siblings": [
+                          {
+                            "fishtype": "shark",
+                            "age": 6,
+                            'birthday': '2012-01-05T01:00:00Z',
+                            "species": "predator",
+                            "length": 20
+                          },
+                          {
+                            "fishtype": "sawshark",
+                            "age": 105,
+                            'birthday': '1900-01-05T01:00:00Z',
+                            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                            "species": "dangerous",
+                            "length": 10
+                          }
+                        ]
+                      },
+                      {
+                        "fishtype": "sawshark",
+                        "age": 105,
+                        'birthday': '1900-01-05T01:00:00Z',
+                        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                        "species": "dangerous",
+                        "length": 10,
+                        "siblings": []
+                      }
+                    ]
+                  },
+                  {
+                    "fishtype": "sawshark",
+                    "age": 105,
+                    'birthday': '1900-01-05T01:00:00Z',
+                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                    "species": "dangerous",
+                    "length": 10, "siblings": []
+                  }
+                ]
+              };
+             */
+            var value = new Fish
+            {
+                Fishtype = "salmon",
+                //Location = "alaska"
+            };
+            return await PolymorphicrecursiveOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+        });
 
         [Test]
-        [Ignore("InProgress")]
-        public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) => await new Task<Response>(() => throw new Exception())/*await TestClass.TestMethodAsync(ClientDiagnostics, pipeline, host)*/);
+        public Task GetComplexReadOnlyPropertyValid() => Test(async (host, pipeline) =>
+        {
+            var result = await ReadonlypropertyOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            Assert.AreEqual("1234", result.Value.Id);
+            Assert.AreEqual(2, result.Value.Size);
+        }, true);
 
-        //public override IEnumerable<string> AdditionalKnownScenarios { get; } = new[] {
-        //    "PutComplexBasicValid",
-        //    "GetComplexBasicValid",
-        //    "GetComplexBasicEmpty",
-        //    "GetComplexBasicNotProvided",
-        //    "GetComplexBasicNull",
-        //    "GetComplexBasicInvalid",
-        //    "PutComplexPrimitiveInteger",
-        //    "PutComplexPrimitiveLong",
-        //    "PutComplexPrimitiveFloat",
-        //    "PutComplexPrimitiveDouble",
-        //    "PutComplexPrimitiveBool",
-        //    "PutComplexPrimitiveString",
-        //    "PutComplexPrimitiveDate",
-        //    "PutComplexPrimitiveDateTime",
-        //    "PutComplexPrimitiveDateTimeRfc1123",
-        //    "PutComplexPrimitiveDuration",
-        //    "PutComplexPrimitiveByte",
-        //    "GetComplexPrimitiveInteger",
-        //    "GetComplexPrimitiveLong",
-        //    "GetComplexPrimitiveFloat",
-        //    "GetComplexPrimitiveDouble",
-        //    "GetComplexPrimitiveBool",
-        //    "GetComplexPrimitiveString",
-        //    "GetComplexPrimitiveDate",
-        //    "GetComplexPrimitiveDateTime",
-        //    "GetComplexPrimitiveDateTimeRfc1123",
-        //    "GetComplexPrimitiveDuration",
-        //    "GetComplexPrimitiveByte",
-        //    "PutComplexArrayValid",
-        //    "PutComplexArrayEmpty",
-        //    "GetComplexArrayValid",
-        //    "GetComplexArrayEmpty",
-        //    "GetComplexArrayNotProvided",
-        //    "PutComplexDictionaryValid",
-        //    "PutComplexDictionaryEmpty",
-        //    "GetComplexDictionaryValid",
-        //    "GetComplexDictionaryEmpty",
-        //    "GetComplexDictionaryNull",
-        //    "GetComplexDictionaryNotProvided",
-        //    "PutComplexInheritanceValid",
-        //    "GetComplexInheritanceValid",
-        //    "PutComplexPolymorphismValid",
-        //    "GetComplexPolymorphismValid",
-        //    "PutComplexPolymorphismComplicated",
-        //    "GetComplexPolymorphismComplicated",
-        //    "PutComplexPolymorphismNoDiscriminator",
-        //    "PutComplexPolymorphicRecursiveValid",
-        //    "GetComplexPolymorphicRecursiveValid",
-        //    "PutComplexReadOnlyPropertyValid"
-        //};
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No response found")]
+        public Task PutComplexReadOnlyPropertyValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new ReadonlyObj();
+            return await ReadonlypropertyOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+        });
     }
 }
