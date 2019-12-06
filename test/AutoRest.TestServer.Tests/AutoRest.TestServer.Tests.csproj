@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
-    <Compile Include="../TestServerProjects/**/*.cs" Exclude="../TestServerProjects/**/Azure.Core.Shared/*.cs" LinkBase="TestServerProjects" />
+    <Compile Include="../TestServerProjects/**/*.cs" Exclude="../TestServerProjects/**/obj/**/*.cs" LinkBase="TestServerProjects" />
   </ItemGroup>
 
 </Project>
