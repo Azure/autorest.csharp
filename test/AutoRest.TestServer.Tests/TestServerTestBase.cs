@@ -34,35 +34,39 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void DefinesAllScenarios()
         {
+            var scenarios = AdditionalKnownScenarios;
             if (_coverageFile != null)
             {
-                var scenarios = TestServerV1.GetScenariosForRoute(_coverageFile);
-                var methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Select(m => m.Name)
-                    .ToArray();
+                scenarios = TestServerV1.GetScenariosForRoute(_coverageFile).Concat(scenarios);
+            }
+
+            var methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Select(m => m.Name)
+                .ToArray();
 
 
-                List<string> missingScenarios = new List<string>();
-                foreach (string scenario in scenarios)
+            HashSet<string> missingScenarios = new HashSet<string>(StringComparer.CurrentCultureIgnoreCase);
+            foreach (string scenario in scenarios)
+            {
+                if (!methods.Contains(scenario, StringComparer.CurrentCultureIgnoreCase))
                 {
-                    if (!methods.Contains(scenario, StringComparer.CurrentCultureIgnoreCase))
-                    {
-                        missingScenarios.Add(scenario);
-                    }
-                }
-
-                if (missingScenarios.Any())
-                {
-                    Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios) + " not defined");
+                    missingScenarios.Add(scenario);
                 }
             }
+
+            if (missingScenarios.Any())
+            {
+                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios) + " not defined");
+            }
         }
+
+        public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
         public Task TestStatus(Func<string, HttpPipeline, Task<Response>> test)
         {
             return TestStatus(TestContext.CurrentContext.Test.Name, test);
         }
 
-        public Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
+        private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
@@ -73,7 +77,7 @@ namespace AutoRest.TestServer.Tests
             return Test(TestContext.CurrentContext.Test.Name, test);
         }
 
-        public async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
+        private async Task Test(string scenario, Func<string, HttpPipeline, Task> test)
         {
             var server = TestServerSession.Start(_version, scenario);
 
