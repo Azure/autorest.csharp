@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.V3.Plugins
             foreach (var client in clients)
             {
                 var writer = new ClientWriter(typeFactory);
-                writer.WriteClient(client);
+                writer.WriteClient(client, configuration.Namespace);
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 

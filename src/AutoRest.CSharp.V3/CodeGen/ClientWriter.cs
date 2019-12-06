@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteClient(ServiceClient operationGroup)
+        public bool WriteClient(ServiceClient operationGroup, string rootNamespace)
         {
             Header();
             using var _ = UsingStatements();
@@ -38,14 +38,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     foreach (var method in operationGroup.Methods)
                     {
-                        WriteOperation(method, cs.Namespace);
+                        WriteOperation(method, cs.Namespace, rootNamespace);
                     }
                 }
             }
             return true;
         }
 
-        private void WriteOperation(ClientMethod operation, CSharpNamespace? @namespace)
+        private void WriteOperation(ClientMethod operation, CSharpNamespace? @namespace, string rootNamespace)
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
@@ -54,7 +54,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
                 : new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
 
-            var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
+            var clientDiagnosticsType = new CSharpType(new CSharpNamespace($"{rootNamespace}.Pipeline"), "ClientDiagnostics");
+            var parametersText = new[] { /*Pair(Type(clientDiagnosticsType), "clientDiagnostics"),*/ Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(operation.Parameters
                     .OrderBy(p => p.DefaultValue != null)
                     .Select(parameter =>
@@ -70,10 +71,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             var methodName = operation.Name;
             using (Method("public static async", Type(returnType), $"{methodName}Async", parametersText))
             {
-                Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
+                //Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
                 //TODO: Implement attribute logic
                 //Line("scope.AddAttribute(\"key\", name);");
-                Line("scope.Start();");
+                //Line("scope.Start();");
 
                 using (Try())
                 {
@@ -85,7 +86,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                     //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
                     var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s=> s.IsConstant ? s.Constant.Value :"{" + s.Parameter.Name + "}"));
-                    Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
+                    Line($"request.Uri.Reset(new {Type(typeof(Uri))}($\"{urlText}\"));");
 
                     foreach (var segment in operation.Request.PathSegments)
                     {
@@ -154,10 +155,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writeReturnText();
                 }
 
-                var exceptionParameter = Pair(typeof(Exception), "e");
-                using (Catch(exceptionParameter))
+                //var exceptionParameter = Pair(typeof(Exception), "e");
+                using (Catch())
                 {
-                    Line("scope.Failed(e);");
+                    //Line("scope.Failed(e);");
                     Line("throw;");
                 }
             }

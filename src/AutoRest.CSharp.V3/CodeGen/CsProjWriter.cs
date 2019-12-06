@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.V3.CodeGen
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin</OutputPath>
     <PublishDir>$(OutputPath)</PublishDir>
-    <NoWarn>SA1649</NoWarn>
+    <NoWarn>SA1649,CS8618</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <Nullable>enable</Nullable>

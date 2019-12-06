@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetValid() => Test("getComplexBasicValid", async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await BasicOperations.GetValidAsync(pipeline, host);
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
             Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Color = CMYKColors.Magenta
             };
-            var result = await BasicOperations.PutValidAsync(ClientDiagnostics, pipeline, basic, host);
+            var result = await BasicOperations.PutValidAsync(pipeline, basic, host);
             Assert.AreEqual(200, result.Status);
         });
     }

@@ -15,11 +15,15 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
+  </ItemGroup> -->
+
+  <ItemGroup>
+    <Folder Include="Tests/" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tests\" />
+    <Reference Include="../TestServerProjects/**/*.dll" />
   </ItemGroup>
 </Project>

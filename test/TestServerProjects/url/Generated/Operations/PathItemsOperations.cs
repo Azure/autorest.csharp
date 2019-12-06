@@ -12,10 +12,8 @@ namespace url
 {
     public static class PathItemsOperations
     {
-        public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetAllWithValuesAsync(HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("url.GetAllWithValues");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -40,16 +38,13 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetGlobalQueryNullAsync(HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("url.GetGlobalQueryNull");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -74,16 +69,13 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("url.GetGlobalAndLocalQueryNull");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -108,16 +100,13 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("url.GetLocalPathItemQueryNull");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -142,9 +131,8 @@ namespace url
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }

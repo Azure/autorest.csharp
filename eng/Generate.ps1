@@ -17,13 +17,14 @@ function Invoke-Block([scriptblock]$cmd) {
     }
 }
 
-function Invoke-AutoRest($debugFlags, $testConfiguration, $outputFolder, $inputFile, $name, $namespace, $repoRoot) {
+function Invoke-AutoRest($debugFlags, $requireFile, $outputFolder, $inputFile, $title, $namespace, $repoRoot) {
     Invoke-Block {
         $outputFlag = if($outputFolder) { "--output-folder=$outputFolder" } else { '' }
         $inputFlag = if($inputFile) { "--input-file=$inputFile" } else { '' }
-        $titleFlag = if($name) { "--title=$name" } else { '' }
+        $titleFlag = if($title) { "--title=$title" } else { '' }
         $namespaceFlag = if($namespace) { "--namespace=$namespace" } else { '' }
-        $command = "npx autorest-beta $debugFlags $testConfiguration $outputFlag $inputFlag $titleFlag $namespaceFlag"
+        $requireFlag = if($requireFile) { "--require=$requireFile" } else { '' }
+        $command = "npx autorest-beta $debugFlags $requireFlag $outputFlag $inputFlag $titleFlag $namespaceFlag"
         $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
         Write-Host ">" $commandText
@@ -36,17 +37,16 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 
 # Test server test configuration
-$testServerTestProject = Join-Path $repoRoot 'test' 'AutoRest.TestServer.Tests'
-$testConfiguration = Join-Path $testServerTestProject 'readme.md'
+$testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
+$configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options' }
+$testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
 
 foreach ($testName in $testNames)
 {
-    $outputFolder = Join-Path $testServerTestProject $testName
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $namespace = $testName.Replace('-', '_')
-    Invoke-AutoRest $debugFlags $testConfiguration $outputFolder $inputFile $testName $namespace $repoRoot
+    Invoke-AutoRest $debugFlags $configurationPath -inputFile $inputFile -title $testName -namespace $namespace -repoRoot $repoRoot
 }
 
 # Sample configuration

@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetStringMultiByteCharacters() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetMbcsAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetMbcsAsync(pipeline, host);
             Assert.AreEqual("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€", result.Value);
         });
 
@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("deserializer fails")]
         public Task GetStringNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetNotProvidedAsync(pipeline, host);
             Assert.AreEqual("", result.Value);
         });
 
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("base64 not implemented")]
         public Task GetStringNullBase64UrlEncoding() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetNullBase64UrlEncodedAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetNullBase64UrlEncodedAsync(pipeline, host);
             Assert.AreEqual(null, result.Value);
         });
 
@@ -39,7 +39,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("base64 not implemented")]
         public Task GetStringBase64Encoded() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetBase64EncodedAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetBase64EncodedAsync(pipeline, host);
             Assert.AreEqual("a string that gets encoded with base64", result.Value);
         });
 
@@ -47,19 +47,19 @@ namespace AutoRest.TestServer.Tests
         [Ignore("base64 not implemented")]
         public Task GetStringBase64UrlEncoded() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetBase64UrlEncodedAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetBase64UrlEncodedAsync(pipeline, host);
             Assert.AreEqual("a string that gets encoded with base64", result.Value);
         });
 
         [Test]
         [Ignore("base64 not implemented")]
         public Task PutStringBase64UrlEncoded() => TestStatus(async (host, pipeline) =>
-            await StringOperations.PutBase64UrlEncodedAsync(ClientDiagnostics, pipeline, new byte[0], host));
+            await StringOperations.PutBase64UrlEncodedAsync(pipeline, new byte[0], host));
 
         [Test]
         public Task PutStringMultiByteCharacters() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.PutMbcsAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.PutMbcsAsync(pipeline, host);
             Assert.AreEqual(200, result.Status);
         });
 
@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Deserializer fails")]
         public Task GetStringNull() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetNullAsync(pipeline, host);
             Assert.AreEqual(null, result.Value);
         });
 
@@ -75,21 +75,21 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V1, "returns 400")]
         public Task string_null1() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.PutNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.PutNullAsync(pipeline, host);
             Assert.AreEqual(200, result.Status);
         });
 
         [Test]
         public Task GetStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetEmptyAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetEmptyAsync(pipeline, host);
             Assert.AreEqual("", result.Value);
         });
 
         [Test]
         public Task PutStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.PutEmptyAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.PutEmptyAsync(pipeline, host);
             Assert.AreEqual(200, result.Status);
         });
 
@@ -97,21 +97,21 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V1, "Test server aborts the connection")]
         public Task PutStringNull() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.PutNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.PutNullAsync(pipeline, host);
             Assert.AreEqual(200, result.Status);
         });
 
         [Test]
         public Task GetStringWithLeadingAndTrailingWhitespace() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetWhitespaceAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetWhitespaceAsync(pipeline, host);
             Assert.AreEqual("    Now is the time for all good men to come to the aid of their country    ", result.Value);
         });
 
         [Test]
         public Task PutStringWithLeadingAndTrailingWhitespace() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.PutWhitespaceAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.PutWhitespaceAsync(pipeline, host);
             Assert.AreEqual(200, result.Status);
         });
 
@@ -119,42 +119,42 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Deserializer fails")]
         public Task GetNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await StringOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
+            var result = await StringOperations.GetNotProvidedAsync(pipeline, host);
             Assert.AreEqual("", result.Value);
         });
 
         [Test]
         public Task GetEnumReferenced() => Test(async (host, pipeline) =>
         {
-            var result = await EnumOperations.GetReferencedAsync(ClientDiagnostics, pipeline, host);
+            var result = await EnumOperations.GetReferencedAsync(pipeline, host);
             Assert.AreEqual(Colors.RedColor, result.Value);
         });
 
         [Test]
         public Task GetEnumReferencedConstant() => Test(async (host, pipeline) =>
         {
-            var result = await EnumOperations.GetReferencedConstantAsync(ClientDiagnostics, pipeline, host);
+            var result = await EnumOperations.GetReferencedConstantAsync(pipeline, host);
             Assert.AreEqual("Sample String", result.Value.Field1);
         });
 
         [Test]
         public Task GetEnumNotExpandable() => Test(async (host, pipeline) =>
         {
-            var result = await EnumOperations.GetNotExpandableAsync(ClientDiagnostics, pipeline, host);
+            var result = await EnumOperations.GetNotExpandableAsync(pipeline, host);
             Assert.AreEqual(Colors.RedColor, result.Value);
         });
 
         [Test]
         public Task PutEnumReferenced() => TestStatus(async (host, pipeline) =>
-            await EnumOperations.PutReferencedAsync(ClientDiagnostics, pipeline, Colors.RedColor, host));
+            await EnumOperations.PutReferencedAsync(pipeline, Colors.RedColor, host));
 
         [Test]
         [Ignore("Model not generated correctly")]
         public Task PutEnumReferencedConstant() => TestStatus(async (host, pipeline) =>
-            await EnumOperations.PutReferencedConstantAsync(ClientDiagnostics, pipeline, new RefColorConstant(), host));
+            await EnumOperations.PutReferencedConstantAsync(pipeline, new RefColorConstant(), host));
 
         [Test]
         public Task PutEnumNotExpandable() => TestStatus(async (host, pipeline) =>
-            await EnumOperations.PutNotExpandableAsync(ClientDiagnostics, pipeline, Colors.RedColor, host));
+            await EnumOperations.PutNotExpandableAsync(pipeline, Colors.RedColor, host));
     }
 }

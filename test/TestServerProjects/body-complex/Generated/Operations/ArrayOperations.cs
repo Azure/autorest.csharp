@@ -14,10 +14,8 @@ namespace body_complex
 {
     public static class ArrayOperations
     {
-        public static async ValueTask<Response<ArrayWrapper>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<ArrayWrapper>> GetValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -35,16 +33,13 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArrayWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutValidAsync(HttpPipeline pipeline, ArrayWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -61,16 +56,13 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -88,16 +80,13 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArrayWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutEmptyAsync(HttpPipeline pipeline, ArrayWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutEmpty");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -114,16 +103,13 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -141,9 +127,8 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }

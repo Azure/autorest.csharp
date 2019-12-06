@@ -2,7 +2,7 @@
 
 ``` yaml
 use: $(this-folder)/../../
-output-folder: $(title)
-clear-output-folder: true
+output-folder: $(this-folder)/$(title)
+# clear-output-folder: true
 include-csproj: true
 ```

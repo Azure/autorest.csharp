@@ -12,10 +12,8 @@ namespace custom_baseUrl_more_options
 {
     public static class PathsOperations
     {
-        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetEmptyAsync(HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.GetEmpty");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -33,9 +31,8 @@ namespace custom_baseUrl_more_options
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }

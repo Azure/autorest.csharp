@@ -14,10 +14,8 @@ namespace body_complex
 {
     public static class ReadonlypropertyOperations
     {
-        public static async ValueTask<Response<ReadonlyObj>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<ReadonlyObj>> GetValidAsync(HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -35,16 +33,13 @@ namespace body_complex
                         throw new Exception();
                 }
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ReadonlyObj complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutValidAsync(HttpPipeline pipeline, ReadonlyObj complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
-            scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
@@ -61,9 +56,8 @@ namespace body_complex
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                scope.Failed(e);
                 throw;
             }
         }
