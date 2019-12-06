@@ -12,7 +12,7 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    public static class PolymorphismOperations
+    internal static class PolymorphismOperations
     {
         public static async ValueTask<Response<Fish>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {

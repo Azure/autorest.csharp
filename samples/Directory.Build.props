@@ -1,9 +1,9 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Include="../../../src/assets/**/*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)/../src/assets/**/*.cs" />
   </ItemGroup>
   <PropertyGroup>
     <IncludeStyleCopAnalyzers>false</IncludeStyleCopAnalyzers>
   </PropertyGroup>
-  <Import Project="..\..\Directory.Build.props" />
+  <Import Project="..\Directory.Build.props" />
 </Project>

@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.V3
         public string Namespace { get; private set; }
         public string Title { get; private set; }
         public bool IncludeCsProj { get; private set; }
-        public bool IncludeAssets { get; private set; }
 
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         private Configuration() { }
@@ -23,8 +22,7 @@ namespace AutoRest.CSharp.V3
                 OutputPath = autoRest.GetValue<string?>("output-folder").GetAwaiter().GetResult() ?? "Generated",
                 Namespace = autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult() ?? "Sample",
                 Title = autoRest.GetValue<string?>("title").GetAwaiter().GetResult() ?? "Sample",
-                IncludeCsProj = autoRest.GetValue<bool?>("include-csproj").GetAwaiter().GetResult() ?? true,
-                IncludeAssets = autoRest.GetValue<bool?>("include-assets").GetAwaiter().GetResult() ?? true
+                IncludeCsProj = autoRest.GetValue<bool?>("include-csproj").GetAwaiter().GetResult() ?? true
             };
     }
 }

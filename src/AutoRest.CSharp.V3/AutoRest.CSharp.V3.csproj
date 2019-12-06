@@ -16,4 +16,7 @@
     <PackageReference Include="CaseExtensions" Version="1.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="../../src/assets/**/*.cs" />
+  </ItemGroup>
 </Project>

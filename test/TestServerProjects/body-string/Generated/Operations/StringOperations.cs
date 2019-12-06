@@ -11,7 +11,7 @@ using Azure.Core.Pipeline;
 
 namespace body_string
 {
-    public static class StringOperations
+    internal static class StringOperations
     {
         public static async ValueTask<Response<string>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
