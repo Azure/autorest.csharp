@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.CodeGen
     <NoWarn>SA1649,CS8618</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <Nullable>enable</Nullable>
+    <Nullable>annotations</Nullable>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>

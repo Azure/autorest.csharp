@@ -4,11 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using url;
 using url.Models.V100;
 
-namespace AutoRest.TestServer.Tests.Tests
+namespace AutoRest.TestServer.Tests
 {
     public class UrlTests : TestServerTestBase
     {

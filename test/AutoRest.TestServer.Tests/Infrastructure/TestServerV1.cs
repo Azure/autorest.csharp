@@ -11,7 +11,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : IDisposable, ITestServer
     {

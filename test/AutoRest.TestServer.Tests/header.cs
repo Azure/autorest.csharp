@@ -3,11 +3,12 @@
 
 using System;
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using header;
 using header.Models.V100;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests.Tests
+namespace AutoRest.TestServer.Tests
 {
     [IgnoreOnTestServer(TestServerVersion.V2, "Too many missing or too strict recordings")]
     public class HeaderTests : TestServerTestBase

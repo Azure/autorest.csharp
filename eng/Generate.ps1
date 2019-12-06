@@ -17,14 +17,9 @@ function Invoke-Block([scriptblock]$cmd) {
     }
 }
 
-function Invoke-AutoRest($debugFlags, $requireFile, $outputFolder, $inputFile, $title, $namespace, $repoRoot) {
+function Invoke-AutoRest($autoRestArguments, $repoRoot) {
     Invoke-Block {
-        $outputFlag = if($outputFolder) { "--output-folder=$outputFolder" } else { '' }
-        $inputFlag = if($inputFile) { "--input-file=$inputFile" } else { '' }
-        $titleFlag = if($title) { "--title=$title" } else { '' }
-        $namespaceFlag = if($namespace) { "--namespace=$namespace" } else { '' }
-        $requireFlag = if($requireFile) { "--require=$requireFile" } else { '' }
-        $command = "npx autorest-beta $debugFlags $requireFlag $outputFlag $inputFlag $titleFlag $namespaceFlag"
+        $command = "npx autorest-beta $autoRestArguments"
         $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
         Write-Host ">" $commandText
@@ -47,7 +42,8 @@ foreach ($testName in $testNames)
 {
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $namespace = $testName.Replace('-', '_')
-    Invoke-AutoRest $debugFlags $configurationPath -inputFile $inputFile -title $testName -namespace $namespace -repoRoot $repoRoot
+    $autoRestArguments = "$debugFlags --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
+    Invoke-AutoRest $autoRestArguments $repoRoot
 }
 
 # Sample configuration
@@ -58,5 +54,6 @@ foreach ($projectName in $projectNames)
 {
     $projectDirectory = Join-Path $sampleDirectory $projectName
     $configurationPath = Join-Path $projectDirectory 'readme.md'
-    Invoke-AutoRest $debugFlags $configurationPath -repoRoot $repoRoot
+    $autoRestArguments = "$debugFlags --require=$configurationPath"
+    Invoke-AutoRest $autoRestArguments $repoRoot
 }

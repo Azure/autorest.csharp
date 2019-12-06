@@ -2,11 +2,12 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using body_string;
 using body_string.Models.V100;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests.Tests
+namespace AutoRest.TestServer.Tests
 {
     public class BodyStringTest : TestServerTestBase
     {
