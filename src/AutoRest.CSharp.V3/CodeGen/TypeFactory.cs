@@ -51,7 +51,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             return new CSharpType(
                 new CSharpNamespace(_namespace.NullIfEmpty(), "Models", apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace),
                 type.Name,
-                isNullable: schemaReference.IsNullable);
+                isNullable: schemaReference.IsNullable,
+                isValueType: type is ClientEnum);
         }
 
         public CSharpType CreateType(ServiceClient clientTypeProvider) =>

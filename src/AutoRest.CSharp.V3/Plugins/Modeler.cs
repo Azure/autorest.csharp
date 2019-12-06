@@ -12,6 +12,7 @@ using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -57,7 +58,9 @@ namespace AutoRest.CSharp.V3.Plugins
             new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where(method => method != null).ToArray()!);
 
         private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter) =>
-            requestParameter.ClientDefaultValue != null ? new ClientConstant(requestParameter.ClientDefaultValue, new FrameworkTypeReference(typeof(object))) : (ClientConstant?)null;
+            requestParameter.ClientDefaultValue != null ?
+                new ClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference) CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
+                (ClientConstant?)null;
 
         private static ClientMethod? BuildMethod(Operation operation)
         {
@@ -72,7 +75,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             Dictionary<string, ConstantOrParameter> parameters = new Dictionary<string, ConstantOrParameter>();
             List<QueryParameter> query = new List<QueryParameter>();
-            List<KeyValuePair<string, ConstantOrParameter>> headers = new List<KeyValuePair<string, ConstantOrParameter>>();
+            List<RequestHeader> headers = new List<RequestHeader>();
 
             ConstantOrParameter? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
@@ -113,7 +116,7 @@ namespace AutoRest.CSharp.V3.Plugins
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(KeyValuePair.Create(serializedName, constantOrParameter.Value));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, ToHeaderFormat(requestParameter.Schema)));
                             break;
                         case ParameterLocation.Query:
                             query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true));
@@ -130,7 +133,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
             {
-                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => KeyValuePair.Create("Content-Type", new ConstantOrParameter(StringConstant(mediaType)))));
+                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", new ConstantOrParameter(StringConstant(mediaType)))));
             }
 
             var request = new ClientMethodRequest(
@@ -156,6 +159,17 @@ namespace AutoRest.CSharp.V3.Plugins
                 parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
                 responseType
             );
+        }
+
+        private static HeaderSerializationFormat ToHeaderFormat(Schema schema)
+        {
+            return schema switch
+            {
+                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => HeaderSerializationFormat.DateTimeISO8601,
+                DateSchema _ => HeaderSerializationFormat.Date,
+                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => HeaderSerializationFormat.DateTimeRFC1123,
+                _ => HeaderSerializationFormat.Default,
+            };
         }
 
         private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
