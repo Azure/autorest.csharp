@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using url;
 

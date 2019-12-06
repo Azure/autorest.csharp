@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests
+namespace AutoRest.TestServer.Tests.Infrastructure
 {
     [TestFixture(TestServerVersion.V1)]
     [TestFixture(TestServerVersion.V2)]

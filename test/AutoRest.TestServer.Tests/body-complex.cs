@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using body_complex;
 using body_complex.Models.V20160229;
 using NUnit.Framework;

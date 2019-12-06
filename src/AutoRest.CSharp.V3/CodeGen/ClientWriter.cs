@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                     //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
                     var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s=> s.IsConstant ? s.Constant.Value :"{" + s.Parameter.Name + "}"));
-                    Line($"request.Uri.Reset(new Uri($\"{urlText}\"));");
+                    Line($"request.Uri.Reset(new {Type(typeof(Uri))}($\"{urlText}\"));");
 
                     foreach (var segment in operation.Request.PathSegments)
                     {

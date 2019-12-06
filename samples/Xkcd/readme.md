@@ -5,6 +5,6 @@
 ``` yaml
 title: Xkcd
 require: $(this-folder)/../readme.samples.md
-input-file: xkcd.yaml
+input-file: $(this-folder)/xkcd.yaml
 namespace: Xkcd
 ```

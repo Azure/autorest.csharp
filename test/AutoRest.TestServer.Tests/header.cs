@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using header;
 using header.Models.V100;
 using NUnit.Framework;

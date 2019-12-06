@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

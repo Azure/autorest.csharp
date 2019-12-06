@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Azure;
+using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using url;
 using url.Models.V100;

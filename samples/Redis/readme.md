@@ -5,6 +5,6 @@
 ``` yaml
 title: Redis
 require: $(this-folder)/../readme.samples.md
-input-file: redis.json
+input-file: $(this-folder)/redis.json
 namespace: Azure.Redis
 ```
