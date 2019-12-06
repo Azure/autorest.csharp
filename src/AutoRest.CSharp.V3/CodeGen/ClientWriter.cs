@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var @namespace = cs.Namespace;
             using (Namespace(@namespace))
             {
-                using (Class(null, "static", operationGroup.Name))
+                using (Class("internal", "static", operationGroup.Name))
                 {
                     foreach (var method in operationGroup.Methods)
                     {

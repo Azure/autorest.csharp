@@ -12,7 +12,7 @@ using body_string.Models.V100;
 
 namespace body_string
 {
-    public static class EnumOperations
+    internal static class EnumOperations
     {
         public static async ValueTask<Response<Colors>> GetNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {

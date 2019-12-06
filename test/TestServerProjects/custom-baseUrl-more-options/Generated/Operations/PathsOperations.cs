@@ -10,7 +10,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_more_options
 {
-    public static class PathsOperations
+    internal static class PathsOperations
     {
         public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
         {

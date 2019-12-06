@@ -12,7 +12,7 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    public static class ArrayOperations
+    internal static class ArrayOperations
     {
         public static async ValueTask<Response<ArrayWrapper>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {

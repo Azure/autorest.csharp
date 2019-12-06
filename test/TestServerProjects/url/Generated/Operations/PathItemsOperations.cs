@@ -10,7 +10,7 @@ using Azure.Core.Pipeline;
 
 namespace url
 {
-    public static class PathItemsOperations
+    internal static class PathItemsOperations
     {
         public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {

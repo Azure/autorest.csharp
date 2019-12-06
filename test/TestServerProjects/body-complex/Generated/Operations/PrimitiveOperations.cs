@@ -12,7 +12,7 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    public static class PrimitiveOperations
+    internal static class PrimitiveOperations
     {
         public static async ValueTask<Response<IntWrapper>> GetIntAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
