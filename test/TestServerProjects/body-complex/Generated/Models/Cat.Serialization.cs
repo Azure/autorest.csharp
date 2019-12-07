@@ -18,7 +18,6 @@ namespace body_complex.Models.V20160229
             writer.WriteStartArray("hates");
             foreach (var item in Hates)
             {
-                writer.WritePropertyName("hates");
                 item.Serialize(writer);
             }
             writer.WriteEndArray();

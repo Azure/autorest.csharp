@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_complex;
 using body_complex.Models.V20160229;
@@ -216,6 +217,7 @@ namespace AutoRest.TestServer.Tests
             return await PrimitiveOperations.PutDateAsync(ClientDiagnostics, pipeline, value, host);
         });
 
+        //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
         [Test]
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
@@ -224,6 +226,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(DateTime.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Now);
         });
 
+        //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
         [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/303")]
         public Task PutComplexPrimitiveDateTime() => TestStatus(async (host, pipeline) =>
@@ -262,7 +265,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDuration() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDurationAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(TimeSpan.Parse("P123DT22H14M12.011S"), result.Value.Field);
+            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), result.Value.Field);
         });
 
         [Test]
@@ -271,7 +274,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DurationWrapper
             {
-                Field = TimeSpan.Parse("P123DT22H14M12.011S")
+                Field = XmlConvert.ToTimeSpan("P123DT22H14M12.011S")
             };
             return await PrimitiveOperations.PutDurationAsync(ClientDiagnostics, pipeline, value, host);
         });
@@ -306,7 +309,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/310")]
         public Task PutComplexArrayValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new ArrayWrapper();
@@ -356,7 +358,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289 https://github.com/Azure/autorest.csharp/issues/311")]
         public Task PutComplexDictionaryValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new DictionaryWrapper();
@@ -383,11 +384,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/311")]
         public Task PutComplexDictionaryEmpty() => TestStatus(async (host, pipeline) =>
         {
             var value = new DictionaryWrapper();
-            return await DictionaryOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await DictionaryOperations.PutEmptyAsync(ClientDiagnostics, pipeline, value, host);
         });
 
         [Test]

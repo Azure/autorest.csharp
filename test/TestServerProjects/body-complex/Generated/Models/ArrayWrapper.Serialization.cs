@@ -13,7 +13,6 @@ namespace body_complex.Models.V20160229
             writer.WriteStartArray("array");
             foreach (var item in Array)
             {
-                writer.WritePropertyName("array");
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();

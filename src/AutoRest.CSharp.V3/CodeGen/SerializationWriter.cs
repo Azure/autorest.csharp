@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Line($"writer.WriteStartArray(\"{serializedName}\");");
                 using (ForEach($"var item in {name}"))
                 {
-                    this.ToSerializeCall(array.ItemType, _typeFactory, "item", serializedName, true);
+                    this.ToSerializeCall(array.ItemType, _typeFactory, "item", serializedName, false);
                 }
                 Line("writer.WriteEndArray();");
                 return;
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Line($"writer.WriteStartObject(\"{serializedName}\");");
                 using (ForEach($"var item in {name}"))
                 {
-                    this.ToSerializeCall(dictionary.ValueType, _typeFactory, "item.Value", "item.Key", false, false);
+                    this.ToSerializeCall(dictionary.ValueType, _typeFactory, "item.Value", "item.Key", true, false);
                 }
                 Line("writer.WriteEndObject();");
                 return;

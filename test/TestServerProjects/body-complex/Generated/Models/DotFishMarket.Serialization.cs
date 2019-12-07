@@ -18,7 +18,6 @@ namespace body_complex.Models.V20160229
             writer.WriteStartArray("salmons");
             foreach (var item in Salmons)
             {
-                writer.WritePropertyName("salmons");
                 item.Serialize(writer);
             }
             writer.WriteEndArray();
@@ -30,7 +29,6 @@ namespace body_complex.Models.V20160229
             writer.WriteStartArray("fishes");
             foreach (var item in Fishes)
             {
-                writer.WritePropertyName("fishes");
                 item.Serialize(writer);
             }
             writer.WriteEndArray();
