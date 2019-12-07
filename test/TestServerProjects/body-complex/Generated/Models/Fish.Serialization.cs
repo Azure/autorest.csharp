@@ -44,7 +44,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetDouble();
+                    result.Length = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("siblings"))

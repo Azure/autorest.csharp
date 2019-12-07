@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Dictionary => null,
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => typeof(int),
+            AllSchemaTypes.Integer => null, // Handled in ToFrameworkType for NumberSchema
             AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => typeof(double),
+            AllSchemaTypes.Number => null, // Handled in ToFrameworkType for NumberSchema
             AllSchemaTypes.Object => null,
             AllSchemaTypes.OdataQuery => typeof(string),
             AllSchemaTypes.Or => null,
@@ -41,6 +41,23 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Uuid => typeof(string),
             AllSchemaTypes.Xor => null,
             _ => null
+        };
+
+        public static Type ToFrameworkType(this NumberSchema schema) => schema.Type switch
+        {
+            AllSchemaTypes.Number => schema.Precision switch
+            {
+                32 => typeof(float),
+                128 => typeof(decimal),
+                _ => typeof(double)
+            },
+            // Assumes AllSchemaTypes.Integer
+            _ => schema.Precision switch
+            {
+                16 => typeof(short),
+                64 => typeof(long),
+                _ => typeof(int)
+            }
         };
 
         public static RequestMethod? ToCoreRequestMethod(this HttpMethod method) => method switch
@@ -56,18 +73,27 @@ namespace AutoRest.CSharp.V3.Pipeline
             _ => null
         };
 
+        private static readonly Func<string, bool, string?> NumberSerializer =
+            (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});";
+        private static Func<string, bool, string?> StringSerializer(bool includeToString = false) =>
+            (vn, nu) => $"writer.WriteStringValue({vn}{(includeToString ? ".ToString()" : string.Empty)});";
+
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
         private static readonly Dictionary<Type, Func<string, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, string?>>
         {
             { typeof(bool), (vn, nu) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
-            { typeof(char), (vn, nu) => $"writer.WriteStringValue({vn});" },
-            { typeof(int), (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});" },
-            { typeof(double), (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});" },
-            { typeof(string), (vn, nu) => $"writer.WriteStringValue({vn});" },
+            { typeof(char), StringSerializer() },
+            { typeof(short), NumberSerializer },
+            { typeof(int), NumberSerializer },
+            { typeof(long), NumberSerializer },
+            { typeof(float), NumberSerializer },
+            { typeof(double), NumberSerializer },
+            { typeof(decimal), NumberSerializer },
+            { typeof(string), StringSerializer() },
             { typeof(byte[]), (vn, nu) => null },
-            { typeof(DateTime), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" },
-            { typeof(TimeSpan), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" },
-            { typeof(Uri), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" }
+            { typeof(DateTime), StringSerializer(true) },
+            { typeof(TimeSpan), StringSerializer(true) },
+            { typeof(Uri), StringSerializer(true) }
         };
 
         //TODO: Figure out the rest of these.
@@ -75,8 +101,12 @@ namespace AutoRest.CSharp.V3.Pipeline
         {
             { typeof(bool), n => $"{n}.GetBoolean()" },
             { typeof(char), n => $"{n}.GetString()" },
+            { typeof(short), n => $"{n}.GetInt16()" },
             { typeof(int), n => $"{n}.GetInt32()" },
+            { typeof(long), n => $"{n}.GetInt64()" },
+            { typeof(float), n => $"{n}.GetSingle()" },
             { typeof(double), n => $"{n}.GetDouble()" },
+            { typeof(decimal), n => $"{n}.GetDecimal()" },
             { typeof(string), n => $"{n}.GetString()" },
             { typeof(DateTime), n => $"{n}.GetDateTime()" },
             { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
