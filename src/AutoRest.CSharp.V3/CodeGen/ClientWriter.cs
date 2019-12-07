@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
                         var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
-                        this.ToSerializeCall(type, _typeFactory, name, "", includePropertyName: false);
+                        this.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
 
                         Line("writer.Flush();");
                         Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
