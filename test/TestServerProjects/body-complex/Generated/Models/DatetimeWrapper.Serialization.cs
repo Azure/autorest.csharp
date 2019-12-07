@@ -14,12 +14,12 @@ namespace body_complex.Models.V20160229
             if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.ToString());
+                writer.WriteStringValue(Field.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             }
             if (Now != null)
             {
                 writer.WritePropertyName("now");
-                writer.WriteStringValue(Now.ToString());
+                writer.WriteStringValue(Now.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             }
             writer.WriteEndObject();
         }

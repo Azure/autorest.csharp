@@ -202,7 +202,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/302")]
         public Task PutComplexPrimitiveDate() => TestStatus(async (host, pipeline) =>
         {
             var value = new DateWrapper
@@ -224,7 +223,6 @@ namespace AutoRest.TestServer.Tests
 
         //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/303")]
         public Task PutComplexPrimitiveDateTime() => TestStatus(async (host, pipeline) =>
         {
             var value = new DatetimeWrapper
@@ -245,7 +243,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/304")]
+        //[Ignore("https://github.com/Azure/autorest.csharp/issues/304")]
         public Task PutComplexPrimitiveDateTimeRfc1123() => TestStatus(async (host, pipeline) =>
         {
             var value = new Datetimerfc1123Wrapper
