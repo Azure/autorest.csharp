@@ -2,7 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using header;
 using header.Models.V100;
@@ -13,7 +15,12 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "Too many missing or too strict recordings")]
     public class HeaderTests : TestServerTestBase
     {
+        private static readonly DateTime MinDate = new DateTime(0001, 1, 1, 0, 0, 0);
+        private static readonly DateTime ValidDate = new DateTime(2010, 1, 1, 12, 34, 56);
         public HeaderTests(TestServerVersion version) : base(version, "header") { }
+
+        public static byte[] ByteArray { get; } =
+            Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩");
 
         [Test]
         public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamExistingKeyAsync(ClientDiagnostics, pipeline, "overwrite", host: host));
@@ -77,11 +84,9 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDoubleNegative() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDoubleAsync(ClientDiagnostics, pipeline, scenario: "negative", host: host));
 
         [Test]
-        [Ignore("bool.ToString() has wrong casing")]
         public Task HeaderParameterBoolFalse() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamBoolAsync(ClientDiagnostics, pipeline, scenario: "false", false, host: host));
 
         [Test]
-        [Ignore("bool.ToString() has wrong casing")]
         public Task HeaderParameterBoolTrue() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamBoolAsync(ClientDiagnostics, pipeline, scenario: "true", true, host: host));
 
         [Test]
@@ -109,11 +114,9 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseStringEmpty() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseStringAsync(ClientDiagnostics, pipeline, scenario: "empty", host: host));
 
         [Test]
-        [Ignore("wrong date format")]
         public Task HeaderParameterDateValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDateAsync(ClientDiagnostics, pipeline, scenario: "valid", new DateTime(2010, 1, 1), host: host));
 
         [Test]
-        [Ignore("wrong date format")]
         public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDateAsync(ClientDiagnostics, pipeline, scenario: "min", new DateTime(0001, 1, 1), host: host));
 
         [Test]
@@ -123,12 +126,10 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateMin() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDateAsync(ClientDiagnostics, pipeline, scenario: "min", host: host));
 
         [Test]
-        [Ignore("wrong date format")]
-        public Task HeaderParameterDateTimeValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeAsync(ClientDiagnostics, pipeline, scenario: "valid", new DateTime(2010, 1, 1, 12, 34, 56), host: host));
+        public Task HeaderParameterDateTimeValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeAsync(ClientDiagnostics, pipeline, scenario: "valid", ValidDate, host: host));
 
         [Test]
-        [Ignore("wrong date format")]
-        public Task HeaderParameterDateTimeMin() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeAsync(ClientDiagnostics, pipeline, scenario: "valid", new DateTime(2010, 1, 1, 12, 34, 56), host: host));
+        public Task HeaderParameterDateTimeMin() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeAsync(ClientDiagnostics, pipeline, scenario: "min", MinDate, host: host));
 
         [Test]
         public Task HeaderResponseDateTimeValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDatetimeAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host));
@@ -137,12 +138,10 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeMin() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDatetimeAsync(ClientDiagnostics, pipeline, scenario: "min", host: host));
 
         [Test]
-        [Ignore("wrong date format")]
-        public Task HeaderParameterDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "valid", new DateTime(2010, 1, 1, 12, 34, 56), host: host));
+        public Task HeaderParameterDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "valid", ValidDate, host: host));
 
         [Test]
-        [Ignore("wrong date format")]
-        public Task HeaderParameterDateTimeRfc1123Min() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "min", new DateTime(2010, 1, 1, 12, 34, 56), host: host));
+        public Task HeaderParameterDateTimeRfc1123Min() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "min", MinDate, host: host));
 
         [Test]
         public Task HeaderResponseDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "valid", host: host));
@@ -151,15 +150,13 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeRfc1123Min() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "min", host: host));
 
         [Test]
-        [Ignore("wrong duration format")]
-        public Task HeaderParameterDurationValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDurationAsync(ClientDiagnostics, pipeline, scenario: "valid", TimeSpan.FromSeconds(1), host: host));
+        public Task HeaderParameterDurationValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamDurationAsync(ClientDiagnostics, pipeline, scenario: "valid", XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), host: host));
 
         [Test]
         public Task HeaderResponseDurationValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDurationAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host));
 
         [Test]
-        [Ignore("Byte[] not supported")]
-        public Task HeaderParameterBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamByteAsync(ClientDiagnostics, pipeline, scenario: "valid", new byte[1], host: host));
+        public Task HeaderParameterBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamByteAsync(ClientDiagnostics, pipeline, scenario: "valid", ByteArray, host: host));
 
         [Test]
         public Task HeaderResponseBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseByteAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host));

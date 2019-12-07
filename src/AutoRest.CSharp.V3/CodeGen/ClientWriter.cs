@@ -95,19 +95,28 @@ namespace AutoRest.CSharp.V3.CodeGen
                             : $"request.Uri.AppendPath({value.Parameter.Name}.ToString()!, {segment.Escape.ToString().ToLower()});");
                     }
 
-                    foreach (var pair in operation.Request.Headers)
+                    foreach (var header in operation.Request.Headers)
                     {
-                        if (pair.Value.IsConstant)
+                        if (header.Value.IsConstant)
                         {
-                            Line($"request.Headers.Add(\"{pair.Key}\", \"{pair.Value.Constant.Value}\");");
+                            Line($"request.Headers.Add(\"{header.Name}\", \"{header.Value.Constant.Value}\");");
                             continue;
                         }
 
-                        var parameter = pair.Value.Parameter;
-                        using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
+                        var parameter = header.Value.Parameter;
+                        var type = _typeFactory.CreateType(parameter.Type);
+                        using (type.IsNullable ? If($"{parameter.Name} != null") : null)
                         {
                             //TODO: Determine conditions in which to ToString() or not
-                            Line($"request.Headers.Add(\"{pair.Key}\", {parameter.Name}.ToString()!);");
+                            Append($"request.Headers.Add(\"{header.Name}\",");
+                            Append(parameter.Name);
+                            if (type.IsNullable && type.IsValueType)
+                            {
+                                Append(".Value");
+                            }
+
+                            WriteHeaderFormat(header.Format);
+                            Line(");");
                         }
                     }
 
@@ -160,6 +169,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Line("scope.Failed(e);");
                     Line("throw;");
                 }
+            }
+        }
+
+        private void WriteHeaderFormat(HeaderSerializationFormat format)
+        {
+            var formatSpecifier = format switch
+            {
+                HeaderSerializationFormat.DateTimeRFC1123 => "R",
+                HeaderSerializationFormat.DateTimeISO8601 => "S",
+                HeaderSerializationFormat.Date => "D",
+                _ => null
+            };
+
+            if (formatSpecifier != null)
+            {
+                Append($", \"{formatSpecifier}\"");
             }
         }
 

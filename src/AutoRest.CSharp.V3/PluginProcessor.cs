@@ -42,6 +42,9 @@ namespace AutoRest.CSharp.V3
                     if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
 
                     var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+
+                    await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+
                     codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
                 }
                 var configuration = Configuration.Create(autoRest);
