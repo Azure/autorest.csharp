@@ -57,17 +57,17 @@ namespace AutoRest.CSharp.V3.Pipeline
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
-        private static readonly Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, string?, bool, bool, bool, bool, string?>>
+        private static readonly Dictionary<Type, Func<string, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, string?>>
         {
-            { typeof(bool), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteBooleanValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteBoolean({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(char), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
-            { typeof(int), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(double), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteNumberValue({vn}{(n ? ".Value" : String.Empty)});" : $"writer.WriteNumber({(q ? $"\"{sn}\"" : sn)}, {vn}{(n ? ".Value" : String.Empty)});" },
-            { typeof(string), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn});" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn});" },
-            { typeof(byte[]), (vn, sn, n, a, q, ipn) => null },
-            { typeof(DateTime), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
-            { typeof(TimeSpan), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" },
-            { typeof(Uri), (vn, sn, n, a, q, ipn) => a || !ipn ? $"writer.WriteStringValue({vn}.ToString());" : $"writer.WriteString({(q ? $"\"{sn}\"" : sn)}, {vn}.ToString());" }
+            { typeof(bool), (vn, nu) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
+            { typeof(char), (vn, nu) => $"writer.WriteStringValue({vn});" },
+            { typeof(int), (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});" },
+            { typeof(double), (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});" },
+            { typeof(string), (vn, nu) => $"writer.WriteStringValue({vn});" },
+            { typeof(byte[]), (vn, nu) => null },
+            { typeof(DateTime), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" },
+            { typeof(TimeSpan), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" },
+            { typeof(Uri), (vn, nu) => $"writer.WriteStringValue({vn}.ToString());" }
         };
 
         //TODO: Figure out the rest of these.
@@ -125,19 +125,27 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Line(");");
         }
 
-        private static void WriteSerializeDefault(WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        private static void WriteSerializeDefault(WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name)
         {
             var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
-            writer.Line(TypeSerializers[frameworkType](name, serializedName, type.IsNullable, asArray, quotedSerializedName, false) ?? "writer.WriteNullValue();");
+            writer.Line(TypeSerializers[frameworkType](name, type.IsNullable) ?? "writer.WriteNullValue();");
         }
 
-        public static void ToSerializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool asArray = false, bool quotedSerializedName = true, bool includePropertyName = true)
+        public static void ToSerializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
         {
             if (includePropertyName)
             {
-                writer.Append("writer.WritePropertyName(\"");
+                writer.Append("writer.WritePropertyName(");
+                if (quoteSerializedName)
+                {
+                    writer.Append("\"");
+                }
                 writer.Append(serializedName);
-                writer.Line("\");");
+                if (quoteSerializedName)
+                {
+                    writer.Append("\"");
+                }
+                writer.Line(");");
             }
 
             switch (type)
@@ -149,7 +157,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                     WriteSerializeBinaryTypeReference(writer, name);
                     return;
                 default:
-                    WriteSerializeDefault(writer, type, typeFactory, name, serializedName, asArray, quotedSerializedName, includePropertyName);
+                    WriteSerializeDefault(writer, type, typeFactory, name);
                     return;
             }
         }

@@ -13,7 +13,7 @@ namespace body_complex.Models.V20160229
             writer.WriteStartObject("defaultProgram");
             foreach (var item in DefaultProgram)
             {
-                writer.WritePropertyName("item.Key");
+                writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
