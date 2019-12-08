@@ -15,25 +15,31 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("sampleSalmon");
                 SampleSalmon?.Serialize(writer);
             }
-            writer.WriteStartArray("salmons");
-            foreach (var item in Salmons)
+            if (Salmons != null)
             {
-                writer.WritePropertyName("salmons");
-                item.Serialize(writer);
+                writer.WriteStartArray("salmons");
+                foreach (var item in Salmons)
+                {
+                    writer.WritePropertyName("salmons");
+                    item.Serialize(writer);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             if (SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish");
                 SampleFish?.Serialize(writer);
             }
-            writer.WriteStartArray("fishes");
-            foreach (var item in Fishes)
+            if (Fishes != null)
             {
-                writer.WritePropertyName("fishes");
-                item.Serialize(writer);
+                writer.WriteStartArray("fishes");
+                foreach (var item in Fishes)
+                {
+                    writer.WritePropertyName("fishes");
+                    item.Serialize(writer);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static DotFishMarket Deserialize(JsonElement element)

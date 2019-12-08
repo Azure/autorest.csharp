@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Utilities;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -213,5 +214,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             var t when t == typeof(string) => "string",
             _ => null
         };
+
+        public void Literal(object? o)
+        {
+            Append(o switch
+            {
+                null => "null",
+                string s => SyntaxFactory.Literal(s).ToString(),
+                int i => SyntaxFactory.Literal(i).ToString(),
+                decimal d => SyntaxFactory.Literal(d).ToString(),
+                double d => SyntaxFactory.Literal(d).ToString(),
+                float f => SyntaxFactory.Literal(f).ToString(),
+                bool b => b ? "true" : "false",
+                _ => throw new NotImplementedException()
+            });
+        }
     }
 }

@@ -24,14 +24,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
                 {
                     name = name.Substring(2);
                 }
-                if (parts.Length == 1)
-                {
-                    _arguments[name] = "true";
-                }
-                else
-                {
-                    _arguments[name] = parts[1];
-                }
+                _arguments[name] = parts.Length == 1 ? "true" : parts[1];
             }
 
             _basePath = _arguments["base-path"];

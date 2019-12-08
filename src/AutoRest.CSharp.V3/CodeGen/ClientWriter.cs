@@ -89,53 +89,18 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var segment in operation.Request.PathSegments)
                     {
-                        var value = segment.Value;
-                        Line(value.IsConstant
-                            ? $"request.Uri.AppendPath(\"{value.Constant.Value}\", {segment.Escape.ToString().ToLower()});"
-                            : $"request.Uri.AppendPath({value.Parameter.Name}.ToString()!, {segment.Escape.ToString().ToLower()});");
+                        WritePathSegment(segment);
                     }
 
                     foreach (var header in operation.Request.Headers)
                     {
-                        if (header.Value.IsConstant)
-                        {
-                            Line($"request.Headers.Add(\"{header.Name}\", \"{header.Value.Constant.Value}\");");
-                            continue;
-                        }
-
-                        var parameter = header.Value.Parameter;
-                        var type = _typeFactory.CreateType(parameter.Type);
-                        using (type.IsNullable ? If($"{parameter.Name} != null") : null)
-                        {
-                            //TODO: Determine conditions in which to ToString() or not
-                            Append($"request.Headers.Add(\"{header.Name}\",");
-                            Append(parameter.Name);
-                            if (type.IsNullable && type.IsValueType)
-                            {
-                                Append(".Value");
-                            }
-
-                            WriteHeaderFormat(header.Format);
-                            Line(");");
-                        }
+                        WriteHeader(header);
                     }
 
                     //TODO: Duplicate code between query and header parameter processing logic
                     foreach (var queryParameter in operation.Request.Query)
                     {
-                        ConstantOrParameter value = queryParameter.Value;
-                        if (value.IsConstant)
-                        {
-                            Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", \"{value.Constant.Value}\", {queryParameter.Escape.ToString().ToLower()});");
-                            continue;
-                        }
-
-                        var parameter = value.Parameter;
-                        using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : new DisposeAction())
-                        {
-                            //TODO: Determine conditions in which to ToString() or not
-                            Line($"request.Uri.AppendQuery(\"{queryParameter.Name}\", {parameter.Name}.ToString()!, {queryParameter.Escape.ToString().ToLower()});");
-                        }
+                        WriteQueryParameter(queryParameter);
                     }
 
 
@@ -172,19 +137,107 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteHeaderFormat(HeaderSerializationFormat format)
+        private void WritePathSegment(PathSegment segment)
+        {
+            var value = segment.Value;
+
+            if (value.IsConstant)
+            {
+                Append("request.Uri.AppendPath(");
+                Literal(value.Constant.Value);
+                WriteSerializationFormat(segment.Format);
+                Append(", ");
+                Literal(segment.Escape);
+                Line(");");
+                return;
+            }
+
+            Append("request.Uri.AppendPath(");
+            Append(value.Parameter.Name);
+            WriteSerializationFormat(segment.Format);
+            Append(", ");
+            Literal(segment.Escape);
+            Line(");");
+        }
+
+        private void WriteHeader(RequestHeader header)
+        {
+            if (header.Value.IsConstant)
+            {
+                Append("request.Headers.Add(");
+                Literal(header.Name);
+                Append(", ");
+                Literal(header.Value.Constant.Value);
+                Line(");");
+                return;
+            }
+
+            var parameter = header.Value.Parameter;
+            var type = _typeFactory.CreateType(parameter.Type);
+            using (type.IsNullable ? If($"{parameter.Name} != null") : null)
+            {
+                Append("request.Headers.Add(");
+                Literal(header.Name);
+                Append(", ");
+                Append(parameter.Name);
+                if (type.IsNullable && type.IsValueType)
+                {
+                    Append(".Value");
+                }
+
+                WriteSerializationFormat(header.Format);
+                Line(");");
+            }
+        }
+
+        private void WriteSerializationFormat(SerializationFormat format)
         {
             var formatSpecifier = format switch
             {
-                HeaderSerializationFormat.DateTimeRFC1123 => "R",
-                HeaderSerializationFormat.DateTimeISO8601 => "S",
-                HeaderSerializationFormat.Date => "D",
+                SerializationFormat.DateTimeRFC1123 => "R",
+                SerializationFormat.DateTimeISO8601 => "S",
+                SerializationFormat.Date => "D",
+                SerializationFormat.DateTimeUnix => "U",
                 _ => null
             };
 
             if (formatSpecifier != null)
             {
-                Append($", \"{formatSpecifier}\"");
+                Append($", ");
+                Literal(formatSpecifier);
+            }
+        }
+
+        private void WriteQueryParameter(QueryParameter queryParameter)
+        {
+            ConstantOrParameter value = queryParameter.Value;
+            if (value.IsConstant)
+            {
+                Append("request.Uri.AppendQuery(");
+                Literal(queryParameter.Name);
+                Append(", ");
+                Literal(value.Constant.Value);
+                Append(", ");
+                Literal(queryParameter.Escape);
+                Line(");");
+                return;
+            }
+
+            var parameter = value.Parameter;
+            var type = _typeFactory.CreateType(parameter.Type);
+            using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : null)
+            {
+                Append("request.Uri.AppendQuery(");
+                Literal(queryParameter.Name);
+                Append(", ");
+                Append(parameter.Name);
+                if (type.IsNullable && type.IsValueType)
+                {
+                    Append(".Value");
+                }
+                Append(", ");
+                Literal(queryParameter.Escape);
+                Line(");");
             }
         }
 

@@ -42,10 +42,11 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("Wrong float format")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -61,7 +62,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("Causes 500 server error")]
+        [Ignore("No test server handler for this one")]
         public Task StringUnicodeAsync() => TestStatus(async (host, pipeline) => await QueriesOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -80,19 +81,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesEnumNull() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("byte[] not supported")]
-        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[0], host: host));
+        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host: host));
 
         [Test]
-        [Ignore("nullref")]
         public Task UrlQueriesByteNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
         public Task UrlQueriesByteEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host: host));
-
-        [Test]
-        [Ignore("null ref")]
-        public Task ByteNullAsync() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
         public Task UrlQueriesDateValid() => TestStatus(async (host, pipeline) => await QueriesOperations.DateValidAsync(ClientDiagnostics, pipeline, host: host));
@@ -108,15 +103,12 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDateTimeNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
         public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvEmptyAsync(ClientDiagnostics, pipeline, new string[0], host: host));
 
         [Test]

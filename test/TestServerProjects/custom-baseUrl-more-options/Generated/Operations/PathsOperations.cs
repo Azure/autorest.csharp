@@ -27,7 +27,7 @@ namespace custom_baseUrl_more_options
                 request.Uri.AppendPath(keyName.ToString()!, true);
                 if (keyVersion != null)
                 {
-                    request.Uri.AppendQuery("keyVersion", keyVersion.ToString()!, true);
+                    request.Uri.AppendQuery("keyVersion", keyVersion, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();

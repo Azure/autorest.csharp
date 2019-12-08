@@ -7,9 +7,9 @@ namespace AutoRest.CSharp.V3.ClientModels
     {
         public string Name { get; }
         public ConstantOrParameter Value { get; }
-        public HeaderSerializationFormat Format { get; }
+        public SerializationFormat Format { get; }
 
-        public RequestHeader(string name, ConstantOrParameter value, HeaderSerializationFormat format = HeaderSerializationFormat.Default)
+        public RequestHeader(string name, ConstantOrParameter value, SerializationFormat format = SerializationFormat.Default)
         {
             Name = name;
             Value = value;

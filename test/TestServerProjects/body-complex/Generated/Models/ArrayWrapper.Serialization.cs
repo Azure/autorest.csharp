@@ -10,13 +10,16 @@ namespace body_complex.Models.V20160229
         internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WriteStartArray("array");
-            foreach (var item in Array)
+            if (Array != null)
             {
-                writer.WritePropertyName("array");
-                writer.WriteStringValue(item);
+                writer.WriteStartArray("array");
+                foreach (var item in Array)
+                {
+                    writer.WritePropertyName("array");
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static ArrayWrapper Deserialize(JsonElement element)

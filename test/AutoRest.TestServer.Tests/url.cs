@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -22,35 +23,31 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsEnumValid() => TestStatus(async (host, pipeline) => await PathsOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host));
 
         [Test]
-        [Ignore("Wrong url")]
         public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await PathsOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringNullAsync(ClientDiagnostics, pipeline, "", host));
+        [Ignore("Don't have null-checks yet")]
+        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host));
 
         [Test]
-        [Ignore("Wrong url")]
+        [Ignore("Wasn't able to find a server endpoint for this")]
         public Task UrlStringUnicodeAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host, pipeline) => await PathsOperations.ArrayCsvInPathAsync(ClientDiagnostics, pipeline, new[] { "a", "b", "c" }, host));
+        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host, pipeline) => await PathsOperations.ArrayCsvInPathAsync(ClientDiagnostics, pipeline, new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlPathsStringBase64Url() => TestStatus(async (host, pipeline) => await PathsOperations.Base64UrlAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
+        public Task UrlPathsStringBase64Url() => TestStatus(async (host, pipeline) => await PathsOperations.Base64UrlAsync(ClientDiagnostics, pipeline, Encoding.UTF8.GetBytes("lorem"), host));
 
         [Test]
         public Task UrlPathsByteEmpty() => TestStatus(async (host, pipeline) => await PathsOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[] { 1, 2, 3 }, host));
+        public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlByteNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, new byte[0], host));
+        [Ignore("Don't have null-checks yet")]
+        public Task UrlByteNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host));
 
         [Test]
         [Ignore("Might not apply")]
@@ -61,22 +58,21 @@ namespace AutoRest.TestServer.Tests
         public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.EnumNullAsync(ClientDiagnostics, pipeline, new UriColor(), host));
 
         [Test]
-        [Ignore("Wrong url")]
+        [Ignore("Might not apply")]
         public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
 
         [Test]
         public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateValidAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("Wrong url")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
         public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
         public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await PathsOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
-        [Ignore("Wrong url")]
-        public Task UrlPathsIntUnixTime() => TestStatus(async (host, pipeline) => await PathsOperations.UnixTimeUrlAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+        public Task UrlPathsIntUnixTime() => TestStatus(async (host, pipeline) => await PathsOperations.UnixTimeUrlAsync(ClientDiagnostics, pipeline, DateTimeOffset.FromUnixTimeSeconds(1460505600L).UtcDateTime, host));
 
         [Test]
         public Task UrlPathsIntNegative() => TestStatus(async (host, pipeline) => await PathsOperations.GetIntNegativeOneMillionAsync(ClientDiagnostics, pipeline, host));
@@ -98,6 +94,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsFloatPositive() => TestStatus(async (host, pipeline) => await PathsOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
         public Task UrlPathsFloatNegative() => TestStatus(async (host, pipeline) => await PathsOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host));
 
         [Test]

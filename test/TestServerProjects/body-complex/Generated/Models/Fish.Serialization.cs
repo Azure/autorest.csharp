@@ -19,13 +19,16 @@ namespace body_complex.Models.V20160229
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            writer.WriteStartArray("siblings");
-            foreach (var item in Siblings)
+            if (Siblings != null)
             {
-                writer.WritePropertyName("siblings");
-                item.Serialize(writer);
+                writer.WriteStartArray("siblings");
+                foreach (var item in Siblings)
+                {
+                    writer.WritePropertyName("siblings");
+                    item.Serialize(writer);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Fish Deserialize(JsonElement element)
