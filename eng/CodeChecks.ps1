@@ -48,10 +48,13 @@ function Invoke-Block([scriptblock]$cmd) {
 try {
     Write-Host "Downloading files"
     Invoke-Block {
-        $PSScriptRoot\DownloadSharedSource.ps1 @script:PSBoundParameters }
+        & $PSScriptRoot\DownloadSharedSource.ps1 @script:PSBoundParameters
+    }
 
     Write-Host "Generate test clients"
-    Invoke-Block { $PSScriptRoot\Generate.ps1 @script:PSBoundParameters }
+    Invoke-Block {
+        & $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
+    }
 
     Write-Host "git diff"
     & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
