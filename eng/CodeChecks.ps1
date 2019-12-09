@@ -1,60 +1,65 @@
-#requires -version 5
+#Requires -Version 6.0
 
-[CmdletBinding()]
-param (
-    [Parameter(Position=0)]
-    [ValidateNotNullOrEmpty()]
-    [string] $ServiceDirectory
-)
+# [CmdletBinding()]
+# param (
+#     # [Parameter(Position=0)]
+#     [ValidateNotNullOrEmpty()]
+#     [string] $ServiceDirectory
+# )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
 
-$repoRoot = Resolve-Path "$PSScriptRoot/.."
+. (Join-Path $PSScriptRoot 'DownloadSharedSource.ps1')
+. (Join-Path $PSScriptRoot 'Generate.ps1') -noRun
 
-[string[]] $errors = @()
+# $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
-function LogError([string]$message) {
-    if ($env:TF_BUILD) {
-        Write-Host "##vso[task.logissue type=error]$message"
-    }
-    Write-Host -f Red "error: $message"
-    $script:errors += $message
-}
+# [string[]] $errors = @()
 
-function Invoke-Block([scriptblock]$cmd) {
-    $cmd | Out-String | Write-Verbose
-    try
-    {
-        & $cmd
+# function LogError([string]$message) {
+#     if ($env:TF_BUILD) {
+#         Write-Host "##vso[task.logissue type=error]$message"
+#     }
+#     Write-Host -f Red "error: $message"
+#     $script:errors += $message
+# }
 
-        # Need to check both of these cases for errors as they represent different items
-        # - $?: did the powershell script block throw an error
-        # - $lastexitcode: did a windows command executed by the script block end in error
-        if ((-not $?) -or ($lastexitcode -ne 0)) {
-            if ($error -ne $null)
-            {
-                Write-Warning $error[0]
-            }
-            throw "Command failed to execute: $cmd"
-        }
-    }
-    catch
-    {
-        LogError $_
-    }
-}
+# function Invoke-Block([scriptblock]$cmd) {
+#     $cmd | Out-String | Write-Verbose
+#     try
+#     {
+#         & $cmd
+
+#         # Need to check both of these cases for errors as they represent different items
+#         # - $?: did the powershell script block throw an error
+#         # - $lastexitcode: did a windows command executed by the script block end in error
+#         if ((-not $?) -or ($lastexitcode -ne 0)) {
+#             if ($error -ne $null)
+#             {
+#                 Write-Warning $error[0]
+#             }
+#             throw "Command failed to execute: $cmd"
+#         }
+#     }
+#     catch
+#     {
+#         LogError $_
+#     }
+# }
 
 try {
     Write-Host "Downloading files"
-    Invoke-Block {
-        & $PSScriptRoot\DownloadSharedSource.ps1 @script:PSBoundParameters
-    }
+    # Invoke-Block {
+    #     & $PSScriptRoot\DownloadSharedSource.ps1 @script:PSBoundParameters
+    # }
+    Invoke-DownloadSharedSource
 
     Write-Host "Generate test clients"
-    Invoke-Block {
-        & $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
-    }
+    # Invoke-Block {
+    #     & $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
+    # }
+    Invoke-Generate @script:PSBoundParameters
 
     Write-Host "git diff"
     & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
