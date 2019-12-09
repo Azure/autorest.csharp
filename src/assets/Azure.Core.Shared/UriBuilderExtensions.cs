@@ -62,6 +62,11 @@ namespace Azure.Core
             builder.AppendQuery(name, value.ToString(TypeFormatters.DefaultNumberFormat), escape);
         }
 
+        public static void AppendQuery(this RequestUriBuilder builder, string name, DateTime value, string format, bool escape = true)
+        {
+            builder.AppendQuery(name, TypeFormatters.ToString(value, format), escape);
+        }
+
         public static void AppendQuery(this RequestUriBuilder builder, string name, double value, bool escape = true)
         {
             builder.AppendQuery(name, value.ToString(TypeFormatters.DefaultNumberFormat), escape);

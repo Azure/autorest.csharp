@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, false));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, false));
                         break;
                     case BinarySchema _:
                         // skip
@@ -116,16 +116,17 @@ namespace AutoRest.CSharp.V3.Plugins
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
+                    SerializationFormat serializationFormat = GetSerializationFormat(requestParameter.Schema);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, GetSerializationFormat(requestParameter.Schema)));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, GetSerializationFormat(requestParameter.Schema)));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Body:
                             body = constantOrParameter;
@@ -275,9 +276,15 @@ namespace AutoRest.CSharp.V3.Plugins
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
-        private static ClientConstant ParseClientConstant(object? value, FrameworkTypeReference type)
+        private static ClientConstant ParseClientConstant(object? value, ClientTypeReference type)
         {
-            return new ClientConstant(Convert.ChangeType(value, type.Type), type);
+            var normalizedValue = type switch
+            {
+                BinaryTypeReference _ when value is string base64String => Convert.FromBase64String(base64String),
+                FrameworkTypeReference frameworkType => Convert.ChangeType(value, frameworkType.Type),
+                _ => null
+            };
+            return new ClientConstant(normalizedValue, type);
         }
 
         //TODO: Refactor as this is written quite... ugly.

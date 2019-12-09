@@ -19,10 +19,10 @@ namespace AutoRest.CodeModel
         private static void Main()
         {
             using var webClient = new WebClient();
-            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "../../../../../src/AutoRest.CodeModel/code-model.json");
+            var schemaJson = webClient.DownloadString(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json");
 
-            var schemaJsonLines = File.ReadAllLines("../../../../../src/AutoRest.CodeModel/code-model.json");
-            var schemaJson = String.Join(Environment.NewLine, schemaJsonLines)
+            schemaJson = schemaJson
+                .Replace("\n", Environment.NewLine)
                 // Fixes + and - enum values that cannot be generated into C# enum names
                 .Replace("\"+\"", "\"plus\"").Replace("\"-\"", "\"minus\"")
                 // Makes Choices only have string values
@@ -67,7 +67,7 @@ namespace AutoRest.CodeModel
                 })
                 .SkipLast(1)
                 .Prepend(lines.First()));
-            File.WriteAllText($"../../../../../src/{Path}/CodeModel.cs", fileWithNullable);
+            File.WriteAllText($"../../src/{Path}/CodeModel.cs", fileWithNullable);
         }
     }
 }

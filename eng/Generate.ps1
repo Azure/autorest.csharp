@@ -1,5 +1,7 @@
-param($name, [switch]$noDebug)
+param($name, [switch]$noDebug, [switch]$Reset)
 $ErrorActionPreference = 'Stop'
+
+$AutorestCoreVersion = "3.0.6162"
 
 function Invoke-Block([scriptblock]$cmd) {
     $cmd | Out-String | Write-Verbose
@@ -19,7 +21,7 @@ function Invoke-Block([scriptblock]$cmd) {
 
 function Invoke-AutoRest($autoRestArguments, $repoRoot) {
     Invoke-Block {
-        $command = "npx autorest-beta $autoRestArguments"
+        $command = "npx autorest-beta --version:$AutorestCoreVersion $autoRestArguments"
         $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
         Write-Host ">" $commandText
@@ -37,6 +39,11 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
+
+if ($reset)
+{
+    Invoke-AutoRest "--reset" $repoRoot
+}
 
 foreach ($testName in $testNames)
 {

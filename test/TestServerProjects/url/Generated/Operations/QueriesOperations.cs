@@ -513,7 +513,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/byte/empty", false);
-                request.Uri.AppendQuery("byteQuery", "", true);
+                request.Uri.AppendQuery("byteQuery", new byte[] { }, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -558,7 +558,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/date/2012-01-01", false);
-                request.Uri.AppendQuery("dateQuery", "2012-01-01", true);
+                request.Uri.AppendQuery("dateQuery", new DateTime(2012, 1, 1, 0, 0, 0, 0), true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -581,7 +581,7 @@ namespace url
                 request.Uri.AppendPath("/queries/date/null", false);
                 if (dateQuery != null)
                 {
-                    request.Uri.AppendQuery("dateQuery", dateQuery.Value, true);
+                    request.Uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -603,7 +603,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-                request.Uri.AppendQuery("dateTimeQuery", "2012-01-01T01:01:01Z", true);
+                request.Uri.AppendQuery("dateTimeQuery", new DateTime(2011, 12, 31, 17, 1, 1, 0), true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -626,7 +626,7 @@ namespace url
                 request.Uri.AppendPath("/queries/datetime/null", false);
                 if (dateTimeQuery != null)
                 {
-                    request.Uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, true);
+                    request.Uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "S", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
