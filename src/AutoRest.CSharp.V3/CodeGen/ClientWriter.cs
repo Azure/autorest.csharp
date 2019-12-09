@@ -149,6 +149,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTime):
                     var dateTimeValue = (DateTime)constant.Value;
+                    dateTimeValue = dateTimeValue.ToUniversalTime();
+
                     Append("new ");
                     Append(Type(typeof(DateTime)));
                     Append("(");
@@ -165,6 +167,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                     Literal(dateTimeValue.Second);
                     Append(", ");
                     Literal(dateTimeValue.Millisecond);
+                    Append(", ");
+                    Append(Type(typeof(DateTimeKind)));
+                    Append(".");
+                    Append(nameof(DateTimeKind.Utc));
                     Append(")");
                     break;
                 case FrameworkTypeReference _:

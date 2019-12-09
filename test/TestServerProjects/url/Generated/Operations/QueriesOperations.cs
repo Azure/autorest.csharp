@@ -558,7 +558,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/date/2012-01-01", false);
-                request.Uri.AppendQuery("dateQuery", new DateTime(2012, 1, 1, 0, 0, 0, 0), true);
+                request.Uri.AppendQuery("dateQuery", new DateTime(2012, 1, 1, 8, 0, 0, 0, DateTimeKind.Utc), true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -603,7 +603,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-                request.Uri.AppendQuery("dateTimeQuery", new DateTime(2011, 12, 31, 17, 1, 1, 0), true);
+                request.Uri.AppendQuery("dateTimeQuery", new DateTime(2012, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc), true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
