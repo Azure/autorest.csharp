@@ -5,7 +5,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class FloatWrapper
     {
-        public double? Field1 { get; set; }
-        public double? Field2 { get; set; }
+        public float? Field1 { get; set; }
+        public float? Field2 { get; set; }
     }
 }

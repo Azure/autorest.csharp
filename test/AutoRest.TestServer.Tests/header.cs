@@ -56,7 +56,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseLongNegative() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseLongAsync(ClientDiagnostics, pipeline, scenario: "negative", host: host));
 
         [Test]
-        public Task HeaderParameterFloatPositive() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamFloatAsync(ClientDiagnostics, pipeline, scenario: "positive", 0.07, host: host));
+        public Task HeaderParameterFloatPositive() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamFloatAsync(ClientDiagnostics, pipeline, scenario: "positive", 0.07F, host: host));
 
         [Test]
         public Task HeaderParameterFloatNegative() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamFloatAsync(ClientDiagnostics, pipeline, scenario: "negative", -3, host: host));

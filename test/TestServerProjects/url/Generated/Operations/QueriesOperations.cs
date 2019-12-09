@@ -90,7 +90,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/int/1000000", false);
-                request.Uri.AppendQuery("intQuery", 1000000, true);
+                request.Uri.AppendQuery("intQuery", 1000000F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -111,7 +111,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/int/-1000000", false);
-                request.Uri.AppendQuery("intQuery", -1000000, true);
+                request.Uri.AppendQuery("intQuery", -1000000F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -156,7 +156,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/long/10000000000", false);
-                request.Uri.AppendQuery("longQuery", 10000000000, true);
+                request.Uri.AppendQuery("longQuery", 1E+10F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -177,7 +177,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/long/-10000000000", false);
-                request.Uri.AppendQuery("longQuery", -10000000000, true);
+                request.Uri.AppendQuery("longQuery", -1E+10F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -188,7 +188,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetLongNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int? longQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetLongNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long? longQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.GetLongNull");
             scope.Start();
@@ -222,7 +222,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/float/1.034E+20", false);
-                request.Uri.AppendQuery("floatQuery", 1.034E+20, true);
+                request.Uri.AppendQuery("floatQuery", 1.034E+20F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -243,7 +243,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/float/-1.034E-20", false);
-                request.Uri.AppendQuery("floatQuery", -1.034E-20, true);
+                request.Uri.AppendQuery("floatQuery", -1.034E-20F, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -254,7 +254,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> FloatNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double? floatQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> FloatNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, float? floatQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.FloatNull");
             scope.Start();

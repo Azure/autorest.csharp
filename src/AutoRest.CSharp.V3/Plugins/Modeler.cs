@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, false));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, true));
                         break;
                     case BinarySchema _:
                         // skip
@@ -271,6 +271,7 @@ namespace AutoRest.CSharp.V3.Plugins
             { Type: AllSchemaTypes.Binary } => new BinaryTypeReference(false),
             ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false), isNullable),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable)),
+            NumberSchema number => new FrameworkTypeReference(number.ToFrameworkType(), isNullable),
             _ when schema.Type.ToFrameworkCSharpType() is Type type => new FrameworkTypeReference(type, isNullable),
             _ => new SchemaTypeReference(schema, isNullable)
         };

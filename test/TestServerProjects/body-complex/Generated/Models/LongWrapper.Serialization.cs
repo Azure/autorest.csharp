@@ -29,12 +29,12 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field1"))
                 {
-                    result.Field1 = property.Value.GetInt32();
+                    result.Field1 = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("field2"))
                 {
-                    result.Field2 = property.Value.GetInt32();
+                    result.Field2 = property.Value.GetInt64();
                     continue;
                 }
             }
