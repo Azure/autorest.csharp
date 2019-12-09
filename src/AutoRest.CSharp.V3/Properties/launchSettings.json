@@ -8,7 +8,7 @@
     },
     "Standalone": {
         "commandName": "Project",
-        "commandLineArgs": "--standalone --input-codemodel=d:\\github\\azure\\autorest.csharp\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=cs-modeler --base-path=D:/github/azure/autorest.csharp/test/TestServerProjects/url/ --namespace=url"
+        "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=cs-modeler --base-path=$(SolutionDir)/test/TestServerProjects/url/ --namespace=url"
     }
   }
 }

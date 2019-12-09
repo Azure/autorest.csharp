@@ -138,7 +138,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, int value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ParamLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, long value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("header.ParamLong");
             scope.Start();
@@ -181,7 +181,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, double value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ParamFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, float value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("header.ParamFloat");
             scope.Start();

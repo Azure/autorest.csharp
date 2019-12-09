@@ -9,7 +9,7 @@ namespace body_complex.Models.V20160229
     {
         public string Fishtype { get; set; }
         public string? Species { get; set; }
-        public double Length { get; set; }
+        public float Length { get; set; }
         public ICollection<Fish> Siblings { get; } = new List<Fish>();
     }
 }
