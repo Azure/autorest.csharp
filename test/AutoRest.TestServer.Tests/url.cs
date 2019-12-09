@@ -69,6 +69,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await PathsOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
@@ -87,6 +88,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsBoolFalse() => TestStatus(async (host, pipeline) => await PathsOperations.GetBooleanFalseAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlPathsLongNegative() => TestStatus(async (host, pipeline) => await PathsOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
