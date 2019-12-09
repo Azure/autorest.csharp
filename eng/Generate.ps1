@@ -1,4 +1,4 @@
-param($name, [switch]$noDebug, [switch]$Reset)
+param($name, [switch]$noDebug, [switch]$NoReset)
 $ErrorActionPreference = 'Stop'
 
 $AutorestCoreVersion = "3.0.6162"
@@ -40,7 +40,7 @@ $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
 
-if ($reset)
+if (!$NoReset)
 {
     Invoke-AutoRest "--reset" $repoRoot
 }
