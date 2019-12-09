@@ -18,13 +18,13 @@ function Invoke-Block([scriptblock]$cmd) {
 }
 
 function Invoke-AutoRest($autoRestArguments, $repoRoot) {
-    Invoke-Block {
-        $command = "npx autorest-beta $autoRestArguments"
-        $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
+    $command = "npx autorest-beta --version:$AutorestCoreVersion $autoRestArguments"
+    $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
-        Write-Host ">" $commandText
-        
-        & cmd /c "$command 2>&1"
+    Write-Host ">" $commandText
+    
+    Invoke-Block {
+        cmd /c "$command 2>&1"
     }
 }
 
