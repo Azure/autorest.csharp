@@ -238,7 +238,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("Mon, 01 Jan 0001 12:00:00 GMT"), result.Value.Field);
+            Assert.AreEqual(DateTime.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
             Assert.AreEqual(DateTime.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
 
@@ -248,7 +248,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Datetimerfc1123Wrapper
             {
-                Field = DateTime.Parse("Mon, 01 Jan 0001 12:00:00 GMT"),
+                Field = DateTime.Parse("Mon, 01 Jan 0001 00:00:00 GMT"),
                 Now = DateTime.Parse("Mon, 18 May 2015 11:38:00 GMT")
             };
             return await PrimitiveOperations.PutDateTimeRfc1123Async(ClientDiagnostics, pipeline, value, host);

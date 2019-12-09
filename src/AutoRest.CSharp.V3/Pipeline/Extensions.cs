@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Choice => null,
             AllSchemaTypes.Constant => null,
             AllSchemaTypes.Credential => null,
-            AllSchemaTypes.Date => typeof(DateTime),
-            AllSchemaTypes.DateTime => typeof(DateTime),
+            AllSchemaTypes.Date => typeof(DateTimeOffset),
+            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Dictionary => null,
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.Flag => null,
@@ -36,42 +36,50 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Group => null,
             AllSchemaTypes.SealedChoice => null,
             AllSchemaTypes.String => typeof(string),
-            AllSchemaTypes.Unixtime => typeof(DateTime),
+            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
             AllSchemaTypes.Xor => null,
             _ => null
         };
 
-        public static FrameworkTypeReferenceFormat? ToFrameworkTypeReferenceFormat(this AllSchemaTypes schemaType) => schemaType switch
+        //public static FrameworkTypeReferenceFormat? ToFrameworkTypeReferenceFormat(this AllSchemaTypes schemaType) => schemaType switch
+        //{
+        //    AllSchemaTypes.Any => null,
+        //    AllSchemaTypes.Array => null,
+        //    AllSchemaTypes.Boolean => null,
+        //    AllSchemaTypes.ByteArray => null,
+        //    AllSchemaTypes.Char => null,
+        //    AllSchemaTypes.Choice => null,
+        //    AllSchemaTypes.Constant => null,
+        //    AllSchemaTypes.Credential => null,
+        //    AllSchemaTypes.Date => FrameworkTypeReferenceFormat.Date,
+        //    AllSchemaTypes.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
+        //    AllSchemaTypes.Dictionary => null,
+        //    AllSchemaTypes.Duration => null,
+        //    AllSchemaTypes.Flag => null,
+        //    AllSchemaTypes.Integer => null,
+        //    AllSchemaTypes.Not => null,
+        //    AllSchemaTypes.Number => null,
+        //    AllSchemaTypes.Object => null,
+        //    AllSchemaTypes.OdataQuery => null,
+        //    AllSchemaTypes.Or => null,
+        //    AllSchemaTypes.Group => null,
+        //    AllSchemaTypes.SealedChoice => null,
+        //    AllSchemaTypes.String => null,
+        //    AllSchemaTypes.Unixtime => FrameworkTypeReferenceFormat.DateTimeRFC1123,
+        //    AllSchemaTypes.Uri => null,
+        //    AllSchemaTypes.Uuid => null,
+        //    AllSchemaTypes.Xor => null,
+        //    _ => (FrameworkTypeReferenceFormat?)null
+        //};
+
+        public static FrameworkTypeReferenceFormat ToFrameworkTypeReferenceFormat(this Schema schema) => schema switch
         {
-            AllSchemaTypes.Any => null,
-            AllSchemaTypes.Array => null,
-            AllSchemaTypes.Boolean => null,
-            AllSchemaTypes.ByteArray => null,
-            AllSchemaTypes.Char => null,
-            AllSchemaTypes.Choice => null,
-            AllSchemaTypes.Constant => null,
-            AllSchemaTypes.Credential => null,
-            AllSchemaTypes.Date => FrameworkTypeReferenceFormat.Date,
-            AllSchemaTypes.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
-            AllSchemaTypes.Dictionary => null,
-            AllSchemaTypes.Duration => null,
-            AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => null,
-            AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => null,
-            AllSchemaTypes.Object => null,
-            AllSchemaTypes.OdataQuery => null,
-            AllSchemaTypes.Or => null,
-            AllSchemaTypes.Group => null,
-            AllSchemaTypes.SealedChoice => null,
-            AllSchemaTypes.String => null,
-            AllSchemaTypes.Unixtime => FrameworkTypeReferenceFormat.DateTimeRFC1123,
-            AllSchemaTypes.Uri => null,
-            AllSchemaTypes.Uuid => null,
-            AllSchemaTypes.Xor => null,
-            _ => (FrameworkTypeReferenceFormat?)null
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
+            DateSchema _ => FrameworkTypeReferenceFormat.Date,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => FrameworkTypeReferenceFormat.DateTimeRFC1123,
+            _ => FrameworkTypeReferenceFormat.Default,
         };
 
         public static Type ToFrameworkType(this NumberSchema schema) => schema.Type switch
@@ -137,7 +145,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(string), StringSerializer() },
             { typeof(byte[]), (vn, nu, f) => null },
             //{ typeof(DateTime), (vn, nu, f) => $"writer.WriteStringValue({vn}.ToString(\"yyyy-MM-dd\")" },
-            { typeof(DateTime), DateTimeSerializer },
+            { typeof(DateTimeOffset), DateTimeSerializer },
             { typeof(TimeSpan), StringSerializer(true) },
             { typeof(Uri), StringSerializer(true) }
         };
@@ -154,7 +162,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(double), n => $"{n}.GetDouble()" },
             { typeof(decimal), n => $"{n}.GetDecimal()" },
             { typeof(string), n => $"{n}.GetString()" },
-            { typeof(DateTime), n => $"{n}.GetDateTime()" },
+            { typeof(DateTimeOffset), n => $"{n}.GetDateTime()" },
             { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
             { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };

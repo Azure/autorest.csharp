@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.V3.Plugins
             ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false)),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable)),
             NumberSchema number => new FrameworkTypeReference(number.ToFrameworkType(), isNullable),
-            _ when schema.Type.ToFrameworkCSharpType() is Type type => new FrameworkTypeReference(type, isNullable, schema.Type.ToFrameworkTypeReferenceFormat() ?? FrameworkTypeReferenceFormat.Default),
+            _ when schema.Type.ToFrameworkCSharpType() is Type type => new FrameworkTypeReference(type, isNullable, schema.ToFrameworkTypeReferenceFormat()),
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
