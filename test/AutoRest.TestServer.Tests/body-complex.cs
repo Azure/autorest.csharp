@@ -985,5 +985,15 @@ namespace AutoRest.TestServer.Tests
             var value = new ReadonlyObj();
             return await ReadonlypropertyOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void EnumGeneratedAsExtensibleWithCorrectName()
+        {
+            // Name directive
+            Assert.AreEqual("CMYKColors", typeof(CMYKColors).Name);
+            // modelAsString
+            Assert.True(typeof(CMYKColors).IsValueType);
+            Assert.False(!typeof(CMYKColors).IsEnum);
+        }
     }
 }

@@ -105,6 +105,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UrlPathsDoublePositive() => TestStatus(async (host, pipeline) => await PathsOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host));
 
+
+        [Test]
+        public void EnumGeneratedNonExtesibleWithoutModelAsString()
+        {
+            // modelAsString
+            Assert.True(typeof(UriColor).IsEnum);
+        }
+
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[] {"UrlPathsBoolFalse",
             "UrlPathsBoolTrue",
             "UrlPathsIntPositive",

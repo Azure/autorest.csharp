@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, true));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, true));
                         break;
                     case BinarySchema _:
                         // skip
