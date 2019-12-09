@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -78,6 +80,14 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public void CheckComplexPrimitiveInteger()
+        {
+            var properties = typeof(IntWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(int?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(int?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
+
+        [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetIntAsync(ClientDiagnostics, pipeline, host);
@@ -95,6 +105,14 @@ namespace AutoRest.TestServer.Tests
             };
             return await PrimitiveOperations.PutIntAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void CheckComplexPrimitiveLong()
+        {
+            var properties = typeof(LongWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(long?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(long?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
 
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host, pipeline) =>
@@ -116,6 +134,14 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public void CheckComplexPrimitiveFloat()
+        {
+            var properties = typeof(FloatWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(float?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(float?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
+
+        [Test]
         public Task GetComplexPrimitiveFloat() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetFloatAsync(ClientDiagnostics, pipeline, host);
@@ -133,6 +159,14 @@ namespace AutoRest.TestServer.Tests
             };
             return await PrimitiveOperations.PutFloatAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void CheckComplexPrimitiveDouble()
+        {
+            var properties = typeof(DoubleWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(double?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(double?), properties.First(p => p.Name == "Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose").PropertyType);
+        }
 
         [Test]
         public Task GetComplexPrimitiveDouble() => Test(async (host, pipeline) =>
