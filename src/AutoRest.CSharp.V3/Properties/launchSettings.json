@@ -8,7 +8,7 @@
     },
     "Standalone": {
         "commandName": "Project",
-        "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-string\\CodeModel.yaml --plugin=cs-modeler --base-path=$(SolutionDir)/test/TestServerProjects/body-string/ --namespace=body_string"
+        "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=cs-modeler --base-path=$(SolutionDir)/test/TestServerProjects/url/ --namespace=url"
     }
   }
 }
