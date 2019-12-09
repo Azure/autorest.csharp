@@ -12,7 +12,7 @@ using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter) =>
             requestParameter.ClientDefaultValue != null ?
-                new ClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference) CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
+                ParseClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference) CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
                 (ClientConstant?)null;
 
         private static ClientMethod? BuildMethod(Operation operation)
@@ -73,9 +73,12 @@ namespace AutoRest.CSharp.V3.Plugins
                 return null;
             }
 
-            Dictionary<string, ConstantOrParameter> parameters = new Dictionary<string, ConstantOrParameter>();
+            Dictionary<string, ConstantOrParameter> uriParameters = new Dictionary<string, ConstantOrParameter>();
+            Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
+
+            List<ServiceClientMethodParameter> methodParameters = new List<ServiceClientMethodParameter>();
 
             ConstantOrParameter? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
@@ -87,7 +90,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = new ClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, false));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, false));
                         break;
                     case BinarySchema _:
                         // skip
@@ -95,13 +98,13 @@ namespace AutoRest.CSharp.V3.Plugins
                     //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
                     case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
-                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false)),
+                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false), false),
                             CreateDefaultValueConstant(requestParameter));
                         break;
                     //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
                     case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
-                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false)),
+                            new CollectionTypeReference(CreateType(constantInnerType.ValueType, false), false),
                             CreateDefaultValueConstant(requestParameter));
                         break;
                     default:
@@ -116,20 +119,28 @@ namespace AutoRest.CSharp.V3.Plugins
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, ToHeaderFormat(requestParameter.Schema)));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, GetSerializationFormat(requestParameter.Schema)));
                             break;
                         case ParameterLocation.Query:
                             query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true));
                             break;
+                        case ParameterLocation.Path:
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, GetSerializationFormat(requestParameter.Schema)));
+                            break;
                         case ParameterLocation.Body:
                             body = constantOrParameter;
+                            break;
+                        case ParameterLocation.Uri:
+                            uriParameters[defaultName] = constantOrParameter.Value;
                             break;
                     }
                 }
 
-                parameters[defaultName] = constantOrParameter.Value;
+                if (!constantOrParameter.Value.IsConstant)
+                {
+                    methodParameters.Add(constantOrParameter.Value.Parameter);
+                }
             }
-
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
             {
@@ -138,8 +149,8 @@ namespace AutoRest.CSharp.V3.Plugins
 
             var request = new ClientMethodRequest(
                 httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                ToParts(httpRequest.Uri, parameters),
-                ToPathParts(httpRequest.Path, parameters),
+                ToParts(httpRequest.Uri, uriParameters),
+                ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
                 headers.ToArray(),
                 httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
@@ -156,19 +167,20 @@ namespace AutoRest.CSharp.V3.Plugins
             return new ClientMethod(
                 operation.CSharpName(),
                 request,
-                parameters.Values.Where(parameter => !parameter.IsConstant).Select(parameter => parameter.Parameter).ToArray(),
+                methodParameters.ToArray(),
                 responseType
             );
         }
 
-        private static HeaderSerializationFormat ToHeaderFormat(Schema schema)
+        private static SerializationFormat GetSerializationFormat(Schema schema)
         {
             return schema switch
             {
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => HeaderSerializationFormat.DateTimeISO8601,
-                DateSchema _ => HeaderSerializationFormat.Date,
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => HeaderSerializationFormat.DateTimeRFC1123,
-                _ => HeaderSerializationFormat.Default,
+                UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
+                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
+                DateSchema _ => SerializationFormat.Date,
+                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
+                _ => SerializationFormat.Default,
             };
         }
 
@@ -183,17 +195,30 @@ namespace AutoRest.CSharp.V3.Plugins
             return host.ToArray();
         }
 
-        private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, PathSegment> parameters)
         {
+            PathSegment TextSegment(string text)
+            {
+                return new PathSegment(StringConstant(text), false, SerializationFormat.Default);
+            }
+
             List<PathSegment> host = new List<PathSegment>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
-                //TODO: WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
-                if (!isLiteral && !parameters.ContainsKey(text))
+                if (!isLiteral)
                 {
-                    parameters[text] = StringConstant(text);
+
+                    if (!parameters.TryGetValue(text, out var segment))
+                    {
+                        //TODO: WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
+                        segment = TextSegment(text);
+                    }
+                    host.Add(segment);
                 }
-                host.Add(new PathSegment(isLiteral ? StringConstant(text) : parameters[text], !isLiteral));
+                else
+                {
+                    host.Add(TextSegment(text));
+                }
             }
 
             return host.ToArray();
@@ -201,7 +226,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
 
-        private static ClientConstant StringConstant(string s) => new ClientConstant(s, new FrameworkTypeReference(typeof(string)));
+        private static ClientConstant StringConstant(string s) => ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
 
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
@@ -231,7 +256,7 @@ namespace AutoRest.CSharp.V3.Plugins
         {
             var constantSchema = (ConstantSchema)property.Schema;
             FrameworkTypeReference type = (FrameworkTypeReference)CreateType(constantSchema.ValueType, false);
-            return new ClientObjectConstant(property.CSharpName(), type, new ClientConstant(constantSchema.Value.Value, type));
+            return new ClientObjectConstant(property.CSharpName(), type, ParseClientConstant(constantSchema.Value.Value, type));
         }
 
         private static ClientObjectProperty CreateProperty(Property property) =>
@@ -240,16 +265,21 @@ namespace AutoRest.CSharp.V3.Plugins
         //TODO: Handle nullability properly
         private static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
-            BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(false),
-            ByteArraySchema _ => new BinaryTypeReference(false),
+            BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(isNullable),
+            ByteArraySchema _ => new BinaryTypeReference(isNullable),
             //https://devblogs.microsoft.com/dotnet/do-more-with-patterns-in-c-8-0/
             { Type: AllSchemaTypes.Binary } => new BinaryTypeReference(false),
-            ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false)),
+            ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false), isNullable),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, isNullable)),
             NumberSchema number => new FrameworkTypeReference(number.ToFrameworkType(), isNullable),
             _ when schema.Type.ToFrameworkCSharpType() is Type type => new FrameworkTypeReference(type, isNullable),
             _ => new SchemaTypeReference(schema, isNullable)
         };
+
+        private static ClientConstant ParseClientConstant(object? value, FrameworkTypeReference type)
+        {
+            return new ClientConstant(Convert.ChangeType(value, type.Type), type);
+        }
 
         //TODO: Refactor as this is written quite... ugly.
         private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
