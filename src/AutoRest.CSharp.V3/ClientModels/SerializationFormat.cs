@@ -3,11 +3,12 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal enum HeaderSerializationFormat
+    internal enum SerializationFormat
     {
         Default,
         DateTimeRFC1123,
         DateTimeISO8601,
+        DateTimeUnix,
         Date
     }
 }

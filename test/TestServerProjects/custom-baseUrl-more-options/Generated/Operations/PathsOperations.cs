@@ -22,12 +22,12 @@ namespace custom_baseUrl_more_options
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{vault}{secret}{dnsSuffix}"));
                 request.Uri.AppendPath("/customuri/", false);
-                request.Uri.AppendPath(subscriptionId.ToString()!, true);
+                request.Uri.AppendPath(subscriptionId, true);
                 request.Uri.AppendPath("/", false);
-                request.Uri.AppendPath(keyName.ToString()!, true);
+                request.Uri.AppendPath(keyName, true);
                 if (keyVersion != null)
                 {
-                    request.Uri.AppendQuery("keyVersion", keyVersion.ToString()!, true);
+                    request.Uri.AppendQuery("keyVersion", keyVersion, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();

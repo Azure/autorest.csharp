@@ -11,8 +11,11 @@ namespace body_complex.Models.V20160229
         internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("field");
-            writer.WriteBase64StringValue(Field);
+            if (Field != null)
+            {
+                writer.WritePropertyName("field");
+                writer.WriteBase64StringValue(Field);
+            }
             writer.WriteEndObject();
         }
         internal static ByteWrapper Deserialize(JsonElement element)
