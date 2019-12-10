@@ -79,7 +79,7 @@ function Invoke-Generate($name, [switch]$noDebug)
 
 
             # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace
-            Invoke-Expression "autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
+            Invoke-Expression "npx autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
             if($LastExitCode -gt 0) {
                 Write-Error "Failure"
             }
