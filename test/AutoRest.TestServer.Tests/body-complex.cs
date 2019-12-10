@@ -231,8 +231,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDate() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("0001-01-01"), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("2016-02-29"), result.Value.Leap);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("2016-02-29"), result.Value.Leap);
         });
 
         [Test]
@@ -241,8 +241,8 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DateWrapper
             {
-                Field = DateTime.Parse("0001-01-01"),
-                Leap = DateTime.Parse("2016-02-29")
+                Field = DateTimeOffset.Parse("0001-01-01"),
+                Leap = DateTimeOffset.Parse("2016-02-29")
             };
             return await PrimitiveOperations.PutDateAsync(ClientDiagnostics, pipeline, value, host);
         });
@@ -252,8 +252,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Field);
-            Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Now);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z"), result.Value.Now);
         });
 
         //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
@@ -263,8 +263,8 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DatetimeWrapper
             {
-                Field = DateTime.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal),
-                Now = DateTime.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal)
+                Field = DateTimeOffset.Parse("0001-01-01T00:00:00Z"),
+                Now = DateTimeOffset.Parse("2015-05-18T18:38:00Z")
             };
             return await PrimitiveOperations.PutDateTimeAsync(ClientDiagnostics, pipeline, value, host);
         });
@@ -274,8 +274,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("Mon, 01 Jan 0001 12:00:00 GMT"), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 12:00:00 GMT"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
 
         [Test]
