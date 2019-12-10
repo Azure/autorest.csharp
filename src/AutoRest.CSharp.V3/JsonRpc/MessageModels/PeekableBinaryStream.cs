@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
@@ -16,7 +15,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 #pragma warning disable IDE0069 // Disposable fields should be disposed
         private readonly Stream _stream;
 #pragma warning restore IDE0069 // Disposable fields should be disposed
-        private readonly DisposeService<PeekableBinaryStream> _disposeService;
 
         private byte? _currentByte;
         public byte? CurrentByte
@@ -38,13 +36,12 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 
         public PeekableBinaryStream(Stream stream)
         {
-            _disposeService = new DisposeService<PeekableBinaryStream>(this, pbr => _stream.Dispose());
             _stream = stream;
         }
 
         public void Dispose()
         {
-            _disposeService.Dispose(true);
+            _stream.Dispose();
         }
 
         private byte? PopCurrentByte()
