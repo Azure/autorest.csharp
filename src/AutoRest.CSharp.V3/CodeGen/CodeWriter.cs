@@ -194,6 +194,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public string ToFormattedCode()
         {
+            if (_builder.Length == 0)
+            {
+                return string.Empty;
+            }
+
             var builder = new StringBuilder();
             string[] namespaces = _usingNamespaces
                     .Select(ns=>ns.FullName)
