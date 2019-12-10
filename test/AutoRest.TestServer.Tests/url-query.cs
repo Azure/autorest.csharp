@@ -115,16 +115,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvEmptyAsync(ClientDiagnostics, pipeline, new string[0], host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
         [Ignore("We don't seem to have operation for this")]

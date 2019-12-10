@@ -650,7 +650,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -674,7 +674,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/null", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -698,7 +698,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/empty", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -722,7 +722,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/ssv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -746,7 +746,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/tsv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -770,7 +770,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/pipes/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
