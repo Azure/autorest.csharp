@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 _end = end;
             }
 
-            public void Dispose() => _writer.Line(_end);
+            public void Dispose() => _writer?.Line(_end);
         }
     }
 }
