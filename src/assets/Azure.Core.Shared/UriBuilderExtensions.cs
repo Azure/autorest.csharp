@@ -87,7 +87,7 @@ namespace Azure.Core
             builder.AppendQuery(name, Convert.ToBase64String(value), escape);
         }
 
-        public static void AppendQueryDelimited(this RequestUriBuilder builder, string name, IEnumerable<string> value, string delimiter, bool escape = true)
+        public static void AppendQueryDelimited<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, string delimiter, bool escape = true)
         {
             builder.AppendQuery(name, string.Join(delimiter, value), escape);
         }
