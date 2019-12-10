@@ -115,7 +115,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             string name = mappedName ?? type.Name;
             if (mappedName == null)
             {
-                _usingNamespaces.Add(type.Namespace);
+                if (_currentNamespace?.FullName != type.Namespace.FullName)
+                {
+                    _usingNamespaces.Add(type.Namespace);
+                }
             }
 
             if (type.Arguments.Any())
@@ -205,8 +208,6 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             foreach (string ns in namespaces)
             {
-                if (ns == _currentNamespace?.FullName) continue;
-
                 builder.Append("using ").Append(ns).AppendLine(";");
             }
 
