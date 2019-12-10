@@ -290,8 +290,8 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 BinaryTypeReference _ when value is string base64String => Convert.FromBase64String(base64String),
                 FrameworkTypeReference frameworkType when
-                    frameworkType.Type == typeof(DateTime) &&
-                    value is string dateTimeString => DateTime.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal),
+                    frameworkType.Type == typeof(DateTimeOffset) &&
+                    value is string dateTimeString => DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal),
                 FrameworkTypeReference frameworkType => Convert.ChangeType(value, frameworkType.Type),
                 _ => null
             };

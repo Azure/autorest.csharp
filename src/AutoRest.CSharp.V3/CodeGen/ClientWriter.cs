@@ -148,12 +148,12 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             switch (constant.Type)
             {
-                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTime):
-                    var dateTimeValue = (DateTime)constant.Value;
+                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTimeOffset):
+                    var dateTimeValue = (DateTimeOffset)constant.Value;
                     dateTimeValue = dateTimeValue.ToUniversalTime();
 
                     writer.Append("new ");
-                    writer.Append(writer.Type(typeof(DateTime)));
+                    writer.Append(writer.Type(typeof(DateTimeOffset)));
                     writer.Append("(");
                     writer.Literal(dateTimeValue.Year);
                     writer.Comma();
@@ -169,9 +169,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Comma();
                     writer.Literal(dateTimeValue.Millisecond);
                     writer.Comma();
-                    writer.Append(writer.Type(typeof(DateTimeKind)));
+                    writer.Append(writer.Type(typeof(TimeSpan)));
                     writer.Append(".");
-                    writer.Append(nameof(DateTimeKind.Utc));
+                    writer.Append(nameof(TimeSpan.Zero));
                     writer.Append(")");
                     break;
                 case FrameworkTypeReference _:

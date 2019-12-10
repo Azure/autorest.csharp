@@ -7,7 +7,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class DatetimeWrapper
     {
-        public DateTime? Field { get; set; }
-        public DateTime? Now { get; set; }
+        public DateTimeOffset? Field { get; set; }
+        public DateTimeOffset? Now { get; set; }
     }
 }

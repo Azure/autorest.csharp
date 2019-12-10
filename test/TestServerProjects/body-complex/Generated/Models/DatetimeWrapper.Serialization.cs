@@ -30,12 +30,12 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    result.Field = property.Value.GetDateTime();
+                    result.Field = property.Value.GetDateTimeOffset();
                     continue;
                 }
                 if (property.NameEquals("now"))
                 {
-                    result.Now = property.Value.GetDateTime();
+                    result.Now = property.Value.GetDateTimeOffset();
                     continue;
                 }
             }

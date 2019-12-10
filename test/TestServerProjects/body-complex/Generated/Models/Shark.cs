@@ -8,6 +8,6 @@ namespace body_complex.Models.V20160229
     public partial class Shark
     {
         public int? Age { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTimeOffset Birthday { get; set; }
     }
 }
