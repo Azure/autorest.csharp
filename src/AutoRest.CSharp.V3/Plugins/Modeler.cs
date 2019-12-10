@@ -33,24 +33,28 @@ namespace AutoRest.CSharp.V3.Plugins
             var typeProviders = models.OfType<ISchemaTypeProvider>().ToArray();
             var typeFactory = new TypeFactory(configuration.Namespace, typeProviders);
 
+            var modelWriter = new ModelWriter(typeFactory);
+            var writer = new ClientWriter(typeFactory);
+            var serializeWriter = new SerializationWriter(typeFactory);
+
             foreach (var model in models)
             {
+                var codeWriter = new CodeWriter();
+                modelWriter.WriteModel(codeWriter, model);
+
+                var serializerCodeWriter = new CodeWriter();
+                serializeWriter.WriteSerialization(serializerCodeWriter, model);
+
                 var name = model.Name;
-                var writer = new ModelWriter(typeFactory);
-                writer.WriteModel(model);
-
-                var serializeWriter = new SerializationWriter(typeFactory);
-                serializeWriter.WriteSerialization(model);
-
-                await autoRest.WriteFile($"Generated/Models/{name}.cs", writer.ToFormattedCode(), "source-file-csharp");
-                await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializeWriter.ToFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"Generated/Models/{name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
+                await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode(), "source-file-csharp");
             }
 
             foreach (var client in clients)
             {
-                var writer = new ClientWriter(typeFactory);
-                writer.WriteClient(client);
-                await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
+                var codeWriter = new CodeWriter();
+                writer.WriteClient(codeWriter, client);
+                await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
             }
 
             return true;

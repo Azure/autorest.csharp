@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 #pragma warning disable IDE0069 // Disposable fields should be disposed
     internal sealed class Connection : IDisposable
     {
-        private readonly DisposeService<Connection> _disposeService;
         private readonly Stream _outputStream;
         private readonly PeekableBinaryStream _inputStream;
         private readonly Task _listener;
@@ -32,7 +31,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 
         public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction>? incomingRequestActions = null)
         {
-            _disposeService = new DisposeService<Connection>(this, Disposer);
             _cancellationToken = CancellationTokenSource.Token;
             _inputStream = new PeekableBinaryStream(inputStream);
             _outputStream = outputStream;
@@ -88,11 +86,12 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             return (await response.Task.ConfigureAwait(false)).Parse().ToType<T>();
         }
 
-        public void Dispose() => _disposeService.Dispose(true);
-
-        private void Disposer(Connection connection)
+        public void Dispose()
         {
-            foreach (var t in _responses.Values) { t.SetCanceled(); }
+            foreach (var t in _responses.Values)
+            {
+                t.SetCanceled();
+            }
 
             _outputStream?.Dispose();
             _inputStream?.Dispose();
