@@ -7,9 +7,9 @@ function Invoke-AutoRest($autoRestArguments) {
     $command = "npx autorest-beta $autoRestArguments"
     Write-Host "> $command"
     Invoke-Expression $command
-    if($LastExitCode -gt 0)
+    if($LastExitCode -ne 0)
     {
-        throw "Command failed to execute: $command"
+        Write-Error "Command failed to execute: $command"
     }
 }
 
