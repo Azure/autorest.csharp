@@ -9,7 +9,6 @@ function Invoke-AutoRest($autoRestArguments) {
     Invoke-Expression $command
     if($LastExitCode -gt 0)
     {
-        [Console]::Out.Flush()
         throw "Command failed to execute: $command"
     }
 }
