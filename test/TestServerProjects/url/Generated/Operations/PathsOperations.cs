@@ -423,7 +423,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/date/2012-01-01/", false);
-                request.Uri.AppendPath(new DateTime(2012, 1, 1, 8, 0, 0, 0, DateTimeKind.Utc), true);
+                request.Uri.AppendPath(new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;

@@ -1,8 +1,6 @@
 param($name, [switch]$noDebug, [switch]$NoReset)
 $ErrorActionPreference = 'Stop'
 
-$AutorestCoreVersion = "3.0.6162"
-
 function Invoke-Block([scriptblock]$cmd) {
     $cmd | Out-String | Write-Verbose
     & $cmd
@@ -21,7 +19,7 @@ function Invoke-Block([scriptblock]$cmd) {
 
 function Invoke-AutoRest($autoRestArguments, $repoRoot) {
     Invoke-Block {
-        $command = "npx autorest-beta --version:$AutorestCoreVersion $autoRestArguments"
+        $command = "npx autorest-beta $autoRestArguments"
         $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
 
         Write-Host ">" $commandText
