@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-# param($name, [switch]$noDebug, [switch]$reset)
+param($name, [switch]$noDebug, [switch]$reset)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
@@ -67,10 +67,10 @@ function Invoke-Generate($name, [switch]$noDebug)
 Write-Host 'Downloading shared source files...'
 Invoke-DownloadSharedSource
 
-# if ($reset)
-# {
-#     Invoke-AutoRest "--reset"
-# }
+if ($reset)
+{
+    Invoke-AutoRest '--reset'
+}
 
 Write-Host 'Generating test clients...'
 Invoke-Generate @PSBoundParameters
