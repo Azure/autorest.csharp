@@ -12,14 +12,14 @@ namespace Azure.Core
 
         public static string ToString(bool value) => value ? "true" : "false";
 
-        public static string ToString(DateTime value, string format)
+        public static string ToString(DateTimeOffset value, string format)
         {
             return format switch
             {
                 "D" => value.ToString("yyyy-MM-dd"),
                 "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
                 "R" => value.ToString("R"),
-                "U" => new DateTimeOffset(value).ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
+                "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
                 _ => throw new ArgumentException("Format is not supported", nameof(format))
             };
         }

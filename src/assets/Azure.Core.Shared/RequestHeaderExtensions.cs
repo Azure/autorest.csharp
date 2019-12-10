@@ -28,7 +28,7 @@ namespace Azure.Core
             headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat));
         }
 
-        public static void Add(this RequestHeaders headers, string name, DateTime value, string format)
+        public static void Add(this RequestHeaders headers, string name, DateTimeOffset value, string format)
         {
             headers.Add(name, TypeFormatters.ToString(value, format));
         }

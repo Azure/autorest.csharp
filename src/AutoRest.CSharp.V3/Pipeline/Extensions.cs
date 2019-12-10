@@ -14,32 +14,17 @@ namespace AutoRest.CSharp.V3.Pipeline
     {
         public static Type? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
-            AllSchemaTypes.Any => null,
-            AllSchemaTypes.Array => null,
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
             AllSchemaTypes.Char => typeof(char),
-            AllSchemaTypes.Choice => null,
-            AllSchemaTypes.Constant => null,
-            AllSchemaTypes.Credential => null,
-            AllSchemaTypes.Date => typeof(DateTime),
-            AllSchemaTypes.DateTime => typeof(DateTime),
-            AllSchemaTypes.Dictionary => null,
+            AllSchemaTypes.Date => typeof(DateTimeOffset),
+            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
-            AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => null, // Handled in ToFrameworkType for NumberSchema
-            AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => null, // Handled in ToFrameworkType for NumberSchema
-            AllSchemaTypes.Object => null,
             AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.Or => null,
-            AllSchemaTypes.Group => null,
-            AllSchemaTypes.SealedChoice => null,
             AllSchemaTypes.String => typeof(string),
-            AllSchemaTypes.Unixtime => typeof(DateTime),
+            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
-            AllSchemaTypes.Xor => null,
             _ => null
         };
 
@@ -91,7 +76,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(decimal), NumberSerializer },
             { typeof(string), StringSerializer() },
             { typeof(byte[]), (vn, nu) => null },
-            { typeof(DateTime), StringSerializer(true) },
+            { typeof(DateTimeOffset), StringSerializer(true) },
             { typeof(TimeSpan), StringSerializer(true) },
             { typeof(Uri), StringSerializer(true) }
         };
@@ -108,7 +93,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(double), n => $"{n}.GetDouble()" },
             { typeof(decimal), n => $"{n}.GetDecimal()" },
             { typeof(string), n => $"{n}.GetString()" },
-            { typeof(DateTime), n => $"{n}.GetDateTime()" },
+            { typeof(DateTimeOffset), n => $"{n}.GetDateTimeOffset()" },
             { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
             { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
