@@ -124,16 +124,15 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiNull() => Assert.Fail("");
+        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
         [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiEmpty() => Assert.Fail("");
+        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiEmptyAsync(ClientDiagnostics, pipeline, new string[] { }, host: host));
 
         [Test]
         [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiValid() => Assert.Fail("");
+        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
         {
