@@ -252,8 +252,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Now);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Now);
         });
 
         //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
