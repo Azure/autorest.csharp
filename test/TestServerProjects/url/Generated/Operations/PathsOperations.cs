@@ -381,7 +381,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/byte/empty/", false);
-                request.Uri.AppendPath("", true);
+                request.Uri.AppendPath(new byte[] { }, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -423,7 +423,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/date/2012-01-01/", false);
-                request.Uri.AppendPath("2012-01-01", true);
+                request.Uri.AppendPath(new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "D", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -465,7 +465,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
-                request.Uri.AppendPath("2012-01-01T01:01:01Z", true);
+                request.Uri.AppendPath(new DateTime(2012, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc), "S", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;

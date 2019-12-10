@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,11 @@ namespace AutoRest.CSharp.V3.Plugins
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", writer.ToFormattedCode(), "source-file-csharp");
             }
 
+            if (configuration.Title == "body-string")
+            {
+                throw new Exception("This is supposed to fail");
+            }
+
             return true;
         }
 
@@ -86,11 +92,13 @@ namespace AutoRest.CSharp.V3.Plugins
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
                 ConstantOrParameter? constantOrParameter;
+                Schema valueSchema = requestParameter.Schema;
 
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ParseClientConstant(constant.Value.Value, (FrameworkTypeReference)CreateType(constant.ValueType, requestParameter.IsNullable()));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, true));
+                        valueSchema = constant.ValueType;
                         break;
                     case BinarySchema _:
                         // skip
@@ -116,16 +124,17 @@ namespace AutoRest.CSharp.V3.Plugins
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
+                    SerializationFormat serializationFormat = GetSerializationFormat(valueSchema);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, GetSerializationFormat(requestParameter.Schema)));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, GetSerializationFormat(requestParameter.Schema)));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Body:
                             body = constantOrParameter;
@@ -178,8 +187,8 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
                 DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
-                DateSchema _ => SerializationFormat.Date,
                 DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
+                DateSchema _ => SerializationFormat.Date,
                 _ => SerializationFormat.Default,
             };
         }
@@ -276,9 +285,18 @@ namespace AutoRest.CSharp.V3.Plugins
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
-        private static ClientConstant ParseClientConstant(object? value, FrameworkTypeReference type)
+        private static ClientConstant ParseClientConstant(object? value, ClientTypeReference type)
         {
-            return new ClientConstant(Convert.ChangeType(value, type.Type), type);
+            var normalizedValue = type switch
+            {
+                BinaryTypeReference _ when value is string base64String => Convert.FromBase64String(base64String),
+                FrameworkTypeReference frameworkType when
+                    frameworkType.Type == typeof(DateTime) &&
+                    value is string dateTimeString => DateTime.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal),
+                FrameworkTypeReference frameworkType => Convert.ChangeType(value, frameworkType.Type),
+                _ => null
+            };
+            return new ClientConstant(normalizedValue, type);
         }
 
         //TODO: Refactor as this is written quite... ugly.

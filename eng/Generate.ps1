@@ -1,4 +1,4 @@
-param($name, [switch]$noDebug, [switch]$noRun)
+param($name, [switch]$noDebug, [switch]$noRun, [switch]$NoReset)
 
 # function Invoke-Block([scriptblock]$cmd) {
 #     $cmd | Out-String | Write-Verbose
@@ -49,6 +49,11 @@ function Invoke-Generate($name, [switch]$noDebug)
     $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
     $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
     $testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
+
+    if (!$NoReset)
+    {
+        Invoke-AutoRest "--reset" $repoRoot
+    }
 
     foreach ($testName in $testNames)
     {
