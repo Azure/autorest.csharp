@@ -33,9 +33,11 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetIntNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -75,6 +77,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesStringNull() => TestStatus(async (host, pipeline) => await QueriesOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
+        [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
         public Task UrlQueriesEnumValid() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host: host));
 
         [Test]

@@ -87,11 +87,13 @@ namespace AutoRest.CSharp.V3.Plugins
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
                 ConstantOrParameter? constantOrParameter;
+                Schema valueSchema = requestParameter.Schema;
 
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
                         constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, true));
+                        valueSchema = constant.ValueType;
                         break;
                     case BinarySchema _:
                         // skip
@@ -117,7 +119,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
-                    SerializationFormat serializationFormat = GetSerializationFormat(requestParameter.Schema);
+                    SerializationFormat serializationFormat = GetSerializationFormat(valueSchema);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
@@ -180,8 +182,8 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
                 DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
-                DateSchema _ => SerializationFormat.Date,
                 DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
+                DateSchema _ => SerializationFormat.Date,
                 _ => SerializationFormat.Default,
             };
         }

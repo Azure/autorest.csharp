@@ -993,7 +993,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("CMYKColors", typeof(CMYKColors).Name);
             // modelAsString
             Assert.True(typeof(CMYKColors).IsValueType);
-            Assert.False(!typeof(CMYKColors).IsEnum);
+            Assert.False(typeof(CMYKColors).IsEnum);
         }
     }
 }
