@@ -1,4 +1,4 @@
-param($name, [switch]$noDebug)
+param($name, [switch]$noDebug, [switch]$NoReset)
 $ErrorActionPreference = 'Stop'
 
 function Invoke-Block([scriptblock]$cmd) {
@@ -37,6 +37,11 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
+
+if (!$NoReset)
+{
+    Invoke-AutoRest "--reset" $repoRoot
+}
 
 foreach ($testName in $testNames)
 {

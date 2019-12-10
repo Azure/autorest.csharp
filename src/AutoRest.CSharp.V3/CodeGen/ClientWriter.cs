@@ -137,6 +137,60 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        private void WriteConstant(ClientConstant constant)
+        {
+            if (constant.Value == null)
+            {
+                Literal(null);
+                return;
+            }
+
+            switch (constant.Type)
+            {
+                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTime):
+                    var dateTimeValue = (DateTime)constant.Value;
+                    dateTimeValue = dateTimeValue.ToUniversalTime();
+
+                    Append("new ");
+                    Append(Type(typeof(DateTime)));
+                    Append("(");
+                    Literal(dateTimeValue.Year);
+                    Append(", ");
+                    Literal(dateTimeValue.Month);
+                    Append(", ");
+                    Literal(dateTimeValue.Day);
+                    Append(", ");
+                    Literal(dateTimeValue.Hour);
+                    Append(", ");
+                    Literal(dateTimeValue.Minute);
+                    Append(", ");
+                    Literal(dateTimeValue.Second);
+                    Append(", ");
+                    Literal(dateTimeValue.Millisecond);
+                    Append(", ");
+                    Append(Type(typeof(DateTimeKind)));
+                    Append(".");
+                    Append(nameof(DateTimeKind.Utc));
+                    Append(")");
+                    break;
+                case FrameworkTypeReference _:
+                    Literal(constant.Value);
+                    break;
+                case BinaryTypeReference _:
+                    var value = (byte[])constant.Value;
+                    Append("new byte[] {");
+                    foreach (byte b in value)
+                    {
+                        Literal(b);
+                        Append(", ");
+                    }
+                    Append("}");
+                    break;
+                default:
+                    throw new InvalidOperationException("Unknown constant type");
+            }
+        }
+
         private void WritePathSegment(PathSegment segment)
         {
             var value = segment.Value;
@@ -144,7 +198,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             if (value.IsConstant)
             {
                 Append("request.Uri.AppendPath(");
-                Literal(value.Constant.Value);
+                WriteConstant(value.Constant);
                 WriteSerializationFormat(segment.Format);
                 Append(", ");
                 Literal(segment.Escape);
@@ -167,7 +221,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Append("request.Headers.Add(");
                 Literal(header.Name);
                 Append(", ");
-                Literal(header.Value.Constant.Value);
+                WriteConstant(header.Value.Constant);
                 Line(");");
                 return;
             }
@@ -216,7 +270,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 Append("request.Uri.AppendQuery(");
                 Literal(queryParameter.Name);
                 Append(", ");
-                Literal(value.Constant.Value);
+                WriteConstant(value.Constant);
+                WriteSerializationFormat(queryParameter.SerializationFormat);
                 Append(", ");
                 Literal(queryParameter.Escape);
                 Line(");");
@@ -235,6 +290,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     Append(".Value");
                 }
+                WriteSerializationFormat(queryParameter.SerializationFormat);
                 Append(", ");
                 Literal(queryParameter.Escape);
                 Line(");");

@@ -4,8 +4,8 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.1.60"
-
+  "@autorest/modelerfour": "4.2.84"
+version: 3.0.6162
 pipeline:
   cs-modeler:
     input: modelerfour/identity

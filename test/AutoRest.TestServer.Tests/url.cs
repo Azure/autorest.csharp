@@ -20,6 +20,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringEmpty() => TestStatus(async (host, pipeline) => await PathsOperations.StringEmptyAsync(ClientDiagnostics, pipeline, host));
 
         [Test]
+        [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
         public Task UrlPathsEnumValid() => TestStatus(async (host, pipeline) => await PathsOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host));
 
         [Test]
@@ -104,6 +105,14 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathsDoublePositive() => TestStatus(async (host, pipeline) => await PathsOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host));
+
+
+        [Test]
+        public void EnumGeneratedNonExtesibleWithoutModelAsString()
+        {
+            // modelAsString
+            Assert.True(typeof(UriColor).IsEnum);
+        }
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[] {"UrlPathsBoolFalse",
             "UrlPathsBoolTrue",

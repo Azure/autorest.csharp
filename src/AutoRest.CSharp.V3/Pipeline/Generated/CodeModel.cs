@@ -1500,8 +1500,11 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         [System.Runtime.Serialization.EnumMember(Value = @"spaceDelimited")]
         SpaceDelimited = 8,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"tabDelimited")]
+        TabDelimited = 9,
+
         [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 9,
+        Xml = 10,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
