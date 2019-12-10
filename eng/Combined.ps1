@@ -16,13 +16,13 @@ function Invoke-DownloadSharedSource
     }
 }
 
-function Invoke-AutoRest($autoRestArguments, $repoRoot) {
+function Invoke-AutoRest($autoRestArguments) {
     $command = "npx autorest-beta $autoRestArguments"
-    $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
-    Write-Host "> $commandText"
+    Write-Host "> $command"
     Invoke-Expression $command
-    if($LastExitCode -gt 0) {
-        Write-Error "Failure"
+    if($LastExitCode -ne 0)
+    {
+        Write-Error "Command failed to execute: $command"
     }
 }
 
@@ -48,7 +48,7 @@ function Invoke-Generate($name, [switch]$noDebug, [switch]$noReset)
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
         $namespace = $testName.Replace('-', '_')
         $autoRestArguments = "$debugFlags --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
-        Invoke-AutoRest $autoRestArguments $repoRoot
+        Invoke-AutoRest $autoRestArguments
     }
 
     # Sample configuration
@@ -60,27 +60,19 @@ function Invoke-Generate($name, [switch]$noDebug, [switch]$noReset)
         $projectDirectory = Join-Path $sampleDirectory $projectName
         $configurationPath = Join-Path $projectDirectory 'readme.md'
         $autoRestArguments = "$debugFlags --require=$configurationPath"
-        Invoke-AutoRest $autoRestArguments $repoRoot
+        Invoke-AutoRest $autoRestArguments
     }
 }
 
-# try
-# {
-    Write-Host "Downloading files"
-    Invoke-DownloadSharedSource
+Write-Host "Downloading files"
+Invoke-DownloadSharedSource
 
-    Write-Host "Generate test clients"
-    Invoke-Generate @script:PSBoundParameters
+Write-Host "Generate test clients"
+Invoke-Generate @script:PSBoundParameters
 
-    Write-Host "git diff"
-    & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
-    if ($LastExitCode -ne 0) {
-        $status = git status -s | Out-String
-        $status = $status -replace "`n","`n    "
-        Write-Error "Generated code is not up to date. You may need to run eng\Update-Snippets.ps1 or sdk\storage\generate.ps1 or eng\Export-API.ps1"
-    }
-# }
-# catch
-# {
-#     exit 1
-# }
+Write-Host "git diff"
+git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
+if ($LastExitCode -ne 0) {
+    $status = (git status -s | Out-String) -replace '`n','`n    '
+    Write-Error 'Generated code is not up to date. Please run: eng/Generate.ps1'
+}
