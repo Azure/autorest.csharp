@@ -2024,6 +2024,7 @@
         "pipeDelimited",
         "simple",
         "spaceDelimited",
+        "tabDelimited",
         "xml"
       ],
       "type": "string"
