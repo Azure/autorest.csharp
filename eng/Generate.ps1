@@ -18,13 +18,23 @@ param($name, [switch]$noDebug, [switch]$noRun)
 
 function Invoke-AutoRest($autoRestArguments, $repoRoot) {
     # Invoke-Block {
-        $command = "npx autorest-beta $autoRestArguments"
-        $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
-
+        # $command = "npx autorest-beta $autoRestArguments"
+        $commandText = "npx autorest-beta $autoRestArguments".Replace($repoRoot, "`$(SolutionDir)")
         Write-Host "> $commandText"
-        
+
+        # Invoke-Expression "npx autorest-beta $autoRestArguments" -ErrorVariable e
+        # Write-Host $e
+        # if($e)
+        # {
+        #     Write-Error $e
+        # }
+
+
         # & cmd /c "$command 2>&1"
-        Invoke-Expression "& $command"
+        # $thing = Invoke-Expression "$command ;`$?"
+        # if(-not (Invoke-Expression "$command ;`$?")) {
+        #     Write-Error "AutoRest operation failed."
+        # }
     # }
 }
 
@@ -42,10 +52,56 @@ function Invoke-Generate($name, [switch]$noDebug)
 
     foreach ($testName in $testNames)
     {
+        # trap {"ERROR AAAGGGHHH"}
+
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
         $namespace = $testName.Replace('-', '_')
         $autoRestArguments = "$debugFlags --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
-        Invoke-AutoRest $autoRestArguments $repoRoot
+        # Invoke-AutoRest $autoRestArguments $repoRoot
+        $commandText = "npx autorest-beta $autoRestArguments".Replace($repoRoot, "`$(SolutionDir)")
+        Write-Host "> $commandText"
+        # try{
+            # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace *>&1
+
+
+            # $ErrorActionPreference = 'Continue'
+            # $error.Clear()
+            # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace 2>&1
+            # $ErrorActionPreference = 'Stop'
+            # if($error.Count -gt 0) {
+            #     exit 1
+            # }
+
+
+            # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace
+            Invoke-Expression "autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
+            if($LastExitCode -gt 0) {
+                Write-Error "Failure"
+            }
+
+            # $ErrorActionPreference = 'Stop'
+            # Write-Host "TestExe was executed and the next line, as well."
+            # . { autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace }
+            # Invoke-Expression "autorest-beta --debug --verbose --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace 2>&1" -ErrorVariable e
+            # if($e){
+            #     throw $e.Exception
+            # }
+
+
+
+            # $csprojFile = Join-Path $testServerDirectory $testName "$testName.csproj"
+            # dotnet build $csprojFile --verbosity quiet /nologo
+
+
+            # throw "FAILUREEEEE"
+        # }
+        # catch{
+        #     #  Write-Error $_.Exception | Format-List -Force
+        #     #  Write-Warning $error[0]
+        #     Write-Warning $error[0]
+        #     Write-Error "Failed"
+        # }
+        
     }
 
     # Sample configuration

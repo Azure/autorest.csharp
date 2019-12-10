@@ -61,27 +61,30 @@ try {
     # }
     Invoke-Generate @script:PSBoundParameters
 
-    Write-Host "git diff"
-    & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
-    if ($LastExitCode -ne 0) {
-        $status = git status -s | Out-String
-        $status = $status -replace "`n","`n    "
-        LogError "Generated code is not up to date. You may need to run eng\Update-Snippets.ps1 or sdk\storage\generate.ps1 or eng\Export-API.ps1"
-    }
+    # Write-Host "git diff"
+    # & git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
+    # if ($LastExitCode -ne 0) {
+    #     $status = git status -s | Out-String
+    #     $status = $status -replace "`n","`n    "
+    #     LogError "Generated code is not up to date. You may need to run eng\Update-Snippets.ps1 or sdk\storage\generate.ps1 or eng\Export-API.ps1"
+    # }
 }
-finally {
-    Write-Host ""
-    Write-Host "Summary:"
-    Write-Host ""
-    Write-Host "   $($errors.Length) error(s)"
-    Write-Host ""
-
-    foreach ($err in $errors) {
-        Write-Host -f Red "error : $err"
-    }
-
-    if ($errors.Length -ne 0) {
-        exit 1
-    }
-    exit 0
+catch{
+    exit 1
 }
+# finally {
+#     Write-Host ""
+#     Write-Host "Summary:"
+#     Write-Host ""
+#     Write-Host "   $($errors.Length) error(s)"
+#     Write-Host ""
+
+#     foreach ($err in $errors) {
+#         Write-Host -f Red "error : $err"
+#     }
+
+#     if ($errors.Length -ne 0) {
+#         exit 1
+#     }
+#     exit 0
+# }
