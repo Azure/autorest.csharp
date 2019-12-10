@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     method = nameof(UriBuilderExtensions.AppendQueryDelimited);
                     delimiter = " ";
                     break;
-                case QuerySerializationStyle.ComaDelimited:
+                case QuerySerializationStyle.CommaDelimited:
                     method = nameof(UriBuilderExtensions.AppendQueryDelimited);
                     delimiter = ",";
                     break;
@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             ConstantOrParameter value = queryParameter.Value;
             if (value.IsConstant)
             {
-                writer.Append("request.Uri.AppendQuery(");
+                writer.Append("request.Uri.");
                 writer.Append(method);
                 writer.Append("(");
                 writer.Literal(queryParameter.Name);
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 WriteConstant(writer, value.Constant);
                 if (delimiter != null)
                 {
-                    writer.Append(", ");
+                    writer.Comma();
                     writer.Literal(delimiter);
                 }
                 WriteSerializationFormat(writer, queryParameter.SerializationFormat);
@@ -329,11 +329,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
                 if (delimiter != null)
                 {
-                    writer.Append(", ");
+                    writer.Comma();
                     writer.Literal(delimiter);
                 }
                 WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Append(", ");
+                writer.Comma();
                 writer.Literal(queryParameter.Escape);
                 writer.Line(");");
             }

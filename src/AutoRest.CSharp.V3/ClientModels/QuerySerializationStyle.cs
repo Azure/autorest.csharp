@@ -9,6 +9,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         PipeDelimited,
         SpaceDelimited,
         TabDelimited,
-        ComaDelimited
+        CommaDelimited
     }
 }

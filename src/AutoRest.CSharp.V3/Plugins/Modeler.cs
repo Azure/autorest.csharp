@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.V3.Plugins
             {
                 case null:
                 case SerializationStyle.Form:
-                    return valueSchema is ArraySchema ? QuerySerializationStyle.ComaDelimited : QuerySerializationStyle.Simple;
+                    return valueSchema is ArraySchema ? QuerySerializationStyle.CommaDelimited : QuerySerializationStyle.Simple;
                 case SerializationStyle.PipeDelimited:
                     return QuerySerializationStyle.PipeDelimited;
                 case SerializationStyle.SpaceDelimited:
