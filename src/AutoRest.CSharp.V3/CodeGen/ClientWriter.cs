@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     dateTimeValue = dateTimeValue.ToUniversalTime();
 
                     writer.Append("new ");
-                    writer.Append(Type(typeof(DateTimeOffset)));
+                    writer.Append(writer.Type(typeof(DateTimeOffset)));
                     writer.Append("(");
                     writer.Literal(dateTimeValue.Year);
                     writer.Comma();
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Comma();
                     writer.Literal(dateTimeValue.Millisecond);
                     writer.Comma();
-                    writer.Append(Type(typeof(TimeSpan)));
+                    writer.Append(writer.Type(typeof(TimeSpan)));
                     writer.Append(".");
                     writer.Append(nameof(TimeSpan.Zero));
                     writer.Append(")");
