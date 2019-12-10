@@ -6,6 +6,7 @@
 #     [ValidateNotNullOrEmpty()]
 #     [string] $ServiceDirectory
 # )
+# param($name, [switch]$noDebug, [switch]$noRun, [switch]$noReset)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
@@ -48,7 +49,8 @@ Set-StrictMode -Version 1
 #     }
 # }
 
-try {
+try
+{
     Write-Host "Downloading files"
     # Invoke-Block {
     #     & $PSScriptRoot\DownloadSharedSource.ps1 @script:PSBoundParameters
@@ -59,6 +61,7 @@ try {
     # Invoke-Block {
     #     & $PSScriptRoot\Generate.ps1 @script:PSBoundParameters
     # }
+    # Write-Host $noReset
     Invoke-Generate @script:PSBoundParameters
 
     # Write-Host "git diff"
@@ -69,7 +72,8 @@ try {
     #     LogError "Generated code is not up to date. You may need to run eng\Update-Snippets.ps1 or sdk\storage\generate.ps1 or eng\Export-API.ps1"
     # }
 }
-catch{
+catch
+{
     exit 1
 }
 # finally {

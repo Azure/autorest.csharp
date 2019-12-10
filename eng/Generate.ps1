@@ -1,4 +1,4 @@
-param($name, [switch]$noDebug, [switch]$noRun, [switch]$NoReset)
+param($name, [switch]$noDebug, [switch]$noRun, [switch]$noReset)
 
 # function Invoke-Block([scriptblock]$cmd) {
 #     $cmd | Out-String | Write-Verbose
@@ -17,28 +17,16 @@ param($name, [switch]$noDebug, [switch]$noRun, [switch]$NoReset)
 # }
 
 function Invoke-AutoRest($autoRestArguments, $repoRoot) {
-    # Invoke-Block {
-        # $command = "npx autorest-beta $autoRestArguments"
-        $commandText = "npx autorest-beta $autoRestArguments".Replace($repoRoot, "`$(SolutionDir)")
-        Write-Host "> $commandText"
-
-        # Invoke-Expression "npx autorest-beta $autoRestArguments" -ErrorVariable e
-        # Write-Host $e
-        # if($e)
-        # {
-        #     Write-Error $e
-        # }
-
-
-        # & cmd /c "$command 2>&1"
-        # $thing = Invoke-Expression "$command ;`$?"
-        # if(-not (Invoke-Expression "$command ;`$?")) {
-        #     Write-Error "AutoRest operation failed."
-        # }
-    # }
+    $command = "npx autorest-beta $autoRestArguments"
+    $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
+    Write-Host "> $commandText"
+    Invoke-Expression $command
+    if($LastExitCode -gt 0) {
+        Write-Error "Failure"
+    }
 }
 
-function Invoke-Generate($name, [switch]$noDebug)
+function Invoke-Generate($name, [switch]$noDebug, [switch]$noReset)
 {
     # General configuration
     $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
@@ -50,10 +38,11 @@ function Invoke-Generate($name, [switch]$noDebug)
     $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
     $testNames = if ($name) { $name } else { 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
 
-    if (!$NoReset)
-    {
-        Invoke-AutoRest "--reset" $repoRoot
-    }
+    # Write-Host $noReset
+    # if (-not $noReset)
+    # {
+    #     Invoke-AutoRest "--reset" $repoRoot
+    # }
 
     foreach ($testName in $testNames)
     {
@@ -62,9 +51,9 @@ function Invoke-Generate($name, [switch]$noDebug)
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
         $namespace = $testName.Replace('-', '_')
         $autoRestArguments = "$debugFlags --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
-        # Invoke-AutoRest $autoRestArguments $repoRoot
-        $commandText = "npx autorest-beta $autoRestArguments".Replace($repoRoot, "`$(SolutionDir)")
-        Write-Host "> $commandText"
+        Invoke-AutoRest $autoRestArguments $repoRoot
+        # $commandText = "npx autorest-beta $autoRestArguments".Replace($repoRoot, "`$(SolutionDir)")
+        # Write-Host "> $commandText"
         # try{
             # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace *>&1
 
@@ -79,10 +68,10 @@ function Invoke-Generate($name, [switch]$noDebug)
 
 
             # autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace
-            Invoke-Expression "npx autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
-            if($LastExitCode -gt 0) {
-                Write-Error "Failure"
-            }
+            # Invoke-Expression "npx autorest-beta --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
+            # if($LastExitCode -gt 0) {
+            #     Write-Error "Failure"
+            # }
 
             # $ErrorActionPreference = 'Stop'
             # Write-Host "TestExe was executed and the next line, as well."
