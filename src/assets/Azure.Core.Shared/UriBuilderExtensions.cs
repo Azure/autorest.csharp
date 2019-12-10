@@ -47,7 +47,7 @@ namespace Azure.Core
             builder.AppendPath(value.ToString()!, escape);
         }
 
-        public static void AppendPath(this RequestUriBuilder builder, DateTime value, string format, bool escape = true)
+        public static void AppendPath(this RequestUriBuilder builder, DateTimeOffset value, string format, bool escape = true)
         {
             builder.AppendPath(TypeFormatters.ToString(value, format), escape);
         }
@@ -62,7 +62,7 @@ namespace Azure.Core
             builder.AppendQuery(name, value.ToString(TypeFormatters.DefaultNumberFormat), escape);
         }
 
-        public static void AppendQuery(this RequestUriBuilder builder, string name, DateTime value, string format, bool escape = true)
+        public static void AppendQuery(this RequestUriBuilder builder, string name, DateTimeOffset value, string format, bool escape = true)
         {
             builder.AppendQuery(name, TypeFormatters.ToString(value, format), escape);
         }
@@ -87,12 +87,12 @@ namespace Azure.Core
             builder.AppendQuery(name, Convert.ToBase64String(value), escape);
         }
 
-        public static void AppendQuery(this RequestUriBuilder builder, string name, IEnumerable<string> value, bool escape = true)
+        public static void AppendQueryDelimited<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, string delimiter, bool escape = true)
         {
-            builder.AppendQuery(name, string.Join(",", value), escape);
+            builder.AppendQuery(name, string.Join(delimiter, value), escape);
         }
 
-        public static void AppendQuery<T>(this RequestUriBuilder builder, string name, T value, bool escape = false)
+        public static void AppendQuery<T>(this RequestUriBuilder builder, string name, T value, bool escape = false) where T: Enum
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));

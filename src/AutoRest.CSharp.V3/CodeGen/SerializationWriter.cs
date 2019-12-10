@@ -10,7 +10,7 @@ using AutoRest.CSharp.V3.Plugins;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class SerializationWriter : StringWriter
+    internal class SerializationWriter
     {
         private readonly TypeFactory _typeFactory;
 
@@ -19,141 +19,137 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteSerialization(ClientModel schema)
+        public void WriteSerialization(CodeWriter writer, ClientModel schema)
         {
             switch (schema)
             {
                 case ClientObject objectSchema:
-                    WriteObjectSerialization(objectSchema);
+                    WriteObjectSerialization(writer, objectSchema);
                     break;
                 case ClientEnum sealedChoiceSchema when !sealedChoiceSchema.IsStringBased:
-                    WriteSealedChoiceSerialization(sealedChoiceSchema);
+                    WriteSealedChoiceSerialization(writer, sealedChoiceSchema);
                     break;
             }
         }
 
-        private void WriteProperty(ClientTypeReference type, string name, string serializedName)
+        private void WriteProperty(CodeWriter writer, ClientTypeReference type, string name, string serializedName)
         {
             if (type is CollectionTypeReference array)
             {
-                Line($"writer.WriteStartArray(\"{serializedName}\");");
-                using (ForEach($"var item in {name}"))
+                writer.Line($"writer.WriteStartArray(\"{serializedName}\");");
+                using (writer.ForEach($"var item in {name}"))
                 {
-                    this.ToSerializeCall(array.ItemType, _typeFactory, "item", serializedName, false);
+                    writer.ToSerializeCall(array.ItemType, _typeFactory, "item", serializedName, false);
                 }
-                Line("writer.WriteEndArray();");
+                writer.Line("writer.WriteEndArray();");
                 return;
             }
 
             if (type is DictionaryTypeReference dictionary)
             {
-                Line($"writer.WriteStartObject(\"{serializedName}\");");
-                using (ForEach($"var item in {name}"))
+                writer.Line($"writer.WriteStartObject(\"{serializedName}\");");
+                using (writer.ForEach($"var item in {name}"))
                 {
-                    this.ToSerializeCall(dictionary.ValueType, _typeFactory, "item.Value", "item.Key", true, false);
+                    writer.ToSerializeCall(dictionary.ValueType, _typeFactory, "item.Value", "item.Key", true, false);
                 }
-                Line("writer.WriteEndObject();");
+                writer.Line("writer.WriteEndObject();");
                 return;
             }
 
-            this.ToSerializeCall(type, _typeFactory, name, serializedName);
+            writer.ToSerializeCall(type, _typeFactory, name, serializedName);
         }
 
-        private void ReadProperty(ClientTypeReference type, string name)
+        private void ReadProperty(CodeWriter writer, ClientTypeReference type, string name)
         {
             if (type is CollectionTypeReference array)
             {
-                using (ForEach("var item in property.Value.EnumerateArray()"))
+                using (writer.ForEach("var item in property.Value.EnumerateArray()"))
                 {
                     var elementType = _typeFactory.CreateType(array.ItemType);
                     var elementTypeName = elementType.Name;
-                    var elementTypeText = Type(elementType);
-                    Append($"result.{name}.Add(");
-                    this.ToDeserializeCall(array.ItemType, _typeFactory, "item", elementTypeText, elementTypeName);
-                    Line(");");
+                    var elementTypeText = writer.Type(elementType);
+                    writer.Append($"result.{name}.Add(");
+                    writer.ToDeserializeCall(array.ItemType, _typeFactory, "item", elementTypeText, elementTypeName);
+                    writer.Line(");");
                 }
                 return;
             }
             if (type is DictionaryTypeReference dictionary)
             {
-                using (ForEach("var item in property.Value.EnumerateObject()"))
+                using (writer.ForEach("var item in property.Value.EnumerateObject()"))
                 {
                     var elementType = _typeFactory.CreateType(dictionary.ValueType);
                     var elementTypeName = elementType.Name;
-                    var elementTypeText = Type(elementType);
-                    Append($"result.{name}.Add(item.Name, ");
-                    this.ToDeserializeCall(dictionary.ValueType, _typeFactory, "item.Value", elementTypeText, elementTypeName);
-                    Line(");");
+                    var elementTypeText = writer.Type(elementType);
+                    writer.Append($"result.{name}.Add(item.Name, ");
+                    writer.ToDeserializeCall(dictionary.ValueType, _typeFactory, "item.Value", elementTypeText, elementTypeName);
+                    writer.Line(");");
                 }
                 return;
             }
 
-            var t = Type(_typeFactory.CreateType(type));
-            Append($"result.{name} = ");
-            this.ToDeserializeCall(type, _typeFactory, "property.Value", t, t);
-            Line(";");
+            var t = writer.Type(_typeFactory.CreateType(type));
+            writer.Append($"result.{name} = ");
+            writer.ToDeserializeCall(type, _typeFactory, "property.Value", t, t);
+            writer.Line(";");
         }
 
         //TODO: This is currently input schemas only. Does not handle output-style schemas.
-        private void WriteObjectSerialization(ClientObject model)
+        private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(model);
-            using (Namespace(cs.Namespace))
+            using (writer.Namespace(cs.Namespace))
             {
-                using (Class(null, "partial", model.CSharpName()))
+                using (writer.Class(null, "partial", model.CSharpName()))
                 {
-                    using (Method("internal", "void", "Serialize", Pair(typeof(Utf8JsonWriter), "writer")))
+                    using (writer.Method("internal", "void", "Serialize", writer.Pair(typeof(Utf8JsonWriter), "writer")))
                     {
-                         Line("writer.WriteStartObject();");
+                        writer.Line("writer.WriteStartObject();");
 
                         var propertyInfos = model.Properties;
                         foreach (var property in propertyInfos)
                         {
-                            using (property.Type.IsNullable ? If($"{property.Name} != null") : new DisposeAction())
+                            using (property.Type.IsNullable ? writer.If($"{property.Name} != null") : default)
                             {
-                                WriteProperty(property.Type, property.Name, property.SerializedName);
+                                WriteProperty(writer, property.Type, property.Name, property.SerializedName);
                             }
                         }
 
-                        Line("writer.WriteEndObject();");
+                        writer.Line("writer.WriteEndObject();");
                     }
 
-                    var typeText = Type(cs);
-                    using (Method("internal static", typeText, "Deserialize", Pair(typeof(JsonElement), "element")))
+                    var typeText = writer.Type(cs);
+                    using (writer.Method("internal static", typeText, "Deserialize", writer.Pair(typeof(JsonElement), "element")))
                     {
-                        Line($"var result = new {typeText}();");
-                        using (ForEach("var property in element.EnumerateObject()"))
+                        writer.Line($"var result = new {typeText}();");
+                        using (writer.ForEach("var property in element.EnumerateObject()"))
                         {
                             foreach (var property in model.Properties)
                             {
-                                using (If($"property.NameEquals(\"{property.SerializedName}\")"))
+                                using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
                                 {
-                                    ReadProperty(property.Type, property.Name);
-                                    Line("continue;");
+                                    ReadProperty(writer, property.Type, property.Name);
+                                    writer.Line("continue;");
                                 }
                             }
                         }
-                        Line("return result;");
+                        writer.Line("return result;");
                     }
                 }
             }
         }
 
-        private void WriteSealedChoiceSerialization(ClientEnum schema)
+        private void WriteSealedChoiceSerialization(CodeWriter writer, ClientEnum schema)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs.Namespace))
+            using (writer.Namespace(cs.Namespace))
             {
-                using (Class("internal", "static", $"{schema.CSharpName()}Extensions"))
+                using (writer.Class("internal", "static", $"{schema.CSharpName()}Extensions"))
                 {
-                    var stringText = Type(typeof(string));
-                    var csTypeText = Type(cs);
+                    var stringText = writer.Type(typeof(string));
+                    var csTypeText = writer.Type(cs);
                     var nameMap = schema.Values.Select(c => (Choice: $"{csTypeText}.{c.Name}", Serial: $"\"{c.Value.Value}\"")).ToArray();
-                    var exceptionEntry = $"_ => throw new {Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
+                    var exceptionEntry = $"_ => throw new {writer.Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
 
                     var toSerialString = String.Join(Environment.NewLine, nameMap
                         .Select(nm => $"{nm.Choice} => {nm.Serial},")
@@ -161,8 +157,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         .Append("}")
                         .Prepend("{")
                         .Prepend("value switch"));
-                    MethodExpression("public static", stringText, "ToSerialString", new[] { Pair($"this {csTypeText}", "value") }, toSerialString);
-                    Line();
+                    writer.MethodExpression("public static", stringText, "ToSerialString", new[] { writer.Pair($"this {csTypeText}", "value") }, toSerialString);
+                    writer.Line();
 
                     var toChoiceType = String.Join(Environment.NewLine, nameMap
                         .Select(nm => $"{nm.Serial} => {nm.Choice},")
@@ -170,7 +166,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         .Append("}")
                         .Prepend("{")
                         .Prepend("value switch"));
-                    MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { Pair($"this {stringText}", "value") }, toChoiceType);
+                    writer.MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { writer.Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
         }

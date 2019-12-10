@@ -558,7 +558,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/date/2012-01-01", false);
-                request.Uri.AppendQuery("dateQuery", new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "D", true);
+                request.Uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -569,7 +569,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime? dateQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset? dateQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.DateNull");
             scope.Start();
@@ -603,7 +603,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-                request.Uri.AppendQuery("dateTimeQuery", new DateTime(2012, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc), "S", true);
+                request.Uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -614,7 +614,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime? dateTimeQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset? dateTimeQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.DateTimeNull");
             scope.Start();
@@ -650,7 +650,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -674,7 +674,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/null", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -698,7 +698,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/csv/string/empty", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -722,7 +722,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/ssv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -746,7 +746,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/tsv/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -770,7 +770,7 @@ namespace url
                 request.Uri.AppendPath("/queries/array/pipes/string/valid", false);
                 if (arrayQuery != null)
                 {
-                    request.Uri.AppendQuery("arrayQuery", arrayQuery, true);
+                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();

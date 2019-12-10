@@ -423,7 +423,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/date/2012-01-01/", false);
-                request.Uri.AppendPath(new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "D", true);
+                request.Uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -434,7 +434,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime datePath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset datePath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.DateNull");
             scope.Start();
@@ -465,7 +465,7 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
-                request.Uri.AppendPath(new DateTime(2012, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc), "S", true);
+                request.Uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 return response;
@@ -476,7 +476,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime dateTimePath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset dateTimePath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.DateTimeNull");
             scope.Start();
@@ -539,7 +539,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> UnixTimeUrlAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTime unixTimeUrlPath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> UnixTimeUrlAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset unixTimeUrlPath, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.UnixTimeUrl");
             scope.Start();
