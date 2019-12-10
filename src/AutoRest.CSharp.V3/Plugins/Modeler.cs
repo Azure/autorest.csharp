@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -126,7 +127,7 @@ namespace AutoRest.CSharp.V3.Plugins
                             headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
@@ -174,6 +175,26 @@ namespace AutoRest.CSharp.V3.Plugins
                 methodParameters.ToArray(),
                 responseType
             );
+        }
+
+        private static QuerySerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
+        {
+            Debug.Assert(httpParameter.In == ParameterLocation.Query);
+
+            switch (httpParameter.Style)
+            {
+                case null:
+                case SerializationStyle.Form:
+                    return valueSchema is ArraySchema ? QuerySerializationStyle.ComaDelimited : QuerySerializationStyle.Simple;
+                case SerializationStyle.PipeDelimited:
+                    return QuerySerializationStyle.PipeDelimited;
+                case SerializationStyle.SpaceDelimited:
+                    return QuerySerializationStyle.SpaceDelimited;
+                case SerializationStyle.TabDelimited:
+                    return QuerySerializationStyle.TabDelimited;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static SerializationFormat GetSerializationFormat(Schema schema)

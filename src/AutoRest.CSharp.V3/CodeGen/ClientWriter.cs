@@ -9,11 +9,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Response = Azure.Response;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -264,13 +266,46 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteQueryParameter(QueryParameter queryParameter)
         {
+            string method;
+            string? delimiter = null;
+            switch (queryParameter.SerializationStyle)
+            {
+                case QuerySerializationStyle.PipeDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = "|";
+                    break;
+                case QuerySerializationStyle.TabDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = "\t";
+                    break;
+                case QuerySerializationStyle.SpaceDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = " ";
+                    break;
+                case QuerySerializationStyle.ComaDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = ",";
+                    break;
+
+                default:
+                    method = nameof(UriBuilderExtensions.AppendQuery);
+                    break;
+            }
+
             ConstantOrParameter value = queryParameter.Value;
             if (value.IsConstant)
             {
-                Append("request.Uri.AppendQuery(");
+                Append("request.Uri.");
+                Append(method);
+                Append("(");
                 Literal(queryParameter.Name);
                 Append(", ");
                 WriteConstant(value.Constant);
+                if (delimiter != null)
+                {
+                    Append(", ");
+                    Literal(delimiter);
+                }
                 WriteSerializationFormat(queryParameter.SerializationFormat);
                 Append(", ");
                 Literal(queryParameter.Escape);
@@ -282,13 +317,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             var type = _typeFactory.CreateType(parameter.Type);
             using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : null)
             {
-                Append("request.Uri.AppendQuery(");
+                Append("request.Uri.");
+                Append(method);
+                Append("(");
                 Literal(queryParameter.Name);
                 Append(", ");
                 Append(parameter.Name);
                 if (type.IsNullable && type.IsValueType)
                 {
                     Append(".Value");
+                }
+                if (delimiter != null)
+                {
+                    Append(", ");
+                    Literal(delimiter);
                 }
                 WriteSerializationFormat(queryParameter.SerializationFormat);
                 Append(", ");
