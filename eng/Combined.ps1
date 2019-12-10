@@ -64,8 +64,8 @@ function Invoke-Generate($name, [switch]$noDebug, [switch]$noReset)
     }
 }
 
-try
-{
+# try
+# {
     Write-Host "Downloading files"
     Invoke-DownloadSharedSource
 
@@ -79,8 +79,8 @@ try
         $status = $status -replace "`n","`n    "
         Write-Error "Generated code is not up to date. You may need to run eng\Update-Snippets.ps1 or sdk\storage\generate.ps1 or eng\Export-API.ps1"
     }
-}
-catch
-{
-    exit 1
-}
+# }
+# catch
+# {
+#     exit 1
+# }
