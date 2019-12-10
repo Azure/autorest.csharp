@@ -1,4 +1,7 @@
-param($name, [switch]$noDebug, [switch]$noRun)
+#Requires -Version 6.0
+param($name, [switch]$noDebug, [switch]$noReset)
+
+$ErrorActionPreference = 'Stop'
 
 function Invoke-AutoRest($autoRestArguments) {
     $command = "npx autorest-beta $autoRestArguments"
@@ -10,8 +13,13 @@ function Invoke-AutoRest($autoRestArguments) {
     }
 }
 
-function Invoke-Generate($name, [switch]$noDebug)
+try
 {
+    if (-not $noReset)
+    {
+        Invoke-AutoRest '--reset'
+    }
+
     # General configuration
     $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
     $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
@@ -42,17 +50,8 @@ function Invoke-Generate($name, [switch]$noDebug)
         Invoke-AutoRest $autoRestArguments
     }
 }
-
-if(-not $noRun)
+catch
 {
-    $ErrorActionPreference = 'Stop'
-    try
-    {
-        Invoke-Generate $name $noDebug
-    }
-    catch
-    {
-        Write-Host -ForegroundColor Red $_
-        exit 1
-    }
+    Write-Host -ForegroundColor Red $_
+    exit 1
 }
