@@ -17,7 +17,7 @@ using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class ClientWriter : StringWriter
+    internal class ClientWriter
     {
         private readonly TypeFactory _typeFactory;
 
@@ -26,26 +26,24 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteClient(ServiceClient operationGroup)
+        public bool WriteClient(CodeWriter writer, ServiceClient operationGroup)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(operationGroup);
             var @namespace = cs.Namespace;
-            using (Namespace(@namespace))
+            using (writer.Namespace(@namespace))
             {
-                using (Class("internal", "static", operationGroup.Name))
+                using (writer.Class("internal", "static", operationGroup.Name))
                 {
                     foreach (var method in operationGroup.Methods)
                     {
-                        WriteOperation(method, cs.Namespace);
+                        WriteOperation(writer, method, cs.Namespace);
                     }
                 }
             }
             return true;
         }
 
-        private void WriteOperation(ClientMethod operation, CSharpNamespace? @namespace)
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace? @namespace)
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
@@ -54,94 +52,97 @@ namespace AutoRest.CSharp.V3.CodeGen
                 ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
                 : new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
 
-            var parametersText = new[] { Pair(Type(typeof(ClientDiagnostics)), "clientDiagnostics"), Pair(typeof(HttpPipeline), "pipeline") }
+            var parametersText = new[] { writer.Pair(writer.Type(typeof(ClientDiagnostics)), "clientDiagnostics"), writer.Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(operation.Parameters
                     .OrderBy(p => p.DefaultValue != null)
                     .Select(parameter =>
                     {
                         Debug.Assert(parameter != null);
-                        var pair = Pair(_typeFactory.CreateInputType(parameter.Type), parameter.Name);
+                        var pair = writer.Pair(_typeFactory.CreateInputType(parameter.Type), parameter.Name);
                         var shouldBeDefaulted = parameter.DefaultValue != null;
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.DefaultValue != null ? $"\"{parameter.DefaultValue.Value.Value}\"" : "default")}" : pair;
                     }))
-                .Append($"{Pair(typeof(CancellationToken), "cancellationToken")} = default").ToArray();
+                .Append($"{writer.Pair(typeof(CancellationToken), "cancellationToken")} = default").ToArray();
 
             var methodName = operation.Name;
-            using (Method("public static async", Type(returnType), $"{methodName}Async", parametersText))
+            using (writer.Method("public static async", writer.Type(returnType), $"{methodName}Async", parametersText))
             {
-                Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
+                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
                 //TODO: Implement attribute logic
-                //Line("scope.AddAttribute(\"key\", name);");
-                Line("scope.Start();");
+                //writer.Line("scope.AddAttribute(\"key\", name);");
+                writer.Line("scope.Start();");
 
-                using (Try())
+                using (writer.Try())
                 {
-                    Line("var request = pipeline.CreateRequest();");
+                    writer.Line("var request = pipeline.CreateRequest();");
                     var method = operation.Request.Method;
-                    Line($"request.Method = {Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
+                    writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                     //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
-                    var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s=> s.IsConstant ? s.Constant.Value :"{" + s.Parameter.Name + "}"));
-                    Line($"request.Uri.Reset(new {Type(typeof(Uri))}($\"{urlText}\"));");
+                    var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
+                    writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
 
                     foreach (var segment in operation.Request.PathSegments)
                     {
-                        WritePathSegment(segment);
+                        WritePathSegment(writer, segment);
                     }
 
                     foreach (var header in operation.Request.Headers)
                     {
-                        WriteHeader(header);
+                        WriteHeader(writer, header);
                     }
 
                     //TODO: Duplicate code between query and header parameter processing logic
                     foreach (var queryParameter in operation.Request.Query)
                     {
-                        WriteQueryParameter(queryParameter);
+                        WriteQueryParameter(writer, queryParameter);
                     }
-
 
                     if (operation.Request.Body is ConstantOrParameter body)
                     {
                         var bufferWriter = new CSharpType(typeof(ArrayBufferWriter<>), new CSharpType(typeof(byte)));
 
-                        Line($"var buffer = new {Type(bufferWriter)}();");
-                        Line($"await using var writer = new {Type(typeof(Utf8JsonWriter))}(buffer);");
+                        writer.Line($"var buffer = new {writer.Type(bufferWriter)}();");
+                        writer.Line($"await using var writer = new {writer.Type(typeof(Utf8JsonWriter))}(buffer);");
 
                         var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
                         var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
-                        this.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
+                        writer.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
 
-                        Line("writer.Flush();");
-                        Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
+                        writer.Line("writer.Flush();");
+                        writer.Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
                     }
 
-                    Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
-                    Line("cancellationToken.ThrowIfCancellationRequested();");
+                    writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
+                    writer.Line("cancellationToken.ThrowIfCancellationRequested();");
 
-                    Action writeReturnText = schemaResponse != null && responseType != null
-                        ? (Action)(() => WriteStatusCodeSwitch(schemaResponse, responseType, operation))
-                        : () => Line("return response;");
-                    writeReturnText();
+                    if (schemaResponse != null && responseType != null)
+                    {
+                        WriteStatusCodeSwitch(writer, schemaResponse, responseType, operation);
+                    }
+                    else
+                    {
+                        writer.Line("return response;");
+                    }
                 }
 
-                var exceptionParameter = Pair(typeof(Exception), "e");
-                using (Catch(exceptionParameter))
+                var exceptionParameter = writer.Pair(typeof(Exception), "e");
+                using (writer.Catch(exceptionParameter))
                 {
-                    Line("scope.Failed(e);");
-                    Line("throw;");
+                    writer.Line("scope.Failed(e);");
+                    writer.Line("throw;");
                 }
             }
         }
 
-        private void WriteConstant(ClientConstant constant)
+        private void WriteConstant(CodeWriter writer, ClientConstant constant)
         {
             if (constant.Value == null)
             {
-                Literal(null);
+                writer.Literal(null);
                 return;
             }
 
@@ -151,100 +152,100 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var dateTimeValue = (DateTimeOffset)constant.Value;
                     dateTimeValue = dateTimeValue.ToUniversalTime();
 
-                    Append("new ");
-                    Append(Type(typeof(DateTimeOffset)));
-                    Append("(");
-                    Literal(dateTimeValue.Year);
-                    Append(", ");
-                    Literal(dateTimeValue.Month);
-                    Append(", ");
-                    Literal(dateTimeValue.Day);
-                    Append(", ");
-                    Literal(dateTimeValue.Hour);
-                    Append(", ");
-                    Literal(dateTimeValue.Minute);
-                    Append(", ");
-                    Literal(dateTimeValue.Second);
-                    Append(", ");
-                    Literal(dateTimeValue.Millisecond);
-                    Append(", ");
-                    Append(Type(typeof(TimeSpan)));
-                    Append(".");
-                    Append(nameof(TimeSpan.Zero));
-                    Append(")");
+                    writer.Append("new ");
+                    writer.Append(Type(typeof(DateTimeOffset)));
+                    writer.Append("(");
+                    writer.Literal(dateTimeValue.Year);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Month);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Day);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Hour);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Minute);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Second);
+                    writer.Comma();
+                    writer.Literal(dateTimeValue.Millisecond);
+                    writer.Comma();
+                    writer.Append(Type(typeof(TimeSpan)));
+                    writer.Append(".");
+                    writer.Append(nameof(TimeSpan.Zero));
+                    writer.Append(")");
                     break;
                 case FrameworkTypeReference _:
-                    Literal(constant.Value);
+                    writer.Literal(constant.Value);
                     break;
                 case BinaryTypeReference _:
                     var value = (byte[])constant.Value;
-                    Append("new byte[] {");
+                    writer.Append("new byte[] {");
                     foreach (byte b in value)
                     {
-                        Literal(b);
-                        Append(", ");
+                        writer.Literal(b);
+                        writer.Comma();
                     }
-                    Append("}");
+                    writer.Append("}");
                     break;
                 default:
                     throw new InvalidOperationException("Unknown constant type");
             }
         }
 
-        private void WritePathSegment(PathSegment segment)
+        private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
             var value = segment.Value;
 
             if (value.IsConstant)
             {
-                Append("request.Uri.AppendPath(");
-                WriteConstant(value.Constant);
-                WriteSerializationFormat(segment.Format);
-                Append(", ");
-                Literal(segment.Escape);
-                Line(");");
+                writer.Append("request.Uri.AppendPath(");
+                WriteConstant(writer, value.Constant);
+                WriteSerializationFormat(writer, segment.Format);
+                writer.Comma();
+                writer.Literal(segment.Escape);
+                writer.Line(");");
                 return;
             }
 
-            Append("request.Uri.AppendPath(");
-            Append(value.Parameter.Name);
-            WriteSerializationFormat(segment.Format);
-            Append(", ");
-            Literal(segment.Escape);
-            Line(");");
+            writer.Append("request.Uri.AppendPath(");
+            writer.Append(value.Parameter.Name);
+            WriteSerializationFormat(writer, segment.Format);
+            writer.Comma();
+            writer.Literal(segment.Escape);
+            writer.Line(");");
         }
 
-        private void WriteHeader(RequestHeader header)
+        private void WriteHeader(CodeWriter writer, RequestHeader header)
         {
             if (header.Value.IsConstant)
             {
-                Append("request.Headers.Add(");
-                Literal(header.Name);
-                Append(", ");
-                WriteConstant(header.Value.Constant);
-                Line(");");
+                writer.Append("request.Headers.Add(");
+                writer.Literal(header.Name);
+                writer.Comma();
+                WriteConstant(writer, header.Value.Constant);
+                writer.Line(");");
                 return;
             }
 
             var parameter = header.Value.Parameter;
             var type = _typeFactory.CreateType(parameter.Type);
-            using (type.IsNullable ? If($"{parameter.Name} != null") : null)
+            using (type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
             {
-                Append("request.Headers.Add(");
-                Literal(header.Name);
-                Append(", ");
-                Append(parameter.Name);
+                writer.Append("request.Headers.Add(");
+                writer.Literal(header.Name);
+                writer.Comma();
+                writer.Append(parameter.Name);
                 if (type.IsNullable && type.IsValueType)
                 {
-                    Append(".Value");
+                    writer.Append(".Value");
                 }
 
-                WriteSerializationFormat(header.Format);
-                Line(");");
+                WriteSerializationFormat(writer, header.Format);
+                writer.Line(");");
             }
         }
 
-        private void WriteSerializationFormat(SerializationFormat format)
+        private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
             var formatSpecifier = format switch
             {
@@ -257,68 +258,67 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             if (formatSpecifier != null)
             {
-                Append($", ");
-                Literal(formatSpecifier);
+                writer.Comma().Literal(formatSpecifier);
             }
         }
 
-        private void WriteQueryParameter(QueryParameter queryParameter)
+        private void WriteQueryParameter(CodeWriter writer, QueryParameter queryParameter)
         {
             ConstantOrParameter value = queryParameter.Value;
             if (value.IsConstant)
             {
-                Append("request.Uri.AppendQuery(");
-                Literal(queryParameter.Name);
-                Append(", ");
-                WriteConstant(value.Constant);
-                WriteSerializationFormat(queryParameter.SerializationFormat);
-                Append(", ");
-                Literal(queryParameter.Escape);
-                Line(");");
+                writer.Append("request.Uri.AppendQuery(");
+                writer.Literal(queryParameter.Name);
+                writer.Comma();
+                WriteConstant(writer, value.Constant);
+                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
+                writer.Comma();
+                writer.Literal(queryParameter.Escape);
+                writer.Line(");");
                 return;
             }
 
             var parameter = value.Parameter;
             var type = _typeFactory.CreateType(parameter.Type);
-            using (parameter.Type.IsNullable ? If($"{parameter.Name} != null") : null)
+            using (parameter.Type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
             {
-                Append("request.Uri.AppendQuery(");
-                Literal(queryParameter.Name);
-                Append(", ");
-                Append(parameter.Name);
+                writer.Append("request.Uri.AppendQuery(");
+                writer.Literal(queryParameter.Name);
+                writer.Comma();
+                writer.Append(parameter.Name);
                 if (type.IsNullable && type.IsValueType)
                 {
-                    Append(".Value");
+                    writer.Append(".Value");
                 }
-                WriteSerializationFormat(queryParameter.SerializationFormat);
-                Append(", ");
-                Literal(queryParameter.Escape);
-                Line(");");
+                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
+                writer.Comma();
+                writer.Literal(queryParameter.Escape);
+                writer.Line(");");
             }
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(ClientTypeReference schemaResponse, CSharpType responseType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ClientTypeReference schemaResponse, CSharpType responseType, ClientMethod operation)
         {
-            Line($"using var document = await {Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+            writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
 
             //TODO: Handle multiple exceptions
             //var schemaException = operation.Exceptions?.FirstOrDefault() as SchemaResponse;
 
-            using (Switch("response.Status"))
+            using (writer.Switch("response.Status"))
             {
                 var statusCodes = operation.Request.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
                 {
-                    Line($"case {statusCode}:");
+                    writer.Line($"case {statusCode}:");
                 }
 
-                Append($"return {Type(typeof(Response))}.FromValue(");
-                this.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
-                Line(", response);");
-                Line("default:");
+                writer.Append($"return {writer.Type(typeof(Response))}.FromValue(");
+                writer.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
+                writer.Line(", response);");
+                writer.Line("default:");
                 //TODO: Handle actual exception responses
-                Line($"throw new {Type(typeof(Exception))}();");
+                writer.Line($"throw new {writer.Type(typeof(Exception))}();");
             }
         }
     }
