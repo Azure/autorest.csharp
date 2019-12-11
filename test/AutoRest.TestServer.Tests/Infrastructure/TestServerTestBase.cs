@@ -62,7 +62,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public Task TestStatus(Func<string, HttpPipeline, Task<Response>> test)
         {
-            return TestStatus(TestContext.CurrentContext.Test.Name, test);
+            return TestStatus(GetScenarioName(), test);
         }
 
         private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public Task Test(Func<string, HttpPipeline, Task> test, bool ignoreScenario = false)
         {
-            return Test(TestContext.CurrentContext.Test.Name, test, ignoreScenario);
+            return Test(GetScenarioName(), test, ignoreScenario);
         }
 
         private async Task Test(string scenario, Func<string, HttpPipeline, Task> test, bool ignoreScenario = false)
@@ -101,6 +101,13 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
 
             await server.DisposeAsync();
+        }
+
+        private static string GetScenarioName()
+        {
+            var testName = TestContext.CurrentContext.Test.Name;
+            var indexOfUnderscore = testName.IndexOf('_');
+            return indexOfUnderscore == -1 ? testName : testName.Substring(0, indexOfUnderscore);
         }
     }
 }

@@ -36,7 +36,7 @@ $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$testNames = if ($name) { $name } else { 'url-multi-collectionFormat', 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
+$testNames = if ($name) { $name } else { 'extensible-enums-swagger', 'url-multi-collectionFormat', 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
 
 if (!$NoReset)
 {
