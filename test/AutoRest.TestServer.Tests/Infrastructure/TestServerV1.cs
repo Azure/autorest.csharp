@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : IDisposable, ITestServer
     {
-        private static Regex _scenariosRegex = new Regex("(coverage|optionalCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
+        private static Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
 
         private Process _process;
         public HttpClient Client { get; }
@@ -109,6 +109,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             foreach (var request in coverageDocument.RootElement.EnumerateObject())
             {
                 var mapping = request.Name;
+                if (request.Value.ValueKind != JsonValueKind.Number) continue;
                 int value = request.Value.GetInt32();
                 // HeaderParameterProtectedKey is always matched
                 if (mapping == "HeaderParameterProtectedKey" && value == 1)
