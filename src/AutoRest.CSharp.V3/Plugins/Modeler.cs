@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, true));
+                        constantOrParameter = ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
                         valueSchema = constant.ValueType;
                         break;
                     case BinarySchema _:
@@ -107,18 +107,18 @@ namespace AutoRest.CSharp.V3.Plugins
                     case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
                             new CollectionTypeReference(CreateType(constantInnerType.ValueType, false), false),
-                            CreateDefaultValueConstant(requestParameter));
+                            CreateDefaultValueConstant(requestParameter), false);
                         break;
                     //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
                     case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
                             new CollectionTypeReference(CreateType(constantInnerType.ValueType, false), false),
-                            CreateDefaultValueConstant(requestParameter));
+                            CreateDefaultValueConstant(requestParameter), false);
                         break;
                     default:
                         constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
                             CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                            CreateDefaultValueConstant(requestParameter));
+                            CreateDefaultValueConstant(requestParameter), requestParameter.Required == true);
                         break;
                 }
 

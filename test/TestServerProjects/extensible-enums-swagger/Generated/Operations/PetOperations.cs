@@ -8,33 +8,38 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_complex.Models.V20160229;
+using extensible_enums_swagger.Models.V20160707;
 
-namespace body_complex
+namespace extensible_enums_swagger
 {
-    internal static class PolymorphicrecursiveOperations
+    internal static class PetOperations
     {
-        public static async ValueTask<Response<Fish>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Pet>> GetByPetIdAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string petId, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+            if (petId == null)
+            {
+                throw new ArgumentNullException(nameof(petId));
+            }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.GetByPetId");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphicrecursive/valid", false);
+                request.Uri.AppendPath("/extensibleenums/pet/", false);
+                request.Uri.AppendPath(petId, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(Fish.Deserialize(document.RootElement), response);
+                        return Response.FromValue(Pet.Deserialize(document.RootElement), response);
                     default:
                         throw new Exception();
                 }
@@ -45,32 +50,35 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<Pet>> AddPetAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Pet? petParam, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (complexBody == null)
-            {
-                throw new ArgumentNullException(nameof(complexBody));
-            }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.AddPet");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Put;
+                request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphicrecursive/valid", false);
+                request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                complexBody.Serialize(writer);
+                petParam?.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(Pet.Deserialize(document.RootElement), response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {

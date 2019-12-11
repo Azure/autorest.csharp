@@ -9,31 +9,31 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_string
+namespace body_integer
 {
-    internal static class StringOperations
+    internal static class IntOperations
     {
-        public static async ValueTask<Response<string>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<int>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNull");
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetNull");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/null", false);
+                request.Uri.AppendPath("/int/null", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetString(), response);
+                        return Response.FromValue(document.RootElement.GetInt32(), response);
                     default:
                         throw new Exception();
                 }
@@ -44,25 +44,180 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<int>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutNull");
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalid");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/invalid", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response<int>> GetOverflowInt32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt32");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/overflowint32", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response<int>> GetUnderflowInt32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt32");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/underflowint32", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response<long>> GetOverflowInt64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt64");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/overflowint64", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetInt64(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response<long>> GetUnderflowInt64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt64");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/underflowint64", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetInt64(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response> PutMax32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.PutMax32");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/null", false);
+                request.Uri.AppendPath("/int/max/32", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue("");
+                writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;
@@ -73,56 +228,25 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutMax64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetEmpty");
-            scope.Start();
-            try
-            {
-                var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/empty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(document.RootElement.GetString(), response);
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("body_string.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("body_integer.PutMax64");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/empty", false);
+                request.Uri.AppendPath("/int/max/64", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue("");
+                writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;
@@ -133,56 +257,25 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetMbcsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutMin32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetMbcs");
-            scope.Start();
-            try
-            {
-                var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/mbcs", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(document.RootElement.GetString(), response);
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        public static async ValueTask<Response> PutMbcsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("body_string.PutMbcs");
+            using var scope = clientDiagnostics.CreateScope("body_integer.PutMin32");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/mbcs", false);
+                request.Uri.AppendPath("/int/min/32", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+                writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;
@@ -193,56 +286,25 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetWhitespaceAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutMin64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetWhitespace");
-            scope.Start();
-            try
-            {
-                var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/whitespace", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(document.RootElement.GetString(), response);
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        public static async ValueTask<Response> PutWhitespaceAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("body_string.PutWhitespace");
+            using var scope = clientDiagnostics.CreateScope("body_integer.PutMin64");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/whitespace", false);
+                request.Uri.AppendPath("/int/min/64", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
+                writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;
@@ -253,27 +315,27 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnixTime");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/notProvided", false);
+                request.Uri.AppendPath("/int/unixtime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetString(), response);
+                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
                     default:
                         throw new Exception();
                 }
@@ -284,91 +346,25 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetBase64EncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> PutUnixTimeDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetBase64Encoded");
-            scope.Start();
-            try
-            {
-                var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64Encoding", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(document.RootElement.GetBytesFromBase64(), response);
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        public static async ValueTask<Response<Byte[]>> GetBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("body_string.GetBase64UrlEncoded");
-            scope.Start();
-            try
-            {
-                var request = pipeline.CreateRequest();
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64UrlEncoding", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                        return Response.FromValue(document.RootElement.GetBytesFromBase64(), response);
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        public static async ValueTask<Response> PutBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
-        {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("body_string.PutBase64UrlEncoded");
+            using var scope = clientDiagnostics.CreateScope("body_integer.PutUnixTimeDate");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64UrlEncoding", false);
+                request.Uri.AppendPath("/int/unixtime", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteBase64StringValue(stringBody);
+                writer.WriteStringValue(intBody.ToString());
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;
@@ -379,27 +375,58 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetNullBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNullBase64UrlEncoded");
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalidUnixTime");
             scope.Start();
             try
             {
                 var request = pipeline.CreateRequest();
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/nullBase64UrlEncoding", false);
+                request.Uri.AppendPath("/int/invalidunixtime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetBytesFromBase64(), response);
+                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public static async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("body_integer.GetNullUnixTime");
+            scope.Start();
+            try
+            {
+                var request = pipeline.CreateRequest();
+                request.Method = RequestMethod.Get;
+                request.Uri.Reset(new Uri($"{host}"));
+                request.Uri.AppendPath("/int/nullunixtime", false);
+                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
                     default:
                         throw new Exception();
                 }

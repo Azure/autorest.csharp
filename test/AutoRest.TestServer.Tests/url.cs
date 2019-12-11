@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using NUnit.Framework;
 using url;
 using url.Models.V100;
@@ -47,8 +48,10 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host));
 
         [Test]
-        [Ignore("Don't have null-checks yet")]
-        public Task UrlByteNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host));
+        public void UrlByteNullAsync()
+        {
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await PathsOperations.ByteNullAsync(ClientDiagnostics, null, null, host: string.Empty));
+        }
 
         [Test]
         [Ignore("Might not apply")]

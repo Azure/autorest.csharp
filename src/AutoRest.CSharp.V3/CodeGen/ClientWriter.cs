@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace? @namespace)
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
@@ -70,7 +70,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             var methodName = operation.Name;
             using (writer.Method("public static async", writer.Type(returnType), $"{methodName}Async", parametersText))
             {
-                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
+                WriteParameterNullChecks(writer, operation);
+
+                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace.FullName}.{methodName}\");");
                 //TODO: Implement attribute logic
                 //writer.Line("scope.AddAttribute(\"key\", name);");
                 writer.Line("scope.Start();");
@@ -105,21 +107,17 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     if (operation.Request.Body is ConstantOrParameter body)
                     {
-                        var bufferWriter = new CSharpType(typeof(ArrayBufferWriter<>), new CSharpType(typeof(byte)));
-
-                        writer.Line($"var buffer = new {writer.Type(bufferWriter)}();");
-                        writer.Line($"await using var writer = new {writer.Type(typeof(Utf8JsonWriter))}(buffer);");
+                        writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
+                        writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
 
                         var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
                         var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
                         writer.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
 
-                        writer.Line("writer.Flush();");
-                        writer.Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
+                        writer.Line("request.Content = content;");
                     }
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
-                    writer.Line("cancellationToken.ThrowIfCancellationRequested();");
 
                     if (schemaResponse != null && responseType != null)
                     {
@@ -140,6 +138,23 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        private void WriteParameterNullChecks(CodeWriter writer, ClientMethod operation)
+        {
+            foreach (ServiceClientMethodParameter parameter in operation.Parameters)
+            {
+                var cs = _typeFactory.CreateType(parameter.Type);
+                if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
+                {
+                    using (writer.If($"{parameter.Name} == null"))
+                    {
+                        writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");
+                        writer.Line();
+                    }
+                }
+            }
+            writer.Line();
+        }
+
         private void WriteConstant(CodeWriter writer, ClientConstant constant)
         {
             if (constant.Value == null)
@@ -155,7 +170,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     dateTimeValue = dateTimeValue.ToUniversalTime();
 
                     writer.Append("new ");
-                    writer.Append(writer.Type(typeof(DateTimeOffset)));
+                    writer.AppendType(typeof(DateTimeOffset));
                     writer.Append("(");
                     writer.Literal(dateTimeValue.Year);
                     writer.Comma();
@@ -171,7 +186,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Comma();
                     writer.Literal(dateTimeValue.Millisecond);
                     writer.Comma();
-                    writer.Append(writer.Type(typeof(TimeSpan)));
+                    writer.AppendType(typeof(TimeSpan));
                     writer.Append(".");
                     writer.Append(nameof(TimeSpan.Zero));
                     writer.Append(")");
