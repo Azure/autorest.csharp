@@ -354,7 +354,6 @@ namespace header
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
             if (scenario == null) throw new ArgumentNullException(nameof(scenario));
-            if (value == null) throw new ArgumentNullException(nameof(value));
 
             using var scope = clientDiagnostics.CreateScope("header.ParamString");
             scope.Start();

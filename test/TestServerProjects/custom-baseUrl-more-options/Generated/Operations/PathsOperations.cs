@@ -19,7 +19,6 @@ namespace custom_baseUrl_more_options
             if (dnsSuffix == null) throw new ArgumentNullException(nameof(dnsSuffix));
             if (keyName == null) throw new ArgumentNullException(nameof(keyName));
             if (subscriptionId == null) throw new ArgumentNullException(nameof(subscriptionId));
-            if (keyVersion == null) throw new ArgumentNullException(nameof(keyVersion));
 
             using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.GetEmpty");
             scope.Start();

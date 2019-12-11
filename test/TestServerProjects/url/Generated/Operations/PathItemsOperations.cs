@@ -16,11 +16,8 @@ namespace url
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
             if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
-            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
             if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
-            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
             if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
-            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.GetAllWithValues");
             scope.Start();
@@ -62,11 +59,8 @@ namespace url
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
             if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
-            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
             if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
-            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
             if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
-            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalQueryNull");
             scope.Start();
@@ -108,11 +102,8 @@ namespace url
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
             if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
-            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
             if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
-            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
             if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
-            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -154,11 +145,8 @@ namespace url
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
             if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
-            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
             if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
-            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
             if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
-            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.GetLocalPathItemQueryNull");
             scope.Start();

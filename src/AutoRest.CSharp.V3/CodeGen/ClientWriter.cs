@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             foreach (ServiceClientMethodParameter parameter in operation.Parameters)
             {
                 var cs = _typeFactory.CreateType(parameter.Type);
-                if (parameter.IsRequired && cs.IsNullable || !cs.IsValueType)
+                if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
                     writer.Append("if (").Append(parameter.Name).Append("== null)");
                     writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");

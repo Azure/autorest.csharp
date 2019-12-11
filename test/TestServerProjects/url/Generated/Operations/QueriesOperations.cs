@@ -446,7 +446,6 @@ namespace url
         public static async ValueTask<Response> StringNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string? stringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (stringQuery == null) throw new ArgumentNullException(nameof(stringQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.StringNull");
             scope.Start();
@@ -525,7 +524,6 @@ namespace url
         public static async ValueTask<Response> ByteMultiByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[]? byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (byteQuery == null) throw new ArgumentNullException(nameof(byteQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ByteMultiByte");
             scope.Start();
@@ -575,7 +573,6 @@ namespace url
         public static async ValueTask<Response> ByteNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[]? byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (byteQuery == null) throw new ArgumentNullException(nameof(byteQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ByteNull");
             scope.Start();
@@ -700,7 +697,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringCsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvValid");
             scope.Start();
@@ -727,7 +723,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringCsvNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvNull");
             scope.Start();
@@ -754,7 +749,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringCsvEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvEmpty");
             scope.Start();
@@ -781,7 +775,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringSsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringSsvValid");
             scope.Start();
@@ -808,7 +801,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringTsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringTsvValid");
             scope.Start();
@@ -835,7 +827,6 @@ namespace url
         public static async ValueTask<Response> ArrayStringPipesValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null) throw new ArgumentNullException(nameof(host));
-            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringPipesValid");
             scope.Start();
