@@ -45,6 +45,7 @@ RUN npm config set strict-ssl false
 RUN node -v
 RUN npm install npm@6.12.0 -g
 RUN npm install -g autorest
+RUN npm i -g eol-converter-cli
 
 COPY package.json /tmp/package.json
 RUN cd /tmp && npm install
