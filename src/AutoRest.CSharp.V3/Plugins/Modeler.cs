@@ -57,11 +57,6 @@ namespace AutoRest.CSharp.V3.Plugins
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
             }
 
-            if (configuration.Title == "body-string")
-            {
-                throw new Exception("This is supposed to fail");
-            }
-
             return true;
         }
 
