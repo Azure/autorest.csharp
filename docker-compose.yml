@@ -2,19 +2,19 @@ version: "3"
 
 services:
   autorest-gen: 
-    image: reg-hk.agodadev.io/library/autorest-gen:1.0.10
+    image: reg-hk.agodadev.io/library/autorest-gen:${IMAGE_VERSION}
     ### Following commented out lines are helpful for local testing
     ### Build image from local docker file
     # build: .
     ### Get generated code to local to view .cs and .nupkg file
     ### you can change .nupkg to .zip to view generated .dll file inside the package
-    volumes:
-      - C:\Users\ranantawat\Desktop\New folder:/app/output
+    # volumes:
+    #   - /Users/nkar/workspaces/temp/autorest/output:/app/output
     environment: 
-      ENV_YML_FILE_URL: http://bk-qahms-1003.agoda.local/v2/spec
+      ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_OUTPUT_PATH: "/app/output"
-      ENV_NAMESPACE: Agoda.Abc 
-      ENV_VERSION: 1.0
+      ENV_NAMESPACE: ${NAMESPACE} 
+      ENV_VERSION: ${VERSION}
       ENV_NUGET_KEY: ${NUGET_KEY}
-      ENV_SHOULD_PUSH_NUGET: "false"
+      ENV_SHOULD_PUSH_NUGET: ${SHOULD_UPLOAD_TO_NUGET} 
     command: /app/build/create-project.sh
