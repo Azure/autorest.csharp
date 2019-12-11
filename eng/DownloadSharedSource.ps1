@@ -15,6 +15,3 @@ foreach ($file in $files)
 }
 
 $ProgressPreference = $currentProgressPreference
-
-# . (Join-Path $PSScriptRoot 'Shared.ps1')
-# Invoke-DownloadSharedSource

@@ -3,7 +3,8 @@ param($name, [switch]$noDebug, [switch]$reset)
 
 $ErrorActionPreference = 'Stop'
 
-function Invoke-AutoRest($autoRestArguments) {
+function Invoke-AutoRest($autoRestArguments)
+{
     $command = "npx autorest-beta $autoRestArguments"
     Write-Host "> $command"
     cmd /c "$command 2>&1"
@@ -26,7 +27,17 @@ $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$testNames = if ($name) { $name } else { 'body-string', 'extensible-enums-swagger', 'url-multi-collectionFormat', 'url', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
+$testNames = if ($name) { $name } else
+{
+    'body-string',
+    'extensible-enums-swagger',
+    'url-multi-collectionFormat',
+    'url',
+    'body-complex',
+    'custom-baseUrl',
+    'custom-baseUrl-more-options',
+    'header'
+}
 
 foreach ($testName in $testNames)
 {
@@ -47,12 +58,3 @@ foreach ($projectName in $projectNames)
     $autoRestArguments = "$debugFlags --require=$configurationPath"
     Invoke-AutoRest $autoRestArguments
 }
-
-# . (Join-Path $PSScriptRoot 'Shared.ps1')
-
-# if ($reset)
-# {
-#     Invoke-AutoRest '--reset'
-# }
-
-# Invoke-Generate @PSBoundParameters
