@@ -149,9 +149,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var cs = _typeFactory.CreateType(parameter.Type);
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
-                    writer.Append("if (").Append(parameter.Name).Append("== null)");
-                    writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");
-                    writer.Line();
+                    using (writer.If($"{parameter.Name} == null"))
+                    {
+                        writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");
+                        writer.Line();
+                    }
                 }
             }
             writer.Line();

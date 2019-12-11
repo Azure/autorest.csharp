@@ -14,11 +14,26 @@ namespace custom_baseUrl_more_options
     {
         public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
         {
-            if (vault == null) throw new ArgumentNullException(nameof(vault));
-            if (secret == null) throw new ArgumentNullException(nameof(secret));
-            if (dnsSuffix == null) throw new ArgumentNullException(nameof(dnsSuffix));
-            if (keyName == null) throw new ArgumentNullException(nameof(keyName));
-            if (subscriptionId == null) throw new ArgumentNullException(nameof(subscriptionId));
+            if (vault == null)
+            {
+                throw new ArgumentNullException(nameof(vault));
+            }
+            if (secret == null)
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+            if (dnsSuffix == null)
+            {
+                throw new ArgumentNullException(nameof(dnsSuffix));
+            }
+            if (keyName == null)
+            {
+                throw new ArgumentNullException(nameof(keyName));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
             using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.GetEmpty");
             scope.Start();

@@ -16,7 +16,10 @@ namespace body_complex
     {
         public static async ValueTask<Response<MyBaseType>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
-            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
