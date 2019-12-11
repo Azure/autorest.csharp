@@ -25,7 +25,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/integer", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -52,13 +51,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/integer", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -78,7 +75,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/long", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -105,13 +101,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/long", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -131,7 +125,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/float", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -158,13 +151,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/float", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -184,7 +175,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/double", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -211,13 +201,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/double", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -237,7 +225,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/bool", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -264,13 +251,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/bool", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -290,7 +275,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/string", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -317,13 +301,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/string", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -343,7 +325,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/date", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -370,13 +351,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/date", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -396,7 +375,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -423,13 +401,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetime", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -449,7 +425,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -476,13 +451,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -502,7 +475,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/duration", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -529,13 +501,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/duration", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -555,7 +525,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/byte", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -582,13 +551,11 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/byte", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)

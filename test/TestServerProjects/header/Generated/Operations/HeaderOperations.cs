@@ -25,7 +25,6 @@ namespace header
                 request.Uri.AppendPath("/header/param/existingkey", false);
                 request.Headers.Add("User-Agent", userAgent);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -45,7 +44,6 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/existingkey", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -66,7 +64,6 @@ namespace header
                 request.Uri.AppendPath("/header/param/protectedkey", false);
                 request.Headers.Add("Content-Type", contentType);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -86,7 +83,6 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/protectedkey", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -108,7 +104,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -129,7 +124,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/integer", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -151,7 +145,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -172,7 +165,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/long", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -194,7 +186,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -215,7 +206,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/float", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -237,7 +227,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -258,7 +247,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/double", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -280,7 +268,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -301,7 +288,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/bool", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -326,7 +312,6 @@ namespace header
                     request.Headers.Add("value", value);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -347,7 +332,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/string", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -369,7 +353,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "D");
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -390,7 +373,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/date", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -412,7 +394,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "S");
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -433,7 +414,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/datetime", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -458,7 +438,6 @@ namespace header
                     request.Headers.Add("value", value.Value, "R");
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -479,7 +458,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -501,7 +479,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -522,7 +499,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/duration", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -544,7 +520,6 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -565,7 +540,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/byte", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -590,7 +564,6 @@ namespace header
                     request.Headers.Add("value", value.Value);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -611,7 +584,6 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/enum", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -631,7 +603,6 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)

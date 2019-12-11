@@ -25,7 +25,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/notExpandable", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -52,13 +51,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/notExpandable", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue(stringBody.ToSerialString());
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -78,7 +75,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/Referenced", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -105,13 +101,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/Referenced", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue(enumStringBody.ToSerialString());
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -131,7 +125,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -158,13 +151,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 enumStringBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
