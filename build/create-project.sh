@@ -9,6 +9,8 @@ rm -rf input/*
 rm -rf $OUTPUT_PATH/*
 curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
+eolConverter "./input/swagger.yml"
+
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH
 
 dotnet new classlib -n $NAMESPACE -o $OUTPUT_PATH
