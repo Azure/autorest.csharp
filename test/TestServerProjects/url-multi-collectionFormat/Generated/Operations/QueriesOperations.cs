@@ -33,7 +33,6 @@ namespace url_multi_collectionFormat
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -62,7 +61,6 @@ namespace url_multi_collectionFormat
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -91,7 +89,6 @@ namespace url_multi_collectionFormat
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)

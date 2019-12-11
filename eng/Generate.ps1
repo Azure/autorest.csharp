@@ -29,6 +29,8 @@ $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames = if ($name) { $name } else
 {
+    'body-integer',
+    'body-number',
     'body-string',
     'extensible-enums-swagger',
     'url-multi-collectionFormat',

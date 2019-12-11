@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             if (missingScenarios.Any())
             {
-                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios) + " not defined");
+                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios.OrderBy(s=>s)) + " not defined");
             }
         }
 
@@ -70,6 +70,15 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
         });
+
+        public Task Test(Action<string, HttpPipeline> test, bool ignoreScenario = false)
+        {
+            return Test(GetScenarioName(), (host, pipeline) =>
+            {
+                test(host, pipeline);
+                return Task.CompletedTask;
+            }, ignoreScenario);
+        }
 
         public Task Test(Func<string, HttpPipeline, Task> test, bool ignoreScenario = false)
         {

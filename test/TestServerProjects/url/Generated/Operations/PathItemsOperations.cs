@@ -58,7 +58,6 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -113,7 +112,6 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -168,7 +166,6 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -223,7 +220,6 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)

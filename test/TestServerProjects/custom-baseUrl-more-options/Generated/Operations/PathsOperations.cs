@@ -51,7 +51,6 @@ namespace custom_baseUrl_more_options
                     request.Uri.AppendQuery("keyVersion", keyVersion, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
