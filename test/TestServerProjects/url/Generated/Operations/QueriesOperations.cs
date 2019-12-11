@@ -16,6 +16,11 @@ namespace url
     {
         public static async ValueTask<Response> GetBooleanTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetBooleanTrue");
             scope.Start();
             try
@@ -37,6 +42,11 @@ namespace url
         }
         public static async ValueTask<Response> GetBooleanFalseAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetBooleanFalse");
             scope.Start();
             try
@@ -58,6 +68,11 @@ namespace url
         }
         public static async ValueTask<Response> GetBooleanNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, bool? boolQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetBooleanNull");
             scope.Start();
             try
@@ -82,6 +97,11 @@ namespace url
         }
         public static async ValueTask<Response> GetIntOneMillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetIntOneMillion");
             scope.Start();
             try
@@ -103,6 +123,11 @@ namespace url
         }
         public static async ValueTask<Response> GetIntNegativeOneMillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -124,6 +149,11 @@ namespace url
         }
         public static async ValueTask<Response> GetIntNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int? intQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetIntNull");
             scope.Start();
             try
@@ -148,6 +178,11 @@ namespace url
         }
         public static async ValueTask<Response> GetTenBillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetTenBillion");
             scope.Start();
             try
@@ -169,6 +204,11 @@ namespace url
         }
         public static async ValueTask<Response> GetNegativeTenBillionAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetNegativeTenBillion");
             scope.Start();
             try
@@ -190,6 +230,11 @@ namespace url
         }
         public static async ValueTask<Response> GetLongNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long? longQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.GetLongNull");
             scope.Start();
             try
@@ -214,6 +259,11 @@ namespace url
         }
         public static async ValueTask<Response> FloatScientificPositiveAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.FloatScientificPositive");
             scope.Start();
             try
@@ -235,6 +285,11 @@ namespace url
         }
         public static async ValueTask<Response> FloatScientificNegativeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.FloatScientificNegative");
             scope.Start();
             try
@@ -256,6 +311,11 @@ namespace url
         }
         public static async ValueTask<Response> FloatNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, float? floatQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.FloatNull");
             scope.Start();
             try
@@ -280,6 +340,11 @@ namespace url
         }
         public static async ValueTask<Response> DoubleDecimalPositiveAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DoubleDecimalPositive");
             scope.Start();
             try
@@ -301,6 +366,11 @@ namespace url
         }
         public static async ValueTask<Response> DoubleDecimalNegativeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DoubleDecimalNegative");
             scope.Start();
             try
@@ -322,6 +392,11 @@ namespace url
         }
         public static async ValueTask<Response> DoubleNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double? doubleQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DoubleNull");
             scope.Start();
             try
@@ -346,6 +421,11 @@ namespace url
         }
         public static async ValueTask<Response> StringUnicodeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.StringUnicode");
             scope.Start();
             try
@@ -367,6 +447,11 @@ namespace url
         }
         public static async ValueTask<Response> StringUrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.StringUrlEncoded");
             scope.Start();
             try
@@ -388,6 +473,11 @@ namespace url
         }
         public static async ValueTask<Response> StringEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.StringEmpty");
             scope.Start();
             try
@@ -409,6 +499,11 @@ namespace url
         }
         public static async ValueTask<Response> StringNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string? stringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.StringNull");
             scope.Start();
             try
@@ -433,6 +528,11 @@ namespace url
         }
         public static async ValueTask<Response> EnumValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.EnumValid");
             scope.Start();
             try
@@ -457,6 +557,11 @@ namespace url
         }
         public static async ValueTask<Response> EnumNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, UriColor? enumQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.EnumNull");
             scope.Start();
             try
@@ -481,6 +586,11 @@ namespace url
         }
         public static async ValueTask<Response> ByteMultiByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[]? byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ByteMultiByte");
             scope.Start();
             try
@@ -505,6 +615,11 @@ namespace url
         }
         public static async ValueTask<Response> ByteEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ByteEmpty");
             scope.Start();
             try
@@ -526,6 +641,11 @@ namespace url
         }
         public static async ValueTask<Response> ByteNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[]? byteQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ByteNull");
             scope.Start();
             try
@@ -550,6 +670,11 @@ namespace url
         }
         public static async ValueTask<Response> DateValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DateValid");
             scope.Start();
             try
@@ -571,6 +696,11 @@ namespace url
         }
         public static async ValueTask<Response> DateNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset? dateQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DateNull");
             scope.Start();
             try
@@ -595,6 +725,11 @@ namespace url
         }
         public static async ValueTask<Response> DateTimeValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DateTimeValid");
             scope.Start();
             try
@@ -616,6 +751,11 @@ namespace url
         }
         public static async ValueTask<Response> DateTimeNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset? dateTimeQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.DateTimeNull");
             scope.Start();
             try
@@ -640,6 +780,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringCsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvValid");
             scope.Start();
             try
@@ -664,6 +809,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringCsvNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvNull");
             scope.Start();
             try
@@ -688,6 +838,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringCsvEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvEmpty");
             scope.Start();
             try
@@ -712,6 +867,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringSsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringSsvValid");
             scope.Start();
             try
@@ -736,6 +896,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringTsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringTsvValid");
             scope.Start();
             try
@@ -760,6 +925,11 @@ namespace url
         }
         public static async ValueTask<Response> ArrayStringPipesValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringPipesValid");
             scope.Start();
             try
