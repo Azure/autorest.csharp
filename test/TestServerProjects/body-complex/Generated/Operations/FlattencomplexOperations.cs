@@ -30,7 +30,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/flatten/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {

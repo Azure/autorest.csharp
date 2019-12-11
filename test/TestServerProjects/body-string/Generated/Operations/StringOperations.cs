@@ -29,7 +29,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/null", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -61,13 +60,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/null", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue("");
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -92,7 +89,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/empty", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -124,13 +120,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/empty", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue("");
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -155,7 +149,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/mbcs", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -187,13 +180,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/mbcs", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -218,7 +209,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/whitespace", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -250,13 +240,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/whitespace", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -281,7 +269,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/notProvided", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -313,7 +300,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/base64Encoding", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -345,7 +331,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/base64UrlEncoding", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -381,13 +366,11 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/base64UrlEncoding", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 writer.WriteBase64StringValue(stringBody);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -412,7 +395,6 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/nullBase64UrlEncoding", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
