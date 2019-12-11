@@ -15,6 +15,15 @@ namespace header
     {
         public static async ValueTask<Response> ParamExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string userAgent, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (userAgent == null)
+            {
+                throw new ArgumentNullException(nameof(userAgent));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamExistingKey");
             scope.Start();
             try
@@ -35,6 +44,11 @@ namespace header
         }
         public static async ValueTask<Response> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseExistingKey");
             scope.Start();
             try
@@ -54,6 +68,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string contentType, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (contentType == null)
+            {
+                throw new ArgumentNullException(nameof(contentType));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamProtectedKey");
             scope.Start();
             try
@@ -74,6 +97,11 @@ namespace header
         }
         public static async ValueTask<Response> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseProtectedKey");
             scope.Start();
             try
@@ -93,6 +121,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, int value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamInteger");
             scope.Start();
             try
@@ -114,6 +151,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseInteger");
             scope.Start();
             try
@@ -134,6 +180,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, long value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamLong");
             scope.Start();
             try
@@ -155,6 +210,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseLong");
             scope.Start();
             try
@@ -175,6 +239,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, float value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamFloat");
             scope.Start();
             try
@@ -196,6 +269,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseFloat");
             scope.Start();
             try
@@ -216,6 +298,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, double value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamDouble");
             scope.Start();
             try
@@ -237,6 +328,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseDouble");
             scope.Start();
             try
@@ -257,6 +357,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, bool value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamBool");
             scope.Start();
             try
@@ -278,6 +387,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseBool");
             scope.Start();
             try
@@ -298,6 +416,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamString");
             scope.Start();
             try
@@ -322,6 +449,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseString");
             scope.Start();
             try
@@ -342,6 +478,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamDate");
             scope.Start();
             try
@@ -363,6 +508,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseDate");
             scope.Start();
             try
@@ -383,6 +537,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamDatetime");
             scope.Start();
             try
@@ -404,6 +567,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseDatetime");
             scope.Start();
             try
@@ -424,6 +596,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamDatetimeRfc1123");
             scope.Start();
             try
@@ -448,6 +629,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseDatetimeRfc1123");
             scope.Start();
             try
@@ -468,6 +658,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, TimeSpan value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamDuration");
             scope.Start();
             try
@@ -489,6 +688,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseDuration");
             scope.Start();
             try
@@ -509,6 +717,19 @@ namespace header
         }
         public static async ValueTask<Response> ParamByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, Byte[] value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamByte");
             scope.Start();
             try
@@ -530,6 +751,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseByte");
             scope.Start();
             try
@@ -550,6 +780,15 @@ namespace header
         }
         public static async ValueTask<Response> ParamEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, GreyscaleColors? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ParamEnum");
             scope.Start();
             try
@@ -574,6 +813,15 @@ namespace header
         }
         public static async ValueTask<Response> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (scenario == null)
+            {
+                throw new ArgumentNullException(nameof(scenario));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.ResponseEnum");
             scope.Start();
             try
@@ -594,6 +842,11 @@ namespace header
         }
         public static async ValueTask<Response> CustomRequestIdAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("header.CustomRequestId");
             scope.Start();
             try

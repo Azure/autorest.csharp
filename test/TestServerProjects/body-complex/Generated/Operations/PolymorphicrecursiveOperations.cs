@@ -16,6 +16,11 @@ namespace body_complex
     {
         public static async ValueTask<Response<Fish>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
@@ -42,6 +47,15 @@ namespace body_complex
         }
         public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
             scope.Start();
             try

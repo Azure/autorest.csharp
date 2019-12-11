@@ -16,6 +16,11 @@ namespace body_string
     {
         public static async ValueTask<Response<Colors>> GetNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.GetNotExpandable");
             scope.Start();
             try
@@ -42,6 +47,11 @@ namespace body_string
         }
         public static async ValueTask<Response> PutNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.PutNotExpandable");
             scope.Start();
             try
@@ -66,6 +76,11 @@ namespace body_string
         }
         public static async ValueTask<Response<Colors>> GetReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.GetReferenced");
             scope.Start();
             try
@@ -92,6 +107,11 @@ namespace body_string
         }
         public static async ValueTask<Response> PutReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.PutReferenced");
             scope.Start();
             try
@@ -116,6 +136,11 @@ namespace body_string
         }
         public static async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.GetReferencedConstant");
             scope.Start();
             try
@@ -142,6 +167,15 @@ namespace body_string
         }
         public static async ValueTask<Response> PutReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, RefColorConstant enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (enumStringBody == null)
+            {
+                throw new ArgumentNullException(nameof(enumStringBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_string.PutReferencedConstant");
             scope.Start();
             try

@@ -16,6 +16,11 @@ namespace body_complex
     {
         public static async ValueTask<Response<Fish>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
@@ -42,6 +47,15 @@ namespace body_complex
         }
         public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
             scope.Start();
             try
@@ -66,6 +80,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<DotFish>> GetDotSyntaxAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDotSyntax");
             scope.Start();
             try
@@ -92,6 +111,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithDiscriminator");
             scope.Start();
             try
@@ -118,6 +142,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithoutDiscriminator");
             scope.Start();
             try
@@ -144,6 +173,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<Salmon>> GetComplicatedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetComplicated");
             scope.Start();
             try
@@ -170,6 +204,15 @@ namespace body_complex
         }
         public static async ValueTask<Response> PutComplicatedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutComplicated");
             scope.Start();
             try
@@ -194,6 +237,15 @@ namespace body_complex
         }
         public static async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Salmon complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutMissingDiscriminator");
             scope.Start();
             try
@@ -225,6 +277,15 @@ namespace body_complex
         }
         public static async ValueTask<Response> PutValidMissingRequiredAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Fish complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutValidMissingRequired");
             scope.Start();
             try

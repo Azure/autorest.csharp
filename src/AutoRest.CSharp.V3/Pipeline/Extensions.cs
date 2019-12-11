@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.V3.Pipeline
 
         private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, string name)
         {
-            writer.Append(writer.Type(cSharpType));
+            writer.AppendType(cSharpType);
             writer.Append(".Deserialize(");
             writer.Append(name);
             writer.Append(")");
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             if (isStringBased)
             {
                 writer.Append("new ");
-                writer.Append(writer.Type(cSharpType));
+                writer.AppendType(cSharpType);
                 writer.Append("(");
                 writer.Append(name);
                 writer.Append(".GetString())");
@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.V3.Pipeline
 
             writer.Append(name);
             writer.Append(".GetString().To");
-            writer.Append(writer.Type(cSharpType));
+            writer.AppendType(cSharpType);
             writer.Append("()");
         }
 
