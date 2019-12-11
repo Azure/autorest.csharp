@@ -15,6 +15,9 @@ namespace url_multi_collectionFormat
     {
         public static async ValueTask<Response> ArrayStringMultiNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
+
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiNull");
             scope.Start();
             try
@@ -39,6 +42,9 @@ namespace url_multi_collectionFormat
         }
         public static async ValueTask<Response> ArrayStringMultiEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
+
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiEmpty");
             scope.Start();
             try
@@ -63,6 +69,9 @@ namespace url_multi_collectionFormat
         }
         public static async ValueTask<Response> ArrayStringMultiValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (arrayQuery == null) throw new ArgumentNullException(nameof(arrayQuery));
+
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiValid");
             scope.Start();
             try

@@ -135,6 +135,16 @@ namespace AutoRest.CSharp.V3.CodeGen
             return name;
         }
 
+        public CodeWriter AppendType(CSharpType type)
+        {
+            return Append(Type(type));
+        }
+
+        public CodeWriter AppendType(Type type, bool isNullable = false)
+        {
+            return Append(Type(type, isNullable));
+        }
+
         public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
         public string AttributeType(Type type) => Type(type).Replace("Attribute", String.Empty);
 

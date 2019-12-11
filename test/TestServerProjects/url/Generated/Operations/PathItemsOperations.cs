@@ -14,6 +14,14 @@ namespace url
     {
         public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
+            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
+            if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
+            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
+            if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
+            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
+
             using var scope = clientDiagnostics.CreateScope("url.GetAllWithValues");
             scope.Start();
             try
@@ -52,6 +60,14 @@ namespace url
         }
         public static async ValueTask<Response> GetGlobalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
+            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
+            if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
+            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
+            if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
+            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
+
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalQueryNull");
             scope.Start();
             try
@@ -90,6 +106,14 @@ namespace url
         }
         public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
+            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
+            if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
+            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
+            if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
+            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
+
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
@@ -128,6 +152,14 @@ namespace url
         }
         public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null) throw new ArgumentNullException(nameof(host));
+            if (pathItemStringPath == null) throw new ArgumentNullException(nameof(pathItemStringPath));
+            if (pathItemStringQuery == null) throw new ArgumentNullException(nameof(pathItemStringQuery));
+            if (globalStringPath == null) throw new ArgumentNullException(nameof(globalStringPath));
+            if (globalStringQuery == null) throw new ArgumentNullException(nameof(globalStringQuery));
+            if (localStringPath == null) throw new ArgumentNullException(nameof(localStringPath));
+            if (localStringQuery == null) throw new ArgumentNullException(nameof(localStringQuery));
+
             using var scope = clientDiagnostics.CreateScope("url.GetLocalPathItemQueryNull");
             scope.Start();
             try

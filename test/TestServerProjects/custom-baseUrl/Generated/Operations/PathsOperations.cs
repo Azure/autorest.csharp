@@ -14,6 +14,9 @@ namespace custom_baseUrl
     {
         public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string accountName, string host = "host", CancellationToken cancellationToken = default)
         {
+            if (accountName == null) throw new ArgumentNullException(nameof(accountName));
+            if (host == null) throw new ArgumentNullException(nameof(host));
+
             using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");
             scope.Start();
             try

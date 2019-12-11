@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return true;
         }
 
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace? @namespace)
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
             var schemaResponse = operation.ResponseType;
@@ -70,7 +70,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             var methodName = operation.Name;
             using (writer.Method("public static async", writer.Type(returnType), $"{methodName}Async", parametersText))
             {
-                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace?.FullName ?? "[NO NAMESPACE]"}.{methodName}\");");
+                WriteParameterNullChecks(writer, operation);
+
+                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace.FullName}.{methodName}\");");
                 //TODO: Implement attribute logic
                 //writer.Line("scope.AddAttribute(\"key\", name);");
                 writer.Line("scope.Start();");
@@ -140,6 +142,21 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        private void WriteParameterNullChecks(CodeWriter writer, ClientMethod operation)
+        {
+            foreach (ServiceClientMethodParameter parameter in operation.Parameters)
+            {
+                var cs = _typeFactory.CreateType(parameter.Type);
+                if (parameter.IsRequired && cs.IsNullable || !cs.IsValueType)
+                {
+                    writer.Append("if (").Append(parameter.Name).Append("== null)");
+                    writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");
+                    writer.Line();
+                }
+            }
+            writer.Line();
+        }
+
         private void WriteConstant(CodeWriter writer, ClientConstant constant)
         {
             if (constant.Value == null)
@@ -155,7 +172,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     dateTimeValue = dateTimeValue.ToUniversalTime();
 
                     writer.Append("new ");
-                    writer.Append(writer.Type(typeof(DateTimeOffset)));
+                    writer.AppendType(typeof(DateTimeOffset));
                     writer.Append("(");
                     writer.Literal(dateTimeValue.Year);
                     writer.Comma();
@@ -171,7 +188,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Comma();
                     writer.Literal(dateTimeValue.Millisecond);
                     writer.Comma();
-                    writer.Append(writer.Type(typeof(TimeSpan)));
+                    writer.AppendType(typeof(TimeSpan));
                     writer.Append(".");
                     writer.Append(nameof(TimeSpan.Zero));
                     writer.Append(")");
