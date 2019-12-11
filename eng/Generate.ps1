@@ -14,7 +14,7 @@ function Invoke-AutoRest($autoRestArguments)
     }
 }
 
-if ($reset)
+if ($reset -or $env:TF_BUILD)
 {
     Invoke-AutoRest '--reset'
 }
