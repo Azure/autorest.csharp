@@ -1,6 +1,17 @@
 # AutoRest.CSharp.V3
 > see https://aka.ms/autorest
 
+## Setup
+- [NodeJS](https://nodejs.org/en/) (10.x.x or 12.x.x)
+- `npm install` (at root)
+- `npm install -g @autorest/autorest`
+- [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.100)
+- [PowerShell Core](https://github.com/PowerShell/PowerShell/releases/latest)
+
+## Build
+- `dotnet build` (at root)
+- `./eng/Generate.ps1` (at root in PowerShell Core)
+
 ## Configuration
 ```yaml
 use-extension:

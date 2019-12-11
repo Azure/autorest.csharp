@@ -1,31 +1,22 @@
-param($name, [switch]$noDebug, [switch]$NoReset)
+#Requires -Version 6.0
+param($name, [switch]$noDebug, [switch]$reset)
+
 $ErrorActionPreference = 'Stop'
 
-function Invoke-Block([scriptblock]$cmd) {
-    $cmd | Out-String | Write-Verbose
-    & $cmd
-
-    # Need to check both of these cases for errors as they represent different items
-    # - $?: did the powershell script block throw an error
-    # - $lastexitcode: did a windows command executed by the script block end in error
-    if ((-not $?) -or ($lastexitcode -ne 0)) {
-        if ($error -ne $null)
-        {
-            Write-Warning $error[0]
-        }
-        throw "Command failed to execute: $cmd"
+function Invoke-AutoRest($autoRestArguments)
+{
+    $command = "npx autorest-beta $autoRestArguments"
+    Write-Host "> $command"
+    cmd /c "$command 2>&1"
+    if($LastExitCode -ne 0)
+    {
+        Write-Error "Command failed to execute: $command"
     }
 }
 
-function Invoke-AutoRest($autoRestArguments, $repoRoot) {
-    Invoke-Block {
-        $command = "npx autorest-beta $autoRestArguments"
-        $commandText = $command.Replace($repoRoot, "`$(SolutionDir)")
-
-        Write-Host ">" $commandText
-        
-        & cmd /c "$command 2>&1"
-    }
+if ($reset -or $env:TF_BUILD)
+{
+    Invoke-AutoRest '--reset'
 }
 
 # General configuration
@@ -36,11 +27,18 @@ $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$testNames = if ($name) { $name } else { 'body-number', 'body-integer', 'extensible-enums-swagger', 'url-multi-collectionFormat', 'url', 'body-string', 'body-complex', 'custom-baseUrl', 'custom-baseUrl-more-options', 'header' }
-
-if (!$NoReset)
+$testNames = if ($name) { $name } else
 {
-    Invoke-AutoRest "--reset" $repoRoot
+    'body-integer',
+    'body-number',
+    'body-string',
+    'extensible-enums-swagger',
+    'url-multi-collectionFormat',
+    'url',
+    'body-complex',
+    'custom-baseUrl',
+    'custom-baseUrl-more-options',
+    'header'
 }
 
 foreach ($testName in $testNames)
@@ -48,7 +46,7 @@ foreach ($testName in $testNames)
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $namespace = $testName.Replace('-', '_')
     $autoRestArguments = "$debugFlags --require=$configurationPath --input-file=$inputFile --title=$testName --namespace=$namespace"
-    Invoke-AutoRest $autoRestArguments $repoRoot
+    Invoke-AutoRest $autoRestArguments
 }
 
 # Sample configuration
@@ -60,5 +58,5 @@ foreach ($projectName in $projectNames)
     $projectDirectory = Join-Path $sampleDirectory $projectName
     $configurationPath = Join-Path $projectDirectory 'readme.md'
     $autoRestArguments = "$debugFlags --require=$configurationPath"
-    Invoke-AutoRest $autoRestArguments $repoRoot
+    Invoke-AutoRest $autoRestArguments
 }
