@@ -13,6 +13,11 @@ namespace body_string
 {
     internal static class StringOperations
     {
+        public static void IntendedFailure()
+        {
+            throw new Exception();
+        }
+
         public static async ValueTask<Response<string>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
