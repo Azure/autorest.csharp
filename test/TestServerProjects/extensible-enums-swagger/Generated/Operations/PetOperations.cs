@@ -16,6 +16,15 @@ namespace extensible_enums_swagger
     {
         public static async ValueTask<Response<Pet>> GetByPetIdAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string petId, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (petId == null)
+            {
+                throw new ArgumentNullException(nameof(petId));
+            }
+
             using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.GetByPetId");
             scope.Start();
             try
@@ -26,7 +35,6 @@ namespace extensible_enums_swagger
                 request.Uri.AppendPath("/extensibleenums/pet/", false);
                 request.Uri.AppendPath(petId, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -44,6 +52,11 @@ namespace extensible_enums_swagger
         }
         public static async ValueTask<Response<Pet>> AddPetAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Pet? petParam, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.AddPet");
             scope.Start();
             try
@@ -53,13 +66,11 @@ namespace extensible_enums_swagger
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
                 request.Headers.Add("Content-Type", "application/json");
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 petParam?.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {

@@ -16,6 +16,11 @@ namespace body_complex
     {
         public static async ValueTask<Response<MyBaseType>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
@@ -25,7 +30,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/flatten/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {

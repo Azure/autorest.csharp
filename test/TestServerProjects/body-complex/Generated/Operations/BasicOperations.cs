@@ -16,6 +16,11 @@ namespace body_complex
     {
         public static async ValueTask<Response<Basic>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
             try
@@ -25,7 +30,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -43,6 +47,15 @@ namespace body_complex
         }
         public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Basic complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
             scope.Start();
             try
@@ -53,13 +66,11 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/basic/valid", false);
                 request.Headers.Add("Content-Type", "application/json");
                 request.Uri.AppendQuery("api-version", "2016-02-29", true);
-                var buffer = new ArrayBufferWriter<byte>();
-                await using var writer = new Utf8JsonWriter(buffer);
+                using var content = new Utf8JsonRequestContent();
+                var writer = content.JsonWriter;
                 complexBody.Serialize(writer);
-                writer.Flush();
-                request.Content = RequestContent.Create(buffer.WrittenMemory);
+                request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 return response;
             }
             catch (Exception e)
@@ -70,6 +81,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<Basic>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetInvalid");
             scope.Start();
             try
@@ -79,7 +95,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/invalid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -97,6 +112,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<Basic>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
             scope.Start();
             try
@@ -106,7 +126,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/empty", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -124,6 +143,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<Basic>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNull");
             scope.Start();
             try
@@ -133,7 +157,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/null", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -151,6 +174,11 @@ namespace body_complex
         }
         public static async ValueTask<Response<Basic>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
             scope.Start();
             try
@@ -160,7 +188,6 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/notprovided", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
