@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -107,17 +106,21 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     if (operation.Request.Body is ConstantOrParameter body)
                     {
-                        writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
-                        writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
+                        var bufferWriter = new CSharpType(typeof(ArrayBufferWriter<>), new CSharpType(typeof(byte)));
+
+                        writer.Line($"var buffer = new {writer.Type(bufferWriter)}();");
+                        writer.Line($"await using var writer = new {writer.Type(typeof(Utf8JsonWriter))}(buffer);");
 
                         var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
                         var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
                         writer.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
 
-                        writer.Line("request.Content = content;");
+                        writer.Line("writer.Flush();");
+                        writer.Line("request.Content = RequestContent.Create(buffer.WrittenMemory);");
                     }
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
+                    writer.Line("cancellationToken.ThrowIfCancellationRequested();");
 
                     if (schemaResponse != null && responseType != null)
                     {
