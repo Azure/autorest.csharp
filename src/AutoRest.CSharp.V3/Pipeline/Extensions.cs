@@ -28,37 +28,6 @@ namespace AutoRest.CSharp.V3.Pipeline
             _ => null
         };
 
-        //public static FrameworkTypeReferenceFormat? ToFrameworkTypeReferenceFormat(this AllSchemaTypes schemaType) => schemaType switch
-        //{
-        //    AllSchemaTypes.Any => null,
-        //    AllSchemaTypes.Array => null,
-        //    AllSchemaTypes.Boolean => null,
-        //    AllSchemaTypes.ByteArray => null,
-        //    AllSchemaTypes.Char => null,
-        //    AllSchemaTypes.Choice => null,
-        //    AllSchemaTypes.Constant => null,
-        //    AllSchemaTypes.Credential => null,
-        //    AllSchemaTypes.Date => FrameworkTypeReferenceFormat.Date,
-        //    AllSchemaTypes.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
-        //    AllSchemaTypes.Dictionary => null,
-        //    AllSchemaTypes.Duration => null,
-        //    AllSchemaTypes.Flag => null,
-        //    AllSchemaTypes.Integer => null,
-        //    AllSchemaTypes.Not => null,
-        //    AllSchemaTypes.Number => null,
-        //    AllSchemaTypes.Object => null,
-        //    AllSchemaTypes.OdataQuery => null,
-        //    AllSchemaTypes.Or => null,
-        //    AllSchemaTypes.Group => null,
-        //    AllSchemaTypes.SealedChoice => null,
-        //    AllSchemaTypes.String => null,
-        //    AllSchemaTypes.Unixtime => FrameworkTypeReferenceFormat.DateTimeRFC1123,
-        //    AllSchemaTypes.Uri => null,
-        //    AllSchemaTypes.Uuid => null,
-        //    AllSchemaTypes.Xor => null,
-        //    _ => (FrameworkTypeReferenceFormat?)null
-        //};
-
         public static FrameworkTypeReferenceFormat ToFrameworkTypeReferenceFormat(this Schema schema) => schema switch
         {
             DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
