@@ -33,19 +33,22 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetIntNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
         public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("Wrong float format")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -61,7 +64,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("Causes 500 server error")]
+        [Ignore("No test server handler for this one")]
         public Task StringUnicodeAsync() => TestStatus(async (host, pipeline) => await QueriesOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host: host));
 
         [Test]
@@ -74,25 +77,20 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesStringNull() => TestStatus(async (host, pipeline) => await QueriesOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
+        [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
         public Task UrlQueriesEnumValid() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host: host));
 
         [Test]
         public Task UrlQueriesEnumNull() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("byte[] not supported")]
-        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, new byte[0], host: host));
+        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host: host));
 
         [Test]
-        [Ignore("nullref")]
         public Task UrlQueriesByteNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
         public Task UrlQueriesByteEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host: host));
-
-        [Test]
-        [Ignore("null ref")]
-        public Task ByteNullAsync() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
         public Task UrlQueriesDateValid() => TestStatus(async (host, pipeline) => await QueriesOperations.DateValidAsync(ClientDiagnostics, pipeline, host: host));
@@ -108,40 +106,31 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDateTimeNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
         public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvEmptyAsync(ClientDiagnostics, pipeline, new string[0], host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("CSV not supported")]
-        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         [Test]
-        [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiNull() => Assert.Fail("");
+        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiNullAsync(ClientDiagnostics, pipeline, null, host: host));
 
         [Test]
-        [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiEmpty() => Assert.Fail("");
+        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiEmptyAsync(ClientDiagnostics, pipeline, new string[] { }, host: host));
 
         [Test]
-        [Ignore("We don't seem to have operation for this")]
-        public void UrlQueriesArrayMultiValid() => Assert.Fail("");
+        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
         {

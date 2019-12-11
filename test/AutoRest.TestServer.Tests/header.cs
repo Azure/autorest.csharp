@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -15,12 +14,9 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "Too many missing or too strict recordings")]
     public class HeaderTests : TestServerTestBase
     {
-        private static readonly DateTime MinDate = new DateTime(0001, 1, 1, 0, 0, 0);
-        private static readonly DateTime ValidDate = new DateTime(2010, 1, 1, 12, 34, 56);
+        private static readonly DateTimeOffset MinDate = new DateTimeOffset(0001, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        private static readonly DateTimeOffset ValidDate = new DateTimeOffset(2010, 1, 1, 12, 34, 56, TimeSpan.Zero);
         public HeaderTests(TestServerVersion version) : base(version, "header") { }
-
-        public static byte[] ByteArray { get; } =
-            Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩");
 
         [Test]
         public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamExistingKeyAsync(ClientDiagnostics, pipeline, "overwrite", host: host));
@@ -156,7 +152,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDurationValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseDurationAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host));
 
         [Test]
-        public Task HeaderParameterBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamByteAsync(ClientDiagnostics, pipeline, scenario: "valid", ByteArray, host: host));
+        public Task HeaderParameterBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamByteAsync(ClientDiagnostics, pipeline, scenario: "valid", TestConstants.ByteArray, host: host));
 
         [Test]
         public Task HeaderResponseBytesValid() => TestStatus(async (host, pipeline) => await HeaderOperations.ResponseByteAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host));

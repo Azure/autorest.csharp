@@ -15,12 +15,15 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(Color);
             }
-            writer.WriteStartArray("hates");
-            foreach (var item in Hates)
+            if (Hates != null)
             {
-                item.Serialize(writer);
+                writer.WriteStartArray("hates");
+                foreach (var item in Hates)
+                {
+                    item.Serialize(writer);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Cat Deserialize(JsonElement element)

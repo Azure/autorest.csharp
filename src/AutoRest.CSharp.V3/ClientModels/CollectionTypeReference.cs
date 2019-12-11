@@ -7,12 +7,12 @@ namespace AutoRest.CSharp.V3.ClientModels
     {
         public ClientTypeReference ItemType { get; }
 
-        public CollectionTypeReference(ClientTypeReference itemType)
+        public CollectionTypeReference(ClientTypeReference itemType, bool isNullable)
         {
             ItemType = itemType;
+            IsNullable = isNullable;
         }
 
-        //TODO: This should not be defaulted to nullable false
-        public override bool IsNullable => false;
+        public override bool IsNullable { get; }
     }
 }

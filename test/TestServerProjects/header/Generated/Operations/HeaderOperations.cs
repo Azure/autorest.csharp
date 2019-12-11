@@ -356,7 +356,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTime value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ParamDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("header.ParamDate");
             scope.Start();
@@ -399,7 +399,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTime value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ParamDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("header.ParamDatetime");
             scope.Start();
@@ -442,7 +442,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTime? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ParamDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("header.ParamDatetimeRfc1123");
             scope.Start();

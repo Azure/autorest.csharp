@@ -13,22 +13,56 @@ namespace AutoRest.TestServer.Tests
         public UrlPathItemsTests(TestServerVersion version) : base(version, "pathitem") { }
 
         [Test]
-        [Ignore("globalStringQuery not generated")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetAll() => TestStatus(async (host, pipeline) =>
-            await PathItemsOperations.GetAllWithValuesAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: "localStringQuery", host));
+            await PathItemsOperations.GetAllWithValuesAsync(ClientDiagnostics,
+                pipeline,
+                pathItemStringPath: "pathItemStringPath",
+                pathItemStringQuery: "pathItemStringQuery",
+                globalStringPath: "globalStringPath",
+                globalStringQuery: "globalStringQuery",
+                localStringPath: "localStringPath",
+                localStringQuery: "localStringQuery",
+                host: host));
 
         [Test]
-        [Ignore("globalStringQuery not generated")]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await PathItemsOperations.GetLocalPathItemQueryNullAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: null, host));
+            await PathItemsOperations.GetLocalPathItemQueryNullAsync(
+                ClientDiagnostics,
+                pipeline,
+                pathItemStringPath: "pathItemStringPath",
+                pathItemStringQuery: null,
+                globalStringPath: "globalStringPath",
+                globalStringQuery: "globalStringQuery",
+                localStringPath: "localStringPath",
+                localStringQuery: null,
+                host));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host, pipeline) =>
-            await PathItemsOperations.GetGlobalQueryNullAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: "localStringQuery", host));
+            await PathItemsOperations.GetGlobalQueryNullAsync(
+                ClientDiagnostics,
+                pipeline,
+                pathItemStringPath: "pathItemStringPath",
+                pathItemStringQuery: "pathItemStringQuery",
+                globalStringPath: "globalStringPath",
+                globalStringQuery: null,
+                localStringPath: "localStringPath",
+                localStringQuery: "localStringQuery",
+                host));
 
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await PathItemsOperations.GetGlobalAndLocalQueryNullAsync(ClientDiagnostics, pipeline, pathItemStringPath: "pathItemStringPath", pathItemStringQuery: "pathItemStringQuery", localStringPath: "localStringPath", localStringQuery: null, host));
+            await PathItemsOperations.GetGlobalAndLocalQueryNullAsync(
+                ClientDiagnostics,
+                pipeline,
+                pathItemStringPath: "pathItemStringPath",
+                pathItemStringQuery: "pathItemStringQuery",
+                globalStringPath: "globalStringPath",
+                globalStringQuery: null,
+                localStringPath: "localStringPath",
+                localStringQuery: null,
+                host));
     }
 }

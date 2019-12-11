@@ -6,21 +6,18 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
 #pragma warning disable IDE0069 // Disposable fields should be disposed
     internal class OutgoingMessageProcessor : IDisposable
     {
-        private readonly DisposeService<OutgoingMessageProcessor> _disposeService;
         private readonly Stream _stream;
         private readonly CancellationToken _cancellationToken;
         private readonly Semaphore _streamSemaphore = new Semaphore(1, 1);
 
         public OutgoingMessageProcessor(Stream stream, CancellationToken cancellationToken)
         {
-            _disposeService = new DisposeService<OutgoingMessageProcessor>(this, Disposer);
             _stream = stream;
             _cancellationToken = cancellationToken;
         }
@@ -43,11 +40,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
         }
 
         public void Dispose()
-        {
-            _disposeService.Dispose(true);
-        }
-
-        private void Disposer(OutgoingMessageProcessor processor)
         {
             _streamSemaphore?.Dispose();
         }

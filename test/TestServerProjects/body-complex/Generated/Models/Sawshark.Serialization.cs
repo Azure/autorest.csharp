@@ -11,8 +11,11 @@ namespace body_complex.Models.V20160229
         internal void Serialize(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("picture");
-            writer.WriteBase64StringValue(Picture);
+            if (Picture != null)
+            {
+                writer.WritePropertyName("picture");
+                writer.WriteBase64StringValue(Picture);
+            }
             writer.WriteEndObject();
         }
         internal static Sawshark Deserialize(JsonElement element)

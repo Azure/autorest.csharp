@@ -32,7 +32,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("birthday"))
                 {
-                    result.Birthday = property.Value.GetDateTime();
+                    result.Birthday = property.Value.GetDateTimeOffset();
                     continue;
                 }
             }

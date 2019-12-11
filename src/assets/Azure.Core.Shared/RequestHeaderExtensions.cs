@@ -10,34 +10,27 @@ namespace Azure.Core
     {
         public static void Add(this RequestHeaders headers, string name, bool value)
         {
-            headers.Add(name, value ? "true" : "false");
+            headers.Add(name, TypeFormatters.ToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, float value)
         {
-            headers.Add(name, value.ToString("G"));
+            headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat));
         }
 
         public static void Add(this RequestHeaders headers, string name, double value)
         {
-            headers.Add(name, value.ToString("G"));
+            headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat));
         }
 
         public static void Add(this RequestHeaders headers, string name, int value)
         {
-            headers.Add(name, value.ToString("G"));
+            headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat));
         }
 
-        public static void Add(this RequestHeaders headers, string name, DateTime value, string format)
+        public static void Add(this RequestHeaders headers, string name, DateTimeOffset value, string format)
         {
-            string formatted = format switch
-            {
-                "D" => value.ToString("yyyy-MM-dd"),
-                "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                "R" => value.ToString("R"),
-                 _ => throw new ArgumentException("Format is not supported", nameof(format))
-            };
-            headers.Add(name, formatted);
+            headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string name, TimeSpan value)

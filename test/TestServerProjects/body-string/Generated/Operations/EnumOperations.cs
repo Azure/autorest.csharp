@@ -30,7 +30,7 @@ namespace body_string
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(new Colors(document.RootElement.GetString()), response);
+                        return Response.FromValue(document.RootElement.GetString().ToColors(), response);
                     default:
                         throw new Exception();
                 }
@@ -54,7 +54,7 @@ namespace body_string
                 request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                writer.WriteStringValue(stringBody.ToString());
+                writer.WriteStringValue(stringBody.ToSerialString());
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
@@ -83,7 +83,7 @@ namespace body_string
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(new Colors(document.RootElement.GetString()), response);
+                        return Response.FromValue(document.RootElement.GetString().ToColors(), response);
                     default:
                         throw new Exception();
                 }
@@ -107,7 +107,7 @@ namespace body_string
                 request.Headers.Add("Content-Type", "application/json");
                 var buffer = new ArrayBufferWriter<byte>();
                 await using var writer = new Utf8JsonWriter(buffer);
-                writer.WriteStringValue(enumStringBody.ToString());
+                writer.WriteStringValue(enumStringBody.ToSerialString());
                 writer.Flush();
                 request.Content = RequestContent.Create(buffer.WrittenMemory);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);

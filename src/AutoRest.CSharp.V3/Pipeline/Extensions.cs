@@ -14,32 +14,17 @@ namespace AutoRest.CSharp.V3.Pipeline
     {
         public static Type? ToFrameworkCSharpType(this AllSchemaTypes schemaType) => schemaType switch
         {
-            AllSchemaTypes.Any => null,
-            AllSchemaTypes.Array => null,
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
             AllSchemaTypes.Char => typeof(char),
-            AllSchemaTypes.Choice => null,
-            AllSchemaTypes.Constant => null,
-            AllSchemaTypes.Credential => null,
             AllSchemaTypes.Date => typeof(DateTimeOffset),
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
-            AllSchemaTypes.Dictionary => null,
             AllSchemaTypes.Duration => typeof(TimeSpan),
-            AllSchemaTypes.Flag => null,
-            AllSchemaTypes.Integer => null, // Handled in ToFrameworkType for NumberSchema
-            AllSchemaTypes.Not => null,
-            AllSchemaTypes.Number => null, // Handled in ToFrameworkType for NumberSchema
-            AllSchemaTypes.Object => null,
             AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.Or => null,
-            AllSchemaTypes.Group => null,
-            AllSchemaTypes.SealedChoice => null,
             AllSchemaTypes.String => typeof(string),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
-            AllSchemaTypes.Xor => null,
             _ => null
         };
 
@@ -144,7 +129,6 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(decimal), NumberSerializer },
             { typeof(string), StringSerializer() },
             { typeof(byte[]), (vn, nu, f) => null },
-            //{ typeof(DateTime), (vn, nu, f) => $"writer.WriteStringValue({vn}.ToString(\"yyyy-MM-dd\")" },
             { typeof(DateTimeOffset), DateTimeSerializer },
             { typeof(TimeSpan), StringSerializer(true) },
             { typeof(Uri), StringSerializer(true) }
@@ -162,19 +146,19 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(double), n => $"{n}.GetDouble()" },
             { typeof(decimal), n => $"{n}.GetDecimal()" },
             { typeof(string), n => $"{n}.GetString()" },
-            { typeof(DateTimeOffset), n => $"{n}.GetDateTime()" },
+            { typeof(DateTimeOffset), n => $"{n}.GetDateTimeOffset()" },
             { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
             { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
-        private static void WriteSerializeClientObject(WriterBase writer, string name, bool isNullable)
+        private static void WriteSerializeClientObject(CodeWriter writer, string name, bool isNullable)
         {
             writer.Append(name);
             writer.Append(isNullable ? "?" : string.Empty);
             writer.Line(".Serialize(writer);");
         }
 
-        private static void WriteSerializeClientEnum(WriterBase writer, string name, bool isNullable, bool isStringBased)
+        private static void WriteSerializeClientEnum(CodeWriter writer, string name, bool isNullable, bool isStringBased)
         {
             writer.Append("writer.WriteStringValue(");
             writer.Append(name);
@@ -186,7 +170,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Line(");");
         }
 
-        private static void WriteSerializeSchemaTypeReference(WriterBase writer, SchemaTypeReference type, TypeFactory typeFactory, string name)
+        private static void WriteSerializeSchemaTypeReference(CodeWriter writer, SchemaTypeReference type, TypeFactory typeFactory, string name)
         {
             switch (typeFactory.ResolveReference(type))
             {
@@ -202,21 +186,21 @@ namespace AutoRest.CSharp.V3.Pipeline
             }
         }
 
-        private static void WriteSerializeBinaryTypeReference(WriterBase writer, string name)
+        private static void WriteSerializeBinaryTypeReference(CodeWriter writer, string name)
         {
             writer.Append("writer.WriteBase64StringValue(");
             writer.Append(name);
             writer.Line(");");
         }
 
-        private static void WriteSerializeDefault(WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name)
+        private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name)
         {
             var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
             var format = (type as FrameworkTypeReference)?.Format ?? FrameworkTypeReferenceFormat.Default;
             writer.Line(TypeSerializers[frameworkType](name, type.IsNullable, format) ?? "writer.WriteNullValue();");
         }
 
-        public static void ToSerializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
+        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
         {
             if (includePropertyName)
             {
@@ -247,7 +231,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             }
         }
 
-        private static void WriteDeserializeClientObject(WriterBase writer, CSharpType cSharpType, string name)
+        private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, string name)
         {
             writer.Append(writer.Type(cSharpType));
             writer.Append(".Deserialize(");
@@ -255,7 +239,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Append(")");
         }
 
-        private static void WriteDeserializeClientEnum(WriterBase writer, CSharpType cSharpType, string name, bool isStringBased)
+        private static void WriteDeserializeClientEnum(CodeWriter writer, CSharpType cSharpType, string name, bool isStringBased)
         {
             if (isStringBased)
             {
@@ -273,7 +257,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Append("()");
         }
 
-        private static void WriteDeserializeSchemaTypeReference(WriterBase writer, CSharpType cSharpType, SchemaTypeReference type, TypeFactory typeFactory, string name)
+        private static void WriteDeserializeSchemaTypeReference(CodeWriter writer, CSharpType cSharpType, SchemaTypeReference type, TypeFactory typeFactory, string name)
         {
             switch (typeFactory.ResolveReference(type))
             {
@@ -289,19 +273,19 @@ namespace AutoRest.CSharp.V3.Pipeline
             }
         }
 
-        private static void WriteDeserializeBinaryTypeReference(WriterBase writer, string name)
+        private static void WriteDeserializeBinaryTypeReference(CodeWriter writer, string name)
         {
             writer.Append(name);
             writer.Append(".GetBytesFromBase64()");
         }
 
-        private static void WriteDeserializeDefault(WriterBase writer, CSharpType cSharpType, string name)
+        private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, string name)
         {
             var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
             writer.Append(TypeDeserializers[frameworkType](name) ?? "null");
         }
 
-        public static void ToDeserializeCall(this WriterBase writer, ClientTypeReference type, TypeFactory typeFactory, string name, string typeText, string typeName)
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name, string typeText, string typeName)
         {
             CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
             switch (type)

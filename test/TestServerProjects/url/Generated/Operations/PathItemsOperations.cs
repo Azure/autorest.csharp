@@ -12,7 +12,7 @@ namespace url
 {
     internal static class PathItemsOperations
     {
-        public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.GetAllWithValues");
             scope.Start();
@@ -22,19 +22,23 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", true);
+                request.Uri.AppendPath(globalStringPath, true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
+                request.Uri.AppendPath(pathItemStringPath, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!, true);
+                request.Uri.AppendPath(localStringPath, true);
                 request.Uri.AppendPath("/globalStringQuery/pathItemStringQuery/localStringQuery", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                }
+                if (globalStringQuery != null)
+                {
+                    request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -46,7 +50,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetGlobalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalQueryNull");
             scope.Start();
@@ -56,19 +60,23 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", true);
+                request.Uri.AppendPath(globalStringPath, true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
+                request.Uri.AppendPath(pathItemStringPath, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!, true);
+                request.Uri.AppendPath(localStringPath, true);
                 request.Uri.AppendPath("/null/pathItemStringQuery/localStringQuery", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                }
+                if (globalStringQuery != null)
+                {
+                    request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -80,7 +88,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -90,19 +98,23 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", true);
+                request.Uri.AppendPath(globalStringPath, true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
+                request.Uri.AppendPath(pathItemStringPath, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!, true);
+                request.Uri.AppendPath(localStringPath, true);
                 request.Uri.AppendPath("/null/pathItemStringQuery/null", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                }
+                if (globalStringQuery != null)
+                {
+                    request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
@@ -114,7 +126,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("url.GetLocalPathItemQueryNull");
             scope.Start();
@@ -124,19 +136,23 @@ namespace url
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-                request.Uri.AppendPath("globalStringPath", true);
+                request.Uri.AppendPath(globalStringPath, true);
                 request.Uri.AppendPath("/pathItemStringPath/", false);
-                request.Uri.AppendPath(pathItemStringPath.ToString()!, true);
+                request.Uri.AppendPath(pathItemStringPath, true);
                 request.Uri.AppendPath("/localStringPath/", false);
-                request.Uri.AppendPath(localStringPath.ToString()!, true);
+                request.Uri.AppendPath(localStringPath, true);
                 request.Uri.AppendPath("/globalStringQuery/null/null", false);
                 if (pathItemStringQuery != null)
                 {
-                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                }
+                if (globalStringQuery != null)
+                {
+                    request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
                 }
                 if (localStringQuery != null)
                 {
-                    request.Uri.AppendQuery("localStringQuery", localStringQuery.ToString()!, true);
+                    request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();

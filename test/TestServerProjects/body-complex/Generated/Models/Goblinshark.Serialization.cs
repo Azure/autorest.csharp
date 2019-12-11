@@ -18,7 +18,7 @@ namespace body_complex.Models.V20160229
             if (Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(Color.Value.ToSerialString());
+                writer.WriteStringValue(Color.ToString());
             }
             writer.WriteEndObject();
         }
@@ -34,7 +34,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("color"))
                 {
-                    result.Color = property.Value.GetString().ToGoblinSharkColor();
+                    result.Color = new GoblinSharkColor(property.Value.GetString());
                     continue;
                 }
             }

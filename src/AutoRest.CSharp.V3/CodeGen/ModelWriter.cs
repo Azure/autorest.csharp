@@ -11,7 +11,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class ModelWriter : StringWriter
+    internal class ModelWriter
     {
         private readonly TypeFactory _typeFactory;
 
@@ -20,43 +20,41 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteModel(ClientModel model)
+        public void WriteModel(CodeWriter writer, ClientModel model)
         {
             switch (model)
             {
                 case ClientObject objectSchema:
-                    WriteObjectSchema(objectSchema);
+                    WriteObjectSchema(writer, objectSchema);
                     break;
                 case ClientEnum e when e.IsStringBased:
-                    WriteChoiceSchema(e);
+                    WriteChoiceSchema(writer, e);
                     break;
                 case ClientEnum e when !e.IsStringBased:
-                    WriteSealedChoiceSchema(e);
+                    WriteSealedChoiceSchema(writer, e);
                     break;
                 default:
                     throw new NotImplementedException();
             }
         }
 
-        private void WriteObjectSchema(ClientObject schema)
+        private void WriteObjectSchema(CodeWriter writer, ClientObject schema)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs?.Namespace))
+            using (writer.Namespace(cs.Namespace))
             {
-                using (Class(null, "partial", schema.CSharpName()))
+                using (writer.Class(null, "partial", schema.CSharpName()))
                 {
                     foreach (var constant in schema.Constants)
                     {
                         //TODO: Determine if type can use 'const' field instead of 'static' property
-                        Line($"public static {Pair(_typeFactory.CreateType(constant.Type), constant.Name)} {{ get; }} = {constant.Value.ToValueString()};");
+                        writer.Line($"public static {writer.Pair(_typeFactory.CreateType(constant.Type), constant.Name)} {{ get; }} = {constant.Value.ToValueString()};");
                     }
 
                     foreach (var property in schema.Properties)
                     {
-                        var initializer = NeedsInitialization(property.Type) ? $" = new {Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
-                        AutoProperty("public", _typeFactory.CreateType(property.Type), property.Name, property.IsReadOnly, initializer);
+                        var initializer = NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
+                        writer.AutoProperty("public", _typeFactory.CreateType(property.Type), property.Name, property.IsReadOnly, initializer);
                     }
                 }
             }
@@ -64,70 +62,66 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static bool NeedsInitialization(ClientTypeReference reference) => reference is CollectionTypeReference || reference is DictionaryTypeReference;
 
-        private void WriteSealedChoiceSchema(ClientEnum schema)
+        private void WriteSealedChoiceSchema(CodeWriter writer, ClientEnum schema)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs.Namespace))
+            using (writer.Namespace(cs.Namespace))
             {
-                using (Enum(null, null, cs.Name))
+                using (writer.Enum(null, null, cs.Name))
                 {
-                    schema.Values.Select(c => c).ForEachLast(ccs => EnumValue(ccs.Name), ccs => EnumValue(ccs.Name, false));
+                    schema.Values.Select(c => c).ForEachLast(ccs => writer.EnumValue(ccs.Name), ccs => writer.EnumValue(ccs.Name, false));
                 }
             }
         }
 
-        private void WriteChoiceSchema(ClientEnum schema)
+        private void WriteChoiceSchema(CodeWriter writer, ClientEnum schema)
         {
-            Header();
-            using var _ = UsingStatements();
             var cs = _typeFactory.CreateType(schema);
-            using (Namespace(cs.Namespace))
+            using (writer.Namespace(cs.Namespace))
             {
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (Struct(null, "readonly partial", schema.CSharpName(), Type(implementType)))
+                using (writer.Struct(null, "readonly partial", schema.CSharpName(), writer.Type(implementType)))
                 {
-                    var stringText = Type(typeof(string));
-                    var nullableStringText = Type(typeof(string), true);
-                    var csTypeText = Type(cs);
+                    var stringText = writer.Type(typeof(string));
+                    var nullableStringText = writer.Type(typeof(string), true);
+                    var csTypeText = writer.Type(cs);
 
-                    Line($"private readonly {Pair(nullableStringText, "_value")};");
-                    Line();
+                    writer.Line($"private readonly {writer.Pair(nullableStringText, "_value")};");
+                    writer.Line();
 
-                    using (Method("public", null, schema.CSharpName(), Pair(stringText, "value")))
+                    using (writer.Method("public", null, schema.CSharpName(), writer.Pair(stringText, "value")))
                     {
-                        Line($"_value = value ?? throw new {Type(typeof(ArgumentNullException))}(nameof(value));");
+                        writer.Line($"_value = value ?? throw new {writer.Type(typeof(ArgumentNullException))}(nameof(value));");
                     }
-                    Line();
+                    writer.Line();
 
                     foreach (var choice in schema.Values.Select(c => c))
                     {
-                        Line($"private const {Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
+                        writer.Line($"private const {writer.Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
                     }
-                    Line();
+                    writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
-                        Line($"public static {Pair(csTypeText, choice?.Name)} {{ get; }} = new {csTypeText}({choice?.Name}Value);");
+                        writer.Line($"public static {writer.Pair(csTypeText, choice.Name)} {{ get; }} = new {csTypeText}({choice.Name}Value);");
                     }
 
-                    var boolText = Type(typeof(bool));
-                    var leftRightParams = new[] {Pair(csTypeText, "left"), Pair(csTypeText, "right")};
-                    MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
-                    MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
-                    MethodExpression("public static implicit", null, $"operator {csTypeText}", new[]{Pair(stringText, "value")}, $"new {csTypeText}(value)");
-                    Line();
+                    var boolText = writer.Type(typeof(bool));
+                    var leftRightParams = new[] { writer.Pair(csTypeText, "left"), writer.Pair(csTypeText, "right")};
+                    writer.MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
+                    writer.MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
+                    writer.MethodExpression("public static implicit", null, $"operator {csTypeText}", new[]{ writer.Pair(stringText, "value")}, $"new {csTypeText}(value)");
+                    writer.Line();
 
-                    var editorBrowsableNever = $"[{AttributeType(typeof(EditorBrowsableAttribute))}({Type(typeof(EditorBrowsableState))}.Never)]";
-                    Line(editorBrowsableNever);
-                    MethodExpression("public override", boolText, "Equals", new[]{Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
-                    MethodExpression("public", boolText, "Equals", new[] { Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {Type(typeof(StringComparison))}.Ordinal)");
-                    Line();
+                    var editorBrowsableNever = $"[{writer.AttributeType(typeof(EditorBrowsableAttribute))}({writer.Type(typeof(EditorBrowsableState))}.Never)]";
+                    writer.Line(editorBrowsableNever);
+                    writer.MethodExpression("public override", boolText, "Equals", new[]{ writer.Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
+                    writer.MethodExpression("public", boolText, "Equals", new[] { writer.Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {writer.Type(typeof(StringComparison))}.Ordinal)");
+                    writer.Line();
 
-                    Line(editorBrowsableNever);
-                    MethodExpression("public override", Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
-                    MethodExpression("public override", nullableStringText, "ToString", null, "_value");
+                    writer.Line(editorBrowsableNever);
+                    writer.MethodExpression("public override", writer.Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
+                    writer.MethodExpression("public override", nullableStringText, "ToString", null, "_value");
                 }
             }
         }

@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -78,6 +80,14 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public void CheckComplexPrimitiveInteger()
+        {
+            var properties = typeof(IntWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(int?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(int?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
+
+        [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetIntAsync(ClientDiagnostics, pipeline, host);
@@ -95,6 +105,14 @@ namespace AutoRest.TestServer.Tests
             };
             return await PrimitiveOperations.PutIntAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void CheckComplexPrimitiveLong()
+        {
+            var properties = typeof(LongWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(long?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(long?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
 
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host, pipeline) =>
@@ -116,6 +134,14 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public void CheckComplexPrimitiveFloat()
+        {
+            var properties = typeof(FloatWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(float?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(float?), properties.First(p => p.Name == "Field2").PropertyType);
+        }
+
+        [Test]
         public Task GetComplexPrimitiveFloat() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetFloatAsync(ClientDiagnostics, pipeline, host);
@@ -133,6 +159,14 @@ namespace AutoRest.TestServer.Tests
             };
             return await PrimitiveOperations.PutFloatAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void CheckComplexPrimitiveDouble()
+        {
+            var properties = typeof(DoubleWrapper).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Assert.AreEqual(typeof(double?), properties.First(p => p.Name == "Field1").PropertyType);
+            Assert.AreEqual(typeof(double?), properties.First(p => p.Name == "Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose").PropertyType);
+        }
 
         [Test]
         public Task GetComplexPrimitiveDouble() => Test(async (host, pipeline) =>
@@ -197,8 +231,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDate() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("0001-01-01"), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("2016-02-29"), result.Value.Leap);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("2016-02-29"), result.Value.Leap);
         });
 
         [Test]
@@ -206,8 +240,8 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DateWrapper
             {
-                Field = DateTime.Parse("0001-01-01"),
-                Leap = DateTime.Parse("2016-02-29")
+                Field = DateTimeOffset.Parse("0001-01-01"),
+                Leap = DateTimeOffset.Parse("2016-02-29")
             };
             return await PrimitiveOperations.PutDateAsync(ClientDiagnostics, pipeline, value, host);
         });
@@ -217,8 +251,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal), result.Value.Now);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z"), result.Value.Now);
         });
 
         //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
@@ -227,8 +261,8 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DatetimeWrapper
             {
-                Field = DateTime.Parse("0001-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal),
-                Now = DateTime.Parse("2015-05-18T18:38:00Z", null, DateTimeStyles.AdjustToUniversal)
+                Field = DateTimeOffset.Parse("0001-01-01T00:00:00Z"),
+                Now = DateTimeOffset.Parse("2015-05-18T18:38:00Z")
             };
             return await PrimitiveOperations.PutDateTimeAsync(ClientDiagnostics, pipeline, value, host);
         });
@@ -238,8 +272,8 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTime.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
-            Assert.AreEqual(DateTime.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
 
         [Test]
@@ -949,5 +983,15 @@ namespace AutoRest.TestServer.Tests
             var value = new ReadonlyObj();
             return await ReadonlypropertyOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
+
+        [Test]
+        public void EnumGeneratedAsExtensibleWithCorrectName()
+        {
+            // Name directive
+            Assert.AreEqual("CMYKColors", typeof(CMYKColors).Name);
+            // modelAsString
+            Assert.True(typeof(CMYKColors).IsValueType);
+            Assert.False(typeof(CMYKColors).IsEnum);
+        }
     }
 }
