@@ -12,16 +12,19 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public ConstantOrParameter(ClientConstant constant)
         {
+            Type = constant.Type;
             _constant = constant;
             _parameter = null;
         }
 
         public ConstantOrParameter(ServiceClientMethodParameter parameter)
         {
+            Type = parameter.Type;
             _parameter = parameter;
             _constant = null;
         }
 
+        public ClientTypeReference Type { get; }
         public bool IsConstant => _constant.HasValue;
 
         public ClientConstant Constant => _constant ?? throw new InvalidOperationException("Not a constant");

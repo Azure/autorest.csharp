@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethodRequest
     {
-        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, int[] successfulStatusCodes, ConstantOrParameter? body)
+        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, int[] successfulStatusCodes, RequestBody? body)
         {
             Method = method;
             HostSegments = hostSegments;
@@ -25,6 +24,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public QueryParameter[] Query { get; }
         public RequestHeader[] Headers { get; }
         public int[] SuccessfulStatusCodes { get; set; }
-        public ConstantOrParameter? Body { get; set; }
+        public RequestBody? Body { get; set; }
     }
 }
