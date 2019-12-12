@@ -48,7 +48,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -68,7 +68,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseExistingKeyHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -114,7 +114,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -134,7 +134,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseProtectedKeyHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -181,7 +181,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseIntegerHeaders>> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -206,7 +206,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseIntegerHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -253,7 +253,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseLongHeaders>> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -278,7 +278,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseLongHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -325,7 +325,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseFloatHeaders>> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -350,7 +350,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseFloatHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -397,7 +397,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseDoubleHeaders>> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -422,7 +422,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDoubleHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -469,7 +469,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseBoolHeaders>> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -494,7 +494,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseBoolHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -544,7 +544,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseStringHeaders>> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -569,7 +569,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseStringHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -616,7 +616,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseDateHeaders>> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -641,7 +641,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDateHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -688,7 +688,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseDatetimeHeaders>> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -713,7 +713,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -763,7 +763,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -788,7 +788,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeRfc1123Headers(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -835,7 +835,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseDurationHeaders>> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -860,7 +860,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDurationHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -911,7 +911,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseByteHeaders>> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -936,7 +936,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseByteHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }
@@ -986,7 +986,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeader<ResponseEnumHeaders>> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -1011,7 +1011,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseEnumHeaders(response);
-                        return ResponseWithHeader.FromValue(headers, response);
+                        return ResponseWithHeaders.FromValue(headers, response);
                     default:
                         throw new Exception();
                 }

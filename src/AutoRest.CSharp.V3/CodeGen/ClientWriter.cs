@@ -54,9 +54,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             CSharpType responseType = bodyType switch
             {
                 null when headerModelType == null => new CSharpType(typeof(Response)),
-                null => new CSharpType(typeof(ResponseWithHeader<>), headerModelType),
+                null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
                 { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
-                { } => new CSharpType(typeof(ResponseWithHeader<>), bodyType, headerModelType),
+                { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
             };
 
             CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
@@ -387,10 +387,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                     switch (bodyType)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(headers, response);");
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(headers, response);");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(value, headers, response);");
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(value, headers, response);");
                             break;
                         case { }:
                             writer.Append($"return {writer.Type(typeof(Response))}.FromValue(value, response);");

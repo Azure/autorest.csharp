@@ -3,11 +3,11 @@
 
 namespace Azure.Core
 {
-    internal class ResponseWithHeader<T, THeaders> : Response<T>
+    internal class ResponseWithHeaders<T, THeaders> : Response<T>
     {
         private readonly Response _rawResponse;
 
-        public ResponseWithHeader(T value, THeaders headers, Response rawResponse)
+        public ResponseWithHeaders(T value, THeaders headers, Response rawResponse)
         {
             _rawResponse = rawResponse;
             Value = value;
