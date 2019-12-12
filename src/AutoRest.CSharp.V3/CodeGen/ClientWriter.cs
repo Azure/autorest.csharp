@@ -260,15 +260,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
-            var formatSpecifier = format switch
-            {
-                SerializationFormat.DateTimeRFC1123 => "R",
-                SerializationFormat.DateTimeISO8601 => "S",
-                SerializationFormat.Date => "D",
-                SerializationFormat.DateTimeUnix => "U",
-                _ => null
-            };
-
+            var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {
                 writer.Comma().Literal(formatSpecifier);

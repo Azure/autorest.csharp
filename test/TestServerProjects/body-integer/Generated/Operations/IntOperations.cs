@@ -364,7 +364,7 @@ namespace body_integer
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue(intBody.ToString());
+                Azure.Core.Utf8JsonWriterExtensions.WriteDateTimeOffsetValue(writer, intBody, "U");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 return response;

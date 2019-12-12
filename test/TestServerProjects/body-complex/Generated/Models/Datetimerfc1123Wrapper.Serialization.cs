@@ -14,12 +14,12 @@ namespace body_complex.Models.V20160229
             if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.Value.ToString("R"));
+                Azure.Core.Utf8JsonWriterExtensions.WriteDateTimeOffsetValue(writer, Field.Value, "R");
             }
             if (Now != null)
             {
                 writer.WritePropertyName("now");
-                writer.WriteStringValue(Now.Value.ToString("R"));
+                Azure.Core.Utf8JsonWriterExtensions.WriteDateTimeOffsetValue(writer, Now.Value, "R");
             }
             writer.WriteEndObject();
         }

@@ -64,18 +64,22 @@ namespace AutoRest.CSharp.V3.Pipeline
         private static Func<string, bool, SerializationFormat, string?> StringSerializer(bool includeToString = false) =>
             (vn, nu, f) => $"writer.WriteStringValue({vn}{(includeToString ? ".ToString()" : string.Empty)});";
 
-        private static string? ToFormatSpecifier(this SerializationFormat format) => format switch
+        public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTimeRFC1123 => "R",
-            SerializationFormat.DateTimeISO8601 => "yyyy-MM-ddTHH:mm:ssZ",
-            SerializationFormat.Date => "yyyy-MM-dd",
+            SerializationFormat.DateTimeISO8601 => "S",
+            SerializationFormat.Date => "D",
+            SerializationFormat.DateTimeUnix => "U",
             _ => null
         };
 
         private static readonly Func<string, bool, SerializationFormat, string?> DateTimeSerializer = (vn, nu, f) =>
         {
-            var format = f.ToFormatSpecifier();
-            return $"writer.WriteStringValue({vn}{(nu ? ".Value" : string.Empty)}.ToString({(format != null ? $"\"{format}\"" : string.Empty)}));";
+            var formatSpecifier = f.ToFormatSpecifier();
+            var valueText = $"{vn}{(nu ? ".Value" : string.Empty)}";
+            var formatText = formatSpecifier != null ? $", \"{formatSpecifier}\"" : string.Empty;
+            //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
+            return $"Azure.Core.Utf8JsonWriterExtensions.WriteDateTimeOffsetValue(writer, {valueText}{formatText});";
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
