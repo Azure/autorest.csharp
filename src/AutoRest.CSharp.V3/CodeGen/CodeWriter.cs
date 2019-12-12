@@ -202,6 +202,10 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriter Comma() => Append(", ");
 
+        public CodeWriter Space() => Append(" ");
+
+        public CodeWriter Semicolon() => Append(";").Line();
+
         public string ToFormattedCode()
         {
             if (_builder.Length == 0)

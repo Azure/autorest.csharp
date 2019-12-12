@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 isValueType: type is ClientEnum);
         }
 
-        public CSharpType CreateType(ServiceClient clientTypeProvider) =>
-            new CSharpType(new CSharpNamespace(_namespace.NullIfEmpty()), clientTypeProvider.Name, isNullable: false);
+        public CSharpType CreateType(string name) =>
+            new CSharpType(new CSharpNamespace(_namespace.NullIfEmpty()), name, isNullable: false);
     }
 }

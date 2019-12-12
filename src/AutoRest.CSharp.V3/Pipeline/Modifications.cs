@@ -21,6 +21,14 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         }
     }
 
+    internal partial class HttpResponse
+    {
+        public HttpResponse()
+        {
+            Headers = Array.Empty<HttpHeader>();
+        }
+    }
+
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {

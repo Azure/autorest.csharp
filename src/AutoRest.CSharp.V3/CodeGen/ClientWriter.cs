@@ -9,12 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = Azure.Response;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -30,11 +28,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public bool WriteClient(CodeWriter writer, ServiceClient operationGroup)
         {
-            var cs = _typeFactory.CreateType(operationGroup);
+            var cs = _typeFactory.CreateType(operationGroup.Name);
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                using (writer.Class("internal", "static", operationGroup.Name))
+                using (writer.Class("internal", "static", cs.Name))
                 {
                     foreach (var method in operationGroup.Methods)
                     {
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
-            var schemaResponse = operation.ResponseType;
+            var schemaResponse = operation.Response.Type;
             CSharpType? responseType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
             CSharpType returnType = schemaResponse != null && responseType != null
                 ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
@@ -85,7 +83,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
+                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
                     var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
                     writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
 
@@ -364,7 +362,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             using (writer.Switch("response.Status"))
             {
-                var statusCodes = operation.Request.SuccessfulStatusCodes;
+                var statusCodes = operation.Response.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
                 {
                     writer.Line($"case {statusCode}:");
