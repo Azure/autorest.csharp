@@ -7,6 +7,7 @@ using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using Azure.Core;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Pipeline
 {
@@ -58,15 +59,33 @@ namespace AutoRest.CSharp.V3.Pipeline
             _ => null
         };
 
-        private static readonly Func<string, bool, string?> NumberSerializer =
-            (vn, nu) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});";
-        private static Func<string, bool, string?> StringSerializer(bool includeToString = false) =>
-            (vn, nu) => $"writer.WriteStringValue({vn}{(includeToString ? ".ToString()" : string.Empty)});";
+        private static readonly Func<string, bool, SerializationFormat, string?> NumberSerializer =
+            (vn, nu, f) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});";
+        private static Func<string, bool, SerializationFormat, string?> StringSerializer(bool includeToString = false) =>
+            (vn, nu, f) => $"writer.WriteStringValue({vn}{(includeToString ? ".ToString()" : string.Empty)});";
+
+        public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
+        {
+            SerializationFormat.DateTimeRFC1123 => "R",
+            SerializationFormat.DateTimeISO8601 => "S",
+            SerializationFormat.Date => "D",
+            SerializationFormat.DateTimeUnix => "U",
+            _ => null
+        };
+
+        private static readonly Func<string, bool, SerializationFormat, string?> DateTimeSerializer = (vn, nu, f) =>
+        {
+            var formatSpecifier = f.ToFormatSpecifier();
+            var valueText = $"{vn}{(nu ? ".Value" : string.Empty)}";
+            var formatText = formatSpecifier != null ? $", \"{formatSpecifier}\"" : string.Empty;
+            //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
+            return $"Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, {valueText}{formatText});";
+        };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
-        private static readonly Dictionary<Type, Func<string, bool, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, string?>>
+        private static readonly Dictionary<Type, Func<string, bool, SerializationFormat, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, SerializationFormat, string?>>
         {
-            { typeof(bool), (vn, nu) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
+            { typeof(bool), (vn, nu, f) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
             { typeof(char), StringSerializer() },
             { typeof(short), NumberSerializer },
             { typeof(int), NumberSerializer },
@@ -75,8 +94,8 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(double), NumberSerializer },
             { typeof(decimal), NumberSerializer },
             { typeof(string), StringSerializer() },
-            { typeof(byte[]), (vn, nu) => null },
-            { typeof(DateTimeOffset), StringSerializer(true) },
+            { typeof(byte[]), (vn, nu, f) => null },
+            { typeof(DateTimeOffset), DateTimeSerializer },
             { typeof(TimeSpan), StringSerializer(true) },
             { typeof(Uri), StringSerializer(true) }
         };
@@ -140,13 +159,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Line(");");
         }
 
-        private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name)
+        private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name)
         {
             var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
-            writer.Line(TypeSerializers[frameworkType](name, type.IsNullable) ?? "writer.WriteNullValue();");
+            writer.Line(TypeSerializers[frameworkType](name, type.IsNullable, format) ?? "writer.WriteNullValue();");
         }
 
-        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
+        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
         {
             if (includePropertyName)
             {
@@ -172,7 +191,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                     WriteSerializeBinaryTypeReference(writer, name);
                     return;
                 default:
-                    WriteSerializeDefault(writer, type, typeFactory, name);
+                    WriteSerializeDefault(writer, type, format, typeFactory, name);
                     return;
             }
         }

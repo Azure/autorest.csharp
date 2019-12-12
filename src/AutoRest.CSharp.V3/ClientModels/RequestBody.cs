@@ -3,15 +3,13 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class RequestHeader
+    internal class RequestBody
     {
-        public string Name { get; }
         public ConstantOrParameter Value { get; }
         public SerializationFormat Format { get; }
 
-        public RequestHeader(string name, ConstantOrParameter value, SerializationFormat format = SerializationFormat.Default)
+        public RequestBody(ConstantOrParameter value, SerializationFormat format = SerializationFormat.Default)
         {
-            Name = name;
             Value = value;
             Format = format;
         }

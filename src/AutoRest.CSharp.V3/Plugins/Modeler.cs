@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.V3.Plugins
 
             List<ServiceClientMethodParameter> methodParameters = new List<ServiceClientMethodParameter>();
 
-            ConstantOrParameter? body = null;
+            RequestBody? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
@@ -136,8 +136,8 @@ namespace AutoRest.CSharp.V3.Plugins
                         case ParameterLocation.Path:
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
-                        case ParameterLocation.Body:
-                            body = constantOrParameter;
+                        case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
+                            body = new RequestBody(constantOrParameterValue, serializationFormat);
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter.Value;
@@ -201,17 +201,14 @@ namespace AutoRest.CSharp.V3.Plugins
             }
         }
 
-        private static SerializationFormat GetSerializationFormat(Schema schema)
+        private static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            return schema switch
-            {
-                UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
-                DateSchema _ => SerializationFormat.Date,
-                _ => SerializationFormat.Default,
-            };
-        }
+            UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
+            DateSchema _ => SerializationFormat.Date,
+            _ => SerializationFormat.Default,
+        };
 
         private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
         {
@@ -289,7 +286,7 @@ namespace AutoRest.CSharp.V3.Plugins
         }
 
         private static ClientObjectProperty CreateProperty(Property property) =>
-            new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName);
+            new ClientObjectProperty(property.CSharpName(), CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName, GetSerializationFormat(property.Schema));
 
         //TODO: Handle nullability properly
         private static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch

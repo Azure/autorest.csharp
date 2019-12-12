@@ -14,12 +14,12 @@ namespace body_complex.Models.V20160229
             if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.ToString());
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "D");
             }
             if (Leap != null)
             {
                 writer.WritePropertyName("leap");
-                writer.WriteStringValue(Leap.ToString());
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Leap.Value, "D");
             }
             writer.WriteEndObject();
         }

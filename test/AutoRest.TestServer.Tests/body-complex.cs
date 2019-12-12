@@ -236,7 +236,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/302")]
         public Task PutComplexPrimitiveDate() => TestStatus(async (host, pipeline) =>
         {
             var value = new DateWrapper
@@ -247,7 +246,6 @@ namespace AutoRest.TestServer.Tests
             return await PrimitiveOperations.PutDateAsync(ClientDiagnostics, pipeline, value, host);
         });
 
-        //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
         [Test]
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
@@ -256,9 +254,8 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z"), result.Value.Now);
         });
 
-        //TODO: Passes, but has a bug: https://github.com/Azure/autorest.csharp/issues/316
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/303")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "404 response not found")]
         public Task PutComplexPrimitiveDateTime() => TestStatus(async (host, pipeline) =>
         {
             var value = new DatetimeWrapper
@@ -274,18 +271,17 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 12:00:00 GMT"), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/304")]
         public Task PutComplexPrimitiveDateTimeRfc1123() => TestStatus(async (host, pipeline) =>
         {
             var value = new Datetimerfc1123Wrapper
             {
-                Field = DateTime.Parse("Mon, 01 Jan 0001 12:00:00 GMT"),
-                Now = DateTime.Parse("Mon, 18 May 2015 11:38:00 GMT")
+                Field = DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"),
+                Now = DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT")
             };
             return await PrimitiveOperations.PutDateTimeRfc1123Async(ClientDiagnostics, pipeline, value, host);
         });
