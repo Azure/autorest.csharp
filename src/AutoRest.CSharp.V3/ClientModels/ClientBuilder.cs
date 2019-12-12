@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
             {
-                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", new ConstantOrParameter(StringConstant(mediaType)))));
+                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
             }
 
             var request = new ClientMethodRequest(
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
             foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
             {
-                host.Add(isLiteral ? StringConstant(text) : parameters[text]);
+                host.Add(isLiteral ? ClientModelBuilderHelpers.StringConstant(text) : parameters[text]);
             }
 
             return host.ToArray();
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             PathSegment TextSegment(string text)
             {
-                return new PathSegment(StringConstant(text), false, SerializationFormat.Default);
+                return new PathSegment(ClientModelBuilderHelpers.StringConstant(text), false, SerializationFormat.Default);
             }
 
             List<PathSegment> host = new List<PathSegment>();
@@ -197,9 +197,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
-
-        private static ClientConstant StringConstant(string s) => ClientModelBuilderHelpers.ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
-
 
         //TODO: Refactor as this is written quite... ugly.
         private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
