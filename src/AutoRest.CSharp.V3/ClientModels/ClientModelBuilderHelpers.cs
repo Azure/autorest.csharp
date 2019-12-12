@@ -38,5 +38,14 @@ namespace AutoRest.CSharp.V3.ClientModels
             };
             return new ClientConstant(normalizedValue, type);
         }
+
+        public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
+        {
+            UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
+            DateSchema _ => SerializationFormat.Date,
+            _ => SerializationFormat.Default,
+        };
     }
 }

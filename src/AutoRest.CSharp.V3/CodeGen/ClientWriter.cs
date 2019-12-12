@@ -112,14 +112,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                         WriteQueryParameter(writer, queryParameter);
                     }
 
-                    if (operation.Request.Body is ConstantOrParameter body)
+                    if (operation.Request.Body is RequestBody body)
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-
-                        var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
-                        var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
-                        writer.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
+                        var name = body.Value.IsConstant ? body.Value.Constant.ToValueString() : body.Value.Parameter.Name;
+                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, name, string.Empty, false);
 
                         writer.Line("request.Content = content;");
                     }
@@ -264,15 +262,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
-            var formatSpecifier = format switch
-            {
-                SerializationFormat.DateTimeRFC1123 => "R",
-                SerializationFormat.DateTimeISO8601 => "S",
-                SerializationFormat.Date => "D",
-                SerializationFormat.DateTimeUnix => "U",
-                _ => null
-            };
-
+            var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {
                 writer.Comma().Literal(formatSpecifier);

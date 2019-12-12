@@ -18,10 +18,11 @@ namespace AutoRest.CSharp.V3.ClientModels
     internal class ClientBuilder
     {
         public static ServiceClient BuildClient(OperationGroup arg) =>
-            new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where<ClientMethod?>(method => method != null).ToArray()!);
+            new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where(method => method != null).ToArray()!);
 
         private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter) =>
-            requestParameter.ClientDefaultValue != null ? ClientModelBuilderHelpers.ParseClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
+            requestParameter.ClientDefaultValue != null ?
+                ClientModelBuilderHelpers.ParseClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
                 (ClientConstant?)null;
 
         private static ClientMethod? BuildMethod(Operation operation)
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             List<ServiceClientMethodParameter> methodParameters = new List<ServiceClientMethodParameter>();
 
-            ConstantOrParameter? body = null;
+            RequestBody? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
@@ -72,14 +73,17 @@ namespace AutoRest.CSharp.V3.ClientModels
                             CreateDefaultValueConstant(requestParameter), false);
                         break;
                     default:
-                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(), ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                            CreateDefaultValueConstant(requestParameter), requestParameter.Required == true);
+                        constantOrParameter = new ServiceClientMethodParameter(
+                            requestParameter.CSharpName(),
+                            ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+                            CreateDefaultValueConstant(requestParameter),
+                            requestParameter.Required == true);
                         break;
                 }
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
-                    SerializationFormat serializationFormat = GetSerializationFormat(valueSchema);
+                    SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
@@ -91,8 +95,8 @@ namespace AutoRest.CSharp.V3.ClientModels
                         case ParameterLocation.Path:
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
-                        case ParameterLocation.Body:
-                            body = constantOrParameter;
+                        case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
+                            body = new RequestBody(constantOrParameterValue, serializationFormat);
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter.Value;
@@ -108,7 +112,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
             {
-                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", new ConstantOrParameter(ClientModelBuilderHelpers.StringConstant(mediaType)))));
+                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
             }
 
             var request = new ClientMethodRequest(
@@ -173,18 +177,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
         }
 
-        private static SerializationFormat GetSerializationFormat(Schema schema)
-        {
-            return schema switch
-            {
-                UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
-                DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
-                DateSchema _ => SerializationFormat.Date,
-                _ => SerializationFormat.Default,
-            };
-        }
-
         private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
         {
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
@@ -227,6 +219,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
 
+        //TODO: Refactor as this is written quite... ugly.
         private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
         {
             if (path == null)

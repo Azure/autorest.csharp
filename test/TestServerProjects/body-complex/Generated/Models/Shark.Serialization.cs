@@ -17,7 +17,7 @@ namespace body_complex.Models.V20160229
                 writer.WriteNumberValue(Age.Value);
             }
             writer.WritePropertyName("birthday");
-            writer.WriteStringValue(Birthday.ToString());
+            Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Birthday, "S");
             writer.WriteEndObject();
         }
         internal static Shark Deserialize(JsonElement element)
