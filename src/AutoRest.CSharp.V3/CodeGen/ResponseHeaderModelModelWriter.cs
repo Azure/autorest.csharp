@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 .Append("=>")
                 .Append(ResponseField)
                 .Append(".Headers.TryGetValue(")
-                .Literal(header.Name)
+                .Literal(header.SerializedName)
                 .Append(", out string value) ? value : null")
                 .Semicolon();
         }

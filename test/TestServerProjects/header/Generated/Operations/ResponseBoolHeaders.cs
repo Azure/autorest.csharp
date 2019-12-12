@@ -12,6 +12,6 @@ namespace header
         {
             _response = response;
         }
-        public string? Value => _response.Headers.TryGetValue("Value", out string value) ? value : null;
+        public string? Value => _response.Headers.TryGetValue("value", out string value) ? value : null;
     }
 }

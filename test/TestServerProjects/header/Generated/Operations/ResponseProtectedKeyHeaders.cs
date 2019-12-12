@@ -12,6 +12,6 @@ namespace header
         {
             _response = response;
         }
-        public string? ContentType => _response.Headers.TryGetValue("ContentType", out string value) ? value : null;
+        public string? ContentType => _response.Headers.TryGetValue("Content-Type", out string value) ? value : null;
     }
 }

@@ -12,6 +12,6 @@ namespace header
         {
             _response = response;
         }
-        public string? UserAgent => _response.Headers.TryGetValue("UserAgent", out string value) ? value : null;
+        public string? UserAgent => _response.Headers.TryGetValue("User-Agent", out string value) ? value : null;
     }
 }
