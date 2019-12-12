@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.V3.ClientModels;
 using Azure;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -23,6 +24,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(responseHeaderModel.Name);
             using (writer.Namespace(cs.Namespace))
             {
+                writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
+
                 using (writer.Class("internal", null, cs.Name))
                 {
                     WriteField(writer);
@@ -30,7 +33,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var method in responseHeaderModel.Headers)
                     {
-                        WriteHeaderProperty(writer, method, cs.Namespace);
+                        WriteHeaderProperty(writer, method);
                     }
                 }
             }
@@ -56,17 +59,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header, CSharpNamespace csNamespace)
+        private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header)
         {
+            var type = _typeFactory.CreateType(header.Type);
             writer.Append("public ")
-                .AppendType(typeof(string), true)
+                .AppendType(type)
                 .Space()
                 .Append(header.Name)
                 .Append("=>")
                 .Append(ResponseField)
                 .Append(".Headers.TryGetValue(")
                 .Literal(header.SerializedName)
-                .Append(", out string value) ? value : null")
+                .Append(", out ")
+                .AppendType(type)
+                .Append(" value) ? value : null")
                 .Semicolon();
         }
     }

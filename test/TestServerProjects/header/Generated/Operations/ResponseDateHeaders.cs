@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using Azure;
+using Azure.Core;
 
 namespace header
 {
@@ -12,6 +14,6 @@ namespace header
         {
             _response = response;
         }
-        public string? Value => _response.Headers.TryGetValue("value", out string value) ? value : null;
+        public DateTimeOffset? Value => _response.Headers.TryGetValue("value", out DateTimeOffset? value) ? value : null;
     }
 }

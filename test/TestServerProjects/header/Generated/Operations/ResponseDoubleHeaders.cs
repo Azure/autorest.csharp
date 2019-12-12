@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Azure;
+using Azure.Core;
 
 namespace header
 {
@@ -12,6 +13,6 @@ namespace header
         {
             _response = response;
         }
-        public string? Value => _response.Headers.TryGetValue("value", out string value) ? value : null;
+        public double? Value => _response.Headers.TryGetValue("value", out double? value) ? value : null;
     }
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Azure;
+using Azure.Core;
 
 namespace header
 {
@@ -12,6 +13,6 @@ namespace header
         {
             _response = response;
         }
-        public string? ContentType => _response.Headers.TryGetValue("Content-Type", out string value) ? value : null;
+        public string? ContentType => _response.Headers.TryGetValue("Content-Type", out string? value) ? value : null;
     }
 }

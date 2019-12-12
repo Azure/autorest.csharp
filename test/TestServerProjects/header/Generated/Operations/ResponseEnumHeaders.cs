@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using Azure;
+using Azure.Core;
+using header.Models.V100;
 
 namespace header
 {
@@ -12,6 +14,6 @@ namespace header
         {
             _response = response;
         }
-        public string? Value => _response.Headers.TryGetValue("value", out string value) ? value : null;
+        public GreyscaleColors? Value => _response.Headers.TryGetValue("value", out GreyscaleColors? value) ? value : null;
     }
 }

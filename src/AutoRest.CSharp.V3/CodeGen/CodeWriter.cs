@@ -108,6 +108,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
             Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? String.Empty : "set; ")}}}{initializer}");
 
+        public void UseNamespace(CSharpNamespace @namespace)
+        {
+            _usingNamespaces.Add(@namespace);
+        }
 
         public string Type(CSharpType type)
         {
@@ -117,7 +121,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 if (_currentNamespace?.FullName != type.Namespace.FullName)
                 {
-                    _usingNamespaces.Add(type.Namespace);
+                    UseNamespace(type.Namespace);
                 }
             }
 

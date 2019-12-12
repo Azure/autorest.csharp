@@ -51,7 +51,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseIntegerPositive() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseIntegerAsync(ClientDiagnostics, pipeline, scenario: "positive", host: host);
-            Assert.AreEqual("1", response.Headers.Value);
+            Assert.AreEqual(1, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -59,7 +59,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseIntegerNegative() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseIntegerAsync(ClientDiagnostics, pipeline, scenario: "negative", host: host);
-            Assert.AreEqual("-2", response.Headers.Value);
+            Assert.AreEqual(-2, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseLongPositive() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseLongAsync(ClientDiagnostics, pipeline, scenario: "positive", host: host);
-            Assert.AreEqual("105", response.Headers.Value);
+            Assert.AreEqual(105, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -81,7 +81,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseLongNegative() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseLongAsync(ClientDiagnostics, pipeline, scenario: "negative", host: host);
-            Assert.AreEqual("-2", response.Headers.Value);
+            Assert.AreEqual(-2, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -95,7 +95,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseFloatPositive() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseFloatAsync(ClientDiagnostics, pipeline, scenario: "positive", host: host);
-            Assert.AreEqual("0.07", response.Headers.Value);
+            Assert.AreEqual(0.0700000003f, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -103,7 +103,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseFloatNegative() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseFloatAsync(ClientDiagnostics, pipeline, scenario: "negative",  host: host);
-            Assert.AreEqual("-3", response.Headers.Value);
+            Assert.AreEqual(-3f, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -117,7 +117,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDoublePositive() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDoubleAsync(ClientDiagnostics, pipeline, scenario: "positive", host: host);
-            Assert.AreEqual("7e+120", response.Headers.Value);
+            Assert.AreEqual(7.0000000000000001E+120d, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -125,7 +125,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDoubleNegative() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDoubleAsync(ClientDiagnostics, pipeline, scenario: "negative", host: host);
-            Assert.AreEqual("-3", response.Headers.Value);
+            Assert.AreEqual(-3, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -139,7 +139,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseBoolTrue() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseBoolAsync(ClientDiagnostics, pipeline, scenario: "true", host: host);
-            Assert.AreEqual("true", response.Headers.Value);
+            Assert.AreEqual(true, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -147,7 +147,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseBoolFalse() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseBoolAsync(ClientDiagnostics, pipeline, scenario: "false", host: host);
-            Assert.AreEqual("false", response.Headers.Value);
+            Assert.AreEqual(false, response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -194,7 +194,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDateAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host);
-            Assert.AreEqual("2010-01-01", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -202,7 +202,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateMin() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDateAsync(ClientDiagnostics, pipeline, scenario: "min", host: host);
-            Assert.AreEqual("0001-01-01", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -216,7 +216,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDatetimeAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host);
-            Assert.AreEqual("2010-01-01T12:34:56Z", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01T12:34:56Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -224,7 +224,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeMin() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDatetimeAsync(ClientDiagnostics, pipeline, scenario: "min", host: host);
-            Assert.AreEqual("0001-01-01T00:00:00Z", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -238,7 +238,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "valid", host: host);
-            Assert.AreEqual("Fri, 01 Jan 2010 12:34:56 GMT", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("Fri, 01 Jan 2010 12:34:56 GMT"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -246,7 +246,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateTimeRfc1123Min() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDatetimeRfc1123Async(ClientDiagnostics, pipeline, scenario: "min", host: host);
-            Assert.AreEqual("Mon, 01 Jan 0001 00:00:00 GMT", response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -257,7 +257,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDurationValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseDurationAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host);
-            Assert.AreEqual("P123DT22H14M12.011S", response.Headers.Value);
+            Assert.AreEqual(new TimeSpan(123, 22, 14, 12, 11), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -268,7 +268,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseBytesValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseByteAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host);
-            Assert.AreEqual("5ZWK6b2E5LiC54ub54uc76ex76Ss76ex76iM76ip", response.Headers.Value);
+            Assert.AreEqual(Convert.FromBase64String("5ZWK6b2E5LiC54ub54uc76ex76Ss76ex76iM76ip"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -279,6 +279,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterEnumNull() => TestStatus(async (host, pipeline) => await HeaderOperations.ParamEnumAsync(ClientDiagnostics, pipeline, scenario: "null", null, host: host));
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseEnumAsync(ClientDiagnostics, pipeline, scenario: "valid", host: host);
@@ -287,6 +288,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumNull() => TestStatus(async (host, pipeline) =>
         {
             var response = await HeaderOperations.ResponseEnumAsync(ClientDiagnostics, pipeline, scenario: "null", host: host);
