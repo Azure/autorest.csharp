@@ -9,13 +9,11 @@ namespace AutoRest.CSharp.V3.ClientModels
     {
         public Type Type { get; }
         public override bool IsNullable { get; }
-        public FrameworkTypeReferenceFormat Format { get; }
 
-        public FrameworkTypeReference(Type type, bool isNullable = false, FrameworkTypeReferenceFormat format = FrameworkTypeReferenceFormat.Default)
+        public FrameworkTypeReference(Type type, bool isNullable = false)
         {
             Type = type;
             IsNullable = isNullable;
-            Format = format;
         }
     }
 }

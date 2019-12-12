@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
-using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -105,14 +104,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                         WriteQueryParameter(writer, queryParameter);
                     }
 
-                    if (operation.Request.Body is ConstantOrParameter body)
+                    if (operation.Request.Body is RequestBody body)
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-
-                        var type = body.IsConstant ? body.Constant.Type : body.Parameter.Type;
-                        var name = body.IsConstant ? body.Constant.ToValueString() : body.Parameter.Name;
-                        writer.ToSerializeCall(type, _typeFactory, name, string.Empty, false);
+                        writer.ToSerializeCall(body.Type, body.Format, _typeFactory, body.Name, string.Empty, false);
 
                         writer.Line("request.Content = content;");
                     }

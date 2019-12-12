@@ -7,6 +7,7 @@ using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using Azure.Core;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Pipeline
 {
@@ -26,14 +27,6 @@ namespace AutoRest.CSharp.V3.Pipeline
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
             _ => null
-        };
-
-        public static FrameworkTypeReferenceFormat ToFrameworkTypeReferenceFormat(this Schema schema) => schema switch
-        {
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => FrameworkTypeReferenceFormat.DateTimeISO8601,
-            DateSchema _ => FrameworkTypeReferenceFormat.Date,
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => FrameworkTypeReferenceFormat.DateTimeRFC1123,
-            _ => FrameworkTypeReferenceFormat.Default,
         };
 
         public static Type ToFrameworkType(this NumberSchema schema) => schema.Type switch
@@ -66,27 +59,27 @@ namespace AutoRest.CSharp.V3.Pipeline
             _ => null
         };
 
-        private static readonly Func<string, bool, FrameworkTypeReferenceFormat, string?> NumberSerializer =
+        private static readonly Func<string, bool, SerializationFormat, string?> NumberSerializer =
             (vn, nu, f) => $"writer.WriteNumberValue({vn}{(nu ? ".Value" : string.Empty)});";
-        private static Func<string, bool, FrameworkTypeReferenceFormat, string?> StringSerializer(bool includeToString = false) =>
+        private static Func<string, bool, SerializationFormat, string?> StringSerializer(bool includeToString = false) =>
             (vn, nu, f) => $"writer.WriteStringValue({vn}{(includeToString ? ".ToString()" : string.Empty)});";
 
-        private static string? ToFormatSpecifier(this FrameworkTypeReferenceFormat format) => format switch
+        private static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
-            FrameworkTypeReferenceFormat.DateTimeRFC1123 => "R",
-            FrameworkTypeReferenceFormat.DateTimeISO8601 => "yyyy-MM-ddTHH:mm:ssZ",
-            FrameworkTypeReferenceFormat.Date => "yyyy-MM-dd",
+            SerializationFormat.DateTimeRFC1123 => "R",
+            SerializationFormat.DateTimeISO8601 => "yyyy-MM-ddTHH:mm:ssZ",
+            SerializationFormat.Date => "yyyy-MM-dd",
             _ => null
         };
 
-        private static readonly Func<string, bool, FrameworkTypeReferenceFormat, string?> DateTimeSerializer = (vn, nu, f) =>
+        private static readonly Func<string, bool, SerializationFormat, string?> DateTimeSerializer = (vn, nu, f) =>
         {
             var format = f.ToFormatSpecifier();
             return $"writer.WriteStringValue({vn}{(nu ? ".Value" : string.Empty)}.ToString({(format != null ? $"\"{format}\"" : string.Empty)}));";
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
-        private static readonly Dictionary<Type, Func<string, bool, FrameworkTypeReferenceFormat, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, FrameworkTypeReferenceFormat, string?>>
+        private static readonly Dictionary<Type, Func<string, bool, SerializationFormat, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, SerializationFormat, string?>>
         {
             { typeof(bool), (vn, nu, f) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
             { typeof(char), StringSerializer() },
@@ -162,14 +155,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Line(");");
         }
 
-        private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name)
+        private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name)
         {
             var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
-            var format = (type as FrameworkTypeReference)?.Format ?? FrameworkTypeReferenceFormat.Default;
             writer.Line(TypeSerializers[frameworkType](name, type.IsNullable, format) ?? "writer.WriteNullValue();");
         }
 
-        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
+        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name, string serializedName, bool includePropertyName = true, bool quoteSerializedName = true)
         {
             if (includePropertyName)
             {
@@ -195,7 +187,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                     WriteSerializeBinaryTypeReference(writer, name);
                     return;
                 default:
-                    WriteSerializeDefault(writer, type, typeFactory, name);
+                    WriteSerializeDefault(writer, type, format, typeFactory, name);
                     return;
             }
         }
