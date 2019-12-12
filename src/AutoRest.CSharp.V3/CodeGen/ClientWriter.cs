@@ -108,7 +108,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-                        writer.ToSerializeCall(body.Type, body.Format, _typeFactory, body.Name, string.Empty, false);
+                        var name = body.Value.IsConstant ? body.Value.Constant.ToValueString() : body.Value.Parameter.Name;
+                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, name, string.Empty, false);
 
                         writer.Line("request.Content = content;");
                     }

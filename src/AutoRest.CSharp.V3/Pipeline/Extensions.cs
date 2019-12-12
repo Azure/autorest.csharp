@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             var valueText = $"{vn}{(nu ? ".Value" : string.Empty)}";
             var formatText = formatSpecifier != null ? $", \"{formatSpecifier}\"" : string.Empty;
             //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
-            return $"Azure.Core.Utf8JsonWriterExtensions.WriteDateTimeOffsetValue(writer, {valueText}{formatText});";
+            return $"Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, {valueText}{formatText});";
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.

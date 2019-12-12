@@ -255,6 +255,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "404 response not found")]
         public Task PutComplexPrimitiveDateTime() => TestStatus(async (host, pipeline) =>
         {
             var value = new DatetimeWrapper

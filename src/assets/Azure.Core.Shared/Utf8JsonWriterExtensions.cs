@@ -8,9 +8,10 @@ namespace Azure.Core
 {
     internal static class Utf8JsonWriterExtensions
     {
-        public static void WriteDateTimeOffsetValue(this Utf8JsonWriter writer, DateTimeOffset value, string format)
-        {
+        public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
-        }
+
+        public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value) =>
+            writer.WriteStringValue(value.ToString());
     }
 }
