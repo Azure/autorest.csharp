@@ -47,9 +47,9 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
-            var schemaResponse = operation.ResponseType;
-            CSharpType? responseType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
-            CSharpType returnType = schemaResponse != null && responseType != null
+            ResponseBody? responseBody = operation.ResponseBodies.FirstOrDefault();
+            CSharpType? responseType = responseBody != null ? _typeFactory.CreateType(responseBody.Value) : null;
+            CSharpType returnType = responseBody != null && responseType != null
                 ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
                 : new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
 
@@ -116,9 +116,9 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
-                    if (schemaResponse != null && responseType != null)
+                    if (responseBody != null && responseType != null)
                     {
-                        WriteStatusCodeSwitch(writer, schemaResponse, responseType, operation);
+                        WriteStatusCodeSwitch(writer, responseBody, responseType, operation);
                     }
                     else
                     {
@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ClientTypeReference schemaResponse, CSharpType responseType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody responseBody, CSharpType responseType, ClientMethod operation)
         {
             writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
 
@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
 
                 writer.Append($"return {writer.Type(typeof(Response))}.FromValue(");
-                writer.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
+                writer.ToDeserializeCall(responseBody.Value, responseBody.Format, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
                 writer.Line(", response);");
                 writer.Line("default:");
                 //TODO: Handle actual exception responses

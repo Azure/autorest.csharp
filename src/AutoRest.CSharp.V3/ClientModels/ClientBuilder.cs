@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientMethod? BuildMethod(Operation operation)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
+            //TODO: Handle multiple responses
             var response = operation.Responses.FirstOrDefault();
             var httpResponse = response?.Protocol.Http as HttpResponse;
 
@@ -121,18 +122,19 @@ namespace AutoRest.CSharp.V3.ClientModels
                 body
             );
 
-            ClientTypeReference? responseType = null;
+            List<ResponseBody> responseBodies = new List<ResponseBody>();
             if (response is SchemaResponse schemaResponse)
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
+                var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
+                responseBodies.Add(new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema)));
             }
 
             return new ClientMethod(
                 operation.CSharpName(),
                 request,
                 methodParameters.ToArray(),
-                responseType
+                responseBodies.ToArray()
             );
         }
 

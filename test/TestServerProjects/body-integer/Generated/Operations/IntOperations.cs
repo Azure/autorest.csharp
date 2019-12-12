@@ -335,7 +335,7 @@ namespace body_integer
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        return Response.FromValue(Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U"), response);
                     default:
                         throw new Exception();
                 }
@@ -395,7 +395,7 @@ namespace body_integer
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        return Response.FromValue(Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U"), response);
                     default:
                         throw new Exception();
                 }
@@ -426,7 +426,7 @@ namespace body_integer
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        return Response.FromValue(Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U"), response);
                     default:
                         throw new Exception();
                 }

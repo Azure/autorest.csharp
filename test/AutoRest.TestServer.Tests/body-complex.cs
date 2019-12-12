@@ -267,7 +267,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/307")]
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);

@@ -5,18 +5,18 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethod
     {
-        public ClientMethod(string name, ClientMethodRequest request, ServiceClientMethodParameter[] parameters, ClientTypeReference? responseType)
+        public ClientMethod(string name, ClientMethodRequest request, ServiceClientMethodParameter[] parameters, ResponseBody[] responseBodies)
         {
             Name = name;
             Request = request;
             Parameters = parameters;
-            ResponseType = responseType;
+            ResponseBodies = responseBodies;
         }
 
         public string Name { get; }
 
         public ClientMethodRequest Request { get; }
         public ServiceClientMethodParameter[] Parameters { get; }
-        public ClientTypeReference? ResponseType { get; }
+        public ResponseBody[] ResponseBodies { get; }
     }
 }
