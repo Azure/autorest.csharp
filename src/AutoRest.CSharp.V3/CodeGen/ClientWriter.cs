@@ -365,36 +365,40 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line($"case {statusCode}:");
                 }
 
-                if (bodyType != null)
+                bool hasBody = bodyType != null;
+                using (hasBody ? writer.Scope() : default)
                 {
-                    writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                    writer.Append("var value = ");
-                    writer.ToDeserializeCall(bodyType!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
-                    writer.Semicolon();
-                }
+                    if (hasBody)
+                    {
+                        writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                        writer.Append("var value = ");
+                        writer.ToDeserializeCall(bodyType!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
+                        writer.Semicolon();
+                    }
 
-                if (headersModelType != null)
-                {
-                    writer.Append("var headers = new ")
-                        .AppendType(headersModelType)
-                        .Append("(response)")
-                        .Semicolon();
-                }
+                    if (headersModelType != null)
+                    {
+                        writer.Append("var headers = new ")
+                            .AppendType(headersModelType)
+                            .Append("(response)")
+                            .Semicolon();
+                    }
 
-                switch (bodyType)
-                {
-                    case null when headersModelType != null:
-                        writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(headers, response);");
-                        break;
-                    case { } when headersModelType != null:
-                        writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(value, headers, response);");
-                        break;
-                    case { }:
-                        writer.Append($"return {writer.Type(typeof(Response))}.FromValue(value, response);");
-                        break;
-                    case null:
-                        writer.Append("return response;");
-                        break;
+                    switch (bodyType)
+                    {
+                        case null when headersModelType != null:
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(headers, response);");
+                            break;
+                        case { } when headersModelType != null:
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeader))}.FromValue(value, headers, response);");
+                            break;
+                        case { }:
+                            writer.Append($"return {writer.Type(typeof(Response))}.FromValue(value, response);");
+                            break;
+                        case null:
+                            writer.Append("return response;");
+                            break;
+                    }
                 }
 
 

@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private readonly string _definitionAccessDefault = "public";
         private CSharpNamespace? _currentNamespace;
 
-        protected virtual CodeWriterScope Scope(string start = "{", string end = "}")
+        public CodeWriterScope Scope(string start = "{", string end = "}")
         {
             Line(start);
             return new CodeWriterScope(this, end);
