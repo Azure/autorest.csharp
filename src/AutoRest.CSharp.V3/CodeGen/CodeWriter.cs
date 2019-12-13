@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             Line($"{value}{(includeComma ? "," : String.Empty)}");
 
         public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
-            Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? String.Empty : "set; ")}}}{initializer}");
+            Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? "internal set; " : "set; ")}}}{initializer}");
 
         public void UseNamespace(CSharpNamespace @namespace)
         {

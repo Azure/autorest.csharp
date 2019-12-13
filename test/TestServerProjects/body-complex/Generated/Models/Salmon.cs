@@ -5,6 +5,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class Salmon : Fish
     {
+        public Salmon()
+        {
+            Fishtype = "salmon";
+        }
         public string? Location { get; set; }
         public bool? Iswild { get; set; }
     }

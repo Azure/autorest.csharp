@@ -9,6 +9,12 @@ namespace body_complex.Models.V20160229
     {
         internal static void Serialize(DotFish model, Utf8JsonWriter writer)
         {
+            switch (model)
+            {
+                case DotSalmon dotSalmon:
+                    DotSalmonSerializer.Serialize(dotSalmon, writer);
+                    return;
+            }
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type");
             writer.WriteStringValue(model.FishType);
@@ -21,6 +27,13 @@ namespace body_complex.Models.V20160229
         }
         internal static DotFish Deserialize(JsonElement element)
         {
+            if (element.TryGetProperty("fish.type", out JsonElement discriminator))
+            {
+                switch (discriminator.GetString())
+                {
+                    case "DotSalmon": return DotSalmonSerializer.Deserialize(element);
+                }
+            }
             var result = new DotFish();
             foreach (var property in element.EnumerateObject())
             {

@@ -7,6 +7,7 @@ using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -105,6 +106,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.Method("internal static", "void", "Serialize", writer.Pair(cs, "model"), writer.Pair(typeof(Utf8JsonWriter), "writer")))
                     {
+                        if (model.Discriminator != null)
+                        {
+                            writer.Line("switch (model)");
+                            using (writer.Scope())
+                            {
+                                foreach (var implementation in model.Discriminator.Implementations)
+                                {
+                                    var type = _typeFactory.CreateType(implementation.Value);
+                                    var localName = type.Name.ToVariableName();
+                                    writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
+                                    writer.ToSerializeCall(implementation.Value, SerializationFormat.Default,  _typeFactory, localName, "", includePropertyName: false);
+                                    writer.Line("return;");
+                                }
+                            }
+                        }
+
                         writer.Line("writer.WriteStartObject();");
 
                         var currentType = model;
@@ -115,7 +132,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 using (property.Type.IsNullable ? writer.If($"model.{ property.Name} != null") : default)
                                 {
-                                    WriteProperty(writer, property.Type, property.Format, "model."+property.Name, property.SerializedName);
+                                    WriteProperty(writer, property.Type, property.Format, "model." + property.Name, property.SerializedName);
                                 }
                             }
 
@@ -135,6 +152,28 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var typeText = writer.Type(cs);
                     using (writer.Method("internal static", typeText, "Deserialize", writer.Pair(typeof(JsonElement), "element")))
                     {
+                        if (model.Discriminator != null)
+                        {
+                            using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out JsonElement discriminator)"))
+                            {
+                                writer.Line("switch (discriminator.GetString())");
+                                using (writer.Scope())
+                                {
+                                    foreach (var implementation in model.Discriminator.Implementations)
+                                    {
+                                        var type = _typeFactory.CreateType(implementation.Value);
+
+                                        writer
+                                            .Append("case ")
+                                            .Literal(implementation.Key)
+                                            .Append(": return ")
+                                            .ToDeserializeCall(implementation.Value, SerializationFormat.Default, _typeFactory, "element", writer.Type(type), "");
+                                        writer.SemicolonLine();
+                                    }
+                                }
+                            }
+                        }
+
                         writer.Line($"var result = new {typeText}();");
                         using (writer.ForEach("var property in element.EnumerateObject()"))
                         {

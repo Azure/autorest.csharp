@@ -8,6 +8,6 @@ namespace body_complex.Models.V20160229
     public partial class Cat : Pet
     {
         public string? Color { get; set; }
-        public ICollection<Dog> Hates { get; } = new List<Dog>();
+        public ICollection<Dog> Hates { get; internal set; } = new List<Dog>();
     }
 }

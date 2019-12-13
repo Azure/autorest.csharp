@@ -10,6 +10,18 @@ namespace body_complex.Models.V20160229
     {
         internal static void Serialize(Shark model, Utf8JsonWriter writer)
         {
+            switch (model)
+            {
+                case Cookiecuttershark cookiecuttershark:
+                    CookiecuttersharkSerializer.Serialize(cookiecuttershark, writer);
+                    return;
+                case Goblinshark goblinshark:
+                    GoblinsharkSerializer.Serialize(goblinshark, writer);
+                    return;
+                case Sawshark sawshark:
+                    SawsharkSerializer.Serialize(sawshark, writer);
+                    return;
+            }
             writer.WriteStartObject();
             if (model.Age != null)
             {
@@ -41,6 +53,15 @@ namespace body_complex.Models.V20160229
         }
         internal static Shark Deserialize(JsonElement element)
         {
+            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
+            {
+                switch (discriminator.GetString())
+                {
+                    case "cookiecuttershark": return CookiecuttersharkSerializer.Deserialize(element);
+                    case "goblin": return GoblinsharkSerializer.Deserialize(element);
+                    case "sawshark": return SawsharkSerializer.Deserialize(element);
+                }
+            }
             var result = new Shark();
             foreach (var property in element.EnumerateObject())
             {

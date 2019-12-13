@@ -9,6 +9,12 @@ namespace body_complex.Models.V20160229
     {
         internal static void Serialize(Salmon model, Utf8JsonWriter writer)
         {
+            switch (model)
+            {
+                case SmartSalmon smartSalmon:
+                    SmartSalmonSerializer.Serialize(smartSalmon, writer);
+                    return;
+            }
             writer.WriteStartObject();
             if (model.Location != null)
             {
@@ -43,6 +49,13 @@ namespace body_complex.Models.V20160229
         }
         internal static Salmon Deserialize(JsonElement element)
         {
+            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
+            {
+                switch (discriminator.GetString())
+                {
+                    case "smart_salmon": return SmartSalmonSerializer.Deserialize(element);
+                }
+            }
             var result = new Salmon();
             foreach (var property in element.EnumerateObject())
             {

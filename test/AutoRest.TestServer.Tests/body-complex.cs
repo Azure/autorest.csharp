@@ -675,8 +675,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
-        public Task PutComplexPolymorphismNoDiscriminator() => Test(async (host, pipeline) =>
+        public Task PutComplexPolymorphismNoDiscriminator() => TestStatus(async (host, pipeline) =>
         {
             /*
                 var regularSalmonWithoutDiscriminator = {
@@ -712,14 +711,43 @@ namespace AutoRest.TestServer.Tests
                 ]
               };
              */
-            var value = new Salmon
+            var value = new SmartSalmon()
             {
-                //Fishtype = "smart_salmon",
-                Location = "alaska"
+                Location = "alaska",
+                Iswild = true,
+                Species = "king",
+                Length = 1,
+                Siblings =
+                {
+                    new Shark
+                    {
+                        Age = 6,
+                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
+                        Length = 20
+                    },
+                    new Sawshark()
+                    {
+                        Fishtype = "shark",
+                        Age = 105,
+                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                        Picture = new byte[] {255, 255, 255, 255, 254},
+                        Length = 10
+                    },
+                    new Goblinshark()
+                    {
+                        Fishtype = "goblin",
+                        Age = 1,
+                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
+                        Length = 10,
+                        Species = "scary",
+                        Jawsize = 5
+                    },
+
+                }
             };
             var result = await PolymorphismOperations.PutMissingDiscriminatorAsync(ClientDiagnostics, pipeline, value, host);
-            Assert.AreEqual(200, result.GetRawResponse().Status);
-            //Assert.AreEqual("alaska", result.Value.Location);
+            Assert.AreEqual("alaska", result.Value.Location);
+            return result.GetRawResponse();
         });
 
         [Test]

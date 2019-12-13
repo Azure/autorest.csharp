@@ -16,6 +16,8 @@ namespace body_complex.Models.V20160229
                 writer.WriteStringValue(model.PropD1);
             }
 
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(model.Kind);
             if (model.PropB1 != null)
             {
                 writer.WritePropertyName("propB1");
@@ -39,6 +41,11 @@ namespace body_complex.Models.V20160229
                     continue;
                 }
 
+                if (property.NameEquals("kind"))
+                {
+                    result.Kind = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("propB1"))
                 {
                     result.PropB1 = property.Value.GetString();
