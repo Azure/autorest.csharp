@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class BooleanWrapper
+    public partial class BooleanWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(BooleanWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (FieldTrue != null)
+            if (model.FieldTrue != null)
             {
                 writer.WritePropertyName("field_true");
-                writer.WriteBooleanValue(FieldTrue.Value);
+                writer.WriteBooleanValue(model.FieldTrue.Value);
             }
-            if (FieldFalse != null)
+            if (model.FieldFalse != null)
             {
                 writer.WritePropertyName("field_false");
-                writer.WriteBooleanValue(FieldFalse.Value);
+                writer.WriteBooleanValue(model.FieldFalse.Value);
             }
             writer.WriteEndObject();
         }

@@ -5,15 +5,15 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyBaseHelperType
+    public partial class MyBaseHelperTypeSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(MyBaseHelperType model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (PropBH1 != null)
+            if (model.PropBH1 != null)
             {
                 writer.WritePropertyName("propBH1");
-                writer.WriteStringValue(PropBH1);
+                writer.WriteStringValue(model.PropBH1);
             }
             writer.WriteEndObject();
         }

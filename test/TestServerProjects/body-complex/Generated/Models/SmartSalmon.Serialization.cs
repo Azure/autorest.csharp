@@ -5,15 +5,45 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class SmartSalmon
+    public partial class SmartSalmonSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(SmartSalmon model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (CollegeDegree != null)
+            if (model.CollegeDegree != null)
             {
                 writer.WritePropertyName("college_degree");
-                writer.WriteStringValue(CollegeDegree);
+                writer.WriteStringValue(model.CollegeDegree);
+            }
+
+            if (model.Location != null)
+            {
+                writer.WritePropertyName("location");
+                writer.WriteStringValue(model.Location);
+            }
+            if (model.Iswild != null)
+            {
+                writer.WritePropertyName("iswild");
+                writer.WriteBooleanValue(model.Iswild.Value);
+            }
+
+            writer.WritePropertyName("fishtype");
+            writer.WriteStringValue(model.Fishtype);
+            if (model.Species != null)
+            {
+                writer.WritePropertyName("species");
+                writer.WriteStringValue(model.Species);
+            }
+            writer.WritePropertyName("length");
+            writer.WriteNumberValue(model.Length);
+            if (model.Siblings != null)
+            {
+                writer.WriteStartArray("siblings");
+                foreach (var item in model.Siblings)
+                {
+                    FishSerializer.Serialize(item, writer);
+                }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
@@ -25,6 +55,41 @@ namespace body_complex.Models.V20160229
                 if (property.NameEquals("college_degree"))
                 {
                     result.CollegeDegree = property.Value.GetString();
+                    continue;
+                }
+
+                if (property.NameEquals("location"))
+                {
+                    result.Location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("iswild"))
+                {
+                    result.Iswild = property.Value.GetBoolean();
+                    continue;
+                }
+
+                if (property.NameEquals("fishtype"))
+                {
+                    result.Fishtype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("species"))
+                {
+                    result.Species = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("length"))
+                {
+                    result.Length = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("siblings"))
+                {
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.Siblings.Add(FishSerializer.Deserialize(item));
+                    }
                     continue;
                 }
             }

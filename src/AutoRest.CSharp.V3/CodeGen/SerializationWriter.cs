@@ -98,21 +98,35 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
         {
             var cs = _typeFactory.CreateType(model);
+            var serializerName = model.Name + "Serializer";
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class(null, "partial", model.CSharpName()))
+                using (writer.Class(null, "partial", serializerName))
                 {
-                    using (writer.Method("internal", "void", "Serialize", writer.Pair(typeof(Utf8JsonWriter), "writer")))
+                    using (writer.Method("internal static", "void", "Serialize", writer.Pair(cs, "model"), writer.Pair(typeof(Utf8JsonWriter), "writer")))
                     {
                         writer.Line("writer.WriteStartObject();");
 
-                        var propertyInfos = model.Properties;
-                        foreach (var property in propertyInfos)
+                        var currentType = model;
+
+                        while (currentType != null)
                         {
-                            using (property.Type.IsNullable ? writer.If($"{property.Name} != null") : default)
+                            foreach (var property in currentType.Properties)
                             {
-                                WriteProperty(writer, property.Type, property.Format, property.Name, property.SerializedName);
+                                using (property.Type.IsNullable ? writer.If($"model.{ property.Name} != null") : default)
+                                {
+                                    WriteProperty(writer, property.Type, property.Format, "model."+property.Name, property.SerializedName);
+                                }
                             }
+
+                            if (currentType.Inherits == null)
+                            {
+                                break;
+                            }
+
+                            currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
+
+                            writer.Line();
                         }
 
                         writer.Line("writer.WriteEndObject();");
@@ -124,13 +138,27 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"var result = new {typeText}();");
                         using (writer.ForEach("var property in element.EnumerateObject()"))
                         {
-                            foreach (var property in model.Properties)
+                            var currentType = model;
+
+                            while (currentType != null)
                             {
-                                using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
+                                foreach (var property in currentType.Properties)
                                 {
-                                    ReadProperty(writer, property.Type, property.Format, property.Name);
-                                    writer.Line("continue;");
+                                    using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
+                                    {
+                                        ReadProperty(writer, property.Type, property.Format, property.Name);
+                                        writer.Line("continue;");
+                                    }
                                 }
+
+                                if (currentType.Inherits == null)
+                                {
+                                    break;
+                                }
+
+                                currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
+
+                                writer.Line();
                             }
                         }
                         writer.Line("return result;");

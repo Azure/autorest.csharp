@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Siamese
+    public partial class Siamese : Cat
     {
         public string? Breed { get; set; }
     }

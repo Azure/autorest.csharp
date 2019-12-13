@@ -5,26 +5,26 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Fish
+    public partial class FishSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Fish model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype");
-            writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            writer.WriteStringValue(model.Fishtype);
+            if (model.Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(Species);
+                writer.WriteStringValue(model.Species);
             }
             writer.WritePropertyName("length");
-            writer.WriteNumberValue(Length);
-            if (Siblings != null)
+            writer.WriteNumberValue(model.Length);
+            if (model.Siblings != null)
             {
                 writer.WriteStartArray("siblings");
-                foreach (var item in Siblings)
+                foreach (var item in model.Siblings)
                 {
-                    item.Serialize(writer);
+                    FishSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
             }
@@ -54,7 +54,7 @@ namespace body_complex.Models.V20160229
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(Fish.Deserialize(item));
+                        result.Siblings.Add(FishSerializer.Deserialize(item));
                     }
                     continue;
                 }

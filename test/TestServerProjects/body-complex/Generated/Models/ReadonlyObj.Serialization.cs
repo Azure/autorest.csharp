@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ReadonlyObj
+    public partial class ReadonlyObjSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(ReadonlyObj model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (model.Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
+                writer.WriteStringValue(model.Id);
             }
-            if (Size != null)
+            if (model.Size != null)
             {
                 writer.WritePropertyName("size");
-                writer.WriteNumberValue(Size.Value);
+                writer.WriteNumberValue(model.Size.Value);
             }
             writer.WriteEndObject();
         }

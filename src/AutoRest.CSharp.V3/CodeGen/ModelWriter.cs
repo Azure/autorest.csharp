@@ -43,7 +43,13 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class(null, "partial", schema.CSharpName()))
+                string? implementsType = null;
+                if (schema.Inherits != null)
+                {
+                    implementsType = writer.Type(_typeFactory.CreateType(schema.Inherits));
+                }
+
+                using (writer.Class(null, "partial", schema.CSharpName(), implements: implementsType))
                 {
                     foreach (var constant in schema.Constants)
                     {

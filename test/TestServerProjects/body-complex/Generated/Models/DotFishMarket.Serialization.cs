@@ -5,36 +5,36 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotFishMarket
+    public partial class DotFishMarketSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DotFishMarket model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SampleSalmon != null)
+            if (model.SampleSalmon != null)
             {
                 writer.WritePropertyName("sampleSalmon");
-                SampleSalmon?.Serialize(writer);
+                DotSalmonSerializer.Serialize(model.SampleSalmon, writer);
             }
-            if (Salmons != null)
+            if (model.Salmons != null)
             {
                 writer.WriteStartArray("salmons");
-                foreach (var item in Salmons)
+                foreach (var item in model.Salmons)
                 {
-                    item.Serialize(writer);
+                    DotSalmonSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
             }
-            if (SampleFish != null)
+            if (model.SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish");
-                SampleFish?.Serialize(writer);
+                DotFishSerializer.Serialize(model.SampleFish, writer);
             }
-            if (Fishes != null)
+            if (model.Fishes != null)
             {
                 writer.WriteStartArray("fishes");
-                foreach (var item in Fishes)
+                foreach (var item in model.Fishes)
                 {
-                    item.Serialize(writer);
+                    DotFishSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
             }
@@ -47,27 +47,27 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("sampleSalmon"))
                 {
-                    result.SampleSalmon = DotSalmon.Deserialize(property.Value);
+                    result.SampleSalmon = DotSalmonSerializer.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Salmons.Add(DotSalmon.Deserialize(item));
+                        result.Salmons.Add(DotSalmonSerializer.Deserialize(item));
                     }
                     continue;
                 }
                 if (property.NameEquals("sampleFish"))
                 {
-                    result.SampleFish = DotFish.Deserialize(property.Value);
+                    result.SampleFish = DotFishSerializer.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fishes.Add(DotFish.Deserialize(item));
+                        result.Fishes.Add(DotFishSerializer.Deserialize(item));
                     }
                     continue;
                 }

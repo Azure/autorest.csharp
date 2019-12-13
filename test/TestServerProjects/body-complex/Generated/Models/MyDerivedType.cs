@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyDerivedType
+    public partial class MyDerivedType : MyBaseType
     {
         public string? PropD1 { get; set; }
     }

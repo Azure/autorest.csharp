@@ -5,20 +5,28 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotSalmon
+    public partial class DotSalmonSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DotSalmon model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Location != null)
+            if (model.Location != null)
             {
                 writer.WritePropertyName("location");
-                writer.WriteStringValue(Location);
+                writer.WriteStringValue(model.Location);
             }
-            if (Iswild != null)
+            if (model.Iswild != null)
             {
                 writer.WritePropertyName("iswild");
-                writer.WriteBooleanValue(Iswild.Value);
+                writer.WriteBooleanValue(model.Iswild.Value);
+            }
+
+            writer.WritePropertyName("fish.type");
+            writer.WriteStringValue(model.FishType);
+            if (model.Species != null)
+            {
+                writer.WritePropertyName("species");
+                writer.WriteStringValue(model.Species);
             }
             writer.WriteEndObject();
         }
@@ -35,6 +43,17 @@ namespace body_complex.Models.V20160229
                 if (property.NameEquals("iswild"))
                 {
                     result.Iswild = property.Value.GetBoolean();
+                    continue;
+                }
+
+                if (property.NameEquals("fish.type"))
+                {
+                    result.FishType = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("species"))
+                {
+                    result.Species = property.Value.GetString();
                     continue;
                 }
             }

@@ -5,23 +5,23 @@ using System.Text.Json;
 
 namespace extensible_enums_swagger.Models.V20160707
 {
-    public partial class Pet
+    public partial class PetSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Pet model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (model.Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
+                writer.WriteStringValue(model.Name);
             }
-            if (DaysOfWeek != null)
+            if (model.DaysOfWeek != null)
             {
                 writer.WritePropertyName("DaysOfWeek");
-                writer.WriteStringValue(DaysOfWeek.ToString());
+                writer.WriteStringValue(model.DaysOfWeek.ToString());
             }
             writer.WritePropertyName("IntEnum");
-            writer.WriteStringValue(IntEnum.ToString());
+            writer.WriteStringValue(model.IntEnum.ToString());
             writer.WriteEndObject();
         }
         internal static Pet Deserialize(JsonElement element)

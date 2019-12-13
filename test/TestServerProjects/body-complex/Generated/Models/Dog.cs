@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Dog
+    public partial class Dog : Pet
     {
         public string? Food { get; set; }
     }

@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
-            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(ModelExtensions.CSharpName((ChoiceValue) c), ClientModelBuilderHelpers.StringConstant(c.Value))));
+            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))));
 
         private static ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
             choiceSchema,
@@ -21,10 +21,18 @@ namespace AutoRest.CSharp.V3.ClientModels
             choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
-        private static ClientModel BuildClientObject(ObjectSchema objectSchema) => new ClientObject(
-            objectSchema, objectSchema.CSharpName(),
-            objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
-            objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
+        private static ClientModel BuildClientObject(ObjectSchema objectSchema)
+        {
+            var inheritsFrom = objectSchema.Parents?.Immediate.OfType<ObjectSchema>().SingleOrDefault();
+            var inheritsFromTypeReference = inheritsFrom != null ? ClientModelBuilderHelpers.CreateType(inheritsFrom, false) : null;
+
+            return new ClientObject(
+                objectSchema,
+                objectSchema.CSharpName(),
+                (SchemaTypeReference?) inheritsFromTypeReference,
+                objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
+                objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
+        }
 
         public static ClientModel BuildModel(Schema schema) => schema switch
         {

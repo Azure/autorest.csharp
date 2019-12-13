@@ -5,15 +5,15 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ArrayWrapper
+    public partial class ArrayWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(ArrayWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Array != null)
+            if (model.Array != null)
             {
                 writer.WriteStartArray("array");
-                foreach (var item in Array)
+                foreach (var item in model.Array)
                 {
                     writer.WriteStringValue(item);
                 }

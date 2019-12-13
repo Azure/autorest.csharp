@@ -6,15 +6,15 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ByteWrapper
+    public partial class ByteWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(ByteWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteBase64StringValue(Field);
+                writer.WriteBase64StringValue(model.Field);
             }
             writer.WriteEndObject();
         }

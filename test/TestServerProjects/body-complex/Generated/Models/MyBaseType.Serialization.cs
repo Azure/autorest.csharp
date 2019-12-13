@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyBaseType
+    public partial class MyBaseTypeSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(MyBaseType model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (PropB1 != null)
+            if (model.PropB1 != null)
             {
                 writer.WritePropertyName("propB1");
-                writer.WriteStringValue(PropB1);
+                writer.WriteStringValue(model.PropB1);
             }
-            if (Helper != null)
+            if (model.Helper != null)
             {
                 writer.WritePropertyName("helper");
-                Helper?.Serialize(writer);
+                MyBaseHelperTypeSerializer.Serialize(model.Helper, writer);
             }
             writer.WriteEndObject();
         }
@@ -34,7 +34,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("helper"))
                 {
-                    result.Helper = MyBaseHelperType.Deserialize(property.Value);
+                    result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
                     continue;
                 }
             }

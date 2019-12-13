@@ -6,12 +6,12 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DurationWrapper
+    public partial class DurationWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DurationWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (model.Field != null)
             {
                 writer.WritePropertyName("field");
                 Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "P");

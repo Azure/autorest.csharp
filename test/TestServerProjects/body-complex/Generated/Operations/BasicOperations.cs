@@ -35,7 +35,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Basic.Deserialize(document.RootElement);
+                            var value = BasicSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -71,7 +71,7 @@ namespace body_complex
                 request.Uri.AppendQuery("api-version", "2016-02-29", true);
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                complexBody.Serialize(writer);
+                BasicSerializer.Serialize(complexBody, writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -109,7 +109,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Basic.Deserialize(document.RootElement);
+                            var value = BasicSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -143,7 +143,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Basic.Deserialize(document.RootElement);
+                            var value = BasicSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -177,7 +177,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Basic.Deserialize(document.RootElement);
+                            var value = BasicSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -211,7 +211,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Basic.Deserialize(document.RootElement);
+                            var value = BasicSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:

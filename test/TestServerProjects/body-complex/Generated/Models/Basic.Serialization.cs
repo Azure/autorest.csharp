@@ -5,25 +5,25 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Basic
+    public partial class BasicSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Basic model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (model.Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
+                writer.WriteNumberValue(model.Id.Value);
             }
-            if (Name != null)
+            if (model.Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
+                writer.WriteStringValue(model.Name);
             }
-            if (Color != null)
+            if (model.Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(Color.ToString());
+                writer.WriteStringValue(model.Color.ToString());
             }
             writer.WriteEndObject();
         }

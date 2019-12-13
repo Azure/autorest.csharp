@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Salmon
+    public partial class Salmon : Fish
     {
         public string? Location { get; set; }
         public bool? Iswild { get; set; }

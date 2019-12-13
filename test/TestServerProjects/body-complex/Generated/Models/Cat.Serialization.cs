@@ -5,24 +5,35 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Cat
+    public partial class CatSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Cat model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Color != null)
+            if (model.Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(Color);
+                writer.WriteStringValue(model.Color);
             }
-            if (Hates != null)
+            if (model.Hates != null)
             {
                 writer.WriteStartArray("hates");
-                foreach (var item in Hates)
+                foreach (var item in model.Hates)
                 {
-                    item.Serialize(writer);
+                    DogSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
+            }
+
+            if (model.Id != null)
+            {
+                writer.WritePropertyName("id");
+                writer.WriteNumberValue(model.Id.Value);
+            }
+            if (model.Name != null)
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(model.Name);
             }
             writer.WriteEndObject();
         }
@@ -40,8 +51,19 @@ namespace body_complex.Models.V20160229
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(Dog.Deserialize(item));
+                        result.Hates.Add(DogSerializer.Deserialize(item));
                     }
+                    continue;
+                }
+
+                if (property.NameEquals("id"))
+                {
+                    result.Id = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    result.Name = property.Value.GetString();
                     continue;
                 }
             }
