@@ -41,11 +41,12 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            UnixTimeSchema _ => SerializationFormat.DateTimeUnix,
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTimeISO8601,
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTimeRFC1123,
-            DateSchema _ => SerializationFormat.Date,
-            _ => SerializationFormat.Default,
+            UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+            DateSchema _ => SerializationFormat.Date_ISO8601,
+            DurationSchema _ => SerializationFormat.Duration_ISO8601,
+            _ => SerializationFormat.Default
         };
     }
 }

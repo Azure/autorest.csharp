@@ -66,14 +66,15 @@ namespace AutoRest.CSharp.V3.Pipeline
 
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
-            SerializationFormat.DateTimeRFC1123 => "R",
-            SerializationFormat.DateTimeISO8601 => "S",
-            SerializationFormat.Date => "D",
-            SerializationFormat.DateTimeUnix => "U",
+            SerializationFormat.DateTime_RFC1123 => "R",
+            SerializationFormat.DateTime_ISO8601 => "S",
+            SerializationFormat.Date_ISO8601 => "D",
+            SerializationFormat.DateTime_Unix => "U",
+            SerializationFormat.Duration_ISO8601 => "P",
             _ => null
         };
 
-        private static readonly Func<string, bool, SerializationFormat, string?> DateTimeSerializer = (vn, nu, f) =>
+        private static readonly Func<string, bool, SerializationFormat, string?> FormatSerializer = (vn, nu, f) =>
         {
             var formatSpecifier = f.ToFormatSpecifier();
             var valueText = $"{vn}{(nu ? ".Value" : string.Empty)}";
@@ -95,18 +96,16 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(decimal), NumberSerializer },
             { typeof(string), StringSerializer() },
             { typeof(byte[]), (vn, nu, f) => null },
-            { typeof(DateTimeOffset), DateTimeSerializer },
-            { typeof(TimeSpan), StringSerializer(true) },
+            { typeof(DateTimeOffset), FormatSerializer },
+            { typeof(TimeSpan), FormatSerializer },
             { typeof(Uri), StringSerializer(true) }
         };
 
-        private static readonly Func<string, SerializationFormat, string?> DateTimeDeserializer = (n, f) =>
+        private static Func<string, SerializationFormat, string?>? FormatDeserializer(string typeName) => (n, f) =>
         {
             var formatSpecifier = f.ToFormatSpecifier();
             //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
-            return formatSpecifier != null
-                ? $"Azure.Core.TypeFormatters.GetDateTimeOffset({n}, \"{formatSpecifier}\")"
-                : $"{n}.GetDateTimeOffset()";
+            return formatSpecifier != null ? $"Azure.Core.TypeFormatters.Get{typeName}({n}, \"{formatSpecifier}\")" : null;
         };
 
         private static readonly Dictionary<Type, Func<string, SerializationFormat, string?>> TypeDeserializers = new Dictionary<Type, Func<string, SerializationFormat, string?>>
@@ -120,8 +119,8 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(double), (n, f) => $"{n}.GetDouble()" },
             { typeof(decimal), (n, f) => $"{n}.GetDecimal()" },
             { typeof(string), (n, f) => $"{n}.GetString()" },
-            { typeof(DateTimeOffset), DateTimeDeserializer },
-            { typeof(TimeSpan), (n, f) => $"TimeSpan.Parse({n}.GetString())" },
+            { typeof(DateTimeOffset), FormatDeserializer(nameof(DateTimeOffset)) ?? ((n, f) => $"{n}.GetDateTimeOffset()") },
+            { typeof(TimeSpan), FormatDeserializer(nameof(TimeSpan)) ?? ((n, f) => $"TimeSpan.Parse({n}.GetString())") },
             { typeof(Uri), (n, f) => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 

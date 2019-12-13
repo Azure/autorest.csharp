@@ -14,7 +14,7 @@ namespace body_complex.Models.V20160229
             if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.ToString());
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "P");
             }
             writer.WriteEndObject();
         }
@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    result.Field = TimeSpan.Parse(property.Value.GetString());
+                    result.Field = Azure.Core.TypeFormatters.GetTimeSpan(property.Value, "P");
                     continue;
                 }
             }
