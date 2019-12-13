@@ -5,8 +5,13 @@ $ErrorActionPreference = 'Stop'
 
 function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
-    $namespace = $title.Replace('-', '_')
-    $command = "npx autorest-beta $debugFlags $autoRestArguments --title=$title --namespace=$namespace"
+    $command = "npx autorest-beta $debugFlags $autoRestArguments"
+    if ($title)
+    {
+        $namespace = $title.Replace('-', '_')
+        $command = "$command --title=$title --namespace=$namespace"
+    }
+
     if ($fast)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
