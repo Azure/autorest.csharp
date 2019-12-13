@@ -13,7 +13,7 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = Azure.Response;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -29,11 +29,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public bool WriteClient(CodeWriter writer, ServiceClient operationGroup)
         {
-            var cs = _typeFactory.CreateType(operationGroup);
+            var cs = _typeFactory.CreateType(operationGroup.Name);
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                using (writer.Class("internal", "static", operationGroup.Name))
+                using (writer.Class("internal", "static", cs.Name))
                 {
                     foreach (var method in operationGroup.Methods)
                     {
@@ -47,11 +47,19 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
-            var schemaResponse = operation.ResponseType;
-            CSharpType? responseType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
-            CSharpType returnType = schemaResponse != null && responseType != null
-                ? new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), responseType))
-                : new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response)));
+            var schemaResponse = operation.Response.Type;
+            CSharpType? bodyType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
+            CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
+
+            CSharpType responseType = bodyType switch
+            {
+                null when headerModelType == null => new CSharpType(typeof(Response)),
+                null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
+                { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
+                { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
+            };
+
+            CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
 
             var parametersText = new[] { writer.Pair(writer.Type(typeof(ClientDiagnostics)), "clientDiagnostics"), writer.Pair(typeof(HttpPipeline), "pipeline") }
                 .Concat(operation.Parameters
@@ -84,7 +92,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end up with multiple // together
+                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
                     var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
                     writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
 
@@ -116,14 +124,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
-                    if (schemaResponse != null && responseType != null)
-                    {
-                        WriteStatusCodeSwitch(writer, schemaResponse, responseType, operation);
-                    }
-                    else
-                    {
-                        writer.Line("return response;");
-                    }
+                    WriteStatusCodeSwitch(writer, responseType, schemaResponse, headerModelType, operation);
                 }
 
                 var exceptionParameter = writer.Pair(typeof(Exception), "e");
@@ -344,24 +345,52 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ClientTypeReference schemaResponse, CSharpType responseType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CSharpType responseType, ClientTypeReference? bodyType, CSharpType? headersModelType, ClientMethod operation)
         {
-            writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-
-            //TODO: Handle multiple exceptions
-            //var schemaException = operation.Exceptions?.FirstOrDefault() as SchemaResponse;
-
             using (writer.Switch("response.Status"))
             {
-                var statusCodes = operation.Request.SuccessfulStatusCodes;
+                var statusCodes = operation.Response.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
                 {
                     writer.Line($"case {statusCode}:");
                 }
 
-                writer.Append($"return {writer.Type(typeof(Response))}.FromValue(");
-                writer.ToDeserializeCall(schemaResponse!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name ?? "[NO TYPE NAME]");
-                writer.Line(", response);");
+                using (bodyType != null ? writer.Scope() : default)
+                {
+                    if (bodyType != null)
+                    {
+                        writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                        writer.Append("var value = ");
+                        writer.ToDeserializeCall(bodyType, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
+                        writer.SemicolonLine();
+                    }
+
+                    if (headersModelType != null)
+                    {
+                        writer.Append("var headers = new ")
+                            .AppendType(headersModelType)
+                            .Append("(response)")
+                            .SemicolonLine();
+                    }
+
+                    switch (bodyType)
+                    {
+                        case null when headersModelType != null:
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(headers, response);");
+                            break;
+                        case { } when headersModelType != null:
+                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(value, headers, response);");
+                            break;
+                        case { }:
+                            writer.Append($"return {writer.Type(typeof(Response))}.FromValue(value, response);");
+                            break;
+                        case null:
+                            writer.Append("return response;");
+                            break;
+                    }
+                }
+
+
                 writer.Line("default:");
                 //TODO: Handle actual exception responses
                 writer.Line($"throw new {writer.Type(typeof(Exception))}();");

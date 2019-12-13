@@ -30,11 +30,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/polymorphicrecursive/valid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(Fish.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = Fish.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -70,7 +73,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {

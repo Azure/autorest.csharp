@@ -29,11 +29,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/null", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt32();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -60,11 +63,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/invalid", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt32();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -91,11 +97,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/overflowint32", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt32();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -122,11 +131,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/underflowint32", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt32(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt32();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -153,11 +165,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/overflowint64", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt64(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt64();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -184,11 +199,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/underflowint64", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetInt64(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetInt64();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -220,7 +238,13 @@ namespace body_integer
                 writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -249,7 +273,13 @@ namespace body_integer
                 writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -278,7 +308,13 @@ namespace body_integer
                 writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -307,7 +343,13 @@ namespace body_integer
                 writer.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -331,11 +373,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/unixtime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetDateTimeOffset();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -367,7 +412,13 @@ namespace body_integer
                 Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, intBody, "U");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -391,11 +442,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/invalidunixtime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetDateTimeOffset();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -422,11 +476,14 @@ namespace body_integer
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/nullunixtime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetDateTimeOffset(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetDateTimeOffset();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }

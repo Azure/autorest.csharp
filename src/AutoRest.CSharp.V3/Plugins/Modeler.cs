@@ -1,20 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
-using Azure.Core;
-using SerializationFormat = System.Data.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -36,6 +28,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);
             var serializeWriter = new SerializationWriter(typeFactory);
+            var headerModelModelWriter = new ResponseHeaderModelModelWriter(typeFactory);
 
             foreach (var model in models)
             {
@@ -55,6 +48,17 @@ namespace AutoRest.CSharp.V3.Plugins
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
                 await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
+
+                foreach (ClientMethod clientMethod in client.Methods)
+                {
+                    ResponseHeaderModel? responseHeaderModel = clientMethod.Response.HeaderModel;
+                    if (responseHeaderModel == null) continue;
+
+                    var headerModelCodeWriter = new CodeWriter();
+                    headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
+
+                    await autoRest.WriteFile($"Generated/Operations/{responseHeaderModel.Name}.cs", headerModelCodeWriter.ToFormattedCode(), "source-file-csharp");
+                }
             }
 
             return true;

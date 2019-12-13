@@ -43,6 +43,5 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static ClientObjectProperty CreateProperty(Property property) =>
             new ClientObjectProperty(property.CSharpName(), ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName, ClientModelBuilderHelpers.GetSerializationFormat(property.Schema));
-
     }
 }

@@ -30,11 +30,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/integer", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(IntWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = IntWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -70,7 +73,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -94,11 +103,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/long", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(LongWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = LongWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -134,7 +146,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -158,11 +176,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/float", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(FloatWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = FloatWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -198,7 +219,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -222,11 +249,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/double", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DoubleWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = DoubleWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -262,7 +292,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -286,11 +322,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/bool", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(BooleanWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = BooleanWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -326,7 +365,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -350,11 +395,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/string", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(StringWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = StringWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -390,7 +438,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -414,11 +468,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/date", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DateWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = DateWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -454,7 +511,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -478,11 +541,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetime", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DatetimeWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = DatetimeWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -518,7 +584,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -542,11 +614,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(Datetimerfc1123Wrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = Datetimerfc1123Wrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -582,7 +657,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -606,11 +687,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/duration", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(DurationWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = DurationWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -646,7 +730,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -670,11 +760,14 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/primitive/byte", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(ByteWrapper.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = ByteWrapper.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -710,7 +803,13 @@ namespace body_complex
                 complexBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {

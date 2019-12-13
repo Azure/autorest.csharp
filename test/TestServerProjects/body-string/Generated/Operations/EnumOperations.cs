@@ -30,11 +30,14 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/notExpandable", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetString().ToColors(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetString().ToColors();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -66,7 +69,13 @@ namespace body_string
                 writer.WriteStringValue(stringBody.ToSerialString());
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -90,11 +99,14 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/Referenced", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(document.RootElement.GetString().ToColors(), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = document.RootElement.GetString().ToColors();
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -126,7 +138,13 @@ namespace body_string
                 writer.WriteStringValue(enumStringBody.ToSerialString());
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -150,11 +168,14 @@ namespace body_string
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(RefColorConstant.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = RefColorConstant.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -190,7 +211,13 @@ namespace body_string
                 enumStringBody.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
