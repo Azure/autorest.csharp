@@ -819,7 +819,7 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/duration", false);
                 request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                request.Headers.Add("value", value, "P");
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {

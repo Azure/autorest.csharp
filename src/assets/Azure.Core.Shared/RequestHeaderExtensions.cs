@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Xml;
 
 namespace Azure.Core
 {
@@ -33,9 +32,9 @@ namespace Azure.Core
             headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
-        public static void Add(this RequestHeaders headers, string name, TimeSpan value)
+        public static void Add(this RequestHeaders headers, string name, TimeSpan value, string format)
         {
-            headers.Add(name, XmlConvert.ToString(value));
+            headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string name, byte[] value)

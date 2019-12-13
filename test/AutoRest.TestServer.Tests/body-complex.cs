@@ -286,7 +286,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/309")]
         public Task GetComplexPrimitiveDuration() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetDurationAsync(ClientDiagnostics, pipeline, host);
@@ -294,7 +293,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/305")]
         public Task PutComplexPrimitiveDuration() => TestStatus(async (host, pipeline) =>
         {
             var value = new DurationWrapper

@@ -52,6 +52,11 @@ namespace Azure.Core
             builder.AppendPath(TypeFormatters.ToString(value, format), escape);
         }
 
+        public static void AppendPath(this RequestUriBuilder builder, TimeSpan value, string format, bool escape = true)
+        {
+            builder.AppendPath(TypeFormatters.ToString(value, format), escape);
+        }
+
         public static void AppendQuery(this RequestUriBuilder builder, string name, bool value, bool escape = false)
         {
             builder.AppendQuery(name, TypeFormatters.ToString(value), escape);
@@ -63,6 +68,11 @@ namespace Azure.Core
         }
 
         public static void AppendQuery(this RequestUriBuilder builder, string name, DateTimeOffset value, string format, bool escape = true)
+        {
+            builder.AppendQuery(name, TypeFormatters.ToString(value, format), escape);
+        }
+
+        public static void AppendQuery(this RequestUriBuilder builder, string name, TimeSpan value, string format, bool escape = true)
         {
             builder.AppendQuery(name, TypeFormatters.ToString(value, format), escape);
         }
