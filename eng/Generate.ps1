@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 
 function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
-    $command = "npx autorest-beta $debugFlags $autoRestArguments"
+    $command = "npx autorest-beta $script:debugFlags $autoRestArguments"
     if ($title)
     {
         $namespace = $title.Replace('-', '_')
@@ -16,7 +16,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
         $outputPath = Join-Path $baseOutput $title
-        $command = "dotnet run --project $autorestPluginProject --no-build -- --plugin=cs-modeler --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-path=$outputPath"
+        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=cs-modeler --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-path=$outputPath"
     }
     
     Write-Host "> $command"
@@ -53,7 +53,7 @@ $testNames = if ($name) { $name } else
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke-AutoRest '--reset'
+    Invoke-AutoRest $null $null '--reset'
 }
 
 if (!$noBuild)
