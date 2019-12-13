@@ -5,20 +5,39 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Salmon
+    public partial class SalmonSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Salmon model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Location != null)
+            if (model.Location != null)
             {
                 writer.WritePropertyName("location");
-                writer.WriteStringValue(Location);
+                writer.WriteStringValue(model.Location);
             }
-            if (Iswild != null)
+            if (model.Iswild != null)
             {
                 writer.WritePropertyName("iswild");
-                writer.WriteBooleanValue(Iswild.Value);
+                writer.WriteBooleanValue(model.Iswild.Value);
+            }
+
+            writer.WritePropertyName("fishtype");
+            writer.WriteStringValue(model.Fishtype);
+            if (model.Species != null)
+            {
+                writer.WritePropertyName("species");
+                writer.WriteStringValue(model.Species);
+            }
+            writer.WritePropertyName("length");
+            writer.WriteNumberValue(model.Length);
+            if (model.Siblings != null)
+            {
+                writer.WriteStartArray("siblings");
+                foreach (var item in model.Siblings)
+                {
+                    FishSerializer.Serialize(item, writer);
+                }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
@@ -35,6 +54,30 @@ namespace body_complex.Models.V20160229
                 if (property.NameEquals("iswild"))
                 {
                     result.Iswild = property.Value.GetBoolean();
+                    continue;
+                }
+
+                if (property.NameEquals("fishtype"))
+                {
+                    result.Fishtype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("species"))
+                {
+                    result.Species = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("length"))
+                {
+                    result.Length = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("siblings"))
+                {
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.Siblings.Add(FishSerializer.Deserialize(item));
+                    }
                     continue;
                 }
             }

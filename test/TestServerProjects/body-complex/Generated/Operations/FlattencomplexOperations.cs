@@ -35,7 +35,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = MyBaseType.Deserialize(document.RootElement);
+                            var value = MyBaseTypeSerializer.Deserialize(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:

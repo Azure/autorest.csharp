@@ -6,20 +6,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DateWrapper
+    public partial class DateWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DateWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "D");
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "D");
             }
-            if (Leap != null)
+            if (model.Leap != null)
             {
                 writer.WritePropertyName("leap");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Leap.Value, "D");
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Leap.Value, "D");
             }
             writer.WriteEndObject();
         }

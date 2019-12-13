@@ -6,20 +6,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Datetimerfc1123Wrapper
+    public partial class Datetimerfc1123WrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Datetimerfc1123Wrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "R");
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "R");
             }
-            if (Now != null)
+            if (model.Now != null)
             {
                 writer.WritePropertyName("now");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Now.Value, "R");
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Now.Value, "R");
             }
             writer.WriteEndObject();
         }

@@ -5,17 +5,17 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotFish
+    public partial class DotFishSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DotFish model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type");
-            writer.WriteStringValue(FishType);
-            if (Species != null)
+            writer.WriteStringValue(model.FishType);
+            if (model.Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(Species);
+                writer.WriteStringValue(model.Species);
             }
             writer.WriteEndObject();
         }

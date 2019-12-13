@@ -5,25 +5,25 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class StringWrapper
+    public partial class StringWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(StringWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field);
+                writer.WriteStringValue(model.Field);
             }
-            if (Empty != null)
+            if (model.Empty != null)
             {
                 writer.WritePropertyName("empty");
-                writer.WriteStringValue(Empty);
+                writer.WriteStringValue(model.Empty);
             }
-            if (NullProperty != null)
+            if (model.NullProperty != null)
             {
                 writer.WritePropertyName("null");
-                writer.WriteStringValue(NullProperty);
+                writer.WriteStringValue(model.NullProperty);
             }
             writer.WriteEndObject();
         }

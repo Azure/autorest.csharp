@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Cookiecuttershark
+    public partial class Cookiecuttershark : Shark
     {
     }
 }

@@ -5,15 +5,15 @@ using System.Text.Json;
 
 namespace body_string.Models.V100
 {
-    public partial class RefColorConstant
+    public partial class RefColorConstantSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(RefColorConstant model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field1 != null)
+            if (model.Field1 != null)
             {
                 writer.WritePropertyName("field1");
-                writer.WriteStringValue(Field1);
+                writer.WriteStringValue(model.Field1);
             }
             writer.WriteEndObject();
         }

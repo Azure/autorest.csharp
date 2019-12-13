@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DoubleWrapper
+    public partial class DoubleWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DoubleWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field1 != null)
+            if (model.Field1 != null)
             {
                 writer.WritePropertyName("field1");
-                writer.WriteNumberValue(Field1.Value);
+                writer.WriteNumberValue(model.Field1.Value);
             }
-            if (Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose != null)
+            if (model.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose != null)
             {
                 writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose");
-                writer.WriteNumberValue(Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
+                writer.WriteNumberValue(model.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
             }
             writer.WriteEndObject();
         }

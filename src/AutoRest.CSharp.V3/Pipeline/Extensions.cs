@@ -124,11 +124,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), (n, f) => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
-        private static void WriteSerializeClientObject(CodeWriter writer, string name, bool isNullable)
+        private static void WriteSerializeClientObject(CodeWriter writer, string name, CSharpType type)
         {
-            writer.Append(name);
-            writer.Append(isNullable ? "?" : string.Empty);
-            writer.Line(".Serialize(writer);");
+            writer.AppendType(type.WithNullable(false))
+                .Append("Serializer.Serialize(")
+                .Append(name)
+                .Append(", writer)")
+                .SemicolonLine();
         }
 
         private static void WriteSerializeClientEnum(CodeWriter writer, string name, bool isNullable, bool isStringBased)
@@ -148,7 +150,7 @@ namespace AutoRest.CSharp.V3.Pipeline
             switch (typeFactory.ResolveReference(type))
             {
                 case ClientObject _:
-                    WriteSerializeClientObject(writer, name, type.IsNullable);
+                    WriteSerializeClientObject(writer, name, typeFactory.CreateType(type));
                     return;
                 case ClientEnum clientEnum:
                     WriteSerializeClientEnum(writer, name, type.IsNullable, clientEnum.IsStringBased);
@@ -205,10 +207,10 @@ namespace AutoRest.CSharp.V3.Pipeline
 
         private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, string name)
         {
-            writer.AppendType(cSharpType);
-            writer.Append(".Deserialize(");
-            writer.Append(name);
-            writer.Append(")");
+            writer.AppendType(cSharpType)
+                .Append("Serializer.Deserialize(")
+                .Append(name)
+                .Append(")");
         }
 
         private static void WriteDeserializeClientEnum(CodeWriter writer, CSharpType cSharpType, string name, bool isStringBased)

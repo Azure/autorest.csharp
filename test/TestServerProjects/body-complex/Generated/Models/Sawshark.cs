@@ -5,7 +5,7 @@ using System;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Sawshark
+    public partial class Sawshark : Shark
     {
         public Byte[]? Picture { get; set; }
     }

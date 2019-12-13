@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace body_number.Models.V100
 {
-    public partial class Error
+    public partial class ErrorSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(Error model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Status != null)
+            if (model.Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteNumberValue(Status.Value);
+                writer.WriteNumberValue(model.Status.Value);
             }
-            if (Message != null)
+            if (model.Message != null)
             {
                 writer.WritePropertyName("message");
-                writer.WriteStringValue(Message);
+                writer.WriteStringValue(model.Message);
             }
             writer.WriteEndObject();
         }

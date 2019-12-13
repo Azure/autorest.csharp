@@ -5,13 +5,13 @@ using System.Text.Json;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DictionaryWrapper
+    public partial class DictionaryWrapperSerializer
     {
-        internal void Serialize(Utf8JsonWriter writer)
+        internal static void Serialize(DictionaryWrapper model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WriteStartObject("defaultProgram");
-            foreach (var item in DefaultProgram)
+            foreach (var item in model.DefaultProgram)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);

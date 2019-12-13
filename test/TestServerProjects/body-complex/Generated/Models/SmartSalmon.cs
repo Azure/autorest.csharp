@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class SmartSalmon
+    public partial class SmartSalmon : Salmon
     {
         public string? CollegeDegree { get; set; }
     }

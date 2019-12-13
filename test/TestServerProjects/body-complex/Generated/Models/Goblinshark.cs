@@ -3,7 +3,7 @@
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Goblinshark
+    public partial class Goblinshark : Shark
     {
         public int? Jawsize { get; set; }
         public GoblinSharkColor? Color { get; set; }

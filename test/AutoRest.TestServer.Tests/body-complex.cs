@@ -431,30 +431,49 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComplexInheritanceValid() => Test(async (host, pipeline) =>
         {
             var result = await InheritanceOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
-            //"breed":"persian","color":"green","hates":[{"food":"tomato","id":1,"name":"Potato"},{"food":"french fries","id":-1,"name":"Tomato"}],"id":2,"name":"Siameeee"
             Assert.AreEqual("persian", result.Value.Breed);
-            //Assert.AreEqual("green", result.Value.Color);
-            //Assert.AreEqual(, result.Value.Hates); // Array of dictionaries or objects
-            //Assert.AreEqual(2, result.Value.Id);
-            //Assert.AreEqual("Siameeee", result.Value.Name);
+            Assert.AreEqual("green", result.Value.Color);
+            var hates = result.Value.Hates.ToArray();
+
+            Assert.AreEqual("tomato", hates[0].Food);
+            Assert.AreEqual(1, hates[0].Id);
+            Assert.AreEqual("Potato", hates[0].Name);
+
+            Assert.AreEqual("french fries", hates[1].Food);
+            Assert.AreEqual(-1, hates[1].Id);
+            Assert.AreEqual("Tomato", hates[1].Name);
+
+            Assert.AreEqual(2, result.Value.Id);
+            Assert.AreEqual("Siameeee", result.Value.Name);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task PutComplexInheritanceValid() => TestStatus(async (host, pipeline) =>
         {
-            //"breed":"persian","color":"green","hates":[{"food":"tomato","id":1,"name":"Potato"},{"food":"french fries","id":-1,"name":"Tomato"}],"id":2,"name":"Siameeee"
             var value = new Siamese
             {
                 Breed = "persian",
-                //Color = "green",
-                //Hates = ___, // Array of dictionaries or objects
-                //Id = 2,
-                //Name = "Siameeee"
+                Color = "green",
+                Hates =
+                {
+                    new Dog()
+                    {
+                        Food = "tomato",
+                        Id = 1,
+                        Name = "Potato"
+                    },
+                    new Dog()
+                    {
+                        Food = "french fries",
+                        Id = -1,
+                        Name = "Tomato"
+                    },
+                },
+                Id = 2,
+                Name = "Siameeee"
             };
             return await InheritanceOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
