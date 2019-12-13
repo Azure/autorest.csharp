@@ -48,7 +48,8 @@ $testNames = if ($name) { $name } else
     'body-complex',
     'custom-baseUrl',
     'custom-baseUrl-more-options',
-    'header'
+    'header',
+    'body-date'
 }
 
 if ($reset -or $env:TF_BUILD)
