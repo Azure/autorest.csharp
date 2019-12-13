@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Text.Json;
 
 namespace Azure.Core
 {
@@ -12,17 +13,23 @@ namespace Azure.Core
 
         public static string ToString(bool value) => value ? "true" : "false";
 
-        public static string ToString(DateTimeOffset value, string format)
+        public static string ToString(DateTimeOffset value, string format) => format switch
         {
-            return format switch
-            {
-                "D" => value.ToString("yyyy-MM-dd"),
-                "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                "R" => value.ToString("R"),
-                "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
-                _ => throw new ArgumentException("Format is not supported", nameof(format))
-            };
-        }
+            "D" => value.ToString("yyyy-MM-dd"),
+            "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            "R" => value.ToString("R"),
+            "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
+            _ => throw new ArgumentException("Format is not supported", nameof(format))
+        };
+
+        public static DateTimeOffset GetDateTimeOffset(JsonElement element, string format) => format switch
+        {
+            "D" => element.GetDateTimeOffset(),
+            "S" => element.GetDateTimeOffset(),
+            "R" => DateTimeOffset.Parse(element.GetString()),
+            "U" => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
+            _ => throw new ArgumentException("Format is not supported", nameof(format))
+        };
 
         public static string ToBase64UrlString(byte[] value)
         {

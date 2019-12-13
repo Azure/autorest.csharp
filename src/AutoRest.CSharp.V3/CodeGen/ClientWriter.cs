@@ -47,16 +47,16 @@ namespace AutoRest.CSharp.V3.CodeGen
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
         {
             //TODO: Handle multiple responses
-            var schemaResponse = operation.Response.Type;
-            CSharpType? bodyType = schemaResponse != null ? _typeFactory.CreateType(schemaResponse) : null;
+            var responseBody = operation.Response.ResponseBody;
+            CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Value) : null;
             CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
 
             CSharpType responseType = bodyType switch
             {
-                null when headerModelType == null => new CSharpType(typeof(Response)),
-                null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
+                null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
                 { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
+                _ => new CSharpType(typeof(Response)),
             };
 
             CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
-                    WriteStatusCodeSwitch(writer, responseType, schemaResponse, headerModelType, operation);
+                    WriteStatusCodeSwitch(writer, responseType, responseBody, headerModelType, operation);
                 }
 
                 var exceptionParameter = writer.Pair(typeof(Exception), "e");
@@ -345,7 +345,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, CSharpType responseType, ClientTypeReference? bodyType, CSharpType? headersModelType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CSharpType responseType, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
         {
             using (writer.Switch("response.Status"))
             {
@@ -355,13 +355,20 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line($"case {statusCode}:");
                 }
 
-                using (bodyType != null ? writer.Scope() : default)
+                using (responseBody != null ? writer.Scope() : default)
                 {
-                    if (bodyType != null)
+                    if (responseBody != null)
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.Append("var value = ");
-                        writer.ToDeserializeCall(bodyType, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
+                        writer.ToDeserializeCall(
+                            responseBody.Value,
+                            responseBody.Format,
+                            _typeFactory,
+                            "document.RootElement",
+                            writer.Type(responseType),
+                            responseType.Name
+                        );
                         writer.SemicolonLine();
                     }
 
@@ -373,7 +380,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             .SemicolonLine();
                     }
 
-                    switch (bodyType)
+                    switch (responseBody)
                     {
                         case null when headersModelType != null:
                             writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(headers, response);");

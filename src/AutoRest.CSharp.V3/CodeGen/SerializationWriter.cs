@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.ToSerializeCall(type, format, _typeFactory, name, serializedName);
         }
 
-        private void ReadProperty(CodeWriter writer, ClientTypeReference type, string name)
+        private void ReadProperty(CodeWriter writer, ClientTypeReference type, SerializationFormat format, string name)
         {
             if (type is CollectionTypeReference array)
             {
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var elementTypeName = elementType.Name;
                     var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(");
-                    writer.ToDeserializeCall(array.ItemType, _typeFactory, "item", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, "item", elementTypeText, elementTypeName);
                     writer.Line(");");
                 }
                 return;
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var elementTypeName = elementType.Name;
                     var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(item.Name, ");
-                    writer.ToDeserializeCall(dictionary.ValueType, _typeFactory, "item.Value", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", elementTypeText, elementTypeName);
                     writer.Line(");");
                 }
                 return;
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             var t = writer.Type(_typeFactory.CreateType(type));
             writer.Append($"result.{name} = ");
-            writer.ToDeserializeCall(type, _typeFactory, "property.Value", t, t);
+            writer.ToDeserializeCall(type, format, _typeFactory, "property.Value", t, t);
             writer.Line(";");
         }
 
@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
                                 {
-                                    ReadProperty(writer, property.Type, property.Name);
+                                    ReadProperty(writer, property.Type, property.Format, property.Name);
                                     writer.Line("continue;");
                                 }
                             }

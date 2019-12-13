@@ -30,12 +30,12 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
-                    result.Field = property.Value.GetDateTimeOffset();
+                    result.Field = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "R");
                     continue;
                 }
                 if (property.NameEquals("now"))
                 {
-                    result.Now = property.Value.GetDateTimeOffset();
+                    result.Now = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "R");
                     continue;
                 }
             }

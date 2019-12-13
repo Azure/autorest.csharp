@@ -378,7 +378,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset();
+                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -447,7 +447,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset();
+                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -481,7 +481,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset();
+                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
                             return Response.FromValue(value, response);
                         }
                     default:

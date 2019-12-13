@@ -100,21 +100,29 @@ namespace AutoRest.CSharp.V3.Pipeline
             { typeof(Uri), StringSerializer(true) }
         };
 
-        //TODO: Figure out the rest of these.
-        private static readonly Dictionary<Type, Func<string, string?>> TypeDeserializers = new Dictionary<Type, Func<string, string?>>
+        private static readonly Func<string, SerializationFormat, string?> DateTimeDeserializer = (n, f) =>
         {
-            { typeof(bool), n => $"{n}.GetBoolean()" },
-            { typeof(char), n => $"{n}.GetString()" },
-            { typeof(short), n => $"{n}.GetInt16()" },
-            { typeof(int), n => $"{n}.GetInt32()" },
-            { typeof(long), n => $"{n}.GetInt64()" },
-            { typeof(float), n => $"{n}.GetSingle()" },
-            { typeof(double), n => $"{n}.GetDouble()" },
-            { typeof(decimal), n => $"{n}.GetDecimal()" },
-            { typeof(string), n => $"{n}.GetString()" },
-            { typeof(DateTimeOffset), n => $"{n}.GetDateTimeOffset()" },
-            { typeof(TimeSpan), n => $"TimeSpan.Parse({n}.GetString())" },
-            { typeof(Uri), n => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
+            var formatSpecifier = f.ToFormatSpecifier();
+            //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
+            return formatSpecifier != null
+                ? $"Azure.Core.TypeFormatters.GetDateTimeOffset({n}, \"{formatSpecifier}\")"
+                : $"{n}.GetDateTimeOffset()";
+        };
+
+        private static readonly Dictionary<Type, Func<string, SerializationFormat, string?>> TypeDeserializers = new Dictionary<Type, Func<string, SerializationFormat, string?>>
+        {
+            { typeof(bool), (n, f) => $"{n}.GetBoolean()" },
+            { typeof(char), (n, f) => $"{n}.GetString()" },
+            { typeof(short), (n, f) => $"{n}.GetInt16()" },
+            { typeof(int), (n, f) => $"{n}.GetInt32()" },
+            { typeof(long), (n, f) => $"{n}.GetInt64()" },
+            { typeof(float), (n, f) => $"{n}.GetSingle()" },
+            { typeof(double), (n, f) => $"{n}.GetDouble()" },
+            { typeof(decimal), (n, f) => $"{n}.GetDecimal()" },
+            { typeof(string), (n, f) => $"{n}.GetString()" },
+            { typeof(DateTimeOffset), DateTimeDeserializer },
+            { typeof(TimeSpan), (n, f) => $"TimeSpan.Parse({n}.GetString())" },
+            { typeof(Uri), (n, f) => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
         private static void WriteSerializeClientObject(CodeWriter writer, string name, bool isNullable)
@@ -244,13 +252,13 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Append(".GetBytesFromBase64()");
         }
 
-        private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, string name)
+        private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, SerializationFormat format, string name)
         {
             var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
-            writer.Append(TypeDeserializers[frameworkType](name) ?? "null");
+            writer.Append(TypeDeserializers[frameworkType](name, format) ?? "null");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, TypeFactory typeFactory, string name, string typeText, string typeName)
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name, string typeText, string typeName)
         {
             CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
             switch (type)
@@ -262,7 +270,7 @@ namespace AutoRest.CSharp.V3.Pipeline
                     WriteDeserializeBinaryTypeReference(writer, name);
                     return;
                 default:
-                    WriteDeserializeDefault(writer, cSharpType, name);
+                    WriteDeserializeDefault(writer, cSharpType, format, name);
                     return;
             }
         }
