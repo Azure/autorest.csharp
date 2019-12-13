@@ -1,0 +1,26 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: API with referenced form data
+paths:
+  "/operation":
+    post:
+      description: test op
+      operationId: testOperation
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        x-ms-client-name: ApiId
+        x-ms-requestBody-name: ApiId
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                API_ID:
+                  type: string
+              required:
+              - API_ID
+      x-ms-requestBody-index: 0

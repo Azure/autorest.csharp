@@ -1,0 +1,35 @@
+---
+openapi: 3.0.0
+servers: []
+info:
+  title: TestAPI
+  description: test api
+  version: 0.0.0
+paths:
+  "/SimpleAPI/Pets":
+    put:
+      operationId: test_PutPet
+      description: Put pet with name
+      responses:
+        '200':
+          description: Pet added to system
+      requestBody:
+        x-ms-requestBody-name: pet
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Pet"
+        description: pet to put
+        required: true
+      x-ms-requestBody-index: 0
+components:
+  schemas:
+    Pet:
+      description: simple pet to add
+      required:
+      - _id
+      properties:
+        _id:
+          type: integer
+        name:
+          type: string

@@ -17,10 +17,10 @@ namespace AutoRest.CSharp
     {
         public static IAnyPlugin GetPlugin(string generator, bool azure, bool fluent)
         {
-//            if (generator == "jsonrpcclient") return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
-//            if (fluent) return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
-//            if (azure) return new AutoRest.CSharp.Azure.PluginCsa();
-            return new AutoRest.CSharp.LoadBalanced.LoadBalancedPluginCs();
+            if (generator == "jsonrpcclient") return new AutoRest.CSharp.Azure.JsonRpcClient.PluginCsa();
+            if (fluent) return new AutoRest.CSharp.Azure.Fluent.PluginCsaf();
+            if (azure) return new AutoRest.CSharp.Azure.PluginCsa();
+            return new AutoRest.CSharp.PluginCs();
         }
     }
 
