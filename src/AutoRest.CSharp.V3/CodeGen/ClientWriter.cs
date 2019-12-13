@@ -355,14 +355,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line($"case {statusCode}:");
                 }
 
-                bool hasBody = bodyType != null;
-                using (hasBody ? writer.Scope() : default)
+                using (bodyType != null ? writer.Scope() : default)
                 {
-                    if (hasBody)
+                    if (bodyType != null)
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.Append("var value = ");
-                        writer.ToDeserializeCall(bodyType!, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
+                        writer.ToDeserializeCall(bodyType, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
                         writer.Semicolon();
                     }
 
