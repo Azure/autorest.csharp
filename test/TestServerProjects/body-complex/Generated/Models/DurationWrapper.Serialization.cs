@@ -14,7 +14,7 @@ namespace body_complex.Models.V20160229
             if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, Field.Value, "P");
+                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "P");
             }
             writer.WriteEndObject();
         }
