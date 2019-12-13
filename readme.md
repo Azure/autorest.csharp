@@ -7,6 +7,7 @@
 - `npm install -g @autorest/autorest`
 - [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.100)
 - [PowerShell Core](https://github.com/PowerShell/PowerShell/releases/latest)
+- [Java](https://www.java.com/en/download/) (for V2 testserver)
 
 ## Build
 - `dotnet build` (at root)
