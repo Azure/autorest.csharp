@@ -68,13 +68,6 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             await File.WriteAllTextAsync(filename, content);
         }
 
-        public async Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap)
-        {
-            filename = Path.Combine(_basePath, filename);
-            Console.WriteLine($"Writing {filename} {artifactType}");
-            await File.WriteAllTextAsync(filename, content);
-        }
-
         public async Task Fatal(string text)
         {
             await Console.Error.WriteLineAsync("FATAL: " + text);
