@@ -5,14 +5,14 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethodResponse
     {
-        public ClientMethodResponse(ClientTypeReference? type, int[] successfulStatusCodes, ResponseHeaderModel? headerModel)
+        public ClientMethodResponse(ResponseBody? responseBody, int[] successfulStatusCodes, ResponseHeaderModel? headerModel)
         {
-            Type = type;
+            ResponseBody = responseBody;
             SuccessfulStatusCodes = successfulStatusCodes;
             HeaderModel = headerModel;
         }
 
-        public ClientTypeReference? Type { get; }
+        public ResponseBody? ResponseBody { get; }
         public int[] SuccessfulStatusCodes { get; }
         public ResponseHeaderModel? HeaderModel { get; }
     }

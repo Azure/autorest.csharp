@@ -125,15 +125,19 @@ namespace AutoRest.CSharp.V3.ClientModels
                 body
             );
 
-            List<ResponseBody> responseBodies = new List<ResponseBody>();
+            ResponseBody? responseBody = null;
             if (response is SchemaResponse schemaResponse)
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
-                responseBodies.Add(new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema)));
+                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema));
             }
 
-            ClientMethodResponse clientResponse = new ClientMethodResponse(responseType, httpResponse.StatusCodes.Select(ToStatusCode).ToArray(), BuildResponseHeaderModel(operation, httpResponse));
+            ClientMethodResponse clientResponse = new ClientMethodResponse(
+                responseBody,
+                httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                BuildResponseHeaderModel(operation, httpResponse)
+            );
 
             return new ClientMethod(
                 operation.CSharpName(),
