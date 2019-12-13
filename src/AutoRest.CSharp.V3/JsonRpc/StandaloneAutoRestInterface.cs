@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
                 _arguments[name] = parts.Length == 1 ? "true" : parts[1];
             }
 
-            _basePath = _arguments["base-path"];
+            _basePath = _arguments["output-path"];
             PluginName = _arguments["plugin"];
         }
 
@@ -59,13 +59,10 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 
         public async Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null)
         {
-            filename = Path.Combine(_basePath, filename);
-            Console.WriteLine($"Writing {filename} {artifactType}");
-            await File.WriteAllTextAsync(filename, content);
-        }
-
-        public async Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap)
-        {
+            if (string.IsNullOrEmpty(content))
+            {
+                return;
+            }
             filename = Path.Combine(_basePath, filename);
             Console.WriteLine($"Writing {filename} {artifactType}");
             await File.WriteAllTextAsync(filename, content);
