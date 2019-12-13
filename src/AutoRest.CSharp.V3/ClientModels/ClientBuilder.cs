@@ -9,7 +9,9 @@ using System.Text;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
+using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
+using HttpHeader = AutoRest.CSharp.V3.Pipeline.Generated.HttpHeader;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
@@ -72,9 +74,11 @@ namespace AutoRest.CSharp.V3.ClientModels
                             CreateDefaultValueConstant(requestParameter), false);
                         break;
                     default:
-                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
+                        constantOrParameter = new ServiceClientMethodParameter(
+                            requestParameter.CSharpName(),
                             ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                            CreateDefaultValueConstant(requestParameter), requestParameter.Required == true);
+                            CreateDefaultValueConstant(requestParameter),
+                            requestParameter.Required == true);
                         break;
                 }
 
@@ -118,7 +122,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                 ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
                 headers.ToArray(),
-                httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
                 body
             );
 
@@ -130,12 +133,30 @@ namespace AutoRest.CSharp.V3.ClientModels
                 responseBodies.Add(new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema)));
             }
 
+            ClientMethodResponse clientResponse = new ClientMethodResponse(responseType, httpResponse.StatusCodes.Select(ToStatusCode).ToArray(), BuildResponseHeaderModel(operation, httpResponse));
+
             return new ClientMethod(
                 operation.CSharpName(),
                 request,
                 methodParameters.ToArray(),
-                responseBodies.ToArray()
+                clientResponse
             );
+        }
+
+        private static ResponseHeaderModel? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
+        {
+            if (!httpResponse.Headers.Any())
+            {
+                return null;
+            }
+
+            ResponseHeader CreateResponseHeader(HttpHeader header) =>
+                new ResponseHeader(header.Header.ToCleanName(), header.Header, ClientModelBuilderHelpers.CreateType(header.Schema, true));
+
+            return new ResponseHeaderModel(
+                operation.CSharpName() + "Headers",
+                httpResponse.Headers.Select(CreateResponseHeader).ToArray()
+                );
         }
 
         private static QuerySerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)

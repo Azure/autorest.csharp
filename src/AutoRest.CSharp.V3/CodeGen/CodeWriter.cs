@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         private readonly string _definitionAccessDefault = "public";
         private CSharpNamespace? _currentNamespace;
 
-        protected virtual CodeWriterScope Scope(string start = "{", string end = "}")
+        public CodeWriterScope Scope(string start = "{", string end = "}")
         {
             Line(start);
             return new CodeWriterScope(this, end);
@@ -108,6 +108,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
             Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? String.Empty : "set; ")}}}{initializer}");
 
+        public void UseNamespace(CSharpNamespace @namespace)
+        {
+            _usingNamespaces.Add(@namespace);
+        }
 
         public string Type(CSharpType type)
         {
@@ -117,7 +121,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 if (_currentNamespace?.FullName != type.Namespace.FullName)
                 {
-                    _usingNamespaces.Add(type.Namespace);
+                    UseNamespace(type.Namespace);
                 }
             }
 
@@ -201,6 +205,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public CodeWriter Comma() => Append(", ");
+
+        public CodeWriter Space() => Append(" ");
+
+        public CodeWriter SemicolonLine() => Append(";").Line();
 
         public string ToFormattedCode()
         {

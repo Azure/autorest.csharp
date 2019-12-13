@@ -34,7 +34,13 @@ namespace header
                 request.Uri.AppendPath("/header/param/existingkey", false);
                 request.Headers.Add("User-Agent", userAgent);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -42,7 +48,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -58,7 +64,14 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/existingkey", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseExistingKeyHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -87,7 +100,13 @@ namespace header
                 request.Uri.AppendPath("/header/param/protectedkey", false);
                 request.Headers.Add("Content-Type", contentType);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -95,7 +114,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -111,7 +130,14 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/protectedkey", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseProtectedKeyHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -141,7 +167,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -149,7 +181,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -170,7 +202,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/integer", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseIntegerHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -200,7 +239,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -208,7 +253,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -229,7 +274,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/long", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseLongHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -259,7 +311,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -267,7 +325,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -288,7 +346,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/float", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseFloatHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -318,7 +383,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -326,7 +397,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -347,7 +418,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/double", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseDoubleHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -377,7 +455,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -385,7 +469,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -406,7 +490,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/bool", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseBoolHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -439,7 +530,13 @@ namespace header
                     request.Headers.Add("value", value);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -447,7 +544,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -468,7 +565,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/string", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseStringHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -498,7 +602,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "D");
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -506,7 +616,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -527,7 +637,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/date", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseDateHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -557,7 +674,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "S");
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -565,7 +688,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -586,7 +709,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/datetime", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseDatetimeHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -619,7 +749,13 @@ namespace header
                     request.Headers.Add("value", value.Value, "R");
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -627,7 +763,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -648,7 +784,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseDatetimeRfc1123Headers(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -678,7 +821,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -686,7 +835,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -707,7 +856,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/duration", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseDurationHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -741,7 +897,13 @@ namespace header
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -749,7 +911,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -770,7 +932,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/byte", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseByteHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -803,7 +972,13 @@ namespace header
                     request.Headers.Add("value", value.Value);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -811,7 +986,7 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -832,7 +1007,14 @@ namespace header
                 request.Uri.AppendPath("/header/response/prim/enum", false);
                 request.Headers.Add("scenario", scenario);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        var headers = new ResponseEnumHeaders(response);
+                        return ResponseWithHeaders.FromValue(headers, response);
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -856,7 +1038,13 @@ namespace header
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {

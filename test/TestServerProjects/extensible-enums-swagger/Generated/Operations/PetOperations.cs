@@ -35,11 +35,14 @@ namespace extensible_enums_swagger
                 request.Uri.AppendPath("/extensibleenums/pet/", false);
                 request.Uri.AppendPath(petId, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(Pet.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = Pet.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }
@@ -71,11 +74,14 @@ namespace extensible_enums_swagger
                 petParam?.Serialize(writer);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
                     case 200:
-                        return Response.FromValue(Pet.Deserialize(document.RootElement), response);
+                        {
+                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = Pet.Deserialize(document.RootElement);
+                            return Response.FromValue(value, response);
+                        }
                     default:
                         throw new Exception();
                 }

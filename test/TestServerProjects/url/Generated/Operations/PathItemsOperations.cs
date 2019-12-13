@@ -58,7 +58,13 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -112,7 +118,13 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -166,7 +178,13 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
@@ -220,7 +238,13 @@ namespace url
                     request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
                 }
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                return response;
+                switch (response.Status)
+                {
+                    case 200:
+                        return response;
+                    default:
+                        throw new Exception();
+                }
             }
             catch (Exception e)
             {
