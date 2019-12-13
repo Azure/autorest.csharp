@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 .AppendType(typeof(Response))
                 .Space()
                 .Append(ResponseField)
-                .Semicolon();
+                .SemicolonLine();
         }
 
         private void WriteConstructor(CodeWriter writer, CSharpType cs)
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Append(ResponseField)
                     .Append("=")
                     .Append(ResponseParameter)
-                    .Semicolon();
+                    .SemicolonLine();
             }
         }
 
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 .Append(", out ")
                 .AppendType(type)
                 .Append(" value) ? value : null")
-                .Semicolon();
+                .SemicolonLine();
         }
     }
 }

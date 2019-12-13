@@ -208,7 +208,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriter Space() => Append(" ");
 
-        public CodeWriter Semicolon() => Append(";").Line();
+        public CodeWriter SemicolonLine() => Append(";").Line();
 
         public string ToFormattedCode()
         {

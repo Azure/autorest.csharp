@@ -362,7 +362,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.Append("var value = ");
                         writer.ToDeserializeCall(bodyType, _typeFactory, "document.RootElement", writer.Type(responseType), responseType.Name);
-                        writer.Semicolon();
+                        writer.SemicolonLine();
                     }
 
                     if (headersModelType != null)
@@ -370,7 +370,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Append("var headers = new ")
                             .AppendType(headersModelType)
                             .Append("(response)")
-                            .Semicolon();
+                            .SemicolonLine();
                     }
 
                     switch (bodyType)
