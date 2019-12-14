@@ -7,6 +7,7 @@
 namespace AutoRest.CSharp.V3.Pipeline.Generated
 {
     #pragma warning disable // Disable all warnings
+    #nullable enable
 
     /// <summary>- since API version formats range from
     /// Azure ARM API date style (2018-01-01) to semver (1.2.3)
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual api version string used in the API</summary>
         [YamlDotNet.Serialization.YamlMember(ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = "version")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Version { get; set; }
+        public string Version { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "range")]
         public ApiVersionRange? Range { get; set; }
@@ -44,7 +45,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the reason why this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "message")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Message { get; set; }
+        public string Message { get; set; } = null!;
 
         /// <summary>the api versions that this deprecation is applicable to.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "apiVersions")]
@@ -122,7 +123,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "url")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Url { get; set; }
+        public string Url { get; set; } = null!;
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -220,12 +221,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>name used in actual implementation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>description text - describes this node.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -702,7 +703,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Value { get; set; }
+        public string Value { get; set; } = null!;
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -874,7 +875,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the wire name of this property</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serializedName")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string SerializedName { get; set; }
+        public string SerializedName { get; set; } = null!;
 
         /// <summary>when a property is flattened, the property will be the set of serialized names to get to that target property.
         ///
@@ -1014,12 +1015,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "target")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Target { get; set; }
+        public string Target { get; set; } = null!;
 
         /// <summary>the actual value</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "source")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Source { get; set; }
+        public string Source { get; set; } = null!;
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -1083,7 +1084,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the actual constant value to use</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "value")]
         [System.ComponentModel.DataAnnotations.Required]
-        public object Value { get; set; }
+        public object Value { get; set; } = null!;
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -1279,7 +1280,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the nameof the license</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>an uri pointing to the full license text</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "url")]
@@ -1297,7 +1298,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>the title of this service.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "title")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         /// <summary>a text description of the service</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
@@ -1437,7 +1438,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "$key")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Key { get; set; }
+        public string Key { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "operations")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -1821,12 +1822,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "authorizationUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string AuthorizationUrl { get; set; }
+        public string AuthorizationUrl { get; set; } = null!;
 
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "tokenUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string TokenUrl { get; set; }
+        public string TokenUrl { get; set; } = null!;
 
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "refreshUrl")]
@@ -1869,7 +1870,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "tokenUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string TokenUrl { get; set; }
+        public string TokenUrl { get; set; } = null!;
 
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "refreshUrl")]
@@ -1890,7 +1891,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "authorizationUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string AuthorizationUrl { get; set; }
+        public string AuthorizationUrl { get; set; } = null!;
 
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "refreshUrl")]
@@ -1910,7 +1911,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "scheme")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Scheme { get; set; }
+        public string Scheme { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         public string? Description { get; set; }
@@ -1982,7 +1983,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
 
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "in")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2006,7 +2007,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "openIdConnectUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string OpenIdConnectUrl { get; set; }
+        public string OpenIdConnectUrl { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         public string? Description { get; set; }
@@ -2022,7 +2023,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "tokenUrl")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string TokenUrl { get; set; }
+        public string TokenUrl { get; set; } = null!;
 
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "refreshUrl")]
@@ -2074,12 +2075,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// When matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "path")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         /// <summary>the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "uri")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Uri { get; set; }
+        public string Uri { get; set; } = null!;
 
         /// <summary>the HTTP Method used to process this operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "method")]
@@ -2146,12 +2147,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         /// When matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "path")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         /// <summary>the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "uri")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Uri { get; set; }
+        public string Uri { get; set; } = null!;
 
         /// <summary>the HTTP Method used to process this operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "method")]
@@ -2164,7 +2165,7 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "header")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Header { get; set; }
+        public string Header { get; set; } = null!;
 
         [YamlDotNet.Serialization.YamlMember(Alias = "schema")]
         [System.ComponentModel.DataAnnotations.Required]
