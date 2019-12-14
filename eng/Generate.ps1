@@ -53,7 +53,7 @@ $testNames = if ($name) { $name } else
     'body-complex',
     'body-date',
     'body-datetime',
-    #'body-datetime-rfc1123',
+    'body-datetime-rfc1123',
     #'body-dictionary',
     #'body-duration',
     #'body-file',
