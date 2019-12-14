@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.V3
 
                     codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
                 }
-                var configuration = Configuration.Create(autoRest);
+                var configuration = new Configuration(autoRest);
                 await plugin.Execute(autoRest, codeModel, configuration);
                 return true;
             }
