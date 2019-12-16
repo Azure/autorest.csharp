@@ -32,7 +32,5 @@ namespace AutoRest.CSharp.V3.Plugins
 
         public static string CSharpName(this ISchemaTypeProvider operation) =>
             operation.Name.ToCleanName();
-
-        public static bool IsLazy(this Schema operation) => operation is ArraySchema || operation is DictionarySchema;
     }
 }

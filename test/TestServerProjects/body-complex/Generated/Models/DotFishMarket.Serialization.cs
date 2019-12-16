@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -47,11 +48,20 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("sampleSalmon"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.SampleSalmon = DotSalmonSerializer.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Salmons = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Salmons.Add(DotSalmonSerializer.Deserialize(item));
@@ -60,11 +70,20 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("sampleFish"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.SampleFish = DotFishSerializer.Deserialize(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Fishes = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Fishes.Add(DotFishSerializer.Deserialize(item));

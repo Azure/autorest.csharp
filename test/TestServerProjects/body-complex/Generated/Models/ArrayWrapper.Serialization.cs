@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -28,6 +29,11 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("array"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Array.Add(item.GetString());

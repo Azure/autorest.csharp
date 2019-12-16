@@ -24,6 +24,10 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("propBH1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.PropBH1 = property.Value.GetString();
                     continue;
                 }

@@ -37,11 +37,19 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("location"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
@@ -53,6 +61,10 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Species = property.Value.GetString();
                     continue;
                 }

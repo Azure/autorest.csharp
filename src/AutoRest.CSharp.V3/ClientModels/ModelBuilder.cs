@@ -38,17 +38,28 @@ namespace AutoRest.CSharp.V3.ClientModels
             Discriminator? schemaDiscriminator = objectSchema.Discriminator;
             ClientObjectDiscriminator? discriminator = null;
 
-            if (schemaDiscriminator != null)
+            if (schemaDiscriminator == null && objectSchema.DiscriminatorValue != null)
+            {
+                schemaDiscriminator = objectSchema.Parents?.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
+
+
+                discriminator = new ClientObjectDiscriminator(
+                    schemaDiscriminator!.Property.CSharpName(),
+                    schemaDiscriminator!.Property.SerializedName,
+                    Array.Empty<ClientObjectDiscriminatorImplementation>(),
+                    objectSchema.DiscriminatorValue!
+                );
+            }
+            else if (schemaDiscriminator != null)
             {
                 discriminator = new ClientObjectDiscriminator(
                     schemaDiscriminator.Property.CSharpName(),
                     schemaDiscriminator.Property.SerializedName,
-                    schemaDiscriminator.Immediate.ToDictionary(
-                        v => v.Key,
-                        s => (SchemaTypeReference)ClientModelBuilderHelpers.CreateType(s.Value, false)),
+                    CreateDiscriminatorImplementations(schemaDiscriminator),
                     objectSchema.DiscriminatorValue!
                     );
             }
+
 
             return new ClientObject(
                 objectSchema,
@@ -58,6 +69,15 @@ namespace AutoRest.CSharp.V3.ClientModels
                 constants.ToArray(),
                 discriminator
                 );
+        }
+
+        private static ClientObjectDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
+        {
+            return schemaDiscriminator.All.Select(implementation => new ClientObjectDiscriminatorImplementation(
+                implementation.Key,
+                (SchemaTypeReference)ClientModelBuilderHelpers.CreateType(implementation.Value, false),
+                schemaDiscriminator.Immediate.ContainsKey(implementation.Key)
+            )).ToArray();
         }
 
         public static ClientModel BuildModel(Schema schema) => schema switch
@@ -70,7 +90,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static ClientObjectProperty CreateProperty(Property property)
         {
-            bool isReadOnly = property.Schema.IsLazy() || (property.IsDiscriminator == true);
+            bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
 
             ClientConstant? defaultValue = null;
 
@@ -92,7 +112,9 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientObjectProperty(property.CSharpName(),
                 type,
                 isReadOnly,
-                property.SerializedName, ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
+                property.Required == true,
+                property.SerializedName,
+                ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
                 defaultValue);
         }
     }

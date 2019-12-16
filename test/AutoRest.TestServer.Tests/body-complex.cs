@@ -60,7 +60,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
             var result = await BasicOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
@@ -335,11 +334,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexArrayValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new ArrayWrapper();
-            var content = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
-            foreach (var item in content)
-            {
-                value.Array.Add(item);
-            }
+            value.Array = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
             return await ArrayOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
 
@@ -354,6 +349,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexArrayEmpty() => TestStatus(async (host, pipeline) =>
         {
             var value = new ArrayWrapper();
+            value.Array = new List<string>();
             return await ArrayOperations.PutEmptyAsync(ClientDiagnostics, pipeline, value, host);
         });
 
@@ -362,7 +358,7 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await ArrayOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(new string[0], result.Value.Array);
+            Assert.AreEqual(null, result.Value.Array);
         });
 
         [Test]
@@ -384,7 +380,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexDictionaryValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new DictionaryWrapper();
-            var content = new Dictionary<string, string?>
+            value.DefaultProgram = new Dictionary<string, string?>
             {
                 { "txt", "notepad" },
                 { "bmp", "mspaint" },
@@ -392,10 +388,6 @@ namespace AutoRest.TestServer.Tests
                 { "exe", string.Empty },
                 { string.Empty, null }
             };
-            foreach (var item in content)
-            {
-                value.DefaultProgram.Add(item);
-            }
             return await DictionaryOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
 
@@ -410,16 +402,16 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexDictionaryEmpty() => TestStatus(async (host, pipeline) =>
         {
             var value = new DictionaryWrapper();
+            value.DefaultProgram = new Dictionary<string, string?>();
             return await DictionaryOperations.PutEmptyAsync(ClientDiagnostics, pipeline, value, host);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
         public Task GetComplexDictionaryNull() => Test(async (host, pipeline) =>
         {
             var result = await DictionaryOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(new Dictionary<string, string?>(), result.Value.DefaultProgram);
+            Assert.AreEqual(null, result.Value.DefaultProgram);
         });
 
         [Test]
@@ -427,7 +419,7 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await DictionaryOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(new Dictionary<string, string?>(), result.Value.DefaultProgram);
+            Assert.AreEqual(null, result.Value.DefaultProgram);
         });
 
         [Test]
@@ -457,7 +449,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Breed = "persian",
                 Color = "green",
-                Hates =
+                Hates = new[]
                 {
                     new Dog()
                     {
@@ -479,105 +471,121 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComplexPolymorphismValid() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
-            /*
-             var rawFish = {
-                'fishtype': 'salmon',
-                'location': 'alaska',
-                'iswild': true,
-                'species': 'king',
-                'length': 1.0,
-                'siblings': [
-                  {
-                    'fishtype': 'shark',
-                    'age': 6,
-                    'birthday': '2012-01-05T01:00:00Z',
-                    'length': 20.0,
-                    'species': 'predator',
-                  },
-                  {
-                    'fishtype': 'sawshark',
-                    'age': 105,
-                    'birthday': '1900-01-05T01:00:00Z',
-                    'length': 10.0,
-                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                    'species': 'dangerous',
-                  },
-                  {
-                    'fishtype': 'goblin',
-                    'age': 1,
-                    'birthday': '2015-08-08T00:00:00Z',
-                    'length': 30.0,
-                    'species': 'scary',
-                    'jawsize': 5,
-                    // Intentionally requiring a value not defined in the enum, since
-                    // such values should be allowed to be sent to/received from the server
-                    'color':'pinkish-gray'
-                  }
-                ]
-              };
-             */
 
-            //Assert.AreEqual("salmon", result.Value.Fishtype);
+            var value = (Salmon)result.Value;
+            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("alaska", value.Location);
+            Assert.AreEqual("king", value.Species);
+            Assert.AreEqual(true, value.Iswild);
+            Assert.AreEqual(1, value.Length);
+
+            var siblings = value.Siblings.ToArray();
+
+            var shark = (Shark)siblings[0];
+            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
+            Assert.AreEqual("predator", shark.Species);
+            Assert.AreEqual(6, shark.Age);
+            Assert.AreEqual(20, shark.Length);
+
+            var sawshark = (Sawshark)siblings[1];
+            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
+            Assert.AreEqual("dangerous", sawshark.Species);
+            Assert.AreEqual(105, sawshark.Age);
+            Assert.AreEqual(10, sawshark.Length);
+
+            var goblin = (Goblinshark)siblings[2];
+            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
+            Assert.AreEqual("scary", goblin.Species);
+            Assert.AreEqual(1, goblin.Age);
+            Assert.AreEqual(30, goblin.Length);
+            Assert.AreEqual(5, goblin.Jawsize);
+            Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task PutComplexPolymorphismValid() => TestStatus(async (host, pipeline) =>
         {
-            /*
-             var rawFish = {
-                'fishtype': 'salmon',
-                'location': 'alaska',
-                'iswild': true,
-                'species': 'king',
-                'length': 1.0,
-                'siblings': [
-                  {
-                    'fishtype': 'shark',
-                    'age': 6,
-                    'birthday': '2012-01-05T01:00:00Z',
-                    'length': 20.0,
-                    'species': 'predator',
-                  },
-                  {
-                    'fishtype': 'sawshark',
-                    'age': 105,
-                    'birthday': '1900-01-05T01:00:00Z',
-                    'length': 10.0,
-                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                    'species': 'dangerous',
-                  },
-                  {
-                    'fishtype': 'goblin',
-                    'age': 1,
-                    'birthday': '2015-08-08T00:00:00Z',
-                    'length': 30.0,
-                    'species': 'scary',
-                    'jawsize': 5,
-                    // Intentionally requiring a value not defined in the enum, since
-                    // such values should be allowed to be sent to/received from the server
-                    'color':'pinkish-gray'
-                  }
-                ]
-              };
-             */
-            var value = new Fish
+            var value = new Salmon()
             {
-                Fishtype = "salmon",
-                //Location = "alaska",
+                Location = "alaska",
+                Iswild = true,
+                Species = "king",
+                Length = 1,
+                Siblings = new[]
+                {
+                    new Shark
+                    {
+                        Age = 6,
+                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
+                        Length = 20,
+                        Species = "predator"
+                    },
+                    new Sawshark()
+                    {
+                        Age = 105,
+                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                        Picture = new byte[] {255, 255, 255, 255, 254},
+                        Length = 10,
+                        Species = "dangerous"
+                    },
+                    new Goblinshark()
+                    {
+                        Age = 1,
+                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
+                        Length = 30,
+                        Species = "scary",
+                        Jawsize = 5,
+                        Color = "pinkish-gray"
+                    }
+                }
             };
             return await PolymorphismOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        // TODO: Passes but without additional properties https://github.com/Azure/autorest.csharp/issues/348
         public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComplicatedAsync(ClientDiagnostics, pipeline, host);
+
+            var value = (SmartSalmon)result.Value;
+            Assert.AreEqual("smart_salmon", value.Fishtype);
+            Assert.AreEqual("alaska", value.Location);
+            Assert.AreEqual("king", value.Species);
+            Assert.AreEqual(true, value.Iswild);
+            Assert.AreEqual(1, value.Length);
+
+            var siblings = value.Siblings.ToArray();
+
+            var shark = (Shark)siblings[0];
+            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
+            Assert.AreEqual("predator", shark.Species);
+            Assert.AreEqual(6, shark.Age);
+            Assert.AreEqual(20, shark.Length);
+
+            var sawshark = (Sawshark)siblings[1];
+            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
+            Assert.AreEqual("dangerous", sawshark.Species);
+            Assert.AreEqual(105, sawshark.Age);
+            Assert.AreEqual(10, sawshark.Length);
+
+            var goblin = (Goblinshark)siblings[2];
+            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
+            Assert.AreEqual("scary", goblin.Species);
+            Assert.AreEqual(1, goblin.Age);
+            Assert.AreEqual(30, goblin.Length);
+            Assert.AreEqual(5, goblin.Jawsize);
+            Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
+
             /*
                var rawSalmon = {
                  'fishtype': 'smart_salmon',
@@ -618,12 +626,10 @@ namespace AutoRest.TestServer.Tests
                  ]
                };
              */
-
-            //Assert.AreEqual("smart_salmon", result.Value.Fishtype);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/348")]
         public Task PutComplexPolymorphismComplicated() => TestStatus(async (host, pipeline) =>
         {
             /*
@@ -677,201 +683,242 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutComplexPolymorphismNoDiscriminator() => TestStatus(async (host, pipeline) =>
         {
-            /*
-                var regularSalmonWithoutDiscriminator = {
-                'location': 'alaska',
-                'iswild': true,
-                'species': 'king',
-                'length': 1.0,
-                'siblings': [
-                  {
-                    'fishtype': 'shark',
-                    'age': 6,
-                    'birthday': '2012-01-05T01:00:00Z',
-                    'length': 20.0,
-                    'species': 'predator',
-                  },
-                  {
-                    'fishtype': 'sawshark',
-                    'age': 105,
-                    'birthday': '1900-01-05T01:00:00Z',
-                    'length': 10.0,
-                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                    'species': 'dangerous',
-                  },
-                  {
-                    'fishtype': 'goblin',
-                    'age': 1,
-                    'birthday': '2015-08-08T00:00:00Z',
-                    'length': 30.0,
-                    'species': 'scary',
-                    'jawsize': 5,
-                    'color':'pinkish-gray'
-                  }
-                ]
-              };
-             */
-            var value = new SmartSalmon()
+            var value = new Salmon()
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
                 Length = 1,
-                Siblings =
+                Siblings = new[]
                 {
                     new Shark
                     {
                         Age = 6,
                         Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                        Length = 20
+                        Length = 20,
+                        Species = "predator"
                     },
                     new Sawshark()
                     {
-                        Fishtype = "shark",
                         Age = 105,
                         Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                         Picture = new byte[] {255, 255, 255, 255, 254},
-                        Length = 10
+                        Length = 10,
+                        Species = "dangerous"
                     },
                     new Goblinshark()
                     {
-                        Fishtype = "goblin",
                         Age = 1,
                         Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
-                        Length = 10,
+                        Length = 30,
                         Species = "scary",
-                        Jawsize = 5
-                    },
-
+                        Jawsize = 5,
+                        Color = "pinkish-gray"
+                    }
                 }
             };
-            var result = await PolymorphismOperations.PutMissingDiscriminatorAsync(ClientDiagnostics, pipeline, value, host);
-            Assert.AreEqual("alaska", result.Value.Location);
+
+            var result = await PolymorphismOperations.PutMissingDiscriminatorAsync(ClientDiagnostics, pipeline, value, host: host);
+
+            value = result.Value;
+            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("alaska", value.Location);
+            Assert.AreEqual("king", value.Species);
+            Assert.AreEqual(true, value.Iswild);
+            Assert.AreEqual(1, value.Length);
+
+            var siblings = value.Siblings.ToArray();
+
+            var shark = (Shark)siblings[0];
+            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
+            Assert.AreEqual("predator", shark.Species);
+            Assert.AreEqual(6, shark.Age);
+            Assert.AreEqual(20, shark.Length);
+            Assert.Null(shark.Siblings);
+
+            var sawshark = (Sawshark)siblings[1];
+            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
+            Assert.AreEqual("dangerous", sawshark.Species);
+            Assert.AreEqual(105, sawshark.Age);
+            Assert.AreEqual(10, sawshark.Length);
+            Assert.Null(sawshark.Siblings);
+
+            var goblin = (Goblinshark)siblings[2];
+            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
+            Assert.AreEqual("scary", goblin.Species);
+            Assert.AreEqual(1, goblin.Age);
+            Assert.AreEqual(30, goblin.Length);
+            Assert.AreEqual(5, goblin.Jawsize);
+            Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
+            Assert.Null(goblin.Siblings);
+
             return result.GetRawResponse();
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetDotSyntaxAsync(ClientDiagnostics, pipeline, host);
-            /*
-              var dotSalmon = {
-                'fish.type': 'DotSalmon',
-                'location': 'sweden',
-                'iswild': true,
-                'species': 'king',
-              };
-             */
 
-            //Assert.AreEqual("DotSalmon", result.Value.Fish.Type);
+            var dotSalmon = (DotSalmon)result.Value;
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(true, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComposedWithDiscriminatorAsync(ClientDiagnostics, pipeline, host);
-            /*
-              var dotFishMarketWithDiscriminator = {
-                'sampleSalmon': {
-                  'fish.type': 'DotSalmon',
-                  'location': 'sweden',
-                  'iswild': false,
-                  'species': 'king',
-                },
-                'salmons': [
-                  {
-                    'fish.type': 'DotSalmon',
-                    'location': 'sweden',
-                    'iswild': false,
-                    'species': 'king',
-                  },
-                  {
-                    'fish.type': 'DotSalmon',
-                    'location': 'atlantic',
-                    'iswild': true,
-                    'species': 'king',
-                  }
-                ],
-                'sampleFish': {
-                  'fish.type': 'DotSalmon',
-                  'location': 'australia',
-                  'iswild': false,
-                  'species': 'king',
-                },
-                'fishes': [
-                  {
-                    'fish.type': 'DotSalmon',
-                    'location': 'australia',
-                    'iswild': false,
-                    'species': 'king',
-                  },
-                  {
-                    'fish.type': 'DotSalmon',
-                    'location': 'canada',
-                    'iswild': true,
-                    'species': 'king',
-                  }
-                ]
-              }
-             */
 
-            //Assert.AreEqual("DotSalmon", result.Value.SampleSalmon.Fish.Type);
+            var dotSalmon = result.Value.SampleSalmon;
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            var salmons = result.Value.Salmons.ToArray();
+
+            dotSalmon = salmons[0];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            dotSalmon = salmons[1];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("atlantic", dotSalmon.Location);
+            Assert.AreEqual(true, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            dotSalmon = (DotSalmon) result.Value.SampleFish;
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("australia", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            var fishes = result.Value.Fishes.ToArray();
+
+            dotSalmon = (DotSalmon) fishes[0];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("australia", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            dotSalmon = (DotSalmon) fishes[1];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("canada", dotSalmon.Location);
+            Assert.AreEqual(true, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComposedWithoutDiscriminatorAsync(ClientDiagnostics, pipeline, host);
-            /*
-              var dotFishMarketWithoutDiscriminator = {
-                'sampleSalmon': {
-                  'location': 'sweden',
-                  'iswild': false,
-                  'species': 'king',
-                },
-                'salmons': [
-                  {
-                    'location': 'sweden',
-                    'iswild': false,
-                    'species': 'king',
-                  },
-                  {
-                    'location': 'atlantic',
-                    'iswild': true,
-                    'species': 'king',
-                  }
-                ],
-                'sampleFish': {
-                  'location': 'australia',
-                  'iswild': false,
-                  'species': 'king',
-                },
-                'fishes': [
-                  {
-                    'location': 'australia',
-                    'iswild': false,
-                    'species': 'king',
-                  },
-                  {
-                    'location': 'canada',
-                    'iswild': true,
-                    'species': 'king',
-                  }
-                ]
-              }
-             */
 
-            //Assert.AreEqual("sweden", result.Value.SampleSalmon.Location);
+            var dotSalmon = result.Value.SampleSalmon;
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            var salmons = result.Value.Salmons.ToArray();
+
+            dotSalmon = salmons[0];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(false, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            dotSalmon = salmons[1];
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("atlantic", dotSalmon.Location);
+            Assert.AreEqual(true, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+
+            var dotFish = result.Value.SampleFish;
+            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("king", dotFish.Species);
+
+            var fishes = result.Value.Fishes.ToArray();
+
+            dotFish = fishes[0];
+            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("king", dotFish.Species);
+
+            dotFish = fishes[1];
+            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("king", dotFish.Species);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task GetComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphicrecursiveOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var value = (Salmon)result.Value;
+            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("alaska", value.Location);
+            Assert.AreEqual("king", value.Species);
+            Assert.AreEqual(true, value.Iswild);
+            Assert.AreEqual(1, value.Length);
+
+            var siblings = value.Siblings.ToArray();
+
+            var shark = (Shark)siblings[0];
+            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
+            Assert.AreEqual("predator", shark.Species);
+            Assert.AreEqual(6, shark.Age);
+            Assert.AreEqual(20, shark.Length);
+
+            var sharkSiblings = shark.Siblings.ToArray();
+
+            var innerSalmon = (Salmon)sharkSiblings[0];
+            Assert.AreEqual("salmon", innerSalmon.Fishtype);
+            Assert.AreEqual("atlantic", innerSalmon.Location);
+            Assert.AreEqual("coho", innerSalmon.Species);
+            Assert.AreEqual(true, innerSalmon.Iswild);
+            Assert.AreEqual(2, innerSalmon.Length);
+
+            var innerSalmonSiblings = innerSalmon.Siblings.ToArray();
+
+            var innerInnerShark = (Shark)innerSalmonSiblings[0];
+            Assert.AreEqual("shark", innerInnerShark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), innerInnerShark.Birthday);
+            Assert.AreEqual("predator", innerInnerShark.Species);
+            Assert.AreEqual(6, innerInnerShark.Age);
+            Assert.AreEqual(20, innerInnerShark.Length);
+            Assert.Null(innerInnerShark.Siblings);
+
+            var innerInnerSawshark = (Sawshark)innerSalmonSiblings[1];
+            Assert.AreEqual("sawshark", innerInnerSawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), innerInnerSawshark.Birthday);
+            Assert.AreEqual("dangerous", innerInnerSawshark.Species);
+            Assert.AreEqual(105, innerInnerSawshark.Age);
+            Assert.AreEqual(10, innerInnerSawshark.Length);
+            Assert.Null(innerInnerSawshark.Siblings);
+
+
+            var innerSawshark = (Sawshark)sharkSiblings[1];
+            Assert.AreEqual("sawshark", innerSawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), innerSawshark.Birthday);
+            Assert.AreEqual("dangerous", innerSawshark.Species);
+            Assert.AreEqual(105, innerSawshark.Age);
+            Assert.AreEqual(10, innerSawshark.Length);
+            CollectionAssert.IsEmpty(innerSawshark.Siblings);
+
+            var sawshark = (Sawshark)siblings[1];
+            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
+            Assert.AreEqual("dangerous", sawshark.Species);
+            Assert.AreEqual(105, sawshark.Age);
+            Assert.AreEqual(10, sawshark.Length);
+            CollectionAssert.IsEmpty(sawshark.Siblings);
             /*
                 var bigfishRaw = {
                 "fishtype": "salmon",
@@ -938,74 +985,71 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/312")]
         public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
         {
-            /*
-                var bigfishRaw = {
-                "fishtype": "salmon",
-                "location": "alaska",
-                "iswild": true,
-                "species": "king",
-                "length": 1,
-                "siblings": [
-                  {
-                    "fishtype": "shark",
-                    "age": 6,
-                    'birthday': '2012-01-05T01:00:00Z',
-                    "species": "predator",
-                    "length": 20,
-                    "siblings": [
-                      {
-                        "fishtype": "salmon",
-                        "location": "atlantic",
-                        "iswild": true,
-                        "species": "coho",
-                        "length": 2,
-                        "siblings": [
-                          {
-                            "fishtype": "shark",
-                            "age": 6,
-                            'birthday': '2012-01-05T01:00:00Z',
-                            "species": "predator",
-                            "length": 20
-                          },
-                          {
-                            "fishtype": "sawshark",
-                            "age": 105,
-                            'birthday': '1900-01-05T01:00:00Z',
-                            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                            "species": "dangerous",
-                            "length": 10
-                          }
-                        ]
-                      },
-                      {
-                        "fishtype": "sawshark",
-                        "age": 105,
-                        'birthday': '1900-01-05T01:00:00Z',
-                        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                        "species": "dangerous",
-                        "length": 10,
-                        "siblings": []
-                      }
-                    ]
-                  },
-                  {
-                    "fishtype": "sawshark",
-                    "age": 105,
-                    'birthday': '1900-01-05T01:00:00Z',
-                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                    "species": "dangerous",
-                    "length": 10, "siblings": []
-                  }
-                ]
-              };
-             */
-            var value = new Fish
+            var value = new Salmon()
             {
-                Fishtype = "salmon",
-                //Location = "alaska"
+                Location = "alaska",
+                Iswild = true,
+                Species = "king",
+                Length = 1,
+                Siblings = new[]
+                {
+                    new Shark
+                    {
+                        Age = 6,
+                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
+                        Length = 20,
+                        Species = "predator",
+                        Siblings = new Fish[]
+                        {
+                            new Salmon()
+                            {
+                                Location = "atlantic",
+                                Iswild = true,
+                                Species = "coho",
+                                Length = 2,
+                                Siblings = new[]
+                                {
+                                    new Shark
+                                    {
+                                        Age = 6,
+                                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
+                                        Length = 20,
+                                        Species = "predator",
+                                    },
+                                    new Sawshark()
+                                    {
+                                        Age = 105,
+                                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                                        Picture = new byte[] {255, 255, 255, 255, 254},
+                                        Length = 10,
+                                        Species = "dangerous"
+                                    },
+                                }
+                            },
+
+                            new Sawshark()
+                            {
+                                Age = 105,
+                                Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                                Picture = new byte[] {255, 255, 255, 255, 254},
+                                Length = 10,
+                                Species = "dangerous",
+                                Siblings = new Fish[] {}
+                            },
+                        }
+                    },
+                    new Sawshark()
+                    {
+                        Age = 105,
+                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                        Picture = new byte[] {255, 255, 255, 255, 254},
+                        Length = 10,
+                        Species = "dangerous",
+                        Siblings = new Fish[] {}
+                    },
+                }
             };
             return await PolymorphicrecursiveOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
         });

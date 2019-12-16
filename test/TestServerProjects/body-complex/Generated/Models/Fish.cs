@@ -14,6 +14,6 @@ namespace body_complex.Models.V20160229
         public string Fishtype { get; internal set; }
         public string? Species { get; set; }
         public float Length { get; set; }
-        public ICollection<Fish> Siblings { get; internal set; } = new List<Fish>();
+        public ICollection<Fish> Siblings { get; set; }
     }
 }

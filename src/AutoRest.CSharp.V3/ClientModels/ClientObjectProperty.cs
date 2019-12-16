@@ -5,12 +5,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientObjectProperty
     {
-        public ClientObjectProperty(string name, ClientTypeReference type, bool isReadOnly, string serializedName,
+        public ClientObjectProperty(string name, ClientTypeReference type, bool isReadOnly, bool isRequired, string serializedName,
             SerializationFormat format = SerializationFormat.Default, ClientConstant? defaultValue = null)
         {
             Name = name;
             Type = type;
             IsReadOnly = isReadOnly;
+            IsRequired = isRequired;
             SerializedName = serializedName;
             Format = format;
             DefaultValue = defaultValue;
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         public ClientConstant? DefaultValue { get; }
         public ClientTypeReference Type { get; }
         public bool IsReadOnly { get; }
+        public bool IsRequired { get; }
         public string SerializedName { get; set; }
         public SerializationFormat Format { get; }
     }

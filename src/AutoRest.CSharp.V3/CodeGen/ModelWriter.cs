@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var property in schema.Properties)
                     {
-                        var initializer = NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
+                        var initializer = property.IsRequired && NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
                         writer.AutoProperty("public", _typeFactory.CreateType(property.Type), property.Name, property.IsReadOnly, initializer);
                     }
                 }

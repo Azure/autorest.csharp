@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -52,12 +53,20 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("picture"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Picture = property.Value.GetBytesFromBase64();
                     continue;
                 }
 
                 if (property.NameEquals("age"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Age = property.Value.GetInt32();
                     continue;
                 }
@@ -74,6 +83,10 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Species = property.Value.GetString();
                     continue;
                 }
@@ -84,6 +97,11 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Siblings.Add(FishSerializer.Deserialize(item));

@@ -44,6 +44,10 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Species = property.Value.GetString();
                     continue;
                 }

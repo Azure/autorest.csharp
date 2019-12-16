@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
@@ -13,14 +14,17 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string Value { get; }
 
-        public IDictionary<string, SchemaTypeReference> Implementations { get; }
+        public ClientObjectDiscriminatorImplementation[] Implementations { get; }
 
-        public ClientObjectDiscriminator(string property, string serializedName, IDictionary<string, SchemaTypeReference> implementations, string value)
+        public ClientObjectDiscriminator(string property, string serializedName, ClientObjectDiscriminatorImplementation[] implementations, string value)
         {
             Property = property;
             Implementations = implementations;
             Value = value;
             SerializedName = serializedName;
         }
+
+        public bool HasDescendants => Implementations.Any();
+        public bool HasDirectDescendants => Implementations.Any(i => i.IsDirect);
     }
 }

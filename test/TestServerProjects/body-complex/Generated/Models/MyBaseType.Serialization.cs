@@ -49,11 +49,19 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("propB1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.PropB1 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("helper"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
                     continue;
                 }

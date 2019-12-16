@@ -5,6 +5,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotSalmon : DotFish
     {
+        public DotSalmon()
+        {
+            FishType = "DotSalmon";
+        }
         public string? Location { get; set; }
         public bool? Iswild { get; set; }
     }

@@ -5,6 +5,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class Goblinshark : Shark
     {
+        public Goblinshark()
+        {
+            Fishtype = "goblin";
+        }
         public int? Jawsize { get; set; }
         public GoblinSharkColor? Color { get; set; }
     }
