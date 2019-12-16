@@ -17,10 +17,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             var matched = await session.Server.GetMatchedStubs();
 
-            CollectionAssert.AreEqual(new[]
-            {
-                "putStringNull"
-            }, matched);
+            CollectionAssert.Contains(matched, "putStringNull");
         }
 
         [Test]

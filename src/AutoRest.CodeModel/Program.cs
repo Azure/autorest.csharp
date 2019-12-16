@@ -55,7 +55,10 @@ namespace AutoRest.CodeModel
                 // Set properties to be single quoted
                 .Replace("Alias = \"version\"", "ScalarStyle = YamlDotNet.Core.ScalarStyle.SingleQuoted, Alias = \"version\"")
                 // Cases CSharp properly
-                .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp");
+                .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp")
+                // Fix for issue with Solution Error Visualizer
+                // https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.SolutionErrorVisualizer&ssr=false#review-details
+                .Replace("#pragma warning disable // Disable all warnings", $"#pragma warning disable // Disable all warnings{Environment.NewLine}    #nullable enable");
 
             var lines = cleanFile.ToLines().ToArray();
             var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))
@@ -66,7 +69,30 @@ namespace AutoRest.CodeModel
                 })
                 .SkipLast(1)
                 .Prepend(lines.First()));
-            File.WriteAllText($"../../src/{Path}/CodeModel.cs", fileWithNullable);
+            var fileWithNullableFix = fileWithNullable
+                // Fix for issue with Solution Error Visualizer
+                // https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.SolutionErrorVisualizer&ssr=false#review-details
+                // https://stackoverflow.com/a/54973095/294804
+                .Replace("public string Version { get; set; }", "public string Version { get; set; } = null!;")
+                .Replace("public string Message { get; set; }", "public string Message { get; set; } = null!;")
+                .Replace("public string Url { get; set; }", "public string Url { get; set; } = null!;")
+                .Replace("public string Name { get; set; }", "public string Name { get; set; } = null!;")
+                .Replace("public string Description { get; set; }", "public string Description { get; set; } = null!;")
+                .Replace("public string Value { get; set; }", "public string Value { get; set; } = null!;")
+                .Replace("public string SerializedName { get; set; }", "public string SerializedName { get; set; } = null!;")
+                .Replace("public string Target { get; set; }", "public string Target { get; set; } = null!;")
+                .Replace("public string Source { get; set; }", "public string Source { get; set; } = null!;")
+                .Replace("public string Title { get; set; }", "public string Title { get; set; } = null!;")
+                .Replace("public string Key { get; set; }", "public string Key { get; set; } = null!;")
+                .Replace("public object Value { get; set; }", "public object Value { get; set; } = null!;")
+                .Replace("public string AuthorizationUrl { get; set; }", "public string AuthorizationUrl { get; set; } = null!;")
+                .Replace("public string TokenUrl { get; set; }", "public string TokenUrl { get; set; } = null!;")
+                .Replace("public string Scheme { get; set; }", "public string Scheme { get; set; } = null!;")
+                .Replace("public string OpenIdConnectUrl { get; set; }", "public string OpenIdConnectUrl { get; set; } = null!;")
+                .Replace("public string Path { get; set; }", "public string Path { get; set; } = null!;")
+                .Replace("public string Uri { get; set; }", "public string Uri { get; set; } = null!;")
+                .Replace("public string Header { get; set; }", "public string Header { get; set; } = null!;");
+            File.WriteAllText($"../../src/{Path}/CodeModel.cs", fileWithNullableFix);
         }
     }
 }
