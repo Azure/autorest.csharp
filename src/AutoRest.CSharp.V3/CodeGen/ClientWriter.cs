@@ -116,7 +116,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, body.Value));
+
+                        //TODO: Workaround for JSON serialization not supporting the null constants
+                        ConstantOrParameter value = body.Value;
+                        if (value.IsConstant && value.Constant.Value == null)
+                        {
+                            value = ClientModelBuilderHelpers.StringConstant("");
+                        }
+
+                        writer.ToSerializeCall(value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, value));
 
                         writer.Line("request.Content = content;");
                     }
