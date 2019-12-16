@@ -305,16 +305,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveByte() => Test(async (host, pipeline) =>
         {
             var result = await PrimitiveOperations.GetByteAsync(ClientDiagnostics, pipeline, host);
-            //https://github.com/dotnet/csharplang/issues/1058
-            var content = new[] { (byte)0xFF, (byte)0xFE, (byte)0xFD, (byte)0xFC, (byte)0x00, (byte)0xFA, (byte)0xF9, (byte)0xF8, (byte)0xF7, (byte)0xF6 };
+            var content = new byte[] { 0xFF, 0xFE, 0xFD, 0xFC, 0x00, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6 };
             Assert.AreEqual(content, result.Value.Field);
         });
 
         [Test]
         public Task PutComplexPrimitiveByte() => TestStatus(async (host, pipeline) =>
         {
-            //https://github.com/dotnet/csharplang/issues/1058
-            var content = new[] { (byte)0xFF, (byte)0xFE, (byte)0xFD, (byte)0xFC, (byte)0x00, (byte)0xFA, (byte)0xF9, (byte)0xF8, (byte)0xF7, (byte)0xF6 };
+            var content = new byte[] { 0xFF, 0xFE, 0xFD, 0xFC, 0x00, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6 };
             var value = new ByteWrapper
             {
                 Field = content
