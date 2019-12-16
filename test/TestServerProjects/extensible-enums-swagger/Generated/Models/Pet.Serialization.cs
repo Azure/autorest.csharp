@@ -31,11 +31,19 @@ namespace extensible_enums_swagger.Models.V20160707
             {
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.DaysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
                     continue;
                 }

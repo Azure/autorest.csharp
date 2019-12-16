@@ -16,6 +16,8 @@ namespace body_complex.Models.V20160229
                 writer.WriteStringValue(model.PropD1);
             }
 
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(model.Kind);
             if (model.PropB1 != null)
             {
                 writer.WritePropertyName("propB1");
@@ -35,17 +37,34 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("propD1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.PropD1 = property.Value.GetString();
                     continue;
                 }
 
+                if (property.NameEquals("kind"))
+                {
+                    result.Kind = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("propB1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.PropB1 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("helper"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
                     continue;
                 }

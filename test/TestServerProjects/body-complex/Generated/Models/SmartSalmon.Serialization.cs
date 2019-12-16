@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -54,17 +55,29 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("college_degree"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.CollegeDegree = property.Value.GetString();
                     continue;
                 }
 
                 if (property.NameEquals("location"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
@@ -76,6 +89,10 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Species = property.Value.GetString();
                     continue;
                 }
@@ -86,6 +103,11 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Siblings.Add(FishSerializer.Deserialize(item));

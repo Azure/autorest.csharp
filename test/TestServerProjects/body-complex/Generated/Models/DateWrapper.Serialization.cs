@@ -30,11 +30,19 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Field = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "D");
                     continue;
                 }
                 if (property.NameEquals("leap"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Leap = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "D");
                     continue;
                 }

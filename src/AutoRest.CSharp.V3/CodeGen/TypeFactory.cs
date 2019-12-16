@@ -37,11 +37,43 @@ namespace AutoRest.CSharp.V3.CodeGen
             _ => throw new NotImplementedException()
         };
 
-        private CSharpType ArrayTypeInfo(CollectionTypeReference schema, bool useConcrete = false, bool useInput = false) =>
-            new CSharpType(useConcrete ? typeof(List<>) : (useInput ? typeof(IEnumerable<>) : typeof(ICollection<>)),CreateTypeInfo(schema.ItemType));
+        private CSharpType ArrayTypeInfo(CollectionTypeReference schema, bool useConcrete = false, bool useInput = false)
+        {
+            bool isNullable = schema.IsNullable;
+            Type type;
+            if (useConcrete)
+            {
+                type = typeof(List<>);
+                isNullable = false;
+            }
+            else if (useInput)
+            {
+                type = typeof(IEnumerable<>);
+            }
+            else
+            {
+                type = typeof(ICollection<>);
+            }
 
-        private CSharpType DictionaryTypeInfo(DictionaryTypeReference schema, bool useConcrete = false) =>
-            new CSharpType(useConcrete ? typeof(Dictionary<string, object>) : typeof(IDictionary<string, object>), CreateTypeInfo(schema.KeyType), CreateTypeInfo(schema.ValueType));
+            return new CSharpType(type, isNullable, CreateTypeInfo(schema.ItemType));
+        }
+
+        private CSharpType DictionaryTypeInfo(DictionaryTypeReference schema, bool useConcrete = false)
+        {
+            Type type;
+            bool isNullable = schema.IsNullable;
+            if (useConcrete)
+            {
+                type = typeof(Dictionary<,>);
+                isNullable = false;
+            }
+            else
+            {
+                type = typeof(IDictionary<,>);
+            }
+
+            return new CSharpType(type, isNullable, CreateTypeInfo(schema.KeyType), CreateTypeInfo(schema.ValueType));
+        }
 
         private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
         {

@@ -34,16 +34,28 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Field = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("empty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Empty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.NullProperty = property.Value.GetString();
                     continue;
                 }

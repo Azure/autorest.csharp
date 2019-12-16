@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -44,11 +45,20 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("color"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Color = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("hates"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Hates = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Hates.Add(DogSerializer.Deserialize(item));
@@ -58,11 +68,19 @@ namespace body_complex.Models.V20160229
 
                 if (property.NameEquals("id"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Name = property.Value.GetString();
                     continue;
                 }

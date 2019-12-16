@@ -29,11 +29,19 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("field_true"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.FieldTrue = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("field_false"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.FieldFalse = property.Value.GetBoolean();
                     continue;
                 }

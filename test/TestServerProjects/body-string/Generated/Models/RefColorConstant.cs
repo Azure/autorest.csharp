@@ -5,7 +5,7 @@ namespace body_string.Models.V100
 {
     public partial class RefColorConstant
     {
-        public static string ColorConstant { get; } = "green-color";
+        public string ColorConstant { get; set; }
         public string? Field1 { get; set; }
     }
 }

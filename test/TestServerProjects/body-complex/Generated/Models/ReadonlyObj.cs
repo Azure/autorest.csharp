@@ -5,7 +5,7 @@ namespace body_complex.Models.V20160229
 {
     public partial class ReadonlyObj
     {
-        public string? Id { get; set; }
+        public string? Id { get; internal set; }
         public int? Size { get; set; }
     }
 }

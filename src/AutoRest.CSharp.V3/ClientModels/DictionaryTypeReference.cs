@@ -8,12 +8,13 @@ namespace AutoRest.CSharp.V3.ClientModels
         public ClientTypeReference KeyType { get; }
         public ClientTypeReference ValueType { get; }
 
-        public DictionaryTypeReference(ClientTypeReference keyType, ClientTypeReference valueType)
+        public DictionaryTypeReference(ClientTypeReference keyType, ClientTypeReference valueType, bool isNullable)
         {
             KeyType = keyType;
             ValueType = valueType;
+            IsNullable = isNullable;
         }
 
-        public override bool IsNullable => false;
+        public override bool IsNullable { get; }
     }
 }

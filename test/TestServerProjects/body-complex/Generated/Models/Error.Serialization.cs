@@ -29,11 +29,19 @@ namespace body_complex.Models.V20160229
             {
                 if (property.NameEquals("status"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Message = property.Value.GetString();
                     continue;
                 }

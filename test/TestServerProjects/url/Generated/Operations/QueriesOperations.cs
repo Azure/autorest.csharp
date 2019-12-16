@@ -918,7 +918,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -952,7 +952,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -986,7 +986,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringCsvEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringCsvEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -1020,7 +1020,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringSsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringSsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -1054,7 +1054,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringTsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringTsvValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -1088,7 +1088,7 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringPipesValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringPipesValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {

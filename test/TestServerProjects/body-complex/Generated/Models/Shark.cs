@@ -7,6 +7,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class Shark : Fish
     {
+        public Shark()
+        {
+            Fishtype = "shark";
+        }
         public int? Age { get; set; }
         public DateTimeOffset Birthday { get; set; }
     }

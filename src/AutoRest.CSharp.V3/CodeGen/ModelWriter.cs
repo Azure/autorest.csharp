@@ -51,16 +51,23 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Class(null, "partial", schema.CSharpName(), implements: implementsType))
                 {
-                    foreach (var constant in schema.Constants)
+                    if (schema.Discriminator != null)
                     {
-                        //TODO: Determine if type can use 'const' field instead of 'static' property
-                        writer.Line($"public static {writer.Pair(_typeFactory.CreateType(constant.Type), constant.Name)} {{ get; }} = {constant.Value.ToValueString()};");
+                        using (writer.Method("public", null, cs.Name))
+                        {
+                            writer
+                                .Append(schema.Discriminator.Property)
+                                .Append("=")
+                                .Literal(schema.Discriminator.Value)
+                                .SemicolonLine();
+                        }
                     }
 
                     foreach (var property in schema.Properties)
                     {
-                        var initializer = NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
-                        writer.AutoProperty("public", _typeFactory.CreateType(property.Type), property.Name, property.IsReadOnly, initializer);
+                        CSharpType propertyType = _typeFactory.CreateType(property.Type);
+                        var initializer = !propertyType.IsNullable && NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
+                        writer.AutoProperty("public", propertyType, property.Name, property.IsReadOnly, initializer);
                     }
                 }
             }

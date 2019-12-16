@@ -8,8 +8,8 @@ namespace body_complex.Models.V20160229
     public partial class DotFishMarket
     {
         public DotSalmon? SampleSalmon { get; set; }
-        public ICollection<DotSalmon> Salmons { get; } = new List<DotSalmon>();
+        public ICollection<DotSalmon>? Salmons { get; set; }
         public DotFish? SampleFish { get; set; }
-        public ICollection<DotFish> Fishes { get; } = new List<DotFish>();
+        public ICollection<DotFish>? Fishes { get; set; }
     }
 }

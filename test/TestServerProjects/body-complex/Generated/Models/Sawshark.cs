@@ -7,6 +7,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class Sawshark : Shark
     {
+        public Sawshark()
+        {
+            Fishtype = "sawshark";
+        }
         public Byte[]? Picture { get; set; }
     }
 }

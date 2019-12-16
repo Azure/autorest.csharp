@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace body_complex.Models.V20160229
@@ -10,6 +11,18 @@ namespace body_complex.Models.V20160229
     {
         internal static void Serialize(Shark model, Utf8JsonWriter writer)
         {
+            switch (model)
+            {
+                case Cookiecuttershark cookiecuttershark:
+                    CookiecuttersharkSerializer.Serialize(cookiecuttershark, writer);
+                    return;
+                case Goblinshark goblinshark:
+                    GoblinsharkSerializer.Serialize(goblinshark, writer);
+                    return;
+                case Sawshark sawshark:
+                    SawsharkSerializer.Serialize(sawshark, writer);
+                    return;
+            }
             writer.WriteStartObject();
             if (model.Age != null)
             {
@@ -41,11 +54,24 @@ namespace body_complex.Models.V20160229
         }
         internal static Shark Deserialize(JsonElement element)
         {
+            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
+            {
+                switch (discriminator.GetString())
+                {
+                    case "cookiecuttershark": return CookiecuttersharkSerializer.Deserialize(element);
+                    case "goblin": return GoblinsharkSerializer.Deserialize(element);
+                    case "sawshark": return SawsharkSerializer.Deserialize(element);
+                }
+            }
             var result = new Shark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Age = property.Value.GetInt32();
                     continue;
                 }
@@ -62,6 +88,10 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.Species = property.Value.GetString();
                     continue;
                 }
@@ -72,6 +102,11 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Siblings.Add(FishSerializer.Deserialize(item));

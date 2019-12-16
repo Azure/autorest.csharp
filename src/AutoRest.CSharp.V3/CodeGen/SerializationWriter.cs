@@ -7,6 +7,7 @@ using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -42,6 +43,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.ToSerializeCall(array.ItemType, format, _typeFactory, "item", serializedName, false);
                 }
                 writer.Line("writer.WriteEndArray();");
+
                 return;
             }
 
@@ -53,16 +55,36 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", "item.Key", true, false);
                 }
                 writer.Line("writer.WriteEndObject();");
+
                 return;
             }
 
             writer.ToSerializeCall(type, format, _typeFactory, name, serializedName);
         }
 
-        private void ReadProperty(CodeWriter writer, ClientTypeReference type, SerializationFormat format, string name)
+        private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
         {
+            var type = property.Type;
+            var name = property.Name;
+            var format = property.Format;
+
+            CSharpType propertyType = _typeFactory.CreateType(type);
+
+            void WriteInitialization()
+            {
+                if (propertyType.IsNullable)
+                {
+                    WriteNullCheck(writer);
+
+                    writer.Append($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}()")
+                        .SemicolonLine();
+                }
+            }
+
             if (type is CollectionTypeReference array)
             {
+                WriteInitialization();
+
                 using (writer.ForEach("var item in property.Value.EnumerateArray()"))
                 {
                     var elementType = _typeFactory.CreateType(array.ItemType);
@@ -76,6 +98,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
             if (type is DictionaryTypeReference dictionary)
             {
+                WriteInitialization();
+
                 using (writer.ForEach("var item in property.Value.EnumerateObject()"))
                 {
                     var elementType = _typeFactory.CreateType(dictionary.ValueType);
@@ -88,10 +112,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                 return;
             }
 
-            var t = writer.Type(_typeFactory.CreateType(type));
+            var t = writer.Type(propertyType);
+            if (propertyType.IsNullable)
+            {
+                WriteNullCheck(writer);
+            }
             writer.Append($"result.{name} = ");
             writer.ToDeserializeCall(type, format, _typeFactory, "property.Value", t, t);
             writer.Line(";");
+        }
+
+        private static void WriteNullCheck(CodeWriter writer)
+        {
+            using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
+            {
+                writer.Append("continue;");
+            }
         }
 
         //TODO: This is currently input schemas only. Does not handle output-style schemas.
@@ -105,6 +141,27 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.Method("internal static", "void", "Serialize", writer.Pair(cs, "model"), writer.Pair(typeof(Utf8JsonWriter), "writer")))
                     {
+                        if (model.Discriminator?.HasDirectDescendants == true)
+                        {
+                            writer.Line("switch (model)");
+                            using (writer.Scope())
+                            {
+                                foreach (var implementation in model.Discriminator.Implementations)
+                                {
+                                    if (!implementation.IsDirect)
+                                    {
+                                        continue;
+                                    }
+
+                                    var type = _typeFactory.CreateType(implementation.Type);
+                                    var localName = type.Name.ToVariableName();
+                                    writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
+                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, localName, "", includePropertyName: false);
+                                    writer.Line("return;");
+                                }
+                            }
+                        }
+
                         writer.Line("writer.WriteStartObject();");
 
                         var currentType = model;
@@ -115,7 +172,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 using (property.Type.IsNullable ? writer.If($"model.{ property.Name} != null") : default)
                                 {
-                                    WriteProperty(writer, property.Type, property.Format, "model."+property.Name, property.SerializedName);
+                                    WriteProperty(writer, property.Type, property.Format, "model." + property.Name, property.SerializedName);
                                 }
                             }
 
@@ -135,6 +192,28 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var typeText = writer.Type(cs);
                     using (writer.Method("internal static", typeText, "Deserialize", writer.Pair(typeof(JsonElement), "element")))
                     {
+                        if (model.Discriminator?.HasDescendants == true)
+                        {
+                            using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
+                            {
+                                writer.Line("switch (discriminator.GetString())");
+                                using (writer.Scope())
+                                {
+                                    foreach (var implementation in model.Discriminator.Implementations)
+                                    {
+                                        var type = _typeFactory.CreateType(implementation.Type);
+
+                                        writer
+                                            .Append("case ")
+                                            .Literal(implementation.Key)
+                                            .Append(": return ")
+                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, "element", writer.Type(type), "");
+                                        writer.SemicolonLine();
+                                    }
+                                }
+                            }
+                        }
+
                         writer.Line($"var result = new {typeText}();");
                         using (writer.ForEach("var property in element.EnumerateObject()"))
                         {
@@ -146,7 +225,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 {
                                     using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
                                     {
-                                        ReadProperty(writer, property.Type, property.Format, property.Name);
+                                        ReadProperty(writer, property);
                                         writer.Line("continue;");
                                     }
                                 }

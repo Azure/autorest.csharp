@@ -13,7 +13,7 @@ namespace url_multi_collectionFormat
 {
     internal static class QueriesOperations
     {
-        public static async ValueTask<Response> ArrayStringMultiNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringMultiNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -47,7 +47,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringMultiEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringMultiEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {
@@ -81,7 +81,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringMultiValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string> arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ArrayStringMultiValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
         {
             if (host == null)
             {

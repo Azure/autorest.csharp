@@ -5,6 +5,10 @@ namespace body_complex.Models.V20160229
 {
     public partial class MyDerivedType : MyBaseType
     {
+        public MyDerivedType()
+        {
+            Kind = "Kind1";
+        }
         public string? PropD1 { get; set; }
     }
 }

@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
@@ -26,12 +28,57 @@ namespace AutoRest.CSharp.V3.ClientModels
             var inheritsFrom = objectSchema.Parents?.Immediate.OfType<ObjectSchema>().SingleOrDefault();
             var inheritsFromTypeReference = inheritsFrom != null ? ClientModelBuilderHelpers.CreateType(inheritsFrom, false) : null;
 
+            List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
+            List<ClientObjectConstant> constants = new List<ClientObjectConstant>();
+
+            foreach (Property property in objectSchema.Properties!)
+            {
+                properties.Add(CreateProperty(property));
+            }
+
+            Discriminator? schemaDiscriminator = objectSchema.Discriminator;
+            ClientObjectDiscriminator? discriminator = null;
+
+            if (schemaDiscriminator == null && objectSchema.DiscriminatorValue != null)
+            {
+                schemaDiscriminator = objectSchema.Parents?.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
+
+                Debug.Assert(schemaDiscriminator != null);
+
+                discriminator = new ClientObjectDiscriminator(
+                    schemaDiscriminator.Property.CSharpName(),
+                    schemaDiscriminator.Property.SerializedName,
+                    Array.Empty<ClientObjectDiscriminatorImplementation>(),
+                    objectSchema.DiscriminatorValue
+                );
+            }
+            else if (schemaDiscriminator != null)
+            {
+                discriminator = new ClientObjectDiscriminator(
+                    schemaDiscriminator.Property.CSharpName(),
+                    schemaDiscriminator.Property.SerializedName,
+                    CreateDiscriminatorImplementations(schemaDiscriminator),
+                    objectSchema.DiscriminatorValue
+                    );
+            }
+
             return new ClientObject(
                 objectSchema,
                 objectSchema.CSharpName(),
                 (SchemaTypeReference?) inheritsFromTypeReference,
-                objectSchema.Properties.Where(property => !(property.Schema is ConstantSchema)).Select(CreateProperty),
-                objectSchema.Properties.Where(property => property.Schema is ConstantSchema).Select(CreateConstant));
+                properties.ToArray(),
+                constants.ToArray(),
+                discriminator
+                );
+        }
+
+        private static ClientObjectDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
+        {
+            return schemaDiscriminator.All.Select(implementation => new ClientObjectDiscriminatorImplementation(
+                implementation.Key,
+                (SchemaTypeReference)ClientModelBuilderHelpers.CreateType(implementation.Value, false),
+                schemaDiscriminator.Immediate.ContainsKey(implementation.Key)
+            )).ToArray();
         }
 
         public static ClientModel BuildModel(Schema schema) => schema switch
@@ -42,14 +89,33 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => throw new NotImplementedException()
         };
 
-        private static ClientObjectConstant CreateConstant(Property property)
+        private static ClientObjectProperty CreateProperty(Property property)
         {
-            var constantSchema = (ConstantSchema)property.Schema;
-            FrameworkTypeReference type = (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(constantSchema.ValueType, false);
-            return new ClientObjectConstant(property.CSharpName(), type, ClientModelBuilderHelpers.ParseClientConstant(constantSchema.Value.Value, type));
-        }
+            bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
 
-        private static ClientObjectProperty CreateProperty(Property property) =>
-            new ClientObjectProperty(property.CSharpName(), ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable()), property.Schema.IsLazy(), property.SerializedName, ClientModelBuilderHelpers.GetSerializationFormat(property.Schema));
+            ClientConstant? defaultValue = null;
+
+            ClientTypeReference type;
+            if (property.Schema is ConstantSchema constantSchema)
+            {
+                type = ClientModelBuilderHelpers.CreateType(constantSchema.ValueType, false);
+                defaultValue = ClientModelBuilderHelpers.ParseClientConstant(constantSchema.Value.Value, type);
+            }
+            else
+            {
+                type = ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable());
+                if (property.ClientDefaultValue != null)
+                {
+                    defaultValue = ClientModelBuilderHelpers.ParseClientConstant(property.ClientDefaultValue, type);
+                }
+            }
+
+            return new ClientObjectProperty(property.CSharpName(),
+                type,
+                isReadOnly,
+                property.SerializedName,
+                ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
+                defaultValue);
+        }
     }
 }

@@ -5,5 +5,9 @@ namespace body_complex.Models.V20160229
 {
     public partial class Cookiecuttershark : Shark
     {
+        public Cookiecuttershark()
+        {
+            Fishtype = "cookiecuttershark";
+        }
     }
 }

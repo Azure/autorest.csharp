@@ -5,7 +5,11 @@ namespace body_complex.Models.V20160229
 {
     public partial class DotFish
     {
-        public string FishType { get; set; }
+        public DotFish()
+        {
+            FishType = null;
+        }
+        public string FishType { get; internal set; }
         public string? Species { get; set; }
     }
 }
