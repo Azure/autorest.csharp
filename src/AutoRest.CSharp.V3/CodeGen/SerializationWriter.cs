@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void WriteNullCheck(CodeWriter writer)
         {
-            using (writer.If("property.Value.ValueKind == JsonValueKind.Null"))
+            using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
             {
                 writer.Append("continue;");
             }
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         if (model.Discriminator?.HasDescendants == true)
                         {
-                            using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out JsonElement discriminator)"))
+                            using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
                             {
                                 writer.Line("switch (discriminator.GetString())");
                                 using (writer.Scope())
