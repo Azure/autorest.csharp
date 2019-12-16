@@ -922,69 +922,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(105, sawshark.Age);
             Assert.AreEqual(10, sawshark.Length);
             CollectionAssert.IsEmpty(sawshark.Siblings);
-            /*
-                var bigfishRaw = {
-                "fishtype": "salmon",
-                "location": "alaska",
-                "iswild": true,
-                "species": "king",
-                "length": 1,
-                "siblings": [
-                  {
-                    "fishtype": "shark",
-                    "age": 6,
-                    'birthday': '2012-01-05T01:00:00Z',
-                    "species": "predator",
-                    "length": 20,
-                    "siblings": [
-                      {
-                        "fishtype": "salmon",
-                        "location": "atlantic",
-                        "iswild": true,
-                        "species": "coho",
-                        "length": 2,
-                        "siblings": [
-                          {
-                            "fishtype": "shark",
-                            "age": 6,
-                            'birthday': '2012-01-05T01:00:00Z',
-                            "species": "predator",
-                            "length": 20
-                          },
-                          {
-                            "fishtype": "sawshark",
-                            "age": 105,
-                            'birthday': '1900-01-05T01:00:00Z',
-                            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                            "species": "dangerous",
-                            "length": 10
-                          }
-                        ]
-                      },
-                      {
-                        "fishtype": "sawshark",
-                        "age": 105,
-                        'birthday': '1900-01-05T01:00:00Z',
-                        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                        "species": "dangerous",
-                        "length": 10,
-                        "siblings": []
-                      }
-                    ]
-                  },
-                  {
-                    "fishtype": "sawshark",
-                    "age": 105,
-                    'birthday': '1900-01-05T01:00:00Z',
-                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                    "species": "dangerous",
-                    "length": 10, "siblings": []
-                  }
-                ]
-              };
-             */
-
-            //Assert.AreEqual("salmon", result.Value.Fishtype);
         });
 
         [Test]
