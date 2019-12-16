@@ -4,9 +4,8 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.CodeGen;
 
-namespace AutoRest.CSharp.V3.Pipeline
+namespace AutoRest.CSharp.V3.CodeGen
 {
     internal static class JsonSerializerExtensions
     {
