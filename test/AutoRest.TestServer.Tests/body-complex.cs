@@ -1020,5 +1020,25 @@ namespace AutoRest.TestServer.Tests
             Assert.True(typeof(CMYKColors).IsValueType);
             Assert.False(typeof(CMYKColors).IsEnum);
         }
+
+        [Test]
+        public void OptionalCollectionsAreNullByDefault()
+        {
+            var arrayWrapper = new ArrayWrapper();
+            Assert.Null(arrayWrapper.Array);
+        }
+
+        [Test]
+        public void OptionalDictionariesAreNullByDefault()
+        {
+            var dictionaryWrapper = new DictionaryWrapper();
+            Assert.Null(dictionaryWrapper.DefaultProgram);
+        }
+
+        [Test]
+        public void ReadonlyPropertiesAreGetOnly()
+        {
+            Assert.False(typeof(ReadonlyObj).GetProperty(nameof(ReadonlyObj.Id)).SetMethod.IsPublic);
+        }
     }
 }
