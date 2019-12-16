@@ -1040,5 +1040,19 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.False(typeof(ReadonlyObj).GetProperty(nameof(ReadonlyObj.Id)).SetMethod.IsPublic);
         }
+
+        [Test]
+        public void PolymorphicModelsDiscriminatorValueSet()
+        {
+            var shark = new Shark();
+            Assert.AreEqual("shark" ,shark.Fishtype);
+        }
+
+        [Test]
+        public void DiscriminatorPropertiesAreGetOnly()
+        {
+            Assert.False(typeof(Shark).GetProperty(nameof(Shark.Fishtype)).SetMethod.IsPublic);
+        }
+
     }
 }
