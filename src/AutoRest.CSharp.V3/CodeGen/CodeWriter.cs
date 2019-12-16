@@ -204,6 +204,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             return this;
         }
 
+        public CodeWriter Append(CodeWriterDelegate writerDelegate)
+        {
+            writerDelegate(this);
+            return this;
+        }
+
         public CodeWriter Comma() => Append(", ");
 
         public CodeWriter Space() => Append(" ");
@@ -247,6 +253,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public override string? ToString() => _builder.ToString();
+
+        public static string Materialize(CodeWriterDelegate writer)
+        {
+            var codeWriter = new CodeWriter();
+            writer(codeWriter);
+            return codeWriter._builder.ToString();
+        }
 
         internal readonly struct CodeWriterScope : IDisposable
         {

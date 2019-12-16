@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"writer.WriteStartArray(\"{serializedName}\");");
                 using (writer.ForEach($"var item in {name}"))
                 {
-                    writer.ToSerializeCall(array.ItemType, format, _typeFactory, "item", serializedName, false);
+                    writer.ToSerializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
                 }
                 writer.Line("writer.WriteEndArray();");
 
@@ -52,14 +52,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"writer.WriteStartObject(\"{serializedName}\");");
                 using (writer.ForEach($"var item in {name}"))
                 {
-                    writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", "item.Key", true, false);
+                    writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
                 }
                 writer.Line("writer.WriteEndObject();");
 
                 return;
             }
 
-            writer.ToSerializeCall(type, format, _typeFactory, name, serializedName);
+            writer.ToSerializeCall(type, format, _typeFactory, w => w.Append(name), w => w.Literal(serializedName));
         }
 
         private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                     var type = _typeFactory.CreateType(implementation.Type);
                                     var localName = type.Name.ToVariableName();
                                     writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
-                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, localName, "", includePropertyName: false);
+                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, w => w.Append(localName));
                                     writer.Line("return;");
                                 }
                             }

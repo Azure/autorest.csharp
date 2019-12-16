@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.V3.ClientModels
             { Type: AllSchemaTypes.Binary } => new BinaryTypeReference(false),
             ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false), isNullable),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, false), isNullable),
-            NumberSchema number => new FrameworkTypeReference(number.ToFrameworkType(), isNullable),
-            _ when schema.Type.ToFrameworkCSharpType() is Type type => new FrameworkTypeReference(type, isNullable),
+            NumberSchema number => new FrameworkTypeReference(ToFrameworkNumberType(number), isNullable),
+            _ when ToFrameworkType(schema.Type) is Type type => new FrameworkTypeReference(type, isNullable),
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
@@ -48,5 +48,40 @@ namespace AutoRest.CSharp.V3.ClientModels
             DurationSchema _ => SerializationFormat.Duration_ISO8601,
             _ => SerializationFormat.Default
         };
+
+
+        private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
+        {
+            AllSchemaTypes.Boolean => typeof(bool),
+            AllSchemaTypes.ByteArray => null,
+            AllSchemaTypes.Char => typeof(char),
+            AllSchemaTypes.Date => typeof(DateTimeOffset),
+            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
+            AllSchemaTypes.Duration => typeof(TimeSpan),
+            AllSchemaTypes.OdataQuery => typeof(string),
+            AllSchemaTypes.String => typeof(string),
+            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
+            AllSchemaTypes.Uri => typeof(Uri),
+            AllSchemaTypes.Uuid => typeof(string),
+            _ => null
+        };
+
+        private static Type ToFrameworkNumberType(NumberSchema schema) => schema.Type switch
+        {
+            AllSchemaTypes.Number => schema.Precision switch
+            {
+                32 => typeof(float),
+                128 => typeof(decimal),
+                _ => typeof(double)
+            },
+            // Assumes AllSchemaTypes.Integer
+            _ => schema.Precision switch
+            {
+                16 => typeof(short),
+                64 => typeof(long),
+                _ => typeof(int)
+            }
+        };
+
     }
 }
