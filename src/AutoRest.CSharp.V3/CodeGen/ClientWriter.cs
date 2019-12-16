@@ -116,8 +116,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-                        var name = body.Value.IsConstant ? body.Value.Constant.ToValueString() : body.Value.Parameter.Name;
-                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, w => w.Append(name), null);
+                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, body.Value));
 
                         writer.Line("request.Content = content;");
                     }
@@ -133,6 +132,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line("scope.Failed(e);");
                     writer.Line("throw;");
                 }
+            }
+        }
+
+        private void WriteConstantOrParameter(CodeWriter writer, ConstantOrParameter constantOrParameter)
+        {
+            if (constantOrParameter.IsConstant)
+            {
+                WriteConstant(writer, constantOrParameter.Constant);
+            }
+            else
+            {
+                writer.Append(constantOrParameter.Parameter.Name);
             }
         }
 
@@ -209,25 +220,12 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            var value = segment.Value;
-
-            if (value.IsConstant)
-            {
                 writer.Append("request.Uri.AppendPath(");
-                WriteConstant(writer, value.Constant);
+                WriteConstantOrParameter(writer, segment.Value);
                 WriteSerializationFormat(writer, segment.Format);
                 writer.Comma();
                 writer.Literal(segment.Escape);
                 writer.Line(");");
-                return;
-            }
-
-            writer.Append("request.Uri.AppendPath(");
-            writer.Append(value.Parameter.Name);
-            WriteSerializationFormat(writer, segment.Format);
-            writer.Comma();
-            writer.Literal(segment.Escape);
-            writer.Line(");");
         }
 
         private void WriteHeader(CodeWriter writer, RequestHeader header)

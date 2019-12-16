@@ -218,11 +218,5 @@ namespace AutoRest.CSharp.V3.Pipeline
                     return;
             }
         }
-
-        public static string ToValueString(this ClientConstant schema)
-        {
-            var value = schema.Value;
-            return $"{((value is string || value == null) ? $"\"{value}\"" : value)}";
-        }
     }
 }
