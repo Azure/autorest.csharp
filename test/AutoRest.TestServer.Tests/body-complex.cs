@@ -509,6 +509,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Salmon()
@@ -681,6 +682,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismNoDiscriminator() => TestStatus(async (host, pipeline) =>
         {
             var value = new Salmon()
@@ -759,6 +761,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetDotSyntaxAsync(ClientDiagnostics, pipeline, host);
@@ -771,6 +774,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComposedWithDiscriminatorAsync(ClientDiagnostics, pipeline, host);
@@ -817,6 +821,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComposedWithoutDiscriminatorAsync(ClientDiagnostics, pipeline, host);
@@ -985,6 +990,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Salmon()

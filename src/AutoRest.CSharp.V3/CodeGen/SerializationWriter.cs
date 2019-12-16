@@ -64,14 +64,15 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
         {
-
             var type = property.Type;
             var name = property.Name;
             var format = property.Format;
 
+            CSharpType propertyType = _typeFactory.CreateType(type);
+
             void WriteInitialization()
             {
-                if (!property.IsRequired)
+                if (propertyType.IsNullable)
                 {
                     WriteNullCheck(writer);
 
@@ -111,7 +112,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                 return;
             }
 
-            CSharpType propertyType = _typeFactory.CreateType(type);
             var t = writer.Type(propertyType);
             if (propertyType.IsNullable)
             {

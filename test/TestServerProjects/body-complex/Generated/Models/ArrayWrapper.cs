@@ -7,6 +7,6 @@ namespace body_complex.Models.V20160229
 {
     public partial class ArrayWrapper
     {
-        public ICollection<string> Array { get; set; }
+        public ICollection<string>? Array { get; set; }
     }
 }

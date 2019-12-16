@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.CSharp.V3.ClientModels
@@ -12,11 +11,11 @@ namespace AutoRest.CSharp.V3.ClientModels
         public string Property { get; }
         public string SerializedName { get; }
 
-        public string Value { get; }
+        public string? Value { get; }
 
         public ClientObjectDiscriminatorImplementation[] Implementations { get; }
 
-        public ClientObjectDiscriminator(string property, string serializedName, ClientObjectDiscriminatorImplementation[] implementations, string value)
+        public ClientObjectDiscriminator(string property, string serializedName, ClientObjectDiscriminatorImplementation[] implementations, string? value)
         {
             Property = property;
             Implementations = implementations;

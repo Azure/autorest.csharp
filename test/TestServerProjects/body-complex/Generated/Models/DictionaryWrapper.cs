@@ -7,6 +7,6 @@ namespace body_complex.Models.V20160229
 {
     public partial class DictionaryWrapper
     {
-        public IDictionary<string, string?> DefaultProgram { get; set; }
+        public IDictionary<string, string>? DefaultProgram { get; set; }
     }
 }

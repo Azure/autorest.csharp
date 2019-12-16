@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
@@ -42,12 +43,13 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 schemaDiscriminator = objectSchema.Parents?.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
 
+                Debug.Assert(schemaDiscriminator != null);
 
                 discriminator = new ClientObjectDiscriminator(
-                    schemaDiscriminator!.Property.CSharpName(),
-                    schemaDiscriminator!.Property.SerializedName,
+                    schemaDiscriminator.Property.CSharpName(),
+                    schemaDiscriminator.Property.SerializedName,
                     Array.Empty<ClientObjectDiscriminatorImplementation>(),
-                    objectSchema.DiscriminatorValue!
+                    objectSchema.DiscriminatorValue
                 );
             }
             else if (schemaDiscriminator != null)
@@ -56,10 +58,9 @@ namespace AutoRest.CSharp.V3.ClientModels
                     schemaDiscriminator.Property.CSharpName(),
                     schemaDiscriminator.Property.SerializedName,
                     CreateDiscriminatorImplementations(schemaDiscriminator),
-                    objectSchema.DiscriminatorValue!
+                    objectSchema.DiscriminatorValue
                     );
             }
-
 
             return new ClientObject(
                 objectSchema,
@@ -112,7 +113,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientObjectProperty(property.CSharpName(),
                 type,
                 isReadOnly,
-                property.Required == true,
                 property.SerializedName,
                 ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
                 defaultValue);
