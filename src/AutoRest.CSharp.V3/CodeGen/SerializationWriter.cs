@@ -87,11 +87,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.ForEach("var item in property.Value.EnumerateArray()"))
                 {
-                    var elementType = _typeFactory.CreateType(array.ItemType);
-                    var elementTypeName = elementType.Name;
-                    var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(");
-                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, "item", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
                     writer.Line(");");
                 }
                 return;
@@ -102,23 +99,19 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.ForEach("var item in property.Value.EnumerateObject()"))
                 {
-                    var elementType = _typeFactory.CreateType(dictionary.ValueType);
-                    var elementTypeName = elementType.Name;
-                    var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(item.Name, ");
-                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"));
                     writer.Line(");");
                 }
                 return;
             }
 
-            var t = writer.Type(propertyType);
             if (propertyType.IsNullable)
             {
                 WriteNullCheck(writer);
             }
             writer.Append($"result.{name} = ");
-            writer.ToDeserializeCall(type, format, _typeFactory, "property.Value", t, t);
+            writer.ToDeserializeCall(type, format, _typeFactory, w => w.Append("property.Value"));
             writer.Line(";");
         }
 
@@ -201,13 +194,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 {
                                     foreach (var implementation in model.Discriminator.Implementations)
                                     {
-                                        var type = _typeFactory.CreateType(implementation.Type);
-
                                         writer
                                             .Append("case ")
                                             .Literal(implementation.Key)
                                             .Append(": return ")
-                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, "element", writer.Type(type), "");
+                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, w => w.Append("element"));
                                         writer.SemicolonLine();
                                     }
                                 }

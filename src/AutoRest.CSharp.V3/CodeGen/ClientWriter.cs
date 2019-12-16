@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
-                    WriteStatusCodeSwitch(writer, responseType, responseBody, headerModelType, operation);
+                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
                 }
 
                 var exceptionParameter = writer.Pair(typeof(Exception), "e");
@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, CSharpType responseType, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
         {
             using (writer.Switch("response.Status"))
             {
@@ -371,9 +371,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             responseBody.Value,
                             responseBody.Format,
                             _typeFactory,
-                            "document.RootElement",
-                            writer.Type(responseType),
-                            responseType.Name
+                            w => w.Append("document.RootElement")
                         );
                         writer.SemicolonLine();
                     }

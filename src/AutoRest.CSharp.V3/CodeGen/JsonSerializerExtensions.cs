@@ -196,19 +196,19 @@ namespace AutoRest.CSharp.V3.Pipeline
             writer.Append(".GetBytesFromBase64()");
         }
 
-        private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, SerializationFormat format, string name)
+        private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, SerializationFormat format, CodeWriterDelegate name)
         {
             var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
-            writer.Append(TypeDeserializers[frameworkType](name, format) ?? "null");
+            writer.Append(TypeDeserializers[frameworkType](CodeWriter.Materialize(name), format) ?? "null");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, string name, string typeText, string typeName)
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name)
         {
             CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
             switch (type)
             {
                 case SchemaTypeReference schemaTypeReference:
-                    WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, w => w.Append(name));
+                    WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, name);
                     return;
                 case BinaryTypeReference _:
                     WriteDeserializeBinaryTypeReference(writer, w => w.Append(name));
