@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             if (missingScenarios.Any())
             {
-                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios.OrderBy(s=>s)) + " not defined");
+                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios.OrderBy(s=>s)) + " not defined.");
             }
         }
 
