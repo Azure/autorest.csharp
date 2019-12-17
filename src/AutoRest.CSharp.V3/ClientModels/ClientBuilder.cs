@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             var request = new ClientMethodRequest(
-                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
                 ToParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
@@ -278,5 +278,19 @@ namespace AutoRest.CSharp.V3.ClientModels
                 yield return (currentPart.ToString(), true);
             }
         }
+
+        private static RequestMethod? ToCoreRequestMethod(HttpMethod method) => method switch
+        {
+            HttpMethod.Delete => RequestMethod.Delete,
+            HttpMethod.Get => RequestMethod.Get,
+            HttpMethod.Head => RequestMethod.Head,
+            HttpMethod.Options => (RequestMethod?)null,
+            HttpMethod.Patch => RequestMethod.Patch,
+            HttpMethod.Post => RequestMethod.Post,
+            HttpMethod.Put => RequestMethod.Put,
+            HttpMethod.Trace => null,
+            _ => null
+        };
+
     }
 }
