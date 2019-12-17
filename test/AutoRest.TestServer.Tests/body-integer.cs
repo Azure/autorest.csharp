@@ -45,7 +45,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Unit time in json not implemented")]
         public Task GetUnixTime() => TestStatus(async (host, pipeline) =>
         {
             var response = await IntOperations.GetUnixTimeAsync(ClientDiagnostics, pipeline, host);
@@ -92,7 +91,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutLongMin() => TestStatus(async (host, pipeline) => await IntOperations.PutMin64Async(ClientDiagnostics, pipeline, long.MinValue, host));
 
         [Test]
-        [Ignore("Unit time in json not implemented")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutUnixTime() => TestStatus(async (host, pipeline) => await IntOperations.PutUnixTimeDateAsync(ClientDiagnostics, pipeline, DateTimeOffset.FromUnixTimeSeconds(1460505600), host));
     }
 }

@@ -47,7 +47,7 @@ $testNames = if ($name) { $name } else
     #'azure-resource-x',
     #'azure-special-properties',
     #'body-array',
-    #'body-boolean',
+    'body-boolean',
     #'body-boolean.quirks',
     #'body-byte',
     'body-complex',

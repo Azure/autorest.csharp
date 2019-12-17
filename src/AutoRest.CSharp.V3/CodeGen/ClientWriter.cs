@@ -8,12 +8,10 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -116,15 +114,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
                         writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
-                        var name = body.Value.IsConstant ? body.Value.Constant.ToValueString() : body.Value.Parameter.Name;
-                        writer.ToSerializeCall(body.Value.Type, body.Format, _typeFactory, name, string.Empty, false);
+
+                        //TODO: Workaround for JSON serialization not supporting the null constants
+                        ConstantOrParameter value = body.Value;
+                        if (value.IsConstant && value.Constant.Value == null)
+                        {
+                            value = ClientModelBuilderHelpers.StringConstant("");
+                        }
+
+                        writer.ToSerializeCall(value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, value));
 
                         writer.Line("request.Content = content;");
                     }
 
                     writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
-                    WriteStatusCodeSwitch(writer, responseType, responseBody, headerModelType, operation);
+                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
                 }
 
                 var exceptionParameter = writer.Pair(typeof(Exception), "e");
@@ -132,6 +137,24 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     writer.Line("scope.Failed(e);");
                     writer.Line("throw;");
+                }
+            }
+        }
+
+        private void WriteConstantOrParameter(CodeWriter writer, ConstantOrParameter constantOrParameter)
+        {
+            if (constantOrParameter.IsConstant)
+            {
+                WriteConstant(writer, constantOrParameter.Constant);
+            }
+            else
+            {
+                writer.Append(constantOrParameter.Parameter.Name);
+
+                var type = _typeFactory.CreateType(constantOrParameter.Type);
+                if (type.IsNullable && type.IsValueType)
+                {
+                    writer.Append(".Value");
                 }
             }
         }
@@ -209,21 +232,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            var value = segment.Value;
-
-            if (value.IsConstant)
-            {
-                writer.Append("request.Uri.AppendPath(");
-                WriteConstant(writer, value.Constant);
-                WriteSerializationFormat(writer, segment.Format);
-                writer.Comma();
-                writer.Literal(segment.Escape);
-                writer.Line(");");
-                return;
-            }
-
             writer.Append("request.Uri.AppendPath(");
-            writer.Append(value.Parameter.Name);
+            WriteConstantOrParameter(writer, segment.Value);
             WriteSerializationFormat(writer, segment.Format);
             writer.Comma();
             writer.Literal(segment.Escape);
@@ -232,32 +242,28 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteHeader(CodeWriter writer, RequestHeader header)
         {
-            if (header.Value.IsConstant)
+            using (WriteValueNullCheck(writer, header.Value))
             {
                 writer.Append("request.Headers.Add(");
                 writer.Literal(header.Name);
                 writer.Comma();
-                WriteConstant(writer, header.Value.Constant);
-                writer.Line(");");
-                return;
-            }
-
-            var parameter = header.Value.Parameter;
-            var type = _typeFactory.CreateType(parameter.Type);
-            using (type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
-            {
-                writer.Append("request.Headers.Add(");
-                writer.Literal(header.Name);
-                writer.Comma();
-                writer.Append(parameter.Name);
-                if (type.IsNullable && type.IsValueType)
-                {
-                    writer.Append(".Value");
-                }
-
+                WriteConstantOrParameter(writer, header.Value);
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line(");");
             }
+        }
+
+        private CodeWriter.CodeWriterScope WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
+        {
+            if (value.IsConstant) return default;
+
+            var type = _typeFactory.CreateType(value.Type);
+            if (type.IsNullable)
+            {
+                return writer.If($"{value.Parameter.Name} != null");
+            }
+
+            return default;
         }
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
@@ -298,40 +304,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
 
             ConstantOrParameter value = queryParameter.Value;
-            if (value.IsConstant)
+            using (WriteValueNullCheck(writer, value))
             {
                 writer.Append("request.Uri.");
                 writer.Append(method);
                 writer.Append("(");
                 writer.Literal(queryParameter.Name);
                 writer.Comma();
-                WriteConstant(writer, value.Constant);
-                if (delimiter != null)
-                {
-                    writer.Comma();
-                    writer.Literal(delimiter);
-                }
-                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Comma();
-                writer.Literal(queryParameter.Escape);
-                writer.Line(");");
-                return;
-            }
-
-            var parameter = value.Parameter;
-            var type = _typeFactory.CreateType(parameter.Type);
-            using (parameter.Type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
-            {
-                writer.Append("request.Uri.");
-                writer.Append(method);
-                writer.Append("(");
-                writer.Literal(queryParameter.Name);
-                writer.Comma();
-                writer.Append(parameter.Name);
-                if (type.IsNullable && type.IsValueType)
-                {
-                    writer.Append(".Value");
-                }
+                WriteConstantOrParameter(writer, value);
                 if (delimiter != null)
                 {
                     writer.Comma();
@@ -345,7 +325,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, CSharpType responseType, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
         {
             using (writer.Switch("response.Status"))
             {
@@ -365,9 +345,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             responseBody.Value,
                             responseBody.Format,
                             _typeFactory,
-                            "document.RootElement",
-                            writer.Type(responseType),
-                            responseType.Name
+                            w => w.Append("document.RootElement")
                         );
                         writer.SemicolonLine();
                     }

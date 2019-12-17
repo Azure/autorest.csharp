@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"writer.WriteStartArray(\"{serializedName}\");");
                 using (writer.ForEach($"var item in {name}"))
                 {
-                    writer.ToSerializeCall(array.ItemType, format, _typeFactory, "item", serializedName, false);
+                    writer.ToSerializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
                 }
                 writer.Line("writer.WriteEndArray();");
 
@@ -52,14 +51,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"writer.WriteStartObject(\"{serializedName}\");");
                 using (writer.ForEach($"var item in {name}"))
                 {
-                    writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", "item.Key", true, false);
+                    writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
                 }
                 writer.Line("writer.WriteEndObject();");
 
                 return;
             }
 
-            writer.ToSerializeCall(type, format, _typeFactory, name, serializedName);
+            writer.ToSerializeCall(type, format, _typeFactory, w => w.Append(name), w => w.Literal(serializedName));
         }
 
         private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
@@ -87,11 +86,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.ForEach("var item in property.Value.EnumerateArray()"))
                 {
-                    var elementType = _typeFactory.CreateType(array.ItemType);
-                    var elementTypeName = elementType.Name;
-                    var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(");
-                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, "item", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
                     writer.Line(");");
                 }
                 return;
@@ -102,23 +98,19 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.ForEach("var item in property.Value.EnumerateObject()"))
                 {
-                    var elementType = _typeFactory.CreateType(dictionary.ValueType);
-                    var elementTypeName = elementType.Name;
-                    var elementTypeText = writer.Type(elementType);
                     writer.Append($"result.{name}.Add(item.Name, ");
-                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, "item.Value", elementTypeText, elementTypeName);
+                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"));
                     writer.Line(");");
                 }
                 return;
             }
 
-            var t = writer.Type(propertyType);
             if (propertyType.IsNullable)
             {
                 WriteNullCheck(writer);
             }
             writer.Append($"result.{name} = ");
-            writer.ToDeserializeCall(type, format, _typeFactory, "property.Value", t, t);
+            writer.ToDeserializeCall(type, format, _typeFactory, w => w.Append("property.Value"));
             writer.Line(";");
         }
 
@@ -156,7 +148,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                     var type = _typeFactory.CreateType(implementation.Type);
                                     var localName = type.Name.ToVariableName();
                                     writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
-                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, localName, "", includePropertyName: false);
+                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, w => w.Append(localName));
                                     writer.Line("return;");
                                 }
                             }
@@ -201,13 +193,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 {
                                     foreach (var implementation in model.Discriminator.Implementations)
                                     {
-                                        var type = _typeFactory.CreateType(implementation.Type);
-
                                         writer
                                             .Append("case ")
                                             .Literal(implementation.Key)
                                             .Append(": return ")
-                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, "element", writer.Type(type), "");
+                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, w => w.Append("element"));
                                         writer.SemicolonLine();
                                     }
                                 }
