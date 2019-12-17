@@ -8,12 +8,10 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -152,6 +150,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             else
             {
                 writer.Append(constantOrParameter.Parameter.Name);
+
+                var type = _typeFactory.CreateType(constantOrParameter.Type);
+                if (type.IsNullable && type.IsValueType)
+                {
+                    writer.Append(".Value");
+                }
             }
         }
 
@@ -228,42 +232,38 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-                writer.Append("request.Uri.AppendPath(");
-                WriteConstantOrParameter(writer, segment.Value);
-                WriteSerializationFormat(writer, segment.Format);
-                writer.Comma();
-                writer.Literal(segment.Escape);
-                writer.Line(");");
+            writer.Append("request.Uri.AppendPath(");
+            WriteConstantOrParameter(writer, segment.Value);
+            WriteSerializationFormat(writer, segment.Format);
+            writer.Comma();
+            writer.Literal(segment.Escape);
+            writer.Line(");");
         }
 
         private void WriteHeader(CodeWriter writer, RequestHeader header)
         {
-            if (header.Value.IsConstant)
+            using (WriteValueNullCheck(writer, header.Value))
             {
                 writer.Append("request.Headers.Add(");
                 writer.Literal(header.Name);
                 writer.Comma();
-                WriteConstant(writer, header.Value.Constant);
-                writer.Line(");");
-                return;
-            }
-
-            var parameter = header.Value.Parameter;
-            var type = _typeFactory.CreateType(parameter.Type);
-            using (type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
-            {
-                writer.Append("request.Headers.Add(");
-                writer.Literal(header.Name);
-                writer.Comma();
-                writer.Append(parameter.Name);
-                if (type.IsNullable && type.IsValueType)
-                {
-                    writer.Append(".Value");
-                }
-
+                WriteConstantOrParameter(writer, header.Value);
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line(");");
             }
+        }
+
+        private CodeWriter.CodeWriterScope WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
+        {
+            if (value.IsConstant) return default;
+
+            var type = _typeFactory.CreateType(value.Type);
+            if (type.IsNullable)
+            {
+                return writer.If($"{value.Parameter.Name} != null");
+            }
+
+            return default;
         }
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
@@ -304,40 +304,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
 
             ConstantOrParameter value = queryParameter.Value;
-            if (value.IsConstant)
+            using (WriteValueNullCheck(writer, value))
             {
                 writer.Append("request.Uri.");
                 writer.Append(method);
                 writer.Append("(");
                 writer.Literal(queryParameter.Name);
                 writer.Comma();
-                WriteConstant(writer, value.Constant);
-                if (delimiter != null)
-                {
-                    writer.Comma();
-                    writer.Literal(delimiter);
-                }
-                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Comma();
-                writer.Literal(queryParameter.Escape);
-                writer.Line(");");
-                return;
-            }
-
-            var parameter = value.Parameter;
-            var type = _typeFactory.CreateType(parameter.Type);
-            using (parameter.Type.IsNullable ? writer.If($"{parameter.Name} != null") : default)
-            {
-                writer.Append("request.Uri.");
-                writer.Append(method);
-                writer.Append("(");
-                writer.Literal(queryParameter.Name);
-                writer.Comma();
-                writer.Append(parameter.Name);
-                if (type.IsNullable && type.IsValueType)
-                {
-                    writer.Append(".Value");
-                }
+                WriteConstantOrParameter(writer, value);
                 if (delimiter != null)
                 {
                     writer.Comma();
