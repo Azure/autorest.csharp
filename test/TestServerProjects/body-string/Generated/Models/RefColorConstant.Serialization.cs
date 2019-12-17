@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_string.Models.V100
 {
@@ -17,6 +18,7 @@ namespace body_string.Models.V100
                 writer.WritePropertyName("field1");
                 writer.WriteStringValue(model.Field1);
             }
+
             writer.WriteEndObject();
         }
         internal static RefColorConstant Deserialize(JsonElement element)
@@ -38,6 +40,7 @@ namespace body_string.Models.V100
                     result.Field1 = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

@@ -34,7 +34,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -68,7 +68,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -102,7 +102,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -136,7 +136,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -167,7 +167,7 @@ namespace body_datetime_rfc1123
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "R");
+                writer.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -205,7 +205,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -239,7 +239,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -270,7 +270,7 @@ namespace body_datetime_rfc1123
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "R");
+                writer.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -308,7 +308,7 @@ namespace body_datetime_rfc1123
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "R");
+                            var value = document.RootElement.GetDateTimeOffset("R");
                             return Response.FromValue(value, response);
                         }
                     default:

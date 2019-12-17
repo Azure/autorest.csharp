@@ -378,7 +378,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
+                            var value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -409,7 +409,7 @@ namespace body_integer
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, intBody, "U");
+                writer.WriteStringValue(intBody, "U");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -447,7 +447,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
+                            var value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -481,7 +481,7 @@ namespace body_integer
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "U");
+                            var value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, response);
                         }
                     default:

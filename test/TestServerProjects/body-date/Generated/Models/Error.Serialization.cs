@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_date.Models.V100
 {
@@ -20,6 +21,7 @@ namespace body_date.Models.V100
                 writer.WritePropertyName("message");
                 writer.WriteStringValue(model.Message);
             }
+
             writer.WriteEndObject();
         }
         internal static Error Deserialize(JsonElement element)
@@ -45,6 +47,7 @@ namespace body_date.Models.V100
                     result.Message = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

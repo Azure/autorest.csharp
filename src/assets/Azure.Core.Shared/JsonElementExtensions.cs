@@ -3,6 +3,7 @@
 
 using System;
 using System.Text.Json;
+using System.Xml;
 
 namespace Azure.Core
 {
@@ -26,5 +27,20 @@ namespace Azure.Core
                     throw new NotSupportedException("Not supported value kind " + element.ValueKind);
             }
         }
+
+        public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format) => format switch
+        {
+            "D" => element.GetDateTimeOffset(),
+            "S" => element.GetDateTimeOffset(),
+            "R" => DateTimeOffset.Parse(element.GetString()),
+            "U" => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
+            _ => throw new ArgumentException("Format is not supported", nameof(format))
+        };
+
+        public static TimeSpan GetTimeSpan(in this JsonElement element, string format) => format switch
+        {
+            "P" => XmlConvert.ToTimeSpan(element.GetString()),
+            _ => throw new ArgumentException("Format is not supported", nameof(format))
+        };
     }
 }
