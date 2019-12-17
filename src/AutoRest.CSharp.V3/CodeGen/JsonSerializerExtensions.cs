@@ -100,10 +100,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             switch (typeFactory.ResolveReference(type))
             {
                 case ClientObject _:
-                    WriteSerializeClientObject(writer, w => w.Append(name), typeFactory.CreateType(type));
+                    WriteSerializeClientObject(writer, name, typeFactory.CreateType(type));
                     return;
                 case ClientEnum clientEnum:
-                    WriteSerializeClientEnum(writer, w => w.Append(name), type.IsNullable, clientEnum.IsStringBased);
+                    WriteSerializeClientEnum(writer, name, type.IsNullable, clientEnum.IsStringBased);
                     return;
                 default:
                     writer.Line("// Serialization of this type is not supported");
@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, name);
                     return;
                 case BinaryTypeReference _:
-                    WriteDeserializeBinaryTypeReference(writer, w => w.Append(name));
+                    WriteDeserializeBinaryTypeReference(writer, name);
                     return;
                 default:
                     WriteDeserializeDefault(writer, cSharpType, format, name);
