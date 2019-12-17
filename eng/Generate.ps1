@@ -85,7 +85,7 @@ $testNames = if ($name) { $name } else
     #'storage',
     #'subscriptionId-apiVersion',
     'url',
-    #'validation',
+    'validation',
     #'xml-service',
     #'xms-error-responses',
     'url-multi-collectionFormat'
