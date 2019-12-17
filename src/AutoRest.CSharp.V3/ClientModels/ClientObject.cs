@@ -8,12 +8,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientObject : ClientModel, ISchemaTypeProvider
     {
-        public ClientObject(Schema schema, string name, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, IEnumerable<ClientObjectConstant> constants, ClientObjectDiscriminator? discriminator)
+        public ClientObject(Schema schema, string name, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, ClientObjectDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary)
         {
             Schema = schema;
             Name = name;
             Inherits = inherits;
             Discriminator = discriminator;
+            ImplementsDictionary = implementsDictionary;
             Properties = new List<ClientObjectProperty>(properties);
         }
 
@@ -22,5 +23,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public SchemaTypeReference? Inherits { get; }
         public IList<ClientObjectProperty> Properties { get; }
         public ClientObjectDiscriminator? Discriminator { get; }
+        public DictionaryTypeReference? ImplementsDictionary { get; }
     }
 }

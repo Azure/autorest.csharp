@@ -4,15 +4,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace body_complex.Models.V20160229
+namespace additionalProperties.Models.V100
 {
-    public partial class SmartSalmon : Salmon, IDictionary<string, object>
+    public partial class PetAPTrue : IDictionary<string, object>
     {
-        public SmartSalmon()
-        {
-            Fishtype = "smart_salmon";
-        }
-        public string? CollegeDegree { get; set; }
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public bool? Status { get; internal set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _additionalProperties.GetEnumerator();

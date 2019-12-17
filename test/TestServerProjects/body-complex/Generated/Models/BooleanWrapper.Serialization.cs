@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -20,6 +21,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("field_false");
                 writer.WriteBooleanValue(model.FieldFalse.Value);
             }
+
             writer.WriteEndObject();
         }
         internal static BooleanWrapper Deserialize(JsonElement element)
@@ -45,6 +47,7 @@ namespace body_complex.Models.V20160229
                     result.FieldFalse = property.Value.GetBoolean();
                     continue;
                 }
+
             }
             return result;
         }

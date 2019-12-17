@@ -25,11 +25,28 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static ClientModel BuildClientObject(ObjectSchema objectSchema)
         {
-            var inheritsFrom = objectSchema.Parents?.Immediate.OfType<ObjectSchema>().SingleOrDefault();
-            var inheritsFromTypeReference = inheritsFrom != null ? ClientModelBuilderHelpers.CreateType(inheritsFrom, false) : null;
+            ClientTypeReference? inheritsFromTypeReference = null;
+            DictionaryTypeReference? dictionaryElementTypeReference = null;
+
+            foreach (ComplexSchema complexSchema in objectSchema.Parents!.Immediate)
+            {
+                switch (complexSchema)
+                {
+                    case ObjectSchema parentObjectSchema:
+                        inheritsFromTypeReference = ClientModelBuilderHelpers.CreateType(parentObjectSchema, false);
+                        break;
+                    case DictionarySchema dictionarySchema:
+                        var dictionaryElementType = dictionarySchema.ElementType;
+                        dictionaryElementTypeReference = new DictionaryTypeReference(
+                            new FrameworkTypeReference(typeof(string)),
+                            ClientModelBuilderHelpers.CreateType(dictionaryElementType, false),
+                            false);
+
+                        break;
+                }
+            }
 
             List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
-            List<ClientObjectConstant> constants = new List<ClientObjectConstant>();
 
             foreach (Property property in objectSchema.Properties!)
             {
@@ -41,7 +58,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             if (schemaDiscriminator == null && objectSchema.DiscriminatorValue != null)
             {
-                schemaDiscriminator = objectSchema.Parents?.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
+                schemaDiscriminator = objectSchema.Parents!.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
 
                 Debug.Assert(schemaDiscriminator != null);
 
@@ -67,8 +84,8 @@ namespace AutoRest.CSharp.V3.ClientModels
                 objectSchema.CSharpName(),
                 (SchemaTypeReference?) inheritsFromTypeReference,
                 properties.ToArray(),
-                constants.ToArray(),
-                discriminator
+                discriminator,
+                dictionaryElementTypeReference
                 );
         }
 

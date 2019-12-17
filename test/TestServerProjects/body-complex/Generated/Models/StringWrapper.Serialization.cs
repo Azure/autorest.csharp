@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -25,6 +26,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("null");
                 writer.WriteStringValue(model.NullProperty);
             }
+
             writer.WriteEndObject();
         }
         internal static StringWrapper Deserialize(JsonElement element)
@@ -59,6 +61,7 @@ namespace body_complex.Models.V20160229
                     result.NullProperty = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

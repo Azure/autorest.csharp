@@ -4,47 +4,47 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace additionalProperties.Models.V100
 {
-    public partial class IntWrapperSerializer
+    public partial class ErrorSerializer
     {
-        internal static void Serialize(IntWrapper model, Utf8JsonWriter writer)
+        internal static void Serialize(Error model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field1 != null)
+            if (model.Status != null)
             {
-                writer.WritePropertyName("field1");
-                writer.WriteNumberValue(model.Field1.Value);
+                writer.WritePropertyName("status");
+                writer.WriteNumberValue(model.Status.Value);
             }
-            if (model.Field2 != null)
+            if (model.Message != null)
             {
-                writer.WritePropertyName("field2");
-                writer.WriteNumberValue(model.Field2.Value);
+                writer.WritePropertyName("message");
+                writer.WriteStringValue(model.Message);
             }
 
             writer.WriteEndObject();
         }
-        internal static IntWrapper Deserialize(JsonElement element)
+        internal static Error Deserialize(JsonElement element)
         {
-            var result = new IntWrapper();
+            var result = new Error();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field1"))
+                if (property.NameEquals("status"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Field1 = property.Value.GetInt32();
+                    result.Status = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("field2"))
+                if (property.NameEquals("message"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Field2 = property.Value.GetInt32();
+                    result.Message = property.Value.GetString();
                     continue;
                 }
 

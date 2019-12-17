@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -20,6 +21,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose");
                 writer.WriteNumberValue(model.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
             }
+
             writer.WriteEndObject();
         }
         internal static DoubleWrapper Deserialize(JsonElement element)
@@ -45,6 +47,7 @@ namespace body_complex.Models.V20160229
                     result.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
                     continue;
                 }
+
             }
             return result;
         }

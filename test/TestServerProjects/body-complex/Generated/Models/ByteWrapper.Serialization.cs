@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -15,6 +16,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("field");
                 writer.WriteBase64StringValue(model.Field);
             }
+
             writer.WriteEndObject();
         }
         internal static ByteWrapper Deserialize(JsonElement element)
@@ -31,6 +33,7 @@ namespace body_complex.Models.V20160229
                     result.Field = property.Value.GetBytesFromBase64();
                     continue;
                 }
+
             }
             return result;
         }

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -24,7 +25,8 @@ namespace body_complex.Models.V20160229
             }
             if (model.Hates != null)
             {
-                writer.WriteStartArray("hates");
+                writer.WritePropertyName("hates");
+                writer.WriteStartArray();
                 foreach (var item in model.Hates)
                 {
                     DogSerializer.Serialize(item, writer);
@@ -42,6 +44,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
+
             writer.WriteEndObject();
         }
         internal static Siamese Deserialize(JsonElement element)
@@ -100,6 +103,7 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

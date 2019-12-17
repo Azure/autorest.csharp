@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -20,6 +21,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("size");
                 writer.WriteNumberValue(model.Size.Value);
             }
+
             writer.WriteEndObject();
         }
         internal static ReadonlyObj Deserialize(JsonElement element)
@@ -45,6 +47,7 @@ namespace body_complex.Models.V20160229
                     result.Size = property.Value.GetInt32();
                     continue;
                 }
+
             }
             return result;
         }

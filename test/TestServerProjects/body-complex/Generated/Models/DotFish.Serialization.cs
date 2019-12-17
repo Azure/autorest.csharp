@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -23,6 +24,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("species");
                 writer.WriteStringValue(model.Species);
             }
+
             writer.WriteEndObject();
         }
         internal static DotFish Deserialize(JsonElement element)
@@ -51,6 +53,7 @@ namespace body_complex.Models.V20160229
                     result.Species = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

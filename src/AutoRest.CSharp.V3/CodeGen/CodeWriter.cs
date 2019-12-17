@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         private string DefinitionLine(string? access, string? modifiers, string kind, string? name, string? implements = null) =>
-            new[] { access ?? _definitionAccessDefault, modifiers, kind, name , implements != null ? $": {implements}" : null }.JoinIgnoreEmpty(" ");
+            new[] { access ?? _definitionAccessDefault, modifiers, kind, name , !string.IsNullOrWhiteSpace(implements)? $": {implements}" : null }.JoinIgnoreEmpty(" ");
 
         private CodeWriterScope Definition(string? access, string? modifiers, string kind, string? name, string? implements = null)
         {

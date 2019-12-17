@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -15,6 +16,7 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("propBH1");
                 writer.WriteStringValue(model.PropBH1);
             }
+
             writer.WriteEndObject();
         }
         internal static MyBaseHelperType Deserialize(JsonElement element)
@@ -31,6 +33,7 @@ namespace body_complex.Models.V20160229
                     result.PropBH1 = property.Value.GetString();
                     continue;
                 }
+
             }
             return result;
         }

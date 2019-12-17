@@ -18,6 +18,17 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         public ObjectSchema()
         {
             Properties = Array.Empty<Property>();
+            Parents = new Relations();
+            Children = new Relations();
+        }
+    }
+
+    internal partial class Relations
+    {
+        public Relations()
+        {
+            Immediate = Array.Empty<ComplexSchema>();
+            All = Array.Empty<ComplexSchema>();
         }
     }
 

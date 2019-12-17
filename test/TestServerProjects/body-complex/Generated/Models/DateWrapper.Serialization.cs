@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -13,13 +14,14 @@ namespace body_complex.Models.V20160229
             if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "D");
+                writer.WriteStringValue(model.Field.Value, "D");
             }
             if (model.Leap != null)
             {
                 writer.WritePropertyName("leap");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Leap.Value, "D");
+                writer.WriteStringValue(model.Leap.Value, "D");
             }
+
             writer.WriteEndObject();
         }
         internal static DateWrapper Deserialize(JsonElement element)
@@ -33,7 +35,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Field = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "D");
+                    result.Field = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
                 if (property.NameEquals("leap"))
@@ -42,9 +44,10 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Leap = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "D");
+                    result.Leap = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
+
             }
             return result;
         }

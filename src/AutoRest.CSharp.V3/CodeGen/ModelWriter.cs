@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModels;
@@ -43,13 +45,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
-                string? implementsType = null;
+                List<string> implementsTypes = new List<string>();
                 if (schema.Inherits != null)
                 {
-                    implementsType = writer.Type(_typeFactory.CreateType(schema.Inherits));
+                    implementsTypes.Add(writer.Type(_typeFactory.CreateType(schema.Inherits)));
                 }
 
-                using (writer.Class(null, "partial", schema.CSharpName(), implements: implementsType))
+                if (schema.ImplementsDictionary != null)
+                {
+                    var dictionaryType = _typeFactory.CreateInputType(schema.ImplementsDictionary);
+                    implementsTypes.Add(writer.Type(dictionaryType));
+                }
+
+
+                using (writer.Class(null, "partial", schema.CSharpName(), implements: string.Join(", ", implementsTypes)))
                 {
                     if (schema.Discriminator != null)
                     {
@@ -68,6 +77,48 @@ namespace AutoRest.CSharp.V3.CodeGen
                         CSharpType propertyType = _typeFactory.CreateType(property.Type);
                         var initializer = !propertyType.IsNullable && NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
                         writer.AutoProperty("public", propertyType, property.Name, property.IsReadOnly, initializer);
+                    }
+
+                    if (schema.ImplementsDictionary != null)
+                    {
+                        var implementationType = _typeFactory.CreateType(schema.ImplementsDictionary);
+                        var fieldType = _typeFactory.CreateConcreteType(schema.ImplementsDictionary);
+                        var keyType = _typeFactory.CreateType(schema.ImplementsDictionary.KeyType);
+                        var itemType = _typeFactory.CreateType(schema.ImplementsDictionary.ValueType);
+
+                        var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
+                        var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
+                        var iCollectionKeyValuePairType = new CSharpType(typeof(ICollection<>), keyValuePairType);
+                        var iCollectionKeyType = new CSharpType(typeof(ICollection<>), keyType);
+                        var iCollectionItemType = new CSharpType(typeof(ICollection<>), itemType);
+                        var iEnumerator = new CSharpType(typeof(IEnumerator));
+                        var iEnumerable = new CSharpType(typeof(IEnumerable));
+
+                        string additionalProperties = "_additionalProperties";
+                        writer.Append("private readonly ").AppendType(implementationType).Space().Append(additionalProperties).Append("= new ").AppendType(fieldType).Append("()").SemicolonLine();
+
+                        writer.Append("public ").AppendType(iEnumeratorKeyValuePairType).Append(" GetEnumerator() => _additionalProperties.GetEnumerator();").Line()
+                            .AppendType(iEnumerator).Space().AppendType(iEnumerable).Append(".GetEnumerator() => _additionalProperties.GetEnumerator();").Line()
+                            .Append("public ").AppendType(iCollectionKeyType).Append(" Keys => _additionalProperties.Keys;").Line()
+                            .Append("public ").AppendType(iCollectionItemType).Append(" Values => _additionalProperties.Values;").Line()
+                            .Append("public bool TryGetValue(string key, out ").AppendType(itemType).Append(" value) => _additionalProperties.TryGetValue(key, out value);").Line()
+                            .Append("public void Add(").AppendType(keyType).Append(" key, ").AppendType(itemType).Append(" value) => _additionalProperties.Add(key, value);").Line()
+                            .Append("public bool ContainsKey(").AppendType(keyType).Append(" key) => _additionalProperties.ContainsKey(key);").Line()
+                            .Append("public bool Remove(").AppendType(keyType).Append(" key) => _additionalProperties.Remove(key);").Line()
+                            .Append("public int Count => _additionalProperties.Count;").Line()
+                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".IsReadOnly => _additionalProperties.IsReadOnly;").Line()
+                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".Add(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Add(value);").Line()
+                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".Remove(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Remove(value);").Line()
+                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".Contains(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Contains(value);").Line()
+                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".CopyTo(").AppendType(keyValuePairType).Append("[] destination, int offset) => _additionalProperties.CopyTo(destination, offset);").Line()
+                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".Clear() => _additionalProperties.Clear();").Line();
+
+                        using (writer.Append("public ").AppendType(itemType).Append(" this[").AppendType(keyType).Append(" key]").Scope())
+                        {
+                            writer
+                                .Line("get => _additionalProperties[key];")
+                                .Line("set => _additionalProperties[key] = value;");
+                        }
                     }
                 }
             }

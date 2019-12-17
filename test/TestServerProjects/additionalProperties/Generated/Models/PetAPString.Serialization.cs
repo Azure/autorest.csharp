@@ -4,42 +4,40 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace additionalProperties.Models.V100
 {
-    public partial class BasicSerializer
+    public partial class PetAPStringSerializer
     {
-        internal static void Serialize(Basic model, Utf8JsonWriter writer)
+        internal static void Serialize(PetAPString model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Id != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
-            }
+            writer.WritePropertyName("id");
+            writer.WriteNumberValue(model.Id);
             if (model.Name != null)
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
-            if (model.Color != null)
+            if (model.Status != null)
             {
-                writer.WritePropertyName("color");
-                writer.WriteStringValue(model.Color.ToString());
+                writer.WritePropertyName("status");
+                writer.WriteBooleanValue(model.Status.Value);
             }
 
+            foreach (var item in model)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
             writer.WriteEndObject();
         }
-        internal static Basic Deserialize(JsonElement element)
+        internal static PetAPString Deserialize(JsonElement element)
         {
-            var result = new Basic();
+            var result = new PetAPString();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     result.Id = property.Value.GetInt32();
                     continue;
                 }
@@ -52,16 +50,17 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("color"))
+                if (property.NameEquals("status"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Color = new CMYKColors(property.Value.GetString());
+                    result.Status = property.Value.GetBoolean();
                     continue;
                 }
 
+                result.Add(property.Name, property.Value.GetString());
             }
             return result;
         }

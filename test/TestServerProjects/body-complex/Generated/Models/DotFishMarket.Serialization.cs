@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -18,7 +19,8 @@ namespace body_complex.Models.V20160229
             }
             if (model.Salmons != null)
             {
-                writer.WriteStartArray("salmons");
+                writer.WritePropertyName("salmons");
+                writer.WriteStartArray();
                 foreach (var item in model.Salmons)
                 {
                     DotSalmonSerializer.Serialize(item, writer);
@@ -32,13 +34,15 @@ namespace body_complex.Models.V20160229
             }
             if (model.Fishes != null)
             {
-                writer.WriteStartArray("fishes");
+                writer.WritePropertyName("fishes");
+                writer.WriteStartArray();
                 foreach (var item in model.Fishes)
                 {
                     DotFishSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
             }
+
             writer.WriteEndObject();
         }
         internal static DotFishMarket Deserialize(JsonElement element)
@@ -90,6 +94,7 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
+
             }
             return result;
         }

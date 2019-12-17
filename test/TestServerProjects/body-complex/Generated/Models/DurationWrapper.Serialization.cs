@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -13,8 +14,9 @@ namespace body_complex.Models.V20160229
             if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "P");
+                writer.WriteStringValue(model.Field.Value, "P");
             }
+
             writer.WriteEndObject();
         }
         internal static DurationWrapper Deserialize(JsonElement element)
@@ -28,9 +30,10 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Field = Azure.Core.TypeFormatters.GetTimeSpan(property.Value, "P");
+                    result.Field = property.Value.GetTimeSpan("P");
                     continue;
                 }
+
             }
             return result;
         }

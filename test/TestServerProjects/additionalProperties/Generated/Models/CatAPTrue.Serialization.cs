@@ -4,53 +4,51 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace additionalProperties.Models.V100
 {
-    public partial class DogSerializer
+    public partial class CatAPTrueSerializer
     {
-        internal static void Serialize(Dog model, Utf8JsonWriter writer)
+        internal static void Serialize(CatAPTrue model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Food != null)
+            if (model.Friendly != null)
             {
-                writer.WritePropertyName("food");
-                writer.WriteStringValue(model.Food);
+                writer.WritePropertyName("friendly");
+                writer.WriteBooleanValue(model.Friendly.Value);
             }
 
-            if (model.Id != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
-            }
+            writer.WritePropertyName("id");
+            writer.WriteNumberValue(model.Id);
             if (model.Name != null)
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
+            if (model.Status != null)
+            {
+                writer.WritePropertyName("status");
+                writer.WriteBooleanValue(model.Status.Value);
+            }
 
             writer.WriteEndObject();
         }
-        internal static Dog Deserialize(JsonElement element)
+        internal static CatAPTrue Deserialize(JsonElement element)
         {
-            var result = new Dog();
+            var result = new CatAPTrue();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("food"))
+                if (property.NameEquals("friendly"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Food = property.Value.GetString();
+                    result.Friendly = property.Value.GetBoolean();
                     continue;
                 }
 
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     result.Id = property.Value.GetInt32();
                     continue;
                 }
@@ -61,6 +59,15 @@ namespace body_complex.Models.V20160229
                         continue;
                     }
                     result.Name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("status"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Status = property.Value.GetBoolean();
                     continue;
                 }
 
