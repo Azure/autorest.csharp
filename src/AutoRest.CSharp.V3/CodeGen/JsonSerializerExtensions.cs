@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name)
         {
-                .Append("Serializer.Deserialize(")
+            writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({name})");
         }
 
         private static void WriteDeserializeClientEnum(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name, bool isStringBased)
