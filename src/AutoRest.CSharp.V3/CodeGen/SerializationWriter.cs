@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
                 {
-                    writer.Append("continue;");
+                    writer.Append($"continue;");
                 }
             }
 
@@ -53,8 +53,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
-                    writer.Append($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}()")
-                        .SemicolonLine();
+                    writer.Line($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();");
                 }
             }
 
@@ -65,7 +64,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             WriteInitialization();
 
-            writer.ToDeserializeCall(type, format, _typeFactory, w=> w.Append($"result.{name}"), w => w.Append("property.Value"));
+            writer.ToDeserializeCall(type, format, _typeFactory, w=> w.Append($"result.{name}"), w => w.Append($"property.Value"));
         }
 
 
@@ -94,18 +93,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
                     {
-                        writer.Line("switch (discriminator.GetString())");
+                        writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())
                         {
                             foreach (var implementation in model.Discriminator.Implementations)
                             {
                                 writer
-                                    .Append("case ")
-                                    .Literal(implementation.Key)
-                                    .Append(": return ")
-                                    .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory,
-                                        w => w.Append("element"));
-                                writer.SemicolonLine();
+                                    .Append($"case {implementation.Key:L}: return ")
+                                    .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, w => w.Append($"element"));
+                                writer.Line($";");
                             }
                         }
                     }
@@ -123,7 +119,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
                             {
                                 ReadProperty(writer, property);
-                                writer.Line("continue;");
+                                writer.Line($"continue;");
                             }
                         }
 
@@ -132,14 +128,14 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     if (implementsDictionary != null)
                     {
-                        writer.Append("result.Add(property.Name, ");
-                        writer.ToDeserializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("property.Value"));
-                        writer.Append(");").Line();
+                        writer.Append($"result.Add(property.Name, ");
+                        writer.ToDeserializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append($"property.Value"));
+                        writer.Line($");");
                     }
                 }
 
 
-                writer.Line("return result;");
+                writer.Line($"return result;");
             }
         }
 
@@ -166,7 +162,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 if (model.Discriminator?.HasDirectDescendants == true)
                 {
-                    writer.Line("switch (model)");
+                    writer.Line($"switch (model)");
                     using (writer.Scope())
                     {
                         foreach (var implementation in model.Discriminator.Implementations)
@@ -178,15 +174,15 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                             var type = _typeFactory.CreateType(implementation.Type);
                             var localName = type.Name.ToVariableName();
-                            writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
+                            writer.Line($"case {type} {localName}:");
                             writer.ToSerializeCall(implementation.Type, SerializationFormat.Default, _typeFactory,
-                                w => w.Append(localName));
-                            writer.Line("return;");
+                                w => w.AppendRaw(localName));
+                            writer.Line($"return;");
                         }
                     }
                 }
 
-                writer.Line("writer.WriteStartObject();");
+                writer.Line($"writer.WriteStartObject();");
 
                 DictionaryTypeReference? implementsDictionary = null;
 
@@ -200,7 +196,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 property.Type,
                                 property.Format,
                                 _typeFactory,
-                                w => w.Append("model.").Append(property.Name),
+                                w => w.Append($"model.{property.Name}"),
                                 w => w.Literal(property.SerializedName));
                         }
 
@@ -212,11 +208,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.ForEach("var item in model"))
                     {
-                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
+                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append($"item.Value"), w => w.Append($"item.Key"));
                     }
                 }
 
-                writer.Line("writer.WriteEndObject();");
+                writer.Line($"writer.WriteEndObject();");
             }
         }
 

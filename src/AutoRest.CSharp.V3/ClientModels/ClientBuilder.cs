@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
         {
             List<ConstantOrParameter> host = new List<ConstantOrParameter>();
-            foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
+            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
                 host.Add(isLiteral ? ClientModelBuilderHelpers.StringConstant(text) : parameters[text]);
             }
@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             List<PathSegment> host = new List<PathSegment>();
-            foreach ((string text, bool isLiteral) in GetPathParts(httpRequestUri))
+            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
                 if (!isLiteral)
                 {
@@ -224,60 +224,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
-
-        //TODO: Refactor as this is written quite... ugly.
-        private static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
-        {
-            if (path == null)
-            {
-                yield break;
-            }
-
-            var index = 0;
-            var currentPart = new StringBuilder();
-            var innerPart = new StringBuilder();
-            while (index < path.Length)
-            {
-                if (path[index] == '{')
-                {
-                    var innerIndex = index + 1;
-                    while (innerIndex < path.Length)
-                    {
-                        if (path[innerIndex] == '}')
-                        {
-                            if (currentPart.Length > 0)
-                            {
-                                yield return (currentPart.ToString(), true);
-                                currentPart.Clear();
-                            }
-
-                            yield return (innerPart.ToString(), false);
-                            innerPart.Clear();
-
-                            break;
-                        }
-
-                        innerPart.Append(path[innerIndex]);
-                        innerIndex++;
-                    }
-
-                    if (innerPart.Length > 0)
-                    {
-                        currentPart.Append('{');
-                        currentPart.Append(innerPart);
-                    }
-                    index = innerIndex + 1;
-                    continue;
-                }
-                currentPart.Append(path[index]);
-                index++;
-            }
-
-            if (currentPart.Length > 0)
-            {
-                yield return (currentPart.ToString(), true);
-            }
-        }
 
         private static RequestMethod? ToCoreRequestMethod(HttpMethod method) => method switch
         {

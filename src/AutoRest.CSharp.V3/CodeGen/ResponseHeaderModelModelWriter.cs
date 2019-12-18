@@ -41,39 +41,21 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteField(CodeWriter writer)
         {
-            writer.Append("private readonly ")
-                .AppendType(typeof(Response))
-                .Space()
-                .Append(ResponseField)
-                .SemicolonLine();
+            writer.Line($"private readonly {typeof(Response)} {ResponseField};");
         }
 
         private void WriteConstructor(CodeWriter writer, CSharpType cs)
         {
             using (writer.Method("public", null, cs.Name, writer.Pair(typeof(Response), ResponseParameter)))
             {
-                writer.Append(ResponseField)
-                    .Append("=")
-                    .Append(ResponseParameter)
-                    .SemicolonLine();
+                writer.Line($"{ResponseField} = {ResponseParameter};");
             }
         }
 
         private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header)
         {
             var type = _typeFactory.CreateType(header.Type);
-            writer.Append("public ")
-                .AppendType(type)
-                .Space()
-                .Append(header.Name)
-                .Append("=>")
-                .Append(ResponseField)
-                .Append(".Headers.TryGetValue(")
-                .Literal(header.SerializedName)
-                .Append(", out ")
-                .AppendType(type)
-                .Append(" value) ? value : null")
-                .SemicolonLine();
+            writer.Line($"public {type} {header.Name} => {ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
         }
     }
 }

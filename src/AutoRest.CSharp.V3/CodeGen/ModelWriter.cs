@@ -64,11 +64,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         using (writer.Method("public", null, cs.Name))
                         {
-                            writer
-                                .Append(schema.Discriminator.Property)
-                                .Append("=")
-                                .Literal(schema.Discriminator.Value)
-                                .SemicolonLine();
+                            writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
                         }
                     }
 
@@ -95,29 +91,29 @@ namespace AutoRest.CSharp.V3.CodeGen
                         var iEnumerable = new CSharpType(typeof(IEnumerable));
 
                         string additionalProperties = "_additionalProperties";
-                        writer.Append("private readonly ").AppendType(implementationType).Space().Append(additionalProperties).Append("= new ").AppendType(fieldType).Append("()").SemicolonLine();
+                        writer.Line($"private readonly {implementationType} {additionalProperties} = new {fieldType}();");
 
-                        writer.Append("public ").AppendType(iEnumeratorKeyValuePairType).Append(" GetEnumerator() => _additionalProperties.GetEnumerator();").Line()
-                            .AppendType(iEnumerator).Space().AppendType(iEnumerable).Append(".GetEnumerator() => _additionalProperties.GetEnumerator();").Line()
-                            .Append("public ").AppendType(iCollectionKeyType).Append(" Keys => _additionalProperties.Keys;").Line()
-                            .Append("public ").AppendType(iCollectionItemType).Append(" Values => _additionalProperties.Values;").Line()
-                            .Append("public bool TryGetValue(string key, out ").AppendType(itemType).Append(" value) => _additionalProperties.TryGetValue(key, out value);").Line()
-                            .Append("public void Add(").AppendType(keyType).Append(" key, ").AppendType(itemType).Append(" value) => _additionalProperties.Add(key, value);").Line()
-                            .Append("public bool ContainsKey(").AppendType(keyType).Append(" key) => _additionalProperties.ContainsKey(key);").Line()
-                            .Append("public bool Remove(").AppendType(keyType).Append(" key) => _additionalProperties.Remove(key);").Line()
-                            .Append("public int Count => _additionalProperties.Count;").Line()
-                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".IsReadOnly => _additionalProperties.IsReadOnly;").Line()
-                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".Add(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Add(value);").Line()
-                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".Remove(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Remove(value);").Line()
-                            .Append("bool ").AppendType(iCollectionKeyValuePairType).Append(".Contains(").AppendType(keyValuePairType).Append(" value) => _additionalProperties.Contains(value);").Line()
-                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".CopyTo(").AppendType(keyValuePairType).Append("[] destination, int offset) => _additionalProperties.CopyTo(destination, offset);").Line()
-                            .Append("void ").AppendType(iCollectionKeyValuePairType).Append(".Clear() => _additionalProperties.Clear();").Line();
+                        writer.Line($"public {iEnumeratorKeyValuePairType} GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                            .Line($"{iEnumerator}  {iEnumerable}.GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                            .Line($"public {iCollectionKeyType} Keys => {additionalProperties}.Keys;")
+                            .Line($"public {iCollectionItemType} Values => {additionalProperties}.Values;")
+                            .Line($"public bool TryGetValue(string key, out {itemType} value) => {additionalProperties}.TryGetValue(key, out value);")
+                            .Line($"public void Add({keyType} key, {itemType} value) => {additionalProperties}.Add(key, value);")
+                            .Line($"public bool ContainsKey({keyType} key) => {additionalProperties}.ContainsKey(key);")
+                            .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
+                            .Line($"public int Count => _additionalProperties.Count;")
+                            .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
+                            .Line($"void {iCollectionKeyValuePairType}.Add({keyValuePairType} value) => {additionalProperties}.Add(value);")
+                            .Line($"bool {iCollectionKeyValuePairType}.Remove({keyValuePairType} value) => {additionalProperties}.Remove(value);")
+                            .Line($"bool {iCollectionKeyValuePairType}.Contains({keyValuePairType} value) => {additionalProperties}.Contains(value);")
+                            .Line($"void {iCollectionKeyValuePairType}.CopyTo({keyValuePairType}[] destination, int offset) => {additionalProperties}.CopyTo(destination, offset);")
+                            .Line($"void {iCollectionKeyValuePairType}.Clear() => {additionalProperties}.Clear();");
 
-                        using (writer.Append("public ").AppendType(itemType).Append(" this[").AppendType(keyType).Append(" key]").Scope())
+                        using (writer.Append($"public {itemType} this[{keyType} key]").Scope())
                         {
                             writer
-                                .Line("get => _additionalProperties[key];")
-                                .Line("set => _additionalProperties[key] = value;");
+                                .Line($"get => _additionalProperties[key];")
+                                .Line($"set => _additionalProperties[key] = value;");
                         }
                     }
                 }
@@ -150,24 +146,24 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var nullableStringText = writer.Type(typeof(string), true);
                     var csTypeText = writer.Type(cs);
 
-                    writer.Line($"private readonly {writer.Pair(nullableStringText, "_value")};");
+                    writer.LineRaw($"private readonly {writer.Pair(nullableStringText, "_value")};");
                     writer.Line();
 
                     using (writer.Method("public", null, schema.CSharpName(), writer.Pair(stringText, "value")))
                     {
-                        writer.Line($"_value = value ?? throw new {writer.Type(typeof(ArgumentNullException))}(nameof(value));");
+                        writer.LineRaw($"_value = value ?? throw new {writer.Type(typeof(ArgumentNullException))}(nameof(value));");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values.Select(c => c))
                     {
-                        writer.Line($"private const {writer.Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
+                        writer.LineRaw($"private const {writer.Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.Line($"public static {writer.Pair(csTypeText, choice.Name)} {{ get; }} = new {csTypeText}({choice.Name}Value);");
+                        writer.LineRaw($"public static {writer.Pair(csTypeText, choice.Name)} {{ get; }} = new {csTypeText}({choice.Name}Value);");
                     }
 
                     var boolText = writer.Type(typeof(bool));
@@ -178,12 +174,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line();
 
                     var editorBrowsableNever = $"[{writer.AttributeType(typeof(EditorBrowsableAttribute))}({writer.Type(typeof(EditorBrowsableState))}.Never)]";
-                    writer.Line(editorBrowsableNever);
+                    writer.LineRaw(editorBrowsableNever);
                     writer.MethodExpression("public override", boolText, "Equals", new[]{ writer.Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
                     writer.MethodExpression("public", boolText, "Equals", new[] { writer.Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {writer.Type(typeof(StringComparison))}.Ordinal)");
                     writer.Line();
 
-                    writer.Line(editorBrowsableNever);
+                    writer.LineRaw(editorBrowsableNever);
                     writer.MethodExpression("public override", writer.Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
                     writer.MethodExpression("public override", nullableStringText, "ToString", null, "_value");
                 }

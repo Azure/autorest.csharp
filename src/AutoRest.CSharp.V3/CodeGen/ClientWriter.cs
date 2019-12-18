@@ -80,11 +80,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace.FullName}.{methodName}\");");
                 //TODO: Implement attribute logic
                 //writer.Line("scope.AddAttribute(\"key\", name);");
-                writer.Line("scope.Start();");
+                writer.Line($"scope.Start();");
 
                 using (writer.Try())
                 {
-                    writer.Line("var request = pipeline.CreateRequest();");
+                    writer.Line($"var request = pipeline.CreateRequest();");
                     var method = operation.Request.Method;
                     writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
@@ -119,10 +119,10 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         writer.ToSerializeCall(value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, value));
 
-                        writer.Line("request.Content = content;");
+                        writer.Line($"request.Content = content;");
                     }
 
-                    writer.Line("var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
 
                     WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
                 }
@@ -130,8 +130,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var exceptionParameter = writer.Pair(typeof(Exception), "e");
                 using (writer.Catch(exceptionParameter))
                 {
-                    writer.Line("scope.Failed(e);");
-                    writer.Line("throw;");
+                    writer.Line($"scope.Failed(e);");
+                    writer.Line($"throw;");
                 }
             }
         }
@@ -144,12 +144,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
             else
             {
-                writer.Append(constantOrParameter.Parameter.Name);
+                writer.AppendRaw(constantOrParameter.Parameter.Name);
 
                 var type = _typeFactory.CreateType(constantOrParameter.Type);
                 if (type.IsNullable && type.IsValueType)
                 {
-                    writer.Append(".Value");
+                    writer.Append($".Value");
                 }
             }
         }
@@ -163,8 +163,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.If($"{parameter.Name} == null"))
                     {
-                        writer.Append("throw new ").AppendType(typeof(ArgumentNullException)).Append("(nameof(").Append(parameter.Name).Append("));");
-                        writer.Line();
+                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
                     }
                 }
             }
@@ -176,53 +175,28 @@ namespace AutoRest.CSharp.V3.CodeGen
             if (constant.Value == null)
             {
                 // Cast helps the overload resolution
-                writer.Append("(")
-                    .AppendType(_typeFactory.CreateType(constant.Type))
-                    .Append(")")
-                    .Literal(null);
+                writer.Append($"({_typeFactory.CreateType(constant.Type)}){null:L}");
                 return;
             }
 
             switch (constant.Type)
             {
                 case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTimeOffset):
-                    var dateTimeValue = (DateTimeOffset)constant.Value;
-                    dateTimeValue = dateTimeValue.ToUniversalTime();
-
-                    writer.Append("new ");
-                    writer.AppendType(typeof(DateTimeOffset));
-                    writer.Append("(");
-                    writer.Literal(dateTimeValue.Year);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Month);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Day);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Hour);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Minute);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Second);
-                    writer.Comma();
-                    writer.Literal(dateTimeValue.Millisecond);
-                    writer.Comma();
-                    writer.AppendType(typeof(TimeSpan));
-                    writer.Append(".");
-                    writer.Append(nameof(TimeSpan.Zero));
-                    writer.Append(")");
+                    var d = (DateTimeOffset)constant.Value;
+                    d = d.ToUniversalTime();
+                    writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)}");
                     break;
                 case FrameworkTypeReference _:
                     writer.Literal(constant.Value);
                     break;
                 case BinaryTypeReference _:
                     var value = (byte[])constant.Value;
-                    writer.Append("new byte[] {");
+                    writer.Append($"new byte[] {{");
                     foreach (byte b in value)
                     {
-                        writer.Literal(b);
-                        writer.Comma();
+                        writer.Append($"{b}, ");
                     }
-                    writer.Append("}");
+                    writer.Append($"}}");
                     break;
                 default:
                     throw new InvalidOperationException("Unknown constant type");
@@ -231,24 +205,20 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            writer.Append("request.Uri.AppendPath(");
+            writer.Append($"request.Uri.AppendPath(");
             WriteConstantOrParameter(writer, segment.Value);
             WriteSerializationFormat(writer, segment.Format);
-            writer.Comma();
-            writer.Literal(segment.Escape);
-            writer.Line(");");
+            writer.Line($", {segment.Escape:L});");
         }
 
         private void WriteHeader(CodeWriter writer, RequestHeader header)
         {
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append("request.Headers.Add(");
-                writer.Literal(header.Name);
-                writer.Comma();
+                writer.Append($"request.Headers.Add({header.Name:L}, ");
                 WriteConstantOrParameter(writer, header.Value);
                 WriteSerializationFormat(writer, header.Format);
-                writer.Line(");");
+                writer.Line($");");
             }
         }
 
@@ -270,7 +240,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {
-                writer.Comma().Literal(formatSpecifier);
+                writer.Append($", {formatSpecifier:L}");
             }
         }
 
@@ -305,21 +275,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             ConstantOrParameter value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append("request.Uri.");
-                writer.Append(method);
-                writer.Append("(");
-                writer.Literal(queryParameter.Name);
-                writer.Comma();
+                writer.Append($"request.Uri.{method}({queryParameter.Name:L}, ");
                 WriteConstantOrParameter(writer, value);
                 if (delimiter != null)
                 {
-                    writer.Comma();
-                    writer.Literal(delimiter);
+                    writer.Append($", {delimiter:L}");
                 }
                 WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Comma();
-                writer.Literal(queryParameter.Escape);
-                writer.Line(");");
+                writer.Line($", {queryParameter.Escape:L});");
             }
         }
 
@@ -339,45 +302,42 @@ namespace AutoRest.CSharp.V3.CodeGen
                     if (responseBody != null)
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                        writer.Append("var value = ");
+                        writer.Append($"var value = ");
                         writer.ToDeserializeCall(
                             responseBody.Value,
                             responseBody.Format,
                             _typeFactory,
-                            w => w.Append("document.RootElement")
+                            w => w.Append($"document.RootElement")
                         );
-                        writer.SemicolonLine();
+                        writer.Line($";");
                     }
 
                     if (headersModelType != null)
                     {
-                        writer.Append("var headers = new ")
-                            .AppendType(headersModelType)
-                            .Append("(response)")
-                            .SemicolonLine();
+                        writer.Line($"var headers = new {headersModelType}(response)");
                     }
 
                     switch (responseBody)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(headers, response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, response);");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {writer.Type(typeof(ResponseWithHeaders))}.FromValue(value, headers, response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(value, headers, response);");
                             break;
                         case { }:
-                            writer.Append($"return {writer.Type(typeof(Response))}.FromValue(value, response);");
+                            writer.Append($"return {typeof(Response)}.FromValue(value, response);");
                             break;
                         case null:
-                            writer.Append("return response;");
+                            writer.Append($"return response;");
                             break;
                     }
                 }
 
 
-                writer.Line("default:");
+                writer.Line($"default:");
                 //TODO: Handle actual exception responses
-                writer.Line($"throw new {writer.Type(typeof(Exception))}();");
+                writer.Line($"throw new {typeof(Exception)}();");
             }
         }
     }
