@@ -65,8 +65,7 @@ namespace body_string
                 request.Uri.AppendPath("/string/enum/notExpandable", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(stringBody.ToSerialString());
+                content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -134,8 +133,7 @@ namespace body_string
                 request.Uri.AppendPath("/string/enum/Referenced", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(enumStringBody.ToSerialString());
+                content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -207,8 +205,7 @@ namespace body_string
                 request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(enumStringBody);
+                content.JsonWriter.WriteObjectValue(enumStringBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

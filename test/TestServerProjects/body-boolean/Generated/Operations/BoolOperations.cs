@@ -64,8 +64,7 @@ namespace body_boolean
                 request.Uri.AppendPath("/bool/true", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteBooleanValue(true);
+                content.JsonWriter.WriteBooleanValue(true);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -133,8 +132,7 @@ namespace body_boolean
                 request.Uri.AppendPath("/bool/false", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteBooleanValue(false);
+                content.JsonWriter.WriteBooleanValue(false);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

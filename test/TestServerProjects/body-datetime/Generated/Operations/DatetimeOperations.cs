@@ -166,8 +166,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/max/utc", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -269,8 +268,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/max/localpositiveoffset", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -372,8 +370,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/max/localnegativeoffset", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -475,8 +472,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/min/utc", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -544,8 +540,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/min/localpositiveoffset", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -613,8 +608,7 @@ namespace body_datetime
                 request.Uri.AppendPath("/datetime/min/localnegativeoffset", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "S");
+                content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

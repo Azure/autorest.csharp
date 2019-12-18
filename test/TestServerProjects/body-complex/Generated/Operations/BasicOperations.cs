@@ -70,8 +70,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 request.Uri.AppendQuery("api-version", "2016-02-29", true);
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

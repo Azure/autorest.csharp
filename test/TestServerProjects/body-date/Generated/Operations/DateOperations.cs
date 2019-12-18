@@ -166,8 +166,7 @@ namespace body_date
                 request.Uri.AppendPath("/date/max", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(dateBody, "D");
+                content.JsonWriter.WriteStringValue(dateBody, "D");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -235,8 +234,7 @@ namespace body_date
                 request.Uri.AppendPath("/date/min", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(dateBody, "D");
+                content.JsonWriter.WriteStringValue(dateBody, "D");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

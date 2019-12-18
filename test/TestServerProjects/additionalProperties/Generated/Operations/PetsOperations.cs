@@ -35,8 +35,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/true", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -78,8 +77,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/true-subclass", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -121,8 +119,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/type/object", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -164,8 +161,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/type/string", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -207,8 +203,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/in/properties", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -250,8 +245,7 @@ namespace additionalProperties
                 request.Uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(createParameters);
+                content.JsonWriter.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

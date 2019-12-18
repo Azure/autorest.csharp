@@ -93,8 +93,7 @@ namespace validation
                 request.Headers.Add("Content-Type", "application/json");
                 request.Uri.AppendQuery("apiVersion", "1.0.0", true);
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -166,8 +165,7 @@ namespace validation
                 request.Uri.AppendPath("/value", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

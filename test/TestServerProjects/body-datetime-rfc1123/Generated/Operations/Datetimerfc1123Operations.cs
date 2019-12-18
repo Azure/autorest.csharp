@@ -166,8 +166,7 @@ namespace body_datetime_rfc1123
                 request.Uri.AppendPath("/datetimerfc1123/max", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "R");
+                content.JsonWriter.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -269,8 +268,7 @@ namespace body_datetime_rfc1123
                 request.Uri.AppendPath("/datetimerfc1123/min", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(datetimeBody, "R");
+                content.JsonWriter.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

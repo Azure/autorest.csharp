@@ -19,7 +19,7 @@ namespace extensible_enums_swagger.Models.V20160707
             if (DaysOfWeek != null)
             {
                 writer.WritePropertyName("DaysOfWeek");
-                writer.WriteStringValue(DaysOfWeek.ToString());
+                writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WritePropertyName("IntEnum");
             writer.WriteStringValue(IntEnum.ToString());

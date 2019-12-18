@@ -70,8 +70,7 @@ namespace extensible_enums_swagger
                 request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(petParam);
+                content.JsonWriter.WriteObjectValue(petParam);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
