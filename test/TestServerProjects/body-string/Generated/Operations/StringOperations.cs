@@ -65,7 +65,7 @@ namespace body_string
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                writer.WriteStringValue("");
+                writer.WriteStringValue((string?)null);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

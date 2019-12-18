@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -15,7 +16,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("propD1");
                 writer.WriteStringValue(model.PropD1);
             }
-
             writer.WritePropertyName("kind");
             writer.WriteStringValue(model.Kind);
             if (model.PropB1 != null)
@@ -44,7 +44,6 @@ namespace body_complex.Models.V20160229
                     result.PropD1 = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("kind"))
                 {
                     result.Kind = property.Value.GetString();

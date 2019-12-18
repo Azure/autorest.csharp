@@ -29,14 +29,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             var formatSpecifier = f.ToFormatSpecifier();
             var valueText = $"{vn}{(nu ? ".Value" : string.Empty)}";
             var formatText = formatSpecifier != null ? $", \"{formatSpecifier}\"" : string.Empty;
-            //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
-            return $"Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, {valueText}{formatText});";
+            return $"writer.WriteStringValue({valueText}{formatText});";
         };
 
         //TODO: Do this by AllSchemaTypes so things like Date versus DateTime can be serialized properly.
         private static readonly Dictionary<Type, Func<string, bool, SerializationFormat, string?>> TypeSerializers = new Dictionary<Type, Func<string, bool, SerializationFormat, string?>>
         {
             { typeof(bool), (vn, nu, f) => $"writer.WriteBooleanValue({vn}{(nu ? ".Value" : string.Empty)});" },
+            { typeof(object), (vn, nu, f) => $"writer.WriteObjectValue({vn});" },
             { typeof(char), StringSerializer() },
             { typeof(short), NumberSerializer },
             { typeof(int), NumberSerializer },
@@ -54,12 +54,12 @@ namespace AutoRest.CSharp.V3.CodeGen
         private static Func<string, SerializationFormat, string?>? FormatDeserializer(string typeName) => (n, f) =>
         {
             var formatSpecifier = f.ToFormatSpecifier();
-            //TODO: Hack to call Azure.Core functionality without having the context of the namespaces specified to the file this is being written to.
-            return formatSpecifier != null ? $"Azure.Core.TypeFormatters.Get{typeName}({n}, \"{formatSpecifier}\")" : null;
+            return formatSpecifier != null ? $"{n}.Get{typeName}(\"{formatSpecifier}\")" : null;
         };
 
         private static readonly Dictionary<Type, Func<string, SerializationFormat, string?>> TypeDeserializers = new Dictionary<Type, Func<string, SerializationFormat, string?>>
         {
+            { typeof(object), (n, f) => $"{n}.GetObject()" },
             { typeof(bool), (n, f) => $"{n}.GetBoolean()" },
             { typeof(char), (n, f) => $"{n}.GetString()" },
             { typeof(short), (n, f) => $"{n}.GetInt16()" },
@@ -126,6 +126,9 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? serializedName = null)
         {
+            // TODO: remove when serialization uses the full writer
+            writer.UseNamespace(new CSharpNamespace("Azure.Core"));
+
             if (serializedName != null)
             {
                 writer.Append("writer.WritePropertyName(");
@@ -135,6 +138,28 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             switch (type)
             {
+                case CollectionTypeReference array:
+                {
+                    writer.Line("writer.WriteStartArray();");
+                    using (writer.ForEach($"var item in {CodeWriter.Materialize(name)}"))
+                    {
+                        writer.ToSerializeCall(array.ItemType, format, typeFactory, w => w.Append("item"));
+                    }
+                    writer.Line("writer.WriteEndArray();");
+
+                    return;
+                }
+                case DictionaryTypeReference dictionary:
+                {
+                    writer.Line("writer.WriteStartObject();");
+                    using (writer.ForEach($"var item in {CodeWriter.Materialize(name)}"))
+                    {
+                        writer.ToSerializeCall(dictionary.ValueType, format, typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
+                    }
+                    writer.Line("writer.WriteEndObject();");
+
+                    return;
+                }
                 case SchemaTypeReference schemaTypeReference:
                     WriteSerializeSchemaTypeReference(writer, schemaTypeReference, typeFactory, name);
                     return;
@@ -201,19 +226,59 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.Append(TypeDeserializers[frameworkType](CodeWriter.Materialize(name), format) ?? "null");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name)
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
+        {
+            // TODO: remove when serialization uses the full writer
+            writer.UseNamespace(new CSharpNamespace("Azure.Core"));
+
+            switch (type)
+            {
+                case CollectionTypeReference array:
+                {
+                    using (writer.ForEach("var item in property.Value.EnumerateArray()"))
+                    {
+                        writer.Append(destination);
+                        writer.Append(".Add(");
+                        writer.ToDeserializeCall(array.ItemType, format, typeFactory, w => w.Append("item"));
+                        writer.Line(");");
+                    }
+
+                    return;
+                }
+                case DictionaryTypeReference dictionary:
+                {
+                    using (writer.ForEach("var item in property.Value.EnumerateObject()"))
+                    {
+                        writer.Append(destination);
+                        writer.Append(".Add(item.Name, ");
+                        writer.ToDeserializeCall(dictionary.ValueType, format, typeFactory, w => w.Append("item.Value"));
+                        writer.Line(");");
+                    }
+
+                    return;
+                }
+            }
+
+            writer.Append(destination);
+            writer.Append("=");
+            ToDeserializeCall(writer, type, format, typeFactory, element);
+            writer.SemicolonLine();
+        }
+
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate element)
         {
             CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
+
             switch (type)
             {
                 case SchemaTypeReference schemaTypeReference:
-                    WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, name);
+                    WriteDeserializeSchemaTypeReference(writer, cSharpType, schemaTypeReference, typeFactory, element);
                     return;
                 case BinaryTypeReference _:
-                    WriteDeserializeBinaryTypeReference(writer, name);
+                    WriteDeserializeBinaryTypeReference(writer, element);
                     return;
                 default:
-                    WriteDeserializeDefault(writer, cSharpType, format, name);
+                    WriteDeserializeDefault(writer, cSharpType, format, element);
                     return;
             }
         }

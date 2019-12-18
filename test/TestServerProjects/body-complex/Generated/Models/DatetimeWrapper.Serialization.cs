@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -13,12 +14,12 @@ namespace body_complex.Models.V20160229
             if (model.Field != null)
             {
                 writer.WritePropertyName("field");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Field.Value, "S");
+                writer.WriteStringValue(model.Field.Value, "S");
             }
             if (model.Now != null)
             {
                 writer.WritePropertyName("now");
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Now.Value, "S");
+                writer.WriteStringValue(model.Now.Value, "S");
             }
             writer.WriteEndObject();
         }
@@ -33,7 +34,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Field = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "S");
+                    result.Field = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("now"))
@@ -42,7 +43,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Now = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "S");
+                    result.Now = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
             }

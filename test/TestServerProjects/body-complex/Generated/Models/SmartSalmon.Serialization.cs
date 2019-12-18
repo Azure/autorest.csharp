@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -16,7 +17,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("college_degree");
                 writer.WriteStringValue(model.CollegeDegree);
             }
-
             if (model.Location != null)
             {
                 writer.WritePropertyName("location");
@@ -27,7 +27,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("iswild");
                 writer.WriteBooleanValue(model.Iswild.Value);
             }
-
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(model.Fishtype);
             if (model.Species != null)
@@ -39,12 +38,18 @@ namespace body_complex.Models.V20160229
             writer.WriteNumberValue(model.Length);
             if (model.Siblings != null)
             {
-                writer.WriteStartArray("siblings");
+                writer.WritePropertyName("siblings");
+                writer.WriteStartArray();
                 foreach (var item in model.Siblings)
                 {
                     FishSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
+            }
+            foreach (var item in model)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
         }
@@ -62,7 +67,6 @@ namespace body_complex.Models.V20160229
                     result.CollegeDegree = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("location"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -81,7 +85,6 @@ namespace body_complex.Models.V20160229
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
-
                 if (property.NameEquals("fishtype"))
                 {
                     result.Fishtype = property.Value.GetString();
@@ -114,6 +117,7 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
+                result.Add(property.Name, property.Value.GetObject());
             }
             return result;
         }

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -27,7 +28,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("iswild");
                 writer.WriteBooleanValue(model.Iswild.Value);
             }
-
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(model.Fishtype);
             if (model.Species != null)
@@ -39,7 +39,8 @@ namespace body_complex.Models.V20160229
             writer.WriteNumberValue(model.Length);
             if (model.Siblings != null)
             {
-                writer.WriteStartArray("siblings");
+                writer.WritePropertyName("siblings");
+                writer.WriteStartArray();
                 foreach (var item in model.Siblings)
                 {
                     FishSerializer.Serialize(item, writer);
@@ -78,7 +79,6 @@ namespace body_complex.Models.V20160229
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
-
                 if (property.NameEquals("fishtype"))
                 {
                     result.Fishtype = property.Value.GetString();

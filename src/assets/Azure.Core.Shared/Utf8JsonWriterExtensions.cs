@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace Azure.Core
@@ -13,5 +14,56 @@ namespace Azure.Core
 
         public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
+
+        public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
+        {
+            switch (value)
+            {
+                case null:
+                    writer.WriteNullValue();
+                    break;
+                case int i:
+                    writer.WriteNumberValue(i);
+                    break;
+                case decimal d:
+                    writer.WriteNumberValue(d);
+                    break;
+                case double d:
+                    writer.WriteNumberValue(d);
+                    break;
+                case float f:
+                    writer.WriteNumberValue(f);
+                    break;
+                case string s:
+                    writer.WriteStringValue(s);
+                    break;
+                case bool b:
+                    writer.WriteBooleanValue(b);
+                    break;
+                case DateTimeOffset dateTimeOffset:
+                    writer.WriteStringValue(dateTimeOffset,"S");
+                    break;
+                case IEnumerable<KeyValuePair<string, object>> enumerable:
+                    writer.WriteStartObject();
+                    foreach (KeyValuePair<string, object> pair in enumerable)
+                    {
+                        writer.WritePropertyName(pair.Key);
+                        writer.WriteObjectValue(pair.Value);
+                    }
+                    writer.WriteEndObject();
+                    break;
+                case IEnumerable<object> objectEnumerable:
+                    writer.WriteStartArray();
+                    foreach (object item in objectEnumerable)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                    break;
+
+                default:
+                    throw new NotSupportedException("Not supported type " + value.GetType());
+            }
+        }
     }
 }

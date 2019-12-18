@@ -3,7 +3,6 @@
 
 using System;
 using System.Globalization;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
@@ -63,6 +62,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
+            AllSchemaTypes.Any => typeof(object),
             _ => null
         };
 

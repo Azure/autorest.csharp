@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
@@ -32,35 +33,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteProperty(CodeWriter writer, ClientTypeReference type, SerializationFormat format, string name, string serializedName)
-        {
-            if (type is CollectionTypeReference array)
-            {
-                writer.Line($"writer.WriteStartArray(\"{serializedName}\");");
-                using (writer.ForEach($"var item in {name}"))
-                {
-                    writer.ToSerializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
-                }
-                writer.Line("writer.WriteEndArray();");
-
-                return;
-            }
-
-            if (type is DictionaryTypeReference dictionary)
-            {
-                writer.Line($"writer.WriteStartObject(\"{serializedName}\");");
-                using (writer.ForEach($"var item in {name}"))
-                {
-                    writer.ToSerializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
-                }
-                writer.Line("writer.WriteEndObject();");
-
-                return;
-            }
-
-            writer.ToSerializeCall(type, format, _typeFactory, w => w.Append(name), w => w.Literal(serializedName));
-        }
-
         private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
         {
             var type = property.Type;
@@ -69,58 +41,33 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             CSharpType propertyType = _typeFactory.CreateType(type);
 
+            void WriteNullCheck()
+            {
+                using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
+                {
+                    writer.Append("continue;");
+                }
+            }
+
             void WriteInitialization()
             {
-                if (propertyType.IsNullable)
+                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
-                    WriteNullCheck(writer);
-
                     writer.Append($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}()")
                         .SemicolonLine();
                 }
             }
 
-            if (type is CollectionTypeReference array)
-            {
-                WriteInitialization();
-
-                using (writer.ForEach("var item in property.Value.EnumerateArray()"))
-                {
-                    writer.Append($"result.{name}.Add(");
-                    writer.ToDeserializeCall(array.ItemType, format, _typeFactory, w => w.Append("item"));
-                    writer.Line(");");
-                }
-                return;
-            }
-            if (type is DictionaryTypeReference dictionary)
-            {
-                WriteInitialization();
-
-                using (writer.ForEach("var item in property.Value.EnumerateObject()"))
-                {
-                    writer.Append($"result.{name}.Add(item.Name, ");
-                    writer.ToDeserializeCall(dictionary.ValueType, format, _typeFactory, w => w.Append("item.Value"));
-                    writer.Line(");");
-                }
-                return;
-            }
-
             if (propertyType.IsNullable)
             {
-                WriteNullCheck(writer);
+                WriteNullCheck();
             }
-            writer.Append($"result.{name} = ");
-            writer.ToDeserializeCall(type, format, _typeFactory, w => w.Append("property.Value"));
-            writer.Line(";");
+
+            WriteInitialization();
+
+            writer.ToDeserializeCall(type, format, _typeFactory, w=> w.Append($"result.{name}"), w => w.Append("property.Value"));
         }
 
-        private static void WriteNullCheck(CodeWriter writer)
-        {
-            using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
-            {
-                writer.Append("continue;");
-            }
-        }
 
         //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
@@ -131,108 +78,145 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 using (writer.Class(null, "partial", serializerName))
                 {
-                    using (writer.Method("internal static", "void", "Serialize", writer.Pair(cs, "model"), writer.Pair(typeof(Utf8JsonWriter), "writer")))
+                    WriteSerialize(writer, model, cs);
+
+                    WriteDeserialize(writer, model, cs);
+                }
+            }
+        }
+
+        private void WriteDeserialize(CodeWriter writer, ClientObject model, CSharpType cs)
+        {
+            var typeText = writer.Type(cs);
+            using (writer.Method("internal static", typeText, "Deserialize", writer.Pair(typeof(JsonElement), "element")))
+            {
+                if (model.Discriminator?.HasDescendants == true)
+                {
+                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
                     {
-                        if (model.Discriminator?.HasDirectDescendants == true)
+                        writer.Line("switch (discriminator.GetString())");
+                        using (writer.Scope())
                         {
-                            writer.Line("switch (model)");
-                            using (writer.Scope())
+                            foreach (var implementation in model.Discriminator.Implementations)
                             {
-                                foreach (var implementation in model.Discriminator.Implementations)
-                                {
-                                    if (!implementation.IsDirect)
-                                    {
-                                        continue;
-                                    }
-
-                                    var type = _typeFactory.CreateType(implementation.Type);
-                                    var localName = type.Name.ToVariableName();
-                                    writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
-                                    writer.ToSerializeCall(implementation.Type, SerializationFormat.Default,  _typeFactory, w => w.Append(localName));
-                                    writer.Line("return;");
-                                }
+                                writer
+                                    .Append("case ")
+                                    .Literal(implementation.Key)
+                                    .Append(": return ")
+                                    .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory,
+                                        w => w.Append("element"));
+                                writer.SemicolonLine();
                             }
                         }
-
-                        writer.Line("writer.WriteStartObject();");
-
-                        var currentType = model;
-
-                        while (currentType != null)
-                        {
-                            foreach (var property in currentType.Properties)
-                            {
-                                using (property.Type.IsNullable ? writer.If($"model.{ property.Name} != null") : default)
-                                {
-                                    WriteProperty(writer, property.Type, property.Format, "model." + property.Name, property.SerializedName);
-                                }
-                            }
-
-                            if (currentType.Inherits == null)
-                            {
-                                break;
-                            }
-
-                            currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
-
-                            writer.Line();
-                        }
-
-                        writer.Line("writer.WriteEndObject();");
-                    }
-
-                    var typeText = writer.Type(cs);
-                    using (writer.Method("internal static", typeText, "Deserialize", writer.Pair(typeof(JsonElement), "element")))
-                    {
-                        if (model.Discriminator?.HasDescendants == true)
-                        {
-                            using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
-                            {
-                                writer.Line("switch (discriminator.GetString())");
-                                using (writer.Scope())
-                                {
-                                    foreach (var implementation in model.Discriminator.Implementations)
-                                    {
-                                        writer
-                                            .Append("case ")
-                                            .Literal(implementation.Key)
-                                            .Append(": return ")
-                                            .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, w => w.Append("element"));
-                                        writer.SemicolonLine();
-                                    }
-                                }
-                            }
-                        }
-
-                        writer.Line($"var result = new {typeText}();");
-                        using (writer.ForEach("var property in element.EnumerateObject()"))
-                        {
-                            var currentType = model;
-
-                            while (currentType != null)
-                            {
-                                foreach (var property in currentType.Properties)
-                                {
-                                    using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
-                                    {
-                                        ReadProperty(writer, property);
-                                        writer.Line("continue;");
-                                    }
-                                }
-
-                                if (currentType.Inherits == null)
-                                {
-                                    break;
-                                }
-
-                                currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
-
-                                writer.Line();
-                            }
-                        }
-                        writer.Line("return result;");
                     }
                 }
+
+                writer.Line($"var result = new {typeText}();");
+                using (writer.ForEach("var property in element.EnumerateObject()"))
+                {
+                    DictionaryTypeReference? implementsDictionary = null;
+
+                    foreach (ClientObject currentType in WalkInheritance(model))
+                    {
+                        foreach (var property in currentType.Properties)
+                        {
+                            using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
+                            {
+                                ReadProperty(writer, property);
+                                writer.Line("continue;");
+                            }
+                        }
+
+                        implementsDictionary ??= currentType.ImplementsDictionary;
+                    }
+
+                    if (implementsDictionary != null)
+                    {
+                        writer.Append("result.Add(property.Name, ");
+                        writer.ToDeserializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("property.Value"));
+                        writer.Append(");").Line();
+                    }
+                }
+
+
+                writer.Line("return result;");
+            }
+        }
+
+        private IEnumerable<ClientObject> WalkInheritance(ClientObject model)
+        {
+            var currentType = model;
+
+            while (currentType != null)
+            {
+                yield return currentType;
+
+                if (currentType.Inherits == null)
+                {
+                    yield break;
+                }
+
+                currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
+            }
+        }
+
+        private void WriteSerialize(CodeWriter writer, ClientObject model, CSharpType cs)
+        {
+            using (writer.Method("internal static", "void", "Serialize", writer.Pair(cs, "model"), writer.Pair(typeof(Utf8JsonWriter), "writer")))
+            {
+                if (model.Discriminator?.HasDirectDescendants == true)
+                {
+                    writer.Line("switch (model)");
+                    using (writer.Scope())
+                    {
+                        foreach (var implementation in model.Discriminator.Implementations)
+                        {
+                            if (!implementation.IsDirect)
+                            {
+                                continue;
+                            }
+
+                            var type = _typeFactory.CreateType(implementation.Type);
+                            var localName = type.Name.ToVariableName();
+                            writer.Append("case ").AppendType(type).Space().Append(localName).Append(":").Line();
+                            writer.ToSerializeCall(implementation.Type, SerializationFormat.Default, _typeFactory,
+                                w => w.Append(localName));
+                            writer.Line("return;");
+                        }
+                    }
+                }
+
+                writer.Line("writer.WriteStartObject();");
+
+                DictionaryTypeReference? implementsDictionary = null;
+
+                foreach (ClientObject currentType in WalkInheritance(model))
+                {
+                    foreach (var property in currentType.Properties)
+                    {
+                        using (property.Type.IsNullable ? writer.If($"model.{property.Name} != null") : default)
+                        {
+                            writer.ToSerializeCall(
+                                property.Type,
+                                property.Format,
+                                _typeFactory,
+                                w => w.Append("model.").Append(property.Name),
+                                w => w.Literal(property.SerializedName));
+                        }
+
+                        implementsDictionary ??= currentType.ImplementsDictionary;
+                    }
+                }
+
+                if (implementsDictionary != null)
+                {
+                    using (writer.ForEach("var item in model"))
+                    {
+                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
+                    }
+                }
+
+                writer.Line("writer.WriteEndObject();");
             }
         }
 

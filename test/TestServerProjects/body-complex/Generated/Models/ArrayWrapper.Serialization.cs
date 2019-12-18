@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -13,7 +14,8 @@ namespace body_complex.Models.V20160229
             writer.WriteStartObject();
             if (model.Array != null)
             {
-                writer.WriteStartArray("array");
+                writer.WritePropertyName("array");
+                writer.WriteStartArray();
                 foreach (var item in model.Array)
                 {
                     writer.WriteStringValue(item);

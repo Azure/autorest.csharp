@@ -39,7 +39,7 @@ $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames = if ($name) { $name } else
 {
-    #'additionalProperties',
+    'additionalProperties',
     #'azure-composite-swagger',
     #'azure-parameter-grouping',
     #'azure-report',

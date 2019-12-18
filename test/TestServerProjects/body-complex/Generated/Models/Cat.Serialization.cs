@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -18,14 +19,14 @@ namespace body_complex.Models.V20160229
             }
             if (model.Hates != null)
             {
-                writer.WriteStartArray("hates");
+                writer.WritePropertyName("hates");
+                writer.WriteStartArray();
                 foreach (var item in model.Hates)
                 {
                     DogSerializer.Serialize(item, writer);
                 }
                 writer.WriteEndArray();
             }
-
             if (model.Id != null)
             {
                 writer.WritePropertyName("id");
@@ -65,7 +66,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)

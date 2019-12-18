@@ -34,7 +34,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -68,7 +68,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -102,7 +102,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -136,7 +136,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -167,7 +167,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -205,7 +205,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -239,7 +239,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -270,7 +270,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -308,7 +308,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -342,7 +342,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -373,7 +373,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -411,7 +411,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -445,7 +445,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -476,7 +476,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -514,7 +514,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -545,7 +545,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -583,7 +583,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -614,7 +614,7 @@ namespace body_datetime
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, datetimeBody, "S");
+                writer.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -652,7 +652,7 @@ namespace body_datetime
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "S");
+                            var value = document.RootElement.GetDateTimeOffset("S");
                             return Response.FromValue(value, response);
                         }
                     default:

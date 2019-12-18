@@ -548,7 +548,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        // TODO: Passes but without additional properties https://github.com/Azure/autorest.csharp/issues/348
         public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) =>
         {
             var result = await PolymorphismOperations.GetComplicatedAsync(ClientDiagnostics, pipeline, host);
@@ -585,97 +584,62 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(5, goblin.Jawsize);
             Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
 
-            /*
-               var rawSalmon = {
-                 'fishtype': 'smart_salmon',
-                 'location': 'alaska',
-                 'iswild': true,
-                 'species': 'king',
-                 'additionalProperty1': 1,
-                 'additionalProperty2': false,
-                 'additionalProperty3': "hello",
-                 'additionalProperty4': { a: 1, b: 2 },
-                 'additionalProperty5': [1, 3],
-                 'length': 1.0,
-                 'siblings': [
-                   {
-                     'fishtype': 'shark',
-                     'age': 6,
-                     'birthday': '2012-01-05T01:00:00Z',
-                     'length': 20.0,
-                     'species': 'predator',
-                   },
-                   {
-                     'fishtype': 'sawshark',
-                     'age': 105,
-                     'birthday': '1900-01-05T01:00:00Z',
-                     'length': 10.0,
-                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                     'species': 'dangerous',
-                   },
-                   {
-                     'fishtype': 'goblin',
-                     'age': 1,
-                     'birthday': '2015-08-08T00:00:00Z',
-                     'length': 30.0,
-                     'species': 'scary',
-                     'jawsize': 5,
-                     'color':'pinkish-gray'
-                   }
-                 ]
-               };
-             */
+            Assert.AreEqual(1, value["additionalProperty1"]);
+            Assert.AreEqual(false, value["additionalProperty2"]);
+            Assert.AreEqual("hello", value["additionalProperty3"]);
+            Assert.AreEqual(new Dictionary<string, object>()
+            {
+                {"a", 1},
+                {"b", 2 }
+            }, value["additionalProperty4"]);
+
+            Assert.AreEqual(new object[] { 1, 3 }, value["additionalProperty5"]);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/348")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismComplicated() => TestStatus(async (host, pipeline) =>
         {
-            /*
-               var rawSalmon = {
-                 'fishtype': 'smart_salmon',
-                 'location': 'alaska',
-                 'iswild': true,
-                 'species': 'king',
-                 'additionalProperty1': 1,
-                 'additionalProperty2': false,
-                 'additionalProperty3': "hello",
-                 'additionalProperty4': { a: 1, b: 2 },
-                 'additionalProperty5': [1, 3],
-                 'length': 1.0,
-                 'siblings': [
-                   {
-                     'fishtype': 'shark',
-                     'age': 6,
-                     'birthday': '2012-01-05T01:00:00Z',
-                     'length': 20.0,
-                     'species': 'predator',
-                   },
-                   {
-                     'fishtype': 'sawshark',
-                     'age': 105,
-                     'birthday': '1900-01-05T01:00:00Z',
-                     'length': 10.0,
-                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                     'species': 'dangerous',
-                   },
-                   {
-                     'fishtype': 'goblin',
-                     'age': 1,
-                     'birthday': '2015-08-08T00:00:00Z',
-                     'length': 30.0,
-                     'species': 'scary',
-                     'jawsize': 5,
-                     'color':'pinkish-gray'
-                   }
-                 ]
-               };
-             */
-            var value = new Salmon
+            var value = new SmartSalmon()
             {
-                //Fishtype = "smart_salmon",
-                Location = "alaska"
+                Location = "alaska",
+                Iswild = true,
+                Species = "king",
+                Length = 1,
+                Siblings = new[]
+                {
+                    new Shark
+                    {
+                        Age = 6,
+                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
+                        Length = 20,
+                        Species = "predator"
+                    },
+                    new Sawshark()
+                    {
+                        Age = 105,
+                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
+                        Picture = new byte[] {255, 255, 255, 255, 254},
+                        Length = 10,
+                        Species = "dangerous"
+                    },
+                    new Goblinshark()
+                    {
+                        Age = 1,
+                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
+                        Length = 30,
+                        Species = "scary",
+                        Jawsize = 5,
+                        Color = "pinkish-gray"
+                    }
+                }
             };
+            value["additionalProperty1"] = 1;
+            value["additionalProperty2"] = false;
+            value["additionalProperty3"] = "hello";
+            value["additionalProperty4"] = new Dictionary<string, object>() {{"a", 1}, {"b", 2}};
+            value["additionalProperty5"] = new object[] {1, 3};
+
             return await PolymorphismOperations.PutComplicatedAsync(ClientDiagnostics, pipeline, value, host);
         });
 

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace url_multi_collectionFormat.Models.V100
 {

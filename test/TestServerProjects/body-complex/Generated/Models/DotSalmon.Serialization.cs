@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -20,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("iswild");
                 writer.WriteBooleanValue(model.Iswild.Value);
             }
-
             writer.WritePropertyName("fish.type");
             writer.WriteStringValue(model.FishType);
             if (model.Species != null)
@@ -53,7 +53,6 @@ namespace body_complex.Models.V20160229
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
-
                 if (property.NameEquals("fish.type"))
                 {
                     result.FishType = property.Value.GetString();

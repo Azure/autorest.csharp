@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -15,7 +16,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("food");
                 writer.WriteStringValue(model.Food);
             }
-
             if (model.Id != null)
             {
                 writer.WritePropertyName("id");
@@ -42,7 +42,6 @@ namespace body_complex.Models.V20160229
                     result.Food = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)

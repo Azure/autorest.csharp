@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -11,15 +12,13 @@ namespace body_complex.Models.V20160229
         internal static void Serialize(Cookiecuttershark model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-
             if (model.Age != null)
             {
                 writer.WritePropertyName("age");
                 writer.WriteNumberValue(model.Age.Value);
             }
             writer.WritePropertyName("birthday");
-            Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, model.Birthday, "S");
-
+            writer.WriteStringValue(model.Birthday, "S");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(model.Fishtype);
             if (model.Species != null)
@@ -31,7 +30,8 @@ namespace body_complex.Models.V20160229
             writer.WriteNumberValue(model.Length);
             if (model.Siblings != null)
             {
-                writer.WriteStartArray("siblings");
+                writer.WritePropertyName("siblings");
+                writer.WriteStartArray();
                 foreach (var item in model.Siblings)
                 {
                     FishSerializer.Serialize(item, writer);
@@ -45,7 +45,6 @@ namespace body_complex.Models.V20160229
             var result = new Cookiecuttershark();
             foreach (var property in element.EnumerateObject())
             {
-
                 if (property.NameEquals("age"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -57,10 +56,9 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("birthday"))
                 {
-                    result.Birthday = Azure.Core.TypeFormatters.GetDateTimeOffset(property.Value, "S");
+                    result.Birthday = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
-
                 if (property.NameEquals("fishtype"))
                 {
                     result.Fishtype = property.Value.GetString();

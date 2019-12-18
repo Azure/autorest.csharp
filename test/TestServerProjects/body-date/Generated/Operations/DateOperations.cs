@@ -34,7 +34,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -68,7 +68,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -102,7 +102,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -136,7 +136,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -167,7 +167,7 @@ namespace body_date
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, dateBody, "D");
+                writer.WriteStringValue(dateBody, "D");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -205,7 +205,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -236,7 +236,7 @@ namespace body_date
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Azure.Core.Utf8JsonWriterExtensions.WriteStringValue(writer, dateBody, "D");
+                writer.WriteStringValue(dateBody, "D");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -274,7 +274,7 @@ namespace body_date
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Azure.Core.TypeFormatters.GetDateTimeOffset(document.RootElement, "D");
+                            var value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, response);
                         }
                     default:

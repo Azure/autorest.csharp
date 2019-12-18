@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
@@ -13,7 +14,8 @@ namespace body_complex.Models.V20160229
             writer.WriteStartObject();
             if (model.DefaultProgram != null)
             {
-                writer.WriteStartObject("defaultProgram");
+                writer.WritePropertyName("defaultProgram");
+                writer.WriteStartObject();
                 foreach (var item in model.DefaultProgram)
                 {
                     writer.WritePropertyName(item.Key);
