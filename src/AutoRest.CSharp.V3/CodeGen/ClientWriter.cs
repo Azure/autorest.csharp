@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTimeOffset):
                     var d = (DateTimeOffset)constant.Value;
                     d = d.ToUniversalTime();
-                    writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)}");
+                    writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
                     break;
                 case FrameworkTypeReference _:
                     writer.Literal(constant.Value);
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     if (headersModelType != null)
                     {
-                        writer.Line($"var headers = new {headersModelType}(response)");
+                        writer.Line($"var headers = new {headersModelType}(response);");
                     }
 
                     switch (responseBody)

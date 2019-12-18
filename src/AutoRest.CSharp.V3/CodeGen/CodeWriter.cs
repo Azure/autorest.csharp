@@ -34,6 +34,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriter Append(FormattableString formattableString)
         {
+            if (formattableString.ArgumentCount == 0)
+            {
+                return AppendRaw(formattableString.ToString());
+            }
+
             const string literalFormatString = ":L";
             foreach ((string Text, bool IsLiteral) part in StringExtensions.GetPathParts(formattableString.Format))
             {
