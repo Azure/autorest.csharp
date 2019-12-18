@@ -7,16 +7,16 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DictionaryWrapperSerializer
+    public partial class DictionaryWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(DictionaryWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.DefaultProgram != null)
+            if (DefaultProgram != null)
             {
                 writer.WritePropertyName("defaultProgram");
                 writer.WriteStartObject();
-                foreach (var item in model.DefaultProgram)
+                foreach (var item in DefaultProgram)
                 {
                     writer.WritePropertyName(item.Key);
                     writer.WriteStringValue(item.Value);
@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static DictionaryWrapper Deserialize(JsonElement element)
+        internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element)
         {
             var result = new DictionaryWrapper();
             foreach (var property in element.EnumerateObject())

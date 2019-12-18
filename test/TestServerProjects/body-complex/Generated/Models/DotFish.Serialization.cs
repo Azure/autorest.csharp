@@ -6,33 +6,27 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotFishSerializer
+    public partial class DotFish : IUtf8JsonSerializable
     {
-        internal static void Serialize(DotFish model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            switch (model)
-            {
-                case DotSalmon dotSalmon:
-                    DotSalmonSerializer.Serialize(dotSalmon, writer);
-                    return;
-            }
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type");
-            writer.WriteStringValue(model.FishType);
-            if (model.Species != null)
+            writer.WriteStringValue(FishType);
+            if (Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(model.Species);
+                writer.WriteStringValue(Species);
             }
             writer.WriteEndObject();
         }
-        internal static DotFish Deserialize(JsonElement element)
+        internal static DotFish DeserializeDotFish(JsonElement element)
         {
             if (element.TryGetProperty("fish.type", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "DotSalmon": return DotSalmonSerializer.Deserialize(element);
+                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
             var result = new DotFish();

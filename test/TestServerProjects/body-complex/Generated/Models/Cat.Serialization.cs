@@ -7,39 +7,39 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class CatSerializer
+    public partial class Cat : IUtf8JsonSerializable
     {
-        internal static void Serialize(Cat model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Color != null)
+            if (Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(model.Color);
+                writer.WriteStringValue(Color);
             }
-            if (model.Hates != null)
+            if (Hates != null)
             {
                 writer.WritePropertyName("hates");
                 writer.WriteStartArray();
-                foreach (var item in model.Hates)
+                foreach (var item in Hates)
                 {
-                    DogSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
+                writer.WriteNumberValue(Id.Value);
             }
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
             writer.WriteEndObject();
         }
-        internal static Cat Deserialize(JsonElement element)
+        internal static Cat DeserializeCat(JsonElement element)
         {
             var result = new Cat();
             foreach (var property in element.EnumerateObject())
@@ -62,7 +62,7 @@ namespace body_complex.Models.V20160229
                     result.Hates = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(DogSerializer.Deserialize(item));
+                        result.Hates.Add(Dog.DeserializeDog(item));
                     }
                     continue;
                 }

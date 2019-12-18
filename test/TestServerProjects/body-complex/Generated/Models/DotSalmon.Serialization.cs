@@ -6,31 +6,31 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotSalmonSerializer
+    public partial class DotSalmon : IUtf8JsonSerializable
     {
-        internal static void Serialize(DotSalmon model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Location != null)
+            if (Location != null)
             {
                 writer.WritePropertyName("location");
-                writer.WriteStringValue(model.Location);
+                writer.WriteStringValue(Location);
             }
-            if (model.Iswild != null)
+            if (Iswild != null)
             {
                 writer.WritePropertyName("iswild");
-                writer.WriteBooleanValue(model.Iswild.Value);
+                writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fish.type");
-            writer.WriteStringValue(model.FishType);
-            if (model.Species != null)
+            writer.WriteStringValue(FishType);
+            if (Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(model.Species);
+                writer.WriteStringValue(Species);
             }
             writer.WriteEndObject();
         }
-        internal static DotSalmon Deserialize(JsonElement element)
+        internal static DotSalmon DeserializeDotSalmon(JsonElement element)
         {
             var result = new DotSalmon();
             foreach (var property in element.EnumerateObject())

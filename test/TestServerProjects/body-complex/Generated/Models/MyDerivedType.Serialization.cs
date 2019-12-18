@@ -6,31 +6,31 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyDerivedTypeSerializer
+    public partial class MyDerivedType : IUtf8JsonSerializable
     {
-        internal static void Serialize(MyDerivedType model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.PropD1 != null)
+            if (PropD1 != null)
             {
                 writer.WritePropertyName("propD1");
-                writer.WriteStringValue(model.PropD1);
+                writer.WriteStringValue(PropD1);
             }
             writer.WritePropertyName("kind");
-            writer.WriteStringValue(model.Kind);
-            if (model.PropB1 != null)
+            writer.WriteStringValue(Kind);
+            if (PropB1 != null)
             {
                 writer.WritePropertyName("propB1");
-                writer.WriteStringValue(model.PropB1);
+                writer.WriteStringValue(PropB1);
             }
-            if (model.Helper != null)
+            if (Helper != null)
             {
                 writer.WritePropertyName("helper");
-                MyBaseHelperTypeSerializer.Serialize(model.Helper, writer);
+                writer.WriteObjectValue(Helper);
             }
             writer.WriteEndObject();
         }
-        internal static MyDerivedType Deserialize(JsonElement element)
+        internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
             var result = new MyDerivedType();
             foreach (var property in element.EnumerateObject())
@@ -64,7 +64,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
+                    result.Helper = MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
                     continue;
                 }
             }

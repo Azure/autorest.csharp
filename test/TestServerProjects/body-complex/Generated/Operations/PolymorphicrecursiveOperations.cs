@@ -35,7 +35,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FishSerializer.Deserialize(document.RootElement);
+                            var value = Fish.DeserializeFish(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -70,7 +70,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                FishSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

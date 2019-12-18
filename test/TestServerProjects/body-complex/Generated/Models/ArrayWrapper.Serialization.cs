@@ -7,16 +7,16 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ArrayWrapperSerializer
+    public partial class ArrayWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(ArrayWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Array != null)
+            if (Array != null)
             {
                 writer.WritePropertyName("array");
                 writer.WriteStartArray();
-                foreach (var item in model.Array)
+                foreach (var item in Array)
                 {
                     writer.WriteStringValue(item);
                 }
@@ -24,7 +24,7 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static ArrayWrapper Deserialize(JsonElement element)
+        internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
             var result = new ArrayWrapper();
             foreach (var property in element.EnumerateObject())

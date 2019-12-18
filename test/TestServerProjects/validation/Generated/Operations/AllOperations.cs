@@ -49,7 +49,7 @@ namespace validation
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductSerializer.Deserialize(document.RootElement);
+                            var value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -94,7 +94,7 @@ namespace validation
                 request.Uri.AppendQuery("apiVersion", "1.0.0", true);
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                ProductSerializer.Serialize(body, writer);
+                writer.WriteObjectValue(body);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -102,7 +102,7 @@ namespace validation
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductSerializer.Deserialize(document.RootElement);
+                            var value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -167,7 +167,7 @@ namespace validation
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                ProductSerializer.Serialize(body, writer);
+                writer.WriteObjectValue(body);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -175,7 +175,7 @@ namespace validation
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductSerializer.Deserialize(document.RootElement);
+                            var value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:

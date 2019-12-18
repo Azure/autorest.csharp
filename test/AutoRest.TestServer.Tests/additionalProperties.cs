@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using additionalProperties;
 using additionalProperties.Models.V100;
@@ -129,7 +130,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/360")]
         public Task AdditionalPropertiesTypeObject() => Test(async (host, pipeline) =>
         {
             PetAPObject petApObject = new PetAPObject()
@@ -144,8 +144,32 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            await PetsOperations.CreateAPObjectAsync(ClientDiagnostics, pipeline, petApObject, host);
+            PetAPObject outerApObject = new PetAPObject()
+            {
+                Id = 2,
+                Name = "Hira"
+            };
+            outerApObject["siblings"] = new object[]
+            {
+                petApObject
+            };
+            outerApObject["picture"] = new byte[] { 255, 255, 255, 255, 254 };
 
+            var response = await PetsOperations.CreateAPObjectAsync(ClientDiagnostics, pipeline, outerApObject, host);
+
+            var value = response.Value;
+
+            Assert.AreEqual(2, value.Id);
+            Assert.AreEqual("Hira", value.Name);
+            Assert.AreEqual(true, value.Status);
+
+            var siblings = (IEnumerable<object>)value["siblings"];
+            var sibling = (IDictionary<string, object>)siblings.Single();
+
+            Assert.AreEqual(1, sibling["id"]);
+            Assert.AreEqual("Puppy", sibling["name"]);
+            Assert.AreEqual("2017-12-13T02:29:51Z", sibling["birthdate"]);
+            Assert.AreEqual("Red", ((Dictionary<string, object>)sibling["complexProperty"])["color"]);
         });
 
         [Test]

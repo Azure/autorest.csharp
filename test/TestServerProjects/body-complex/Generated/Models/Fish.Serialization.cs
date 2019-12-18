@@ -7,53 +7,44 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class FishSerializer
+    public partial class Fish : IUtf8JsonSerializable
     {
-        internal static void Serialize(Fish model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            switch (model)
-            {
-                case Salmon salmon:
-                    SalmonSerializer.Serialize(salmon, writer);
-                    return;
-                case Shark shark:
-                    SharkSerializer.Serialize(shark, writer);
-                    return;
-            }
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype");
-            writer.WriteStringValue(model.Fishtype);
-            if (model.Species != null)
+            writer.WriteStringValue(Fishtype);
+            if (Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(model.Species);
+                writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length");
-            writer.WriteNumberValue(model.Length);
-            if (model.Siblings != null)
+            writer.WriteNumberValue(Length);
+            if (Siblings != null)
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
-                foreach (var item in model.Siblings)
+                foreach (var item in Siblings)
                 {
-                    FishSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
-        internal static Fish Deserialize(JsonElement element)
+        internal static Fish DeserializeFish(JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return CookiecuttersharkSerializer.Deserialize(element);
-                    case "goblin": return GoblinsharkSerializer.Deserialize(element);
-                    case "salmon": return SalmonSerializer.Deserialize(element);
-                    case "sawshark": return SawsharkSerializer.Deserialize(element);
-                    case "shark": return SharkSerializer.Deserialize(element);
-                    case "smart_salmon": return SmartSalmonSerializer.Deserialize(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
+                    case "salmon": return Salmon.DeserializeSalmon(element);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element);
+                    case "shark": return Shark.DeserializeShark(element);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
             var result = new Fish();
@@ -87,7 +78,7 @@ namespace body_complex.Models.V20160229
                     result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(FishSerializer.Deserialize(item));
+                        result.Siblings.Add(Fish.DeserializeFish(item));
                     }
                     continue;
                 }

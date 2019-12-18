@@ -6,19 +6,19 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DurationWrapperSerializer
+    public partial class DurationWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(DurationWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field != null)
+            if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(model.Field.Value, "P");
+                writer.WriteStringValue(Field.Value, "P");
             }
             writer.WriteEndObject();
         }
-        internal static DurationWrapper Deserialize(JsonElement element)
+        internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
             var result = new DurationWrapper();
             foreach (var property in element.EnumerateObject())

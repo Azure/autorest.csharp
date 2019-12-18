@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DateWrapperSerializer
+    public partial class DateWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(DateWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field != null)
+            if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(model.Field.Value, "D");
+                writer.WriteStringValue(Field.Value, "D");
             }
-            if (model.Leap != null)
+            if (Leap != null)
             {
                 writer.WritePropertyName("leap");
-                writer.WriteStringValue(model.Leap.Value, "D");
+                writer.WriteStringValue(Leap.Value, "D");
             }
             writer.WriteEndObject();
         }
-        internal static DateWrapper Deserialize(JsonElement element)
+        internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
             var result = new DateWrapper();
             foreach (var property in element.EnumerateObject())

@@ -6,31 +6,31 @@ using Azure.Core;
 
 namespace additionalProperties.Models.V100
 {
-    public partial class PetAPObjectSerializer
+    public partial class PetAPObject : IUtf8JsonSerializable
     {
-        internal static void Serialize(PetAPObject model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id");
-            writer.WriteNumberValue(model.Id);
-            if (model.Name != null)
+            writer.WriteNumberValue(Id);
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.Status != null)
+            if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteBooleanValue(model.Status.Value);
+                writer.WriteBooleanValue(Status.Value);
             }
-            foreach (var item in model)
+            foreach (var item in this)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
         }
-        internal static PetAPObject Deserialize(JsonElement element)
+        internal static PetAPObject DeserializePetAPObject(JsonElement element)
         {
             var result = new PetAPObject();
             foreach (var property in element.EnumerateObject())

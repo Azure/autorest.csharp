@@ -15,12 +15,22 @@ namespace Azure.Core
         public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
 
+        public static void WriteObjectValue(this Utf8JsonWriter writer, IUtf8JsonSerializable value)
+        {
+            value.Write(writer);
+        }
         public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
         {
             switch (value)
             {
                 case null:
                     writer.WriteNullValue();
+                    break;
+                case IUtf8JsonSerializable serializable:
+                    writer.WriteObjectValue(serializable);
+                    break;
+                case byte[] bytes:
+                    writer.WriteStringValue(Convert.ToBase64String(bytes));
                     break;
                 case int i:
                     writer.WriteNumberValue(i);

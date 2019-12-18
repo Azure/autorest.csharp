@@ -7,55 +7,49 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class SalmonSerializer
+    public partial class Salmon : IUtf8JsonSerializable
     {
-        internal static void Serialize(Salmon model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            switch (model)
-            {
-                case SmartSalmon smartSalmon:
-                    SmartSalmonSerializer.Serialize(smartSalmon, writer);
-                    return;
-            }
             writer.WriteStartObject();
-            if (model.Location != null)
+            if (Location != null)
             {
                 writer.WritePropertyName("location");
-                writer.WriteStringValue(model.Location);
+                writer.WriteStringValue(Location);
             }
-            if (model.Iswild != null)
+            if (Iswild != null)
             {
                 writer.WritePropertyName("iswild");
-                writer.WriteBooleanValue(model.Iswild.Value);
+                writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fishtype");
-            writer.WriteStringValue(model.Fishtype);
-            if (model.Species != null)
+            writer.WriteStringValue(Fishtype);
+            if (Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(model.Species);
+                writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length");
-            writer.WriteNumberValue(model.Length);
-            if (model.Siblings != null)
+            writer.WriteNumberValue(Length);
+            if (Siblings != null)
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
-                foreach (var item in model.Siblings)
+                foreach (var item in Siblings)
                 {
-                    FishSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
-        internal static Salmon Deserialize(JsonElement element)
+        internal static Salmon DeserializeSalmon(JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "smart_salmon": return SmartSalmonSerializer.Deserialize(element);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
             var result = new Salmon();
@@ -107,7 +101,7 @@ namespace body_complex.Models.V20160229
                     result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(FishSerializer.Deserialize(item));
+                        result.Siblings.Add(Fish.DeserializeFish(item));
                     }
                     continue;
                 }

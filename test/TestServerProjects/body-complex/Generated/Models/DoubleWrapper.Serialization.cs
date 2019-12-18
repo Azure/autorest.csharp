@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DoubleWrapperSerializer
+    public partial class DoubleWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(DoubleWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field1 != null)
+            if (Field1 != null)
             {
                 writer.WritePropertyName("field1");
-                writer.WriteNumberValue(model.Field1.Value);
+                writer.WriteNumberValue(Field1.Value);
             }
-            if (model.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose != null)
+            if (Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose != null)
             {
                 writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose");
-                writer.WriteNumberValue(model.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
+                writer.WriteNumberValue(Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
             }
             writer.WriteEndObject();
         }
-        internal static DoubleWrapper Deserialize(JsonElement element)
+        internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element)
         {
             var result = new DoubleWrapper();
             foreach (var property in element.EnumerateObject())

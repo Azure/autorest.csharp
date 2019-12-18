@@ -6,29 +6,29 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DogSerializer
+    public partial class Dog : IUtf8JsonSerializable
     {
-        internal static void Serialize(Dog model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Food != null)
+            if (Food != null)
             {
                 writer.WritePropertyName("food");
-                writer.WriteStringValue(model.Food);
+                writer.WriteStringValue(Food);
             }
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
+                writer.WriteNumberValue(Id.Value);
             }
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
             writer.WriteEndObject();
         }
-        internal static Dog Deserialize(JsonElement element)
+        internal static Dog DeserializeDog(JsonElement element)
         {
             var result = new Dog();
             foreach (var property in element.EnumerateObject())

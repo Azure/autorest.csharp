@@ -7,60 +7,48 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class SharkSerializer
+    public partial class Shark : IUtf8JsonSerializable
     {
-        internal static void Serialize(Shark model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            switch (model)
-            {
-                case Cookiecuttershark cookiecuttershark:
-                    CookiecuttersharkSerializer.Serialize(cookiecuttershark, writer);
-                    return;
-                case Goblinshark goblinshark:
-                    GoblinsharkSerializer.Serialize(goblinshark, writer);
-                    return;
-                case Sawshark sawshark:
-                    SawsharkSerializer.Serialize(sawshark, writer);
-                    return;
-            }
             writer.WriteStartObject();
-            if (model.Age != null)
+            if (Age != null)
             {
                 writer.WritePropertyName("age");
-                writer.WriteNumberValue(model.Age.Value);
+                writer.WriteNumberValue(Age.Value);
             }
             writer.WritePropertyName("birthday");
-            writer.WriteStringValue(model.Birthday, "S");
+            writer.WriteStringValue(Birthday, "S");
             writer.WritePropertyName("fishtype");
-            writer.WriteStringValue(model.Fishtype);
-            if (model.Species != null)
+            writer.WriteStringValue(Fishtype);
+            if (Species != null)
             {
                 writer.WritePropertyName("species");
-                writer.WriteStringValue(model.Species);
+                writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length");
-            writer.WriteNumberValue(model.Length);
-            if (model.Siblings != null)
+            writer.WriteNumberValue(Length);
+            if (Siblings != null)
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
-                foreach (var item in model.Siblings)
+                foreach (var item in Siblings)
                 {
-                    FishSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
-        internal static Shark Deserialize(JsonElement element)
+        internal static Shark DeserializeShark(JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return CookiecuttersharkSerializer.Deserialize(element);
-                    case "goblin": return GoblinsharkSerializer.Deserialize(element);
-                    case "sawshark": return SawsharkSerializer.Deserialize(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element);
                 }
             }
             var result = new Shark();
@@ -108,7 +96,7 @@ namespace body_complex.Models.V20160229
                     result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(FishSerializer.Deserialize(item));
+                        result.Siblings.Add(Fish.DeserializeFish(item));
                     }
                     continue;
                 }

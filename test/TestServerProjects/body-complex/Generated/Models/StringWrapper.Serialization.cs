@@ -6,29 +6,29 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class StringWrapperSerializer
+    public partial class StringWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(StringWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field != null)
+            if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(model.Field);
+                writer.WriteStringValue(Field);
             }
-            if (model.Empty != null)
+            if (Empty != null)
             {
                 writer.WritePropertyName("empty");
-                writer.WriteStringValue(model.Empty);
+                writer.WriteStringValue(Empty);
             }
-            if (model.NullProperty != null)
+            if (NullProperty != null)
             {
                 writer.WritePropertyName("null");
-                writer.WriteStringValue(model.NullProperty);
+                writer.WriteStringValue(NullProperty);
             }
             writer.WriteEndObject();
         }
-        internal static StringWrapper Deserialize(JsonElement element)
+        internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
             var result = new StringWrapper();
             foreach (var property in element.EnumerateObject())
