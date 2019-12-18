@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace validation.Models.V100
 {
@@ -13,7 +14,8 @@ namespace validation.Models.V100
             writer.WriteStartObject();
             if (model.DisplayNames != null)
             {
-                writer.WriteStartArray("display_names");
+                writer.WritePropertyName("display_names");
+                writer.WriteStartArray();
                 foreach (var item in model.DisplayNames)
                 {
                     writer.WriteStringValue(item);
