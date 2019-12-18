@@ -76,23 +76,18 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void WriteSerializeClientObject(CodeWriter writer, CodeWriterDelegate name, CSharpType type)
         {
-            writer.AppendType(type.WithNullable(false))
-                .Append("Serializer.Serialize(")
-                .Append(name)
-                .Append(", writer)")
-                .SemicolonLine();
+            writer.Line($"{type.WithNullable(false)}Serializer.Serialize({name}, writer);");
         }
 
         private static void WriteSerializeClientEnum(CodeWriter writer, CodeWriterDelegate name, bool isNullable, bool isStringBased)
         {
-            writer.Append("writer.WriteStringValue(");
-            writer.Append(name);
+            writer.Append($"writer.WriteStringValue({name}");
             if (!isStringBased && isNullable)
             {
-                writer.Append(".Value");
+                writer.Append($".Value");
             }
-            writer.Append(isStringBased ? ".ToString()" : ".ToSerialString()");
-            writer.Line(");");
+            writer.AppendRaw(isStringBased ? ".ToString()" : ".ToSerialString()");
+            writer.Line($");");
         }
 
         private static void WriteSerializeSchemaTypeReference(CodeWriter writer, SchemaTypeReference type, TypeFactory typeFactory, CodeWriterDelegate name)
@@ -106,22 +101,20 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteSerializeClientEnum(writer, name, type.IsNullable, clientEnum.IsStringBased);
                     return;
                 default:
-                    writer.Line("// Serialization of this type is not supported");
+                    writer.Line($"// Serialization of this type is not supported");
                     return;
             }
         }
 
         private static void WriteSerializeBinaryTypeReference(CodeWriter writer, CodeWriterDelegate name)
         {
-            writer.Append("writer.WriteBase64StringValue(");
-            writer.Append(name);
-            writer.Line(");");
+            writer.Line($"writer.WriteBase64StringValue({name});");
         }
 
         private static void WriteSerializeDefault(CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name)
         {
             var frameworkType = typeFactory.CreateType(type)?.FrameworkType ?? typeof(void);
-            writer.Line(TypeSerializers[frameworkType](CodeWriter.Materialize(name), type.IsNullable, format) ?? "writer.WriteNullValue();");
+            writer.LineRaw(TypeSerializers[frameworkType](CodeWriter.Materialize(name), type.IsNullable, format) ?? "writer.WriteNullValue();");
         }
 
         public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? serializedName = null)
@@ -131,32 +124,30 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             if (serializedName != null)
             {
-                writer.Append("writer.WritePropertyName(");
-                writer.Append(serializedName);
-                writer.Line(");");
+                writer.Line($"writer.WritePropertyName({serializedName});");
             }
 
             switch (type)
             {
                 case CollectionTypeReference array:
                 {
-                    writer.Line("writer.WriteStartArray();");
+                    writer.Line($"writer.WriteStartArray();");
                     using (writer.ForEach($"var item in {CodeWriter.Materialize(name)}"))
                     {
-                        writer.ToSerializeCall(array.ItemType, format, typeFactory, w => w.Append("item"));
+                        writer.ToSerializeCall(array.ItemType, format, typeFactory, w => w.Append($"item"));
                     }
-                    writer.Line("writer.WriteEndArray();");
+                    writer.Line($"writer.WriteEndArray();");
 
                     return;
                 }
                 case DictionaryTypeReference dictionary:
                 {
-                    writer.Line("writer.WriteStartObject();");
+                    writer.Line($"writer.WriteStartObject();");
                     using (writer.ForEach($"var item in {CodeWriter.Materialize(name)}"))
                     {
-                        writer.ToSerializeCall(dictionary.ValueType, format, typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
+                        writer.ToSerializeCall(dictionary.ValueType, format, typeFactory, w => w.Append($"item.Value"), w => w.Append($"item.Key"));
                     }
-                    writer.Line("writer.WriteEndObject();");
+                    writer.Line($"writer.WriteEndObject();");
 
                     return;
                 }
@@ -174,28 +165,18 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name)
         {
-            writer.AppendType(cSharpType)
-                .Append("Serializer.Deserialize(")
-                .Append(name)
-                .Append(")");
+            writer.Append($"{cSharpType}Serializer.Deserialize({name})");
         }
 
         private static void WriteDeserializeClientEnum(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name, bool isStringBased)
         {
             if (isStringBased)
             {
-                writer.Append("new ");
-                writer.AppendType(cSharpType);
-                writer.Append("(");
-                writer.Append(name);
-                writer.Append(".GetString())");
+                writer.Append($"new {cSharpType}({name}.GetString())");
                 return;
             }
 
-            writer.Append(name);
-            writer.Append(".GetString().To");
-            writer.AppendType(cSharpType);
-            writer.Append("()");
+            writer.Append($"{name}.GetString().To{cSharpType}()");
         }
 
         private static void WriteDeserializeSchemaTypeReference(CodeWriter writer, CSharpType cSharpType, SchemaTypeReference type, TypeFactory typeFactory, CodeWriterDelegate name)
@@ -209,21 +190,20 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteDeserializeClientEnum(writer, cSharpType, name, clientEnum.IsStringBased);
                     return;
                 default:
-                    writer.Append("/* Deserialization of this type is not supported */");
+                    writer.Append($"/* Deserialization of this type is not supported */");
                     return;
             }
         }
 
         private static void WriteDeserializeBinaryTypeReference(CodeWriter writer, CodeWriterDelegate name)
         {
-            writer.Append(name);
-            writer.Append(".GetBytesFromBase64()");
+            writer.Append($"{name}.GetBytesFromBase64()");
         }
 
         private static void WriteDeserializeDefault(CodeWriter writer, CSharpType cSharpType, SerializationFormat format, CodeWriterDelegate name)
         {
             var frameworkType = cSharpType?.FrameworkType ?? typeof(void);
-            writer.Append(TypeDeserializers[frameworkType](CodeWriter.Materialize(name), format) ?? "null");
+            writer.AppendRaw(TypeDeserializers[frameworkType](CodeWriter.Materialize(name), format) ?? "null");
         }
 
         public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
@@ -237,10 +217,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.ForEach("var item in property.Value.EnumerateArray()"))
                     {
-                        writer.Append(destination);
-                        writer.Append(".Add(");
-                        writer.ToDeserializeCall(array.ItemType, format, typeFactory, w => w.Append("item"));
-                        writer.Line(");");
+                        writer.Append($"{destination}.Add(");
+                        writer.ToDeserializeCall(array.ItemType, format, typeFactory, w => w.Append($"item"));
+                        writer.Line($");");
                     }
 
                     return;
@@ -249,20 +228,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     using (writer.ForEach("var item in property.Value.EnumerateObject()"))
                     {
-                        writer.Append(destination);
-                        writer.Append(".Add(item.Name, ");
-                        writer.ToDeserializeCall(dictionary.ValueType, format, typeFactory, w => w.Append("item.Value"));
-                        writer.Line(");");
+                        writer.Append($"{destination}.Add(item.Name, ");
+                        writer.ToDeserializeCall(dictionary.ValueType, format, typeFactory, w => w.Append($"item.Value"));
+                        writer.Line($");");
                     }
 
                     return;
                 }
             }
 
-            writer.Append(destination);
-            writer.Append("=");
+            writer.Append($"{destination} = ");
             ToDeserializeCall(writer, type, format, typeFactory, element);
-            writer.SemicolonLine();
+            writer.Line($";");
         }
 
         public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate element)

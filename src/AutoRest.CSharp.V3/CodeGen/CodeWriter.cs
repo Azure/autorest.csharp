@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriterScope Scope(string start = "{", string end = "}")
         {
-            Line(start);
+            LineRaw(start);
             return new CodeWriterScope(this, end);
         }
 
@@ -32,18 +32,77 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public CodeWriter Append(FormattableString formattableString)
+        {
+            if (formattableString.ArgumentCount == 0)
+            {
+                return AppendRaw(formattableString.ToString());
+            }
+
+            const string literalFormatString = ":L";
+            foreach ((string Text, bool IsLiteral) part in StringExtensions.GetPathParts(formattableString.Format))
+            {
+                string text = part.Text;
+                if (part.IsLiteral)
+                {
+                    AppendRaw(text);
+                    continue;
+                }
+
+                var formatSeparatorIndex = text.IndexOf(':');
+
+                int index = int.Parse(formatSeparatorIndex == -1
+                    ? text.AsSpan()
+                    : text.AsSpan(0, formatSeparatorIndex));
+
+                var argument = formattableString.GetArgument(index);
+                var isLiteral = text.EndsWith(literalFormatString);
+                switch (argument)
+                {
+                    case CodeWriterDelegate d:
+                        Append(d);
+                        break;
+                    case Type t:
+                        AppendType(t);
+                        break;
+                    case CSharpType t:
+                        AppendType(t);
+                        break;
+                    default:
+                        if (isLiteral)
+                        {
+                            Literal(argument);
+                        }
+                        else
+                        {
+                            string? s = argument?.ToString();
+
+                            if (s == null)
+                            {
+                                throw new ArgumentNullException(index.ToString());
+                            }
+
+                            AppendRaw(s);
+                        }
+                        break;
+                }
+            }
+
+            return this;
+        }
+
         private string DefinitionLine(string? access, string? modifiers, string kind, string? name, string? implements = null) =>
             new[] { access ?? _definitionAccessDefault, modifiers, kind, name , !string.IsNullOrWhiteSpace(implements)? $": {implements}" : null }.JoinIgnoreEmpty(" ");
 
         private CodeWriterScope Definition(string? access, string? modifiers, string kind, string? name, string? implements = null)
         {
-            Line(DefinitionLine(access, modifiers, kind, name, implements));
+            LineRaw(DefinitionLine(access, modifiers, kind, name, implements));
             return Scope();
         }
 
         public CodeWriterScope Class(string? access, string? modifiers, string? name, string? implements = null)
         {
-            Line(DefinitionLine(access, modifiers, "class", name, implements));
+            LineRaw(DefinitionLine(access, modifiers, "class", name, implements));
             return Scope();
         }
         public CodeWriterScope Enum(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "enum", name, implements);
@@ -58,55 +117,55 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriterScope Method(string? modifiers, string? returnType, string? name, params string[] parameters)
         {
-            Line(MethodDeclaration(modifiers, returnType, name, parameters));
+            LineRaw(MethodDeclaration(modifiers, returnType, name, parameters));
             return Scope();
         }
 
         public CodeWriterScope Try()
         {
-            Line("try");
+            Line($"try");
             return Scope();
         }
 
         public CodeWriterScope Catch(params string[] parameters)
         {
             var parametersText = parameters.JoinIgnoreEmpty(", ");
-            Line($"catch{(parameters.Length > 0 ? $"({parametersText})" : String.Empty)}");
+            LineRaw($"catch{(parameters.Length > 0 ? $"({parametersText})" : String.Empty)}");
             return Scope();
         }
 
         public CodeWriterScope If(string condition)
         {
-            Line($"if({condition})");
+            LineRaw($"if({condition})");
             return Scope();
         }
 
         public CodeWriterScope Else()
         {
-            Line("else");
+            Line($"else");
             return Scope();
         }
 
         public CodeWriterScope ForEach(string statement)
         {
-            Line($"foreach({statement})");
+            LineRaw($"foreach({statement})");
             return Scope();
         }
 
         public CodeWriterScope Switch(string value)
         {
-            Line($"switch({value})");
+            LineRaw($"switch({value})");
             return Scope();
         }
 
         public void MethodExpression(string modifiers, string? returnType, string name, string[]? parameters, string expression) =>
-            Line($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
+            LineRaw($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
         public void EnumValue(string value, bool includeComma = true) =>
-            Line($"{value}{(includeComma ? "," : String.Empty)}");
+            LineRaw($"{value}{(includeComma ? "," : String.Empty)}");
 
         public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
-            Line($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? "internal set; " : "set; ")}}}{initializer}");
+            LineRaw($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? "internal set; " : "set; ")}}}{initializer}");
 
         public void UseNamespace(CSharpNamespace @namespace)
         {
@@ -141,12 +200,12 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriter AppendType(CSharpType type)
         {
-            return Append(Type(type));
+            return AppendRaw(Type(type));
         }
 
         public CodeWriter AppendType(Type type, bool isNullable = false)
         {
-            return Append(Type(type, isNullable));
+            return AppendRaw(Type(type, isNullable));
         }
 
         public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
@@ -179,7 +238,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public CodeWriter Literal(object? o)
         {
-            return Append(o switch
+            return AppendRaw(o switch
             {
                 null => "null",
                 string s => SyntaxFactory.Literal(s).ToString(),
@@ -192,13 +251,26 @@ namespace AutoRest.CSharp.V3.CodeGen
             });
         }
 
-        public CodeWriter Line(string str = "")
+        public CodeWriter Line(FormattableString formattableString)
+        {
+            Append(formattableString);
+            Line();
+            return this;
+        }
+
+        public CodeWriter Line()
+        {
+            _builder.AppendLine();
+            return this;
+        }
+
+        public CodeWriter LineRaw(string str)
         {
             _builder.AppendLine(str);
             return this;
         }
 
-        public CodeWriter Append(string str)
+        public CodeWriter AppendRaw(string str)
         {
             _builder.Append(str);
             return this;
@@ -209,12 +281,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             writerDelegate(this);
             return this;
         }
-
-        public CodeWriter Comma() => Append(", ");
-
-        public CodeWriter Space() => Append(" ");
-
-        public CodeWriter SemicolonLine() => Append(";").Line();
 
         public string ToFormattedCode()
         {
@@ -272,7 +338,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 _end = end;
             }
 
-            public void Dispose() => _writer?.Line(_end);
+            public void Dispose() => _writer?.LineRaw(_end);
         }
     }
 }
