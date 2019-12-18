@@ -23,7 +23,6 @@ namespace extensible_enums_swagger.Models.V20160707
             }
             writer.WritePropertyName("IntEnum");
             writer.WriteStringValue(model.IntEnum.ToString());
-
             writer.WriteEndObject();
         }
         internal static Pet Deserialize(JsonElement element)
@@ -54,7 +53,6 @@ namespace extensible_enums_swagger.Models.V20160707
                     result.IntEnum = new IntEnum(property.Value.GetString());
                     continue;
                 }
-
             }
             return result;
         }

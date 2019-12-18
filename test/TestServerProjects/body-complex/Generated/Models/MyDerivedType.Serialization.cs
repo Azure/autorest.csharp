@@ -16,7 +16,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("propD1");
                 writer.WriteStringValue(model.PropD1);
             }
-
             writer.WritePropertyName("kind");
             writer.WriteStringValue(model.Kind);
             if (model.PropB1 != null)
@@ -29,7 +28,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("helper");
                 MyBaseHelperTypeSerializer.Serialize(model.Helper, writer);
             }
-
             writer.WriteEndObject();
         }
         internal static MyDerivedType Deserialize(JsonElement element)
@@ -46,7 +44,6 @@ namespace body_complex.Models.V20160229
                     result.PropD1 = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("kind"))
                 {
                     result.Kind = property.Value.GetString();
@@ -70,7 +67,6 @@ namespace body_complex.Models.V20160229
                     result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
                     continue;
                 }
-
             }
             return result;
         }

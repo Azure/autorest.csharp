@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
-
             writer.WriteEndObject();
         }
         internal static Pet Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

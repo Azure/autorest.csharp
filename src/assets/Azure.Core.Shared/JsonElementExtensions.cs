@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml;
 
@@ -23,6 +24,13 @@ namespace Azure.Core
                     return false;
                 case JsonValueKind.Null:
                     return null;
+                case JsonValueKind.Object:
+                    var dictionary = new Dictionary<string, object?>();
+                    foreach (JsonProperty jsonProperty in element.EnumerateObject())
+                    {
+                        dictionary.Add(jsonProperty.Name, jsonProperty.Value.GetObject());
+                    }
+                    return dictionary;
                 default:
                     throw new NotSupportedException("Not supported value kind " + element.ValueKind);
             }

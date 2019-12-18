@@ -29,7 +29,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("helper");
                 MyBaseHelperTypeSerializer.Serialize(model.Helper, writer);
             }
-
             writer.WriteEndObject();
         }
         internal static MyBaseType Deserialize(JsonElement element)
@@ -67,7 +66,6 @@ namespace body_complex.Models.V20160229
                     result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
                     continue;
                 }
-
             }
             return result;
         }

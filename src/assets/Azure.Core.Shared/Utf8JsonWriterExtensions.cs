@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace Azure.Core
@@ -38,6 +39,18 @@ namespace Azure.Core
                     break;
                 case bool b:
                     writer.WriteBooleanValue(b);
+                    break;
+                case DateTimeOffset dateTimeOffset:
+                    writer.WriteStringValue(dateTimeOffset,"S");
+                    break;
+                case IEnumerable<KeyValuePair<string, object>> enumerable:
+                    writer.WriteStartObject();
+                    foreach (KeyValuePair<string, object> pair in enumerable)
+                    {
+                        writer.WritePropertyName(pair.Key);
+                        writer.WriteObjectValue(pair.Value);
+                    }
+                    writer.WriteEndObject();
                     break;
                 default:
                     throw new NotSupportedException("Not supported type " + value.GetType());

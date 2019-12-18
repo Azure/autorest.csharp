@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("field2");
                 writer.WriteNumberValue(model.Field2.Value);
             }
-
             writer.WriteEndObject();
         }
         internal static IntWrapper Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_complex.Models.V20160229
                     result.Field2 = property.Value.GetInt32();
                     continue;
                 }
-
             }
             return result;
         }

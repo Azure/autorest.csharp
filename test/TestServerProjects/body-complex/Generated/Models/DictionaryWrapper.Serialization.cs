@@ -23,7 +23,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndObject();
             }
-
             writer.WriteEndObject();
         }
         internal static DictionaryWrapper Deserialize(JsonElement element)
@@ -44,7 +43,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
             }
             return result;
         }

@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("now");
                 writer.WriteStringValue(model.Now.Value, "S");
             }
-
             writer.WriteEndObject();
         }
         internal static DatetimeWrapper Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_complex.Models.V20160229
                     result.Now = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
-
             }
             return result;
         }

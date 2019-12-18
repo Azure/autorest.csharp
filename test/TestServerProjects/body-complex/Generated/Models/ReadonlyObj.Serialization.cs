@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("size");
                 writer.WriteNumberValue(model.Size.Value);
             }
-
             writer.WriteEndObject();
         }
         internal static ReadonlyObj Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_complex.Models.V20160229
                     result.Size = property.Value.GetInt32();
                     continue;
                 }
-
             }
             return result;
         }

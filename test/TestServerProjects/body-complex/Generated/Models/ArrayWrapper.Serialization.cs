@@ -22,7 +22,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndArray();
             }
-
             writer.WriteEndObject();
         }
         internal static ArrayWrapper Deserialize(JsonElement element)
@@ -43,7 +42,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
             }
             return result;
         }

@@ -23,7 +23,6 @@ namespace additionalProperties.Models.V100
                 writer.WritePropertyName("status");
                 writer.WriteBooleanValue(model.Status.Value);
             }
-
             foreach (var item in model)
             {
                 writer.WritePropertyName(item.Key);
@@ -59,7 +58,6 @@ namespace additionalProperties.Models.V100
                     result.Status = property.Value.GetBoolean();
                     continue;
                 }
-
                 result.Add(property.Name, property.Value.GetObject());
             }
             return result;

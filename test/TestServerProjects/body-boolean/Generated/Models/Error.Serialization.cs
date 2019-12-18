@@ -21,7 +21,6 @@ namespace body_boolean.Models.V100
                 writer.WritePropertyName("message");
                 writer.WriteStringValue(model.Message);
             }
-
             writer.WriteEndObject();
         }
         internal static Error Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_boolean.Models.V100
                     result.Message = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

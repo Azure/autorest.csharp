@@ -12,7 +12,6 @@ namespace body_complex.Models.V20160229
         internal static void Serialize(Cookiecuttershark model, Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-
             if (model.Age != null)
             {
                 writer.WritePropertyName("age");
@@ -20,7 +19,6 @@ namespace body_complex.Models.V20160229
             }
             writer.WritePropertyName("birthday");
             writer.WriteStringValue(model.Birthday, "S");
-
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(model.Fishtype);
             if (model.Species != null)
@@ -40,7 +38,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndArray();
             }
-
             writer.WriteEndObject();
         }
         internal static Cookiecuttershark Deserialize(JsonElement element)
@@ -48,7 +45,6 @@ namespace body_complex.Models.V20160229
             var result = new Cookiecuttershark();
             foreach (var property in element.EnumerateObject())
             {
-
                 if (property.NameEquals("age"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -63,7 +59,6 @@ namespace body_complex.Models.V20160229
                     result.Birthday = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
-
                 if (property.NameEquals("fishtype"))
                 {
                     result.Fishtype = property.Value.GetString();
@@ -96,7 +91,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
             }
             return result;
         }

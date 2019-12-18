@@ -16,7 +16,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("food");
                 writer.WriteStringValue(model.Food);
             }
-
             if (model.Id != null)
             {
                 writer.WritePropertyName("id");
@@ -27,7 +26,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
-
             writer.WriteEndObject();
         }
         internal static Dog Deserialize(JsonElement element)
@@ -44,7 +42,6 @@ namespace body_complex.Models.V20160229
                     result.Food = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -63,7 +60,6 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

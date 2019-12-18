@@ -26,7 +26,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(model.Color.ToString());
             }
-
             writer.WriteEndObject();
         }
         internal static Basic Deserialize(JsonElement element)
@@ -61,7 +60,6 @@ namespace body_complex.Models.V20160229
                     result.Color = new CMYKColors(property.Value.GetString());
                     continue;
                 }
-
             }
             return result;
         }

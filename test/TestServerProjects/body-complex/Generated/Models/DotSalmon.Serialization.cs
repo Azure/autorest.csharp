@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("iswild");
                 writer.WriteBooleanValue(model.Iswild.Value);
             }
-
             writer.WritePropertyName("fish.type");
             writer.WriteStringValue(model.FishType);
             if (model.Species != null)
@@ -29,7 +28,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("species");
                 writer.WriteStringValue(model.Species);
             }
-
             writer.WriteEndObject();
         }
         internal static DotSalmon Deserialize(JsonElement element)
@@ -55,7 +53,6 @@ namespace body_complex.Models.V20160229
                     result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
-
                 if (property.NameEquals("fish.type"))
                 {
                     result.FishType = property.Value.GetString();
@@ -70,7 +67,6 @@ namespace body_complex.Models.V20160229
                     result.Species = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

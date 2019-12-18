@@ -37,7 +37,6 @@ namespace additionalProperties.Models.V100
                 }
                 writer.WriteEndObject();
             }
-
             foreach (var item in model)
             {
                 writer.WritePropertyName(item.Key);
@@ -91,7 +90,6 @@ namespace additionalProperties.Models.V100
                     }
                     continue;
                 }
-
                 result.Add(property.Name, property.Value.GetString());
             }
             return result;

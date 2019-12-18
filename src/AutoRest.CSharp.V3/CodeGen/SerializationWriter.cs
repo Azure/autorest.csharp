@@ -114,6 +114,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"var result = new {typeText}();");
                 using (writer.ForEach("var property in element.EnumerateObject()"))
                 {
+                    DictionaryTypeReference? implementsDictionary = null;
+
                     foreach (ClientObject currentType in WalkInheritance(model))
                     {
                         foreach (var property in currentType.Properties)
@@ -125,13 +127,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                             }
                         }
 
-                        writer.Line();
+                        implementsDictionary ??= currentType.ImplementsDictionary;
                     }
 
-                    if (model.ImplementsDictionary != null)
+                    if (implementsDictionary != null)
                     {
                         writer.Append("result.Add(property.Name, ");
-                        writer.ToDeserializeCall(model.ImplementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w=>w.Append("property.Value"));
+                        writer.ToDeserializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("property.Value"));
                         writer.Append(");").Line();
                     }
                 }
@@ -186,6 +188,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 writer.Line("writer.WriteStartObject();");
 
+                DictionaryTypeReference? implementsDictionary = null;
 
                 foreach (ClientObject currentType in WalkInheritance(model))
                 {
@@ -200,18 +203,16 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 w => w.Append("model.").Append(property.Name),
                                 w => w.Literal(property.SerializedName));
                         }
-                    }
 
-                    writer.Line();
+                        implementsDictionary ??= currentType.ImplementsDictionary;
+                    }
                 }
 
-
-                if (model.ImplementsDictionary != null)
+                if (implementsDictionary != null)
                 {
-                    var dictionary = model.ImplementsDictionary;
                     using (writer.ForEach("var item in model"))
                     {
-                        writer.ToSerializeCall(dictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
+                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append("item.Value"), w => w.Append("item.Key"));
                     }
                 }
 

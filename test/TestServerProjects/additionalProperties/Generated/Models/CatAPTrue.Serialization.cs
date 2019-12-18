@@ -16,7 +16,6 @@ namespace additionalProperties.Models.V100
                 writer.WritePropertyName("friendly");
                 writer.WriteBooleanValue(model.Friendly.Value);
             }
-
             writer.WritePropertyName("id");
             writer.WriteNumberValue(model.Id);
             if (model.Name != null)
@@ -29,7 +28,11 @@ namespace additionalProperties.Models.V100
                 writer.WritePropertyName("status");
                 writer.WriteBooleanValue(model.Status.Value);
             }
-
+            foreach (var item in model)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
             writer.WriteEndObject();
         }
         internal static CatAPTrue Deserialize(JsonElement element)
@@ -46,7 +49,6 @@ namespace additionalProperties.Models.V100
                     result.Friendly = property.Value.GetBoolean();
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     result.Id = property.Value.GetInt32();
@@ -70,7 +72,7 @@ namespace additionalProperties.Models.V100
                     result.Status = property.Value.GetBoolean();
                     continue;
                 }
-
+                result.Add(property.Name, property.Value.GetObject());
             }
             return result;
         }

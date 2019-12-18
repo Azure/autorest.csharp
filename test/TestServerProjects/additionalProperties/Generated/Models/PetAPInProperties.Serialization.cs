@@ -35,7 +35,6 @@ namespace additionalProperties.Models.V100
                 }
                 writer.WriteEndObject();
             }
-
             writer.WriteEndObject();
         }
         internal static PetAPInProperties Deserialize(JsonElement element)
@@ -79,7 +78,6 @@ namespace additionalProperties.Models.V100
                     }
                     continue;
                 }
-
             }
             return result;
         }

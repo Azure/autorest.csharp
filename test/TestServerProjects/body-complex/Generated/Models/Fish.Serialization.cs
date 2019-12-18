@@ -40,7 +40,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndArray();
             }
-
             writer.WriteEndObject();
         }
         internal static Fish Deserialize(JsonElement element)
@@ -92,7 +91,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
             }
             return result;
         }

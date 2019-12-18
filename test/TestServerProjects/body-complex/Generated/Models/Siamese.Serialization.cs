@@ -17,7 +17,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("breed");
                 writer.WriteStringValue(model.Breed);
             }
-
             if (model.Color != null)
             {
                 writer.WritePropertyName("color");
@@ -33,7 +32,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndArray();
             }
-
             if (model.Id != null)
             {
                 writer.WritePropertyName("id");
@@ -44,7 +42,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
-
             writer.WriteEndObject();
         }
         internal static Siamese Deserialize(JsonElement element)
@@ -61,7 +58,6 @@ namespace body_complex.Models.V20160229
                     result.Breed = property.Value.GetString();
                     continue;
                 }
-
                 if (property.NameEquals("color"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -84,7 +80,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -103,7 +98,6 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

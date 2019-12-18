@@ -27,7 +27,6 @@ namespace body_complex.Models.V20160229
                 }
                 writer.WriteEndArray();
             }
-
             if (model.Id != null)
             {
                 writer.WritePropertyName("id");
@@ -38,7 +37,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(model.Name);
             }
-
             writer.WriteEndObject();
         }
         internal static Cat Deserialize(JsonElement element)
@@ -68,7 +66,6 @@ namespace body_complex.Models.V20160229
                     }
                     continue;
                 }
-
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -87,7 +84,6 @@ namespace body_complex.Models.V20160229
                     result.Name = property.Value.GetString();
                     continue;
                 }
-
             }
             return result;
         }

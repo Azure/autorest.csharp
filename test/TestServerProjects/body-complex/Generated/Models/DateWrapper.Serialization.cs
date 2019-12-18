@@ -21,7 +21,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("leap");
                 writer.WriteStringValue(model.Leap.Value, "D");
             }
-
             writer.WriteEndObject();
         }
         internal static DateWrapper Deserialize(JsonElement element)
@@ -47,7 +46,6 @@ namespace body_complex.Models.V20160229
                     result.Leap = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
-
             }
             return result;
         }

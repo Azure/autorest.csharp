@@ -16,7 +16,6 @@ namespace body_complex.Models.V20160229
                 writer.WritePropertyName("field");
                 writer.WriteStringValue(model.Field.Value, "P");
             }
-
             writer.WriteEndObject();
         }
         internal static DurationWrapper Deserialize(JsonElement element)
@@ -33,7 +32,6 @@ namespace body_complex.Models.V20160229
                     result.Field = property.Value.GetTimeSpan("P");
                     continue;
                 }
-
             }
             return result;
         }
