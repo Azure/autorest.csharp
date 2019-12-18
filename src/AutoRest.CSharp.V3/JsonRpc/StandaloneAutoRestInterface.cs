@@ -65,6 +65,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             }
             filename = Path.Combine(_basePath, filename);
             Console.WriteLine($"Writing {filename} {artifactType}");
+            Directory.CreateDirectory(Path.GetDirectoryName(filename));
             await File.WriteAllTextAsync(filename, content);
         }
 
