@@ -69,8 +69,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/integer", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -142,8 +141,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/long", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -215,8 +213,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/float", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -288,8 +285,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/double", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -361,8 +357,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/bool", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -434,8 +429,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/string", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -507,8 +501,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/date", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -580,8 +573,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/datetime", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -653,8 +645,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -726,8 +717,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/duration", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -799,8 +789,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/primitive/byte", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

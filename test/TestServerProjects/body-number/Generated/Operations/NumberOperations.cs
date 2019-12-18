@@ -166,8 +166,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -235,8 +234,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -304,8 +302,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/double/99999999.99", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(99999999.99);
+                content.JsonWriter.WriteNumberValue(99999999.99);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -373,8 +370,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/double/-99999999.99", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(-99999999.99);
+                content.JsonWriter.WriteNumberValue(-99999999.99);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -442,8 +438,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -511,8 +506,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(99999999.99M);
+                content.JsonWriter.WriteNumberValue(99999999.99M);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -580,8 +574,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(-99999999.99M);
+                content.JsonWriter.WriteNumberValue(-99999999.99M);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -649,8 +642,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -718,8 +710,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -787,8 +778,7 @@ namespace body_number
                 request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(numberBody);
+                content.JsonWriter.WriteNumberValue(numberBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

@@ -113,11 +113,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                     if (operation.Request.Body is RequestBody body)
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
-                        writer.Line($"var writer = content.{nameof(Utf8JsonRequestContent.JsonWriter)};");
 
                         ConstantOrParameter value = body.Value;
 
-                        writer.ToSerializeCall(value.Type, body.Format, _typeFactory, w => WriteConstantOrParameter(w, value));
+                        writer.ToSerializeCall(
+                            value.Type,
+                            body.Format,
+                            _typeFactory,
+                            w => WriteConstantOrParameter(w, value),
+                            writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
 
                         writer.Line($"request.Content = content;");
                     }
@@ -144,13 +148,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
             else
             {
-                writer.AppendRaw(constantOrParameter.Parameter.Name);
-
-                var type = _typeFactory.CreateType(constantOrParameter.Type);
-                if (type.IsNullable && type.IsValueType)
-                {
-                    writer.Append($".Value");
-                }
+                writer.AppendRaw(constantOrParameter.Parameter.Name)
+                    .AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
             }
         }
 

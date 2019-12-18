@@ -234,8 +234,7 @@ namespace body_integer
                 request.Uri.AppendPath("/int/max/32", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(intBody);
+                content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -269,8 +268,7 @@ namespace body_integer
                 request.Uri.AppendPath("/int/max/64", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(intBody);
+                content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -304,8 +302,7 @@ namespace body_integer
                 request.Uri.AppendPath("/int/min/32", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(intBody);
+                content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -339,8 +336,7 @@ namespace body_integer
                 request.Uri.AppendPath("/int/min/64", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteNumberValue(intBody);
+                content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -408,8 +404,7 @@ namespace body_integer
                 request.Uri.AppendPath("/int/unixtime", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(intBody, "U");
+                content.JsonWriter.WriteStringValue(intBody, "U");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

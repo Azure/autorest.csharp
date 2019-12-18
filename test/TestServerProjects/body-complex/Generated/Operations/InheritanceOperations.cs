@@ -69,8 +69,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/inheritance/valid", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

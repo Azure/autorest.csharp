@@ -24,7 +24,7 @@ namespace body_complex.Models.V20160229
             if (Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(Color.ToString());
+                writer.WriteStringValue(Color.Value.ToString());
             }
             writer.WriteEndObject();
         }

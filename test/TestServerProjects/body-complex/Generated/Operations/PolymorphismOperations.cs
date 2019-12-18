@@ -69,8 +69,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/polymorphism/valid", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -244,8 +243,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/polymorphism/complicated", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -283,8 +281,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -326,8 +323,7 @@ namespace body_complex
                 request.Uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteObjectValue(complexBody);
+                content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

@@ -64,8 +64,7 @@ namespace body_duration
                 request.Uri.AppendPath("/duration/positiveduration", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                var writer = content.JsonWriter;
-                writer.WriteStringValue(durationBody, "P");
+                content.JsonWriter.WriteStringValue(durationBody, "P");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
