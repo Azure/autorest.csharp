@@ -17,7 +17,11 @@ namespace Azure.Core
                 case JsonValueKind.String:
                     return element.GetString();
                 case JsonValueKind.Number:
-                    return element.GetInt32();
+                    if (element.TryGetInt32(out var value))
+                    {
+                        return value;
+                    }
+                    return element.GetDouble();
                 case JsonValueKind.True:
                     return true;
                 case JsonValueKind.False:
