@@ -35,6 +35,13 @@ namespace Azure.Core
                         dictionary.Add(jsonProperty.Name, jsonProperty.Value.GetObject());
                     }
                     return dictionary;
+                case JsonValueKind.Array:
+                    var list = new List<object?>();
+                    foreach (JsonElement item in element.EnumerateArray())
+                    {
+                        list.Add(item.GetObject());
+                    }
+                    return list.ToArray();
                 default:
                     throw new NotSupportedException("Not supported value kind " + element.ValueKind);
             }

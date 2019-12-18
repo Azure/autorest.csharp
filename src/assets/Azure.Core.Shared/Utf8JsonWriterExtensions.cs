@@ -52,6 +52,15 @@ namespace Azure.Core
                     }
                     writer.WriteEndObject();
                     break;
+                case IEnumerable<object> objectEnumerable:
+                    writer.WriteStartArray();
+                    foreach (object item in objectEnumerable)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                    break;
+
                 default:
                     throw new NotSupportedException("Not supported type " + value.GetType());
             }
