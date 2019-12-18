@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class BooleanWrapperSerializer
+    public partial class BooleanWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(BooleanWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.FieldTrue != null)
+            if (FieldTrue != null)
             {
                 writer.WritePropertyName("field_true");
-                writer.WriteBooleanValue(model.FieldTrue.Value);
+                writer.WriteBooleanValue(FieldTrue.Value);
             }
-            if (model.FieldFalse != null)
+            if (FieldFalse != null)
             {
                 writer.WritePropertyName("field_false");
-                writer.WriteBooleanValue(model.FieldFalse.Value);
+                writer.WriteBooleanValue(FieldFalse.Value);
             }
             writer.WriteEndObject();
         }
-        internal static BooleanWrapper Deserialize(JsonElement element)
+        internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
             var result = new BooleanWrapper();
             foreach (var property in element.EnumerateObject())

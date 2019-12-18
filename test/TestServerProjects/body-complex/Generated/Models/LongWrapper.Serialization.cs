@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class LongWrapperSerializer
+    public partial class LongWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(LongWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field1 != null)
+            if (Field1 != null)
             {
                 writer.WritePropertyName("field1");
-                writer.WriteNumberValue(model.Field1.Value);
+                writer.WriteNumberValue(Field1.Value);
             }
-            if (model.Field2 != null)
+            if (Field2 != null)
             {
                 writer.WritePropertyName("field2");
-                writer.WriteNumberValue(model.Field2.Value);
+                writer.WriteNumberValue(Field2.Value);
             }
             writer.WriteEndObject();
         }
-        internal static LongWrapper Deserialize(JsonElement element)
+        internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
             var result = new LongWrapper();
             foreach (var property in element.EnumerateObject())

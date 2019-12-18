@@ -36,7 +36,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetAPTrueSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -44,7 +44,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPTrueSerializer.Deserialize(document.RootElement);
+                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -79,7 +79,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                CatAPTrueSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -87,7 +87,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = CatAPTrueSerializer.Deserialize(document.RootElement);
+                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -122,7 +122,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetAPObjectSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -130,7 +130,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPObjectSerializer.Deserialize(document.RootElement);
+                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -165,7 +165,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetAPStringSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -173,7 +173,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPStringSerializer.Deserialize(document.RootElement);
+                            var value = PetAPString.DeserializePetAPString(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -208,7 +208,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetAPInPropertiesSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -216,7 +216,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPInPropertiesSerializer.Deserialize(document.RootElement);
+                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -251,7 +251,7 @@ namespace additionalProperties
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetAPInPropertiesWithAPStringSerializer.Serialize(createParameters, writer);
+                writer.WriteObjectValue(createParameters);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -259,7 +259,7 @@ namespace additionalProperties
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPInPropertiesWithAPStringSerializer.Deserialize(document.RootElement);
+                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:

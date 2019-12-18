@@ -6,26 +6,26 @@ using Azure.Core;
 
 namespace extensible_enums_swagger.Models.V20160707
 {
-    public partial class PetSerializer
+    public partial class Pet : IUtf8JsonSerializable
     {
-        internal static void Serialize(Pet model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.DaysOfWeek != null)
+            if (DaysOfWeek != null)
             {
                 writer.WritePropertyName("DaysOfWeek");
-                writer.WriteStringValue(model.DaysOfWeek.ToString());
+                writer.WriteStringValue(DaysOfWeek.ToString());
             }
             writer.WritePropertyName("IntEnum");
-            writer.WriteStringValue(model.IntEnum.ToString());
+            writer.WriteStringValue(IntEnum.ToString());
             writer.WriteEndObject();
         }
-        internal static Pet Deserialize(JsonElement element)
+        internal static Pet DeserializePet(JsonElement element)
         {
             var result = new Pet();
             foreach (var property in element.EnumerateObject())

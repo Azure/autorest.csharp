@@ -6,21 +6,21 @@ using Azure.Core;
 
 namespace body_string.Models.V100
 {
-    public partial class RefColorConstantSerializer
+    public partial class RefColorConstant : IUtf8JsonSerializable
     {
-        internal static void Serialize(RefColorConstant model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant");
-            writer.WriteStringValue(model.ColorConstant);
-            if (model.Field1 != null)
+            writer.WriteStringValue(ColorConstant);
+            if (Field1 != null)
             {
                 writer.WritePropertyName("field1");
-                writer.WriteStringValue(model.Field1);
+                writer.WriteStringValue(Field1);
             }
             writer.WriteEndObject();
         }
-        internal static RefColorConstant Deserialize(JsonElement element)
+        internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
             var result = new RefColorConstant();
             foreach (var property in element.EnumerateObject())

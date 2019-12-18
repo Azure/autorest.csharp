@@ -35,7 +35,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IntWrapperSerializer.Deserialize(document.RootElement);
+                            var value = IntWrapper.DeserializeIntWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -70,7 +70,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                IntWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -108,7 +108,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LongWrapperSerializer.Deserialize(document.RootElement);
+                            var value = LongWrapper.DeserializeLongWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -143,7 +143,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                LongWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -181,7 +181,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FloatWrapperSerializer.Deserialize(document.RootElement);
+                            var value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -216,7 +216,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                FloatWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -254,7 +254,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DoubleWrapperSerializer.Deserialize(document.RootElement);
+                            var value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -289,7 +289,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                DoubleWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -327,7 +327,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BooleanWrapperSerializer.Deserialize(document.RootElement);
+                            var value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -362,7 +362,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                BooleanWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -400,7 +400,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StringWrapperSerializer.Deserialize(document.RootElement);
+                            var value = StringWrapper.DeserializeStringWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -435,7 +435,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                StringWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -473,7 +473,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DateWrapperSerializer.Deserialize(document.RootElement);
+                            var value = DateWrapper.DeserializeDateWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -508,7 +508,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                DateWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -546,7 +546,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DatetimeWrapperSerializer.Deserialize(document.RootElement);
+                            var value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -581,7 +581,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                DatetimeWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -619,7 +619,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Datetimerfc1123WrapperSerializer.Deserialize(document.RootElement);
+                            var value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -654,7 +654,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                Datetimerfc1123WrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -692,7 +692,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DurationWrapperSerializer.Deserialize(document.RootElement);
+                            var value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -727,7 +727,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                DurationWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -765,7 +765,7 @@ namespace body_complex
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ByteWrapperSerializer.Deserialize(document.RootElement);
+                            var value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -800,7 +800,7 @@ namespace body_complex
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                ByteWrapperSerializer.Serialize(complexBody, writer);
+                writer.WriteObjectValue(complexBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

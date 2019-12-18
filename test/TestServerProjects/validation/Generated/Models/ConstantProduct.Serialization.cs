@@ -6,18 +6,18 @@ using Azure.Core;
 
 namespace validation.Models.V100
 {
-    public partial class ConstantProductSerializer
+    public partial class ConstantProduct : IUtf8JsonSerializable
     {
-        internal static void Serialize(ConstantProduct model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty");
-            writer.WriteStringValue(model.ConstProperty);
+            writer.WriteStringValue(ConstProperty);
             writer.WritePropertyName("constProperty2");
-            writer.WriteStringValue(model.ConstProperty2);
+            writer.WriteStringValue(ConstProperty2);
             writer.WriteEndObject();
         }
-        internal static ConstantProduct Deserialize(JsonElement element)
+        internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
             var result = new ConstantProduct();
             foreach (var property in element.EnumerateObject())

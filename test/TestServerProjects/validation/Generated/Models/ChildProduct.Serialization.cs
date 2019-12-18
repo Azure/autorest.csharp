@@ -6,21 +6,21 @@ using Azure.Core;
 
 namespace validation.Models.V100
 {
-    public partial class ChildProductSerializer
+    public partial class ChildProduct : IUtf8JsonSerializable
     {
-        internal static void Serialize(ChildProduct model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty");
-            writer.WriteStringValue(model.ConstProperty);
-            if (model.Count != null)
+            writer.WriteStringValue(ConstProperty);
+            if (Count != null)
             {
                 writer.WritePropertyName("count");
-                writer.WriteNumberValue(model.Count.Value);
+                writer.WriteNumberValue(Count.Value);
             }
             writer.WriteEndObject();
         }
-        internal static ChildProduct Deserialize(JsonElement element)
+        internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
             var result = new ChildProduct();
             foreach (var property in element.EnumerateObject())

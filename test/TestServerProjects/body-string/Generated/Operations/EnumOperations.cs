@@ -173,7 +173,7 @@ namespace body_string
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = RefColorConstantSerializer.Deserialize(document.RootElement);
+                            var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -208,7 +208,7 @@ namespace body_string
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                RefColorConstantSerializer.Serialize(enumStringBody, writer);
+                writer.WriteObjectValue(enumStringBody);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)

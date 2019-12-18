@@ -7,44 +7,44 @@ using Azure.Core;
 
 namespace validation.Models.V100
 {
-    public partial class ProductSerializer
+    public partial class Product : IUtf8JsonSerializable
     {
-        internal static void Serialize(Product model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.DisplayNames != null)
+            if (DisplayNames != null)
             {
                 writer.WritePropertyName("display_names");
                 writer.WriteStartArray();
-                foreach (var item in model.DisplayNames)
+                foreach (var item in DisplayNames)
                 {
                     writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (model.Capacity != null)
+            if (Capacity != null)
             {
                 writer.WritePropertyName("capacity");
-                writer.WriteNumberValue(model.Capacity.Value);
+                writer.WriteNumberValue(Capacity.Value);
             }
-            if (model.Image != null)
+            if (Image != null)
             {
                 writer.WritePropertyName("image");
-                writer.WriteStringValue(model.Image);
+                writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child");
-            ChildProductSerializer.Serialize(model.Child, writer);
+            writer.WriteObjectValue(Child);
             writer.WritePropertyName("constChild");
-            ConstantProductSerializer.Serialize(model.ConstChild, writer);
+            writer.WriteObjectValue(ConstChild);
             writer.WritePropertyName("constInt");
-            writer.WriteNumberValue(model.ConstInt);
+            writer.WriteNumberValue(ConstInt);
             writer.WritePropertyName("constString");
-            writer.WriteStringValue(model.ConstString);
+            writer.WriteStringValue(ConstString);
             writer.WritePropertyName("constStringAsEnum");
-            writer.WriteStringValue(model.ConstStringAsEnum);
+            writer.WriteStringValue(ConstStringAsEnum);
             writer.WriteEndObject();
         }
-        internal static Product Deserialize(JsonElement element)
+        internal static Product DeserializeProduct(JsonElement element)
         {
             var result = new Product();
             foreach (var property in element.EnumerateObject())
@@ -82,12 +82,12 @@ namespace validation.Models.V100
                 }
                 if (property.NameEquals("child"))
                 {
-                    result.Child = ChildProductSerializer.Deserialize(property.Value);
+                    result.Child = ChildProduct.DeserializeChildProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("constChild"))
                 {
-                    result.ConstChild = ConstantProductSerializer.Deserialize(property.Value);
+                    result.ConstChild = ConstantProduct.DeserializeConstantProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("constInt"))

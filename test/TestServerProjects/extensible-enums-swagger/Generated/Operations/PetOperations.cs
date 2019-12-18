@@ -40,7 +40,7 @@ namespace extensible_enums_swagger
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetSerializer.Deserialize(document.RootElement);
+                            var value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -71,7 +71,7 @@ namespace extensible_enums_swagger
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
                 var writer = content.JsonWriter;
-                PetSerializer.Serialize(petParam, writer);
+                writer.WriteObjectValue(petParam);
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -79,7 +79,7 @@ namespace extensible_enums_swagger
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetSerializer.Deserialize(document.RootElement);
+                            var value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, response);
                         }
                     default:

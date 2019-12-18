@@ -7,28 +7,28 @@ using Azure.Core;
 
 namespace additionalProperties.Models.V100
 {
-    public partial class PetAPInPropertiesSerializer
+    public partial class PetAPInProperties : IUtf8JsonSerializable
     {
-        internal static void Serialize(PetAPInProperties model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id");
-            writer.WriteNumberValue(model.Id);
-            if (model.Name != null)
+            writer.WriteNumberValue(Id);
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.Status != null)
+            if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteBooleanValue(model.Status.Value);
+                writer.WriteBooleanValue(Status.Value);
             }
-            if (model.AdditionalProperties != null)
+            if (AdditionalProperties != null)
             {
                 writer.WritePropertyName("additionalProperties");
                 writer.WriteStartObject();
-                foreach (var item in model.AdditionalProperties)
+                foreach (var item in AdditionalProperties)
                 {
                     writer.WritePropertyName(item.Key);
                     writer.WriteNumberValue(item.Value);
@@ -37,7 +37,7 @@ namespace additionalProperties.Models.V100
             }
             writer.WriteEndObject();
         }
-        internal static PetAPInProperties Deserialize(JsonElement element)
+        internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
         {
             var result = new PetAPInProperties();
             foreach (var property in element.EnumerateObject())

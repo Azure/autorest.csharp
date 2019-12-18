@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ReadonlyObjSerializer
+    public partial class ReadonlyObj : IUtf8JsonSerializable
     {
-        internal static void Serialize(ReadonlyObj model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteStringValue(model.Id);
+                writer.WriteStringValue(Id);
             }
-            if (model.Size != null)
+            if (Size != null)
             {
                 writer.WritePropertyName("size");
-                writer.WriteNumberValue(model.Size.Value);
+                writer.WriteNumberValue(Size.Value);
             }
             writer.WriteEndObject();
         }
-        internal static ReadonlyObj Deserialize(JsonElement element)
+        internal static ReadonlyObj DeserializeReadonlyObj(JsonElement element)
         {
             var result = new ReadonlyObj();
             foreach (var property in element.EnumerateObject())

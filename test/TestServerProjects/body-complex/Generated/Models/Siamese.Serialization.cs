@@ -7,44 +7,44 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class SiameseSerializer
+    public partial class Siamese : IUtf8JsonSerializable
     {
-        internal static void Serialize(Siamese model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Breed != null)
+            if (Breed != null)
             {
                 writer.WritePropertyName("breed");
-                writer.WriteStringValue(model.Breed);
+                writer.WriteStringValue(Breed);
             }
-            if (model.Color != null)
+            if (Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(model.Color);
+                writer.WriteStringValue(Color);
             }
-            if (model.Hates != null)
+            if (Hates != null)
             {
                 writer.WritePropertyName("hates");
                 writer.WriteStartArray();
-                foreach (var item in model.Hates)
+                foreach (var item in Hates)
                 {
-                    DogSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
+                writer.WriteNumberValue(Id.Value);
             }
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
             writer.WriteEndObject();
         }
-        internal static Siamese Deserialize(JsonElement element)
+        internal static Siamese DeserializeSiamese(JsonElement element)
         {
             var result = new Siamese();
             foreach (var property in element.EnumerateObject())
@@ -76,7 +76,7 @@ namespace body_complex.Models.V20160229
                     result.Hates = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(DogSerializer.Deserialize(item));
+                        result.Hates.Add(Dog.DeserializeDog(item));
                     }
                     continue;
                 }

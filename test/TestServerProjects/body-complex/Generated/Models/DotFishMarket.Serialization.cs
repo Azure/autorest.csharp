@@ -7,44 +7,44 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class DotFishMarketSerializer
+    public partial class DotFishMarket : IUtf8JsonSerializable
     {
-        internal static void Serialize(DotFishMarket model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.SampleSalmon != null)
+            if (SampleSalmon != null)
             {
                 writer.WritePropertyName("sampleSalmon");
-                DotSalmonSerializer.Serialize(model.SampleSalmon, writer);
+                writer.WriteObjectValue(SampleSalmon);
             }
-            if (model.Salmons != null)
+            if (Salmons != null)
             {
                 writer.WritePropertyName("salmons");
                 writer.WriteStartArray();
-                foreach (var item in model.Salmons)
+                foreach (var item in Salmons)
                 {
-                    DotSalmonSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (model.SampleFish != null)
+            if (SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish");
-                DotFishSerializer.Serialize(model.SampleFish, writer);
+                writer.WriteObjectValue(SampleFish);
             }
-            if (model.Fishes != null)
+            if (Fishes != null)
             {
                 writer.WritePropertyName("fishes");
                 writer.WriteStartArray();
-                foreach (var item in model.Fishes)
+                foreach (var item in Fishes)
                 {
-                    DotFishSerializer.Serialize(item, writer);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
-        internal static DotFishMarket Deserialize(JsonElement element)
+        internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
             var result = new DotFishMarket();
             foreach (var property in element.EnumerateObject())
@@ -55,7 +55,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.SampleSalmon = DotSalmonSerializer.Deserialize(property.Value);
+                    result.SampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
@@ -67,7 +67,7 @@ namespace body_complex.Models.V20160229
                     result.Salmons = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Salmons.Add(DotSalmonSerializer.Deserialize(item));
+                        result.Salmons.Add(DotSalmon.DeserializeDotSalmon(item));
                     }
                     continue;
                 }
@@ -77,7 +77,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.SampleFish = DotFishSerializer.Deserialize(property.Value);
+                    result.SampleFish = DotFish.DeserializeDotFish(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
@@ -89,7 +89,7 @@ namespace body_complex.Models.V20160229
                     result.Fishes = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fishes.Add(DotFishSerializer.Deserialize(item));
+                        result.Fishes.Add(DotFish.DeserializeDotFish(item));
                     }
                     continue;
                 }

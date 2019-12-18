@@ -6,36 +6,36 @@ using Azure.Core;
 
 namespace additionalProperties.Models.V100
 {
-    public partial class CatAPTrueSerializer
+    public partial class CatAPTrue : IUtf8JsonSerializable
     {
-        internal static void Serialize(CatAPTrue model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Friendly != null)
+            if (Friendly != null)
             {
                 writer.WritePropertyName("friendly");
-                writer.WriteBooleanValue(model.Friendly.Value);
+                writer.WriteBooleanValue(Friendly.Value);
             }
             writer.WritePropertyName("id");
-            writer.WriteNumberValue(model.Id);
-            if (model.Name != null)
+            writer.WriteNumberValue(Id);
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.Status != null)
+            if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteBooleanValue(model.Status.Value);
+                writer.WriteBooleanValue(Status.Value);
             }
-            foreach (var item in model)
+            foreach (var item in this)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
         }
-        internal static CatAPTrue Deserialize(JsonElement element)
+        internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
         {
             var result = new CatAPTrue();
             foreach (var property in element.EnumerateObject())

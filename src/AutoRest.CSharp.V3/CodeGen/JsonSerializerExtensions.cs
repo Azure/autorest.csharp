@@ -74,9 +74,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             { typeof(Uri), (n, f) => null } //TODO: Figure out how to get the Uri type here, so we can do 'new Uri(GetString())'
         };
 
-        private static void WriteSerializeClientObject(CodeWriter writer, CodeWriterDelegate name, CSharpType type)
+        private static void WriteSerializeClientObject(CodeWriter writer, CodeWriterDelegate name)
         {
-            writer.Line($"{type.WithNullable(false)}Serializer.Serialize({name}, writer);");
+            writer.Line($"writer.WriteObjectValue({name});");
         }
 
         private static void WriteSerializeClientEnum(CodeWriter writer, CodeWriterDelegate name, bool isNullable, bool isStringBased)
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             switch (typeFactory.ResolveReference(type))
             {
                 case ClientObject _:
-                    WriteSerializeClientObject(writer, name, typeFactory.CreateType(type));
+                    WriteSerializeClientObject(writer, name);
                     return;
                 case ClientEnum clientEnum:
                     WriteSerializeClientEnum(writer, name, type.IsNullable, clientEnum.IsStringBased);
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void WriteDeserializeClientObject(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name)
         {
-            writer.Append($"{cSharpType}Serializer.Deserialize({name})");
+            writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({name})");
         }
 
         private static void WriteDeserializeClientEnum(CodeWriter writer, CSharpType cSharpType, CodeWriterDelegate name, bool isStringBased)

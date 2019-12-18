@@ -6,38 +6,32 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyBaseTypeSerializer
+    public partial class MyBaseType : IUtf8JsonSerializable
     {
-        internal static void Serialize(MyBaseType model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            switch (model)
-            {
-                case MyDerivedType myDerivedType:
-                    MyDerivedTypeSerializer.Serialize(myDerivedType, writer);
-                    return;
-            }
             writer.WriteStartObject();
             writer.WritePropertyName("kind");
-            writer.WriteStringValue(model.Kind);
-            if (model.PropB1 != null)
+            writer.WriteStringValue(Kind);
+            if (PropB1 != null)
             {
                 writer.WritePropertyName("propB1");
-                writer.WriteStringValue(model.PropB1);
+                writer.WriteStringValue(PropB1);
             }
-            if (model.Helper != null)
+            if (Helper != null)
             {
                 writer.WritePropertyName("helper");
-                MyBaseHelperTypeSerializer.Serialize(model.Helper, writer);
+                writer.WriteObjectValue(Helper);
             }
             writer.WriteEndObject();
         }
-        internal static MyBaseType Deserialize(JsonElement element)
+        internal static MyBaseType DeserializeMyBaseType(JsonElement element)
         {
             if (element.TryGetProperty("kind", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "Kind1": return MyDerivedTypeSerializer.Deserialize(element);
+                    case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
             var result = new MyBaseType();
@@ -63,7 +57,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Helper = MyBaseHelperTypeSerializer.Deserialize(property.Value);
+                    result.Helper = MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
                     continue;
                 }
             }

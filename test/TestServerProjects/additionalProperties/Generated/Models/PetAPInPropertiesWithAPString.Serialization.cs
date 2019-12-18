@@ -7,44 +7,44 @@ using Azure.Core;
 
 namespace additionalProperties.Models.V100
 {
-    public partial class PetAPInPropertiesWithAPStringSerializer
+    public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable
     {
-        internal static void Serialize(PetAPInPropertiesWithAPString model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id");
-            writer.WriteNumberValue(model.Id);
-            if (model.Name != null)
+            writer.WriteNumberValue(Id);
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.Status != null)
+            if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteBooleanValue(model.Status.Value);
+                writer.WriteBooleanValue(Status.Value);
             }
             writer.WritePropertyName("@odata.location");
-            writer.WriteStringValue(model.OdataLocation);
-            if (model.AdditionalProperties != null)
+            writer.WriteStringValue(OdataLocation);
+            if (AdditionalProperties != null)
             {
                 writer.WritePropertyName("additionalProperties");
                 writer.WriteStartObject();
-                foreach (var item in model.AdditionalProperties)
+                foreach (var item in AdditionalProperties)
                 {
                     writer.WritePropertyName(item.Key);
                     writer.WriteNumberValue(item.Value);
                 }
                 writer.WriteEndObject();
             }
-            foreach (var item in model)
+            foreach (var item in this)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
         }
-        internal static PetAPInPropertiesWithAPString Deserialize(JsonElement element)
+        internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
             var result = new PetAPInPropertiesWithAPString();
             foreach (var property in element.EnumerateObject())

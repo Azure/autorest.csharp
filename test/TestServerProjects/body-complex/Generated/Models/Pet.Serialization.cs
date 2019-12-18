@@ -6,24 +6,24 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class PetSerializer
+    public partial class Pet : IUtf8JsonSerializable
     {
-        internal static void Serialize(Pet model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
+                writer.WriteNumberValue(Id.Value);
             }
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
             writer.WriteEndObject();
         }
-        internal static Pet Deserialize(JsonElement element)
+        internal static Pet DeserializePet(JsonElement element)
         {
             var result = new Pet();
             foreach (var property in element.EnumerateObject())

@@ -6,29 +6,29 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class BasicSerializer
+    public partial class Basic : IUtf8JsonSerializable
     {
-        internal static void Serialize(Basic model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Id != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(model.Id.Value);
+                writer.WriteNumberValue(Id.Value);
             }
-            if (model.Name != null)
+            if (Name != null)
             {
                 writer.WritePropertyName("name");
-                writer.WriteStringValue(model.Name);
+                writer.WriteStringValue(Name);
             }
-            if (model.Color != null)
+            if (Color != null)
             {
                 writer.WritePropertyName("color");
-                writer.WriteStringValue(model.Color.ToString());
+                writer.WriteStringValue(Color.ToString());
             }
             writer.WriteEndObject();
         }
-        internal static Basic Deserialize(JsonElement element)
+        internal static Basic DeserializeBasic(JsonElement element)
         {
             var result = new Basic();
             foreach (var property in element.EnumerateObject())

@@ -6,19 +6,19 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class ByteWrapperSerializer
+    public partial class ByteWrapper : IUtf8JsonSerializable
     {
-        internal static void Serialize(ByteWrapper model, Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (model.Field != null)
+            if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteBase64StringValue(model.Field);
+                writer.WriteBase64StringValue(Field);
             }
             writer.WriteEndObject();
         }
-        internal static ByteWrapper Deserialize(JsonElement element)
+        internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
             var result = new ByteWrapper();
             foreach (var property in element.EnumerateObject())
