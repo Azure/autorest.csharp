@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private CodeWriter.CodeWriterScope WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
         {
             if (value.IsConstant) return default;
 
@@ -298,17 +298,18 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (responseBody != null ? writer.Scope() : default)
                 {
+                    string? valueVariable = null;
+
                     if (responseBody != null)
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                        writer.Append($"var value = ");
                         writer.ToDeserializeCall(
                             responseBody.Value,
                             responseBody.Format,
                             _typeFactory,
-                            w => w.Append($"document.RootElement")
+                            w => w.Append($"document.RootElement"),
+                            out valueVariable
                         );
-                        writer.Line($";");
                     }
 
                     if (headersModelType != null)
@@ -322,10 +323,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                             writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, response);");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(value, headers, response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, response);");
                             break;
                         case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue(value, response);");
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, response);");
                             break;
                         case null:
                             writer.Append($"return response;");

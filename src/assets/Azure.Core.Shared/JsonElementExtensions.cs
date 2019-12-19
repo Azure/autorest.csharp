@@ -47,7 +47,7 @@ namespace Azure.Core
             }
         }
 
-        public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format) => format switch
+        public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format = "S") => format switch
         {
             "D" => element.GetDateTimeOffset(),
             "S" => element.GetDateTimeOffset(),
@@ -56,7 +56,7 @@ namespace Azure.Core
             _ => throw new ArgumentException("Format is not supported", nameof(format))
         };
 
-        public static TimeSpan GetTimeSpan(in this JsonElement element, string format) => format switch
+        public static TimeSpan GetTimeSpan(in this JsonElement element, string format = "P") => format switch
         {
             "P" => XmlConvert.ToTimeSpan(element.GetString()),
             _ => throw new ArgumentException("Format is not supported", nameof(format))

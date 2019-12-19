@@ -23,10 +23,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 case CollectionTypeReference array:
                     writer.Line($"{writerName}.WriteStartArray();");
-                    writer.Line($"foreach (var item in {name})");
+                    string collectionItemVariable = writer.GetTemporaryVariable("item");
+                    writer.Line($"foreach (var {collectionItemVariable:D} in {name})");
                     using (writer.Scope())
                     {
-                        writer.ToSerializeCall(array.ItemType, format, typeFactory, w => w.Append($"item"));
+                        writer.ToSerializeCall(
+                            array.ItemType,
+                            format,
+                            typeFactory,
+                            w => w.AppendRaw(collectionItemVariable),
+                            serializedName: null,
+                            writerName);
                     }
 
                     writer.Line($"{writerName}.WriteEndArray();");
@@ -34,15 +41,17 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 case DictionaryTypeReference dictionary:
                     writer.Line($"{writerName}.WriteStartObject();");
-                    writer.Line($"foreach (var item in {name})");
+                    string itemVariable = writer.GetTemporaryVariable("item");
+                    writer.Line($"foreach (var {itemVariable:D} in {name})");
                     using (writer.Scope())
                     {
                         writer.ToSerializeCall(
                             dictionary.ValueType,
                             format,
                             typeFactory,
-                            w => w.Append($"item.Value"),
-                            w => w.Append($"item.Key"));
+                            w => w.Append($"{itemVariable}.Value"),
+                            w => w.Append($"{itemVariable}.Key"),
+                            writerName);
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -116,33 +125,90 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
+        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate element, out string destination)
+        {
+            destination = writer.GetTemporaryVariable("value");
+
+            if (CanDeserializeAsExpression(type))
+            {
+                writer.Append($"var {destination:D} =")
+                    .ToDeserializeCall(type, format, typeFactory, element);
+                writer.LineRaw(";");
+            }
+            else
+            {
+                string s = destination;
+
+                writer
+                    .Line($"{typeFactory.CreateType(type)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
+                    .ToDeserializeCall(type, format, typeFactory, w=>w.AppendRaw(s), element);
+            }
+        }
+
+        private static bool CanDeserializeAsExpression(ClientTypeReference type)
+        {
+            return !(type is CollectionTypeReference || type is DictionaryTypeReference);
+        }
+
         public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
         {
             switch (type)
             {
                 case CollectionTypeReference array:
-                    using (writer.ForEach("var item in property.Value.EnumerateArray()"))
+                    string collectionItemVariable = writer.GetTemporaryVariable("item");
+                    writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
+                    using (writer.Scope())
                     {
-                        writer.Append($"{destination}.Add(");
-                        writer.ToDeserializeCall(
-                            array.ItemType,
-                            format,
-                            typeFactory,
-                            w => w.Append($"item"));
-                        writer.Line($");");
+                        if (CanDeserializeAsExpression(array.ItemType))
+                        {
+                            writer.Append($"{destination}.Add(");
+                            writer.ToDeserializeCall(
+                                array.ItemType,
+                                format,
+                                typeFactory,
+                                w => w.AppendRaw(collectionItemVariable));
+                            writer.Line($");");
+                        }
+                        else
+                        {
+                            writer.ToDeserializeCall(
+                                array.ItemType,
+                                format,
+                                typeFactory,
+                                w => w.AppendRaw(collectionItemVariable),
+                                out var temp);
+
+                            writer.Append($"{destination}.Add({temp});");
+                        }
                     }
 
                     return;
                 case DictionaryTypeReference dictionary:
-                    using (writer.ForEach("var item in property.Value.EnumerateObject()"))
+                    string itemVariable = writer.GetTemporaryVariable("item");
+                    writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
+                    using (writer.Scope())
                     {
-                        writer.Append($"{destination}.Add(item.Name, ");
-                        writer.ToDeserializeCall(
-                            dictionary.ValueType,
-                            format,
-                            typeFactory,
-                            w => w.Append($"item.Value"));
-                        writer.Line($");");
+                        if (CanDeserializeAsExpression(dictionary.ValueType))
+                        {
+                            writer.Append($"{destination}.Add({itemVariable}.Name, ");
+                            writer.ToDeserializeCall(
+                                dictionary.ValueType,
+                                format,
+                                typeFactory,
+                                w => w.Append($"{itemVariable}.Value"));
+                            writer.Line($");");
+                        }
+                        else
+                        {
+                            writer.ToDeserializeCall(
+                                dictionary.ValueType,
+                                format,
+                                typeFactory,
+                                w => w.Append($"{itemVariable}.Value"),
+                                out var temp);
+
+                            writer.Append($"{destination}.Add({itemVariable}.Name, {temp});");
+                        }
                     }
 
                     return;
