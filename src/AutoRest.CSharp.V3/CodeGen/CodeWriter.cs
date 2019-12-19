@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Utilities;
@@ -17,12 +18,21 @@ namespace AutoRest.CSharp.V3.CodeGen
         private readonly List<CSharpNamespace> _usingNamespaces = new List<CSharpNamespace>();
         private readonly StringBuilder _builder = new StringBuilder();
         private readonly string _definitionAccessDefault = "public";
+        private readonly Stack<CodeWriterScope> _scopes;
         private CSharpNamespace? _currentNamespace;
+
+        public CodeWriter()
+        {
+            _scopes = new Stack<CodeWriterScope>();
+            _scopes.Push(new CodeWriterScope(this, ""));
+        }
 
         public CodeWriterScope Scope(string start = "{", string end = "}")
         {
             LineRaw(start);
-            return new CodeWriterScope(this, end);
+            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end);
+            _scopes.Push(codeWriterScope);
+            return codeWriterScope;
         }
 
         public CodeWriterScope Namespace(CSharpNamespace @namespace)
@@ -40,6 +50,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
 
             const string literalFormatString = ":L";
+            const string declarationFormatString = ":D"; // :D :)
             foreach ((string Text, bool IsLiteral) part in StringExtensions.GetPathParts(formattableString.Format))
             {
                 string text = part.Text;
@@ -57,6 +68,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 var argument = formattableString.GetArgument(index);
                 var isLiteral = text.EndsWith(literalFormatString);
+                var isDeclaration = text.EndsWith(declarationFormatString);
                 switch (argument)
                 {
                     case CodeWriterDelegate d:
@@ -72,16 +84,23 @@ namespace AutoRest.CSharp.V3.CodeGen
                         if (isLiteral)
                         {
                             Literal(argument);
+                            continue;
+                        }
+
+                        string? s = argument?.ToString();
+
+                        if (s == null)
+                        {
+                            throw new ArgumentNullException(index.ToString());
+                        }
+
+
+                        if (isDeclaration)
+                        {
+                            Declaration(s);
                         }
                         else
                         {
-                            string? s = argument?.ToString();
-
-                            if (s == null)
-                            {
-                                throw new ArgumentNullException(index.ToString());
-                            }
-
                             AppendRaw(s);
                         }
                         break;
@@ -170,6 +189,37 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void UseNamespace(CSharpNamespace @namespace)
         {
             _usingNamespaces.Add(@namespace);
+        }
+
+        public string GetTemporaryVariable(string s)
+        {
+            if (IsAvailable(s))
+            {
+                return s;
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                var name = s + i;
+                if (IsAvailable(name))
+                {
+                    return name;
+                }
+            }
+            throw new InvalidOperationException("Can't find suitable variable name.");
+        }
+
+        private bool IsAvailable(string s)
+        {
+            foreach (CodeWriterScope codeWriterScope in _scopes)
+            {
+                if (codeWriterScope.Identifiers.Contains(s))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public string Type(CSharpType type)
@@ -276,6 +326,13 @@ namespace AutoRest.CSharp.V3.CodeGen
             return this;
         }
 
+        public CodeWriter Declaration(string name)
+        {
+            _scopes.Peek().Identifiers.Add(name);
+
+            return AppendRaw(name);
+        }
+
         public CodeWriter Append(CodeWriterDelegate writerDelegate)
         {
             writerDelegate(this);
@@ -320,10 +377,12 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public override string? ToString() => _builder.ToString();
 
-        internal readonly struct CodeWriterScope : IDisposable
+        internal class CodeWriterScope : IDisposable
         {
             private readonly CodeWriter _writer;
             private readonly string _end;
+
+            public List<string> Identifiers { get; } = new List<string>();
 
             public CodeWriterScope(CodeWriter writer, string end)
             {
@@ -331,7 +390,17 @@ namespace AutoRest.CSharp.V3.CodeGen
                 _end = end;
             }
 
-            public void Dispose() => _writer?.LineRaw(_end);
+            public void Dispose()
+            {
+                _writer.PopScope(this);
+                _writer?.LineRaw(_end);
+            }
+        }
+
+        private void PopScope(CodeWriterScope expected)
+        {
+            var actual = _scopes.Pop();
+            Debug.Assert(actual == expected);
         }
     }
 }
