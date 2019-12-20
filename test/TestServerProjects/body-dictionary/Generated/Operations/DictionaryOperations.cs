@@ -1259,7 +1259,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1341,7 +1341,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1379,7 +1379,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1417,7 +1417,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1499,7 +1499,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1537,7 +1537,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1575,7 +1575,7 @@ namespace body_dictionary
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset());
+                                value.Add(item.Name, item.Value.GetDateTimeOffset("R"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1657,7 +1657,7 @@ namespace body_dictionary
                             IDictionary<string, TimeSpan> value = new Dictionary<string, TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetTimeSpan());
+                                value.Add(item.Name, item.Value.GetTimeSpan("P"));
                             }
                             return Response.FromValue(value, response);
                         }

@@ -97,10 +97,16 @@ namespace AutoRest.CSharp.V3.ClientModels
                 case ConstantSchema constantSchema:
                     return CreateSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
-                    return new JsonArraySerialization(CreateType(arraySchema.ElementType, false), CreateSerialization(arraySchema.ElementType, false));
+                    return new JsonArraySerialization(CreateType(arraySchema, false), CreateSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
-                    return new JsonObjectSerialization(Array.Empty<JsonPropertySerialization>(),
-                        new JsonAdditionalPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
+
+                    var dictionaryElementTypeReference = new DictionaryTypeReference(
+                        new FrameworkTypeReference(typeof(string)),
+                        CreateType(dictionarySchema.ElementType, false),
+                        false);
+
+                    return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
+                        new JsonDynamicPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
                 default:
                     return new JsonValueSerialization(CreateType(schema, isNullable), JsonValueSerializationKind.Object, GetSerializationFormat(schema));
             }

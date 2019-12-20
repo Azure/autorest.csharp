@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
+using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
@@ -86,6 +87,8 @@ namespace AutoRest.CSharp.V3.ClientModels
                     );
             }
 
+            var schemaTypeReference = ClientModelBuilderHelpers.CreateType(objectSchema, false);
+
             return new ClientObject(
                 objectSchema,
                 objectSchema.CSharpName(),
@@ -93,18 +96,18 @@ namespace AutoRest.CSharp.V3.ClientModels
                 properties.ToArray(),
                 discriminator,
                 inheritedDictionarySchema == null ? null : CreateDictionaryType(inheritedDictionarySchema),
-                new JsonObjectSerialization(serializationProperties.ToArray(), CreateAdditionalProperties(inheritedDictionarySchema))
+                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(inheritedDictionarySchema))
                 );
         }
 
-        private static JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(DictionarySchema? inheritedDictionarySchema)
+        private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(DictionarySchema? inheritedDictionarySchema)
         {
             if (inheritedDictionarySchema == null)
             {
                 return null;
             }
 
-            return new JsonAdditionalPropertiesSerialization(
+            return new JsonDynamicPropertiesSerialization(
                 ClientModelBuilderHelpers.CreateSerialization(inheritedDictionarySchema.ElementType, false)
                 );
         }

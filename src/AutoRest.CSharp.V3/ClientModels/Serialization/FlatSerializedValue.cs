@@ -7,8 +7,9 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
 #pragma warning disable SA1402, SA1649
 
-    internal class JsonSerialization
+    internal abstract class JsonSerialization
     {
+        public abstract ClientTypeReference Type { get; }
     }
 
     internal class JsonValueSerialization: JsonSerialization
@@ -21,7 +22,7 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         }
 
         public JsonValueSerializationKind Kind { get; }
-        public ClientTypeReference Type { get; }
+        public override ClientTypeReference Type { get; }
         public SerializationFormat Format { get; }
     }
 
@@ -36,19 +37,19 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 
     internal class JsonArraySerialization: JsonSerialization
     {
-        public JsonArraySerialization(ClientTypeReference valueType, JsonSerialization valueSerialization)
+        public JsonArraySerialization(ClientTypeReference type, JsonSerialization valueSerialization)
         {
-            ValueType = valueType;
+            Type = type;
             ValueSerialization = valueSerialization;
         }
 
-        public ClientTypeReference ValueType { get; }
+        public override ClientTypeReference Type { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 
-    internal class JsonAdditionalPropertiesSerialization
+    internal class JsonDynamicPropertiesSerialization
     {
-        public JsonAdditionalPropertiesSerialization(JsonSerialization valueSerialization)
+        public JsonDynamicPropertiesSerialization(JsonSerialization valueSerialization)
         {
             ValueSerialization = valueSerialization;
         }
@@ -59,14 +60,16 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 
     internal class JsonObjectSerialization: JsonSerialization
     {
-        public JsonObjectSerialization(JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties)
+        public JsonObjectSerialization(ClientTypeReference type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties)
         {
+            Type = type;
             Properties = properties;
             AdditionalProperties = additionalProperties;
         }
 
+        public override ClientTypeReference Type { get; }
         public JsonPropertySerialization[] Properties { get; }
-        public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
+        public JsonDynamicPropertiesSerialization? AdditionalProperties { get; }
     }
 
     internal class JsonPropertySerialization

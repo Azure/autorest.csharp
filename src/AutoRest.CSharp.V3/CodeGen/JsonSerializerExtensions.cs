@@ -126,10 +126,10 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-
-
         public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, out string destination)
         {
+            var type = serialization.Type;
+
             destination = writer.GetTemporaryVariable("value");
 
             if (serialization is JsonValueSerialization valueSerialization)
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 string s = destination;
 
                 writer
-               //     .Line($"{typeFactory.CreateType(serialization)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
+                    .Line($"{typeFactory.CreateType(type)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
                     .ToDeserializeCall(serialization, typeFactory, w=>w.AppendRaw(s), element);
             }
         }
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     return;
                 case JsonObjectSerialization dictionary:
-                    if (dictionary.AdditionalProperties is JsonAdditionalPropertiesSerialization additionalProperties)
+                    if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
                     {
                         string itemVariable = writer.GetTemporaryVariable("item");
                         writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
