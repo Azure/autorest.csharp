@@ -1,0 +1,52 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<CodeModelCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using Agoda.Frameworks.LoadBalancing;
+    using Agoda.Frameworks.Http;
+@EmptyLine
+
+    public abstract class LoadBalancingConfigBase : ILoadBalancingConfig
+    {
+        public IResourceManager<string> UrlResourceManager { get; }
+        public TimeSpan PerRequestTimeout { get; }
+        public ShouldRetryPredicate ShouldRetryPredicate { get; }
+        public CustomCheckIsErrorResponse IsErrorResponse { get; }
+
+        protected LoadBalancingConfigBase(IEnumerable<string> baseUrls, TimeSpan? perRequestTimeout, int maxRetry = 3, CustomCheckIsErrorResponse isErrorResponse = null)
+        {
+            UrlResourceManager = ResourceManager.Create(baseUrls);
+            PerRequestTimeout = perRequestTimeout.HasValue ? perRequestTimeout.Value : TimeSpan.FromMilliseconds(100);
+            ShouldRetryPredicate = GetRetryCountPredicate(3);
+            IsErrorResponse = isErrorResponse;
+        }
+
+        protected virtual void UpdateBaseUrls(IEnumerable<string> baseUrls)
+        {
+            var dict = baseUrls
+                .Distinct()
+                .ToDictionary(x => x, _ => WeightItem.CreateDefaultItem());
+            UrlResourceManager.UpdateResources(dict);
+        }
+
+        private static ShouldRetryPredicate GetRetryCountPredicate(int maxRetry) => (attemptCount, e) =>
+        {
+            if (e is TimeoutException ||
+                e is TransientHttpRequestException ||
+                e is ServiceUnavailableException)
+            {
+                return attemptCount < maxRetry;
+            }
+            return false;
+        };
+    }
+}

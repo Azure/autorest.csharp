@@ -2,19 +2,19 @@ version: "3"
 
 services:
   autorest-gen: 
-    image: reg-hk.agodadev.io/library/autorest-gen:${IMAGE_VERSION}
+    #image: reg-hk.agodadev.io/library/autorest-gen:${IMAGE_VERSION}
     ### Following commented out lines are helpful for local testing
     ### Build image from local docker file
-    # build: .
+    build: .
     ### Get generated code to local to view .cs and .nupkg file
     ### you can change .nupkg to .zip to view generated .dll file inside the package
-    # volumes:
-    #   - /Users/nkar/workspaces/temp/autorest/output:/app/output
+    volumes:
+      - C:/New folder/output4:/app/output
     environment: 
-      ENV_YML_FILE_URL: ${SWAGGER_URL}
+      ENV_YML_FILE_URL: "https://github.agodadev.io/raw/hermes/hermes/6857b4e0ca276dfa7e147cf6354173a98026eedf/hermes-api/public/spec/hermes-api-v2.yaml?token=AAAAAYPXYDBMMIVLC4ZRNJC6AV44U"
       ENV_OUTPUT_PATH: "/app/output"
-      ENV_NAMESPACE: ${NAMESPACE} 
-      ENV_VERSION: ${VERSION}
+      ENV_NAMESPACE: Agoda.Hermes.V2.Client 
+      ENV_VERSION: "3.0"
       ENV_NUGET_KEY: ${NUGET_KEY}
-      ENV_SHOULD_PUSH_NUGET: ${SHOULD_UPLOAD_TO_NUGET} 
+      ENV_SHOULD_PUSH_NUGET: "false"
     command: /app/build/create-project.sh

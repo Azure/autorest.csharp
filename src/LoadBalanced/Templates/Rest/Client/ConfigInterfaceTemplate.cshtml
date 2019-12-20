@@ -1,0 +1,24 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<CodeModelCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Net.Http;
+    using Agoda.Frameworks.LoadBalancing;
+@EmptyLine
+
+    public delegate bool CustomCheckIsErrorResponse(HttpResponseMessage httpResponseMessage, string responseContent);
+
+    public interface ILoadBalancingConfig
+    {
+        CustomCheckIsErrorResponse IsErrorResponse { get; }
+        TimeSpan PerRequestTimeout { get; }
+        ShouldRetryPredicate ShouldRetryPredicate { get; }
+        IResourceManager<string> UrlResourceManager { get; }
+    }
+}

@@ -23,7 +23,7 @@ namespace AutoRest.CSharp
 {
     public class CodeGeneratorCs : CodeGenerator
     {
-        protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.8";
+        protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.21";
 
         protected virtual string GeneratedSourcesBaseFolder => "";
 

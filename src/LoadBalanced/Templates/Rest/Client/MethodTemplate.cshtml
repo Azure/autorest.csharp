@@ -4,21 +4,14 @@
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp
-@using AutoRest.CSharp.LoadBalanced
-@using AutoRest.CSharp.LoadBalanced.Model
+@using AutoRest.CSharp.Model
 @using AutoRest.Extensions
-@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.MethodCs>
-
-@{ 
-    var basePath = Model.CodeModel.BaseUrl?.Trim('/');
-    var path = new Uri(basePath).AbsolutePath;
-    var endpoint = string.Concat(path, Model.Url);
-}
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment().Replace("\n", "") : Model.Summary.EscapeXmlComment().Replace("\n", ""))
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
     if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
     {
 @:/// <see href="@Model.ExternalDocsUrl" />
@@ -31,78 +24,54 @@
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
 @:/// </remarks>
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (ParameterCs parameter in Model.LocalParameters)
 {
-@:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.DocumentationString.EscapeXmlComment())@:
+@:/// </param>
 }
-/// <param name='customHeaders'>Headers that will be added to request.</param>
-/// <exception cref="@(Model.OperationExceptionTypeString)">Thrown when the operation returned an invalid status code</exception>
+/// <param name='customHeaders'>
+/// Headers that will be added to request.
+/// </param>
+/// <param name='cancellationToken'>
+/// The cancellation token.
+/// </param>
+/// <exception cref="@(Model.OperationExceptionTypeString)">
+/// Thrown when the operation returned an invalid status code
+/// </exception>
 @if (Model.Responses.Where(r => r.Value.Body != null).Any())
 {
-@:/// <exception cref="Microsoft.Rest.SerializationException">Thrown when unable to deserialize the response</exception>
+@:/// <exception cref="Microsoft.Rest.SerializationException">
+@:/// Thrown when unable to deserialize the response
+@:/// </exception>
 }
 @if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
 {
-@:/// <exception cref="Microsoft.Rest.ValidationException">Thrown when a required parameter is null</exception>
-@:/// <exception cref="System.ArgumentNullException">Thrown when a required parameter is null</exception>
+@:/// <exception cref="Microsoft.Rest.ValidationException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
+@:/// <exception cref="System.ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
     }
-/// <return>A response object containing the response body and response headers.</return>
-@if (Model.Deprecated)
+/// <return>
+/// A response object containing the response body and response headers.
+/// </return>
+@(Model.GetObsoleteAttribute())
+@(Model.AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-@:[System.Obsolete()]
-}
-public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
-{
-    @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant && p.Location != ParameterLocation.Header))
+    @switch (Model.Flavor)
     {
-        if (parameter.IsRequired && parameter.IsNullable())
-        {
-    @:if (@(parameter.Name) == null)
-    @:{
-        @:throw new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
-    @:}
-@:
-        }
-        if(parameter.CanBeValidated  && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
-        {
-    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
-        }
+        case MethodFlavor.RestCall:
+    @:@(Include(new MethodBodyTemplateRestCall(), Model))
+            break;
+        case MethodFlavor.ForwardTo:
+    @:@(Include(new MethodBodyTemplateForwardTo(), Model))
+            break;
+        case MethodFlavor.Implementation:
+    @:@(Model.GetImplementation("csharp") ?? "throw new System.NotImplementedException();")
+            break;
+        default:
+            throw new System.NotImplementedException();
     }
-
-    @foreach (ParameterCs parameter in Model.Parameters)
-    {
-        if (parameter.IsConstant && !parameter.IsClientProperty)
-        {
-    @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
-        }
-
-        if (parameter.ModelType is CompositeType
-            && !parameter.IsConstant
-            && parameter.IsRequired
-            && !parameter.IsClientProperty
-            && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
-        {
-    @:if (@(parameter.Name) == null)
-    @:{
-    @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
-    @:}
-        }
-
-    }
-    @Model.BuildInputMappings()
-@EmptyLine
-    var verb = @(Model.HttpMethod.GetHttpMethod());
-@EmptyLine
-    @(Model.BuildUrl("_url"))
-@EmptyLine
-    var requestParameters = new RequestParameters
-                            {
-                                HttpVerb = verb,
-                                RestUrl = "@(endpoint)",
-                                CustomHeaders = _customHeaders,
-                                QueryParameters = queryParameters
-                                @(@Model.Body == null ? "" : ", Body = " + Model.RequestBody.Name)
-                            };
-@EmptyLine
-    return await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
 }

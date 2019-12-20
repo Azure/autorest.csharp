@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" >
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><PowerShell># 2&gt;nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
   <PropertyGroup>
@@ -78,6 +78,24 @@
     <PackageReference Include="dotnet-Perks.CodeGen" Version="2.0.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ExtendedServiceClientTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodBodyTemplateRestCall.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ServiceClientTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodBodyTemplateForwardTo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ServiceClientBodyTemplate.cshtml" />
   </ItemGroup>
 
 </Project>
