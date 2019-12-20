@@ -19,7 +19,7 @@ namespace validation.Models.V100
         }
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
-            var result = new ConstantProduct();
+            ConstantProduct result = new ConstantProduct();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"))

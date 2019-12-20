@@ -55,7 +55,7 @@ namespace body_complex.Models.V20160229
         }
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
-            var result = new SmartSalmon();
+            SmartSalmon result = new SmartSalmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("college_degree"))

@@ -25,7 +25,7 @@ namespace body_byte.Models.V100
         }
         internal static Error DeserializeError(JsonElement element)
         {
-            var result = new Error();
+            Error result = new Error();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))

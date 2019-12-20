@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
-            var result = new LongWrapper();
+            LongWrapper result = new LongWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))

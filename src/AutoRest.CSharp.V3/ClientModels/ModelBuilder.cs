@@ -96,12 +96,14 @@ namespace AutoRest.CSharp.V3.ClientModels
                 properties.ToArray(),
                 discriminator,
                 inheritedDictionarySchema == null ? null : CreateDictionaryType(inheritedDictionarySchema),
-                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(inheritedDictionarySchema))
+                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema))
                 );
         }
 
-        private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(DictionarySchema? inheritedDictionarySchema)
+        private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
         {
+            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().SingleOrDefault();
+
             if (inheritedDictionarySchema == null)
             {
                 return null;

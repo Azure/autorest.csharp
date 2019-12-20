@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element)
         {
-            var result = new DoubleWrapper();
+            DoubleWrapper result = new DoubleWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))

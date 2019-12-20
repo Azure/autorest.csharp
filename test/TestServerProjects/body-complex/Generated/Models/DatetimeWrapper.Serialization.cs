@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element)
         {
-            var result = new DatetimeWrapper();
+            DatetimeWrapper result = new DatetimeWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))

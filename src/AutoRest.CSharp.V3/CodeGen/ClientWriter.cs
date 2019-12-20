@@ -357,7 +357,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (responseBody != null ? writer.Scope() : default)
                 {
-                    string? valueVariable = null;
+                    string valueVariable = "value";
 
                     if (responseBody != null)
                     {
@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             responseBody.Serialization,
                             _typeFactory,
                             w => w.Append($"document.RootElement"),
-                            out valueVariable
+                            ref valueVariable
                         );
                     }
 

@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Pet DeserializePet(JsonElement element)
         {
-            var result = new Pet();
+            Pet result = new Pet();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

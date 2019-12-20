@@ -46,7 +46,7 @@ namespace validation.Models.V100
         }
         internal static Product DeserializeProduct(JsonElement element)
         {
-            var result = new Product();
+            Product result = new Product();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"))
@@ -102,6 +102,10 @@ namespace validation.Models.V100
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     result.ConstStringAsEnum = property.Value.GetString();
                     continue;
                 }

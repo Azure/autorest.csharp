@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
-            var result = new BooleanWrapper();
+            BooleanWrapper result = new BooleanWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field_true"))

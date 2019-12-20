@@ -22,7 +22,7 @@ namespace validation.Models.V100
         }
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
-            var result = new ChildProduct();
+            ChildProduct result = new ChildProduct();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"))

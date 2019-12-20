@@ -35,39 +35,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void ReadProperty(CodeWriter writer, JsonPropertySerialization property)
-        {
-            var type = property.Type;
-            var name = property.MemberName;
-
-            CSharpType propertyType = _typeFactory.CreateType(type);
-
-            void WriteNullCheck()
-            {
-                using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
-                {
-                    writer.Append($"continue;");
-                }
-            }
-
-            void WriteInitialization()
-            {
-                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
-                {
-                    writer.Line($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();");
-                }
-            }
-
-            if (propertyType.IsNullable)
-            {
-                WriteNullCheck();
-            }
-
-            WriteInitialization();
-
-            writer.ToDeserializeCall(property.ValueSerialization, _typeFactory, w=> w.Append($"result.{name}"), w => w.Append($"property.Value"));
-        }
-
 
         //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
@@ -107,31 +74,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                 }
 
-                writer.Line($"var result = new {typeText}();");
-                using (writer.ForEach("var property in element.EnumerateObject()"))
-                {
-                    foreach (JsonPropertySerialization property in model.Serialization.Properties)
-                    {
-                        using (writer.If($"property.NameEquals(\"{property.Name}\")"))
-                        {
-                            ReadProperty(writer, property);
-                            writer.Line($"continue;");
-                        }
-                    }
-
-                    if (model.Serialization.AdditionalProperties != null)
-                    {
-                        writer.Append($"result.Add(property.Name, ");
-                        writer.ToDeserializeCall(
-                            (JsonValueSerialization) model.Serialization.AdditionalProperties.ValueSerialization,
-                            _typeFactory,
-                            w => w.Append($"property.Value"));
-                        writer.Line($");");
-                    }
-                }
-
-
-                writer.Line($"return result;");
+                var resultVariable = "result";
+                writer.ToDeserializeCall(model.Serialization, _typeFactory, w=>w.AppendRaw("element"), ref resultVariable);
+                writer.Line($"return {resultVariable};");
             }
         }
 

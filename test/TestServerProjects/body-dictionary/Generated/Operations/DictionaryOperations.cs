@@ -37,9 +37,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, int> value = new Dictionary<string, int>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt32());
+                                value.Add(property.Name, property.Value.GetInt32());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -75,9 +75,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, int> value = new Dictionary<string, int>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt32());
+                                value.Add(property.Name, property.Value.GetInt32());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -157,9 +157,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -195,9 +195,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -233,9 +233,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -271,9 +271,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -309,9 +309,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, bool> value = new Dictionary<string, bool>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBoolean());
+                                value.Add(property.Name, property.Value.GetBoolean());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -391,9 +391,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, bool> value = new Dictionary<string, bool>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBoolean());
+                                value.Add(property.Name, property.Value.GetBoolean());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -429,9 +429,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, bool> value = new Dictionary<string, bool>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBoolean());
+                                value.Add(property.Name, property.Value.GetBoolean());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -467,9 +467,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, int> value = new Dictionary<string, int>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt32());
+                                value.Add(property.Name, property.Value.GetInt32());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -549,9 +549,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, int> value = new Dictionary<string, int>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt32());
+                                value.Add(property.Name, property.Value.GetInt32());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -587,9 +587,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, int> value = new Dictionary<string, int>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt32());
+                                value.Add(property.Name, property.Value.GetInt32());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -625,9 +625,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, long> value = new Dictionary<string, long>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt64());
+                                value.Add(property.Name, property.Value.GetInt64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -707,9 +707,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, long> value = new Dictionary<string, long>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt64());
+                                value.Add(property.Name, property.Value.GetInt64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -745,9 +745,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, long> value = new Dictionary<string, long>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetInt64());
+                                value.Add(property.Name, property.Value.GetInt64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -783,9 +783,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, float> value = new Dictionary<string, float>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetSingle());
+                                value.Add(property.Name, property.Value.GetSingle());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -865,9 +865,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, float> value = new Dictionary<string, float>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetSingle());
+                                value.Add(property.Name, property.Value.GetSingle());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -903,9 +903,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, float> value = new Dictionary<string, float>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetSingle());
+                                value.Add(property.Name, property.Value.GetSingle());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -941,9 +941,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, double> value = new Dictionary<string, double>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDouble());
+                                value.Add(property.Name, property.Value.GetDouble());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1023,9 +1023,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, double> value = new Dictionary<string, double>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDouble());
+                                value.Add(property.Name, property.Value.GetDouble());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1061,9 +1061,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, double> value = new Dictionary<string, double>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDouble());
+                                value.Add(property.Name, property.Value.GetDouble());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1099,9 +1099,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1181,9 +1181,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1219,9 +1219,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, string> value = new Dictionary<string, string>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetString());
+                                value.Add(property.Name, property.Value.GetString());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1257,9 +1257,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1339,9 +1339,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1377,9 +1377,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("D"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1415,9 +1415,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1497,9 +1497,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1535,9 +1535,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("S"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1573,9 +1573,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetDateTimeOffset("R"));
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("R"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1655,9 +1655,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, TimeSpan> value = new Dictionary<string, TimeSpan>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetTimeSpan("P"));
+                                value.Add(property.Name, property.Value.GetTimeSpan("P"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1737,9 +1737,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBytesFromBase64());
+                                value.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1819,9 +1819,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBytesFromBase64());
+                                value.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1857,9 +1857,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetBytesFromBase64());
+                                value.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1895,9 +1895,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Widget> value = new Dictionary<string, Widget>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, Widget.DeserializeWidget(item.Value));
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1933,9 +1933,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Widget> value = new Dictionary<string, Widget>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, Widget.DeserializeWidget(item.Value));
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1971,9 +1971,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Widget> value = new Dictionary<string, Widget>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, Widget.DeserializeWidget(item.Value));
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2009,9 +2009,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Widget> value = new Dictionary<string, Widget>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, Widget.DeserializeWidget(item.Value));
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2047,9 +2047,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, Widget> value = new Dictionary<string, Widget>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, Widget.DeserializeWidget(item.Value));
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2129,14 +2129,14 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
-                                foreach (var item0 in item.Value.EnumerateArray())
+                                foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    value0.Add(item0.GetString());
+                                    value0.Add(item.GetString());
                                 }
-                                value.Add(item.Name, value0);
+                                value.Add(property.Name, value0);
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2172,14 +2172,14 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
-                                foreach (var item0 in item.Value.EnumerateArray())
+                                foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    value0.Add(item0.GetString());
+                                    value0.Add(item.GetString());
                                 }
-                                value.Add(item.Name, value0);
+                                value.Add(property.Name, value0);
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2215,14 +2215,14 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
-                                foreach (var item0 in item.Value.EnumerateArray())
+                                foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    value0.Add(item0.GetString());
+                                    value0.Add(item.GetString());
                                 }
-                                value.Add(item.Name, value0);
+                                value.Add(property.Name, value0);
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2258,14 +2258,14 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
-                                foreach (var item0 in item.Value.EnumerateArray())
+                                foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    value0.Add(item0.GetString());
+                                    value0.Add(item.GetString());
                                 }
-                                value.Add(item.Name, value0);
+                                value.Add(property.Name, value0);
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2301,14 +2301,14 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
-                                foreach (var item0 in item.Value.EnumerateArray())
+                                foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    value0.Add(item0.GetString());
+                                    value0.Add(item.GetString());
                                 }
-                                value.Add(item.Name, value0);
+                                value.Add(property.Name, value0);
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2393,9 +2393,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, object> value = new Dictionary<string, object>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetObject());
+                                value.Add(property.Name, property.Value.GetObject());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2431,9 +2431,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, object> value = new Dictionary<string, object>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetObject());
+                                value.Add(property.Name, property.Value.GetObject());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2469,9 +2469,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, object> value = new Dictionary<string, object>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetObject());
+                                value.Add(property.Name, property.Value.GetObject());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2507,9 +2507,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, object> value = new Dictionary<string, object>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetObject());
+                                value.Add(property.Name, property.Value.GetObject());
                             }
                             return Response.FromValue(value, response);
                         }
@@ -2545,9 +2545,9 @@ namespace body_dictionary
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             IDictionary<string, object> value = new Dictionary<string, object>();
-                            foreach (var item in document.RootElement.EnumerateObject())
+                            foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(item.Name, item.Value.GetObject());
+                                value.Add(property.Name, property.Value.GetObject());
                             }
                             return Response.FromValue(value, response);
                         }

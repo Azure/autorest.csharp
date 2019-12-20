@@ -30,7 +30,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Basic DeserializeBasic(JsonElement element)
         {
-            var result = new Basic();
+            Basic result = new Basic();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

@@ -41,7 +41,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Cat DeserializeCat(JsonElement element)
         {
-            var result = new Cat();
+            Cat result = new Cat();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("color"))

@@ -170,17 +170,27 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task GetArrayDateTimeRfc1123Valid() => Test(async (host, pipeline) =>
         {
             var result = await ArrayOperations.GetDateTimeRfc1123ValidAsync(ClientDiagnostics, pipeline, host);
+            CollectionAssert.AreEqual(new[]
+            {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, result.Value);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task GetArrayDateTimeValid() => Test(async (host, pipeline) =>
         {
             var result = await ArrayOperations.GetDateTimeValidAsync(ClientDiagnostics, pipeline, host);
+            CollectionAssert.AreEqual(new[]
+            {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, result.Value);
         });
 
         [Test]

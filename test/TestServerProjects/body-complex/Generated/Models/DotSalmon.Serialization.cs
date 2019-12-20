@@ -32,7 +32,7 @@ namespace body_complex.Models.V20160229
         }
         internal static DotSalmon DeserializeDotSalmon(JsonElement element)
         {
-            var result = new DotSalmon();
+            DotSalmon result = new DotSalmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))

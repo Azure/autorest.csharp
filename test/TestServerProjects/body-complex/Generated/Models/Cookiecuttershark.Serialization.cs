@@ -42,7 +42,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Cookiecuttershark DeserializeCookiecuttershark(JsonElement element)
         {
-            var result = new Cookiecuttershark();
+            Cookiecuttershark result = new Cookiecuttershark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))

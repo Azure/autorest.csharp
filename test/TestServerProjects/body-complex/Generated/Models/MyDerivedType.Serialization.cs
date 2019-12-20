@@ -32,7 +32,7 @@ namespace body_complex.Models.V20160229
         }
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
-            var result = new MyDerivedType();
+            MyDerivedType result = new MyDerivedType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propD1"))

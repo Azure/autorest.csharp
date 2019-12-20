@@ -46,7 +46,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
-            var result = new Siamese();
+            Siamese result = new Siamese();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("breed"))

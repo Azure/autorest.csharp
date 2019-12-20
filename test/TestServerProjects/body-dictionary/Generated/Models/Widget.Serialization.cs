@@ -25,7 +25,7 @@ namespace body_dictionary.Models.V100
         }
         internal static Widget DeserializeWidget(JsonElement element)
         {
-            var result = new Widget();
+            Widget result = new Widget();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("integer"))

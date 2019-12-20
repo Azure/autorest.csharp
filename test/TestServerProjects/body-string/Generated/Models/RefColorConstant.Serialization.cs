@@ -22,7 +22,7 @@ namespace body_string.Models.V100
         }
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
-            var result = new RefColorConstant();
+            RefColorConstant result = new RefColorConstant();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ColorConstant"))

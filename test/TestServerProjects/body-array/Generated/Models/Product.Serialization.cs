@@ -25,7 +25,7 @@ namespace body_array.Models.V100
         }
         internal static Product DeserializeProduct(JsonElement element)
         {
-            var result = new Product();
+            Product result = new Product();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("integer"))

@@ -30,7 +30,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Dog DeserializeDog(JsonElement element)
         {
-            var result = new Dog();
+            Dog result = new Dog();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("food"))
