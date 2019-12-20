@@ -24,6 +24,5 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public bool HasDescendants => Implementations.Any();
-        public bool HasDirectDescendants => Implementations.Any(i => i.IsDirect);
     }
 }

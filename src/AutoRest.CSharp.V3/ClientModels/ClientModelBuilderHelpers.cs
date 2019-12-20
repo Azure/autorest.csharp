@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
@@ -13,6 +14,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(isNullable),
             ByteArraySchema _ => new BinaryTypeReference(isNullable),
             //https://devblogs.microsoft.com/dotnet/do-more-with-patterns-in-c-8-0/
@@ -83,5 +85,25 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
         };
 
+        public static ClientConstant ParseClientConstant(ConstantSchema constant)
+        {
+            return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
+        }
+
+        public static JsonSerialization CreateSerialization(Schema schema, bool isNullable)
+        {
+            switch (schema)
+            {
+                case ConstantSchema constantSchema:
+                    return CreateSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
+                case ArraySchema arraySchema:
+                    return new JsonArraySerialization(CreateType(arraySchema.ElementType, false), CreateSerialization(arraySchema.ElementType, false));
+                case DictionarySchema dictionarySchema:
+                    return new JsonObjectSerialization(Array.Empty<JsonPropertySerialization>(),
+                        new JsonAdditionalPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
+                default:
+                    return new JsonValueSerialization(CreateType(schema, isNullable), JsonValueSerializationKind.Object, GetSerializationFormat(schema));
+            }
+        }
     }
 }

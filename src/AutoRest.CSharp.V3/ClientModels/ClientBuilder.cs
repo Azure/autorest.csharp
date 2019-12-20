@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant.Value.Value, ClientModelBuilderHelpers.CreateType(constant.ValueType, constant.Value.Value == null));
+                        constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
                         valueSchema = constant.ValueType;
                         break;
                     case BinarySchema _:
@@ -91,7 +92,9 @@ namespace AutoRest.CSharp.V3.ClientModels
                             headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName,
+                                ClientModelBuilderHelpers.CreateType(valueSchema, requestParameter.IsNullable()),
+                                BuildFlatSerialization(requestParameter, httpParameter), true));
                             break;
                         case ParameterLocation.Path:
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
@@ -130,7 +133,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
-                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema));
+                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.CreateSerialization(schema, false));
             }
 
             ClientMethodResponse clientResponse = new ClientMethodResponse(
@@ -145,6 +148,32 @@ namespace AutoRest.CSharp.V3.ClientModels
                 methodParameters.ToArray(),
                 clientResponse
             );
+        }
+
+        private static FlatSerialization BuildFlatSerialization(Parameter requestParameter, HttpParameter httpParameter)
+        {
+            FlatSerialization BuildFlatSerializationInner(Schema schema, bool isNullable)
+            {
+                switch (schema)
+                {
+                    case ConstantSchema constantSchema:
+                        return new FlatSerializedValue(
+                            new ConstantBinding(ClientModelBuilderHelpers.ParseClientConstant(constantSchema)),
+                            ClientModelBuilderHelpers.GetSerializationFormat(constantSchema.ValueType));
+                    case ArraySchema arraySchema:
+                        return new FlatSerializedCollection(
+                            BuildFlatSerializationInner(arraySchema.ElementType, false),
+                            new ParentBinding(ClientModelBuilderHelpers.CreateType(arraySchema, isNullable)),
+                            GetSerializationStyle(httpParameter, arraySchema)
+                        );
+                    default:
+                        return new FlatSerializedValue(
+                            new ParentBinding(ClientModelBuilderHelpers.CreateType(schema, isNullable)),
+                            ClientModelBuilderHelpers.GetSerializationFormat(schema));
+                }
+            }
+
+            return BuildFlatSerializationInner(requestParameter.Schema, requestParameter.IsNullable());
         }
 
         private static ResponseHeaderModel? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)

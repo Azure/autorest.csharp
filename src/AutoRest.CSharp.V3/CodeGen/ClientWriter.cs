@@ -8,10 +8,12 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using YamlDotNet.Serialization;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -223,12 +225,29 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
         {
-            if (value.IsConstant) return default;
+            if (value.IsConstant)
+                return default;
 
             var type = _typeFactory.CreateType(value.Type);
             if (type.IsNullable)
             {
                 return writer.If($"{value.Parameter.Name} != null");
+            }
+
+            return default;
+        }
+
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, Binding parent, Binding value)
+        {
+            if (value is ConstantBinding _) return default;
+
+            var type = _typeFactory.CreateType(value.Type);
+            if (type.IsNullable)
+            {
+                writer.Append($"if (");
+                WriteBinding(writer, parent, value, false);
+                writer.Append($" != null)");
+                return writer.Scope();
             }
 
             return default;
@@ -245,43 +264,83 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteQueryParameter(CodeWriter writer, QueryParameter queryParameter)
         {
+            FlatSerialization serialization = queryParameter.Serialization;
+
             string method;
             string? delimiter = null;
-            switch (queryParameter.SerializationStyle)
-            {
-                case QuerySerializationStyle.PipeDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "|";
-                    break;
-                case QuerySerializationStyle.TabDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "\t";
-                    break;
-                case QuerySerializationStyle.SpaceDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = " ";
-                    break;
-                case QuerySerializationStyle.CommaDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = ",";
-                    break;
+            SerializationFormat format;
+            Binding valueBinding;
 
-                default:
-                    method = nameof(UriBuilderExtensions.AppendQuery);
+            switch (serialization)
+            {
+                case FlatSerializedCollection { ValueSerialization: FlatSerializedValue flatValue } collection :
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = collection.SerializationStyle switch
+                    {
+                        QuerySerializationStyle.PipeDelimited => "|",
+                        QuerySerializationStyle.TabDelimited => "\t",
+                        QuerySerializationStyle.SpaceDelimited => " ",
+                        QuerySerializationStyle.CommaDelimited => ",",
+                        _ => null
+                    };
+                    format = flatValue.Format;
+                    valueBinding = collection.ValuesBinding;
                     break;
+                case FlatSerializedValue value:
+                    method = nameof(UriBuilderExtensions.AppendQuery);
+                    format = value.Format;
+                    valueBinding = value.Binding;
+                    break;
+                default:
+                    throw new NotSupportedException();
             }
 
-            ConstantOrParameter value = queryParameter.Value;
-            using (WriteValueNullCheck(writer, value))
+            IdentifierBinding identifierBinding = new IdentifierBinding(queryParameter.Name, queryParameter.Type);
+            using (WriteValueNullCheck(writer, identifierBinding, valueBinding))
             {
                 writer.Append($"request.Uri.{method}({queryParameter.Name:L}, ");
-                WriteConstantOrParameter(writer, value);
+                WriteBinding(writer, identifierBinding, valueBinding, true);
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");
                 }
-                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
+                WriteSerializationFormat(writer, format);
                 writer.Line($", {queryParameter.Escape:L});");
+            }
+        }
+
+        private void WriteBinding(CodeWriter writer, Binding parent, Binding binding, bool getNullableValue)
+        {
+            void WriteBindingInternal(Binding current, bool isParent)
+            {
+                switch (current)
+                {
+                    case ParentBinding _:
+                        if (isParent)
+                        {
+                            throw new InvalidOperationException("Can have parent binding in the parent chain");
+                        }
+                        WriteBindingInternal(parent, true);
+                        break;
+                    case IdentifierBinding identifier:
+                        writer.AppendRaw(identifier.Name);
+                        break;
+                    case MemberBinding member:
+                        WriteBindingInternal(member.Item, isParent);
+                        writer.AppendRaw(member.Member);
+                        break;
+                    case ConstantBinding constantBinding:
+                        WriteConstant(writer, constantBinding.Value);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+
+            WriteBindingInternal(binding, false);
+            if (getNullableValue)
+            {
+                writer.AppendNullableValue(_typeFactory.CreateType(binding.Type));
             }
         }
 
@@ -304,8 +363,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.ToDeserializeCall(
-                            responseBody.Value,
-                            responseBody.Format,
+                            responseBody.Serialization,
                             _typeFactory,
                             w => w.Append($"document.RootElement"),
                             out valueVariable
