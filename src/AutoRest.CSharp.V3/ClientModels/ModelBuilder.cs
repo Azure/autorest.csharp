@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
         {
-            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().SingleOrDefault();
+            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
             if (inheritedDictionarySchema == null)
             {

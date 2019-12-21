@@ -1457,7 +1457,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "D");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1614,7 +1614,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "S");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1771,7 +1771,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "R");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1852,7 +1852,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "P");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;

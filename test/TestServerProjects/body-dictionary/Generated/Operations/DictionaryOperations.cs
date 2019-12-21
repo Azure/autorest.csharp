@@ -1298,7 +1298,7 @@ namespace body_dictionary
                 foreach (var item in arrayBody)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteStringValue(item.Value);
+                    content.JsonWriter.WriteStringValue(item.Value, "D");
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -1456,7 +1456,7 @@ namespace body_dictionary
                 foreach (var item in arrayBody)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteStringValue(item.Value);
+                    content.JsonWriter.WriteStringValue(item.Value, "S");
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -1614,7 +1614,7 @@ namespace body_dictionary
                 foreach (var item in arrayBody)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteStringValue(item.Value);
+                    content.JsonWriter.WriteStringValue(item.Value, "R");
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -1696,7 +1696,7 @@ namespace body_dictionary
                 foreach (var item in arrayBody)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteStringValue(item.Value);
+                    content.JsonWriter.WriteStringValue(item.Value, "P");
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;

@@ -40,8 +40,11 @@ namespace validation.Models.V100
             writer.WriteNumberValue(ConstInt);
             writer.WritePropertyName("constString");
             writer.WriteStringValue(ConstString);
-            writer.WritePropertyName("constStringAsEnum");
-            writer.WriteStringValue(ConstStringAsEnum);
+            if (ConstStringAsEnum != null)
+            {
+                writer.WritePropertyName("constStringAsEnum");
+                writer.WriteStringValue(ConstStringAsEnum);
+            }
             writer.WriteEndObject();
         }
         internal static Product DeserializeProduct(JsonElement element)
