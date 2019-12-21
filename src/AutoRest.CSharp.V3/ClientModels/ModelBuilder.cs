@@ -185,8 +185,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientObjectProperty(property.CSharpName(),
                 type,
                 isReadOnly,
-                property.SerializedName,
-                ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
                 defaultValue);
         }
     }
