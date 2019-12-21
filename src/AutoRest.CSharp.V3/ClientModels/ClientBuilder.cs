@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
-                            body = new RequestBody(constantOrParameterValue, serializationFormat);
+                            body = new RequestBody(constantOrParameterValue, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter.Value;

@@ -119,8 +119,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         ConstantOrParameter value = body.Value;
 
                         writer.ToSerializeCall(
-                            value.Type,
-                            body.Format,
+                            body.Serialization,
                             _typeFactory,
                             w => WriteConstantOrParameter(w, value),
                             writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));

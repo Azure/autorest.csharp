@@ -80,59 +80,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private IEnumerable<ClientObject> WalkInheritance(ClientObject model)
-        {
-            var currentType = model;
-
-            while (currentType != null)
-            {
-                yield return currentType;
-
-                if (currentType.Inherits == null)
-                {
-                    yield break;
-                }
-
-                currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
-            }
-        }
-
         private void WriteSerialize(CodeWriter writer, ClientObject model)
         {
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.Line($"writer.WriteStartObject();");
-
-                DictionaryTypeReference? implementsDictionary = null;
-
-                foreach (ClientObject currentType in WalkInheritance(model))
-                {
-                    foreach (var property in currentType.Properties)
-                    {
-                        using (property.Type.IsNullable ? writer.If($"{property.Name} != null") : default)
-                        {
-                            writer.ToSerializeCall(
-                                property.Type,
-                                property.Format,
-                                _typeFactory,
-                                w => w.Append($"{property.Name}"),
-                                w => w.Literal(property.SerializedName));
-                        }
-
-                        implementsDictionary ??= currentType.ImplementsDictionary;
-                    }
-                }
-
-                if (implementsDictionary != null)
-                {
-                    using (writer.ForEach("var item in this"))
-                    {
-                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append($"item.Value"), w => w.Append($"item.Key"));
-                    }
-                }
-
-                writer.Line($"writer.WriteEndObject();");
+                writer.ToSerializeCall(model.Serialization, _typeFactory, w => w.AppendRaw("this"));
             }
         }
 
