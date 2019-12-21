@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                     return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
                         new JsonDynamicPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
                 default:
-                    return new JsonValueSerialization(CreateType(schema, isNullable), JsonValueSerializationKind.Object, GetSerializationFormat(schema));
+                    return new JsonValueSerialization(CreateType(schema, isNullable), GetSerializationFormat(schema));
             }
         }
     }

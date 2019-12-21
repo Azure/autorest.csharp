@@ -1,24 +1,23 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.CSharp.V3.ClientModels.Serialization;
-
 namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class QueryParameter
     {
-        public QueryParameter(string name, ClientTypeReference type, FlatSerialization serialization, bool escape)
+        public QueryParameter(string name, ConstantOrParameter value, QuerySerializationStyle serializationStyle, bool escape, SerializationFormat serializationFormat)
         {
             Name = name;
-            Type = type;
+            Value = value;
+            SerializationStyle = serializationStyle;
             Escape = escape;
-            Serialization = serialization;
+            SerializationFormat = serializationFormat;
         }
 
         public string Name { get; }
-        public ClientTypeReference Type { get; }
+        public ConstantOrParameter Value { get; }
+        public QuerySerializationStyle SerializationStyle { get; }
+        public SerializationFormat SerializationFormat { get; }
         public bool Escape { get; }
-
-        public FlatSerialization Serialization { get; set; }
     }
 }

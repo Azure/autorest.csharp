@@ -92,9 +92,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                             headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName,
-                                ClientModelBuilderHelpers.CreateType(valueSchema, requestParameter.IsNullable()),
-                                BuildFlatSerialization(requestParameter, httpParameter), true));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
@@ -148,32 +146,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                 methodParameters.ToArray(),
                 clientResponse
             );
-        }
-
-        private static FlatSerialization BuildFlatSerialization(Parameter requestParameter, HttpParameter httpParameter)
-        {
-            FlatSerialization BuildFlatSerializationInner(Schema schema, bool isNullable)
-            {
-                switch (schema)
-                {
-                    case ConstantSchema constantSchema:
-                        return new FlatSerializedValue(
-                            new ConstantBinding(ClientModelBuilderHelpers.ParseClientConstant(constantSchema)),
-                            ClientModelBuilderHelpers.GetSerializationFormat(constantSchema.ValueType));
-                    case ArraySchema arraySchema:
-                        return new FlatSerializedCollection(
-                            BuildFlatSerializationInner(arraySchema.ElementType, false),
-                            new ParentBinding(ClientModelBuilderHelpers.CreateType(arraySchema, isNullable)),
-                            GetSerializationStyle(httpParameter, arraySchema)
-                        );
-                    default:
-                        return new FlatSerializedValue(
-                            new ParentBinding(ClientModelBuilderHelpers.CreateType(schema, isNullable)),
-                            ClientModelBuilderHelpers.GetSerializationFormat(schema));
-                }
-            }
-
-            return BuildFlatSerializationInner(requestParameter.Schema, requestParameter.IsNullable());
         }
 
         private static ResponseHeaderModel? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)

@@ -236,22 +236,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             return default;
         }
 
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, Binding parent, Binding value)
-        {
-            if (value is ConstantBinding _) return default;
-
-            var type = _typeFactory.CreateType(value.Type);
-            if (type.IsNullable)
-            {
-                writer.Append($"if (");
-                WriteBinding(writer, parent, value, false);
-                writer.Append($" != null)");
-                return writer.Scope();
-            }
-
-            return default;
-        }
-
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
             var formatSpecifier = format.ToFormatSpecifier();
@@ -263,83 +247,43 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteQueryParameter(CodeWriter writer, QueryParameter queryParameter)
         {
-            FlatSerialization serialization = queryParameter.Serialization;
-
             string method;
             string? delimiter = null;
-            SerializationFormat format;
-            Binding valueBinding;
-
-            switch (serialization)
+            switch (queryParameter.SerializationStyle)
             {
-                case FlatSerializedCollection { ValueSerialization: FlatSerializedValue flatValue } collection :
+                case QuerySerializationStyle.PipeDelimited:
                     method = nameof(UriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = collection.SerializationStyle switch
-                    {
-                        QuerySerializationStyle.PipeDelimited => "|",
-                        QuerySerializationStyle.TabDelimited => "\t",
-                        QuerySerializationStyle.SpaceDelimited => " ",
-                        QuerySerializationStyle.CommaDelimited => ",",
-                        _ => null
-                    };
-                    format = flatValue.Format;
-                    valueBinding = collection.ValuesBinding;
+                    delimiter = "|";
                     break;
-                case FlatSerializedValue value:
-                    method = nameof(UriBuilderExtensions.AppendQuery);
-                    format = value.Format;
-                    valueBinding = value.Binding;
+                case QuerySerializationStyle.TabDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = "\t";
                     break;
+                case QuerySerializationStyle.SpaceDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = " ";
+                    break;
+                case QuerySerializationStyle.CommaDelimited:
+                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    delimiter = ",";
+                    break;
+
                 default:
-                    throw new NotSupportedException();
+                    method = nameof(UriBuilderExtensions.AppendQuery);
+                    break;
             }
 
-            IdentifierBinding identifierBinding = new IdentifierBinding(queryParameter.Name, queryParameter.Type);
-            using (WriteValueNullCheck(writer, identifierBinding, valueBinding))
+            ConstantOrParameter value = queryParameter.Value;
+            using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"request.Uri.{method}({queryParameter.Name:L}, ");
-                WriteBinding(writer, identifierBinding, valueBinding, true);
+                WriteConstantOrParameter(writer, value);
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");
                 }
-                WriteSerializationFormat(writer, format);
+                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
                 writer.Line($", {queryParameter.Escape:L});");
-            }
-        }
-
-        private void WriteBinding(CodeWriter writer, Binding parent, Binding binding, bool getNullableValue)
-        {
-            void WriteBindingInternal(Binding current, bool isParent)
-            {
-                switch (current)
-                {
-                    case ParentBinding _:
-                        if (isParent)
-                        {
-                            throw new InvalidOperationException("Can have parent binding in the parent chain");
-                        }
-                        WriteBindingInternal(parent, true);
-                        break;
-                    case IdentifierBinding identifier:
-                        writer.AppendRaw(identifier.Name);
-                        break;
-                    case MemberBinding member:
-                        WriteBindingInternal(member.Item, isParent);
-                        writer.AppendRaw(member.Member);
-                        break;
-                    case ConstantBinding constantBinding:
-                        WriteConstant(writer, constantBinding.Value);
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-
-            WriteBindingInternal(binding, false);
-            if (getNullableValue)
-            {
-                writer.AppendNullableValue(_typeFactory.CreateType(binding.Type));
             }
         }
 
