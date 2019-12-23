@@ -9,8 +9,7 @@
   },
   "devDependencies": {
     "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6146/autorest-autorest-3.0.6146.tgz",
-    "@autorest/test-server": "3.0.27",
-    "@microsoft.azure/autorest.testserver": "^2.7.2"
+    "@microsoft.azure/autorest.testserver": "^2.9.1"
   },
   "dependencies": {}
 }
