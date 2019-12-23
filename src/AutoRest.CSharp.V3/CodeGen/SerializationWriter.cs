@@ -2,13 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Plugins;
-using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.CodeGen

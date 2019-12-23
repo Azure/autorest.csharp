@@ -477,6 +477,7 @@ namespace AutoRest.TestServer.Tests
             }, host));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await ArrayOperations.PutDateTimeValidAsync(ClientDiagnostics, pipeline,
             new[] {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
