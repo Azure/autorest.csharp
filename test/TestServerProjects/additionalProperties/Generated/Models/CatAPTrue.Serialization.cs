@@ -37,7 +37,7 @@ namespace additionalProperties.Models.V100
         }
         internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
         {
-            var result = new CatAPTrue();
+            CatAPTrue result = new CatAPTrue();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friendly"))

@@ -8,10 +8,12 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using YamlDotNet.Serialization;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -117,8 +119,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         ConstantOrParameter value = body.Value;
 
                         writer.ToSerializeCall(
-                            value.Type,
-                            body.Format,
+                            body.Serialization,
                             _typeFactory,
                             w => WriteConstantOrParameter(w, value),
                             writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
@@ -223,7 +224,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
         {
-            if (value.IsConstant) return default;
+            if (value.IsConstant)
+                return default;
 
             var type = _typeFactory.CreateType(value.Type);
             if (type.IsNullable)
@@ -298,17 +300,16 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (responseBody != null ? writer.Scope() : default)
                 {
-                    string? valueVariable = null;
+                    string valueVariable = "value";
 
                     if (responseBody != null)
                     {
                         writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.ToDeserializeCall(
-                            responseBody.Value,
-                            responseBody.Format,
+                            responseBody.Serialization,
                             _typeFactory,
                             w => w.Append($"document.RootElement"),
-                            out valueVariable
+                            ref valueVariable
                         );
                     }
 

@@ -2,137 +2,158 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
     internal static class JsonSerializerExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? serializedName = null, CodeWriterDelegate? writerName = null)
+        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
         {
             writerName ??= w => w.AppendRaw("writer");
 
-            if (serializedName != null)
-            {
-                writer.Line($"{writerName}.WritePropertyName({serializedName});");
-            }
-
+            var type = serialization.Type;
             CSharpType implementationType = typeFactory.CreateType(type);
 
-            switch (type)
+            switch (serialization)
             {
-                case CollectionTypeReference array:
+                case JsonArraySerialization array:
                     writer.Line($"{writerName}.WriteStartArray();");
                     string collectionItemVariable = writer.GetTemporaryVariable("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {name})");
                     using (writer.Scope())
                     {
                         writer.ToSerializeCall(
-                            array.ItemType,
-                            format,
+                            array.ValueSerialization,
                             typeFactory,
                             w => w.AppendRaw(collectionItemVariable),
-                            serializedName: null,
                             writerName);
                     }
 
                     writer.Line($"{writerName}.WriteEndArray();");
                     return;
 
-                case DictionaryTypeReference dictionary:
+                case JsonObjectSerialization dictionary:
                     writer.Line($"{writerName}.WriteStartObject();");
                     string itemVariable = writer.GetTemporaryVariable("item");
-                    writer.Line($"foreach (var {itemVariable:D} in {name})");
-                    using (writer.Scope())
+
+                    foreach (JsonPropertySerialization property in dictionary.Properties)
                     {
-                        writer.ToSerializeCall(
-                            dictionary.ValueType,
-                            format,
-                            typeFactory,
-                            w => w.Append($"{itemVariable}.Value"),
-                            w => w.Append($"{itemVariable}.Key"),
-                            writerName);
+                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        {
+                            writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
+                            writer.ToSerializeCall(
+                                property.ValueSerialization,
+                                typeFactory,
+                                w => w.Append($"{property.MemberName}"));
+                        }
+                    }
+
+                    if (dictionary.AdditionalProperties != null)
+                    {
+                        writer.Line($"foreach (var {itemVariable:D} in {name})");
+                        using (writer.Scope())
+                        {
+                            writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
+                            writer.ToSerializeCall(
+                                dictionary.AdditionalProperties.ValueSerialization,
+                                typeFactory,
+                                w => w.Append($"{itemVariable}.Value"),
+                                writerName);
+                        }
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
                     return;
 
-                case SchemaTypeReference schemaTypeReference:
-                    switch (typeFactory.ResolveReference(schemaTypeReference))
+                case JsonValueSerialization valueSerialization:
+                    switch (valueSerialization.Type)
                     {
-                        case ClientObject _:
-                            writer.Line($"{writerName}.WriteObjectValue({name});");
+                        case SchemaTypeReference schemaTypeReference:
+                            switch (typeFactory.ResolveReference(schemaTypeReference))
+                            {
+                                case ClientObject _:
+                                    writer.Line($"{writerName}.WriteObjectValue({name});");
+                                    return;
+
+                                case ClientEnum clientEnum:
+                                    writer.Append($"{writerName}.WriteStringValue({name}")
+                                        .AppendNullableValue(implementationType)
+                                        .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                                        .Line($");");
+                                    return;
+                            }
                             return;
 
-                        case ClientEnum clientEnum:
-                            writer.Append($"{writerName}.WriteStringValue({name}")
-                                .AppendNullableValue(implementationType)
-                                .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
-                                .Line($");");
+                        case BinaryTypeReference _:
+                            writer.Line($"{writerName}.WriteBase64StringValue({name});");
                             return;
-                    }
-                    return;
 
-                case BinaryTypeReference _:
-                    writer.Line($"{writerName}.WriteBase64StringValue({name});");
-                    return;
+                        case FrameworkTypeReference frameworkTypeReference:
+                            var frameworkType = frameworkTypeReference.Type;
+                            bool writeFormat = false;
 
-                case FrameworkTypeReference frameworkTypeReference:
-                    var frameworkType = frameworkTypeReference.Type;
-                    bool writeFormat = false;
+                            writer.Append($"{writerName}.");
+                            if (frameworkType == typeof(decimal) ||
+                                frameworkType == typeof(double) ||
+                                frameworkType == typeof(float) ||
+                                frameworkType == typeof(long) ||
+                                frameworkType == typeof(int) ||
+                                frameworkType == typeof(short))
+                            {
+                                writer.AppendRaw("WriteNumberValue");
+                            }
+                            else if (frameworkType == typeof(object))
+                            {
+                                writer.AppendRaw("WriteObjectValue");
+                            }
+                            else if (frameworkType == typeof(string) ||
+                                     frameworkType == typeof(char))
+                            {
+                                writer.AppendRaw("WriteStringValue");
+                            }
+                            else if (frameworkType == typeof(bool))
+                            {
+                                writer.AppendRaw("WriteBooleanValue");
+                            }
+                            else if (frameworkType == typeof(DateTimeOffset) ||
+                                     frameworkType == typeof(DateTime) ||
+                                     frameworkType == typeof(TimeSpan))
+                            {
+                                writer.AppendRaw("WriteStringValue");
+                                writeFormat = true;
+                            }
 
-                    writer.Append($"{writerName}.");
-                    if (frameworkType == typeof(decimal) ||
-                        frameworkType == typeof(double) ||
-                        frameworkType == typeof(float) ||
-                        frameworkType == typeof(long) ||
-                        frameworkType == typeof(int) ||
-                        frameworkType == typeof(short))
-                    {
-                        writer.AppendRaw("WriteNumberValue");
-                    }
-                    else if (frameworkType == typeof(object))
-                    {
-                        writer.AppendRaw("WriteObjectValue");
-                    }
-                    else if (frameworkType == typeof(string) ||
-                             frameworkType == typeof(char))
-                    {
-                        writer.AppendRaw("WriteStringValue");
-                    }
-                    else if (frameworkType == typeof(bool))
-                    {
-                        writer.AppendRaw("WriteBooleanValue");
-                    }
-                    else if (frameworkType == typeof(DateTimeOffset) ||
-                             frameworkType == typeof(DateTime) ||
-                             frameworkType == typeof(TimeSpan))
-                    {
-                        writer.AppendRaw("WriteStringValue");
-                        writeFormat = true;
-                    }
+                            writer.Append($"({name}")
+                                .AppendNullableValue(implementationType);
 
-                    writer.Append($"({name}")
-                        .AppendNullableValue(implementationType);
+                            if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
+                            {
+                                writer.Append($", {formatString:L}");
+                            }
 
-                    if (writeFormat && format.ToFormatSpecifier() is string formatString)
-                    {
-                        writer.Append($", {formatString:L}");
+                            writer.LineRaw(");");
+                            return;
+                        default:
+                            throw new NotSupportedException();
                     }
-
-                    writer.LineRaw(");");
-                    return;
+                default:
+                    throw new NotSupportedException();
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate element, out string destination)
+        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination)
         {
-            destination = writer.GetTemporaryVariable("value");
+            var type = serialization.Type;
 
-            if (CanDeserializeAsExpression(type))
+            destination = writer.GetTemporaryVariable(destination);
+
+            if (serialization is JsonValueSerialization valueSerialization)
             {
                 writer.Append($"var {destination:D} =")
-                    .ToDeserializeCall(type, format, typeFactory, element);
+                    .ToDeserializeCall(valueSerialization, typeFactory, element);
                 writer.LineRaw(";");
             }
             else
@@ -141,105 +162,131 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 writer
                     .Line($"{typeFactory.CreateType(type)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
-                    .ToDeserializeCall(type, format, typeFactory, w=>w.AppendRaw(s), element);
+                    .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
             }
         }
 
-        private static bool CanDeserializeAsExpression(ClientTypeReference type)
+        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
         {
-            return !(type is CollectionTypeReference || type is DictionaryTypeReference);
-        }
-
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
-        {
-            switch (type)
+            switch (serialization)
             {
-                case CollectionTypeReference array:
+                case JsonArraySerialization array:
                     string collectionItemVariable = writer.GetTemporaryVariable("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
                     using (writer.Scope())
                     {
-                        if (CanDeserializeAsExpression(array.ItemType))
+                        if (array.ValueSerialization is JsonValueSerialization valueSerialization)
                         {
                             writer.Append($"{destination}.Add(");
                             writer.ToDeserializeCall(
-                                array.ItemType,
-                                format,
+                                valueSerialization,
                                 typeFactory,
                                 w => w.AppendRaw(collectionItemVariable));
                             writer.Line($");");
                         }
                         else
                         {
+                            var itemVariableName = "value";
                             writer.ToDeserializeCall(
-                                array.ItemType,
-                                format,
+                                array.ValueSerialization,
                                 typeFactory,
                                 w => w.AppendRaw(collectionItemVariable),
-                                out var temp);
+                                ref itemVariableName);
 
-                            writer.Append($"{destination}.Add({temp});");
+                            writer.Append($"{destination}.Add({itemVariableName});");
                         }
                     }
 
                     return;
-                case DictionaryTypeReference dictionary:
-                    string itemVariable = writer.GetTemporaryVariable("item");
+                case JsonObjectSerialization dictionary:
+                    string itemVariable = writer.GetTemporaryVariable("property");
                     writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
                     using (writer.Scope())
                     {
-                        if (CanDeserializeAsExpression(dictionary.ValueType))
+                        foreach (JsonPropertySerialization property in dictionary.Properties)
                         {
-                            writer.Append($"{destination}.Add({itemVariable}.Name, ");
-                            writer.ToDeserializeCall(
-                                dictionary.ValueType,
-                                format,
-                                typeFactory,
-                                w => w.Append($"{itemVariable}.Value"));
-                            writer.Line($");");
+                            ReadProperty(writer, itemVariable, destination, property, typeFactory);
                         }
-                        else
-                        {
-                            writer.ToDeserializeCall(
-                                dictionary.ValueType,
-                                format,
-                                typeFactory,
-                                w => w.Append($"{itemVariable}.Value"),
-                                out var temp);
 
-                            writer.Append($"{destination}.Add({itemVariable}.Name, {temp});");
+                        if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
+                        {
+
+                            if (additionalProperties.ValueSerialization is JsonValueSerialization valueSerialization)
+                            {
+                                writer.Append($"{destination}.Add({itemVariable}.Name, ");
+                                writer.ToDeserializeCall(
+                                    valueSerialization,
+                                    typeFactory,
+                                    w => w.Append($"{itemVariable}.Value"));
+                                writer.Line($");");
+                            }
+                            else
+                            {
+                                var itemVariableName = "value";
+                                writer.ToDeserializeCall(
+                                    additionalProperties.ValueSerialization,
+                                    typeFactory,
+                                    w => w.Append($"{itemVariable}.Value"),
+                                    ref itemVariableName);
+
+                                writer.Append($"{destination}.Add({itemVariable}.Name, {itemVariableName});");
+                            }
                         }
                     }
-
                     return;
             }
 
             writer.Append($"{destination} = ");
-            ToDeserializeCall(writer, type, format, typeFactory, element);
+            ToDeserializeCall(writer, (JsonValueSerialization)serialization, typeFactory, element);
             writer.Line($";");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, ClientTypeReference type, SerializationFormat format, TypeFactory typeFactory, CodeWriterDelegate element)
+        private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property, TypeFactory typeFactory)
         {
-            CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
+            var type = property.Type;
+            var name = property.MemberName;
 
-            switch (type)
+            CSharpType propertyType = typeFactory.CreateType(type);
+
+            void WriteNullCheck()
+            {
+                using (writer.If($"{itemVariable}.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
+                {
+                    writer.Append($"continue;");
+                }
+            }
+
+            void WriteInitialization()
+            {
+                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
+                {
+                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.Type))}();");
+                }
+            }
+
+
+            writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
+            using (writer.Scope())
+            {
+                if (propertyType.IsNullable)
+                {
+                    WriteNullCheck();
+                }
+
+                WriteInitialization();
+
+                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, w => w.Append($"{destination}.{name}"), w => w.Append($"{itemVariable}.Value"));
+                writer.Line($"continue;");
+            }
+
+        }
+
+        public static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
+        {
+            switch (serialization.Type)
             {
                 case SchemaTypeReference schemaTypeReference:
-                    switch (typeFactory.ResolveReference(schemaTypeReference))
-                    {
-                        case ClientObject _:
-                            writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
-                            break;
-
-                        case ClientEnum clientEnum when clientEnum.IsStringBased:
-                            writer.Append($"new {cSharpType}({element}.GetString())");
-                            break;
-
-                        case ClientEnum clientEnum when !clientEnum.IsStringBased:
-                            writer.Append($"{element}.GetString().To{cSharpType}()");
-                            break;
-                    }
+                    writer.ToDeserializeCall(schemaTypeReference, typeFactory, element);
                     return;
 
                 case BinaryTypeReference _:
@@ -285,13 +332,33 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.AppendRaw("(");
 
-                    if (includeFormat && format.ToFormatSpecifier() is string formatString)
+                    if (includeFormat && serialization.Format.ToFormatSpecifier() is string formatString)
                     {
                         writer.Literal(formatString);
                     }
 
                     writer.AppendRaw(")");
                     return;
+            }
+        }
+
+        public static void ToDeserializeCall(this CodeWriter writer, SchemaTypeReference type, TypeFactory typeFactory, CodeWriterDelegate element)
+        {
+            CSharpType cSharpType = typeFactory.CreateType(type).WithNullable(false);
+
+            switch (typeFactory.ResolveReference(type))
+            {
+                case ClientObject _:
+                    writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
+                    break;
+
+                case ClientEnum clientEnum when clientEnum.IsStringBased:
+                    writer.Append($"new {cSharpType}({element}.GetString())");
+                    break;
+
+                case ClientEnum clientEnum when !clientEnum.IsStringBased:
+                    writer.Append($"{element}.GetString().To{cSharpType}()");
+                    break;
             }
         }
 

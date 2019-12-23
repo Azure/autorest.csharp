@@ -30,7 +30,7 @@ namespace body_complex.Models.V20160229
         }
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
-            var result = new StringWrapper();
+            StringWrapper result = new StringWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))

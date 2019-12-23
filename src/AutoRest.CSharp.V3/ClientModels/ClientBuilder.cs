@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 switch (requestParameter.Schema)
                 {
                     case ConstantSchema constant:
-                        constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant.Value.Value, ClientModelBuilderHelpers.CreateType(constant.ValueType, constant.Value.Value == null));
+                        constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
                         valueSchema = constant.ValueType;
                         break;
                     case BinarySchema _:
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
                             break;
                         case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
-                            body = new RequestBody(constantOrParameterValue, serializationFormat);
+                            body = new RequestBody(constantOrParameterValue, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter.Value;
@@ -130,7 +131,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
-                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.GetSerializationFormat(schema));
+                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.CreateSerialization(schema, false));
             }
 
             ClientMethodResponse clientResponse = new ClientMethodResponse(

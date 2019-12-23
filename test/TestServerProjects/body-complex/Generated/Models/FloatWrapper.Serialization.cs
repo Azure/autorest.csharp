@@ -25,7 +25,7 @@ namespace body_complex.Models.V20160229
         }
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element)
         {
-            var result = new FloatWrapper();
+            FloatWrapper result = new FloatWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))

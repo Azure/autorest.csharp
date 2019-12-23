@@ -9,10 +9,10 @@ namespace Azure.Core
 {
     internal static class Utf8JsonWriterExtensions
     {
-        public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format = "S") =>
+        public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
 
-        public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format = "P") =>
+        public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
 
         public static void WriteObjectValue(this Utf8JsonWriter writer, IUtf8JsonSerializable value)

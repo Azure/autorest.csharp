@@ -52,7 +52,7 @@ namespace body_complex.Models.V20160229
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            var result = new Salmon();
+            Salmon result = new Salmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))

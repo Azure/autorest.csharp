@@ -26,7 +26,7 @@ namespace body_complex.Models.V20160229
         }
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
-            var result = new ArrayWrapper();
+            ArrayWrapper result = new ArrayWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("array"))

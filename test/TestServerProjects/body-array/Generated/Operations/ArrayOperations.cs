@@ -1419,7 +1419,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1457,7 +1457,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "D");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1500,7 +1500,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1538,7 +1538,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("D"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1576,7 +1576,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1614,7 +1614,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "S");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1657,7 +1657,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1695,7 +1695,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("S"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1733,7 +1733,7 @@ namespace body_array
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetDateTimeOffset());
+                                value.Add(item.GetDateTimeOffset("R"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1771,7 +1771,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "R");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -1814,7 +1814,7 @@ namespace body_array
                             ICollection<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetTimeSpan());
+                                value.Add(item.GetTimeSpan("P"));
                             }
                             return Response.FromValue(value, response);
                         }
@@ -1852,7 +1852,7 @@ namespace body_array
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WriteStringValue(item, "P");
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -2549,9 +2549,9 @@ namespace body_array
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
-                                foreach (var item0 in item.EnumerateObject())
+                                foreach (var property in item.EnumerateObject())
                                 {
-                                    value0.Add(item0.Name, item0.Value.GetString());
+                                    value0.Add(property.Name, property.Value.GetString());
                                 }
                                 value.Add(value0);
                             }
@@ -2592,9 +2592,9 @@ namespace body_array
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
-                                foreach (var item0 in item.EnumerateObject())
+                                foreach (var property in item.EnumerateObject())
                                 {
-                                    value0.Add(item0.Name, item0.Value.GetString());
+                                    value0.Add(property.Name, property.Value.GetString());
                                 }
                                 value.Add(value0);
                             }
@@ -2635,9 +2635,9 @@ namespace body_array
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
-                                foreach (var item0 in item.EnumerateObject())
+                                foreach (var property in item.EnumerateObject())
                                 {
-                                    value0.Add(item0.Name, item0.Value.GetString());
+                                    value0.Add(property.Name, property.Value.GetString());
                                 }
                                 value.Add(value0);
                             }
@@ -2678,9 +2678,9 @@ namespace body_array
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
-                                foreach (var item0 in item.EnumerateObject())
+                                foreach (var property in item.EnumerateObject())
                                 {
-                                    value0.Add(item0.Name, item0.Value.GetString());
+                                    value0.Add(property.Name, property.Value.GetString());
                                 }
                                 value.Add(value0);
                             }
@@ -2721,9 +2721,9 @@ namespace body_array
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
-                                foreach (var item0 in item.EnumerateObject())
+                                foreach (var property in item.EnumerateObject())
                                 {
-                                    value0.Add(item0.Name, item0.Value.GetString());
+                                    value0.Add(property.Name, property.Value.GetString());
                                 }
                                 value.Add(value0);
                             }

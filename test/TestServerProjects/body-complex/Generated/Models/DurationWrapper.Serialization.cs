@@ -20,7 +20,7 @@ namespace body_complex.Models.V20160229
         }
         internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
-            var result = new DurationWrapper();
+            DurationWrapper result = new DurationWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))

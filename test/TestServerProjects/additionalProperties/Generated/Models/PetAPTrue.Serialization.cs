@@ -32,7 +32,7 @@ namespace additionalProperties.Models.V100
         }
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element)
         {
-            var result = new PetAPTrue();
+            PetAPTrue result = new PetAPTrue();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

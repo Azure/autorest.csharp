@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Plugins;
-using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.CodeGen
@@ -32,40 +30,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteSealedChoiceSerialization(writer, sealedChoiceSchema);
                     break;
             }
-        }
-
-        private void ReadProperty(CodeWriter writer, ClientObjectProperty property)
-        {
-            var type = property.Type;
-            var name = property.Name;
-            var format = property.Format;
-
-            CSharpType propertyType = _typeFactory.CreateType(type);
-
-            void WriteNullCheck()
-            {
-                using (writer.If($"property.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
-                {
-                    writer.Append($"continue;");
-                }
-            }
-
-            void WriteInitialization()
-            {
-                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
-                {
-                    writer.Line($"result.{name} = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();");
-                }
-            }
-
-            if (propertyType.IsNullable)
-            {
-                WriteNullCheck();
-            }
-
-            WriteInitialization();
-
-            writer.ToDeserializeCall(type, format, _typeFactory, w=> w.Append($"result.{name}"), w => w.Append($"property.Value"));
         }
 
 
@@ -100,59 +64,16 @@ namespace AutoRest.CSharp.V3.CodeGen
                             {
                                 writer
                                     .Append($"case {implementation.Key:L}: return ")
-                                    .ToDeserializeCall(implementation.Type, SerializationFormat.Default, _typeFactory, w => w.Append($"element"));
+                                    .ToDeserializeCall(implementation.Type, _typeFactory, w => w.Append($"element"));
                                 writer.Line($";");
                             }
                         }
                     }
                 }
 
-                writer.Line($"var result = new {typeText}();");
-                using (writer.ForEach("var property in element.EnumerateObject()"))
-                {
-                    DictionaryTypeReference? implementsDictionary = null;
-
-                    foreach (ClientObject currentType in WalkInheritance(model))
-                    {
-                        foreach (var property in currentType.Properties)
-                        {
-                            using (writer.If($"property.NameEquals(\"{property.SerializedName}\")"))
-                            {
-                                ReadProperty(writer, property);
-                                writer.Line($"continue;");
-                            }
-                        }
-
-                        implementsDictionary ??= currentType.ImplementsDictionary;
-                    }
-
-                    if (implementsDictionary != null)
-                    {
-                        writer.Append($"result.Add(property.Name, ");
-                        writer.ToDeserializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append($"property.Value"));
-                        writer.Line($");");
-                    }
-                }
-
-
-                writer.Line($"return result;");
-            }
-        }
-
-        private IEnumerable<ClientObject> WalkInheritance(ClientObject model)
-        {
-            var currentType = model;
-
-            while (currentType != null)
-            {
-                yield return currentType;
-
-                if (currentType.Inherits == null)
-                {
-                    yield break;
-                }
-
-                currentType = (ClientObject)_typeFactory.ResolveReference(currentType.Inherits);
+                var resultVariable = "result";
+                writer.ToDeserializeCall(model.Serialization, _typeFactory, w=>w.AppendRaw("element"), ref resultVariable);
+                writer.Line($"return {resultVariable};");
             }
         }
 
@@ -161,37 +82,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.Line($"writer.WriteStartObject();");
-
-                DictionaryTypeReference? implementsDictionary = null;
-
-                foreach (ClientObject currentType in WalkInheritance(model))
-                {
-                    foreach (var property in currentType.Properties)
-                    {
-                        using (property.Type.IsNullable ? writer.If($"{property.Name} != null") : default)
-                        {
-                            writer.ToSerializeCall(
-                                property.Type,
-                                property.Format,
-                                _typeFactory,
-                                w => w.Append($"{property.Name}"),
-                                w => w.Literal(property.SerializedName));
-                        }
-
-                        implementsDictionary ??= currentType.ImplementsDictionary;
-                    }
-                }
-
-                if (implementsDictionary != null)
-                {
-                    using (writer.ForEach("var item in this"))
-                    {
-                        writer.ToSerializeCall(implementsDictionary.ValueType, SerializationFormat.Default, _typeFactory, w => w.Append($"item.Value"), w => w.Append($"item.Key"));
-                    }
-                }
-
-                writer.Line($"writer.WriteEndObject();");
+                writer.ToSerializeCall(model.Serialization, _typeFactory, w => w.AppendRaw("this"));
             }
         }
 

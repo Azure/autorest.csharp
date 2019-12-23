@@ -32,7 +32,7 @@ namespace additionalProperties.Models.V100
         }
         internal static PetAPString DeserializePetAPString(JsonElement element)
         {
-            var result = new PetAPString();
+            PetAPString result = new PetAPString();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

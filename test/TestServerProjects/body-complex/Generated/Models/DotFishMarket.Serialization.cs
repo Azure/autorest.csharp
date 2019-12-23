@@ -46,7 +46,7 @@ namespace body_complex.Models.V20160229
         }
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
-            var result = new DotFishMarket();
+            DotFishMarket result = new DotFishMarket();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sampleSalmon"))

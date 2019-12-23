@@ -20,7 +20,7 @@ namespace body_complex.Models.V20160229
         }
         internal static MyBaseHelperType DeserializeMyBaseHelperType(JsonElement element)
         {
-            var result = new MyBaseHelperType();
+            MyBaseHelperType result = new MyBaseHelperType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propBH1"))

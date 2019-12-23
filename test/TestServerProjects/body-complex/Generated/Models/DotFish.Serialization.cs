@@ -29,7 +29,7 @@ namespace body_complex.Models.V20160229
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            var result = new DotFish();
+            DotFish result = new DotFish();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fish.type"))

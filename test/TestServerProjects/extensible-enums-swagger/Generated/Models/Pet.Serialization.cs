@@ -27,7 +27,7 @@ namespace extensible_enums_swagger.Models.V20160707
         }
         internal static Pet DeserializePet(JsonElement element)
         {
-            var result = new Pet();
+            Pet result = new Pet();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

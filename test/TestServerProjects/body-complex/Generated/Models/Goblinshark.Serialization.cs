@@ -52,7 +52,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Goblinshark DeserializeGoblinshark(JsonElement element)
         {
-            var result = new Goblinshark();
+            Goblinshark result = new Goblinshark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jawsize"))

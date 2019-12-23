@@ -51,7 +51,7 @@ namespace body_complex.Models.V20160229
                     case "sawshark": return Sawshark.DeserializeSawshark(element);
                 }
             }
-            var result = new Shark();
+            Shark result = new Shark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))

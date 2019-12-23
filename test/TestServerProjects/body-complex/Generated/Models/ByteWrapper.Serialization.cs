@@ -20,7 +20,7 @@ namespace body_complex.Models.V20160229
         }
         internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
-            var result = new ByteWrapper();
+            ByteWrapper result = new ByteWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))

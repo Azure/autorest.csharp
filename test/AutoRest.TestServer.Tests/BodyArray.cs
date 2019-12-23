@@ -170,17 +170,27 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task GetArrayDateTimeRfc1123Valid() => Test(async (host, pipeline) =>
         {
             var result = await ArrayOperations.GetDateTimeRfc1123ValidAsync(ClientDiagnostics, pipeline, host);
+            CollectionAssert.AreEqual(new[]
+            {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, result.Value);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task GetArrayDateTimeValid() => Test(async (host, pipeline) =>
         {
             var result = await ArrayOperations.GetDateTimeValidAsync(ClientDiagnostics, pipeline, host);
+            CollectionAssert.AreEqual(new[]
+            {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, result.Value);
         });
 
         [Test]
@@ -459,22 +469,28 @@ namespace AutoRest.TestServer.Tests
             new[] { new Product() { Integer = 1, String = "2" }, new Product() { Integer = 3, String = "4" }, new Product() { Integer = 5, String = "6" }}, host));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task PutArrayDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await ArrayOperations.PutDateTimeRfc1123ValidAsync(ClientDiagnostics, pipeline,
-            new DateTimeOffset[] { }, host));
+            new[] {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, host));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
-        public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await ArrayOperations.PutDateValidAsync(ClientDiagnostics, pipeline,
-            new DateTimeOffset[] { }, host));
+        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
+        public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await ArrayOperations.PutDateTimeValidAsync(ClientDiagnostics, pipeline,
+            new[] {
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
+            }, host));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/368")]
         public Task PutArrayDateValid() => TestStatus(async (host, pipeline) => await ArrayOperations.PutDateValidAsync(ClientDiagnostics, pipeline,
             new[] {
-                DateTimeOffset.Parse("2000-12-01"),
-                DateTimeOffset.Parse("1980-01-02"),
-                DateTimeOffset.Parse("1492-10-12")
+                DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
+                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
             }, host));
 
         [Test]

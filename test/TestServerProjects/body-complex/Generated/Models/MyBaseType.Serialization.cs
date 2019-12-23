@@ -34,7 +34,7 @@ namespace body_complex.Models.V20160229
                     case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            var result = new MyBaseType();
+            MyBaseType result = new MyBaseType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))

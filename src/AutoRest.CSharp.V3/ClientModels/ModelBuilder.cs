@@ -2,11 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
+using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
@@ -26,7 +29,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientModel BuildClientObject(ObjectSchema objectSchema)
         {
             ClientTypeReference? inheritsFromTypeReference = null;
-            DictionaryTypeReference? dictionaryElementTypeReference = null;
+            DictionarySchema? inheritedDictionarySchema = null;
 
             foreach (ComplexSchema complexSchema in objectSchema.Parents!.Immediate)
             {
@@ -36,21 +39,26 @@ namespace AutoRest.CSharp.V3.ClientModels
                         inheritsFromTypeReference = ClientModelBuilderHelpers.CreateType(parentObjectSchema, false);
                         break;
                     case DictionarySchema dictionarySchema:
-                        var dictionaryElementType = dictionarySchema.ElementType;
-                        dictionaryElementTypeReference = new DictionaryTypeReference(
-                            new FrameworkTypeReference(typeof(string)),
-                            ClientModelBuilderHelpers.CreateType(dictionaryElementType, false),
-                            false);
-
+                        inheritedDictionarySchema = dictionarySchema;
                         break;
                 }
             }
 
             List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
+            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
 
             foreach (Property property in objectSchema.Properties!)
             {
-                properties.Add(CreateProperty(property));
+                ClientObjectProperty clientObjectProperty = CreateProperty(property);
+                properties.Add(clientObjectProperty);
+            }
+
+            foreach (var schema in EnumerateHierarchy(objectSchema))
+            {
+                foreach (Property property in schema.Properties!)
+                {
+                    serializationProperties.Add(CreateSerialization(property));
+                }
             }
 
             Discriminator? schemaDiscriminator = objectSchema.Discriminator;
@@ -79,13 +87,60 @@ namespace AutoRest.CSharp.V3.ClientModels
                     );
             }
 
+            var schemaTypeReference = ClientModelBuilderHelpers.CreateType(objectSchema, false);
+
             return new ClientObject(
                 objectSchema,
                 objectSchema.CSharpName(),
                 (SchemaTypeReference?) inheritsFromTypeReference,
                 properties.ToArray(),
                 discriminator,
-                dictionaryElementTypeReference
+                inheritedDictionarySchema == null ? null : CreateDictionaryType(inheritedDictionarySchema),
+                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema))
+                );
+        }
+
+        private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
+        {
+            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
+
+            if (inheritedDictionarySchema == null)
+            {
+                return null;
+            }
+
+            return new JsonDynamicPropertiesSerialization(
+                ClientModelBuilderHelpers.CreateSerialization(inheritedDictionarySchema.ElementType, false)
+                );
+        }
+
+        private static DictionaryTypeReference CreateDictionaryType(DictionarySchema inheritedDictionarySchema)
+        {
+            return new DictionaryTypeReference(
+                new FrameworkTypeReference(typeof(string)),
+                ClientModelBuilderHelpers.CreateType(inheritedDictionarySchema.ElementType, false),
+                false);
+        }
+
+        private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)
+        {
+            yield return schema;
+            foreach (ComplexSchema parent in schema.Parents!.All)
+            {
+                if (parent is ObjectSchema objectSchema)
+                {
+                    yield return objectSchema;
+                }
+            }
+        }
+
+        private static JsonPropertySerialization CreateSerialization(Property property)
+        {
+            return new JsonPropertySerialization(
+                property.SerializedName,
+                property.CSharpName(),
+                ClientModelBuilderHelpers.CreateSerialization(property.Schema, property.IsNullable()),
+                ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable())
                 );
         }
 
@@ -130,8 +185,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientObjectProperty(property.CSharpName(),
                 type,
                 isReadOnly,
-                property.SerializedName,
-                ClientModelBuilderHelpers.GetSerializationFormat(property.Schema),
                 defaultValue);
         }
     }

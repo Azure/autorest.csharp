@@ -39,7 +39,7 @@ namespace additionalProperties.Models.V100
         }
         internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
         {
-            var result = new PetAPInProperties();
+            PetAPInProperties result = new PetAPInProperties();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -72,9 +72,9 @@ namespace additionalProperties.Models.V100
                         continue;
                     }
                     result.AdditionalProperties = new Dictionary<string, float>();
-                    foreach (var item in property.Value.EnumerateObject())
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.AdditionalProperties.Add(item.Name, item.Value.GetSingle());
+                        result.AdditionalProperties.Add(property0.Name, property0.Value.GetSingle());
                     }
                     continue;
                 }

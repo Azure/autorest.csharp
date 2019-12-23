@@ -47,7 +47,7 @@ namespace body_complex.Models.V20160229
         }
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
-            var result = new Sawshark();
+            Sawshark result = new Sawshark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("picture"))
