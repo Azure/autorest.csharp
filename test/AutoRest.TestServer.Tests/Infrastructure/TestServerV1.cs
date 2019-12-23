@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         public TestServerV1()
         {
             var portPhrase = "Server started at port ";
-            var startup = Path.Combine(GetBaseDirectory(), "startup", "www.js");
+            var startup = Path.Combine(GetBaseDirectory(), "legacy", "startup", "www.js");
 
             var processStartInfo = new ProcessStartInfo("node", startup);
 
@@ -61,7 +61,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public static string[] GetScenariosForRoute(string name)
         {
-            var scenarios = _scenariosRegex.Matches(File.ReadAllText(Path.Combine(GetBaseDirectory(), "routes", name + ".js")))
+            var scenarios = _scenariosRegex.Matches(File.ReadAllText(Path.Combine(GetBaseDirectory(), "legacy", "routes", name + ".js")))
                 .Select(m => m.Groups["name"].Value).ToArray();
 
             if (!scenarios.Any())

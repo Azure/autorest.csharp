@@ -97,7 +97,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 if (!ignoreChecks && !_allowUnmatched)
                 {
                     var requests = await Server.GetRequests();
-                    if (matched.Contains("not-found"))
+                    if (requests.Any())
                     {
                         throw new InvalidOperationException($"Some requests were not matched {string.Join(Environment.NewLine, requests)}");
                     }
