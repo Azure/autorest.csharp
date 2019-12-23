@@ -17,7 +17,7 @@ namespace url
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public QueriesOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public QueriesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -820,7 +820,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvValidAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvValid");
@@ -850,7 +850,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvNullAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvNull");
@@ -880,7 +880,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvEmptyAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringCsvEmpty");
@@ -910,7 +910,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringSsvValidAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringSsvValid");
@@ -940,7 +940,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringTsvValidAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringTsvValid");
@@ -970,7 +970,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringPipesValidAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ArrayStringPipesValid");

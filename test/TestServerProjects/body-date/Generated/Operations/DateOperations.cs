@@ -16,7 +16,7 @@ namespace body_date
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public DateOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public DateOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {

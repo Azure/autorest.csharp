@@ -14,34 +14,28 @@ namespace validation
 {
     internal partial class AllOperations
     {
-        private string host;
         private string subscriptionId;
-        private string ApiVersion;
+        private string host;
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public AllOperations(string host, string subscriptionId, string ApiVersion, string ApiVersion, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (subscriptionId == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
-            if (ApiVersion == null)
+            if (host == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(host));
             }
             if (ApiVersion == null)
             {
                 throw new ArgumentNullException(nameof(ApiVersion));
             }
 
-            this.host = host;
             this.subscriptionId = subscriptionId;
-            this.ApiVersion = ApiVersion;
+            this.host = host;
             this.ApiVersion = ApiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;

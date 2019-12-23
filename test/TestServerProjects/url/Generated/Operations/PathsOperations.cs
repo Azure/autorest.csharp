@@ -17,7 +17,7 @@ namespace url
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public PathsOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -692,7 +692,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayCsvInPathAsync(ICollection<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
             {

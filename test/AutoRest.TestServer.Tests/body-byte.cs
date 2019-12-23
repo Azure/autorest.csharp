@@ -16,30 +16,30 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetByteEmpty() => Test(async (host, pipeline) =>
         {
-            CollectionAssert.IsEmpty((await new ByteOperations(host, ClientDiagnostics, pipeline).GetEmptyAsync()).Value);
+            CollectionAssert.IsEmpty((await new ByteOperations(ClientDiagnostics, pipeline, host).GetEmptyAsync()).Value);
         });
 
         [Test]
         public Task GetByteInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ByteOperations(host, ClientDiagnostics, pipeline).GetInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ByteOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetByteNonAscii() => Test(async (host, pipeline) => {
             CollectionAssert.AreEqual(new byte[]{ 255, 254, 253, 252, 251, 250, 249, 248, 247, 246 },
-                (await new ByteOperations(host, ClientDiagnostics, pipeline).GetNonAsciiAsync()).Value);
+                (await new ByteOperations(ClientDiagnostics, pipeline, host).GetNonAsciiAsync()).Value);
         });
 
         [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
         public Task GetByteNull() => Test(async (host, pipeline) =>
         {
-            Assert.Null(await new ByteOperations(host, ClientDiagnostics, pipeline).GetNullAsync());
+            Assert.Null(await new ByteOperations(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]
-        public Task PutByteNonAscii() => TestStatus(async (host, pipeline) => await new ByteOperations(host, ClientDiagnostics, pipeline).PutNonAsciiAsync( new byte[] { 255, 254, 253, 252, 251, 250, 249, 248, 247, 246 }));
+        public Task PutByteNonAscii() => TestStatus(async (host, pipeline) => await new ByteOperations(ClientDiagnostics, pipeline, host).PutNonAsciiAsync( new byte[] { 255, 254, 253, 252, 251, 250, 249, 248, 247, 246 }));
 
     }
 }

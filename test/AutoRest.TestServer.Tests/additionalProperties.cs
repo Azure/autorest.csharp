@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInProperties() => Test(async (host, pipeline) =>
         {
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateAPInPropertiesAsync( new PetAPInProperties()
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync( new PetAPInProperties()
             {
                 Id = 4,
                 Name = "Bunny",
@@ -61,7 +61,7 @@ namespace AutoRest.TestServer.Tests
             parameter["city"] = "Seattle";
             parameter["food"] = "tikka masala";
 
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateAPInPropertiesWithAPStringAsync( parameter);
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPInPropertiesWithAPStringAsync( parameter);
 
             var value = response.Value;
             Assert.AreEqual(5, value.Id);
@@ -93,7 +93,7 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateCatAPTrueAsync( catApTrue);
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateCatAPTrueAsync( catApTrue);
 
             var value = response.Value;
             Assert.AreEqual(1, value.Id);
@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateAPTrueAsync( catApTrue);
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPTrueAsync( catApTrue);
 
             var value = response.Value;
             Assert.AreEqual(1, value.Id);
@@ -155,7 +155,7 @@ namespace AutoRest.TestServer.Tests
             };
             outerApObject["picture"] = new byte[] { 255, 255, 255, 255, 254 };
 
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateAPObjectAsync( outerApObject);
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPObjectAsync( outerApObject);
 
             var value = response.Value;
 
@@ -185,7 +185,7 @@ namespace AutoRest.TestServer.Tests
             petApObject["color"] = "red";
             petApObject["city"] = "Bombay";
 
-            var response = await new PetsOperations(host, ClientDiagnostics, pipeline).CreateAPStringAsync( petApObject);
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPStringAsync( petApObject);
             var value = response.Value;
             Assert.AreEqual(3, value.Id);
             Assert.AreEqual("Tommy", value.Name);

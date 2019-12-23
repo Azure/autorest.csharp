@@ -16,7 +16,7 @@ namespace body_integer
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public IntOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public IntOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {

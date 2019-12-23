@@ -16,7 +16,7 @@ namespace body_byte
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public ByteOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public ByteOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {

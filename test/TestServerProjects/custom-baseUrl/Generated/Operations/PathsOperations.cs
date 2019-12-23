@@ -15,7 +15,7 @@ namespace custom_baseUrl
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public PathsOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             if (host == null)
             {

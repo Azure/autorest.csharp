@@ -18,16 +18,17 @@ namespace AutoRest.CSharp.V3.ClientModels
         public static ServiceClient BuildClient(OperationGroup arg)
         {
             List<ClientMethod> methods = new List<ClientMethod>();
-            Dictionary<Parameter, ServiceClientParameter> clientParameters = new Dictionary<Parameter, ServiceClientParameter>();
+            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
 
             var allClientParameters = arg.Operations
                 .SelectMany(op => op.Request.Parameters)
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
 
+            // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
             foreach (Parameter clientParameter in allClientParameters)
             {
-                clientParameters.Add(clientParameter, BuildParameter(clientParameter));
+                clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
             foreach (Operation operation in arg.Operations)
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static ServiceClientParameter[] OrderParameters(IEnumerable<ServiceClientParameter> parameters)
         {
-            return parameters.OrderBy(p => p.DefaultValue == null).ToArray();
+            return parameters.OrderBy(p => p.DefaultValue != null).ToArray();
         }
 
         private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter)
@@ -61,7 +62,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return null;
         }
 
-        private static ClientMethod? BuildMethod(Operation operation, Dictionary<Parameter, ServiceClientParameter> clientParameters)
+        private static ClientMethod? BuildMethod(Operation operation, Dictionary<string, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 }
                 else
                 {
-                    constantOrParameter = clientParameters[requestParameter];
+                    constantOrParameter = clientParameters[requestParameter.Language.Default.Name];
                 }
 
 
@@ -190,10 +191,16 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static ServiceClientParameter BuildParameter(Parameter requestParameter)
         {
+            ClientConstant? defaultValue = null;
+            if (requestParameter.Schema is ConstantSchema constantSchema)
+            {
+                defaultValue = ClientModelBuilderHelpers.ParseClientConstant(constantSchema);
+            }
+
             return new ServiceClientParameter(
                 requestParameter.CSharpName(),
                 ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                CreateDefaultValueConstant(requestParameter),
+                CreateDefaultValueConstant(requestParameter) ?? defaultValue,
                 requestParameter.Required == true);
         }
 

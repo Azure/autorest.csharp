@@ -18,20 +18,20 @@ namespace AutoRest.TestServer.Tests
         public Task GetDateInvalid() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await new DateOperations(host, ClientDiagnostics, pipeline).GetInvalidDateAsync());
+                await new DateOperations(ClientDiagnostics, pipeline, host).GetInvalidDateAsync());
         });
 
         [Test]
         public Task GetDateMax() => Test(async (host, pipeline) =>
         {
-            var result = await new DateOperations(host, ClientDiagnostics, pipeline).GetMaxDateAsync();
+            var result = await new DateOperations(ClientDiagnostics, pipeline, host).GetMaxDateAsync();
             Assert.AreEqual(DateTimeOffset.Parse("9999-12-31"), result.Value);
         });
 
         [Test]
         public Task GetDateMin() => Test(async (host, pipeline) =>
         {
-            var result = await new DateOperations(host, ClientDiagnostics, pipeline).GetMinDateAsync();
+            var result = await new DateOperations(ClientDiagnostics, pipeline, host).GetMinDateAsync();
             Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), result.Value);
         });
 
@@ -39,7 +39,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
         public Task GetDateNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DateOperations(host, ClientDiagnostics, pipeline).GetNullAsync();
+            var result = await new DateOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(null, result.Value);
         });
 
@@ -47,28 +47,28 @@ namespace AutoRest.TestServer.Tests
         public Task GetDateOverflow() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await new DateOperations(host, ClientDiagnostics, pipeline).GetOverflowDateAsync());
+                await new DateOperations(ClientDiagnostics, pipeline, host).GetOverflowDateAsync());
         });
 
         [Test]
         public Task GetDateUnderflow() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await new DateOperations(host, ClientDiagnostics, pipeline).GetUnderflowDateAsync());
+                await new DateOperations(ClientDiagnostics, pipeline, host).GetUnderflowDateAsync());
         });
 
         [Test]
         public Task PutDateMax() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31");
-            return await new DateOperations(host, ClientDiagnostics, pipeline).PutMaxDateAsync( value);
+            return await new DateOperations(ClientDiagnostics, pipeline, host).PutMaxDateAsync( value);
         });
 
         [Test]
         public Task PutDateMin() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("0001-01-01");
-            return await new DateOperations(host, ClientDiagnostics, pipeline).PutMinDateAsync( value);
+            return await new DateOperations(ClientDiagnostics, pipeline, host).PutMinDateAsync( value);
         });
     }
 }

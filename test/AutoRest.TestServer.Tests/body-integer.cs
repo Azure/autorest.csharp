@@ -17,37 +17,37 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetIntegerOverflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetOverflowInt32Async());
+            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetOverflowInt32Async());
         });
 
         [Test]
         public Task GetIntegerUnderflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetUnderflowInt32Async());
+            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetUnderflowInt32Async());
         });
 
         [Test]
         public Task GetIntegerInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetLongOverflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetOverflowInt64Async());
+            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetOverflowInt64Async());
         });
 
         [Test]
         public Task GetLongUnderflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetUnderflowInt64Async());
+            Assert.ThrowsAsync<FormatException>(async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetUnderflowInt64Async());
         });
 
         [Test]
         public Task GetUnixTime() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntOperations(host, ClientDiagnostics, pipeline).GetUnixTimeAsync();
+            var response = await new IntOperations(ClientDiagnostics, pipeline, host).GetUnixTimeAsync();
             Assert.AreEqual(DateTimeOffset.FromUnixTimeSeconds(1460505600), response.Value);
             return response.GetRawResponse();
         });
@@ -56,7 +56,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Nullable return types are not implemented")]
         public Task GetNullUnixTime() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntOperations(host, ClientDiagnostics, pipeline).GetNullUnixTimeAsync();
+            var response = await new IntOperations(ClientDiagnostics, pipeline, host).GetNullUnixTimeAsync();
             Assert.AreEqual(null, response.Value);
             return response.GetRawResponse();
         });
@@ -65,7 +65,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Nullable return types are not implemented")]
         public Task GetIntegerNull() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntOperations(host, ClientDiagnostics, pipeline).GetNullAsync();
+            var response = await new IntOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(null, response.Value);
             return response.GetRawResponse();
         });
@@ -73,25 +73,25 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetInvalidUnixTime() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(),async () => await new IntOperations(host, ClientDiagnostics, pipeline).GetInvalidUnixTimeAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(),async () => await new IntOperations(ClientDiagnostics, pipeline, host).GetInvalidUnixTimeAsync());
         });
 
         [Test]
-        public Task PutIntegerMax() => TestStatus(async (host, pipeline) => await new IntOperations(host, ClientDiagnostics, pipeline).PutMax32Async( int.MaxValue));
+        public Task PutIntegerMax() => TestStatus(async (host, pipeline) => await new IntOperations(ClientDiagnostics, pipeline, host).PutMax32Async( int.MaxValue));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
-        public Task PutLongMax() => TestStatus(async (host, pipeline) => await new IntOperations(host, ClientDiagnostics, pipeline).PutMax64Async( long.MaxValue));
+        public Task PutLongMax() => TestStatus(async (host, pipeline) => await new IntOperations(ClientDiagnostics, pipeline, host).PutMax64Async( long.MaxValue));
 
         [Test]
-        public Task PutIntegerMin() => TestStatus(async (host, pipeline) => await new IntOperations(host, ClientDiagnostics, pipeline).PutMin32Async( int.MinValue));
+        public Task PutIntegerMin() => TestStatus(async (host, pipeline) => await new IntOperations(ClientDiagnostics, pipeline, host).PutMin32Async( int.MinValue));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
-        public Task PutLongMin() => TestStatus(async (host, pipeline) => await new IntOperations(host, ClientDiagnostics, pipeline).PutMin64Async( long.MinValue));
+        public Task PutLongMin() => TestStatus(async (host, pipeline) => await new IntOperations(ClientDiagnostics, pipeline, host).PutMin64Async( long.MinValue));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutUnixTime() => TestStatus(async (host, pipeline) => await new IntOperations(host, ClientDiagnostics, pipeline).PutUnixTimeDateAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600)));
+        public Task PutUnixTime() => TestStatus(async (host, pipeline) => await new IntOperations(ClientDiagnostics, pipeline, host).PutUnixTimeDateAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600)));
     }
 }

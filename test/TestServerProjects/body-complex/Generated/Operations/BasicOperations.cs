@@ -18,7 +18,7 @@ namespace body_complex
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public BasicOperations(string host, string ApiVersion, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public BasicOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string ApiVersion = "2016-02-29")
         {
             if (host == null)
             {

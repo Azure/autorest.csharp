@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 WriteParameter(writer, parameter);
             }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken)");
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {

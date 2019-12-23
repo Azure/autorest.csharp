@@ -12,25 +12,25 @@ namespace url
 {
     internal partial class PathItemsOperations
     {
-        private string host;
         private string globalStringPath;
         private string? globalStringQuery;
+        private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public PathItemsOperations(string host, string globalStringPath, string? globalStringQuery, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public PathItemsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string? globalStringQuery, string host = "http://localhost:3000")
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (globalStringPath == null)
             {
                 throw new ArgumentNullException(nameof(globalStringPath));
             }
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
 
-            this.host = host;
             this.globalStringPath = globalStringPath;
             this.globalStringQuery = globalStringQuery;
+            this.host = host;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

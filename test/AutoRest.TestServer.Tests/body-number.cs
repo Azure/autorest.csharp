@@ -14,62 +14,62 @@ namespace AutoRest.TestServer.Tests
         public NumberTest(TestServerVersion version) : base(version, "number") { }
 
         [Test]
-        public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigFloatAsync( 3.402823e+20f));
+        public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigFloatAsync( 3.402823e+20f));
 
         [Test]
-        public Task PutFloatSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutSmallFloatAsync( 3.402823e-20f));
+        public Task PutFloatSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutSmallFloatAsync( 3.402823e-20f));
 
         [Test]
-        public Task PutDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutSmallDoubleAsync( 2.5976931e-101d));
+        public Task PutDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutSmallDoubleAsync( 2.5976931e-101d));
 
         [Test]
-        public Task PutDoubleBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDoubleAsync( 2.5976931e+101d));
+        public Task PutDoubleBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDoubleAsync( 2.5976931e+101d));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
-        public Task PutDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDecimalPositiveDecimalAsync());
+        public Task PutDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDecimalPositiveDecimalAsync());
 
         [Test]
         [Ignore("Value 2.5976931e+101 is out of range of C# decimal")]
-        public Task PutDecimalBig() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDecimalAsync( 2.5976931e+10m));
+        public Task PutDecimalBig() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDecimalAsync( 2.5976931e+10m));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
-        public Task PutDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDecimalNegativeDecimalAsync());
+        public Task PutDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDecimalNegativeDecimalAsync());
 
         [Test]
         [Ignore("Value 2.5976931e-101m is out of range of C# decimal")]
-        public Task PutDecimalSmall() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutSmallDecimalAsync( 2.5976931e-101m));
+        public Task PutDecimalSmall() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutSmallDecimalAsync( 2.5976931e-101m));
 
         [Test]
-        public Task PutDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDoubleNegativeDecimalAsync());
+        public Task PutDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDoubleNegativeDecimalAsync());
 
         [Test]
-        public Task PutDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(host, ClientDiagnostics, pipeline).PutBigDoublePositiveDecimalAsync());
+        public Task PutDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberOperations(ClientDiagnostics, pipeline, host).PutBigDoublePositiveDecimalAsync());
 
         [Test]
         public Task GetDecimalInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(host, ClientDiagnostics, pipeline).GetInvalidDecimalAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(ClientDiagnostics, pipeline, host).GetInvalidDecimalAsync());
         });
 
         [Test]
         public Task GetDoubleInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(host, ClientDiagnostics, pipeline).GetInvalidDoubleAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(ClientDiagnostics, pipeline, host).GetInvalidDoubleAsync());
         });
 
         [Test]
         public Task GetFloatInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(host, ClientDiagnostics, pipeline).GetInvalidFloatAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberOperations(ClientDiagnostics, pipeline, host).GetInvalidFloatAsync());
         });
 
         [Test]
         [Ignore("Value 2.5976931e+101 is out of range of C# decimal")]
         public Task GetDecimalBig() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDecimalAsync();
             Assert.AreEqual(2.5976931e+101, response.Value);
             return response.GetRawResponse();
         });
@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDecimalNegativeDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDecimalNegativeDecimalAsync();
             Assert.AreEqual(-99999999.99m, response.Value);
             return response.GetRawResponse();
         });
@@ -85,7 +85,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDecimalPositiveDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDecimalPositiveDecimalAsync();
             Assert.AreEqual(99999999.99m, response.Value);
             return response.GetRawResponse();
         });
@@ -94,7 +94,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Value is out of range of C# decimal")]
         public Task GetDecimalSmall() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetSmallDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetSmallDecimalAsync();
             Assert.AreEqual(2.5976931e-101m, response.Value);
             return response.GetRawResponse();
         });
@@ -103,7 +103,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleBigScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDoubleAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDoubleAsync();
             Assert.AreEqual(2.5976931E+101d, response.Value);
             return response.GetRawResponse();
         });
@@ -111,7 +111,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDoubleNegativeDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDoubleNegativeDecimalAsync();
             Assert.AreEqual(-99999999.989999995d, response.Value);
             return response.GetRawResponse();
         });
@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigDoublePositiveDecimalAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigDoublePositiveDecimalAsync();
             Assert.AreEqual(99999999.989999995d, response.Value);
             return response.GetRawResponse();
         });
@@ -127,7 +127,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetSmallDoubleAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetSmallDoubleAsync();
             Assert.AreEqual(2.5976931000000001E-101d, response.Value);
             return response.GetRawResponse();
         });
@@ -135,7 +135,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetFloatBigScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetBigFloatAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetBigFloatAsync();
             Assert.AreEqual(3.40282312E+20f, response.Value);
             return response.GetRawResponse();
         });
@@ -143,7 +143,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetFloatSmallScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetSmallFloatAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetSmallFloatAsync();
             Assert.AreEqual(3.4028229999999997E-20d, response.Value);
             return response.GetRawResponse();
         });
@@ -152,7 +152,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("No support for null results")]
         public Task GetNumberNull() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberOperations(host, ClientDiagnostics, pipeline).GetNullAsync();
+            var response = await new NumberOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.Null(response.Value);
             return response.GetRawResponse();
         });

@@ -16,7 +16,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public StringOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public StringOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {

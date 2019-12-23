@@ -12,23 +12,23 @@ namespace custom_baseUrl_more_options
 {
     internal partial class PathsOperations
     {
-        private string dnsSuffix;
         private string subscriptionId;
+        private string dnsSuffix;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public PathsOperations(string dnsSuffix, string subscriptionId, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
             if (subscriptionId == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
+            if (dnsSuffix == null)
+            {
+                throw new ArgumentNullException(nameof(dnsSuffix));
+            }
 
-            this.dnsSuffix = dnsSuffix;
             this.subscriptionId = subscriptionId;
+            this.dnsSuffix = dnsSuffix;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

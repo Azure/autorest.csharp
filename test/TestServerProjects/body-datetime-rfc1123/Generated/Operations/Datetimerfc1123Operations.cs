@@ -16,7 +16,7 @@ namespace body_datetime_rfc1123
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public Datetimerfc1123Operations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public Datetimerfc1123Operations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {

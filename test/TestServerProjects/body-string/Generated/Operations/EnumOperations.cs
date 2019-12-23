@@ -17,7 +17,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public EnumOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public EnumOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
