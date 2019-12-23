@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var nodeModules = FindNodeModulesDirectory();
             var wiremock = Path.Combine(nodeModules, "wiremock", "jdeploy-bundle");
             var wiremockJar = Directory.GetFiles(wiremock, "*.jar").Single();
-            var root = Path.Combine(nodeModules, "@autorest", "test-server");
+            var root = Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
 
             var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port 0");
             // Use random port
