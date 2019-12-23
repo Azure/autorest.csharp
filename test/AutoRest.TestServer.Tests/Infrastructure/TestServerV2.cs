@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public async Task<string[]> GetRequests()
         {
-            var coverageString = await Client.GetStringAsync("/__admin/requests");
+            var coverageString = await Client.GetStringAsync("/__admin/requests/unmatched");
             var coverageDocument = JsonDocument.Parse(coverageString);
 
             return coverageDocument.RootElement.GetProperty("requests").EnumerateArray().Select(request => request.ToString()).ToArray();

@@ -18,8 +18,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var response = await (session.Server).Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();
 
-            var coverage = await session.Server.GetRequests();
-            Assert.IsNotEmpty(coverage);
+            var unmatchedRequests = await session.Server.GetRequests();
+            Assert.IsEmpty(unmatchedRequests);
 
             var matched = await session.Server.GetMatchedStubs();
 
