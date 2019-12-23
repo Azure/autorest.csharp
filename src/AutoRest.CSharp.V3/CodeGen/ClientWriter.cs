@@ -186,10 +186,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     d = d.ToUniversalTime();
                     writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
                     break;
-                case FrameworkTypeReference _:
-                    writer.Literal(constant.Value);
-                    break;
-                case BinaryTypeReference _:
+                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(byte[]):
                     var value = (byte[])constant.Value;
                     writer.Append($"new byte[] {{");
                     foreach (byte b in value)
@@ -197,6 +194,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Append($"{b}, ");
                     }
                     writer.Append($"}}");
+                    break;
+                case FrameworkTypeReference _:
+                    writer.Literal(constant.Value);
                     break;
                 default:
                     throw new InvalidOperationException("Unknown constant type");
@@ -238,6 +238,12 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
+            if (format == SerializationFormat.Bytes_Base64Url)
+            {
+                // base64url is the only options for paths ns queries
+                return;
+            }
+
             var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {

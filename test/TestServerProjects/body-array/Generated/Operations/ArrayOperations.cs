@@ -2014,7 +2014,7 @@ namespace body_array
                             ICollection<Byte[]> value = new List<Byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetBytesFromBase64());
+                                value.Add(item.GetBytesFromBase64("U"));
                             }
                             return Response.FromValue(value, response);
                         }

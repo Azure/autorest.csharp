@@ -340,7 +340,7 @@ namespace body_string
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
+                            var value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -374,7 +374,7 @@ namespace body_string
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
+                            var value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, response);
                         }
                     default:
@@ -408,7 +408,7 @@ namespace body_string
                 request.Uri.AppendPath("/string/base64UrlEncoding", false);
                 request.Headers.Add("Content-Type", "application/json");
                 using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteBase64StringValue(stringBody);
+                content.JsonWriter.WriteBase64StringValue(stringBody, "U");
                 request.Content = content;
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
@@ -446,7 +446,7 @@ namespace body_string
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
+                            var value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, response);
                         }
                     default:

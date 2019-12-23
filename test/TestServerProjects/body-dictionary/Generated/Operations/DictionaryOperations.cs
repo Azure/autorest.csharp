@@ -1859,7 +1859,7 @@ namespace body_dictionary
                             IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(property.Name, property.Value.GetBytesFromBase64());
+                                value.Add(property.Name, property.Value.GetBytesFromBase64("U"));
                             }
                             return Response.FromValue(value, response);
                         }

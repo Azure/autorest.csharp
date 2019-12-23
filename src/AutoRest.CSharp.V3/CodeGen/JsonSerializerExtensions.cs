@@ -87,10 +87,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                             }
                             return;
 
-                        case BinaryTypeReference _:
-                            writer.Line($"{writerName}.WriteBase64StringValue({name});");
-                            return;
-
                         case FrameworkTypeReference frameworkTypeReference:
                             var frameworkType = frameworkTypeReference.Type;
                             bool writeFormat = false;
@@ -117,6 +113,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                             else if (frameworkType == typeof(bool))
                             {
                                 writer.AppendRaw("WriteBooleanValue");
+                            }
+                            else if (frameworkType == typeof(byte[]))
+                            {
+                                writer.AppendRaw("WriteBase64StringValue");
+                                writeFormat = true;
                             }
                             else if (frameworkType == typeof(DateTimeOffset) ||
                                      frameworkType == typeof(DateTime) ||
@@ -289,10 +290,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.ToDeserializeCall(schemaTypeReference, typeFactory, element);
                     return;
 
-                case BinaryTypeReference _:
-                    writer.Append($"{element}.GetBytesFromBase64()");
-                    return;
-
                 case FrameworkTypeReference frameworkTypeReference:
                     bool includeFormat = false;
                     var frameworkType = frameworkTypeReference.Type;
@@ -317,6 +314,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.AppendRaw("GetDecimal");
                     if (frameworkType == typeof(string))
                         writer.AppendRaw("GetString");
+
+                    if (frameworkType == typeof(byte[]))
+                    {
+                        writer.AppendRaw("GetBytesFromBase64");
+                        includeFormat = true;
+                    }
 
                     if (frameworkType == typeof(DateTimeOffset))
                     {
@@ -368,6 +371,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             SerializationFormat.DateTime_ISO8601 => "S",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
+            SerializationFormat.Bytes_Base64Url => "U",
             SerializationFormat.Duration_ISO8601 => "P",
             _ => null
         };

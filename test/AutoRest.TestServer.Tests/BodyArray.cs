@@ -60,12 +60,15 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/367")]
         public Task GetArrayBase64Url() => Test(async (host, pipeline) =>
         {
             var result = await ArrayOperations.GetBase64UrlAsync(ClientDiagnostics, pipeline, host);
 
-            CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, new object[] { "4", "5", "6" }, new object[] { "7", "8", "9" } }, result.Value);
+            var values = result.Value.ToArray();
+
+            CollectionAssert.AreEqual(new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52, 117, 114, 108 }, values[0]);
+            CollectionAssert.AreEqual(new byte[] { 116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103 }, values[1]);
+            CollectionAssert.AreEqual(new byte[] { 76, 111, 114, 101, 109, 32, 105, 112, 115, 117, 109 }, values[2]);
         });
 
         [Test]

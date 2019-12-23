@@ -59,5 +59,53 @@ namespace Azure.Core
 
             return new string(output, 0, i);
         }
+
+        public static byte[] FromBase64UrlString(string value)
+        {
+            var paddingCharsToAdd = GetNumBase64PaddingCharsToAddForDecode(value.Length);
+
+            var output = new char[value.Length + paddingCharsToAdd];
+
+            int i;
+            for (i = 0; i < value.Length; i++)
+            {
+                var ch = value[i];
+                if (ch == '-')
+                {
+                    output[i] = '+';
+                }
+                else if (ch == '_')
+                {
+                    output[i] = '/';
+                }
+                else
+                {
+                    output[i] = ch;
+                }
+            }
+
+            for (; i < output.Length; i++)
+            {
+                output[i] = '=';
+            }
+
+            return Convert.FromBase64CharArray(output, 0, output.Length);
+        }
+
+
+        private static int GetNumBase64PaddingCharsToAddForDecode(int inputLength)
+        {
+            switch (inputLength % 4)
+            {
+                case 0:
+                    return 0;
+                case 2:
+                    return 2;
+                case 3:
+                    return 1;
+                default:
+                    throw new InvalidOperationException("Malformed input");
+            }
+        }
     }
 }

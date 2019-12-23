@@ -19,6 +19,19 @@ namespace Azure.Core
         {
             value.Write(writer);
         }
+
+        public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)
+        {
+            switch (format)
+            {
+                case "U":
+                    writer.WriteStringValue(TypeFormatters.ToBase64UrlString(value));
+                    break;
+                default:
+                    throw new ArgumentException("Format is not supported", nameof(format));
+            }
+        }
+
         public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
         {
             switch (value)
