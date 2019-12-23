@@ -29,33 +29,30 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("base64 not implemented")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
         public Task GetStringNullBase64UrlEncoding() => Test(async (host, pipeline) =>
         {
             var result = await StringOperations.GetNullBase64UrlEncodedAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual(null, result.Value);
+            Assert.AreEqual(new byte[] { }, result.Value);
         });
 
         [Test]
-        [Ignore("base64 not implemented")]
         public Task GetStringBase64Encoded() => Test(async (host, pipeline) =>
         {
             var result = await StringOperations.GetBase64EncodedAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual("a string that gets encoded with base64", result.Value);
+            Assert.AreEqual(new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52}, result.Value);
         });
 
         [Test]
-        [Ignore("base64 not implemented")]
         public Task GetStringBase64UrlEncoded() => Test(async (host, pipeline) =>
         {
             var result = await StringOperations.GetBase64UrlEncodedAsync(ClientDiagnostics, pipeline, host);
-            Assert.AreEqual("a string that gets encoded with base64", result.Value);
+            Assert.AreEqual(new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52, 117, 114, 108 }, result.Value);
         });
 
         [Test]
-        [Ignore("base64 not implemented")]
         public Task PutStringBase64UrlEncoded() => TestStatus(async (host, pipeline) =>
-            await StringOperations.PutBase64UrlEncodedAsync(ClientDiagnostics, pipeline, new byte[0], host));
+            await StringOperations.PutBase64UrlEncodedAsync(ClientDiagnostics, pipeline, new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52, 117, 114, 108 }, host));
 
         [Test]
         public Task PutStringMultiByteCharacters() => Test(async (host, pipeline) =>
