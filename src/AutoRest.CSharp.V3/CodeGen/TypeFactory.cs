@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
             DictionaryTypeReference dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
             SchemaTypeReference schemaTypeReference => DefaultTypeInfo(schemaTypeReference),
-            BinaryTypeReference binary => new CSharpType(typeof(byte[]), isNullable: binary.IsNullable),
             FrameworkTypeReference frameworkTypeReference => new CSharpType(frameworkTypeReference.Type, isNullable: frameworkTypeReference.IsNullable),
             _ => throw new NotImplementedException()
         };

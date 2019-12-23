@@ -23,12 +23,15 @@ namespace AutoRest.CSharp.V3.ClientModels
                 return;
             }
 
-            var expectedType = type switch
+            Type expectedType;
+            if (type is FrameworkTypeReference frameworkType)
             {
-                BinaryTypeReference _ => typeof(byte[]),
-                FrameworkTypeReference frameworkType => frameworkType.Type,
-                _ => throw new InvalidOperationException("Unexpected type kind")
-            };
+                expectedType = frameworkType.Type;
+            }
+            else
+            {
+                throw new InvalidOperationException("Unexpected type kind");
+            }
 
             if (value.GetType() != expectedType)
             {

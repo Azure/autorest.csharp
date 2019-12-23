@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         DateTime_ISO8601,
         DateTime_Unix,
         Date_ISO8601,
-        Duration_ISO8601
+        Duration_ISO8601,
+        Bytes_Base64Url
     }
 }

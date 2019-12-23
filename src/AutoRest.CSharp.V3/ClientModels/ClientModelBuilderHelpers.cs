@@ -15,10 +15,8 @@ namespace AutoRest.CSharp.V3.ClientModels
         public static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => (ClientTypeReference)new BinaryTypeReference(isNullable),
-            ByteArraySchema _ => new BinaryTypeReference(isNullable),
-            //https://devblogs.microsoft.com/dotnet/do-more-with-patterns-in-c-8-0/
-            { Type: AllSchemaTypes.Binary } => new BinaryTypeReference(false),
+            BinarySchema _ => new FrameworkTypeReference(typeof(byte[]), isNullable),
+            ByteArraySchema _ => new FrameworkTypeReference(typeof(byte[]), isNullable),
             ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false), isNullable),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, false), isNullable),
             NumberSchema number => new FrameworkTypeReference(ToFrameworkNumberType(number), isNullable),
@@ -30,10 +28,12 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             var normalizedValue = type switch
             {
-                BinaryTypeReference _ when value is string base64String => Convert.FromBase64String(base64String),
                 FrameworkTypeReference frameworkType when
-                frameworkType.Type == typeof(DateTimeOffset) &&
-                value is string dateTimeString => DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal),
+                    frameworkType.Type == typeof(byte[]) &&
+                    value is string base64String => Convert.FromBase64String(base64String),
+                FrameworkTypeReference frameworkType when
+                    frameworkType.Type == typeof(DateTimeOffset) &&
+                    value is string dateTimeString => DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal),
                 FrameworkTypeReference frameworkType => Convert.ChangeType(value, frameworkType.Type),
                 _ => null
             };
@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
+            ByteArraySchema byteArraySchema when byteArraySchema.Format == ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
             UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
             DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
             DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
@@ -65,6 +66,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(string),
             AllSchemaTypes.Any => typeof(object),
+            AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };
 
