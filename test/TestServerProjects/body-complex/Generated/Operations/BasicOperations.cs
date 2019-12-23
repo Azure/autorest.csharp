@@ -12,14 +12,30 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    internal static class BasicOperations
+    internal partial class BasicOperations
     {
-        public static async ValueTask<Response<Basic>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private string ApiVersion;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public BasicOperations(string host, string ApiVersion, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+            if (ApiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(ApiVersion));
+            }
+
+            this.host = host;
+            this.ApiVersion = ApiVersion;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
@@ -48,12 +64,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Basic complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -68,7 +80,7 @@ namespace body_complex
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/complex/basic/valid", false);
                 request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("api-version", "2016-02-29", true);
+                request.Uri.AppendQuery("api-version", ApiVersion, true);
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(complexBody);
                 request.Content = content;
@@ -87,12 +99,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<Basic>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetInvalid");
             scope.Start();
@@ -121,12 +129,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<Basic>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
             scope.Start();
@@ -155,12 +159,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<Basic>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNull");
             scope.Start();
@@ -189,12 +189,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<Basic>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
             scope.Start();

@@ -12,14 +12,24 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    internal static class DictionaryOperations
+    internal partial class DictionaryOperations
     {
-        public static async ValueTask<Response<DictionaryWrapper>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public DictionaryOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<DictionaryWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();
@@ -48,12 +58,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DictionaryWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutValidAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -86,12 +92,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
             scope.Start();
@@ -120,12 +122,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DictionaryWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -158,12 +156,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DictionaryWrapper>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DictionaryWrapper>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNull");
             scope.Start();
@@ -192,12 +186,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
             scope.Start();

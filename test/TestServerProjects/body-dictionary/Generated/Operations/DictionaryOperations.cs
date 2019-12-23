@@ -13,14 +13,24 @@ using body_dictionary.Models.V100;
 
 namespace body_dictionary
 {
-    internal static class DictionaryOperations
+    internal partial class DictionaryOperations
     {
-        public static async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public DictionaryOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNull");
             scope.Start();
@@ -53,12 +63,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetEmpty");
             scope.Start();
@@ -91,12 +97,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, string> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -135,12 +137,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNullValue");
             scope.Start();
@@ -173,12 +171,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNullKey");
             scope.Start();
@@ -211,12 +205,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetEmptyStringKey");
             scope.Start();
@@ -249,12 +239,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetInvalid");
             scope.Start();
@@ -287,12 +273,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanTfft");
             scope.Start();
@@ -325,12 +307,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBooleanTfftAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, bool> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -369,12 +347,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanInvalidNull");
             scope.Start();
@@ -407,12 +381,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanInvalidString");
             scope.Start();
@@ -445,12 +415,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntegerValid");
             scope.Start();
@@ -483,12 +449,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutIntegerValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, int> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -527,12 +489,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntInvalidNull");
             scope.Start();
@@ -565,12 +523,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntInvalidString");
             scope.Start();
@@ -603,12 +557,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongValid");
             scope.Start();
@@ -641,12 +591,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutLongValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, long> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -685,12 +631,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongInvalidNull");
             scope.Start();
@@ -723,12 +665,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongInvalidString");
             scope.Start();
@@ -761,12 +699,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatValid");
             scope.Start();
@@ -799,12 +733,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutFloatValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, float> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -843,12 +773,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatInvalidNull");
             scope.Start();
@@ -881,12 +807,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatInvalidString");
             scope.Start();
@@ -919,12 +841,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleValid");
             scope.Start();
@@ -957,12 +875,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDoubleValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, double> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1001,12 +915,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleInvalidNull");
             scope.Start();
@@ -1039,12 +949,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleInvalidString");
             scope.Start();
@@ -1077,12 +983,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringValid");
             scope.Start();
@@ -1115,12 +1017,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutStringValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, string> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1159,12 +1057,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringWithNull");
             scope.Start();
@@ -1197,12 +1091,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringWithInvalid");
             scope.Start();
@@ -1235,12 +1125,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateValid");
             scope.Start();
@@ -1273,12 +1159,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, DateTimeOffset> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1317,12 +1199,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateInvalidNull");
             scope.Start();
@@ -1355,12 +1233,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateInvalidChars");
             scope.Start();
@@ -1393,12 +1267,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeValid");
             scope.Start();
@@ -1431,12 +1301,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateTimeValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, DateTimeOffset> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1475,12 +1341,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeInvalidNull");
             scope.Start();
@@ -1513,12 +1375,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeInvalidChars");
             scope.Start();
@@ -1551,12 +1409,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeRfc1123Valid");
             scope.Start();
@@ -1589,12 +1443,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateTimeRfc1123ValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, DateTimeOffset> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1633,12 +1483,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDurationValid");
             scope.Start();
@@ -1671,12 +1517,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDurationValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, TimeSpan> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1715,12 +1557,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteValid");
             scope.Start();
@@ -1753,12 +1591,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutByteValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, Byte[]> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteValidAsync(IDictionary<string, Byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -1797,12 +1631,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteInvalidNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteInvalidNull");
             scope.Start();
@@ -1835,12 +1665,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Byte[]>>> GetBase64UrlAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBase64Url");
             scope.Start();
@@ -1873,12 +1699,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexNull");
             scope.Start();
@@ -1911,12 +1733,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexEmpty");
             scope.Start();
@@ -1949,12 +1767,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexItemNull");
             scope.Start();
@@ -1987,12 +1801,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexItemEmpty");
             scope.Start();
@@ -2025,12 +1835,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexValid");
             scope.Start();
@@ -2063,12 +1869,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutComplexValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, Widget> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -2107,12 +1909,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayNull");
             scope.Start();
@@ -2150,12 +1948,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayEmpty");
             scope.Start();
@@ -2193,12 +1987,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayItemNull");
             scope.Start();
@@ -2236,12 +2026,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayItemEmpty");
             scope.Start();
@@ -2279,12 +2065,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayValid");
             scope.Start();
@@ -2322,12 +2104,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutArrayValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, ICollection<string>> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));
@@ -2371,12 +2149,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryNull");
             scope.Start();
@@ -2409,12 +2183,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryEmpty");
             scope.Start();
@@ -2447,12 +2217,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryItemNull");
             scope.Start();
@@ -2485,12 +2251,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryItemEmpty");
             scope.Start();
@@ -2523,12 +2285,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryValid");
             scope.Start();
@@ -2561,12 +2319,8 @@ namespace body_dictionary
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDictionaryValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IDictionary<string, object> arrayBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (arrayBody == null)
             {
                 throw new ArgumentNullException(nameof(arrayBody));

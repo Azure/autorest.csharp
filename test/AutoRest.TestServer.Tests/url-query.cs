@@ -15,122 +15,122 @@ namespace AutoRest.TestServer.Tests
         public UrlQueryTests(TestServerVersion version) : base(version, "queries") { }
 
         [Test]
-        public Task UrlQueriesBoolTrue() => TestStatus(async (host, pipeline) => await QueriesOperations.GetBooleanTrueAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesBoolTrue() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetBooleanTrueAsync());
 
         [Test]
-        public Task UrlQueriesBoolFalse() => TestStatus(async (host, pipeline) => await QueriesOperations.GetBooleanFalseAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesBoolFalse() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetBooleanFalseAsync());
 
         [Test]
-        public Task UrlQueriesBoolNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetBooleanNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesBoolNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetBooleanNullAsync( null));
 
         [Test]
-        public Task UrlQueriesIntPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.GetIntOneMillionAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesIntPositive() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetIntOneMillionAsync());
 
         [Test]
-        public Task UrlQueriesIntNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.GetIntNegativeOneMillionAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesIntNegative() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetIntNegativeOneMillionAsync());
 
         [Test]
-        public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetIntNullAsync(ClientDiagnostics, pipeline, null, host: host));
-
-        [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
-        public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetIntNullAsync( null));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
-        public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetTenBillionAsync());
 
         [Test]
-        public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await QueriesOperations.GetLongNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
+        public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetNegativeTenBillionAsync());
+
+        [Test]
+        public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).GetLongNullAsync( null));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
-        public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).FloatScientificPositiveAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
-        public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).FloatScientificNegativeAsync());
 
         [Test]
-        public Task UrlQueriesFloatNull() => TestStatus(async (host, pipeline) => await QueriesOperations.FloatNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesFloatNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).FloatNullAsync( null));
 
         [Test]
-        public Task UrlQueriesDoublePositive() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesDoublePositive() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DoubleDecimalPositiveAsync());
 
         [Test]
-        public Task UrlQueriesDoubleNegative() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleDecimalNegativeAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesDoubleNegative() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DoubleDecimalNegativeAsync());
 
         [Test]
-        public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DoubleNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DoubleNullAsync( null));
 
         [Test]
         [Ignore("No test server handler for this one")]
-        public Task StringUnicodeAsync() => TestStatus(async (host, pipeline) => await QueriesOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host: host));
+        public Task StringUnicodeAsync() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).StringUnicodeAsync());
 
         [Test]
-        public Task UrlQueriesStringUrlEncoded() => TestStatus(async (host, pipeline) => await QueriesOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesStringUrlEncoded() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).StringUrlEncodedAsync());
 
         [Test]
-        public Task UrlQueriesStringEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.StringEmptyAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesStringEmpty() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).StringEmptyAsync());
 
         [Test]
-        public Task UrlQueriesStringNull() => TestStatus(async (host, pipeline) => await QueriesOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesStringNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).StringNullAsync( null));
 
         [Test]
         [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
-        public Task UrlQueriesEnumValid() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host: host));
+        public Task UrlQueriesEnumValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).EnumValidAsync( UriColor.GreenColor));
 
         [Test]
-        public Task UrlQueriesEnumNull() => TestStatus(async (host, pipeline) => await QueriesOperations.EnumNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesEnumNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).EnumNullAsync( null));
 
         [Test]
-        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host: host));
+        public Task UrlQueriesByteMultiByte() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ByteMultiByteAsync( TestConstants.ByteArray));
 
         [Test]
-        public Task UrlQueriesByteNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesByteNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ByteNullAsync( null));
 
         [Test]
-        public Task UrlQueriesByteEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesByteEmpty() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ByteEmptyAsync());
 
         [Test]
-        public Task UrlQueriesDateValid() => TestStatus(async (host, pipeline) => await QueriesOperations.DateValidAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesDateValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DateValidAsync());
 
         [Test]
-        public Task UrlQueriesDateNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DateNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesDateNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DateNullAsync( null));
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
-        public Task UrlQueriesDateTimeValid() => TestStatus(async (host, pipeline) => await QueriesOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host: host));
+        public Task UrlQueriesDateTimeValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DateTimeValidAsync());
 
         [Test]
-        public Task UrlQueriesDateTimeNull() => TestStatus(async (host, pipeline) => await QueriesOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesDateTimeNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).DateTimeNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvValidAsync(ClientDiagnostics, pipeline, new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}, host: host));
+        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
 
         [Test]
-        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringCsvNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringCsvEmptyAsync(ClientDiagnostics, pipeline, new string[0], host: host));
+        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringCsvEmptyAsync( new string[0]));
 
         [Test]
-        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringSsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
+        public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringSsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringTsvValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
+        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringTsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await QueriesOperations.ArrayStringPipesValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
+        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await new QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiNullAsync(ClientDiagnostics, pipeline, null, host: host));
+        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiEmptyAsync(ClientDiagnostics, pipeline, new string[] { }, host: host));
+        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await url_multi_collectionFormat.QueriesOperations.ArrayStringMultiValidAsync(ClientDiagnostics, pipeline, new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host: host));
+        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(host, ClientDiagnostics, pipeline).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
         {

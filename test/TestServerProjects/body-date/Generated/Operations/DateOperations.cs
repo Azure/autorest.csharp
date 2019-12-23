@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_date
 {
-    internal static class DateOperations
+    internal partial class DateOperations
     {
-        public static async ValueTask<Response<DateTimeOffset>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public DateOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetInvalidDate");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetOverflowDate");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetUnderflowDate");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMaxDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset dateBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.PutMaxDate");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetMaxDate");
             scope.Start();
@@ -217,12 +207,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMinDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset dateBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.PutMinDate");
             scope.Start();
@@ -251,12 +237,8 @@ namespace body_date
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_date.GetMinDate");
             scope.Start();

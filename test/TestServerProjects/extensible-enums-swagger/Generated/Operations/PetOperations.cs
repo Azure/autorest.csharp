@@ -12,14 +12,24 @@ using extensible_enums_swagger.Models.V20160707;
 
 namespace extensible_enums_swagger
 {
-    internal static class PetOperations
+    internal partial class PetOperations
     {
-        public static async ValueTask<Response<Pet>> GetByPetIdAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string petId, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PetOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
+        {
             if (petId == null)
             {
                 throw new ArgumentNullException(nameof(petId));
@@ -53,12 +63,8 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
-        public static async ValueTask<Response<Pet>> AddPetAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Pet? petParam, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.AddPet");
             scope.Start();

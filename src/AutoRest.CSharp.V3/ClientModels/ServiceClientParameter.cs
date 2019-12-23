@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ServiceClientMethodParameter
+    internal class ServiceClientParameter
     {
-        public ServiceClientMethodParameter(string name, ClientTypeReference type, ClientConstant? defaultValue, bool isRequired)
+        public ServiceClientParameter(string name, ClientTypeReference type, ClientConstant? defaultValue, bool isRequired)
         {
             Name = name;
             Type = type;

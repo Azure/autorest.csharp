@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\pakrym\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\pakrym\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\nunit.engine.api.dll" t="Include" />
+    <e p="C:\Users\pakrym\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\nunit.engine.dll" t="Include" />
+    <e p="C:\Users\pakrym\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="C:\Users\pakrym\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="C:\Users\pakrym\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\pakrym\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_AutoRest.CSharp.V3.1489503229.00" t="ExcludeRecursive" />
+    <e p="D:\github\azure\autorest.csharp" t="IncludeFlat">
+      <e p=".editorconfig" t="Include" />
+      <e p="artifacts\bin" t="ExcludeRecursive" />
+      <e p="artifacts\obj" t="ExcludeRecursive">
+        <e p="AutoRest.CodeModel\Debug\netcoreapp3.0" t="Include">
+          <e p="AutoRest.CodeModel.AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="AutoRest.CSharp.V3\Debug\netcoreapp3.0" t="Include">
+          <e p="AutoRest.CSharp.V3.AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="AutoRest.TestServer.Tests\Debug\netcoreapp3.0" t="Include">
+          <e p="AutoRest.TestServer.Tests.AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="AutoRest.CSharp.V3.sln" t="IncludeFlat" />
+      <e p="eng\stylecop.json" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Solution Items" t="Include" />
+      <e p="src\assets\Azure.Core.Shared" t="Include">
+        <e p="ArrayBufferWriter.cs" t="Include" />
+        <e p="ClientDiagnostics.cs" t="Include" />
+        <e p="DiagnosticScope.cs" t="Include" />
+        <e p="IUtf8JsonSerializable.cs" t="Include" />
+        <e p="JsonElementExtensions.cs" t="Include" />
+        <e p="RequestHeaderExtensions.cs" t="Include" />
+        <e p="ResponseHeadersExtensions.cs" t="Include" />
+        <e p="ResponseWithHeaders.cs" t="Include" />
+        <e p="ResponseWithHeaders{T,THeaders}.cs" t="Include" />
+        <e p="ResponseWithHeaders{THeaders}.cs" t="Include" />
+        <e p="TypeFormatters.cs" t="Include" />
+        <e p="UriBuilderExtensions.cs" t="Include" />
+        <e p="Utf8JsonRequestContent.cs" t="Include" />
+        <e p="Utf8JsonWriterExtensions.cs" t="Include" />
+      </e>
+      <e p="src\AutoRest.CodeModel" t="IncludeRecursive">
+        <e p="AutoRest.CodeModel.csproj" t="IncludeRecursive" />
+        <e p="code-model.json" t="Include" />
+        <e p="output-example.yaml" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="StringExtensions.cs" t="Include" />
+      </e>
+      <e p="src\AutoRest.CSharp.V3" t="IncludeRecursive">
+        <e p="AutoRest.CSharp.V3.csproj" t="IncludeRecursive" />
+        <e p="ClientModels" t="Include">
+          <e p="ClientBuilder.cs" t="Include" />
+          <e p="ClientConstant.cs" t="Include" />
+          <e p="ClientEnum.cs" t="Include" />
+          <e p="ClientEnumValue.cs" t="Include" />
+          <e p="ClientMethod.cs" t="Include" />
+          <e p="ClientMethodRequest.cs" t="Include" />
+          <e p="ClientMethodResponse.cs" t="Include" />
+          <e p="ClientModel.cs" t="Include" />
+          <e p="ClientModelBuilderHelpers.cs" t="Include" />
+          <e p="ClientObject.cs" t="Include" />
+          <e p="ClientObjectConstant.cs" t="Include" />
+          <e p="ClientObjectDiscriminator.cs" t="Include" />
+          <e p="ClientObjectDiscriminatorImplementation.cs" t="Include" />
+          <e p="ClientObjectProperty.cs" t="Include" />
+          <e p="ClientTypeReference.cs" t="Include" />
+          <e p="CollectionTypeReference.cs" t="Include" />
+          <e p="ConstantOrParameter.cs" t="Include" />
+          <e p="DictionaryTypeReference.cs" t="Include" />
+          <e p="FrameworkTypeReference.cs" t="Include" />
+          <e p="ISchemaTypeProvider.cs" t="Include" />
+          <e p="ModelBuilder.cs" t="Include" />
+          <e p="PathSegment.cs" t="Include" />
+          <e p="QueryParameter.cs" t="Include" />
+          <e p="QuerySerializationStyle.cs" t="Include" />
+          <e p="RequestBody.cs" t="Include" />
+          <e p="RequestHeader.cs" t="Include" />
+          <e p="ResponseBody.cs" t="Include" />
+          <e p="ResponseHeader.cs" t="Include" />
+          <e p="ResponseHeaderModel.cs" t="Include" />
+          <e p="SchemaTypeReference.cs" t="Include" />
+          <e p="Serialization" t="Include">
+            <e p="JsonArraySerialization.cs" t="Include" />
+            <e p="JsonDynamicPropertiesSerialization.cs" t="Include" />
+            <e p="JsonObjectSerialization.cs" t="Include" />
+            <e p="JsonPropertySerialization.cs" t="Include" />
+            <e p="JsonSerialization.cs" t="Include" />
+            <e p="JsonValueSerialization.cs" t="Include" />
+          </e>
+          <e p="SerializationFormat.cs" t="Include" />
+          <e p="ServiceClient.cs" t="Include" />
+          <e p="ServiceClientParameter.cs" t="Include" />
+        </e>
+        <e p="CodeGen" t="Include">
+          <e p="ClientWriter.cs" t="Include" />
+          <e p="CodeWriter.cs" t="Include" />
+          <e p="CodeWriterDelegate.cs" t="Include" />
+          <e p="CodeWriterExtensions.cs" t="Include" />
+          <e p="CSharpNamespace.cs" t="Include" />
+          <e p="CSharpType.cs" t="Include" />
+          <e p="JsonSerializerExtensions.cs" t="Include" />
+          <e p="ModelWriter.cs" t="Include" />
+          <e p="ResponseHeaderModelModelWriter.cs" t="Include" />
+          <e p="SerializationWriter.cs" t="Include" />
+          <e p="TypeFactory.cs" t="Include" />
+        </e>
+        <e p="Configuration.cs" t="Include" />
+        <e p="JsonRpc" t="Include">
+          <e p="AutoRestInterface.cs" t="Include" />
+          <e p="IAutoRestInterface.cs" t="Include" />
+          <e p="MessageModels" t="Include">
+            <e p="ArtifactMapping.cs" t="Include" />
+            <e p="ArtifactMessage.cs" t="Include" />
+            <e p="ArtifactRaw.cs" t="Include" />
+            <e p="Channel.cs" t="Include" />
+            <e p="Connection.cs" t="Include" />
+            <e p="IArtifact.cs" t="Include" />
+            <e p="IMessage.cs" t="Include" />
+            <e p="IPosition.cs" t="Include" />
+            <e p="Mapping.cs" t="Include" />
+            <e p="Message.cs" t="Include" />
+            <e p="PeekableBinaryStream.cs" t="Include" />
+            <e p="Position.cs" t="Include" />
+            <e p="PositionIntPath.cs" t="Include" />
+            <e p="PositionStringPath.cs" t="Include" />
+            <e p="RawSourceMap.cs" t="Include" />
+            <e p="SourceLocation.cs" t="Include" />
+          </e>
+          <e p="Messaging" t="Include">
+            <e p="IncomingMessageProcessor.cs" t="Include" />
+            <e p="IncomingMessages.cs" t="Include" />
+            <e p="IncomingRequest.cs" t="Include" />
+            <e p="IncomingResponse.cs" t="Include" />
+            <e p="OutgoingMessageProcessor.cs" t="Include" />
+            <e p="OutgoingMessages.cs" t="Include" />
+            <e p="PeekingBinaryReaderExtensions.cs" t="Include" />
+          </e>
+          <e p="StandaloneAutoRestInterface.cs" t="Include" />
+        </e>
+        <e p="Pipeline" t="Include">
+          <e p="Generated" t="Include">
+            <e p="CodeModel.cs" t="Include" />
+          </e>
+          <e p="Modifications.cs" t="Include" />
+          <e p="Serialization.cs" t="Include" />
+        </e>
+        <e p="PluginProcessor.cs" t="Include" />
+        <e p="Plugins" t="Include">
+          <e p="Asseter.cs" t="Include" />
+          <e p="IPlugin.cs" t="Include" />
+          <e p="Modeler.cs" t="Include" />
+          <e p="ModelExtensions.cs" t="Include" />
+          <e p="PostGen" t="Include">
+            <e p="QualifiedNamesRewriter.cs" t="Include" />
+            <e p="RoslynExtensions.cs" t="Include" />
+            <e p="SimplifyNamesRewriter.cs" t="Include" />
+            <e p="UsingResolver.cs" t="Include" />
+            <e p="UsingsRewriter.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Utilities" t="Include">
+          <e p="AzureCoreExtensions.cs" t="Include" />
+          <e p="DebuggerAwaiter.cs" t="Include" />
+          <e p="EnumerableExtensions.cs" t="Include" />
+          <e p="EnumExtensions.cs" t="Include" />
+          <e p="EqualityComparerFactory.cs" t="Include" />
+          <e p="JsonElementExtensions.cs" t="Include" />
+          <e p="JsonExtensions.cs" t="Include" />
+          <e p="StringExtensions.cs" t="Include" />
+        </e>
+      </e>
+      <e p="test\AutoRest.TestServer.Tests" t="IncludeRecursive">
+        <e p="additionalProperties.cs" t="Include" />
+        <e p="AutoRest.TestServer.Tests.csproj" t="IncludeRecursive" />
+        <e p="body-array.cs" t="Include" />
+        <e p="body-boolean.cs" t="Include" />
+        <e p="body-byte.cs" t="Include" />
+        <e p="body-complex.cs" t="Include" />
+        <e p="body-date.cs" t="Include" />
+        <e p="body-datetime-rfc1123.cs" t="Include" />
+        <e p="body-datetime.cs" t="Include" />
+        <e p="body-duration.cs" t="Include" />
+        <e p="body-integer.cs" t="Include" />
+        <e p="body-number.cs" t="Include" />
+        <e p="body-string.cs" t="Include" />
+        <e p="custom-baseURL.cs" t="Include" />
+        <e p="ExtensibleEnumTests.cs" t="Include" />
+        <e p="header.cs" t="Include" />
+        <e p="Infrastructure" t="Include">
+          <e p="IgnoreOnTestServer.cs" t="Include" />
+          <e p="ITestServer.cs" t="Include" />
+          <e p="ProcessTracker.cs" t="Include" />
+          <e p="TestOptions.cs" t="Include" />
+          <e p="TestServerSession.cs" t="Include" />
+          <e p="TestServerTestBase.cs" t="Include" />
+          <e p="TestServerV1.cs" t="Include" />
+          <e p="TestServerV1Test.cs" t="Include" />
+          <e p="TestServerV2.cs" t="Include" />
+          <e p="TestServerV2Test.cs" t="Include" />
+          <e p="TestServerVersion.cs" t="Include" />
+        </e>
+        <e p="TestConstants.cs" t="Include" />
+        <e p="url-path-items.cs" t="Include" />
+        <e p="url-query.cs" t="Include" />
+        <e p="url.cs" t="Include" />
+        <e p="validation.cs" t="Include" />
+      </e>
+      <e p="test\TestServerProjects" t="Include">
+        <e p="additionalProperties" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="CatAPTrue.cs" t="Include" />
+              <e p="CatAPTrue.Serialization.cs" t="Include" />
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="PetAPInProperties.cs" t="Include" />
+              <e p="PetAPInProperties.Serialization.cs" t="Include" />
+              <e p="PetAPInPropertiesWithAPString.cs" t="Include" />
+              <e p="PetAPInPropertiesWithAPString.Serialization.cs" t="Include" />
+              <e p="PetAPObject.cs" t="Include" />
+              <e p="PetAPObject.Serialization.cs" t="Include" />
+              <e p="PetAPString.cs" t="Include" />
+              <e p="PetAPString.Serialization.cs" t="Include" />
+              <e p="PetAPTrue.cs" t="Include" />
+              <e p="PetAPTrue.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="PetsOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-array" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Enum0.cs" t="Include" />
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="FooEnum.cs" t="Include" />
+              <e p="FooEnum.Serialization.cs" t="Include" />
+              <e p="Product.cs" t="Include" />
+              <e p="Product.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="ArrayOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-boolean" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="BoolOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-byte" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="ByteOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-complex" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="ArrayWrapper.cs" t="Include" />
+              <e p="ArrayWrapper.Serialization.cs" t="Include" />
+              <e p="Basic.cs" t="Include" />
+              <e p="Basic.Serialization.cs" t="Include" />
+              <e p="BooleanWrapper.cs" t="Include" />
+              <e p="BooleanWrapper.Serialization.cs" t="Include" />
+              <e p="ByteWrapper.cs" t="Include" />
+              <e p="ByteWrapper.Serialization.cs" t="Include" />
+              <e p="Cat.cs" t="Include" />
+              <e p="Cat.Serialization.cs" t="Include" />
+              <e p="CMYKColors.cs" t="Include" />
+              <e p="Cookiecuttershark.cs" t="Include" />
+              <e p="Cookiecuttershark.Serialization.cs" t="Include" />
+              <e p="Datetimerfc1123Wrapper.cs" t="Include" />
+              <e p="Datetimerfc1123Wrapper.Serialization.cs" t="Include" />
+              <e p="DatetimeWrapper.cs" t="Include" />
+              <e p="DatetimeWrapper.Serialization.cs" t="Include" />
+              <e p="DateWrapper.cs" t="Include" />
+              <e p="DateWrapper.Serialization.cs" t="Include" />
+              <e p="DictionaryWrapper.cs" t="Include" />
+              <e p="DictionaryWrapper.Serialization.cs" t="Include" />
+              <e p="Dog.cs" t="Include" />
+              <e p="Dog.Serialization.cs" t="Include" />
+              <e p="DotFish.cs" t="Include" />
+              <e p="DotFish.Serialization.cs" t="Include" />
+              <e p="DotFishMarket.cs" t="Include" />
+              <e p="DotFishMarket.Serialization.cs" t="Include" />
+              <e p="DotSalmon.cs" t="Include" />
+              <e p="DotSalmon.Serialization.cs" t="Include" />
+              <e p="DoubleWrapper.cs" t="Include" />
+              <e p="DoubleWrapper.Serialization.cs" t="Include" />
+              <e p="DurationWrapper.cs" t="Include" />
+              <e p="DurationWrapper.Serialization.cs" t="Include" />
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="Fish.cs" t="Include" />
+              <e p="Fish.Serialization.cs" t="Include" />
+              <e p="FloatWrapper.cs" t="Include" />
+              <e p="FloatWrapper.Serialization.cs" t="Include" />
+              <e p="Goblinshark.cs" t="Include" />
+              <e p="Goblinshark.Serialization.cs" t="Include" />
+              <e p="GoblinSharkColor.cs" t="Include" />
+              <e p="IntWrapper.cs" t="Include" />
+              <e p="IntWrapper.Serialization.cs" t="Include" />
+              <e p="LongWrapper.cs" t="Include" />
+              <e p="LongWrapper.Serialization.cs" t="Include" />
+              <e p="MyBaseHelperType.cs" t="Include" />
+              <e p="MyBaseHelperType.Serialization.cs" t="Include" />
+              <e p="MyBaseType.cs" t="Include" />
+              <e p="MyBaseType.Serialization.cs" t="Include" />
+              <e p="MyDerivedType.cs" t="Include" />
+              <e p="MyDerivedType.Serialization.cs" t="Include" />
+              <e p="Pet.cs" t="Include" />
+              <e p="Pet.Serialization.cs" t="Include" />
+              <e p="ReadonlyObj.cs" t="Include" />
+              <e p="ReadonlyObj.Serialization.cs" t="Include" />
+              <e p="Salmon.cs" t="Include" />
+              <e p="Salmon.Serialization.cs" t="Include" />
+              <e p="Sawshark.cs" t="Include" />
+              <e p="Sawshark.Serialization.cs" t="Include" />
+              <e p="Shark.cs" t="Include" />
+              <e p="Shark.Serialization.cs" t="Include" />
+              <e p="Siamese.cs" t="Include" />
+              <e p="Siamese.Serialization.cs" t="Include" />
+              <e p="SmartSalmon.cs" t="Include" />
+              <e p="SmartSalmon.Serialization.cs" t="Include" />
+              <e p="StringWrapper.cs" t="Include" />
+              <e p="StringWrapper.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="ArrayOperations.cs" t="Include" />
+              <e p="BasicOperations.cs" t="Include" />
+              <e p="DictionaryOperations.cs" t="Include" />
+              <e p="FlattencomplexOperations.cs" t="Include" />
+              <e p="InheritanceOperations.cs" t="Include" />
+              <e p="PolymorphicrecursiveOperations.cs" t="Include" />
+              <e p="PolymorphismOperations.cs" t="Include" />
+              <e p="PrimitiveOperations.cs" t="Include" />
+              <e p="ReadonlypropertyOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-date" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="DateOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-datetime" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="DatetimeOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-datetime-rfc1123" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="Datetimerfc1123Operations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-dictionary" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="Widget.cs" t="Include" />
+              <e p="Widget.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="DictionaryOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-duration" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="DurationOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-integer" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="IntOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-number" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="NumberOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="body-string" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Colors.cs" t="Include" />
+              <e p="Colors.Serialization.cs" t="Include" />
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="RefColorConstant.cs" t="Include" />
+              <e p="RefColorConstant.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="EnumOperations.cs" t="Include" />
+              <e p="StringOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="custom-baseUrl" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="PathsOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="custom-baseUrl-more-options" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="PathsOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="extensible-enums-swagger" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="DaysOfWeekExtensibleEnum.cs" t="Include" />
+              <e p="IntEnum.cs" t="Include" />
+              <e p="Pet.cs" t="Include" />
+              <e p="Pet.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="PetOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="header" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="GreyscaleColors.cs" t="Include" />
+              <e p="GreyscaleColors.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="HeaderOperations.cs" t="Include" />
+              <e p="ResponseBoolHeaders.cs" t="Include" />
+              <e p="ResponseByteHeaders.cs" t="Include" />
+              <e p="ResponseDateHeaders.cs" t="Include" />
+              <e p="ResponseDatetimeHeaders.cs" t="Include" />
+              <e p="ResponseDatetimeRfc1123Headers.cs" t="Include" />
+              <e p="ResponseDoubleHeaders.cs" t="Include" />
+              <e p="ResponseDurationHeaders.cs" t="Include" />
+              <e p="ResponseEnumHeaders.cs" t="Include" />
+              <e p="ResponseExistingKeyHeaders.cs" t="Include" />
+              <e p="ResponseFloatHeaders.cs" t="Include" />
+              <e p="ResponseIntegerHeaders.cs" t="Include" />
+              <e p="ResponseLongHeaders.cs" t="Include" />
+              <e p="ResponseProtectedKeyHeaders.cs" t="Include" />
+              <e p="ResponseStringHeaders.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="model-flattening" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include" />
+            <e p="Operations" t="Include" />
+          </e>
+        </e>
+        <e p="url" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="UriColor.cs" t="Include" />
+              <e p="UriColor.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="PathItemsOperations.cs" t="Include" />
+              <e p="PathsOperations.cs" t="Include" />
+              <e p="QueriesOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="url-multi-collectionFormat" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="QueriesOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="validation" t="Include">
+          <e p="Generated" t="Include">
+            <e p="Models" t="Include">
+              <e p="ChildProduct.cs" t="Include" />
+              <e p="ChildProduct.Serialization.cs" t="Include" />
+              <e p="ConstantProduct.cs" t="Include" />
+              <e p="ConstantProduct.Serialization.cs" t="Include" />
+              <e p="Error.cs" t="Include" />
+              <e p="Error.Serialization.cs" t="Include" />
+              <e p="Product.cs" t="Include" />
+              <e p="Product.Serialization.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="AllOperations.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+    </e>
+  </component>
+</project>

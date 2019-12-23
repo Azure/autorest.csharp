@@ -10,17 +10,27 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl
 {
-    internal static class PathsOperations
+    internal partial class PathsOperations
     {
-        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string accountName, string host = "host", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PathsOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
                 throw new ArgumentNullException(nameof(accountName));
-            }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
             }
 
             using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");

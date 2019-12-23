@@ -10,21 +10,35 @@ using Azure.Core.Pipeline;
 
 namespace url
 {
-    internal static class PathItemsOperations
+    internal partial class PathItemsOperations
     {
-        public static async ValueTask<Response> GetAllWithValuesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private string globalStringPath;
+        private string? globalStringQuery;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PathItemsOperations(string host, string globalStringPath, string? globalStringQuery, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
             if (globalStringPath == null)
             {
                 throw new ArgumentNullException(nameof(globalStringPath));
+            }
+
+            this.host = host;
+            this.globalStringPath = globalStringPath;
+            this.globalStringQuery = globalStringQuery;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response> GetAllWithValuesAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        {
+            if (pathItemStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(pathItemStringPath));
             }
             if (localStringPath == null)
             {
@@ -72,19 +86,11 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (pathItemStringPath == null)
             {
                 throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
             }
             if (localStringPath == null)
             {
@@ -132,19 +138,11 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (pathItemStringPath == null)
             {
                 throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
             }
             if (localStringPath == null)
             {
@@ -192,19 +190,11 @@ namespace url
                 throw;
             }
         }
-        public static async ValueTask<Response> GetLocalPathItemQueryNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string pathItemStringPath, string? pathItemStringQuery, string globalStringPath, string? globalStringQuery, string localStringPath, string? localStringQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (pathItemStringPath == null)
             {
                 throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
             }
             if (localStringPath == null)
             {

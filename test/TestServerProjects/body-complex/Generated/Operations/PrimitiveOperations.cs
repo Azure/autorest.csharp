@@ -12,14 +12,24 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    internal static class PrimitiveOperations
+    internal partial class PrimitiveOperations
     {
-        public static async ValueTask<Response<IntWrapper>> GetIntAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PrimitiveOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetInt");
             scope.Start();
@@ -48,12 +58,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutIntAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IntWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -86,12 +92,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<LongWrapper>> GetLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetLong");
             scope.Start();
@@ -120,12 +122,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, LongWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -158,12 +156,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<FloatWrapper>> GetFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetFloat");
             scope.Start();
@@ -192,12 +186,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, FloatWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -230,12 +220,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDouble");
             scope.Start();
@@ -264,12 +250,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DoubleWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -302,12 +284,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<BooleanWrapper>> GetBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetBool");
             scope.Start();
@@ -336,12 +314,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, BooleanWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -374,12 +348,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<StringWrapper>> GetStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetString");
             scope.Start();
@@ -408,12 +378,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, StringWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -446,12 +412,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DateWrapper>> GetDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDate");
             scope.Start();
@@ -480,12 +442,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -518,12 +476,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTime");
             scope.Start();
@@ -552,12 +506,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DatetimeWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -590,12 +540,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTimeRfc1123");
             scope.Start();
@@ -624,12 +570,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDateTimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Datetimerfc1123Wrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -662,12 +604,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<DurationWrapper>> GetDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetDuration");
             scope.Start();
@@ -696,12 +634,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DurationWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));
@@ -734,12 +668,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response<ByteWrapper>> GetByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetByte");
             scope.Start();
@@ -768,12 +698,8 @@ namespace body_complex
                 throw;
             }
         }
-        public static async ValueTask<Response> PutByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ByteWrapper complexBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (complexBody == null)
             {
                 throw new ArgumentNullException(nameof(complexBody));

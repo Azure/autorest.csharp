@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_number
 {
-    internal static class NumberOperations
+    internal partial class NumberOperations
     {
-        public static async ValueTask<Response<float>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public NumberOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<float>> GetInvalidFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidFloat");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetInvalidDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidDouble");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<decimal>> GetInvalidDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidDecimal");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, float numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigFloat");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<float>> GetBigFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigFloat");
             scope.Start();
@@ -217,12 +207,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDouble");
             scope.Start();
@@ -251,12 +237,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetBigDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDouble");
             scope.Start();
@@ -285,12 +267,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDoublePositiveDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDoublePositiveDecimal");
             scope.Start();
@@ -319,12 +297,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDoublePositiveDecimal");
             scope.Start();
@@ -353,12 +327,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDoubleNegativeDecimal");
             scope.Start();
@@ -387,12 +357,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDoubleNegativeDecimal");
             scope.Start();
@@ -421,12 +387,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, decimal numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimal");
             scope.Start();
@@ -455,12 +417,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<decimal>> GetBigDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimal");
             scope.Start();
@@ -489,12 +447,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimalPositiveDecimal");
             scope.Start();
@@ -523,12 +477,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimalPositiveDecimal");
             scope.Start();
@@ -557,12 +507,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimalNegativeDecimal");
             scope.Start();
@@ -591,12 +537,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimalNegativeDecimal");
             scope.Start();
@@ -625,12 +567,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutSmallFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, float numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutSmallFloat");
             scope.Start();
@@ -659,12 +597,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetSmallFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetSmallFloat");
             scope.Start();
@@ -693,12 +627,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutSmallDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, double numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutSmallDouble");
             scope.Start();
@@ -727,12 +657,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<double>> GetSmallDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetSmallDouble");
             scope.Start();
@@ -761,12 +687,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response> PutSmallDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, decimal numberBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.PutSmallDecimal");
             scope.Start();
@@ -795,12 +717,8 @@ namespace body_number
                 throw;
             }
         }
-        public static async ValueTask<Response<decimal>> GetSmallDecimalAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_number.GetSmallDecimal");
             scope.Start();

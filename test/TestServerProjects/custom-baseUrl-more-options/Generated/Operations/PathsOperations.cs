@@ -10,9 +10,29 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_more_options
 {
-    internal static class PathsOperations
+    internal partial class PathsOperations
     {
-        public static async ValueTask<Response> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string vault, string secret, string keyName, string subscriptionId, string? keyVersion, string dnsSuffix = "host", CancellationToken cancellationToken = default)
+        private string dnsSuffix;
+        private string subscriptionId;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PathsOperations(string dnsSuffix, string subscriptionId, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        {
+            if (dnsSuffix == null)
+            {
+                throw new ArgumentNullException(nameof(dnsSuffix));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            this.dnsSuffix = dnsSuffix;
+            this.subscriptionId = subscriptionId;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response> GetEmptyAsync(string vault, string secret, string keyName, string? keyVersion, CancellationToken cancellationToken = default)
         {
             if (vault == null)
             {
@@ -22,17 +42,9 @@ namespace custom_baseUrl_more_options
             {
                 throw new ArgumentNullException(nameof(secret));
             }
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
             if (keyName == null)
             {
                 throw new ArgumentNullException(nameof(keyName));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
             }
 
             using var scope = clientDiagnostics.CreateScope("custom_baseUrl_more_options.GetEmpty");

@@ -18,96 +18,96 @@ namespace AutoRest.TestServer.Tests
         public UrlTests(TestServerVersion version) : base(version) { }
 
         [Test]
-        public Task UrlPathsStringEmpty() => TestStatus(async (host, pipeline) => await PathsOperations.StringEmptyAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsStringEmpty() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).StringEmptyAsync());
 
         [Test]
         [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
-        public Task UrlPathsEnumValid() => TestStatus(async (host, pipeline) => await PathsOperations.EnumValidAsync(ClientDiagnostics, pipeline, UriColor.GreenColor, host));
+        public Task UrlPathsEnumValid() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).EnumValidAsync( UriColor.GreenColor));
 
         [Test]
-        public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await PathsOperations.StringUrlEncodedAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).StringUrlEncodedAsync());
 
         [Test]
         [Ignore("Don't have null-checks yet")]
-        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringNullAsync(ClientDiagnostics, pipeline, null, host));
+        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).StringNullAsync( null));
 
         [Test]
         [Ignore("Wasn't able to find a server endpoint for this")]
-        public Task UrlStringUnicodeAsync() => TestStatus(async (host, pipeline) => await PathsOperations.StringUnicodeAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlStringUnicodeAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).StringUnicodeAsync());
 
         [Test]
-        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host, pipeline) => await PathsOperations.ArrayCsvInPathAsync(ClientDiagnostics, pipeline, new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }, host));
+        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).ArrayCsvInPathAsync( new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlPathsStringBase64Url() => TestStatus(async (host, pipeline) => await PathsOperations.Base64UrlAsync(ClientDiagnostics, pipeline, Encoding.UTF8.GetBytes("lorem"), host));
+        public Task UrlPathsStringBase64Url() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).Base64UrlAsync( Encoding.UTF8.GetBytes("lorem")));
 
         [Test]
-        public Task UrlPathsByteEmpty() => TestStatus(async (host, pipeline) => await PathsOperations.ByteEmptyAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsByteEmpty() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).ByteEmptyAsync());
 
         [Test]
-        public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await PathsOperations.ByteMultiByteAsync(ClientDiagnostics, pipeline, TestConstants.ByteArray, host));
+        public Task UrlPathsByteMultiByte() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).ByteMultiByteAsync( TestConstants.ByteArray));
 
         [Test]
         public void UrlByteNullAsync()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await PathsOperations.ByteNullAsync(ClientDiagnostics, null, null, host: string.Empty));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsOperations("", ClientDiagnostics, null).ByteNullAsync(null));
         }
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlUrlDateNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.DateNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+        public Task UrlUrlDateNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DateNullAsync( new DateTime()));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.EnumNullAsync(ClientDiagnostics, pipeline, new UriColor(), host));
+        public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).EnumNullAsync( new UriColor()));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeNullAsync(ClientDiagnostics, pipeline, new DateTime(), host));
+        public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DateTimeNullAsync( new DateTime()));
 
         [Test]
-        public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateValidAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DateValidAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
-        public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await PathsOperations.DateTimeValidAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DateTimeValidAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
-        public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await PathsOperations.GetTenBillionAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetTenBillionAsync());
 
         [Test]
-        public Task UrlPathsIntUnixTime() => TestStatus(async (host, pipeline) => await PathsOperations.UnixTimeUrlAsync(ClientDiagnostics, pipeline, DateTimeOffset.FromUnixTimeSeconds(1460505600L).UtcDateTime, host));
+        public Task UrlPathsIntUnixTime() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).UnixTimeUrlAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600L).UtcDateTime));
 
         [Test]
-        public Task UrlPathsIntNegative() => TestStatus(async (host, pipeline) => await PathsOperations.GetIntNegativeOneMillionAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsIntNegative() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetIntNegativeOneMillionAsync());
 
         [Test]
-        public Task UrlPathsIntPositive() => TestStatus(async (host, pipeline) => await PathsOperations.GetIntOneMillionAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsIntPositive() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetIntOneMillionAsync());
 
         [Test]
-        public Task UrlPathsBoolTrue() => TestStatus(async (host, pipeline) => await PathsOperations.GetBooleanTrueAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsBoolTrue() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetBooleanTrueAsync());
 
         [Test]
-        public Task UrlPathsBoolFalse() => TestStatus(async (host, pipeline) => await PathsOperations.GetBooleanFalseAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsBoolFalse() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetBooleanFalseAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
-        public Task UrlPathsLongNegative() => TestStatus(async (host, pipeline) => await PathsOperations.GetNegativeTenBillionAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsLongNegative() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).GetNegativeTenBillionAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
-        public Task UrlPathsFloatPositive() => TestStatus(async (host, pipeline) => await PathsOperations.FloatScientificPositiveAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsFloatPositive() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).FloatScientificPositiveAsync());
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
-        public Task UrlPathsFloatNegative() => TestStatus(async (host, pipeline) => await PathsOperations.FloatScientificNegativeAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsFloatNegative() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).FloatScientificNegativeAsync());
 
         [Test]
-        public Task UrlPathsDoubleNegative() => TestStatus(async (host, pipeline) => await PathsOperations.DoubleDecimalNegativeAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsDoubleNegative() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DoubleDecimalNegativeAsync());
 
         [Test]
-        public Task UrlPathsDoublePositive() => TestStatus(async (host, pipeline) => await PathsOperations.DoubleDecimalPositiveAsync(ClientDiagnostics, pipeline, host));
+        public Task UrlPathsDoublePositive() => TestStatus(async (host, pipeline) => await new PathsOperations(host, ClientDiagnostics, pipeline).DoubleDecimalPositiveAsync());
 
 
         [Test]

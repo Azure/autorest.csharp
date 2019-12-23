@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
@@ -18,15 +15,48 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientBuilder
     {
-        public static ServiceClient BuildClient(OperationGroup arg) =>
-            new ServiceClient(arg.CSharpName(), arg.Operations.Select(BuildMethod).Where(method => method != null).ToArray()!);
+        public static ServiceClient BuildClient(OperationGroup arg)
+        {
+            List<ClientMethod> methods = new List<ClientMethod>();
+            Dictionary<Parameter, ServiceClientParameter> clientParameters = new Dictionary<Parameter, ServiceClientParameter>();
 
-        private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter) =>
-            requestParameter.ClientDefaultValue != null ?
-                ClientModelBuilderHelpers.ParseClientConstant(requestParameter.ClientDefaultValue, (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable())) :
-                (ClientConstant?)null;
+            var allClientParameters = arg.Operations
+                .SelectMany(op => op.Request.Parameters)
+                .Where(p => p.Implementation == ImplementationLocation.Client)
+                .Distinct();
 
-        private static ClientMethod? BuildMethod(Operation operation)
+            foreach (Parameter clientParameter in allClientParameters)
+            {
+                clientParameters.Add(clientParameter, BuildParameter(clientParameter));
+            }
+
+            foreach (Operation operation in arg.Operations)
+            {
+                var method = BuildMethod(operation, clientParameters);
+                if (method != null)
+                {
+                    methods.Add(method);
+                }
+            }
+
+            return new ServiceClient(arg.CSharpName(),
+                clientParameters.Values.ToArray(),
+                methods.ToArray());
+        }
+
+        private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter)
+        {
+            if (requestParameter.ClientDefaultValue != null)
+            {
+                return ClientModelBuilderHelpers.ParseClientConstant(
+                    requestParameter.ClientDefaultValue,
+                    (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()));
+            }
+
+            return null;
+        }
+
+        private static ClientMethod? BuildMethod(Operation operation, Dictionary<Parameter, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses
@@ -43,7 +73,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
 
-            List<ServiceClientMethodParameter> methodParameters = new List<ServiceClientMethodParameter>();
+            List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
 
             RequestBody? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
@@ -53,35 +83,44 @@ namespace AutoRest.CSharp.V3.ClientModels
                 ConstantOrParameter? constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
-                switch (requestParameter.Schema)
+                if (requestParameter.Implementation == ImplementationLocation.Method)
                 {
-                    case ConstantSchema constant:
-                        constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
-                        valueSchema = constant.ValueType;
-                        break;
-                    case BinarySchema _:
-                        // skip
-                        continue;
-                    //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
-                    case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
-                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
-                            new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
-                            CreateDefaultValueConstant(requestParameter), false);
-                        break;
-                    //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
-                    case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
-                        constantOrParameter = new ServiceClientMethodParameter(requestParameter.CSharpName(),
-                            new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
-                            CreateDefaultValueConstant(requestParameter), false);
-                        break;
-                    default:
-                        constantOrParameter = new ServiceClientMethodParameter(
-                            requestParameter.CSharpName(),
-                            ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                            CreateDefaultValueConstant(requestParameter),
-                            requestParameter.Required == true);
-                        break;
+                    switch (requestParameter.Schema)
+                    {
+                        case ConstantSchema constant:
+                            constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
+                            valueSchema = constant.ValueType;
+                            break;
+                        case BinarySchema _:
+                            // skip
+                            continue;
+                        //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
+                        case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
+                            constantOrParameter = new ServiceClientParameter(requestParameter.CSharpName(),
+                                new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
+                                CreateDefaultValueConstant(requestParameter), false);
+                            break;
+                        //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
+                        case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
+                            constantOrParameter = new ServiceClientParameter(requestParameter.CSharpName(),
+                                new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
+                                CreateDefaultValueConstant(requestParameter), false);
+                            break;
+                        default:
+                            constantOrParameter = BuildParameter(requestParameter);
+                            break;
+                    }
+
+                    if (!constantOrParameter.Value.IsConstant)
+                    {
+                        methodParameters.Add(constantOrParameter.Value.Parameter);
+                    }
                 }
+                else
+                {
+                    constantOrParameter = clientParameters[requestParameter];
+                }
+
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
@@ -106,10 +145,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                     }
                 }
 
-                if (!constantOrParameter.Value.IsConstant)
-                {
-                    methodParameters.Add(constantOrParameter.Value.Parameter);
-                }
             }
 
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
@@ -146,6 +181,15 @@ namespace AutoRest.CSharp.V3.ClientModels
                 methodParameters.ToArray(),
                 clientResponse
             );
+        }
+
+        private static ServiceClientParameter BuildParameter(Parameter requestParameter)
+        {
+            return new ServiceClientParameter(
+                requestParameter.CSharpName(),
+                ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+                CreateDefaultValueConstant(requestParameter),
+                requestParameter.Required == true);
         }
 
         private static ResponseHeaderModel? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)

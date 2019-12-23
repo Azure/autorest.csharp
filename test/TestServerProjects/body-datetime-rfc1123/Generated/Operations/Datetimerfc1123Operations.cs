@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_datetime_rfc1123
 {
-    internal static class Datetimerfc1123Operations
+    internal partial class Datetimerfc1123Operations
     {
-        public static async ValueTask<Response<DateTimeOffset>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public Datetimerfc1123Operations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetInvalid");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetOverflow");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUnderflow");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response> PutUtcMaxDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset datetimeBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.PutUtcMaxDateTime");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcLowercaseMaxDateTime");
             scope.Start();
@@ -217,12 +207,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcUppercaseMaxDateTime");
             scope.Start();
@@ -251,12 +237,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response> PutUtcMinDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset datetimeBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.PutUtcMinDateTime");
             scope.Start();
@@ -285,12 +267,8 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcMinDateTime");
             scope.Start();

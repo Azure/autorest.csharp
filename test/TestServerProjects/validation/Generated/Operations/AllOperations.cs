@@ -12,9 +12,15 @@ using validation.Models.V100;
 
 namespace validation
 {
-    internal static class AllOperations
+    internal partial class AllOperations
     {
-        public static async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string resourceGroupName, int id, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private string subscriptionId;
+        private string ApiVersion;
+        private string ApiVersion;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public AllOperations(string host, string subscriptionId, string ApiVersion, string ApiVersion, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             if (host == null)
             {
@@ -24,6 +30,24 @@ namespace validation
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
+            if (ApiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(ApiVersion));
+            }
+            if (ApiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(ApiVersion));
+            }
+
+            this.host = host;
+            this.subscriptionId = subscriptionId;
+            this.ApiVersion = ApiVersion;
+            this.ApiVersion = ApiVersion;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
+        {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -42,7 +66,7 @@ namespace validation
                 request.Uri.AppendPath(resourceGroupName, true);
                 request.Uri.AppendPath("/", false);
                 request.Uri.AppendPath(id, true);
-                request.Uri.AppendQuery("apiVersion", "1.0.0", true);
+                request.Uri.AppendQuery("apiVersion", ApiVersion, true);
                 var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
                 switch (response.Status)
                 {
@@ -62,16 +86,8 @@ namespace validation
                 throw;
             }
         }
-        public static async ValueTask<Response<Product>> ValidationOfBodyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string resourceGroupName, int id, Product? body, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -91,7 +107,7 @@ namespace validation
                 request.Uri.AppendPath("/", false);
                 request.Uri.AppendPath(id, true);
                 request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("apiVersion", "1.0.0", true);
+                request.Uri.AppendQuery("apiVersion", ApiVersion, true);
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
@@ -114,12 +130,8 @@ namespace validation
                 throw;
             }
         }
-        public static async ValueTask<Response> GetWithConstantInPathAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("validation.GetWithConstantInPath");
             scope.Start();
@@ -146,12 +158,8 @@ namespace validation
                 throw;
             }
         }
-        public static async ValueTask<Response<Product>> PostWithConstantInBodyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Product? body, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product? body, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("validation.PostWithConstantInBody");
             scope.Start();

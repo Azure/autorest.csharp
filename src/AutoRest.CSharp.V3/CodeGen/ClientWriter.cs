@@ -2,19 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using YamlDotNet.Serialization;
-using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -33,15 +31,54 @@ namespace AutoRest.CSharp.V3.CodeGen
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                using (writer.Class("internal", "static", cs.Name))
+                using (writer.Class("internal", "partial", cs.Name))
                 {
+                    WriteClientFields(writer, operationGroup);
+
+                    WriteClientCtor(writer, operationGroup, cs);
+
                     foreach (var method in operationGroup.Methods)
                     {
                         WriteOperation(writer, method, cs.Namespace);
                     }
                 }
             }
+
             return true;
+        }
+
+        private void WriteClientFields(CodeWriter writer, ServiceClient operationGroup)
+        {
+            foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+            {
+                writer.Line($"private {_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name};");
+            }
+
+            writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
+            writer.Line($"private {typeof(HttpPipeline)} pipeline;");
+        }
+
+        private void WriteClientCtor(CodeWriter writer, ServiceClient operationGroup, CSharpType cs)
+        {
+            writer.Append($"public {cs.Name:D}(");
+            foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+            {
+                writer.Append($"{_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name}, ");
+            }
+
+            writer.Line($"{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline)");
+            using (writer.Scope())
+            {
+                WriteParameterNullChecks(writer, operationGroup.Parameters);
+
+                foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+                {
+                    writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
+                }
+
+                writer.Line($"this.clientDiagnostics = clientDiagnostics;");
+                writer.Line($"this.pipeline = pipeline;");
+            }
         }
 
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
@@ -61,8 +98,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
 
-            var parametersText = new[] { writer.Pair(writer.Type(typeof(ClientDiagnostics)), "clientDiagnostics"), writer.Pair(typeof(HttpPipeline), "pipeline") }
-                .Concat(operation.Parameters
+            var parametersText =
+                    operation.Parameters
                     .OrderBy(p => p.DefaultValue != null)
                     .Select(parameter =>
                     {
@@ -71,13 +108,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                         var shouldBeDefaulted = parameter.DefaultValue != null;
                         //TODO: This will only work if the parameter is a string parameter
                         return shouldBeDefaulted ? $"{pair} = {(parameter.DefaultValue != null ? $"\"{parameter.DefaultValue.Value.Value}\"" : "default")}" : pair;
-                    }))
+                    })
                 .Append($"{writer.Pair(typeof(CancellationToken), "cancellationToken")} = default").ToArray();
 
             var methodName = operation.Name;
-            using (writer.Method("public static async", writer.Type(returnType), $"{methodName}Async", parametersText))
+            using (writer.Method("public async", writer.Type(returnType), $"{methodName}Async", parametersText))
             {
-                WriteParameterNullChecks(writer, operation);
+                WriteParameterNullChecks(writer, operation.Parameters);
 
                 writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace.FullName}.{methodName}\");");
                 //TODO: Implement attribute logic
@@ -154,9 +191,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteParameterNullChecks(CodeWriter writer, ClientMethod operation)
+        private void WriteParameterNullChecks(CodeWriter writer, IEnumerable<ServiceClientParameter> parameters)
         {
-            foreach (ServiceClientMethodParameter parameter in operation.Parameters)
+            foreach (ServiceClientParameter parameter in parameters)
             {
                 var cs = _typeFactory.CreateType(parameter.Type);
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
