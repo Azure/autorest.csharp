@@ -60,13 +60,14 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteClientCtor(CodeWriter writer, ServiceClient operationGroup, CSharpType cs)
         {
-            writer.Append($"public {cs.Name:D}(");
+            writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
             {
-                writer.Append($"{_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name}, ");
+                WriteParameter(writer, clientParameter);
             }
 
-            writer.Line($"{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline)");
+            writer.RemoveTrailingComma();
+            writer.Line($")");
             using (writer.Scope())
             {
                 WriteParameterNullChecks(writer, operationGroup.Parameters);
@@ -79,6 +80,17 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"this.clientDiagnostics = clientDiagnostics;");
                 writer.Line($"this.pipeline = pipeline;");
             }
+        }
+
+        private void WriteParameter(CodeWriter writer, ServiceClientParameter clientParameter)
+        {
+            writer.Append($"{_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name}");
+            if (clientParameter.DefaultValue != null)
+            {
+                writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+            }
+
+            writer.AppendRaw(",");
         }
 
         private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
@@ -98,21 +110,15 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
 
-            var parametersText =
-                    operation.Parameters
-                    .OrderBy(p => p.DefaultValue != null)
-                    .Select(parameter =>
-                    {
-                        Debug.Assert(parameter != null);
-                        var pair = writer.Pair(_typeFactory.CreateInputType(parameter.Type), parameter.Name);
-                        var shouldBeDefaulted = parameter.DefaultValue != null;
-                        //TODO: This will only work if the parameter is a string parameter
-                        return shouldBeDefaulted ? $"{pair} = {(parameter.DefaultValue != null ? $"\"{parameter.DefaultValue.Value.Value}\"" : "default")}" : pair;
-                    })
-                .Append($"{writer.Pair(typeof(CancellationToken), "cancellationToken")} = default").ToArray();
-
             var methodName = operation.Name;
-            using (writer.Method("public async", writer.Type(returnType), $"{methodName}Async", parametersText))
+            writer.Append($"public async {returnType} {methodName}Async(");
+            foreach (ServiceClientParameter parameter in operation.Parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken)");
+
+            using (writer.Scope())
             {
                 WriteParameterNullChecks(writer, operation.Parameters);
 

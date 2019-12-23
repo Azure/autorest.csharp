@@ -40,8 +40,13 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             return new ServiceClient(arg.CSharpName(),
-                clientParameters.Values.ToArray(),
+                OrderParameters(clientParameters.Values),
                 methods.ToArray());
+        }
+
+        private static ServiceClientParameter[] OrderParameters(IEnumerable<ServiceClientParameter> parameters)
+        {
+            return parameters.OrderBy(p => p.DefaultValue == null).ToArray();
         }
 
         private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter)
@@ -178,7 +183,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientMethod(
                 operation.CSharpName(),
                 request,
-                methodParameters.ToArray(),
+                OrderParameters(methodParameters),
                 clientResponse
             );
         }

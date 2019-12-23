@@ -18,7 +18,7 @@ namespace body_dictionary
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public DictionaryOperations(string host, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        public DictionaryOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -29,7 +29,7 @@ namespace body_dictionary
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNull");
@@ -63,7 +63,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetEmpty");
@@ -97,7 +97,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -137,7 +137,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNullValue");
@@ -171,7 +171,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetNullKey");
@@ -205,7 +205,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetEmptyStringKey");
@@ -239,7 +239,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetInvalid");
@@ -273,7 +273,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanTfft");
@@ -307,7 +307,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -347,7 +347,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanInvalidNull");
@@ -381,7 +381,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBooleanInvalidString");
@@ -415,7 +415,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntegerValid");
@@ -449,7 +449,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -489,7 +489,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntInvalidNull");
@@ -523,7 +523,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetIntInvalidString");
@@ -557,7 +557,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongValid");
@@ -591,7 +591,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -631,7 +631,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongInvalidNull");
@@ -665,7 +665,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetLongInvalidString");
@@ -699,7 +699,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatValid");
@@ -733,7 +733,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -773,7 +773,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatInvalidNull");
@@ -807,7 +807,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetFloatInvalidString");
@@ -841,7 +841,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleValid");
@@ -875,7 +875,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -915,7 +915,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleInvalidNull");
@@ -949,7 +949,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDoubleInvalidString");
@@ -983,7 +983,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringValid");
@@ -1017,7 +1017,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1057,7 +1057,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringWithNull");
@@ -1091,7 +1091,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetStringWithInvalid");
@@ -1125,7 +1125,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateValid");
@@ -1159,7 +1159,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1199,7 +1199,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateInvalidNull");
@@ -1233,7 +1233,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateInvalidChars");
@@ -1267,7 +1267,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeValid");
@@ -1301,7 +1301,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1341,7 +1341,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeInvalidNull");
@@ -1375,7 +1375,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeInvalidChars");
@@ -1409,7 +1409,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDateTimeRfc1123Valid");
@@ -1443,7 +1443,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1483,7 +1483,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDurationValid");
@@ -1517,7 +1517,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1557,7 +1557,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteValid");
@@ -1591,7 +1591,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutByteValidAsync(IDictionary<string, Byte[]> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteValidAsync(IDictionary<string, Byte[]> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1631,7 +1631,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteInvalidNull");
@@ -1665,7 +1665,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBase64Url");
@@ -1699,7 +1699,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexNull");
@@ -1733,7 +1733,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexEmpty");
@@ -1767,7 +1767,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexItemNull");
@@ -1801,7 +1801,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexItemEmpty");
@@ -1835,7 +1835,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetComplexValid");
@@ -1869,7 +1869,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -1909,7 +1909,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayNull");
@@ -1948,7 +1948,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayEmpty");
@@ -1987,7 +1987,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayItemNull");
@@ -2026,7 +2026,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayItemEmpty");
@@ -2065,7 +2065,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetArrayValid");
@@ -2104,7 +2104,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
@@ -2149,7 +2149,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryNull");
@@ -2183,7 +2183,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryEmpty");
@@ -2217,7 +2217,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryItemNull");
@@ -2251,7 +2251,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryItemEmpty");
@@ -2285,7 +2285,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetDictionaryValid");
@@ -2319,7 +2319,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken)
         {
             if (arrayBody == null)
             {
