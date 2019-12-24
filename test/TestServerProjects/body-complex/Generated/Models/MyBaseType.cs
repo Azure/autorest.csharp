@@ -9,7 +9,7 @@ namespace body_complex.Models.V20160229
         {
             Kind = null;
         }
-        public string Kind { get; internal set; }
+        public string Kind { get; internal set; } = "Kind1";
         public string? PropB1 { get; set; }
         public MyBaseHelperType? Helper { get; set; }
     }

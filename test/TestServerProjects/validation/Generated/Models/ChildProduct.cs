@@ -5,7 +5,7 @@ namespace validation.Models.V100
 {
     public partial class ChildProduct
     {
-        public string ConstProperty { get; set; }
+        public string ConstProperty { get; set; } = "constant";
         public int? Count { get; set; }
     }
 }
