@@ -21,8 +21,6 @@ use-extension:
 pipeline:
   cs-modeler:
     input: modelerfour/identity
-    flatten-models: true    
-    flatten-payloads: true
   cs-modeler/emitter:
     input: cs-modeler
     scope: output-scope
