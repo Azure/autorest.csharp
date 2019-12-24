@@ -5,12 +5,12 @@ using AutoRest.CSharp.V3.ClientModels.Serialization;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class RequestBody
+    internal class JsonRequestBody
     {
         public ConstantOrParameter Value { get; }
         public JsonSerialization Serialization { get; }
 
-        public RequestBody(ConstantOrParameter value, JsonSerialization serialization)
+        public JsonRequestBody(ConstantOrParameter value, JsonSerialization serialization)
         {
             Value = value;
             Serialization = serialization;

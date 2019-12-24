@@ -56,7 +56,7 @@ $testNames = if ($name) { $name } else
     'body-datetime-rfc1123',
     'body-dictionary',
     'body-duration',
-    #'body-file',
+    'body-file',
     #'body-formdata',
     #'body-formdata-urlencoded',
     'body-integer',
