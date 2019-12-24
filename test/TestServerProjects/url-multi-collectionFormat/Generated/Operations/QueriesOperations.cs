@@ -27,7 +27,7 @@ namespace url_multi_collectionFormat
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        public async ValueTask<Response> ArrayStringMultiNullAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiNull");
@@ -57,7 +57,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringMultiEmptyAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiEmpty");
@@ -87,7 +87,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringMultiValidAsync(ICollection<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiValid");

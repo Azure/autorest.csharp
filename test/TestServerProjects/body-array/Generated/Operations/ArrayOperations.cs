@@ -131,7 +131,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutEmptyAsync(ICollection<string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -204,7 +204,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutBooleanTfftAsync(ICollection<bool> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -345,7 +345,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutIntegerValidAsync(ICollection<int> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -486,7 +486,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutLongValidAsync(ICollection<long> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -627,7 +627,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutFloatValidAsync(ICollection<float> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -768,7 +768,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDoubleValidAsync(ICollection<double> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -909,7 +909,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutStringValidAsync(ICollection<string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -982,7 +982,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutEnumValidAsync(ICollection<FooEnum> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1055,7 +1055,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutStringEnumValidAsync(ICollection<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1196,7 +1196,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutUuidValidAsync(ICollection<string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1303,7 +1303,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateValidAsync(ICollection<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1444,7 +1444,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateTimeValidAsync(ICollection<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1585,7 +1585,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(ICollection<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1658,7 +1658,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDurationValidAsync(ICollection<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1731,7 +1731,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutByteValidAsync(ICollection<Byte[]> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteValidAsync(IEnumerable<Byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2008,7 +2008,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutComplexValidAsync(ICollection<Product> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2242,7 +2242,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutArrayValidAsync(ICollection<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2481,7 +2481,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutDictionaryValidAsync(ICollection<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {

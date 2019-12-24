@@ -17,6 +17,6 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task CustomBaseUriMoreOptions() => TestStatus(async (host, pipeline) =>
-            await new custom_baseUrl_more_options.PathsOperations(ClientDiagnostics, pipeline, host, dnsSuffix: string.Empty).GetEmptyAsync( string.Empty, "key1", "test12", "v1"));
+            await new custom_baseUrl_more_options.PathsOperations(ClientDiagnostics, pipeline, "test12", dnsSuffix: host).GetEmptyAsync( string.Empty, string.Empty, "key1",  "v1"));
     }
 }

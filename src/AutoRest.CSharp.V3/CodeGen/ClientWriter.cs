@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteParameter(CodeWriter writer, ServiceClientParameter clientParameter)
         {
-            writer.Append($"{_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name}");
+            writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name}");
             if (clientParameter.DefaultValue != null)
             {
                 writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");

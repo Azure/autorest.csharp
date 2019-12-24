@@ -692,7 +692,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayCsvInPathAsync(ICollection<string> arrayPath, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
             {
