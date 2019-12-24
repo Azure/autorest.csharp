@@ -12,14 +12,24 @@ using body_string.Models.V100;
 
 namespace body_string
 {
-    internal static class EnumOperations
+    internal partial class EnumOperations
     {
-        public static async ValueTask<Response<Colors>> GetNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public EnumOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetNotExpandable");
             scope.Start();
@@ -48,12 +58,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutNotExpandableAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutNotExpandable");
             scope.Start();
@@ -82,12 +88,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Colors>> GetReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetReferenced");
             scope.Start();
@@ -116,12 +118,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutReferencedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Colors enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutReferenced");
             scope.Start();
@@ -150,12 +148,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetReferencedConstant");
             scope.Start();
@@ -184,12 +178,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutReferencedConstantAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, RefColorConstant enumStringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (enumStringBody == null)
             {
                 throw new ArgumentNullException(nameof(enumStringBody));

@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_duration
 {
-    internal static class DurationOperations
+    internal partial class DurationOperations
     {
-        public static async ValueTask<Response<TimeSpan>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public DurationOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_duration.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_duration
                 throw;
             }
         }
-        public static async ValueTask<Response> PutPositiveDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TimeSpan durationBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_duration.PutPositiveDuration");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_duration
                 throw;
             }
         }
-        public static async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_duration.GetPositiveDuration");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_duration
                 throw;
             }
         }
-        public static async ValueTask<Response<TimeSpan>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_duration.GetInvalid");
             scope.Start();

@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicValid() => Test(async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
             Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
@@ -37,13 +37,13 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Color = CMYKColors.Magenta
             };
-            return await BasicOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new BasicOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexBasicEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetEmptyAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetEmptyAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -53,7 +53,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("https://github.com/Azure/autorest.csharp/issues/299")]
         public Task GetComplexBasicNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -62,7 +62,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -72,7 +72,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
         public Task GetComplexBasicInvalid() => Test(async (host, pipeline) =>
         {
-            var result = await BasicOperations.GetInvalidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -89,7 +89,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetIntAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetIntAsync();
             Assert.AreEqual(-1, result.Value.Field1);
             Assert.AreEqual(2, result.Value.Field2);
         });
@@ -102,7 +102,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = -1,
                 Field2 = 2
             };
-            return await PrimitiveOperations.PutIntAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutIntAsync( value);
         });
 
         [Test]
@@ -116,7 +116,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetLongAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetLongAsync();
             Assert.AreEqual(1099511627775L, result.Value.Field1);
             Assert.AreEqual(-999511627788L, result.Value.Field2);
         });
@@ -129,7 +129,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 1099511627775L,
                 Field2 = -999511627788L
             };
-            return await PrimitiveOperations.PutLongAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutLongAsync( value);
         });
 
         [Test]
@@ -143,7 +143,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveFloat() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetFloatAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetFloatAsync();
             Assert.AreEqual(1.05F, result.Value.Field1);
             Assert.AreEqual(-0.003F, result.Value.Field2);
         });
@@ -156,7 +156,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 1.05F,
                 Field2 = -0.003F
             };
-            return await PrimitiveOperations.PutFloatAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutFloatAsync( value);
         });
 
         [Test]
@@ -170,7 +170,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveDouble() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetDoubleAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetDoubleAsync();
             Assert.AreEqual(3e-100D, result.Value.Field1);
             Assert.AreEqual(-0.000000000000000000000000000000000000000000000000000000005D, result.Value.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
         });
@@ -183,13 +183,13 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 3e-100D,
                 Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = -0.000000000000000000000000000000000000000000000000000000005D
             };
-            return await PrimitiveOperations.PutDoubleAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutDoubleAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveBool() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetBoolAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetBoolAsync();
             Assert.AreEqual(true, result.Value.FieldTrue);
             Assert.AreEqual(false, result.Value.FieldFalse);
         });
@@ -202,13 +202,13 @@ namespace AutoRest.TestServer.Tests
                 FieldTrue = true,
                 FieldFalse = false
             };
-            return await PrimitiveOperations.PutBoolAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutBoolAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveString() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetStringAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetStringAsync();
             Assert.AreEqual("goodrequest", result.Value.Field);
             Assert.AreEqual(string.Empty, result.Value.Empty);
             Assert.AreEqual(null, result.Value.NullProperty);
@@ -223,13 +223,13 @@ namespace AutoRest.TestServer.Tests
                 Empty = string.Empty,
                 NullProperty = null
             };
-            return await PrimitiveOperations.PutStringAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutStringAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDate() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetDateAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetDateAsync();
             Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("2016-02-29"), result.Value.Leap);
         });
@@ -242,13 +242,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.Parse("0001-01-01"),
                 Leap = DateTimeOffset.Parse("2016-02-29")
             };
-            return await PrimitiveOperations.PutDateAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutDateAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetDateTimeAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z"), result.Value.Now);
         });
@@ -262,13 +262,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.Parse("0001-01-01T00:00:00Z"),
                 Now = DateTimeOffset.Parse("2015-05-18T18:38:00Z")
             };
-            return await PrimitiveOperations.PutDateTimeAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutDateTimeAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetDateTimeRfc1123Async(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetDateTimeRfc1123Async();
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
@@ -281,13 +281,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"),
                 Now = DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT")
             };
-            return await PrimitiveOperations.PutDateTimeRfc1123Async(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutDateTimeRfc1123Async( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDuration() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetDurationAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetDurationAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), result.Value.Field);
         });
 
@@ -298,13 +298,13 @@ namespace AutoRest.TestServer.Tests
             {
                 Field = XmlConvert.ToTimeSpan("P123DT22H14M12.011S")
             };
-            return await PrimitiveOperations.PutDurationAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutDurationAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveByte() => Test(async (host, pipeline) =>
         {
-            var result = await PrimitiveOperations.GetByteAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PrimitiveOperations(ClientDiagnostics, pipeline, host).GetByteAsync();
             var content = new byte[] { 0xFF, 0xFE, 0xFD, 0xFC, 0x00, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6 };
             Assert.AreEqual(content, result.Value.Field);
         });
@@ -317,13 +317,13 @@ namespace AutoRest.TestServer.Tests
             {
                 Field = content
             };
-            return await PrimitiveOperations.PutByteAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PrimitiveOperations(ClientDiagnostics, pipeline, host).PutByteAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayValid() => Test(async (host, pipeline) =>
         {
-            var result = await ArrayOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new ArrayOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             var content = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
             Assert.AreEqual(content, result.Value.Array);
         });
@@ -333,13 +333,13 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new ArrayWrapper();
             value.Array = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
-            return await ArrayOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new ArrayOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await ArrayOperations.GetEmptyAsync(ClientDiagnostics, pipeline, host);
+            var result = await new ArrayOperations(ClientDiagnostics, pipeline, host).GetEmptyAsync();
             Assert.AreEqual(new string[0], result.Value.Array);
         });
 
@@ -348,13 +348,13 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new ArrayWrapper();
             value.Array = new List<string>();
-            return await ArrayOperations.PutEmptyAsync(ClientDiagnostics, pipeline, value, host);
+            return await new ArrayOperations(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await ArrayOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
+            var result = await new ArrayOperations(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual(null, result.Value.Array);
         });
@@ -362,7 +362,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexDictionaryValid() => Test(async (host, pipeline) =>
         {
-            var result = await DictionaryOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             var content = new Dictionary<string, string?>
             {
                 { "txt", "notepad" },
@@ -386,13 +386,13 @@ namespace AutoRest.TestServer.Tests
                 { "exe", string.Empty },
                 { string.Empty, null }
             };
-            return await DictionaryOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexDictionaryEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await DictionaryOperations.GetEmptyAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetEmptyAsync();
             Assert.AreEqual(new Dictionary<string, string?>(), result.Value.DefaultProgram);
         });
 
@@ -401,13 +401,13 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DictionaryWrapper();
             value.DefaultProgram = new Dictionary<string, string?>();
-            return await DictionaryOperations.PutEmptyAsync(ClientDiagnostics, pipeline, value, host);
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
         });
 
         [Test]
         public Task GetComplexDictionaryNull() => Test(async (host, pipeline) =>
         {
-            var result = await DictionaryOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual(null, result.Value.DefaultProgram);
         });
@@ -415,7 +415,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexDictionaryNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await DictionaryOperations.GetNotProvidedAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual(null, result.Value.DefaultProgram);
         });
@@ -423,7 +423,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexInheritanceValid() => Test(async (host, pipeline) =>
         {
-            var result = await InheritanceOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new InheritanceOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             Assert.AreEqual("persian", result.Value.Breed);
             Assert.AreEqual("green", result.Value.Color);
             var hates = result.Value.Hates.ToArray();
@@ -465,13 +465,13 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Name = "Siameeee"
             };
-            return await InheritanceOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new InheritanceOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexPolymorphismValid() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphismOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
 
             var value = (Salmon)result.Value;
             Assert.AreEqual("salmon", value.Fishtype);
@@ -544,13 +544,13 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await PolymorphismOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PolymorphismOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphismOperations.GetComplicatedAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetComplicatedAsync();
 
             var value = (SmartSalmon)result.Value;
             Assert.AreEqual("smart_salmon", value.Fishtype);
@@ -640,7 +640,7 @@ namespace AutoRest.TestServer.Tests
             value["additionalProperty4"] = new Dictionary<string, object>() {{"a", 1}, {"b", 2}};
             value["additionalProperty5"] = new object[] {1, 3};
 
-            return await PolymorphismOperations.PutComplicatedAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PolymorphismOperations(ClientDiagnostics, pipeline, host).PutComplicatedAsync( value);
         });
 
         [Test]
@@ -682,7 +682,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            var result = await PolymorphismOperations.PutMissingDiscriminatorAsync(ClientDiagnostics, pipeline, value, host: host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).PutMissingDiscriminatorAsync( value);
 
             value = result.Value;
             Assert.AreEqual("salmon", value.Fishtype);
@@ -726,7 +726,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphismOperations.GetDotSyntaxAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetDotSyntaxAsync();
 
             var dotSalmon = (DotSalmon)result.Value;
             Assert.AreEqual("DotSalmon", dotSalmon.FishType);
@@ -739,7 +739,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphismOperations.GetComposedWithDiscriminatorAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetComposedWithDiscriminatorAsync();
 
             var dotSalmon = result.Value.SampleSalmon;
             Assert.AreEqual("DotSalmon", dotSalmon.FishType);
@@ -786,7 +786,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphismOperations.GetComposedWithoutDiscriminatorAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetComposedWithoutDiscriminatorAsync();
 
             var dotSalmon = result.Value.SampleSalmon;
             Assert.AreEqual("DotSalmon", dotSalmon.FishType);
@@ -826,7 +826,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) =>
         {
-            var result = await PolymorphicrecursiveOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new PolymorphicrecursiveOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             var value = (Salmon)result.Value;
             Assert.AreEqual("salmon", value.Fishtype);
             Assert.AreEqual("alaska", value.Location);
@@ -956,13 +956,13 @@ namespace AutoRest.TestServer.Tests
                     },
                 }
             };
-            return await PolymorphicrecursiveOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new PolymorphicrecursiveOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexReadOnlyPropertyValid() => Test(async (host, pipeline) =>
         {
-            var result = await ReadonlypropertyOperations.GetValidAsync(ClientDiagnostics, pipeline, host);
+            var result = await new ReadonlypropertyOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             Assert.AreEqual("1234", result.Value.Id);
             Assert.AreEqual(2, result.Value.Size);
         }, true);
@@ -972,7 +972,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexReadOnlyPropertyValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new ReadonlyObj();
-            return await ReadonlypropertyOperations.PutValidAsync(ClientDiagnostics, pipeline, value, host);
+            return await new ReadonlypropertyOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
         [Test]

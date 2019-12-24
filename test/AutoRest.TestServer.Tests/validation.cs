@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
                     ConstProperty2 = "constant2"
                 }
             };
-            var result = await AllOperations.PostWithConstantInBodyAsync(ClientDiagnostics, pipeline, value, host);
+            var result = await new AllOperations(ClientDiagnostics, pipeline, string.Empty, host).PostWithConstantInBodyAsync( value);
             Assert.AreEqual(value.ConstString, result.Value.ConstString);
             Assert.AreEqual(value.ConstInt, result.Value.ConstInt);
             Assert.AreEqual(value.Child.ConstProperty, result.Value.Child.ConstProperty);
@@ -39,6 +39,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await AllOperations.GetWithConstantInPathAsync(ClientDiagnostics, pipeline, host));
+        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await new AllOperations(ClientDiagnostics, pipeline, string.Empty, host).GetWithConstantInPathAsync());
     }
 }

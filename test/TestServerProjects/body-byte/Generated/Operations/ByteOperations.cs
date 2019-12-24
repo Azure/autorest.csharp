@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_byte
 {
-    internal static class ByteOperations
+    internal partial class ByteOperations
     {
-        public static async ValueTask<Response<Byte[]>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public ByteOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<Byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_byte
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetEmpty");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_byte
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetNonAsciiAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetNonAscii");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_byte
                 throw;
             }
         }
-        public static async ValueTask<Response> PutNonAsciiAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] byteBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonAsciiAsync(Byte[] byteBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (byteBody == null)
             {
                 throw new ArgumentNullException(nameof(byteBody));
@@ -153,12 +151,8 @@ namespace body_byte
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetInvalid");
             scope.Start();

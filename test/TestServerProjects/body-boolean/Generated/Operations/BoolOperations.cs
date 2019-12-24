@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_boolean
 {
-    internal static class BoolOperations
+    internal partial class BoolOperations
     {
-        public static async ValueTask<Response<bool>> GetTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public BoolOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.GetTrue");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_boolean
                 throw;
             }
         }
-        public static async ValueTask<Response> PutTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.PutTrue");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_boolean
                 throw;
             }
         }
-        public static async ValueTask<Response<bool>> GetFalseAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.GetFalse");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_boolean
                 throw;
             }
         }
-        public static async ValueTask<Response> PutFalseAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.PutFalse");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_boolean
                 throw;
             }
         }
-        public static async ValueTask<Response<bool>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.GetNull");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_boolean
                 throw;
             }
         }
-        public static async ValueTask<Response<bool>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_boolean.GetInvalid");
             scope.Start();

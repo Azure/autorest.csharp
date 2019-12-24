@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetDurationInvalid() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await DurationOperations.GetInvalidAsync(ClientDiagnostics, pipeline, host));
+                await new DurationOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
@@ -29,14 +29,14 @@ namespace AutoRest.TestServer.Tests
         [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
         public Task GetDurationNull() => Test(async (host, pipeline) =>
         {
-            var result = await DurationOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DurationOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(null, result.Value);
         });
 
         [Test]
         public Task GetDurationPositive() => Test(async (host, pipeline) =>
         {
-            var result = await DurationOperations.GetPositiveDurationAsync(ClientDiagnostics, pipeline, host);
+            var result = await new DurationOperations(ClientDiagnostics, pipeline, host).GetPositiveDurationAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P3Y6M4DT12H30M5S"), result.Value);
         });
 
@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutDurationPositive() => TestStatus(async (host, pipeline) =>
         {
             var value = XmlConvert.ToTimeSpan("P123DT22H14M12.011S");
-            return await DurationOperations.PutPositiveDurationAsync(ClientDiagnostics, pipeline, value, host);
+            return await new DurationOperations(ClientDiagnostics, pipeline, host).PutPositiveDurationAsync( value);
         });
     }
 }

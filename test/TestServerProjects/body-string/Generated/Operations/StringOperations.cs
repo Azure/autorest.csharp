@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_string
 {
-    internal static class StringOperations
+    internal partial class StringOperations
     {
-        public static async ValueTask<Response<string>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public StringOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNullAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutNull");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetEmpty");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutEmpty");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetMbcsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetMbcs");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMbcsAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutMbcs");
             scope.Start();
@@ -217,12 +207,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetWhitespaceAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetWhitespace");
             scope.Start();
@@ -251,12 +237,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutWhitespaceAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.PutWhitespace");
             scope.Start();
@@ -285,12 +267,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<string>> GetNotProvidedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetNotProvided");
             scope.Start();
@@ -319,12 +297,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetBase64EncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetBase64Encoded");
             scope.Start();
@@ -353,12 +327,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetBase64UrlEncoded");
             scope.Start();
@@ -387,12 +357,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response> PutBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Byte[] stringBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBase64UrlEncodedAsync(Byte[] stringBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (stringBody == null)
             {
                 throw new ArgumentNullException(nameof(stringBody));
@@ -425,12 +391,8 @@ namespace body_string
                 throw;
             }
         }
-        public static async ValueTask<Response<Byte[]>> GetNullBase64UrlEncodedAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetNullBase64UrlEncoded");
             scope.Start();

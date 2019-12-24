@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace url_multi_collectionFormat
 {
-    internal static class QueriesOperations
+    internal partial class QueriesOperations
     {
-        public static async ValueTask<Response> ArrayStringMultiNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public QueriesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringMultiEmptyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiEmpty");
             scope.Start();
@@ -81,12 +87,8 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public static async ValueTask<Response> ArrayStringMultiValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, IEnumerable<string>? arrayQuery, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiValid");
             scope.Start();

@@ -11,14 +11,24 @@ using Azure.Core.Pipeline;
 
 namespace body_integer
 {
-    internal static class IntOperations
+    internal partial class IntOperations
     {
-        public static async ValueTask<Response<int>> GetNullAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public IntOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetNull");
             scope.Start();
@@ -47,12 +57,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<int>> GetInvalidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalid");
             scope.Start();
@@ -81,12 +87,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<int>> GetOverflowInt32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt32");
             scope.Start();
@@ -115,12 +117,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<int>> GetUnderflowInt32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt32");
             scope.Start();
@@ -149,12 +147,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<long>> GetOverflowInt64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt64");
             scope.Start();
@@ -183,12 +177,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<long>> GetUnderflowInt64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt64");
             scope.Start();
@@ -217,12 +207,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMax32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.PutMax32");
             scope.Start();
@@ -251,12 +237,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMax64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.PutMax64");
             scope.Start();
@@ -285,12 +267,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMin32Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, int intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.PutMin32");
             scope.Start();
@@ -319,12 +297,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response> PutMin64Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, long intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.PutMin64");
             scope.Start();
@@ -353,12 +327,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetUnixTime");
             scope.Start();
@@ -387,12 +357,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response> PutUnixTimeDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, DateTimeOffset intBody, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.PutUnixTimeDate");
             scope.Start();
@@ -421,12 +387,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalidUnixTime");
             scope.Start();
@@ -455,12 +417,8 @@ namespace body_integer
                 throw;
             }
         }
-        public static async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("body_integer.GetNullUnixTime");
             scope.Start();
