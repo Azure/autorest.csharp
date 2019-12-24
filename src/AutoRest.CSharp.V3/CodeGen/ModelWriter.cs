@@ -71,8 +71,19 @@ namespace AutoRest.CSharp.V3.CodeGen
                     foreach (var property in schema.Properties)
                     {
                         CSharpType propertyType = _typeFactory.CreateType(property.Type);
-                        var initializer = !propertyType.IsNullable && NeedsInitialization(property.Type) ? $" = new {writer.Type(_typeFactory.CreateConcreteType(property.Type))}();" : null;
-                        writer.AutoProperty("public", propertyType, property.Name, property.IsReadOnly, initializer);
+                        writer.Append($"public {propertyType} {property.Name}");
+                        writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
+
+                        if (property.DefaultValue != null)
+                        {
+                            writer.Append($" = {property.DefaultValue.Value.Value:L};");
+                        }
+                        else if (NeedsInitialization(property))
+                        {
+                            writer.Append($" = new {_typeFactory.CreateConcreteType(property.Type)}();");
+                        }
+
+                        writer.Line();
                     }
 
                     if (schema.ImplementsDictionary != null)
@@ -120,7 +131,26 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private static bool NeedsInitialization(ClientTypeReference reference) => reference is CollectionTypeReference || reference is DictionaryTypeReference;
+        private bool NeedsInitialization(ClientObjectProperty property)
+        {
+            // TODO: This logic shouldn't be base only on type nullability
+            if (property.Type.IsNullable)
+            {
+                return false;
+            }
+
+            if (property.Type is CollectionTypeReference || property.Type is DictionaryTypeReference)
+            {
+                return true;
+            }
+
+            if (property.Type is SchemaTypeReference schemaType)
+            {
+                return _typeFactory.ResolveReference(schemaType) is ClientObject;
+            }
+
+            return false;
+        }
 
         private void WriteSealedChoiceSchema(CodeWriter writer, ClientEnum schema)
         {
