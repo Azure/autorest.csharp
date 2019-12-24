@@ -16,20 +16,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task ConstantsInBody() => Test(async (host, pipeline) =>
         {
-            var value = new Product
-            {
-                ConstString = "constant",
-                ConstInt = 0,
-                Child = new ChildProduct
-                {
-                    ConstProperty = "constant"
-                },
-                ConstChild = new ConstantProduct
-                {
-                    ConstProperty = "constant",
-                    ConstProperty2 = "constant2"
-                }
-            };
+            var value = new Product();
             var result = await AllOperations.PostWithConstantInBodyAsync(ClientDiagnostics, pipeline, value, host);
             Assert.AreEqual(value.ConstString, result.Value.ConstString);
             Assert.AreEqual(value.ConstInt, result.Value.ConstInt);

@@ -147,7 +147,6 @@ namespace AutoRest.TestServer.Tests
             await EnumOperations.PutReferencedAsync(ClientDiagnostics, pipeline, Colors.RedColor, host));
 
         [Test]
-        [Ignore("Model not generated correctly")]
         public Task PutEnumReferencedConstant() => TestStatus(async (host, pipeline) =>
             await EnumOperations.PutReferencedConstantAsync(ClientDiagnostics, pipeline, new RefColorConstant(), host));
 
