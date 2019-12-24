@@ -12,14 +12,24 @@ using body_complex.Models.V20160229;
 
 namespace body_complex
 {
-    internal static class FlattencomplexOperations
+    internal partial class FlattencomplexOperations
     {
-        public static async ValueTask<Response<MyBaseType>> GetValidAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public FlattencomplexOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
+        {
 
             using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
             scope.Start();

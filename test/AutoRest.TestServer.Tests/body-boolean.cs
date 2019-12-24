@@ -16,36 +16,36 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetBoolFalse() => Test(async (host, pipeline) =>
         {
-            var result = await BoolOperations.GetFalseAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BoolOperations(ClientDiagnostics, pipeline, host).GetFalseAsync();
             Assert.False(result.Value);
         });
 
         [Test]
         public Task GetBoolInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await BoolOperations.GetInvalidAsync(ClientDiagnostics, pipeline, host));
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BoolOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         [Ignore("Nullable return types are not implemented")]
         public Task GetBoolNull() => Test(async (host, pipeline) =>
         {
-            var result = await BoolOperations.GetNullAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BoolOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.False(result.Value);
         });
 
         [Test]
         public Task GetBoolTrue() => Test(async (host, pipeline) =>
         {
-            var result = await BoolOperations.GetTrueAsync(ClientDiagnostics, pipeline, host);
+            var result = await new BoolOperations(ClientDiagnostics, pipeline, host).GetTrueAsync();
             Assert.True(result.Value);
         });
 
         [Test]
-        public Task PutBoolFalse() => TestStatus(async (host, pipeline) => await BoolOperations.PutFalseAsync(ClientDiagnostics, pipeline, host));
+        public Task PutBoolFalse() => TestStatus(async (host, pipeline) => await new BoolOperations(ClientDiagnostics, pipeline, host).PutFalseAsync());
 
         [Test]
-        public Task PutBoolTrue() => TestStatus(async (host, pipeline) => await BoolOperations.PutTrueAsync(ClientDiagnostics, pipeline, host));
+        public Task PutBoolTrue() => TestStatus(async (host, pipeline) => await new BoolOperations(ClientDiagnostics, pipeline, host).PutTrueAsync());
 
     }
 }

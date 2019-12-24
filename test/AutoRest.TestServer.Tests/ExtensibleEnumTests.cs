@@ -14,12 +14,12 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.AddPetAsync(ClientDiagnostics, pipeline, new Pet()
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
             {
                 Name = "Retriever",
                 IntEnum = IntEnum._2,
                 DaysOfWeek = DaysOfWeekExtensibleEnum.Friday
-            }, host: host);
+            });
 
             Assert.AreEqual("Retriever", response.Value.Name);
             Assert.AreEqual(IntEnum._2, response.Value.IntEnum);
@@ -32,12 +32,12 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Custom() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.AddPetAsync(ClientDiagnostics, pipeline, new Pet()
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
             {
                 Name = "Retriever",
                 IntEnum = "77",
                 DaysOfWeek = "WED"
-            }, host: host);
+            });
 
             Assert.AreEqual("Retriever", response.Value.Name);
             Assert.AreEqual("77", response.Value.IntEnum.ToString());
@@ -50,12 +50,12 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Null() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.AddPetAsync(ClientDiagnostics, pipeline, new Pet()
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
             {
                 Name = "Retriever",
                 IntEnum = "77",
                 DaysOfWeek = null
-            }, host: host);
+            });
 
             Assert.AreEqual("Retriever", response.Value.Name);
             Assert.AreEqual("77", response.Value.IntEnum.ToString());
@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task AllowedValueEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.GetByPetIdAsync(ClientDiagnostics, pipeline, "scooby", host: host);
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "scooby");
 
             Assert.AreEqual("Scooby Scarface", response.Value.Name);
             Assert.AreEqual("2.1", response.Value.IntEnum.ToString());
@@ -79,7 +79,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task ExpectedEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.GetByPetIdAsync(ClientDiagnostics, pipeline, "tommy", host: host);
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "tommy");
 
             Assert.AreEqual("Tommy Tomson", response.Value.Name);
             Assert.AreEqual(IntEnum._1, response.Value.IntEnum);
@@ -91,7 +91,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UnexpectedEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await PetOperations.GetByPetIdAsync(ClientDiagnostics, pipeline, "casper", host: host);
+            var response = await new PetOperations(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "casper");
 
             Assert.AreEqual("Casper Ghosty", response.Value.Name);
             Assert.AreEqual(IntEnum._2, response.Value.IntEnum);

@@ -11,14 +11,24 @@ using header.Models.V100;
 
 namespace header
 {
-    internal static class HeaderOperations
+    internal partial class HeaderOperations
     {
-        public static async ValueTask<Response> ParamExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string userAgent, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public HeaderOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
+        {
             if (userAgent == null)
             {
                 throw new ArgumentNullException(nameof(userAgent));
@@ -48,12 +58,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("header.ResponseExistingKey");
             scope.Start();
@@ -79,12 +85,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string contentType, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (contentType == null)
             {
                 throw new ArgumentNullException(nameof(contentType));
@@ -114,12 +116,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("header.ResponseProtectedKey");
             scope.Start();
@@ -145,12 +143,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, int value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamIntegerAsync(string scenario, int value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -181,12 +175,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -217,12 +207,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, long value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamLongAsync(string scenario, long value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -253,12 +239,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -289,12 +271,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, float value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamFloatAsync(string scenario, float value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -325,12 +303,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -361,12 +335,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, double value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDoubleAsync(string scenario, double value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -397,12 +367,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -433,12 +399,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, bool value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -469,12 +431,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -505,12 +463,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamStringAsync(string scenario, string? value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -544,12 +498,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -580,12 +530,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -616,12 +562,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -652,12 +594,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -688,12 +626,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -724,12 +658,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, DateTimeOffset? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -763,12 +693,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -799,12 +725,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, TimeSpan value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -835,12 +757,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -871,12 +789,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, Byte[] value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamByteAsync(string scenario, Byte[] value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -911,12 +825,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -947,12 +857,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> ParamEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, GreyscaleColors? value, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -986,12 +892,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scenario, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (scenario == null)
             {
                 throw new ArgumentNullException(nameof(scenario));
@@ -1022,12 +924,8 @@ namespace header
                 throw;
             }
         }
-        public static async ValueTask<Response> CustomRequestIdAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
 
             using var scope = clientDiagnostics.CreateScope("header.CustomRequestId");
             scope.Start();

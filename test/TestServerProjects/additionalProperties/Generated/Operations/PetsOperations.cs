@@ -12,14 +12,24 @@ using Azure.Core.Pipeline;
 
 namespace additionalProperties
 {
-    internal static class PetsOperations
+    internal partial class PetsOperations
     {
-        public static async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, PetAPTrue createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        private string host;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        public PetsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
                 throw new ArgumentNullException(nameof(host));
             }
+
+            this.host = host;
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        public async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
+        {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
@@ -56,12 +66,8 @@ namespace additionalProperties
                 throw;
             }
         }
-        public static async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, CatAPTrue createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
@@ -98,12 +104,8 @@ namespace additionalProperties
                 throw;
             }
         }
-        public static async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, PetAPObject createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
@@ -140,12 +142,8 @@ namespace additionalProperties
                 throw;
             }
         }
-        public static async ValueTask<Response<PetAPString>> CreateAPStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, PetAPString createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
@@ -182,12 +180,8 @@ namespace additionalProperties
                 throw;
             }
         }
-        public static async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, PetAPInProperties createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
@@ -224,12 +218,8 @@ namespace additionalProperties
                 throw;
             }
         }
-        public static async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, PetAPInPropertiesWithAPString createParameters, string host = "http://localhost:3000", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));

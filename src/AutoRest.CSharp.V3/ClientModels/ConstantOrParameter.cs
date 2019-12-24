@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.ClientModels
     internal struct ConstantOrParameter
     {
         private readonly ClientConstant? _constant;
-        private readonly ServiceClientMethodParameter? _parameter;
+        private readonly ServiceClientParameter? _parameter;
 
         public ConstantOrParameter(ClientConstant constant)
         {
@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             _parameter = null;
         }
 
-        public ConstantOrParameter(ServiceClientMethodParameter parameter)
+        public ConstantOrParameter(ServiceClientParameter parameter)
         {
             Type = parameter.Type;
             _parameter = parameter;
@@ -28,9 +28,9 @@ namespace AutoRest.CSharp.V3.ClientModels
         public bool IsConstant => _constant.HasValue;
 
         public ClientConstant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
-        public ServiceClientMethodParameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
+        public ServiceClientParameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
 
         public static implicit operator ConstantOrParameter(ClientConstant constant) => new ConstantOrParameter(constant);
-        public static implicit operator ConstantOrParameter(ServiceClientMethodParameter parameter) => new ConstantOrParameter(parameter);
+        public static implicit operator ConstantOrParameter(ServiceClientParameter parameter) => new ConstantOrParameter(parameter);
     }
 }

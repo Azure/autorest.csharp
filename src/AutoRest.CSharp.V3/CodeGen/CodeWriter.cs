@@ -393,5 +393,23 @@ namespace AutoRest.CSharp.V3.CodeGen
             var actual = _scopes.Pop();
             Debug.Assert(actual == expected);
         }
+
+        public void RemoveTrailingComma()
+        {
+            for (int i = _builder.Length - 1; i >= 0; i--)
+            {
+                if (char.IsWhiteSpace(_builder[i]))
+                {
+                    continue;
+                }
+
+                if (_builder[i] == ',')
+                {
+                    _builder.Remove(i, _builder.Length - i);
+                }
+
+                break;
+            }
+        }
     }
 }
