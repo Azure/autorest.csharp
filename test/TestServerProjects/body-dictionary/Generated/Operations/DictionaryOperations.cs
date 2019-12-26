@@ -1600,7 +1600,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteValid");
@@ -1618,7 +1618,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -1635,7 +1635,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response> PutByteValidAsync(IDictionary<string, Byte[]> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1676,7 +1676,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetByteInvalidNull");
@@ -1694,7 +1694,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -1711,7 +1711,7 @@ namespace body_dictionary
                 throw;
             }
         }
-        public async ValueTask<Response<IDictionary<string, Byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_dictionary.GetBase64Url");
@@ -1729,7 +1729,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Byte[]> value = new Dictionary<string, Byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64("U"));

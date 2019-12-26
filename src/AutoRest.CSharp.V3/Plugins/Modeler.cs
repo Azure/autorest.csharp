@@ -1,12 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.CodeGen;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Pipeline.Generated;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.Simplification;
+using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -30,6 +36,8 @@ namespace AutoRest.CSharp.V3.Plugins
             var serializeWriter = new SerializationWriter(typeFactory);
             var headerModelModelWriter = new ResponseHeaderModelModelWriter(typeFactory);
 
+            var project = WorkspaceFactory.CreateGeneratedCodeProject();
+
             foreach (var model in models)
             {
                 var codeWriter = new CodeWriter();
@@ -39,26 +47,70 @@ namespace AutoRest.CSharp.V3.Plugins
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Name;
-                await autoRest.WriteFile($"Generated/Models/{name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
-                await autoRest.WriteFile($"Generated/Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode(), "source-file-csharp");
+                project = project.AddDocument($"Generated/Models/{name}.cs", codeWriter.ToFormattedCode()).Project;
+                project = project.AddDocument($"Generated/Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode()).Project;
             }
 
             foreach (var client in clients)
             {
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
-                await autoRest.WriteFile($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode(), "source-file-csharp");
+
+                project = project.AddDocument($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode()).Project;
 
                 foreach (ClientMethod clientMethod in client.Methods)
                 {
                     ResponseHeaderModel? responseHeaderModel = clientMethod.Response.HeaderModel;
-                    if (responseHeaderModel == null) continue;
+                    if (responseHeaderModel == null)
+                        continue;
 
                     var headerModelCodeWriter = new CodeWriter();
                     headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    await autoRest.WriteFile($"Generated/Operations/{responseHeaderModel.Name}.cs", headerModelCodeWriter.ToFormattedCode(), "source-file-csharp");
+                    project = project.AddDocument($"Generated/Operations/{responseHeaderModel.Name}.cs", headerModelCodeWriter.ToFormattedCode()).Project;
                 }
+            }
+
+            Compilation? compilation = await project.GetCompilationAsync();
+
+            Debug.Assert(compilation != null);
+
+            foreach (Diagnostic diagnostic in compilation.GetDiagnostics())
+            {
+                if (diagnostic.Severity == DiagnosticSeverity.Error)
+                {
+                    await autoRest.Fatal(diagnostic.ToString());
+                }
+            }
+
+            foreach (Document document in project.Documents)
+            {
+                // Skip writing shared files
+                if (document.Folders.Contains(WorkspaceFactory.SharedFolder))
+                {
+                    continue;
+                }
+
+                var root = await document.GetSyntaxRootAsync()!;
+
+                Debug.Assert(root != null);
+
+                root = root.WithAdditionalAnnotations(Simplifier.Annotation);
+                var simplified = document.WithSyntaxRoot(root);
+
+                try
+                {
+                    simplified = await Simplifier.ReduceAsync(simplified);
+                }
+                catch (InvalidOperationException)
+                {
+                    // Workaround for https://github.com/dotnet/roslyn/issues/40592
+                }
+
+                simplified = await Formatter.FormatAsync(simplified);
+
+                SourceText text = await simplified.GetTextAsync();
+                await autoRest.WriteFile(document.Name, text.ToString(), "source-file-csharp");
             }
 
             return true;

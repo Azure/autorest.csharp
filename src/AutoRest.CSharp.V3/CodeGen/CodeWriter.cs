@@ -7,9 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -223,6 +221,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     UseNamespace(type.Namespace);
                 }
+
+                name = type.Namespace.FullName + "." + type.Name;
             }
 
             if (type.Arguments.Any())
@@ -253,7 +253,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         public string AttributeType(Type type) => Type(type).Replace("Attribute", String.Empty);
 
         public string Pair(string typeText, string name) => $"{typeText} {name}";
-        public string Pair(CSharpType type, string name) => $"{Type(type)} {name}";
         public string Pair(Type type, string name, bool isNullable = false) => $"{Type(type, isNullable)} {name}";
 
         private static string? GetKeywordMapping(Type? type) => type switch
@@ -359,9 +358,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 builder.AppendLine();
             }
 
-            SyntaxNode syntax = SyntaxFactory.ParseCompilationUnit(ToString());
-            syntax = Formatter.Format(syntax, new AdhocWorkspace());
-            builder.Append(syntax);
+            builder.Append(_builder);
 
             return builder.ToString();
         }

@@ -80,7 +80,7 @@ namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
                     result.Details = new List<Error>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Details.Add(Error.DeserializeError(item));
+                        result.Details.Add(DeserializeError(item));
                     }
                     continue;
                 }

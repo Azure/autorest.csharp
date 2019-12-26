@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     break;
 
                 case ClientEnum clientEnum when !clientEnum.IsStringBased:
-                    writer.Append($"{element}.GetString().To{cSharpType}()");
+                    writer.Append($"{element}.GetString().To{cSharpType.Name}()");
                     break;
             }
         }

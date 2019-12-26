@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.Pipeline;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
 
@@ -71,7 +70,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     foreach (var property in schema.Properties)
                     {
                         CSharpType propertyType = _typeFactory.CreateType(property.Type);
-                        writer.Append($"public {propertyType} {property.Name}");
+                        writer.Append($"public {propertyType} {property.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)

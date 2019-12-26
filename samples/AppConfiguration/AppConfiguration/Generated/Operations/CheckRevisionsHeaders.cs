@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class CheckRevisionsHeaders
     {
-        private readonly Response _response;
-        public CheckRevisionsHeaders(Response response)
+        private readonly Azure.Response _response;
+        public CheckRevisionsHeaders(Azure.Response response)
         {
             _response = response;
         }

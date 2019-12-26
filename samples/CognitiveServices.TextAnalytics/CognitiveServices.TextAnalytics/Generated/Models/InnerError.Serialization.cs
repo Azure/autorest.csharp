@@ -57,7 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
                     {
                         continue;
                     }
-                    result.Innererror = InnerError.DeserializeInnerError(property.Value);
+                    result.Innererror = DeserializeInnerError(property.Value);
                     continue;
                 }
             }

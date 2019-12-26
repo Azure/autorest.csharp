@@ -7,9 +7,9 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class Shark : IUtf8JsonSerializable
+    public partial class Shark : Azure.Core.IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Age != null)
@@ -40,23 +40,23 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static Shark DeserializeShark(JsonElement element)
+        internal static body_complex.Models.V20160229.Shark DeserializeShark(System.Text.Json.JsonElement element)
         {
-            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
+            if (element.TryGetProperty("fishtype", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
-                    case "sawshark": return Sawshark.DeserializeSawshark(element);
+                    case "cookiecuttershark": return body_complex.Models.V20160229.Cookiecuttershark.DeserializeCookiecuttershark(element);
+                    case "goblin": return body_complex.Models.V20160229.Goblinshark.DeserializeGoblinshark(element);
+                    case "sawshark": return body_complex.Models.V20160229.Sawshark.DeserializeSawshark(element);
                 }
             }
-            Shark result = new Shark();
+            body_complex.Models.V20160229.Shark result = new body_complex.Models.V20160229.Shark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -75,7 +75,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -89,14 +89,14 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("siblings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Siblings = new List<Fish>();
+                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.V20160229.Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(Fish.DeserializeFish(item));
+                        result.Siblings.Add(body_complex.Models.V20160229.Fish.DeserializeFish(item));
                     }
                     continue;
                 }

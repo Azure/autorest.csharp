@@ -480,7 +480,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ByteMultiByteAsync(Byte[] bytePath, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
             {
@@ -540,7 +540,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ByteNullAsync(Byte[] bytePath, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
             {
@@ -684,7 +684,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> Base64UrlAsync(Byte[] base64UrlPath, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
             {

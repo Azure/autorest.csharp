@@ -8,8 +8,8 @@ namespace header
 {
     internal class ResponseExistingKeyHeaders
     {
-        private readonly Response _response;
-        public ResponseExistingKeyHeaders(Response response)
+        private readonly Azure.Response _response;
+        public ResponseExistingKeyHeaders(Azure.Response response)
         {
             _response = response;
         }

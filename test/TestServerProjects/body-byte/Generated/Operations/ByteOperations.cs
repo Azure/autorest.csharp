@@ -27,7 +27,7 @@ namespace body_byte
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        public async ValueTask<Response<Byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetNull");
@@ -58,7 +58,7 @@ namespace body_byte
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetEmpty");
@@ -89,7 +89,7 @@ namespace body_byte
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetNonAscii");
@@ -120,7 +120,7 @@ namespace body_byte
                 throw;
             }
         }
-        public async ValueTask<Response> PutNonAsciiAsync(Byte[] byteBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             if (byteBody == null)
             {
@@ -155,7 +155,7 @@ namespace body_byte
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_byte.GetInvalid");

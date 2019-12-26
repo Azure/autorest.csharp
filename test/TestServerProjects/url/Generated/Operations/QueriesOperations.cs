@@ -640,7 +640,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ByteMultiByteAsync(Byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteMultiByteAsync(byte[]? byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ByteMultiByte");
@@ -699,7 +699,7 @@ namespace url
                 throw;
             }
         }
-        public async ValueTask<Response> ByteNullAsync(Byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteNullAsync(byte[]? byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("url.ByteNull");

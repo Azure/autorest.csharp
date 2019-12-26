@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class GetLabelsHeaders
     {
-        private readonly Response _response;
-        public GetLabelsHeaders(Response response)
+        private readonly Azure.Response _response;
+        public GetLabelsHeaders(Azure.Response response)
         {
             _response = response;
         }

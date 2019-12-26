@@ -6,9 +6,9 @@ using Azure.Core;
 
 namespace body_complex.Models.V20160229
 {
-    public partial class MyBaseType : IUtf8JsonSerializable
+    public partial class MyBaseType : Azure.Core.IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind");
@@ -25,16 +25,16 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static MyBaseType DeserializeMyBaseType(JsonElement element)
+        internal static body_complex.Models.V20160229.MyBaseType DeserializeMyBaseType(System.Text.Json.JsonElement element)
         {
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            if (element.TryGetProperty("kind", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
+                    case "Kind1": return body_complex.Models.V20160229.MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            MyBaseType result = new MyBaseType();
+            body_complex.Models.V20160229.MyBaseType result = new body_complex.Models.V20160229.MyBaseType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))
@@ -44,7 +44,7 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("propB1"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -53,11 +53,11 @@ namespace body_complex.Models.V20160229
                 }
                 if (property.NameEquals("helper"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Helper = MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
+                    result.Helper = body_complex.Models.V20160229.MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
                     continue;
                 }
             }

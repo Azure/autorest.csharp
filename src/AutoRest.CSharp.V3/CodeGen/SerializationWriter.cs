@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var stringText = writer.Type(typeof(string));
                     var csTypeText = writer.Type(cs);
                     var nameMap = schema.Values.Select(c => (Choice: $"{csTypeText}.{c.Name}", Serial: $"\"{c.Value.Value}\"")).ToArray();
-                    var exceptionEntry = $"_ => throw new {writer.Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {csTypeText} value.\")";
+                    var exceptionEntry = $"_ => throw new {writer.Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {cs.Name} value.\")";
 
                     var toSerialString = String.Join(Environment.NewLine, nameMap
                         .Select(nm => $"{nm.Choice} => {nm.Serial},")
