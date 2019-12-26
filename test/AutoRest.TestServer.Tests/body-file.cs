@@ -50,6 +50,7 @@ namespace AutoRest.TestServer.Tests
             }
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
+            await result.Value.DisposeAsync().ConfigureAwait(false);
         });
 
 

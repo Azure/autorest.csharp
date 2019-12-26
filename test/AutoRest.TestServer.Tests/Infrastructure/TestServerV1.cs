@@ -43,8 +43,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                     Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
                     Client = new HttpClient()
                     {
-                        BaseAddress = new Uri(Host),
-                        Timeout = TimeSpan.FromSeconds(1),
+                        BaseAddress = new Uri(Host)
                     };
                     _ = Task.Run(ReadOutput);
                     return;
