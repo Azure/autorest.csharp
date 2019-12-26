@@ -113,7 +113,7 @@ namespace body_complex.Models.V20160229
                     result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(Fish.DeserializeFish(item));
+                        result.Siblings.Add(DeserializeFish(item));
                     }
                     continue;
                 }

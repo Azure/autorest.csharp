@@ -11,6 +11,6 @@ namespace body_complex.Models.V20160229
         {
             Fishtype = "sawshark";
         }
-        public Byte[]? Picture { get; set; }
+        public byte[]? Picture { get; set; }
     }
 }

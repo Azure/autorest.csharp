@@ -1744,7 +1744,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response<ICollection<Byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_array.GetByteValid");
@@ -1762,7 +1762,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Byte[]> value = new List<Byte[]>();
+                            ICollection<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -1779,7 +1779,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutByteValidAsync(IEnumerable<Byte[]> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1819,7 +1819,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response<ICollection<Byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_array.GetByteInvalidNull");
@@ -1837,7 +1837,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Byte[]> value = new List<Byte[]>();
+                            ICollection<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -1854,7 +1854,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response<ICollection<Byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_array.GetBase64Url");
@@ -1872,7 +1872,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Byte[]> value = new List<Byte[]>();
+                            ICollection<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));

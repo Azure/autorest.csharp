@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class DeleteLockHeaders
     {
-        private readonly Response _response;
-        public DeleteLockHeaders(Response response)
+        private readonly Azure.Response _response;
+        public DeleteLockHeaders(Azure.Response response)
         {
             _response = response;
         }

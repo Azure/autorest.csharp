@@ -813,7 +813,7 @@ namespace header
                 throw;
             }
         }
-        public async ValueTask<Response> ParamByteAsync(string scenario, Byte[] value, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {

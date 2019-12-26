@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class DeleteKeyValueHeaders
     {
-        private readonly Response _response;
-        public DeleteKeyValueHeaders(Response response)
+        private readonly Azure.Response _response;
+        public DeleteKeyValueHeaders(Azure.Response response)
         {
             _response = response;
         }

@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class CheckKeyValuesHeaders
     {
-        private readonly Response _response;
-        public CheckKeyValuesHeaders(Response response)
+        private readonly Azure.Response _response;
+        public CheckKeyValuesHeaders(Azure.Response response)
         {
             _response = response;
         }

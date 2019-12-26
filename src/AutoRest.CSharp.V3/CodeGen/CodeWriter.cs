@@ -165,6 +165,12 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
+        public CodeWriterScope ForEach(string statement)
+        {
+            LineRaw($"foreach({statement})");
+            return Scope();
+        }
+
         public CodeWriterScope Switch(string value)
         {
             LineRaw($"switch({value})");
@@ -176,6 +182,9 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public void EnumValue(string value, bool includeComma = true) =>
             LineRaw($"{value}{(includeComma ? "," : String.Empty)}");
+
+        public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
+            LineRaw($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? "internal set; " : "set; ")}}}{initializer}");
 
         public void UseNamespace(CSharpNamespace @namespace)
         {
@@ -223,6 +232,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     UseNamespace(type.Namespace);
                 }
+
+                name = type.Namespace.FullName + "." + type.Name;
             }
 
             if (type.Arguments.Any())
@@ -359,9 +370,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 builder.AppendLine();
             }
 
-            SyntaxNode syntax = SyntaxFactory.ParseCompilationUnit(ToString());
-            syntax = Formatter.Format(syntax, new AdhocWorkspace());
-            builder.Append(syntax);
+            builder.Append(_builder);
 
             return builder.ToString();
         }

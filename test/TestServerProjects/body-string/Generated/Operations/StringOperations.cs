@@ -306,7 +306,7 @@ namespace body_string
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetBase64Encoded");
@@ -337,7 +337,7 @@ namespace body_string
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetBase64UrlEncoded");
@@ -368,7 +368,7 @@ namespace body_string
                 throw;
             }
         }
-        public async ValueTask<Response> PutBase64UrlEncodedAsync(Byte[] stringBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -403,7 +403,7 @@ namespace body_string
                 throw;
             }
         }
-        public async ValueTask<Response<Byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_string.GetNullBase64UrlEncoded");

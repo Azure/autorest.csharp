@@ -14,6 +14,6 @@ namespace header
         {
             _response = response;
         }
-        public Byte[]? Value => _response.Headers.TryGetValue("value", out Byte[]? value) ? value : null;
+        public byte[]? Value => _response.Headers.TryGetValue("value", out byte[]? value) ? value : null;
     }
 }

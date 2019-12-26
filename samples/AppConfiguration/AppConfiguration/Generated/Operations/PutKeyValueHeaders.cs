@@ -8,8 +8,8 @@ namespace AppConfiguration
 {
     internal class PutKeyValueHeaders
     {
-        private readonly Response _response;
-        public PutKeyValueHeaders(Response response)
+        private readonly Azure.Response _response;
+        public PutKeyValueHeaders(Azure.Response response)
         {
             _response = response;
         }
