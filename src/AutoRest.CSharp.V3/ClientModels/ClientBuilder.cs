@@ -99,18 +99,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                         case BinarySchema _:
                             // skip
                             continue;
-                        //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
-                        case ArraySchema arraySchema when arraySchema.ElementType is ConstantSchema constantInnerType:
-                            constantOrParameter = new ServiceClientParameter(requestParameter.CSharpName(),
-                                new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
-                                CreateDefaultValueConstant(requestParameter), false);
-                            break;
-                        //TODO: Workaround for https://github.com/Azure/autorest.csharp/pull/275
-                        case DictionarySchema dictionarySchema when dictionarySchema.ElementType is ConstantSchema constantInnerType:
-                            constantOrParameter = new ServiceClientParameter(requestParameter.CSharpName(),
-                                new CollectionTypeReference(ClientModelBuilderHelpers.CreateType(constantInnerType.ValueType, false), false),
-                                CreateDefaultValueConstant(requestParameter), false);
-                            break;
                         default:
                             constantOrParameter = BuildParameter(requestParameter);
                             break;
