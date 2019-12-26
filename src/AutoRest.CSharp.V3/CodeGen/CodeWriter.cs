@@ -7,9 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -165,12 +163,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        public CodeWriterScope ForEach(string statement)
-        {
-            LineRaw($"foreach({statement})");
-            return Scope();
-        }
-
         public CodeWriterScope Switch(string value)
         {
             LineRaw($"switch({value})");
@@ -182,9 +174,6 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         public void EnumValue(string value, bool includeComma = true) =>
             LineRaw($"{value}{(includeComma ? "," : String.Empty)}");
-
-        public void AutoProperty(string modifiers, CSharpType type, string name, bool isReadOnly = false, string? initializer = null) =>
-            LineRaw($"{modifiers} {Pair(type, name)} {{ get; {(isReadOnly ? "internal set; " : "set; ")}}}{initializer}");
 
         public void UseNamespace(CSharpNamespace @namespace)
         {
@@ -264,7 +253,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         public string AttributeType(Type type) => Type(type).Replace("Attribute", String.Empty);
 
         public string Pair(string typeText, string name) => $"{typeText} {name}";
-        public string Pair(CSharpType type, string name) => $"{Type(type)} {name}";
         public string Pair(Type type, string name, bool isNullable = false) => $"{Type(type, isNullable)} {name}";
 
         private static string? GetKeywordMapping(Type? type) => type switch
