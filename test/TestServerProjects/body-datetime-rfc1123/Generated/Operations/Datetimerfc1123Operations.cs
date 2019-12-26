@@ -34,18 +34,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -64,18 +65,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/invalid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -94,18 +96,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/overflow", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -124,18 +127,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/underflow", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -154,7 +158,8 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/max", false);
@@ -162,11 +167,11 @@ namespace body_datetime_rfc1123
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -184,18 +189,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/max/lowercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -214,18 +220,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/max/uppercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -244,7 +251,8 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/min", false);
@@ -252,11 +260,11 @@ namespace body_datetime_rfc1123
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "R");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -274,18 +282,19 @@ namespace body_datetime_rfc1123
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetimerfc1123/min", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("R");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();

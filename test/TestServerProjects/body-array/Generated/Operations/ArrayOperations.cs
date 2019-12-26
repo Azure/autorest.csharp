@@ -36,22 +36,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -70,22 +71,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/invalid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -104,22 +106,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/empty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -142,7 +145,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/empty", false);
@@ -155,11 +159,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -177,22 +181,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/boolean/tfft", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -215,7 +220,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/boolean/tfft", false);
@@ -228,11 +234,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -250,22 +256,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/boolean/true.null.false", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -284,22 +291,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -318,22 +326,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -356,7 +365,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
@@ -369,11 +379,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -391,22 +401,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/integer/1.null.zero", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -425,22 +436,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/integer/1.integer.0", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -459,22 +471,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -497,7 +510,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
@@ -510,11 +524,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -532,22 +546,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/long/1.null.zero", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -566,22 +581,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/long/1.integer.0", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -600,22 +616,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -638,7 +655,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
@@ -651,11 +669,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -673,22 +691,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -707,22 +726,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/float/1.number.0", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -741,22 +761,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -779,7 +800,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
@@ -792,11 +814,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -814,22 +836,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -848,22 +871,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/double/1.number.0", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -882,22 +906,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -920,7 +945,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
@@ -933,11 +959,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -955,22 +981,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<FooEnum> value = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString().ToFooEnum());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -993,7 +1020,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
@@ -1006,11 +1034,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1028,22 +1056,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Enum0> value = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(new Enum0(item.GetString()));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1066,7 +1095,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
@@ -1079,11 +1109,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1101,22 +1131,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string/foo.null.foo2", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1135,22 +1166,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/string/foo.123.foo2", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1169,22 +1201,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/uuid/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1207,7 +1240,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/uuid/valid", false);
@@ -1220,11 +1254,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1242,22 +1276,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1276,22 +1311,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1314,7 +1350,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date/valid", false);
@@ -1327,11 +1364,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1349,22 +1386,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date/invalidnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1383,22 +1421,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date/invalidchars", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1417,22 +1456,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1455,7 +1495,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time/valid", false);
@@ -1468,11 +1509,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1490,22 +1531,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time/invalidnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1524,22 +1566,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time/invalidchars", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1558,22 +1601,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("R"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1596,7 +1640,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
@@ -1609,11 +1654,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1631,22 +1676,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/duration/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetTimeSpan("P"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1669,7 +1715,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/duration/valid", false);
@@ -1682,11 +1729,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1704,22 +1751,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/byte/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Byte[]> value = new List<Byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1742,7 +1790,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/byte/valid", false);
@@ -1755,11 +1804,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -1777,22 +1826,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/byte/invalidnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Byte[]> value = new List<Byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1811,22 +1861,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/prim/base64url/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Byte[]> value = new List<Byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1845,22 +1896,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1879,22 +1931,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/empty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1913,22 +1966,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/itemnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1947,22 +2001,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/itemempty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -1981,22 +2036,23 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2019,7 +2075,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/complex/valid", false);
@@ -2032,11 +2089,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -2054,16 +2111,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2074,7 +2132,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2093,16 +2151,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/empty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2113,7 +2172,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2132,16 +2191,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/itemnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2152,7 +2212,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2171,16 +2231,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/itemempty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2191,7 +2252,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2210,16 +2271,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2230,7 +2292,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2253,7 +2315,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/array/valid", false);
@@ -2271,11 +2334,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -2293,16 +2356,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2313,7 +2377,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2332,16 +2396,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/empty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2352,7 +2417,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2371,16 +2436,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/itemnull", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2391,7 +2457,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2410,16 +2476,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/itemempty", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2430,7 +2497,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2449,16 +2516,17 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/valid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
@@ -2469,7 +2537,7 @@ namespace body_array
                                 }
                                 value.Add(value0);
                             }
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -2492,7 +2560,8 @@ namespace body_array
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/array/dictionary/valid", false);
@@ -2511,11 +2580,11 @@ namespace body_array
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }

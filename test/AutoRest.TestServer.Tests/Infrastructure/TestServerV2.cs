@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var nodeModules = FindNodeModulesDirectory();
             var wiremock = Path.Combine(nodeModules, "wiremock", "jdeploy-bundle");
             var wiremockJar = Directory.GetFiles(wiremock, "*.jar").Single();
-            var root = Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
+            var root = GetBaseDirectory();
 
             var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port 0");
             // Use random port
@@ -54,6 +54,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 throw new InvalidOperationException($"Unable to detect server port {_process.StandardOutput.ReadToEnd()} {_process.StandardError.ReadToEnd()}");
             }
 
+        }
+
+        public static string GetBaseDirectory()
+        {
+            return Path.Combine(FindNodeModulesDirectory(), "@microsoft.azure", "autorest.testserver");
         }
 
         public static string FindNodeModulesDirectory()

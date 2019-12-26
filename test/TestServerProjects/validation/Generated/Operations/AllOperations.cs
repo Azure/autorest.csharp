@@ -51,7 +51,8 @@ namespace validation
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/fakepath/", false);
@@ -61,14 +62,14 @@ namespace validation
                 request.Uri.AppendPath("/", false);
                 request.Uri.AppendPath(id, true);
                 request.Uri.AppendQuery("apiVersion", ApiVersion, true);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -91,7 +92,8 @@ namespace validation
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/fakepath/", false);
@@ -105,14 +107,14 @@ namespace validation
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -131,17 +133,18 @@ namespace validation
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/validation/constantsInPath/", false);
                 request.Uri.AppendPath("constant", true);
                 request.Uri.AppendPath("/value", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -159,7 +162,8 @@ namespace validation
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/validation/constantsInPath/", false);
@@ -169,14 +173,14 @@ namespace validation
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();

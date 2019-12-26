@@ -78,15 +78,14 @@ namespace AutoRest.CSharp.V3.ClientModels
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
-
             List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
 
-            RequestBody? body = null;
+            JsonRequestBody? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                ConstantOrParameter? constantOrParameter;
+                ConstantOrParameter constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
@@ -117,9 +116,9 @@ namespace AutoRest.CSharp.V3.ClientModels
                             break;
                     }
 
-                    if (!constantOrParameter.Value.IsConstant)
+                    if (!constantOrParameter.IsConstant)
                     {
-                        methodParameters.Add(constantOrParameter.Value.Parameter);
+                        methodParameters.Add(constantOrParameter.Parameter);
                     }
                 }
                 else
@@ -134,19 +133,19 @@ namespace AutoRest.CSharp.V3.ClientModels
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
                             break;
-                        case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
-                            body = new RequestBody(constantOrParameterValue, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
+                        case ParameterLocation.Body:
+                            body = new JsonRequestBody(constantOrParameter, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
                             break;
                         case ParameterLocation.Uri:
-                            uriParameters[defaultName] = constantOrParameter.Value;
+                            uriParameters[defaultName] = constantOrParameter;
                             break;
                     }
                 }
@@ -172,7 +171,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
-                responseBody = new ResponseBody(responseType, ClientModelBuilderHelpers.CreateSerialization(schema, false));
+                responseBody = new JsonResponseBody(responseType, ClientModelBuilderHelpers.CreateSerialization(schema, false));
+            }
+            else if (response is BinaryResponse)
+            {
+                responseBody = new StreamResponseBody();
             }
 
             ClientMethodResponse clientResponse = new ClientMethodResponse(
@@ -261,20 +264,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             List<PathSegment> host = new List<PathSegment>();
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
-                if (!isLiteral)
-                {
-
-                    if (!parameters.TryGetValue(text, out var segment))
-                    {
-                        //TODO: WORKAROUND FOR https://github.com/Azure/autorest.modelerfour/issues/58
-                        segment = TextSegment(text);
-                    }
-                    host.Add(segment);
-                }
-                else
-                {
-                    host.Add(TextSegment(text));
-                }
+                host.Add(isLiteral ? TextSegment(text) : parameters[text]);
             }
 
             return host.ToArray();

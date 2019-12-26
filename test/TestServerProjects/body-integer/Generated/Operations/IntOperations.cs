@@ -34,18 +34,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt32();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -64,18 +65,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/invalid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt32();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -94,18 +96,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/overflowint32", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt32();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -124,18 +127,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/underflowint32", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt32();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -154,18 +158,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/overflowint64", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt64();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -184,18 +189,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/underflowint64", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetInt64();
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -214,7 +220,8 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/max/32", false);
@@ -222,11 +229,11 @@ namespace body_integer
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -244,7 +251,8 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/max/64", false);
@@ -252,11 +260,11 @@ namespace body_integer
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -274,7 +282,8 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/min/32", false);
@@ -282,11 +291,11 @@ namespace body_integer
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -304,7 +313,8 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/min/64", false);
@@ -312,11 +322,11 @@ namespace body_integer
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteNumberValue(intBody);
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -334,18 +344,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/unixtime", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("U");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -364,7 +375,8 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/unixtime", false);
@@ -372,11 +384,11 @@ namespace body_integer
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(intBody, "U");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -394,18 +406,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/invalidunixtime", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("U");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -424,18 +437,19 @@ namespace body_integer
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/int/nullunixtime", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("U");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();

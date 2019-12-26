@@ -34,18 +34,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/null", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -64,18 +65,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/invalid", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -94,18 +96,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/overflow", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -124,18 +127,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/underflow", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -154,7 +158,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/utc", false);
@@ -162,11 +167,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -184,18 +189,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/utc/lowercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -214,18 +220,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/utc/uppercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -244,7 +251,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localpositiveoffset", false);
@@ -252,11 +260,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -274,18 +282,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -304,18 +313,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -334,7 +344,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localnegativeoffset", false);
@@ -342,11 +353,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -364,18 +375,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -394,18 +406,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -424,7 +437,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/utc", false);
@@ -432,11 +446,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -454,18 +468,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/utc", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -484,7 +499,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/localpositiveoffset", false);
@@ -492,11 +508,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -514,18 +530,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/localpositiveoffset", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();
@@ -544,7 +561,8 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Put;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/localnegativeoffset", false);
@@ -552,11 +570,11 @@ namespace body_datetime
                 using var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(datetimeBody, "S");
                 request.Content = content;
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -574,18 +592,19 @@ namespace body_datetime
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/datetime/min/localnegativeoffset", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
                         {
-                            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw new Exception();

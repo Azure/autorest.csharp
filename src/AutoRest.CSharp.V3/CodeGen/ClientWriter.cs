@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
-            CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Value) : null;
+            CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Type) : null;
             CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
 
             CSharpType responseType = bodyType switch
@@ -129,7 +129,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Try())
                 {
-                    writer.Line($"var request = pipeline.CreateRequest();");
+                    writer.Line($"using var message = pipeline.CreateMessage();");
+                    writer.Line($"var request = message.Request;");
                     var method = operation.Request.Method;
                     writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
@@ -155,7 +156,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         WriteQueryParameter(writer, queryParameter);
                     }
 
-                    if (operation.Request.Body is RequestBody body)
+                    if (operation.Request.Body is JsonRequestBody body)
                     {
                         writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
 
@@ -170,7 +171,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"request.Content = content;");
                     }
 
-                    writer.Line($"var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
 
                     WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
                 }
@@ -339,7 +340,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         //TODO: Do multiple status codes
         private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
         {
-            using (writer.Switch("response.Status"))
+            using (writer.Switch("message.Response.Status"))
             {
                 var statusCodes = operation.Response.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
@@ -351,35 +352,40 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     string valueVariable = "value";
 
-                    if (responseBody != null)
+                    if (responseBody is JsonResponseBody jsonResponseBody)
                     {
-                        writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                        writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.ToDeserializeCall(
-                            responseBody.Serialization,
+                            jsonResponseBody.Serialization,
                             _typeFactory,
                             w => w.Append($"document.RootElement"),
                             ref valueVariable
                         );
                     }
 
+                    if (responseBody is StreamResponseBody _)
+                    {
+                        writer.Line($"var {valueVariable:D} = message.ExtractResponseContent();");
+                    }
+
                     if (headersModelType != null)
                     {
-                        writer.Line($"var headers = new {headersModelType}(response);");
+                        writer.Line($"var headers = new {headersModelType}(message.Response);");
                     }
 
                     switch (responseBody)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
                             break;
                         case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, response);");
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
                             break;
                         case null:
-                            writer.Append($"return response;");
+                            writer.Append($"return message.Response;");
                             break;
                     }
                 }

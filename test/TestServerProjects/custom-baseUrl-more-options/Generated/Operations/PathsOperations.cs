@@ -51,7 +51,8 @@ namespace custom_baseUrl_more_options
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{vault}{secret}{dnsSuffix}"));
                 request.Uri.AppendPath("/customuri/", false);
@@ -62,11 +63,11 @@ namespace custom_baseUrl_more_options
                 {
                     request.Uri.AppendQuery("keyVersion", keyVersion, true);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }

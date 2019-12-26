@@ -34,7 +34,8 @@ namespace url_multi_collectionFormat
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/multi/string/null", false);
@@ -42,11 +43,11 @@ namespace url_multi_collectionFormat
                 {
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -64,7 +65,8 @@ namespace url_multi_collectionFormat
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/multi/string/empty", false);
@@ -72,11 +74,11 @@ namespace url_multi_collectionFormat
                 {
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -94,7 +96,8 @@ namespace url_multi_collectionFormat
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/queries/array/multi/string/valid", false);
@@ -102,11 +105,11 @@ namespace url_multi_collectionFormat
                 {
                     request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }

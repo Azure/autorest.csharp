@@ -38,16 +38,17 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/existingkey", false);
                 request.Headers.Add("User-Agent", userAgent);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -65,16 +66,17 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/existingkey", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseExistingKeyHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseExistingKeyHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -96,16 +98,17 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/protectedkey", false);
                 request.Headers.Add("Content-Type", contentType);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -123,16 +126,17 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/protectedkey", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseProtectedKeyHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseProtectedKeyHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -154,17 +158,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/integer", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -186,17 +191,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/integer", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseIntegerHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseIntegerHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -218,17 +224,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/long", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -250,17 +257,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/long", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseLongHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseLongHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -282,17 +290,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/float", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -314,17 +323,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/float", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseFloatHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseFloatHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -346,17 +356,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/double", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -378,17 +389,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/double", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDoubleHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseDoubleHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -410,17 +422,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/bool", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -442,17 +455,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/bool", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseBoolHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseBoolHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -474,7 +488,8 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/string", false);
@@ -483,11 +498,11 @@ namespace header
                 {
                     request.Headers.Add("value", value);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -509,17 +524,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/string", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseStringHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseStringHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -541,17 +557,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/date", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "D");
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -573,17 +590,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/date", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDateHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseDateHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -605,17 +623,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/datetime", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "S");
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -637,17 +656,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/datetime", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseDatetimeHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -669,7 +689,8 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/datetimerfc1123", false);
@@ -678,11 +699,11 @@ namespace header
                 {
                     request.Headers.Add("value", value.Value, "R");
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -704,17 +725,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeRfc1123Headers(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseDatetimeRfc1123Headers(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -736,17 +758,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/duration", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value, "P");
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -768,17 +791,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/duration", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDurationHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseDurationHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -804,17 +828,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/byte", false);
                 request.Headers.Add("scenario", scenario);
                 request.Headers.Add("value", value);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -836,17 +861,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/byte", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseByteHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseByteHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -868,7 +894,8 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/param/prim/enum", false);
@@ -877,11 +904,11 @@ namespace header
                 {
                     request.Headers.Add("value", value.Value);
                 }
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
@@ -903,17 +930,18 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/response/prim/enum", false);
                 request.Headers.Add("scenario", scenario);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseEnumHeaders(response);
-                        return ResponseWithHeaders.FromValue(headers, response);
+                        var headers = new ResponseEnumHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw new Exception();
                 }
@@ -931,15 +959,16 @@ namespace header
             scope.Start();
             try
             {
-                var request = pipeline.CreateRequest();
+                using var message = pipeline.CreateMessage();
+                var request = message.Request;
                 request.Method = RequestMethod.Post;
                 request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
-                var response = await pipeline.SendRequestAsync(request, cancellationToken).ConfigureAwait(false);
-                switch (response.Status)
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
                 {
                     case 200:
-                        return response;
+                        return message.Response;
                     default:
                         throw new Exception();
                 }
