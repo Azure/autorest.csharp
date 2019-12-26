@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 }
             }
 
-            Compilation compilation = await project.GetCompilationAsync();
+            Compilation? compilation = await project.GetCompilationAsync();
 
             Debug.Assert(compilation != null);
 
