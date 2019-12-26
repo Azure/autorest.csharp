@@ -78,7 +78,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
-
             List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
 
             JsonRequestBody? body = null;
@@ -86,7 +85,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                ConstantOrParameter? constantOrParameter;
+                ConstantOrParameter constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
@@ -117,9 +116,9 @@ namespace AutoRest.CSharp.V3.ClientModels
                             break;
                     }
 
-                    if (!constantOrParameter.Value.IsConstant)
+                    if (!constantOrParameter.IsConstant)
                     {
-                        methodParameters.Add(constantOrParameter.Value.Parameter);
+                        methodParameters.Add(constantOrParameter.Parameter);
                     }
                 }
                 else
@@ -134,19 +133,19 @@ namespace AutoRest.CSharp.V3.ClientModels
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter.Value, serializationFormat));
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter.Value, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter.Value, true, serializationFormat));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
                             break;
-                        case ParameterLocation.Body when constantOrParameter is ConstantOrParameter constantOrParameterValue:
-                            body = new JsonRequestBody(constantOrParameterValue, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
+                        case ParameterLocation.Body:
+                            body = new JsonRequestBody(constantOrParameter, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
                             break;
                         case ParameterLocation.Uri:
-                            uriParameters[defaultName] = constantOrParameter.Value;
+                            uriParameters[defaultName] = constantOrParameter;
                             break;
                     }
                 }
