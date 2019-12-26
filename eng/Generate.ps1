@@ -109,7 +109,7 @@ foreach ($testName in $testNames)
 
 # Sample configuration
 $sampleDirectory = Join-Path $repoRoot 'samples'
-$projectNames = 'AppConfiguration'
+$projectNames = 'AppConfiguration', 'CognitiveServices.TextAnalytics'
 
 foreach ($projectName in $projectNames)
 {

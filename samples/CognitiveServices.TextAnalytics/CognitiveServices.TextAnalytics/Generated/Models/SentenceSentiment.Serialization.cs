@@ -1,0 +1,68 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System.Text.Json;
+using Azure.Core;
+
+namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+{
+    public partial class SentenceSentiment : IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("sentiment");
+            writer.WriteStringValue(Sentiment.ToString());
+            writer.WritePropertyName("sentenceScores");
+            writer.WriteObjectValue(SentenceScores);
+            writer.WritePropertyName("offset");
+            writer.WriteNumberValue(Offset);
+            writer.WritePropertyName("length");
+            writer.WriteNumberValue(Length);
+            writer.WritePropertyName("warnings");
+            writer.WriteStartArray();
+            foreach (var item in Warnings)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+        internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
+        {
+            SentenceSentiment result = new SentenceSentiment();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sentiment"))
+                {
+                    result.Sentiment = new SentenceSentimentSentiment(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("sentenceScores"))
+                {
+                    result.SentenceScores = property.Value.GetObject();
+                    continue;
+                }
+                if (property.NameEquals("offset"))
+                {
+                    result.Offset = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("length"))
+                {
+                    result.Length = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("warnings"))
+                {
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.Warnings.Add(item.GetString());
+                    }
+                    continue;
+                }
+            }
+            return result;
+        }
+    }
+}
