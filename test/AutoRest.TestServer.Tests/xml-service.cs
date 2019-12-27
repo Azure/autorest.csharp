@@ -62,6 +62,61 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task GetRootListSingleItemAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetRootListSingleItemAsync();
+            var value = result.Value;
+            var item = value.Single();
+
+            Assert.AreEqual("Cavendish", item.Name);
+            Assert.AreEqual("Sweet", item.Flavor);
+            Assert.AreEqual(DateTimeOffset.Parse("2018-02-28T00:40:00.123Z"), item.Expiration);
+        }, true);
+
+        [Test]
+        public Task GetEmptyListAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyListAsync();
+            var value = result.Value;
+
+            Assert.Null(value.Slides);
+            Assert.Null(value.Date);
+            Assert.Null(value.Author);
+            Assert.Null(value.Title);
+        }, true);
+
+        [Test]
+        public Task GetEmptyChildElementAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyChildElementAsync();
+            var value = result.Value;
+
+            Assert.AreEqual("Unknown Banana", value.Name);
+            Assert.AreEqual("", value.Flavor);
+            Assert.AreEqual(DateTimeOffset.Parse("2012-02-24T00:53:52.789Z"), value.Expiration);
+        }, true);
+
+        [Test]
+        public Task GetWrappedListsAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetWrappedListsAsync();
+            var value = result.Value;
+
+            CollectionAssert.AreEqual(new[] {"Red Delicious"}, value.BadApples);
+            CollectionAssert.AreEqual(new[] {"Fuji", "Gala"}, value.GoodApples);
+        }, true);
+
+        [Test]
+        public Task GetEmptyWrappedListsAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyWrappedListsAsync();
+            var value = result.Value;
+
+            CollectionAssert.AreEqual(new string[] {}, value.BadApples);
+            CollectionAssert.AreEqual(new string[] {}, value.GoodApples);
+        }, true);
+
+        [Test]
         public Task GetAclsAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetAclsAsync();
