@@ -26,11 +26,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 case XmlObjectSerialization dictionary:
                     if (nameHint != null)
                     {
-                        writer.Line($"{writerName}.WriteStartElement({nameHint} ?? {dictionary.ElementName:L});");
+                        writer.Line($"{writerName}.WriteStartElement({nameHint} ?? {dictionary.Name:L});");
                     }
                     else
                     {
-                        writer.Line($"{writerName}.WriteStartElement({dictionary.ElementName:L});");
+                        writer.Line($"{writerName}.WriteStartElement({dictionary.Name:L});");
                     }
 
                     foreach (XmlObjectElementSerialization property in dictionary.Elements)

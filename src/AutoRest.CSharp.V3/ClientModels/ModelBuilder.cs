@@ -145,11 +145,8 @@ namespace AutoRest.CSharp.V3.ClientModels
                 }
             }
 
-            return new XmlObjectSerialization(schemaTypeReference,
-                elements.ToArray(),
-                attributes.ToArray(),
-                objectSchema.Serialization?.Xml?.Name ?? "Auto" + objectSchema.Language.Default.Name,
-                embeddedArrays.ToArray());
+            return new XmlObjectSerialization(objectSchema.Serialization?.Xml?.Name ?? "Auto" + objectSchema.Language.Default.Name,
+                schemaTypeReference, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray());
         }
 
         private static JsonObjectSerialization BuildJsonSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
