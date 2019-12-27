@@ -244,19 +244,55 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlValueSerialization valueSerialization, TypeFactory typeFactory, CodeWriterDelegate element)
+        public static void ToDeserializeCall(this CodeWriter writer, XmlValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
         {
-            switch (valueSerialization.Type)
+            switch (serialization.Type)
             {
                 case SchemaTypeReference schemaTypeReference:
                     writer.ToXmlDeserializeCall(schemaTypeReference, typeFactory, element);
                     break;
                 case FrameworkTypeReference frameworkTypeReference:
-                    var type = typeFactory.CreateType(frameworkTypeReference);
-                    writer.Append($"({type}){element}");
+
+                    var frameworkType = frameworkTypeReference.Type;
+
+                    if (frameworkType == typeof(bool) ||
+                        frameworkType == typeof(char) ||
+                        frameworkType == typeof(short) ||
+                        frameworkType == typeof(int) ||
+                        frameworkType == typeof(long) ||
+                        frameworkType == typeof(float) ||
+                        frameworkType == typeof(double) ||
+                        frameworkType == typeof(decimal) ||
+                        frameworkType == typeof(string)
+                    )
+                    {
+                        var type = typeFactory.CreateType(frameworkTypeReference);
+                        writer.Append($"({type}){element}");
+                        return;
+                    }
+
+                    writer.Append($"{element}.");
+
+                    if (frameworkType == typeof(byte[]))
+                    {
+                        writer.AppendRaw("GetBytesFromBase64");
+                    }
+
+                    if (frameworkType == typeof(DateTimeOffset))
+                    {
+                        writer.AppendRaw("GetDateTimeOffsetValue");
+                    }
+
+                    if (frameworkType == typeof(TimeSpan))
+                    {
+                        writer.AppendRaw("GetTimeSpanValue");
+                    }
+
+                    writer.Append($"({serialization.Format.ToFormatSpecifier():L})");
+
                     break;
                 default:
-                    throw new NotImplementedException(valueSerialization.Type.ToString());
+                    throw new NotImplementedException(serialization.Type.ToString());
             }
         }
 

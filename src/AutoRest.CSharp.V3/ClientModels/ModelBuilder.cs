@@ -109,15 +109,17 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 foreach (Property property in schema.Properties!)
                 {
+                    var wrapped = property.Schema.Serialization?.Xml?.Wrapped == true;
+                    var name = wrapped ? property.SerializedName : property.Schema.Serialization?.Xml?.Name ?? property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
-                    XmlSerialization valueSerialization = ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable());
+                    XmlSerialization valueSerialization = ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable(), name);
 
                     if (isAttribute)
                     {
                         attributes.Add(
                             new XmlObjectAttributeSerialization(
-                                property.SerializedName,
+                                name,
                                 property.CSharpName(),
                                 (XmlValueSerialization) valueSerialization
                             )
@@ -125,8 +127,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                     }
                     else
                     {
-                        var wrapped = property.Schema.Serialization?.Xml?.Wrapped == true;
-                        var elementName = wrapped ? property.SerializedName : property.Schema.Serialization?.Xml?.Name ?? property.SerializedName;
                         if (!wrapped && valueSerialization is XmlArraySerialization arraySerialization)
                         {
                             embeddedArrays.Add(new XmlObjectArraySerialization(property.CSharpName(), arraySerialization));
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                         {
                             elements.Add(
                                 new XmlObjectElementSerialization(
-                                    elementName,
+                                    name,
                                     property.CSharpName(),
                                     valueSerialization
                                 )

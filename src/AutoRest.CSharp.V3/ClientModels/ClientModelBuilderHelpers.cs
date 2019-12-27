@@ -93,19 +93,26 @@ namespace AutoRest.CSharp.V3.ClientModels
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
         }
 
-        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable)
+        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable, string? nameHint)
         {
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
+                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, nameHint);
                 case ArraySchema arraySchema:
+                    string xmlName =
+                        arraySchema.ElementType.Serialization?.Xml?.Name ??
+                        nameHint ??
+                        throw new ArgumentNullException(nameof(nameHint), "nameHint shouldn't be null for arrays");
+
                     return new XmlArraySerialization(
                         CreateType(arraySchema, false),
-                        CreateXmlSerialization(arraySchema.ElementType, false),
-                        arraySchema.ElementType.Serialization?.Xml?.Name ?? "AUTO " + arraySchema.ElementType.Language.Default.Name);
+                        CreateXmlSerialization(arraySchema.ElementType, false, null),
+                        xmlName);
                 case DictionarySchema dictionarySchema:
-                    return new XmlDictionarySerialization(CreateType(dictionarySchema, false), CreateXmlSerialization(dictionarySchema.ElementType, false));
+                    return new XmlDictionarySerialization(
+                        CreateType(dictionarySchema, false),
+                        CreateXmlSerialization(dictionarySchema.ElementType, false, null));
                 default:
                     return new XmlValueSerialization(
                         CreateType(schema, isNullable),

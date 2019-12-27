@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Azure.Core
 {
-    internal static class XmlWriterExensions
+    internal static class XmlWriterExtensions
     {
         public static void WriteObjectValue(this XmlWriter writer, object value, string? nameHint)
         {

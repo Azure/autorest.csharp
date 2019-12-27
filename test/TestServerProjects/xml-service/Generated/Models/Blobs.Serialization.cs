@@ -62,7 +62,7 @@ namespace xml_service.Models.V100
         {
             Blobs result = new Blobs();
             result.BlobPrefix = new List<BlobPrefix>();
-            var elements = element.Elements("AUTO BlobPrefix");
+            var elements = element.Elements("BlobPrefix");
             foreach (var e in elements)
             {
                 result.BlobPrefix.Add(V100.BlobPrefix.DeserializeBlobPrefix(e));

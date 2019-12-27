@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -64,12 +63,12 @@ namespace xml_service.Models.V100
             var start = element.Element("Start");
             if (start != null)
             {
-                result.Start = (DateTimeOffset)start;
+                result.Start = start.GetDateTimeOffsetValue("S");
             }
             var expiry = element.Element("Expiry");
             if (expiry != null)
             {
-                result.Expiry = (DateTimeOffset)expiry;
+                result.Expiry = expiry.GetDateTimeOffsetValue("S");
             }
             var permission = element.Element("Permission");
             if (permission != null)

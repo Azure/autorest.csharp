@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -104,7 +103,7 @@ namespace xml_service.Models.V100
             var expiration = element.Element("expiration");
             if (expiration != null)
             {
-                result.Expiration = (DateTimeOffset?)expiration;
+                result.Expiration = expiration.GetDateTimeOffsetValue("S");
             }
             return result;
         }

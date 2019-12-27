@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -574,7 +573,7 @@ namespace xml_service.Models.V100
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {
-                result.LastModified = (DateTimeOffset)lastModified;
+                result.LastModified = lastModified.GetDateTimeOffsetValue("R");
             }
             var etag = element.Element("Etag");
             if (etag != null)
@@ -664,7 +663,7 @@ namespace xml_service.Models.V100
             var copyCompletionTime = element.Element("CopyCompletionTime");
             if (copyCompletionTime != null)
             {
-                result.CopyCompletionTime = (DateTimeOffset?)copyCompletionTime;
+                result.CopyCompletionTime = copyCompletionTime.GetDateTimeOffsetValue("R");
             }
             var copyStatusDescription = element.Element("CopyStatusDescription");
             if (copyStatusDescription != null)
@@ -689,7 +688,7 @@ namespace xml_service.Models.V100
             var deletedTime = element.Element("DeletedTime");
             if (deletedTime != null)
             {
-                result.DeletedTime = (DateTimeOffset?)deletedTime;
+                result.DeletedTime = deletedTime.GetDateTimeOffsetValue("R");
             }
             var remainingRetentionDays = element.Element("RemainingRetentionDays");
             if (remainingRetentionDays != null)

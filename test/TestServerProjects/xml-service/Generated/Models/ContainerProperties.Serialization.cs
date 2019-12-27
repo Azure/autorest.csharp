@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -134,7 +133,7 @@ namespace xml_service.Models.V100
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {
-                result.LastModified = (DateTimeOffset)lastModified;
+                result.LastModified = lastModified.GetDateTimeOffsetValue("R");
             }
             var etag = element.Element("Etag");
             if (etag != null)
