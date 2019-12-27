@@ -1,0 +1,104 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Xml;
+using System.Xml.Linq;
+using Azure.Core;
+
+namespace xml_service.Models.V100
+{
+    public partial class Slide : IXmlSerializable, IUtf8JsonSerializable
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Type != null)
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
+            }
+            if (Title != null)
+            {
+                writer.WritePropertyName("title");
+                writer.WriteStringValue(Title);
+            }
+            writer.WritePropertyName("items");
+            writer.WriteStartArray();
+            foreach (var item in Items)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+        internal static Slide DeserializeSlide(JsonElement element)
+        {
+            Slide result = new Slide();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("type"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("title"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Title = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("items"))
+                {
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        result.Items.Add(item.GetString());
+                    }
+                    continue;
+                }
+            }
+            return result;
+        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "slide");
+            if (Title != null)
+            {
+                writer.WriteStartElement("title");
+                writer.WriteValue(Title);
+                writer.WriteEndElement();
+            }
+            writer.WriteStartElement("items");
+            writer.WriteEndElement();
+        }
+        internal static Slide DeserializeSlide(XElement element)
+        {
+            Slide result = new Slide();
+            var type = element.Attribute("type");
+            if (type != null)
+            {
+                result.Type = (string?)type;
+            }
+            var title = element.Element("title");
+            if (title != null)
+            {
+                result.Title = (string?)title;
+            }
+            var items = element.Element("items");
+            if (items != null)
+            {
+                ICollection<string> value = new List<string>();
+                result.Items = value;
+            }
+            return result;
+        }
+    }
+}

@@ -5,6 +5,8 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -67,6 +69,7 @@ namespace validation
                 {
                     case 200:
                         {
+                            var element = await XElement.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);

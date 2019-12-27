@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (JsonPropertySerialization property in dictionary.Properties)
                     {
-                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property, TypeFactory typeFactory)
         {
-            var type = property.Type;
+            var type = property.ValueSerialization.Type;
             var name = property.MemberName;
 
             CSharpType propertyType = typeFactory.CreateType(type);
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
-                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.Type))}();");
+                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.ValueSerialization.Type))}();");
                 }
             }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Plugins;
 using AutoRest.CSharp.V3.Utilities;
@@ -65,6 +66,8 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientMethod? BuildMethod(Operation operation, Dictionary<string, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
+            var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
+
             //TODO: Handle multiple responses
             var response = operation.Responses.FirstOrDefault();
             var httpResponse = response?.Protocol.Http as HttpResponse;
@@ -80,7 +83,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             List<RequestHeader> headers = new List<RequestHeader>();
             List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
 
-            JsonRequestBody? body = null;
+            ObjectRequestBody? body = null;
             foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
@@ -130,7 +133,15 @@ namespace AutoRest.CSharp.V3.ClientModels
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
                             break;
                         case ParameterLocation.Body:
-                            body = new JsonRequestBody(constantOrParameter, ClientModelBuilderHelpers.CreateSerialization(requestParameter.Schema, requestParameter.IsNullable()));
+                            Debug.Assert(httpRequestWithBody != null);
+                            var serialization = httpRequestWithBody.KnownMediaType switch
+                            {
+                                KnownMediaType.Json => (ObjectSerialization)ClientModelBuilderHelpers.CreateJsonSerialization(requestParameter.Schema, requestParameter.IsNullable()),
+                                KnownMediaType.Xml => ClientModelBuilderHelpers.CreateXmlSerialization(requestParameter.Schema, requestParameter.IsNullable()),
+                                _ => throw new NotImplementedException(httpRequestWithBody.KnownMediaType.ToString())
+                            };
+
+                            body = new ObjectRequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter;
@@ -140,9 +151,9 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             }
 
-            if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
+            if (httpRequestWithBody != null)
             {
-                headers.AddRange(httpWithBodyRequest.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
+                headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
             }
 
             var request = new ClientMethodRequest(
@@ -159,7 +170,21 @@ namespace AutoRest.CSharp.V3.ClientModels
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
-                responseBody = new JsonResponseBody(responseType, ClientModelBuilderHelpers.CreateSerialization(schema, false));
+
+                ObjectSerialization serialization;
+                switch (httpResponse.KnownMediaType)
+                {
+                    case KnownMediaType.Json:
+                        serialization = ClientModelBuilderHelpers.CreateJsonSerialization(schema, false);
+                        break;
+                    case KnownMediaType.Xml:
+                        serialization = ClientModelBuilderHelpers.CreateXmlSerialization(schema, false);
+                        break;
+                    default:
+                        throw new NotImplementedException(httpResponse.KnownMediaType.ToString());
+                }
+
+                responseBody = new ObjectResponseBody(responseType, serialization);
             }
             else if (response is BinaryResponse)
             {

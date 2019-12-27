@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -156,18 +158,33 @@ namespace AutoRest.CSharp.V3.CodeGen
                         WriteQueryParameter(writer, queryParameter);
                     }
 
-                    if (operation.Request.Body is JsonRequestBody body)
+                    if (operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
                     {
-                        writer.Line($"using var content = new {writer.Type(typeof(Utf8JsonRequestContent))}();");
+                        writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
                         ConstantOrParameter value = body.Value;
 
                         writer.ToSerializeCall(
-                            body.Serialization,
+                            jsonSerialization,
                             _typeFactory,
                             w => WriteConstantOrParameter(w, value),
                             writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
 
+                        writer.Line($"request.Content = content;");
+                    }
+                    else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlSerialization xmlSerialization)
+                    {
+                        writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
+
+                        ConstantOrParameter value = operation.Request.Body.Value;
+
+                        writer.ToSerializeCall(
+                            xmlSerialization,
+                            _typeFactory,
+                            w => WriteConstantOrParameter(w, value),
+                            writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
+
+                        writer.Line($"// Serializer call here");
                         writer.Line($"request.Content = content;");
                     }
 
@@ -352,18 +369,32 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     string valueVariable = "value";
 
-                    if (responseBody is JsonResponseBody jsonResponseBody)
+                    if (responseBody is ObjectResponseBody objectResponseBody)
                     {
-                        writer.Line($"using var document = await {writer.Type(typeof(JsonDocument))}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                        writer.ToDeserializeCall(
-                            jsonResponseBody.Serialization,
-                            _typeFactory,
-                            w => w.Append($"document.RootElement"),
-                            ref valueVariable
-                        );
+                        const string document = "document";
+                        switch (objectResponseBody.Serialization)
+                        {
+                            case JsonSerialization jsonSerialization:
+                                writer.Line($"using var {document:D} = await {writer.Type(typeof(JsonDocument))}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                                writer.ToDeserializeCall(
+                                    jsonSerialization,
+                                    _typeFactory,
+                                    w => w.Append($"document.RootElement"),
+                                    ref valueVariable
+                                );
+                                break;
+                            case XmlSerialization xmlSerialization:
+                                writer.Line($"var {document:D} = await {typeof(XDocument)}.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);");
+                                writer.ToDeserializeCall(
+                                    xmlSerialization,
+                                    _typeFactory,
+                                    w => w.Append($"document.Root"),
+                                    ref valueVariable
+                                );
+                                break;
+                        }
                     }
-
-                    if (responseBody is StreamResponseBody _)
+                    else if (responseBody is StreamResponseBody _)
                     {
                         writer.Line($"var {valueVariable:D} = message.ExtractResponseContent();");
                     }

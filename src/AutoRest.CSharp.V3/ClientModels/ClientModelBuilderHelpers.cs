@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Xml;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
@@ -92,23 +93,39 @@ namespace AutoRest.CSharp.V3.ClientModels
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
         }
 
-        public static JsonSerialization CreateSerialization(Schema schema, bool isNullable)
+        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable)
         {
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return CreateSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
+                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
-                    return new JsonArraySerialization(CreateType(arraySchema, false), CreateSerialization(arraySchema.ElementType, false));
+                    return new XmlArraySerialization(CreateType(arraySchema, false), CreateXmlSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
+                    return new XmlDictionarySerialization(CreateType(dictionarySchema, false), CreateXmlSerialization(dictionarySchema.ElementType, false));
+                default:
+                    return new XmlValueSerialization(
+                        CreateType(schema, isNullable),
+                        GetSerializationFormat(schema));
+            }
+        }
 
+        public static JsonSerialization CreateJsonSerialization(Schema schema, bool isNullable)
+        {
+            switch (schema)
+            {
+                case ConstantSchema constantSchema:
+                    return CreateJsonSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
+                case ArraySchema arraySchema:
+                    return new JsonArraySerialization(CreateType(arraySchema, false), CreateJsonSerialization(arraySchema.ElementType, false));
+                case DictionarySchema dictionarySchema:
                     var dictionaryElementTypeReference = new DictionaryTypeReference(
                         new FrameworkTypeReference(typeof(string)),
                         CreateType(dictionarySchema.ElementType, false),
                         false);
 
                     return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
+                        new JsonDynamicPropertiesSerialization(CreateJsonSerialization(dictionarySchema.ElementType, false)));
                 default:
                     return new JsonValueSerialization(CreateType(schema, isNullable), GetSerializationFormat(schema));
             }

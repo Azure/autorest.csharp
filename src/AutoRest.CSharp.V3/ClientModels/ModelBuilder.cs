@@ -45,20 +45,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
-            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
 
             foreach (Property property in objectSchema.Properties!)
             {
                 ClientObjectProperty clientObjectProperty = CreateProperty(property);
                 properties.Add(clientObjectProperty);
-            }
-
-            foreach (var schema in EnumerateHierarchy(objectSchema))
-            {
-                foreach (Property property in schema.Properties!)
-                {
-                    serializationProperties.Add(CreateSerialization(property));
-                }
             }
 
             Discriminator? schemaDiscriminator = objectSchema.Discriminator;
@@ -96,8 +87,72 @@ namespace AutoRest.CSharp.V3.ClientModels
                 properties.ToArray(),
                 discriminator,
                 inheritedDictionarySchema == null ? null : CreateDictionaryType(inheritedDictionarySchema),
-                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema))
+                BuildSerializations(objectSchema, schemaTypeReference)
                 );
+        }
+
+        private static ObjectSerialization[] BuildSerializations(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
+        {
+            return new ObjectSerialization[]
+            {
+                BuildJsonSerialization(objectSchema, schemaTypeReference),
+                BuildXmlSerialization(objectSchema, schemaTypeReference),
+            };
+        }
+
+        private static XmlObjectSerialization BuildXmlSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
+        {
+            List<XmlNamedElementSerialization> elements = new List<XmlNamedElementSerialization>();
+            List<XmlNamedAttributeSerialization> attributes = new List<XmlNamedAttributeSerialization>();
+            foreach (var schema in EnumerateHierarchy(objectSchema))
+            {
+                foreach (Property property in schema.Properties!)
+                {
+                    var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
+
+                    if (isAttribute)
+                    {
+                        attributes.Add(
+                            new XmlNamedAttributeSerialization(
+                                property.SerializedName,
+                                property.CSharpName(),
+                                (XmlValueSerialization) ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable())
+                            )
+                        );
+                    }
+                    else
+                    {
+                        var wrapped = property.Schema.Serialization?.Xml?.Wrapped != false;
+                        var elementName = wrapped ? property.SerializedName : property.Schema.Serialization?.Xml?.Name ?? property.SerializedName;
+                        elements.Add(
+                            new XmlNamedElementSerialization(
+                                elementName,
+                                property.CSharpName(),
+                                ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable())
+                            )
+                        );
+                    }
+                }
+            }
+
+            return new XmlObjectSerialization(schemaTypeReference,
+                elements.ToArray(),
+                attributes.ToArray(),
+                objectSchema.Serialization?.Xml?.Name ?? "Auto" + objectSchema.Language.Default.Name);
+        }
+
+        private static JsonObjectSerialization BuildJsonSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
+        {
+            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
+            foreach (var schema in EnumerateHierarchy(objectSchema))
+            {
+                foreach (Property property in schema.Properties!)
+                {
+                    serializationProperties.Add(CreateSerialization(property));
+                }
+            }
+
+            return new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema));
         }
 
         private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
@@ -110,7 +165,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             return new JsonDynamicPropertiesSerialization(
-                ClientModelBuilderHelpers.CreateSerialization(inheritedDictionarySchema.ElementType, false)
+                ClientModelBuilderHelpers.CreateJsonSerialization(inheritedDictionarySchema.ElementType, false)
                 );
         }
 
@@ -139,8 +194,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new JsonPropertySerialization(
                 property.SerializedName,
                 property.CSharpName(),
-                ClientModelBuilderHelpers.CreateSerialization(property.Schema, property.IsNullable()),
-                ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable())
+                ClientModelBuilderHelpers.CreateJsonSerialization(property.Schema, property.IsNullable())
                 );
         }
 
