@@ -167,6 +167,11 @@ namespace xml_service.Models.V100
             if (cors != null)
             {
                 ICollection<CorsRule> value = new List<CorsRule>();
+                var elements = cors.Elements("CorsRule");
+                foreach (var e in elements)
+                {
+                    value.Add(CorsRule.DeserializeCorsRule(e));
+                }
                 result.Cors = value;
             }
             var defaultServiceVersion = element.Element("DefaultServiceVersion");

@@ -21,15 +21,18 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
     }
     internal class XmlArraySerialization : XmlSerialization
     {
-        public XmlArraySerialization(ClientTypeReference type, XmlSerialization valueSerialization)
+        public XmlArraySerialization(ClientTypeReference type, XmlSerialization valueSerialization, string name)
         {
             Type = type;
             ValueSerialization = valueSerialization;
+            Name = name;
         }
 
         public override ClientTypeReference Type { get; }
         public XmlSerialization ValueSerialization { get; }
+        public string Name { get; }
     }
+
     internal class XmlValueSerialization: XmlSerialization
     {
         public XmlValueSerialization(ClientTypeReference type, SerializationFormat format)
@@ -42,9 +45,9 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         public SerializationFormat Format { get; }
     }
 
-    internal class XmlNamedElementSerialization
+    internal class XmlObjectElementSerialization
     {
-        public XmlNamedElementSerialization(
+        public XmlObjectElementSerialization(
             string name,
             string memberName,
             XmlSerialization valueSerialization)
@@ -59,9 +62,9 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         public XmlSerialization ValueSerialization { get; }
     }
 
-    internal class XmlNamedAttributeSerialization
+    internal class XmlObjectAttributeSerialization
     {
-        public XmlNamedAttributeSerialization(
+        public XmlObjectAttributeSerialization(
             string name,
             string memberName,
             XmlValueSerialization valueSerialization)
@@ -76,22 +79,37 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         public XmlValueSerialization ValueSerialization { get; }
     }
 
+    internal class XmlObjectArraySerialization
+    {
+        public XmlObjectArraySerialization(string memberName, XmlArraySerialization arraySerialization)
+        {
+            MemberName = memberName;
+            ArraySerialization = arraySerialization;
+        }
+
+        public string MemberName { get; }
+        public XmlArraySerialization ArraySerialization { get; }
+    }
+
     internal class XmlObjectSerialization: XmlSerialization
     {
         public XmlObjectSerialization(
             ClientTypeReference type,
-            XmlNamedElementSerialization[] elements,
-            XmlNamedAttributeSerialization[] attributes,
-            string elementName)
+            XmlObjectElementSerialization[] elements,
+            XmlObjectAttributeSerialization[] attributes,
+            string elementName,
+            XmlObjectArraySerialization[] embeddedArrays)
         {
             Type = type;
             Elements = elements;
             Attributes = attributes;
             ElementName = elementName;
+            EmbeddedArrays = embeddedArrays;
         }
         public string ElementName { get; }
-        public XmlNamedElementSerialization[] Elements { get; }
-        public XmlNamedAttributeSerialization[] Attributes { get; }
+        public XmlObjectElementSerialization[] Elements { get; }
+        public XmlObjectAttributeSerialization[] Attributes { get; }
+        public XmlObjectArraySerialization[] EmbeddedArrays { get; }
         public override ClientTypeReference Type { get; }
     }
 }

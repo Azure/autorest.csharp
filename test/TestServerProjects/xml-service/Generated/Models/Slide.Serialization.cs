@@ -76,8 +76,6 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            writer.WriteStartElement("items");
-            writer.WriteEndElement();
         }
         internal static Slide DeserializeSlide(XElement element)
         {
@@ -92,11 +90,11 @@ namespace xml_service.Models.V100
             {
                 result.Title = (string?)title;
             }
-            var items = element.Element("items");
-            if (items != null)
+            result.Items = new List<string>();
+            var elements = element.Elements("item");
+            foreach (var e in elements)
             {
-                ICollection<string> value = new List<string>();
-                result.Items = value;
+                result.Items.Add((string)e);
             }
             return result;
         }

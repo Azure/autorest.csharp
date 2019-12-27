@@ -84,8 +84,6 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
-            writer.WriteStartElement("slides");
-            writer.WriteEndElement();
         }
         internal static Slideshow DeserializeSlideshow(XElement element)
         {
@@ -105,11 +103,11 @@ namespace xml_service.Models.V100
             {
                 result.Author = (string?)author;
             }
-            var slides = element.Element("slides");
-            if (slides != null)
+            result.Slides = new List<Slide>();
+            var elements = element.Elements("slide");
+            foreach (var e in elements)
             {
-                ICollection<Slide> value = new List<Slide>();
-                result.Slides = value;
+                result.Slides.Add(Slide.DeserializeSlide(e));
             }
             return result;
         }

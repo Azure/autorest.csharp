@@ -69,12 +69,22 @@ namespace xml_service.Models.V100
             if (goodApples != null)
             {
                 ICollection<string> value = new List<string>();
+                var elements = goodApples.Elements("Apple");
+                foreach (var e in elements)
+                {
+                    value.Add((string)e);
+                }
                 result.GoodApples = value;
             }
             var badApples = element.Element("BadApples");
             if (badApples != null)
             {
                 ICollection<string> value = new List<string>();
+                var elements = badApples.Elements("Apple");
+                foreach (var e in elements)
+                {
+                    value.Add((string)e);
+                }
                 result.BadApples = value;
             }
             return result;

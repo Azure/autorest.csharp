@@ -102,35 +102,45 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         private static XmlObjectSerialization BuildXmlSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
         {
-            List<XmlNamedElementSerialization> elements = new List<XmlNamedElementSerialization>();
-            List<XmlNamedAttributeSerialization> attributes = new List<XmlNamedAttributeSerialization>();
+            List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
+            List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
+            List<XmlObjectArraySerialization> embeddedArrays = new List<XmlObjectArraySerialization>();
             foreach (var schema in EnumerateHierarchy(objectSchema))
             {
                 foreach (Property property in schema.Properties!)
                 {
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
+                    XmlSerialization valueSerialization = ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable());
+
                     if (isAttribute)
                     {
                         attributes.Add(
-                            new XmlNamedAttributeSerialization(
+                            new XmlObjectAttributeSerialization(
                                 property.SerializedName,
                                 property.CSharpName(),
-                                (XmlValueSerialization) ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable())
+                                (XmlValueSerialization) valueSerialization
                             )
                         );
                     }
                     else
                     {
-                        var wrapped = property.Schema.Serialization?.Xml?.Wrapped != false;
+                        var wrapped = property.Schema.Serialization?.Xml?.Wrapped == true;
                         var elementName = wrapped ? property.SerializedName : property.Schema.Serialization?.Xml?.Name ?? property.SerializedName;
-                        elements.Add(
-                            new XmlNamedElementSerialization(
-                                elementName,
-                                property.CSharpName(),
-                                ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable())
-                            )
-                        );
+                        if (!wrapped && valueSerialization is XmlArraySerialization arraySerialization)
+                        {
+                            embeddedArrays.Add(new XmlObjectArraySerialization(property.CSharpName(), arraySerialization));
+                        }
+                        else
+                        {
+                            elements.Add(
+                                new XmlObjectElementSerialization(
+                                    elementName,
+                                    property.CSharpName(),
+                                    valueSerialization
+                                )
+                            );
+                        }
                     }
                 }
             }
@@ -138,7 +148,8 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new XmlObjectSerialization(schemaTypeReference,
                 elements.ToArray(),
                 attributes.ToArray(),
-                objectSchema.Serialization?.Xml?.Name ?? "Auto" + objectSchema.Language.Default.Name);
+                objectSchema.Serialization?.Xml?.Name ?? "Auto" + objectSchema.Language.Default.Name,
+                embeddedArrays.ToArray());
         }
 
         private static JsonObjectSerialization BuildJsonSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)

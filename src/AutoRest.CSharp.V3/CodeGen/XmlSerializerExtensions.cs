@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"{writerName}.WriteStartElement({dictionary.ElementName:L});");
                     }
 
-                    foreach (XmlNamedElementSerialization property in dictionary.Elements)
+                    foreach (XmlObjectElementSerialization property in dictionary.Elements)
                     {
                         using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
                         {
@@ -152,11 +152,38 @@ namespace AutoRest.CSharp.V3.CodeGen
             switch (serialization)
             {
                 case XmlArraySerialization arraySerialization:
+                {
+                    string elementsVariable = writer.GetTemporaryVariable("elements");
+                    string elementVariable = writer.GetTemporaryVariable("e");
+
+                    writer.Line($"var {elementsVariable:D} = {element}.Elements({arraySerialization.Name:L});");
+                    using (writer.Scope($"foreach (var {elementVariable:D} in {elementsVariable})"))
+                    {
+                        if (arraySerialization.ValueSerialization is XmlValueSerialization valueSerialization)
+                        {
+                            writer.Append($"{destination}.Add(");
+                            writer.ToDeserializeCall(valueSerialization, typeFactory, w=> w.AppendRaw(elementVariable));
+                            writer.Line($");");
+                        }
+                        else
+                        {
+                            var itemVariableName = "value";
+                            writer.ToDeserializeCall(
+                                arraySerialization.ValueSerialization,
+                                typeFactory,
+                                w => w.AppendRaw(elementVariable),
+                                ref itemVariableName);
+
+                            writer.Append($"{destination}.Add({itemVariableName});");
+                        }
+                    }
+
                     break;
+                }
                 case XmlDictionarySerialization dictionarySerialization:
                     break;
                 case XmlObjectSerialization elementSerialization:
-                    foreach (XmlNamedAttributeSerialization attribute in elementSerialization.Attributes)
+                    foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {
                         string elementVariable = writer.GetTemporaryVariable(attribute.MemberName.ToVariableName());
 
@@ -168,7 +195,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             writer.Line($";");
                         }
                     }
-                    foreach (XmlNamedElementSerialization elem in elementSerialization.Elements)
+                    foreach (XmlObjectElementSerialization elem in elementSerialization.Elements)
                     {
                         string elementVariable = writer.GetTemporaryVariable(elem.MemberName.ToVariableName());
 
@@ -193,6 +220,19 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 writer.Append($"{destination}.{elem.MemberName} = {itemVariableName};");
                             }
                         }
+                    }
+
+                    foreach (var embeddedArray in elementSerialization.EmbeddedArrays)
+                    {
+                        CodeWriterDelegate arrayDestination = w => w.Append($"{destination}.{embeddedArray.MemberName}");
+
+                        ClientTypeReference type = embeddedArray.ArraySerialization.Type;
+                        writer.Line($"{arrayDestination:D} = new {typeFactory.CreateConcreteType(type)}();");
+                        writer.ToDeserializeCall(
+                            embeddedArray.ArraySerialization,
+                            typeFactory,
+                            arrayDestination,
+                            element);
                     }
 
                     break;

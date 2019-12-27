@@ -479,6 +479,11 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = new List<Banana>();
+                            var elements = document.Root.Elements("banana");
+                            foreach (var e in elements)
+                            {
+                                value.Add(Banana.DeserializeBanana(e));
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -545,6 +550,11 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = new List<Banana>();
+                            var elements = document.Root.Elements("banana");
+                            foreach (var e in elements)
+                            {
+                                value.Add(Banana.DeserializeBanana(e));
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -611,6 +621,11 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = new List<Banana>();
+                            var elements = document.Root.Elements("banana");
+                            foreach (var e in elements)
+                            {
+                                value.Add(Banana.DeserializeBanana(e));
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -849,6 +864,11 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<SignedIdentifier> value = new List<SignedIdentifier>();
+                            var elements = document.Root.Elements("SignedIdentifier");
+                            foreach (var e in elements)
+                            {
+                                value.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -100,7 +100,10 @@ namespace AutoRest.CSharp.V3.ClientModels
                 case ConstantSchema constantSchema:
                     return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
-                    return new XmlArraySerialization(CreateType(arraySchema, false), CreateXmlSerialization(arraySchema.ElementType, false));
+                    return new XmlArraySerialization(
+                        CreateType(arraySchema, false),
+                        CreateXmlSerialization(arraySchema.ElementType, false),
+                        arraySchema.ElementType.Serialization?.Xml?.Name ?? "AUTO " + arraySchema.ElementType.Language.Default.Name);
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(CreateType(dictionarySchema, false), CreateXmlSerialization(dictionarySchema.ElementType, false));
                 default:

@@ -57,25 +57,21 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AutoBlobs");
-            writer.WriteStartElement("BlobPrefix");
-            writer.WriteEndElement();
-            writer.WriteStartElement("Blob");
-            writer.WriteEndElement();
         }
         internal static Blobs DeserializeBlobs(XElement element)
         {
             Blobs result = new Blobs();
-            var blobPrefix = element.Element("BlobPrefix");
-            if (blobPrefix != null)
+            result.BlobPrefix = new List<BlobPrefix>();
+            var elements = element.Elements("AUTO BlobPrefix");
+            foreach (var e in elements)
             {
-                ICollection<BlobPrefix> value = new List<BlobPrefix>();
-                result.BlobPrefix = value;
+                result.BlobPrefix.Add(V100.BlobPrefix.DeserializeBlobPrefix(e));
             }
-            var blob = element.Element("Blob");
-            if (blob != null)
+            result.Blob = new List<Blob>();
+            var elements0 = element.Elements("Blob");
+            foreach (var e0 in elements0)
             {
-                ICollection<Blob> value = new List<Blob>();
-                result.Blob = value;
+                result.Blob.Add(V100.Blob.DeserializeBlob(e0));
             }
             return result;
         }

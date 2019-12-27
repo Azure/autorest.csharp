@@ -129,6 +129,11 @@ namespace xml_service.Models.V100
             if (containers != null)
             {
                 ICollection<Container> value = new List<Container>();
+                var elements = containers.Elements("AUTO Container");
+                foreach (var e in elements)
+                {
+                    value.Add(Container.DeserializeContainer(e));
+                }
                 result.Containers = value;
             }
             var nextMarker = element.Element("NextMarker");
