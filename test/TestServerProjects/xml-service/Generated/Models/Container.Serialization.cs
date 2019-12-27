@@ -83,6 +83,11 @@ namespace xml_service.Models.V100
             if (metadata != null)
             {
                 IDictionary<string, string> value = new Dictionary<string, string>();
+                var elements = metadata.Elements();
+                foreach (var e in elements)
+                {
+                    value.Add(e.Name.LocalName, (string)e);
+                }
                 result.Metadata = value;
             }
             return result;

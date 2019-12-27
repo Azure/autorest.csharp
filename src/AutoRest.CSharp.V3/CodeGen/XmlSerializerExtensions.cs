@@ -181,7 +181,34 @@ namespace AutoRest.CSharp.V3.CodeGen
                     break;
                 }
                 case XmlDictionarySerialization dictionarySerialization:
+                {
+                    string elementsVariable = writer.GetTemporaryVariable("elements");
+                    string elementVariable = writer.GetTemporaryVariable("e");
+
+                    writer.Line($"var {elementsVariable:D} = {element}.Elements();");
+                    using (writer.Scope($"foreach (var {elementVariable:D} in {elementsVariable})"))
+                    {
+                        if (dictionarySerialization.ValueSerialization is XmlValueSerialization valueSerialization)
+                        {
+                            writer.Append($"{destination}.Add({elementVariable}.Name.LocalName, ");
+                            writer.ToDeserializeCall(valueSerialization, typeFactory, w=> w.AppendRaw(elementVariable));
+                            writer.Line($");");
+                        }
+                        else
+                        {
+                            var itemVariableName = "value";
+                            writer.ToDeserializeCall(
+                                dictionarySerialization.ValueSerialization,
+                                typeFactory,
+                                w => w.AppendRaw(elementVariable),
+                                ref itemVariableName);
+
+                            writer.Append($"{destination}.Add({elementVariable}.Name.LocalName, {itemVariableName});");
+                        }
+                    }
+
                     break;
+                }
                 case XmlObjectSerialization elementSerialization:
                     foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {

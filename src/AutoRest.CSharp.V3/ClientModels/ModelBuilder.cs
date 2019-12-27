@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                     var name = wrapped ? property.SerializedName : property.Schema.Serialization?.Xml?.Name ?? property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
-                    XmlSerialization valueSerialization = ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable(), name);
+                    XmlSerialization valueSerialization = ClientModelBuilderHelpers.CreateXmlSerialization(property.Schema, property.IsNullable());
 
                     if (isAttribute)
                     {

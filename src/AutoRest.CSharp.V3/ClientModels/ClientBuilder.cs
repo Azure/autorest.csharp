@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                             var serialization = httpRequestWithBody.KnownMediaType switch
                             {
                                 KnownMediaType.Json => (ObjectSerialization)ClientModelBuilderHelpers.CreateJsonSerialization(requestParameter.Schema, requestParameter.IsNullable()),
-                                KnownMediaType.Xml => ClientModelBuilderHelpers.CreateXmlSerialization(requestParameter.Schema, requestParameter.IsNullable(), null),
+                                KnownMediaType.Xml => ClientModelBuilderHelpers.CreateXmlSerialization(requestParameter.Schema, requestParameter.IsNullable()),
                                 _ => throw new NotImplementedException(httpRequestWithBody.KnownMediaType.ToString())
                             };
 
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                         serialization = ClientModelBuilderHelpers.CreateJsonSerialization(schema, false);
                         break;
                     case KnownMediaType.Xml:
-                        serialization = ClientModelBuilderHelpers.CreateXmlSerialization(schema, false, null);
+                        serialization = ClientModelBuilderHelpers.CreateXmlSerialization(schema, false);
                         break;
                     default:
                         throw new NotImplementedException(httpResponse.KnownMediaType.ToString());

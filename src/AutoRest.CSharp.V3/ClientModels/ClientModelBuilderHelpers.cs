@@ -93,26 +93,25 @@ namespace AutoRest.CSharp.V3.ClientModels
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
         }
 
-        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable, string? nameHint)
+        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable)
         {
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, nameHint);
+                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
                     string xmlName =
                         arraySchema.ElementType.Serialization?.Xml?.Name ??
-                        nameHint ??
-                        throw new ArgumentNullException(nameof(nameHint), "nameHint shouldn't be null for arrays");
+                        arraySchema.ElementType.Language.Default.Name;
 
                     return new XmlArraySerialization(
                         CreateType(arraySchema, false),
-                        CreateXmlSerialization(arraySchema.ElementType, false, null),
+                        CreateXmlSerialization(arraySchema.ElementType, false),
                         xmlName);
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
                         CreateType(dictionarySchema, false),
-                        CreateXmlSerialization(dictionarySchema.ElementType, false, null));
+                        CreateXmlSerialization(dictionarySchema.ElementType, false));
                 default:
                     return new XmlValueSerialization(
                         CreateType(schema, isNullable),

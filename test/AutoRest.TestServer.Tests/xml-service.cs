@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using xml_service;
+using xml_service.Models.V100;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -76,6 +77,32 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task ListContainersAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).ListContainersAsync();
+            var value = result.Value;
+
+            Assert.AreEqual("video", value.NextMarker);
+            Assert.AreEqual("https://myaccount.blob.core.windows.net/", value.ServiceEndpoint);
+            Assert.AreEqual(3, value.MaxResults);
+
+            var containers = value.Containers.ToArray();
+
+            Assert.AreEqual("audio", containers[0].Name);
+            Assert.AreEqual("0x8CACB9BD7C6B1B2", containers[0].Properties.Etag);
+            Assert.AreEqual(PublicAccessType.Container, containers[0].Properties.PublicAccess);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 26 Oct 2016 20:39:39 GMT"), containers[0].Properties.LastModified);
+
+            Assert.AreEqual("images", containers[1].Name);
+            Assert.AreEqual("0x8CACB9BD7C1EEEC", containers[1].Properties.Etag);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 26 Oct 2016 20:39:39 GMT"), containers[1].Properties.LastModified);
+
+            Assert.AreEqual("textfiles", containers[2].Name);
+            Assert.AreEqual("0x8CACB9BD7BACAC3", containers[2].Properties.Etag);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 26 Oct 2016 20:39:39 GMT"), containers[2].Properties.LastModified);
+        }, true);
+
+        [Test]
         public Task GetHeadersAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetHeadersAsync();
@@ -85,123 +112,90 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        public Task Get() => Test(async (host, pipeline) =>
+        public Task ListBlobsAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).ListBlobsAsync();
             var value = result.Value;
 
-            /*<EnumerationResults ContainerName="https://myaccount.blob.core.windows.net/mycontainer">
-  <Blobs>
-    <Blob>
-      <Name>blob1.txt</Name>
-      <Url>https://myaccount.blob.core.windows.net/mycontainer/blob1.txt</Url>
-      <Properties>
-        <Last-Modified>Wed, 09 Sep 2009 09:20:02 GMT</Last-Modified>
-        <Etag>0x8CBFF45D8A29A19</Etag>
-        <Content-Length>100</Content-Length>
-        <Content-Type>text/html</Content-Type>
-        <Content-Encoding />
-        <Content-Language>en-US</Content-Language>
-        <Content-MD5 />
-        <Cache-Control>no-cache</Cache-Control>
-        <BlobType>BlockBlob</BlobType>
-        <LeaseStatus>unlocked</LeaseStatus>
-      </Properties>
-      <Metadata>
-        <Color>blue</Color>
-        <BlobNumber>01</BlobNumber>
-        <SomeMetadataName>SomeMetadataValue</SomeMetadataName>
-      </Metadata>
-    </Blob>
-    <Blob>
-      <Name>blob2.txt</Name>
-      <Snapshot>2009-09-09T09:20:03.0427659Z</Snapshot>
-      <Url>https://myaccount.blob.core.windows.net/mycontainer/blob2.txt?snapshot=2009-09-09T09%3a20%3a03.0427659Z</Url>
-      <Properties>
-        <Last-Modified>Wed, 09 Sep 2009 09:20:02 GMT</Last-Modified>
-        <Etag>0x8CBFF45D8B4C212</Etag>
-        <Content-Length>5000</Content-Length>
-        <Content-Type>application/octet-stream</Content-Type>
-        <Content-Encoding>gzip</Content-Encoding>
-        <Content-Language />
-        <Content-MD5 />
-        <Cache-Control />
-        <BlobType>BlockBlob</BlobType>
-      </Properties>
-      <Metadata>
-        <Color>green</Color>
-        <BlobNumber>02</BlobNumber>
-        <SomeMetadataName>SomeMetadataValue</SomeMetadataName>
-        <x-ms-invalid-name>nasdf$@#$$</x-ms-invalid-name>
-      </Metadata>
-    </Blob>
-    <Blob>
-      <Name>blob2.txt</Name>
-      <Snapshot>2009-09-09T09:20:03.1587543Z</Snapshot>
-      <Url>https://myaccount.blob.core.windows.net/mycontainer/blob2.txt?snapshot=2009-09-09T09%3a20%3a03.1587543Z</Url>
-      <Properties>
-        <Last-Modified>Wed, 09 Sep 2009 09:20:02 GMT</Last-Modified>
-        <Etag>0x8CBFF45D8B4C212</Etag>
-        <Content-Length>5000</Content-Length>
-        <Content-Type>application/octet-stream</Content-Type>
-        <Content-Encoding>gzip</Content-Encoding>
-        <Content-Language />
-        <Content-MD5 />
-        <Cache-Control />
-        <BlobType>BlockBlob</BlobType>
-      </Properties>
-      <Metadata>
-        <Color>green</Color>
-        <BlobNumber>02</BlobNumber>
-        <SomeMetadataName>SomeMetadataValue</SomeMetadataName>
-      </Metadata>
-    </Blob>
-    <Blob>
-      <Name>blob2.txt</Name>
-      <Url>https://myaccount.blob.core.windows.net/mycontainer/blob2.txt</Url>
-      <Properties>
-        <Last-Modified>Wed, 09 Sep 2009 09:20:02 GMT</Last-Modified>
-        <Etag>0x8CBFF45D8B4C212</Etag>
-        <Content-Length>5000</Content-Length>
-        <Content-Type>application/octet-stream</Content-Type>
-        <Content-Encoding>gzip</Content-Encoding>
-        <Content-Language />
-        <Content-MD5 />
-        <Cache-Control />
-        <BlobType>BlockBlob</BlobType>
-        <LeaseStatus>unlocked</LeaseStatus>
-      </Properties>
-      <Metadata>
-        <Color>green</Color>
-        <BlobNumber>02</BlobNumber>
-        <SomeMetadataName>SomeMetadataValue</SomeMetadataName>
-      </Metadata>
-    </Blob>
-    <Blob>
-      <Name>blob3.txt</Name>
-      <Url>https://myaccount.blob.core.windows.net/mycontainer/blob3.txt</Url>
-      <Properties>
-        <Last-Modified>Wed, 09 Sep 2009 09:20:03 GMT</Last-Modified>
-        <Etag>0x8CBFF45D911FADF</Etag>
-        <Content-Length>16384</Content-Length>
-        <Content-Type>image/jpeg</Content-Type>
-        <Content-Encoding />
-        <Content-Language />
-        <Content-MD5 />
-        <Cache-Control />
-        <x-ms-blob-sequence-number>3</x-ms-blob-sequence-number>
-        <BlobType>PageBlob</BlobType>
-        <LeaseStatus>locked</LeaseStatus>
-      </Properties>
-      <Metadata>
-        <Color>yellow</Color>
-        <BlobNumber>03</BlobNumber>
-        <SomeMetadataName>SomeMetadataValue</SomeMetadataName>
-      </Metadata>
-    </Blob>
-  </Blobs>
-  <NextMarker />
-</EnumerationResults>*/
+            Assert.AreEqual("https://myaccount.blob.core.windows.net/mycontainer", value.ContainerName);
+
+            var blobs = value.Blobs.Blob.ToArray();
+
+            Assert.AreEqual(5, blobs.Length);
+
+            Assert.AreEqual("blob1.txt", blobs[0].Name);
+            Assert.AreEqual(false, blobs[0].Deleted);
+
+            Assert.AreEqual("0x8CBFF45D8A29A19", blobs[0].Properties.Etag);
+            Assert.AreEqual("en-US", blobs[0].Properties.ContentLanguage);
+            Assert.AreEqual(LeaseStatusType.Unlocked, blobs[0].Properties.LeaseStatus);
+            Assert.AreEqual(BlobType.BlockBlob, blobs[0].Properties.BlobType);
+            Assert.AreEqual("no-cache", blobs[0].Properties.CacheControl);
+            Assert.AreEqual("text/html", blobs[0].Properties.ContentType);
+            Assert.AreEqual(100, blobs[0].Properties.ContentLength);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 09 Sep 2009 09:20:02 GMT"), blobs[0].Properties.LastModified);
+
+
+            Assert.AreEqual("blob2.txt", blobs[1].Name);
+            Assert.AreEqual("2009-09-09T09:20:03.0427659Z", blobs[1].Snapshot);
+            Assert.AreEqual(false, blobs[1].Deleted);
+
+            Assert.AreEqual("0x8CBFF45D8B4C212", blobs[1].Properties.Etag);
+            Assert.AreEqual("gzip", blobs[1].Properties.ContentEncoding);
+            Assert.AreEqual(BlobType.BlockBlob, blobs[1].Properties.BlobType);
+            Assert.AreEqual("application/octet-stream", blobs[1].Properties.ContentType);
+            Assert.AreEqual(5000, blobs[1].Properties.ContentLength);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 09 Sep 2009 09:20:02 GMT"), blobs[1].Properties.LastModified);
+
+            Assert.AreEqual("green", blobs[1].Metadata["Color"]);
+            Assert.AreEqual("02", blobs[1].Metadata["BlobNumber"]);
+            Assert.AreEqual("SomeMetadataValue", blobs[1].Metadata["SomeMetadataName"]);
+            Assert.AreEqual("nasdf$@#$$", blobs[1].Metadata["x-ms-invalid-name"]);
+
+            Assert.AreEqual("blob2.txt", blobs[2].Name);
+            Assert.AreEqual("2009-09-09T09:20:03.1587543Z", blobs[2].Snapshot);
+            Assert.AreEqual(false, blobs[2].Deleted);
+
+            Assert.AreEqual("0x8CBFF45D8B4C212", blobs[2].Properties.Etag);
+            Assert.AreEqual("gzip", blobs[2].Properties.ContentEncoding);
+            Assert.AreEqual(BlobType.BlockBlob, blobs[2].Properties.BlobType);
+            Assert.AreEqual("application/octet-stream", blobs[2].Properties.ContentType);
+            Assert.AreEqual(5000, blobs[2].Properties.ContentLength);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 09 Sep 2009 09:20:02 GMT"), blobs[2].Properties.LastModified);
+
+            Assert.AreEqual("green", blobs[2].Metadata["Color"]);
+            Assert.AreEqual("02", blobs[2].Metadata["BlobNumber"]);
+            Assert.AreEqual("SomeMetadataValue", blobs[2].Metadata["SomeMetadataName"]);
+
+
+            Assert.AreEqual("blob2.txt", blobs[3].Name);
+            Assert.AreEqual(false, blobs[3].Deleted);
+
+            Assert.AreEqual("0x8CBFF45D8B4C212", blobs[3].Properties.Etag);
+            Assert.AreEqual("gzip", blobs[3].Properties.ContentEncoding);
+            Assert.AreEqual(BlobType.BlockBlob, blobs[3].Properties.BlobType);
+            Assert.AreEqual("application/octet-stream", blobs[3].Properties.ContentType);
+            Assert.AreEqual(5000, blobs[3].Properties.ContentLength);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 09 Sep 2009 09:20:02 GMT"), blobs[3].Properties.LastModified);
+
+            Assert.AreEqual("green", blobs[3].Metadata["Color"]);
+            Assert.AreEqual("02", blobs[3].Metadata["BlobNumber"]);
+            Assert.AreEqual("SomeMetadataValue", blobs[3].Metadata["SomeMetadataName"]);
+
+            Assert.AreEqual("blob3.txt", blobs[4].Name);
+            Assert.AreEqual(false, blobs[4].Deleted);
+
+            Assert.AreEqual("0x8CBFF45D911FADF", blobs[4].Properties.Etag);
+            Assert.AreEqual(BlobType.PageBlob, blobs[4].Properties.BlobType);
+            Assert.AreEqual("image/jpeg", blobs[4].Properties.ContentType);
+            Assert.AreEqual(16384, blobs[4].Properties.ContentLength);
+            Assert.AreEqual(LeaseStatusType.Locked, blobs[4].Properties.LeaseStatus);
+            Assert.AreEqual(3, blobs[4].Properties.BlobSequenceNumber);
+            Assert.AreEqual(DateTimeOffset.Parse("Wed, 09 Sep 2009 09:20:03 GMT"), blobs[4].Properties.LastModified);
+
+            Assert.AreEqual("yellow", blobs[4].Metadata["Color"]);
+            Assert.AreEqual("03", blobs[4].Metadata["BlobNumber"]);
+            Assert.AreEqual("SomeMetadataValue", blobs[4].Metadata["SomeMetadataName"]);
         }, true);
 
         [Test]
