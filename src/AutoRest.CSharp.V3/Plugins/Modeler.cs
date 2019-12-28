@@ -25,7 +25,8 @@ namespace AutoRest.CSharp.V3.Plugins
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
-            var models = schemas.Select(ModelBuilder.BuildModel).ToArray();
+            var modelBuilder = new ModelBuilder(HasXmlOperations(codeModel));
+            var models = schemas.Select(modelBuilder.BuildModel).ToArray();
             var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
 
             var typeProviders = models.OfType<ISchemaTypeProvider>().ToArray();
@@ -114,6 +115,15 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             return true;
+        }
+
+        private bool HasXmlOperations(CodeModel codeModel)
+        {
+            return codeModel.OperationGroups.Any(og =>
+                og.Operations.Any(op =>
+                    (op.Request.Protocol.Http is HttpWithBodyRequest bodyRequest && bodyRequest.KnownMediaType == KnownMediaType.Xml) ||
+                    op.Responses.Any(r => r.Protocol.Http is HttpResponse response && response.KnownMediaType == KnownMediaType.Xml)
+                ));
         }
     }
 }

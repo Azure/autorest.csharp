@@ -15,6 +15,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ModelBuilder
     {
+        private readonly bool _includeXmlSerialization;
+
+        public ModelBuilder(bool includeXmlSerialization)
+        {
+            _includeXmlSerialization = includeXmlSerialization;
+        }
+
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
@@ -26,7 +33,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
-        private static ClientModel BuildClientObject(ObjectSchema objectSchema)
+        private ClientModel BuildClientObject(ObjectSchema objectSchema)
         {
             ClientTypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
@@ -91,13 +98,24 @@ namespace AutoRest.CSharp.V3.ClientModels
                 );
         }
 
-        private static ObjectSerialization[] BuildSerializations(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
+        private ObjectSerialization[] BuildSerializations(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
         {
-            return new ObjectSerialization[]
+            if (_includeXmlSerialization)
             {
-                BuildJsonSerialization(objectSchema, schemaTypeReference),
-                BuildXmlSerialization(objectSchema, schemaTypeReference),
-            };
+                return new ObjectSerialization[]
+                {
+                    BuildJsonSerialization(objectSchema, schemaTypeReference),
+                    BuildXmlSerialization(objectSchema, schemaTypeReference),
+                };
+            }
+            else
+            {
+                return new ObjectSerialization[]
+                {
+                    BuildJsonSerialization(objectSchema, schemaTypeReference)
+                };
+            }
+
         }
 
         private static XmlObjectSerialization BuildXmlSerialization(ObjectSchema objectSchema, ClientTypeReference schemaTypeReference)
@@ -215,7 +233,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             )).ToArray();
         }
 
-        public static ClientModel BuildModel(Schema schema) => schema switch
+        public ClientModel BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
             ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),

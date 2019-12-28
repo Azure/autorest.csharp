@@ -40,7 +40,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(model);
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class(null, "partial", model.Name, writer.Type(typeof(IXmlSerializable)) + "," + writer.Type(typeof(IUtf8JsonSerializable)) ))
+                writer.Append($"public partial class {model.Name}: {typeof(IUtf8JsonSerializable)}");
+
+                if (model.Serializations.OfType<XmlSerialization>().Any())
+                {
+                    writer.Append($", {typeof(IXmlSerializable)}");
+                }
+
+                using (writer.Scope())
                 {
                     foreach (var serialization in model.Serializations)
                     {
