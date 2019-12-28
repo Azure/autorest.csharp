@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class Slideshow : IXmlSerializable, IUtf8JsonSerializable
+    public partial class Slideshow : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -29,13 +29,16 @@ namespace xml_service.Models.V100
                 writer.WritePropertyName("author");
                 writer.WriteStringValue(Author);
             }
-            writer.WritePropertyName("slides");
-            writer.WriteStartArray();
-            foreach (var item in Slides)
+            if (Slides != null)
             {
-                writer.WriteObjectValue(item);
+                writer.WritePropertyName("slides");
+                writer.WriteStartArray();
+                foreach (var item in Slides)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Slideshow DeserializeSlideshow(JsonElement element)
@@ -72,6 +75,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("slides"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Slides = new List<Slide>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Slides.Add(Slide.DeserializeSlide(item));

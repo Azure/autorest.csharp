@@ -9,25 +9,31 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class AppleBarrel : IXmlSerializable, IUtf8JsonSerializable
+    public partial class AppleBarrel : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("GoodApples");
-            writer.WriteStartArray();
-            foreach (var item in GoodApples)
+            if (GoodApples != null)
             {
-                writer.WriteStringValue(item);
+                writer.WritePropertyName("GoodApples");
+                writer.WriteStartArray();
+                foreach (var item in GoodApples)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
-            writer.WritePropertyName("BadApples");
-            writer.WriteStartArray();
-            foreach (var item0 in BadApples)
+            if (BadApples != null)
             {
-                writer.WriteStringValue(item0);
+                writer.WritePropertyName("BadApples");
+                writer.WriteStartArray();
+                foreach (var item in BadApples)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static AppleBarrel DeserializeAppleBarrel(JsonElement element)
@@ -37,6 +43,11 @@ namespace xml_service.Models.V100
             {
                 if (property.NameEquals("GoodApples"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.GoodApples = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.GoodApples.Add(item.GetString());
@@ -45,6 +56,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("BadApples"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.BadApples = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.BadApples.Add(item.GetString());
@@ -57,10 +73,16 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AutoAppleBarrel");
-            writer.WriteStartElement("GoodApples");
-            writer.WriteEndElement();
-            writer.WriteStartElement("BadApples");
-            writer.WriteEndElement();
+            if (GoodApples != null)
+            {
+                writer.WriteStartElement("GoodApples");
+                writer.WriteEndElement();
+            }
+            if (BadApples != null)
+            {
+                writer.WriteStartElement("BadApples");
+                writer.WriteEndElement();
+            }
         }
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
@@ -68,7 +90,7 @@ namespace xml_service.Models.V100
             var goodApples = element.Element("GoodApples");
             if (goodApples != null)
             {
-                ICollection<string> value = new List<string>();
+                ICollection<string>? value = new List<string>();
                 var elements = goodApples.Elements("Apple");
                 foreach (var e in elements)
                 {
@@ -79,7 +101,7 @@ namespace xml_service.Models.V100
             var badApples = element.Element("BadApples");
             if (badApples != null)
             {
-                ICollection<string> value = new List<string>();
+                ICollection<string>? value = new List<string>();
                 var elements = badApples.Elements("Apple");
                 foreach (var e in elements)
                 {

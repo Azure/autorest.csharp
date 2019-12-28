@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class StorageServiceProperties : IXmlSerializable, IUtf8JsonSerializable
+    public partial class StorageServiceProperties : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -29,13 +29,16 @@ namespace xml_service.Models.V100
                 writer.WritePropertyName("MinuteMetrics");
                 writer.WriteObjectValue(MinuteMetrics);
             }
-            writer.WritePropertyName("Cors");
-            writer.WriteStartArray();
-            foreach (var item in Cors)
+            if (Cors != null)
             {
-                writer.WriteObjectValue(item);
+                writer.WritePropertyName("Cors");
+                writer.WriteStartArray();
+                foreach (var item in Cors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             if (DefaultServiceVersion != null)
             {
                 writer.WritePropertyName("DefaultServiceVersion");
@@ -82,6 +85,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("Cors"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Cors = new List<CorsRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Cors.Add(CorsRule.DeserializeCorsRule(item));
@@ -130,8 +138,11 @@ namespace xml_service.Models.V100
                 writer.WriteObjectValue(MinuteMetrics, null);
                 writer.WriteEndElement();
             }
-            writer.WriteStartElement("Cors");
-            writer.WriteEndElement();
+            if (Cors != null)
+            {
+                writer.WriteStartElement("Cors");
+                writer.WriteEndElement();
+            }
             if (DefaultServiceVersion != null)
             {
                 writer.WriteStartElement("DefaultServiceVersion");
@@ -166,7 +177,7 @@ namespace xml_service.Models.V100
             var cors = element.Element("Cors");
             if (cors != null)
             {
-                ICollection<CorsRule> value = new List<CorsRule>();
+                ICollection<CorsRule>? value = new List<CorsRule>();
                 var elements = cors.Elements("CorsRule");
                 foreach (var e in elements)
                 {

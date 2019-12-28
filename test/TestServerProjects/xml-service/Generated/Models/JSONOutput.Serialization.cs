@@ -8,7 +8,7 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class JSONOutput : IXmlSerializable, IUtf8JsonSerializable
+    public partial class JSONOutput : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class Blob : IXmlSerializable, IUtf8JsonSerializable
+    public partial class Blob : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -22,14 +22,17 @@ namespace xml_service.Models.V100
             writer.WriteStringValue(Snapshot);
             writer.WritePropertyName("Properties");
             writer.WriteObjectValue(Properties);
-            writer.WritePropertyName("Metadata");
-            writer.WriteStartObject();
-            foreach (var item in Metadata)
+            if (Metadata != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("Metadata");
+                writer.WriteStartObject();
+                foreach (var item in Metadata)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
         internal static Blob DeserializeBlob(JsonElement element)
@@ -59,6 +62,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("Metadata"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Metadata = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.Metadata.Add(property0.Name, property0.Value.GetString());
@@ -83,8 +91,11 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Properties");
             writer.WriteObjectValue(Properties, null);
             writer.WriteEndElement();
-            writer.WriteStartElement("Metadata");
-            writer.WriteEndElement();
+            if (Metadata != null)
+            {
+                writer.WriteStartElement("Metadata");
+                writer.WriteEndElement();
+            }
         }
         internal static Blob DeserializeBlob(XElement element)
         {
@@ -112,7 +123,7 @@ namespace xml_service.Models.V100
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {
-                IDictionary<string, string> value = new Dictionary<string, string>();
+                IDictionary<string, string>? value = new Dictionary<string, string>();
                 var elements = metadata.Elements();
                 foreach (var e in elements)
                 {

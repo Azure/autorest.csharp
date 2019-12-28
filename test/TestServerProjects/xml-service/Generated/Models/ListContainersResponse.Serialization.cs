@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class ListContainersResponse : IXmlSerializable, IUtf8JsonSerializable
+    public partial class ListContainersResponse : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -25,13 +25,16 @@ namespace xml_service.Models.V100
             }
             writer.WritePropertyName("MaxResults");
             writer.WriteNumberValue(MaxResults);
-            writer.WritePropertyName("Containers");
-            writer.WriteStartArray();
-            foreach (var item in Containers)
+            if (Containers != null)
             {
-                writer.WriteObjectValue(item);
+                writer.WritePropertyName("Containers");
+                writer.WriteStartArray();
+                foreach (var item in Containers)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WritePropertyName("NextMarker");
             writer.WriteStringValue(NextMarker);
             writer.WriteEndObject();
@@ -67,6 +70,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("Containers"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Containers = new List<Container>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Containers.Add(Container.DeserializeContainer(item));
@@ -96,8 +104,11 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("MaxResults");
             writer.WriteValue(MaxResults);
             writer.WriteEndElement();
-            writer.WriteStartElement("Containers");
-            writer.WriteEndElement();
+            if (Containers != null)
+            {
+                writer.WriteStartElement("Containers");
+                writer.WriteEndElement();
+            }
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();
@@ -128,7 +139,7 @@ namespace xml_service.Models.V100
             var containers = element.Element("Containers");
             if (containers != null)
             {
-                ICollection<Container> value = new List<Container>();
+                ICollection<Container>? value = new List<Container>();
                 var elements = containers.Elements("Container");
                 foreach (var e in elements)
                 {

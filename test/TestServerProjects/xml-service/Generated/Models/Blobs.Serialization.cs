@@ -9,25 +9,31 @@ using Azure.Core;
 
 namespace xml_service.Models.V100
 {
-    public partial class Blobs : IXmlSerializable, IUtf8JsonSerializable
+    public partial class Blobs : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("BlobPrefix");
-            writer.WriteStartArray();
-            foreach (var item in BlobPrefix)
+            if (BlobPrefix != null)
             {
-                writer.WriteObjectValue(item);
+                writer.WritePropertyName("BlobPrefix");
+                writer.WriteStartArray();
+                foreach (var item in BlobPrefix)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
-            writer.WritePropertyName("Blob");
-            writer.WriteStartArray();
-            foreach (var item0 in Blob)
+            if (Blob != null)
             {
-                writer.WriteObjectValue(item0);
+                writer.WritePropertyName("Blob");
+                writer.WriteStartArray();
+                foreach (var item in Blob)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static Blobs DeserializeBlobs(JsonElement element)
@@ -37,6 +43,11 @@ namespace xml_service.Models.V100
             {
                 if (property.NameEquals("BlobPrefix"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.BlobPrefix = new List<BlobPrefix>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.BlobPrefix.Add(V100.BlobPrefix.DeserializeBlobPrefix(item));
@@ -45,6 +56,11 @@ namespace xml_service.Models.V100
                 }
                 if (property.NameEquals("Blob"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Blob = new List<Blob>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Blob.Add(V100.Blob.DeserializeBlob(item));

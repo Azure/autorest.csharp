@@ -105,12 +105,12 @@ namespace AutoRest.CSharp.V3.ClientModels
                         arraySchema.ElementType.Language.Default.Name;
 
                     return new XmlArraySerialization(
-                        CreateType(arraySchema, false),
+                        CreateType(arraySchema, isNullable),
                         CreateXmlSerialization(arraySchema.ElementType, false),
                         xmlName);
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        CreateType(dictionarySchema, false),
+                        CreateType(dictionarySchema, isNullable),
                         CreateXmlSerialization(dictionarySchema.ElementType, false));
                 default:
                     return new XmlValueSerialization(
@@ -126,12 +126,12 @@ namespace AutoRest.CSharp.V3.ClientModels
                 case ConstantSchema constantSchema:
                     return CreateJsonSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
-                    return new JsonArraySerialization(CreateType(arraySchema, false), CreateJsonSerialization(arraySchema.ElementType, false));
+                    return new JsonArraySerialization(CreateType(arraySchema, isNullable), CreateJsonSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
                     var dictionaryElementTypeReference = new DictionaryTypeReference(
                         new FrameworkTypeReference(typeof(string)),
                         CreateType(dictionarySchema.ElementType, false),
-                        false);
+                        isNullable);
 
                     return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
                         new JsonDynamicPropertiesSerialization(CreateJsonSerialization(dictionarySchema.ElementType, false)));
