@@ -79,7 +79,7 @@ namespace AutoRest.TestServer.Tests
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyListAsync();
             var value = result.Value;
 
-            Assert.Null(value.Slides);
+            Assert.AreEqual(0, value.Slides.Count);
             Assert.Null(value.Date);
             Assert.Null(value.Author);
             Assert.Null(value.Title);
@@ -158,6 +158,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetHeadersAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetHeadersAsync();
