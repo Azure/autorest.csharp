@@ -92,52 +92,5 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
         }
-
-        public static XmlSerialization CreateXmlSerialization(Schema schema, bool isNullable)
-        {
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return CreateXmlSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
-                case ArraySchema arraySchema:
-                    string xmlName =
-                        arraySchema.ElementType.Serialization?.Xml?.Name ??
-                        arraySchema.ElementType.Language.Default.Name;
-
-                    return new XmlArraySerialization(
-                        CreateType(arraySchema, isNullable),
-                        CreateXmlSerialization(arraySchema.ElementType, false),
-                        xmlName);
-                case DictionarySchema dictionarySchema:
-                    return new XmlDictionarySerialization(
-                        CreateType(dictionarySchema, isNullable),
-                        CreateXmlSerialization(dictionarySchema.ElementType, false));
-                default:
-                    return new XmlValueSerialization(
-                        CreateType(schema, isNullable),
-                        GetSerializationFormat(schema));
-            }
-        }
-
-        public static JsonSerialization CreateJsonSerialization(Schema schema, bool isNullable)
-        {
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return CreateJsonSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
-                case ArraySchema arraySchema:
-                    return new JsonArraySerialization(CreateType(arraySchema, isNullable), CreateJsonSerialization(arraySchema.ElementType, false));
-                case DictionarySchema dictionarySchema:
-                    var dictionaryElementTypeReference = new DictionaryTypeReference(
-                        new FrameworkTypeReference(typeof(string)),
-                        CreateType(dictionarySchema.ElementType, false),
-                        isNullable);
-
-                    return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(CreateJsonSerialization(dictionarySchema.ElementType, false)));
-                default:
-                    return new JsonValueSerialization(CreateType(schema, isNullable), GetSerializationFormat(schema));
-            }
-        }
     }
 }

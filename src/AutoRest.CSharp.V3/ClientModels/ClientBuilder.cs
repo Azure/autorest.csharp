@@ -134,12 +134,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                             break;
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
-                            var serialization = httpRequestWithBody.KnownMediaType switch
-                            {
-                                KnownMediaType.Json => (ObjectSerialization)ClientModelBuilderHelpers.CreateJsonSerialization(requestParameter.Schema, requestParameter.IsNullable()),
-                                KnownMediaType.Xml => ClientModelBuilderHelpers.CreateXmlSerialization(requestParameter.Schema, requestParameter.IsNullable()),
-                                _ => throw new NotImplementedException(httpRequestWithBody.KnownMediaType.ToString())
-                            };
+                            var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
 
                             body = new ObjectRequestBody(constantOrParameter, serialization);
                             break;
@@ -171,18 +166,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
 
-                ObjectSerialization serialization;
-                switch (httpResponse.KnownMediaType)
-                {
-                    case KnownMediaType.Json:
-                        serialization = ClientModelBuilderHelpers.CreateJsonSerialization(schema, false);
-                        break;
-                    case KnownMediaType.Xml:
-                        serialization = ClientModelBuilderHelpers.CreateXmlSerialization(schema, false);
-                        break;
-                    default:
-                        throw new NotImplementedException(httpResponse.KnownMediaType.ToString());
-                }
+                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }

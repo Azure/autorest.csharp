@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.V3.Plugins
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
-            var modelBuilder = new ModelBuilder(HasXmlOperations(codeModel));
+            var modelBuilder = new ModelBuilder(GetMediaTypes(codeModel));
             var models = schemas.Select(modelBuilder.BuildModel).ToArray();
             var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
 
@@ -117,13 +118,31 @@ namespace AutoRest.CSharp.V3.Plugins
             return true;
         }
 
-        private bool HasXmlOperations(CodeModel codeModel)
+        private KnownMediaType[] GetMediaTypes(CodeModel codeModel)
         {
-            return codeModel.OperationGroups.Any(og =>
-                og.Operations.Any(op =>
-                    (op.Request.Protocol.Http is HttpWithBodyRequest bodyRequest && bodyRequest.KnownMediaType == KnownMediaType.Xml) ||
-                    op.Responses.Any(r => r.Protocol.Http is HttpResponse response && response.KnownMediaType == KnownMediaType.Xml)
-                ));
+            HashSet<KnownMediaType> types = new HashSet<KnownMediaType>();
+            foreach (OperationGroup operationGroup in codeModel.OperationGroups)
+            {
+                foreach (Operation operation in operationGroup.Operations)
+                {
+                    if (operation.Request.Protocol.Http is HttpWithBodyRequest bodyRequest)
+                    {
+                        types.Add(bodyRequest.KnownMediaType);
+                    }
+
+                    foreach (var response in operation.Responses!)
+                    {
+                        if (response is SchemaResponse _ &&
+                            response.Protocol.Http is HttpResponse httpResponse)
+                        {
+                            types.Add(httpResponse.KnownMediaType);
+                        }
+                    }
+                }
+            }
+
+            // Order so JSON always goes first
+            return types.OrderBy(t => t).ToArray();
         }
     }
 }
