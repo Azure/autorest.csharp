@@ -94,8 +94,13 @@ namespace xml_service.Models.V100
             if (Metadata != null)
             {
                 writer.WriteStartElement("Metadata");
+                foreach (var pair in Metadata)
+                {
+                    writer.WriteValue(pair.Value);
+                }
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static Blob DeserializeBlob(XElement element)
         {

@@ -46,6 +46,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(ID);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element)
         {

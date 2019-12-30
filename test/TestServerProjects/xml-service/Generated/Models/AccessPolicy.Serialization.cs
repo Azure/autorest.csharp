@@ -56,6 +56,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Permission");
             writer.WriteValue(Permission);
             writer.WriteEndElement();
+            writer.WriteEndElement();
         }
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {

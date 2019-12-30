@@ -76,6 +76,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("MaxAgeInSeconds");
             writer.WriteValue(MaxAgeInSeconds);
             writer.WriteEndElement();
+            writer.WriteEndElement();
         }
         internal static CorsRule DeserializeCorsRule(XElement element)
         {

@@ -73,6 +73,7 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AutoBlobs");
+            writer.WriteEndElement();
         }
         internal static Blobs DeserializeBlobs(XElement element)
         {

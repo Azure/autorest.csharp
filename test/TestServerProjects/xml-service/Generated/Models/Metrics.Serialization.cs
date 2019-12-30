@@ -96,6 +96,7 @@ namespace xml_service.Models.V100
                 writer.WriteObjectValue(RetentionPolicy, null);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static Metrics DeserializeMetrics(XElement element)
         {

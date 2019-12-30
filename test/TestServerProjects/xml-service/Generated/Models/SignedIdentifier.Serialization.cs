@@ -46,6 +46,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("AccessPolicy");
             writer.WriteObjectValue(AccessPolicy, null);
             writer.WriteEndElement();
+            writer.WriteEndElement();
         }
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {

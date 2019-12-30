@@ -126,6 +126,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(PublicAccess.Value.ToString());
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {

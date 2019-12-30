@@ -80,7 +80,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(model, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -147,7 +146,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(model, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -214,7 +212,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(slideshow, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -281,7 +278,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(wrappedLists, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -376,7 +372,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(slideshow, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -443,7 +438,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(appleBarrel, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -514,7 +508,10 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/root-list", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                // Serializer call here
+                foreach (var item in bananas)
+                {
+                    content.XmlWriter.WriteObjectValue(item, null);
+                }
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -585,7 +582,10 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/root-list-single-item", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                // Serializer call here
+                foreach (var item in bananas)
+                {
+                    content.XmlWriter.WriteObjectValue(item, null);
+                }
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -656,7 +656,10 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/empty-root-list", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                // Serializer call here
+                foreach (var item in bananas)
+                {
+                    content.XmlWriter.WriteObjectValue(item, null);
+                }
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -723,7 +726,6 @@ namespace xml_service
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(banana, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -826,7 +828,6 @@ namespace xml_service
                 request.Uri.AppendQuery("restype", "service", true);
                 using var content = new XmlWriterContent();
                 content.XmlWriter.WriteObjectValue(properties, null);
-                // Serializer call here
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -901,7 +902,10 @@ namespace xml_service
                 request.Uri.AppendQuery("comp", "acl", true);
                 request.Uri.AppendQuery("restype", "container", true);
                 using var content = new XmlWriterContent();
-                // Serializer call here
+                foreach (var item in properties)
+                {
+                    content.XmlWriter.WriteObjectValue(item, null);
+                }
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)

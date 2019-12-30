@@ -86,6 +86,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Expiration.Value, "S");
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static Banana DeserializeBanana(XElement element)
         {

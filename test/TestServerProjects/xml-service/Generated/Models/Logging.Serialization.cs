@@ -76,6 +76,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("RetentionPolicy");
             writer.WriteObjectValue(RetentionPolicy, null);
             writer.WriteEndElement();
+            writer.WriteEndElement();
         }
         internal static Logging DeserializeLogging(XElement element)
         {

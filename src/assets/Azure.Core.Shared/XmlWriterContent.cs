@@ -22,28 +22,24 @@ namespace Azure.Core
 
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
-            await XmlWriter.FlushAsync();
             using var content = Create(_stream);
             await content.WriteToAsync(stream, cancellation);
         }
 
         public override void WriteTo(Stream stream, CancellationToken cancellation)
         {
-            XmlWriter.Flush();
             using var content = Create(_stream);
             content.WriteTo(stream, cancellation);
         }
 
         public override bool TryComputeLength(out long length)
         {
-            XmlWriter.Flush();
             length = _stream.Length;
             return true;
         }
 
         public override void Dispose()
         {
-            XmlWriter.Dispose();
         }
     }
 }

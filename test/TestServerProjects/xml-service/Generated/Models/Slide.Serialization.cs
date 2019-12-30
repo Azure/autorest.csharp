@@ -78,12 +78,19 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slide");
+            if (Type != null)
+            {
+                writer.WriteStartAttribute("type");
+                writer.WriteValue(Type);
+                writer.WriteEndAttribute();
+            }
             if (Title != null)
             {
                 writer.WriteStartElement("title");
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static Slide DeserializeSlide(XElement element)
         {

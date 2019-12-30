@@ -60,16 +60,16 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
-        public Task TestStatus(Func<string, HttpPipeline, Task<Response>> test)
+        public Task TestStatus(Func<string, HttpPipeline, Task<Response>> test, bool ignoreScenario = false)
         {
-            return TestStatus(GetScenarioName(), test);
+            return TestStatus(GetScenarioName(), test, ignoreScenario);
         }
 
-        private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test) => Test(scenario, async (host, pipeline) =>
+        private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test, bool ignoreScenario = false) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
             Assert.AreEqual(200, response.Status, "Unexpected response " + response.ReasonPhrase);
-        });
+        }, ignoreScenario);
 
         public Task Test(Action<string, HttpPipeline> test, bool ignoreScenario = false)
         {

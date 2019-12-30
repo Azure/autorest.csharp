@@ -8,7 +8,7 @@ using AutoRest.CSharp.V3.ClientModels.Serialization;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal static class JsonSerializerExtensions
+    internal static class JsonSerializerWriterExtensions
     {
         public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
         {

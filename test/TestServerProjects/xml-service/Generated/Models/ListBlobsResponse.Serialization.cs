@@ -82,6 +82,12 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
+            writer.WriteStartAttribute("ServiceEndpoint");
+            writer.WriteValue(ServiceEndpoint);
+            writer.WriteEndAttribute();
+            writer.WriteStartAttribute("ContainerName");
+            writer.WriteValue(ContainerName);
+            writer.WriteEndAttribute();
             writer.WriteStartElement("Prefix");
             writer.WriteValue(Prefix);
             writer.WriteEndElement();
@@ -99,6 +105,7 @@ namespace xml_service.Models.V100
             writer.WriteEndElement();
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
             writer.WriteEndElement();
         }
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)

@@ -46,6 +46,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Id.Value);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static JSONOutput DeserializeJSONOutput(XElement element)
         {

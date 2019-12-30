@@ -56,6 +56,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Days.Value);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {

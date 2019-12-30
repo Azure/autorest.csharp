@@ -76,13 +76,22 @@ namespace xml_service.Models.V100
             if (GoodApples != null)
             {
                 writer.WriteStartElement("GoodApples");
+                foreach (var item in GoodApples)
+                {
+                    writer.WriteValue(item);
+                }
                 writer.WriteEndElement();
             }
             if (BadApples != null)
             {
                 writer.WriteStartElement("BadApples");
+                foreach (var item in BadApples)
+                {
+                    writer.WriteValue(item);
+                }
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {

@@ -66,6 +66,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Message);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static Error DeserializeError(XElement element)
         {

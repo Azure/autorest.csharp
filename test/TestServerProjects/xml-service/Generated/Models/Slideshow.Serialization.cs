@@ -92,6 +92,25 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
+            if (Title != null)
+            {
+                writer.WriteStartAttribute("title");
+                writer.WriteValue(Title);
+                writer.WriteEndAttribute();
+            }
+            if (Date != null)
+            {
+                writer.WriteStartAttribute("date");
+                writer.WriteValue(Date);
+                writer.WriteEndAttribute();
+            }
+            if (Author != null)
+            {
+                writer.WriteStartAttribute("author");
+                writer.WriteValue(Author);
+                writer.WriteEndAttribute();
+            }
+            writer.WriteEndElement();
         }
         internal static Slideshow DeserializeSlideshow(XElement element)
         {

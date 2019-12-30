@@ -566,6 +566,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(ArchiveStatus.Value.ToString());
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {

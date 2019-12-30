@@ -92,6 +92,9 @@ namespace xml_service.Models.V100
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
+            writer.WriteStartAttribute("ServiceEndpoint");
+            writer.WriteValue(ServiceEndpoint);
+            writer.WriteEndAttribute();
             writer.WriteStartElement("Prefix");
             writer.WriteValue(Prefix);
             writer.WriteEndElement();
@@ -107,10 +110,15 @@ namespace xml_service.Models.V100
             if (Containers != null)
             {
                 writer.WriteStartElement("Containers");
+                foreach (var item in Containers)
+                {
+                    writer.WriteObjectValue(item, null);
+                }
                 writer.WriteEndElement();
             }
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
             writer.WriteEndElement();
         }
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)

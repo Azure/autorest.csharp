@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -14,6 +15,38 @@ namespace AutoRest.TestServer.Tests
     public class XmlTests : TestServerTestBase
     {
         public XmlTests(TestServerVersion version) : base(version) { }
+
+
+        [Test]
+        public Task PutSimpleAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var slideshow = new Slideshow();
+            slideshow.Author = "Yours Truly";
+            slideshow.Date = "Date of publication";
+            slideshow.Title = "Sample Slide Show";
+
+            slideshow.Slides = new List<Slide>()
+            {
+                new Slide()
+                {
+                    Title = "Wake up to WonderWidgets!",
+                    Type = "all"
+                },
+                new Slide()
+                {
+                    Title = "Overview",
+                    Type = "all",
+                    Items = new[]
+                    {
+                        "Why WonderWidgets are great",
+                        "",
+                        "Who buys WonderWidgets"
+                    }
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutSimpleAsync(slideshow);
+        }, true);
 
         [Test]
         public Task GetSimpleAsync() => Test(async (host, pipeline) =>

@@ -184,7 +184,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                             w => WriteConstantOrParameter(w, value),
                             writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
 
-                        writer.Line($"// Serializer call here");
                         writer.Line($"request.Content = content;");
                     }
 

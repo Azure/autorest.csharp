@@ -141,6 +141,10 @@ namespace xml_service.Models.V100
             if (Cors != null)
             {
                 writer.WriteStartElement("Cors");
+                foreach (var item in Cors)
+                {
+                    writer.WriteObjectValue(item, null);
+                }
                 writer.WriteEndElement();
             }
             if (DefaultServiceVersion != null)
@@ -155,6 +159,7 @@ namespace xml_service.Models.V100
                 writer.WriteObjectValue(DeleteRetentionPolicy, null);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {

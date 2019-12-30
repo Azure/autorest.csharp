@@ -36,6 +36,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Name");
             writer.WriteValue(Name);
             writer.WriteEndElement();
+            writer.WriteEndElement();
         }
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {

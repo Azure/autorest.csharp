@@ -8,7 +8,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal static class XmlSerializerExtensions
+    internal static class XmlSerializerWriterExtensions
     {
         public static void ToSerializeCall(this CodeWriter writer, XmlSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null, CodeWriterDelegate? nameHint = null)
         {
@@ -20,20 +20,54 @@ namespace AutoRest.CSharp.V3.CodeGen
             switch (serialization)
             {
                 case XmlArraySerialization array:
+                    var itemVariable = writer.GetTemporaryVariable("item");
+
+                    using (writer.Scope($"foreach (var {itemVariable:D} in {name})"))
+                    {
+                        writer.ToSerializeCall(
+                            array.ValueSerialization,
+                            typeFactory,
+                            w => w.Append($"{itemVariable}"),
+                            writerName);
+                    }
+
+                    break;
                 case XmlDictionarySerialization dictionarySerialization:
+                    var pairVariable = writer.GetTemporaryVariable("pair");
+                    using (writer.Scope($"foreach (var {pairVariable:D} in {name})"))
+                    {
+                        writer.ToSerializeCall(
+                            dictionarySerialization.ValueSerialization,
+                            typeFactory,
+                            w => w.Append($"{pairVariable}.Value"),
+                            writerName);
+                    }
                     break;
 
-                case XmlObjectSerialization dictionary:
+                case XmlObjectSerialization objectSerialization:
                     if (nameHint != null)
                     {
-                        writer.Line($"{writerName}.WriteStartElement({nameHint} ?? {dictionary.Name:L});");
+                        writer.Line($"{writerName}.WriteStartElement({nameHint} ?? {objectSerialization.Name:L});");
                     }
                     else
                     {
-                        writer.Line($"{writerName}.WriteStartElement({dictionary.Name:L});");
+                        writer.Line($"{writerName}.WriteStartElement({objectSerialization.Name:L});");
                     }
 
-                    foreach (XmlObjectElementSerialization property in dictionary.Elements)
+                    foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
+                    {
+                        using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        {
+                            writer.Line($"{writerName}.WriteStartAttribute({property.Name:L});");
+                            writer.ToSerializeCall(
+                                property.ValueSerialization,
+                                typeFactory,
+                                w => w.Append($"{property.MemberName}"));
+                            writer.Line($"{writerName}.WriteEndAttribute();");
+                        }
+                    }
+
+                    foreach (XmlObjectElementSerialization property in objectSerialization.Elements)
                     {
                         using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
                         {
@@ -45,6 +79,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                             writer.Line($"{writerName}.WriteEndElement();");
                         }
                     }
+
+                    writer.Line($"{writerName}.WriteEndElement();");
                     return;
 
                 case XmlValueSerialization valueSerialization:

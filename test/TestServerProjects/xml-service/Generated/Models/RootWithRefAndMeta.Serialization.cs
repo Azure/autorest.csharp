@@ -66,6 +66,7 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Something);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
         }
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
         {
