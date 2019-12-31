@@ -6,17 +6,15 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
     internal class XmlObjectElementSerialization
     {
         public XmlObjectElementSerialization(
-            string name,
             string memberName,
-            XmlSerialization valueSerialization)
+            XmlElementSerialization valueSerialization)
         {
-            Name = name;
             MemberName = memberName;
             ValueSerialization = valueSerialization;
         }
 
-        public string Name { get; }
         public string MemberName { get; }
-        public XmlSerialization ValueSerialization { get; }
+        public ClientTypeReference Type => ValueSerialization.Type;
+        public XmlElementSerialization ValueSerialization { get; }
     }
 }

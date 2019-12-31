@@ -110,11 +110,18 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Author);
                 writer.WriteEndAttribute();
             }
+            if (Slides != null)
+            {
+                foreach (var item in Slides)
+                {
+                    writer.WriteObjectValue(item, "slide");
+                }
+            }
             writer.WriteEndElement();
         }
         internal static Slideshow DeserializeSlideshow(XElement element)
         {
-            Slideshow result = new Slideshow();
+            Slideshow result = default;
             var title = element.Attribute("title");
             if (title != null)
             {
@@ -131,10 +138,16 @@ namespace xml_service.Models.V100
                 result.Author = (string?)author;
             }
             result.Slides = new List<Slide>();
-            var elements = element.Elements("slide");
-            foreach (var e in elements)
+            result.Slides = new List<Slide>();
+            foreach (var e in element.Elements("slide"))
             {
-                result.Slides.Add(Slide.DeserializeSlide(e));
+                Slide value = default;
+                var slide = e.Element("slide");
+                if (slide != null)
+                {
+                    value = Slide.DeserializeSlide(slide);
+                }
+                result.Slides.Add(value);
             }
             return result;
         }

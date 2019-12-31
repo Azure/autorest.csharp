@@ -119,33 +119,18 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoStorageServiceProperties");
+            writer.WriteStartElement(nameHint ?? "StorageServiceProperties");
             if (Logging != null)
             {
-                writer.WriteStartElement("Logging");
-                writer.WriteObjectValue(Logging, null);
-                writer.WriteEndElement();
+                writer.WriteObjectValue(Logging, "Logging");
             }
             if (HourMetrics != null)
             {
-                writer.WriteStartElement("HourMetrics");
-                writer.WriteObjectValue(HourMetrics, null);
-                writer.WriteEndElement();
+                writer.WriteObjectValue(HourMetrics, "HourMetrics");
             }
             if (MinuteMetrics != null)
             {
-                writer.WriteStartElement("MinuteMetrics");
-                writer.WriteObjectValue(MinuteMetrics, null);
-                writer.WriteEndElement();
-            }
-            if (Cors != null)
-            {
-                writer.WriteStartElement("Cors");
-                foreach (var item in Cors)
-                {
-                    writer.WriteObjectValue(item, null);
-                }
-                writer.WriteEndElement();
+                writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics");
             }
             if (DefaultServiceVersion != null)
             {
@@ -155,50 +140,69 @@ namespace xml_service.Models.V100
             }
             if (DeleteRetentionPolicy != null)
             {
-                writer.WriteStartElement("DeleteRetentionPolicy");
-                writer.WriteObjectValue(DeleteRetentionPolicy, null);
+                writer.WriteObjectValue(DeleteRetentionPolicy, "DeleteRetentionPolicy");
+            }
+            if (Cors != null)
+            {
+                writer.WriteStartElement("Cors");
+                foreach (var item in Cors)
+                {
+                    writer.WriteObjectValue(item, "CorsRule");
+                }
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
-            StorageServiceProperties result = new StorageServiceProperties();
+            StorageServiceProperties result = default;
+            Logging? value = default;
             var logging = element.Element("Logging");
             if (logging != null)
             {
-                result.Logging = Logging.DeserializeLogging(logging);
+                value = Logging.DeserializeLogging(logging);
             }
+            result.Logging = value;
+            Metrics? value0 = default;
             var hourMetrics = element.Element("HourMetrics");
             if (hourMetrics != null)
             {
-                result.HourMetrics = Metrics.DeserializeMetrics(hourMetrics);
+                value0 = Metrics.DeserializeMetrics(hourMetrics);
             }
+            result.HourMetrics = value0;
+            Metrics? value1 = default;
             var minuteMetrics = element.Element("MinuteMetrics");
             if (minuteMetrics != null)
             {
-                result.MinuteMetrics = Metrics.DeserializeMetrics(minuteMetrics);
+                value1 = Metrics.DeserializeMetrics(minuteMetrics);
             }
-            var cors = element.Element("Cors");
-            if (cors != null)
-            {
-                ICollection<CorsRule>? value = new List<CorsRule>();
-                var elements = cors.Elements("CorsRule");
-                foreach (var e in elements)
-                {
-                    value.Add(CorsRule.DeserializeCorsRule(e));
-                }
-                result.Cors = value;
-            }
+            result.MinuteMetrics = value1;
+            string? value2 = default;
             var defaultServiceVersion = element.Element("DefaultServiceVersion");
             if (defaultServiceVersion != null)
             {
-                result.DefaultServiceVersion = (string?)defaultServiceVersion;
+                value2 = (string?)defaultServiceVersion;
             }
+            result.DefaultServiceVersion = value2;
+            RetentionPolicy? value3 = default;
             var deleteRetentionPolicy = element.Element("DeleteRetentionPolicy");
             if (deleteRetentionPolicy != null)
             {
-                result.DeleteRetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicy);
+                value3 = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicy);
+            }
+            result.DeleteRetentionPolicy = value3;
+            result.Cors = new List<CorsRule>();
+            var cors = element.Element("Cors");
+            result.Cors = new List<CorsRule>();
+            foreach (var e in cors.Elements("CorsRule"))
+            {
+                CorsRule value4 = default;
+                var corsRule = e.Element("CorsRule");
+                if (corsRule != null)
+                {
+                    value4 = CorsRule.DeserializeCorsRule(corsRule);
+                }
+                result.Cors.Add(value4);
             }
             return result;
         }

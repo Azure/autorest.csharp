@@ -32,7 +32,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoBlobPrefix");
+            writer.WriteStartElement(nameHint ?? "BlobPrefix");
             writer.WriteStartElement("Name");
             writer.WriteValue(Name);
             writer.WriteEndElement();
@@ -40,12 +40,14 @@ namespace xml_service.Models.V100
         }
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {
-            BlobPrefix result = new BlobPrefix();
+            BlobPrefix result = default;
+            string value = default;
             var name = element.Element("Name");
             if (name != null)
             {
-                result.Name = (string)name;
+                value = (string)name;
             }
+            result.Name = value;
             return result;
         }
     }

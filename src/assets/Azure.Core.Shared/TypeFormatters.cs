@@ -17,7 +17,7 @@ namespace Azure.Core
         public static string ToString(DateTimeOffset value, string format) => format switch
         {
             "D" => value.ToString("yyyy-MM-dd"),
-            "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            "S" => value.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
             "R" => value.ToString("R"),
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
             _ => throw new ArgumentException("Format is not supported", nameof(format))

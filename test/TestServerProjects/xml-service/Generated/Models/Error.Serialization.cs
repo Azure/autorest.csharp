@@ -53,7 +53,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoError");
+            writer.WriteStartElement(nameHint ?? "Error");
             if (Status != null)
             {
                 writer.WriteStartElement("status");
@@ -70,17 +70,21 @@ namespace xml_service.Models.V100
         }
         internal static Error DeserializeError(XElement element)
         {
-            Error result = new Error();
+            Error result = default;
+            int? value = default;
             var status = element.Element("status");
             if (status != null)
             {
-                result.Status = (int?)status;
+                value = (int?)status;
             }
+            result.Status = value;
+            string? value0 = default;
             var message = element.Element("message");
             if (message != null)
             {
-                result.Message = (string?)message;
+                value0 = (string?)message;
             }
+            result.Message = value0;
             return result;
         }
     }

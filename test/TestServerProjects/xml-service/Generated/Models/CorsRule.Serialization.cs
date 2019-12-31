@@ -80,32 +80,42 @@ namespace xml_service.Models.V100
         }
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
-            CorsRule result = new CorsRule();
+            CorsRule result = default;
+            string value = default;
             var allowedOrigins = element.Element("AllowedOrigins");
             if (allowedOrigins != null)
             {
-                result.AllowedOrigins = (string)allowedOrigins;
+                value = (string)allowedOrigins;
             }
+            result.AllowedOrigins = value;
+            string value0 = default;
             var allowedMethods = element.Element("AllowedMethods");
             if (allowedMethods != null)
             {
-                result.AllowedMethods = (string)allowedMethods;
+                value0 = (string)allowedMethods;
             }
+            result.AllowedMethods = value0;
+            string value1 = default;
             var allowedHeaders = element.Element("AllowedHeaders");
             if (allowedHeaders != null)
             {
-                result.AllowedHeaders = (string)allowedHeaders;
+                value1 = (string)allowedHeaders;
             }
+            result.AllowedHeaders = value1;
+            string value2 = default;
             var exposedHeaders = element.Element("ExposedHeaders");
             if (exposedHeaders != null)
             {
-                result.ExposedHeaders = (string)exposedHeaders;
+                value2 = (string)exposedHeaders;
             }
+            result.ExposedHeaders = value2;
+            int value3 = default;
             var maxAgeInSeconds = element.Element("MaxAgeInSeconds");
             if (maxAgeInSeconds != null)
             {
-                result.MaxAgeInSeconds = (int)maxAgeInSeconds;
+                value3 = (int)maxAgeInSeconds;
             }
+            result.MaxAgeInSeconds = value3;
             return result;
         }
     }

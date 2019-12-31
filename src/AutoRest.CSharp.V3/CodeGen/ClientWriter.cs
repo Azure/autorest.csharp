@@ -172,11 +172,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                         writer.Line($"request.Content = content;");
                     }
-                    else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlSerialization xmlSerialization)
+                    else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
                     {
                         writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
-                        ConstantOrParameter value = operation.Request.Body.Value;
+                        ConstantOrParameter value = xmlBody.Value;
 
                         writer.ToSerializeCall(
                             xmlSerialization,
@@ -382,12 +382,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                                     ref valueVariable
                                 );
                                 break;
-                            case XmlSerialization xmlSerialization:
+                            case XmlElementSerialization xmlSerialization:
                                 writer.Line($"var {document:D} = await {typeof(XDocument)}.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);");
                                 writer.ToDeserializeCall(
                                     xmlSerialization,
                                     _typeFactory,
-                                    w => w.Append($"document.Root"),
+                                    w => w.Append($"document"),
                                     ref valueVariable
                                 );
                                 break;

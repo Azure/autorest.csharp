@@ -39,7 +39,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoComplexTypeNoMeta");
+            writer.WriteStartElement(nameHint ?? "ComplexTypeNoMeta");
             if (ID != null)
             {
                 writer.WriteStartElement("ID");
@@ -50,12 +50,14 @@ namespace xml_service.Models.V100
         }
         internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element)
         {
-            ComplexTypeNoMeta result = new ComplexTypeNoMeta();
+            ComplexTypeNoMeta result = default;
+            string? value = default;
             var iD = element.Element("ID");
             if (iD != null)
             {
-                result.ID = (string?)iD;
+                value = (string?)iD;
             }
+            result.ID = value;
             return result;
         }
     }

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -403,7 +404,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoBlobProperties");
+            writer.WriteStartElement(nameHint ?? "BlobProperties");
             writer.WriteStartElement("Last-Modified");
             writer.WriteValue(LastModified, "R");
             writer.WriteEndElement();
@@ -570,147 +571,203 @@ namespace xml_service.Models.V100
         }
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {
-            BlobProperties result = new BlobProperties();
+            BlobProperties result = default;
+            DateTimeOffset value = default;
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {
-                result.LastModified = lastModified.GetDateTimeOffsetValue("R");
+                value = lastModified.GetDateTimeOffsetValue("R");
             }
+            result.LastModified = value;
+            string value0 = default;
             var etag = element.Element("Etag");
             if (etag != null)
             {
-                result.Etag = (string)etag;
+                value0 = (string)etag;
             }
+            result.Etag = value0;
+            long? value1 = default;
             var contentLength = element.Element("Content-Length");
             if (contentLength != null)
             {
-                result.ContentLength = (long?)contentLength;
+                value1 = (long?)contentLength;
             }
+            result.ContentLength = value1;
+            string? value2 = default;
             var contentType = element.Element("Content-Type");
             if (contentType != null)
             {
-                result.ContentType = (string?)contentType;
+                value2 = (string?)contentType;
             }
+            result.ContentType = value2;
+            string? value3 = default;
             var contentEncoding = element.Element("Content-Encoding");
             if (contentEncoding != null)
             {
-                result.ContentEncoding = (string?)contentEncoding;
+                value3 = (string?)contentEncoding;
             }
+            result.ContentEncoding = value3;
+            string? value4 = default;
             var contentLanguage = element.Element("Content-Language");
             if (contentLanguage != null)
             {
-                result.ContentLanguage = (string?)contentLanguage;
+                value4 = (string?)contentLanguage;
             }
+            result.ContentLanguage = value4;
+            string? value5 = default;
             var contentMD5 = element.Element("Content-MD5");
             if (contentMD5 != null)
             {
-                result.ContentMD5 = (string?)contentMD5;
+                value5 = (string?)contentMD5;
             }
+            result.ContentMD5 = value5;
+            string? value6 = default;
             var contentDisposition = element.Element("Content-Disposition");
             if (contentDisposition != null)
             {
-                result.ContentDisposition = (string?)contentDisposition;
+                value6 = (string?)contentDisposition;
             }
+            result.ContentDisposition = value6;
+            string? value7 = default;
             var cacheControl = element.Element("Cache-Control");
             if (cacheControl != null)
             {
-                result.CacheControl = (string?)cacheControl;
+                value7 = (string?)cacheControl;
             }
-            var blobSequenceNumber = element.Element("x-ms-blob-sequence-number");
-            if (blobSequenceNumber != null)
+            result.CacheControl = value7;
+            int? value8 = default;
+            var xMsBlobSequenceNumber = element.Element("x-ms-blob-sequence-number");
+            if (xMsBlobSequenceNumber != null)
             {
-                result.BlobSequenceNumber = (int?)blobSequenceNumber;
+                value8 = (int?)xMsBlobSequenceNumber;
             }
+            result.BlobSequenceNumber = value8;
+            BlobType? value9 = default;
             var blobType = element.Element("BlobType");
             if (blobType != null)
             {
-                result.BlobType = blobType.Value.ToBlobType();
+                value9 = blobType.Value.ToBlobType();
             }
+            result.BlobType = value9;
+            LeaseStatusType? value10 = default;
             var leaseStatus = element.Element("LeaseStatus");
             if (leaseStatus != null)
             {
-                result.LeaseStatus = leaseStatus.Value.ToLeaseStatusType();
+                value10 = leaseStatus.Value.ToLeaseStatusType();
             }
+            result.LeaseStatus = value10;
+            LeaseStateType? value11 = default;
             var leaseState = element.Element("LeaseState");
             if (leaseState != null)
             {
-                result.LeaseState = leaseState.Value.ToLeaseStateType();
+                value11 = leaseState.Value.ToLeaseStateType();
             }
+            result.LeaseState = value11;
+            LeaseDurationType? value12 = default;
             var leaseDuration = element.Element("LeaseDuration");
             if (leaseDuration != null)
             {
-                result.LeaseDuration = leaseDuration.Value.ToLeaseDurationType();
+                value12 = leaseDuration.Value.ToLeaseDurationType();
             }
+            result.LeaseDuration = value12;
+            string? value13 = default;
             var copyId = element.Element("CopyId");
             if (copyId != null)
             {
-                result.CopyId = (string?)copyId;
+                value13 = (string?)copyId;
             }
+            result.CopyId = value13;
+            CopyStatusType? value14 = default;
             var copyStatus = element.Element("CopyStatus");
             if (copyStatus != null)
             {
-                result.CopyStatus = copyStatus.Value.ToCopyStatusType();
+                value14 = copyStatus.Value.ToCopyStatusType();
             }
+            result.CopyStatus = value14;
+            string? value15 = default;
             var copySource = element.Element("CopySource");
             if (copySource != null)
             {
-                result.CopySource = (string?)copySource;
+                value15 = (string?)copySource;
             }
+            result.CopySource = value15;
+            string? value16 = default;
             var copyProgress = element.Element("CopyProgress");
             if (copyProgress != null)
             {
-                result.CopyProgress = (string?)copyProgress;
+                value16 = (string?)copyProgress;
             }
+            result.CopyProgress = value16;
+            DateTimeOffset? value17 = default;
             var copyCompletionTime = element.Element("CopyCompletionTime");
             if (copyCompletionTime != null)
             {
-                result.CopyCompletionTime = copyCompletionTime.GetDateTimeOffsetValue("R");
+                value17 = copyCompletionTime.GetDateTimeOffsetValue("R");
             }
+            result.CopyCompletionTime = value17;
+            string? value18 = default;
             var copyStatusDescription = element.Element("CopyStatusDescription");
             if (copyStatusDescription != null)
             {
-                result.CopyStatusDescription = (string?)copyStatusDescription;
+                value18 = (string?)copyStatusDescription;
             }
+            result.CopyStatusDescription = value18;
+            bool? value19 = default;
             var serverEncrypted = element.Element("ServerEncrypted");
             if (serverEncrypted != null)
             {
-                result.ServerEncrypted = (bool?)serverEncrypted;
+                value19 = (bool?)serverEncrypted;
             }
+            result.ServerEncrypted = value19;
+            bool? value20 = default;
             var incrementalCopy = element.Element("IncrementalCopy");
             if (incrementalCopy != null)
             {
-                result.IncrementalCopy = (bool?)incrementalCopy;
+                value20 = (bool?)incrementalCopy;
             }
+            result.IncrementalCopy = value20;
+            string? value21 = default;
             var destinationSnapshot = element.Element("DestinationSnapshot");
             if (destinationSnapshot != null)
             {
-                result.DestinationSnapshot = (string?)destinationSnapshot;
+                value21 = (string?)destinationSnapshot;
             }
+            result.DestinationSnapshot = value21;
+            DateTimeOffset? value22 = default;
             var deletedTime = element.Element("DeletedTime");
             if (deletedTime != null)
             {
-                result.DeletedTime = deletedTime.GetDateTimeOffsetValue("R");
+                value22 = deletedTime.GetDateTimeOffsetValue("R");
             }
+            result.DeletedTime = value22;
+            int? value23 = default;
             var remainingRetentionDays = element.Element("RemainingRetentionDays");
             if (remainingRetentionDays != null)
             {
-                result.RemainingRetentionDays = (int?)remainingRetentionDays;
+                value23 = (int?)remainingRetentionDays;
             }
+            result.RemainingRetentionDays = value23;
+            AccessTier? value24 = default;
             var accessTier = element.Element("AccessTier");
             if (accessTier != null)
             {
-                result.AccessTier = new AccessTier(accessTier.Value);
+                value24 = new AccessTier(accessTier.Value);
             }
+            result.AccessTier = value24;
+            bool? value25 = default;
             var accessTierInferred = element.Element("AccessTierInferred");
             if (accessTierInferred != null)
             {
-                result.AccessTierInferred = (bool?)accessTierInferred;
+                value25 = (bool?)accessTierInferred;
             }
+            result.AccessTierInferred = value25;
+            ArchiveStatus? value26 = default;
             var archiveStatus = element.Element("ArchiveStatus");
             if (archiveStatus != null)
             {
-                result.ArchiveStatus = new ArchiveStatus(archiveStatus.Value);
+                value26 = new ArchiveStatus(archiveStatus.Value);
             }
+            result.ArchiveStatus = value26;
             return result;
         }
     }

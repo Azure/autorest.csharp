@@ -3,15 +3,17 @@
 
 namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
-    internal class XmlDictionarySerialization : XmlSerialization
+    internal class XmlDictionarySerialization : XmlElementSerialization
     {
-        public XmlDictionarySerialization(ClientTypeReference type, XmlSerialization valueSerialization)
+        public XmlDictionarySerialization(ClientTypeReference type, XmlElementSerialization valueSerialization, string name)
         {
             Type = type;
             ValueSerialization = valueSerialization;
+            Name = name;
         }
 
+        public override string Name { get; }
         public override ClientTypeReference Type { get; }
-        public XmlSerialization ValueSerialization { get; }
+        public XmlElementSerialization ValueSerialization { get; }
     }
 }

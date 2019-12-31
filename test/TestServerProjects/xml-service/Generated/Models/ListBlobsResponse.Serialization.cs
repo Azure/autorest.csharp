@@ -100,9 +100,7 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Delimiter");
             writer.WriteValue(Delimiter);
             writer.WriteEndElement();
-            writer.WriteStartElement("Blobs");
-            writer.WriteObjectValue(Blobs, null);
-            writer.WriteEndElement();
+            writer.WriteObjectValue(Blobs, "Blobs");
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();
@@ -110,7 +108,7 @@ namespace xml_service.Models.V100
         }
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
-            ListBlobsResponse result = new ListBlobsResponse();
+            ListBlobsResponse result = default;
             var serviceEndpoint = element.Attribute("ServiceEndpoint");
             if (serviceEndpoint != null)
             {
@@ -121,36 +119,48 @@ namespace xml_service.Models.V100
             {
                 result.ContainerName = (string)containerName;
             }
+            string value = default;
             var prefix = element.Element("Prefix");
             if (prefix != null)
             {
-                result.Prefix = (string)prefix;
+                value = (string)prefix;
             }
+            result.Prefix = value;
+            string value0 = default;
             var marker = element.Element("Marker");
             if (marker != null)
             {
-                result.Marker = (string)marker;
+                value0 = (string)marker;
             }
+            result.Marker = value0;
+            int value1 = default;
             var maxResults = element.Element("MaxResults");
             if (maxResults != null)
             {
-                result.MaxResults = (int)maxResults;
+                value1 = (int)maxResults;
             }
+            result.MaxResults = value1;
+            string value2 = default;
             var delimiter = element.Element("Delimiter");
             if (delimiter != null)
             {
-                result.Delimiter = (string)delimiter;
+                value2 = (string)delimiter;
             }
+            result.Delimiter = value2;
+            Blobs value3 = default;
             var blobs = element.Element("Blobs");
             if (blobs != null)
             {
-                result.Blobs = Blobs.DeserializeBlobs(blobs);
+                value3 = Blobs.DeserializeBlobs(blobs);
             }
+            result.Blobs = value3;
+            string value4 = default;
             var nextMarker = element.Element("NextMarker");
             if (nextMarker != null)
             {
-                result.NextMarker = (string)nextMarker;
+                value4 = (string)nextMarker;
             }
+            result.NextMarker = value4;
             return result;
         }
     }

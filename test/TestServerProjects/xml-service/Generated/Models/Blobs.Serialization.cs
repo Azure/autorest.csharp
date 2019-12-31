@@ -72,23 +72,49 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoBlobs");
+            writer.WriteStartElement(nameHint ?? "Blobs");
+            if (BlobPrefix != null)
+            {
+                foreach (var item in BlobPrefix)
+                {
+                    writer.WriteObjectValue(item, "BlobPrefix");
+                }
+            }
+            if (Blob != null)
+            {
+                foreach (var item in Blob)
+                {
+                    writer.WriteObjectValue(item, "Blob");
+                }
+            }
             writer.WriteEndElement();
         }
         internal static Blobs DeserializeBlobs(XElement element)
         {
-            Blobs result = new Blobs();
+            Blobs result = default;
             result.BlobPrefix = new List<BlobPrefix>();
-            var elements = element.Elements("BlobPrefix");
-            foreach (var e in elements)
+            result.BlobPrefix = new List<BlobPrefix>();
+            foreach (var e in element.Elements("BlobPrefix"))
             {
-                result.BlobPrefix.Add(V100.BlobPrefix.DeserializeBlobPrefix(e));
+                BlobPrefix value = default;
+                var blobPrefix = e.Element("BlobPrefix");
+                if (blobPrefix != null)
+                {
+                    value = V100.BlobPrefix.DeserializeBlobPrefix(blobPrefix);
+                }
+                result.BlobPrefix.Add(value);
             }
             result.Blob = new List<Blob>();
-            var elements0 = element.Elements("Blob");
-            foreach (var e0 in elements0)
+            result.Blob = new List<Blob>();
+            foreach (var e0 in element.Elements("Blob"))
             {
-                result.Blob.Add(V100.Blob.DeserializeBlob(e0));
+                Blob value = default;
+                var blob = e0.Element("Blob");
+                if (blob != null)
+                {
+                    value = V100.Blob.DeserializeBlob(blob);
+                }
+                result.Blob.Add(value);
             }
             return result;
         }

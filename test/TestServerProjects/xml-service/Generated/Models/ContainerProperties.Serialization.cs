@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -95,7 +96,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoContainerProperties");
+            writer.WriteStartElement(nameHint ?? "ContainerProperties");
             writer.WriteStartElement("Last-Modified");
             writer.WriteValue(LastModified, "R");
             writer.WriteEndElement();
@@ -130,37 +131,49 @@ namespace xml_service.Models.V100
         }
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {
-            ContainerProperties result = new ContainerProperties();
+            ContainerProperties result = default;
+            DateTimeOffset value = default;
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {
-                result.LastModified = lastModified.GetDateTimeOffsetValue("R");
+                value = lastModified.GetDateTimeOffsetValue("R");
             }
+            result.LastModified = value;
+            string value0 = default;
             var etag = element.Element("Etag");
             if (etag != null)
             {
-                result.Etag = (string)etag;
+                value0 = (string)etag;
             }
+            result.Etag = value0;
+            LeaseStatusType? value1 = default;
             var leaseStatus = element.Element("LeaseStatus");
             if (leaseStatus != null)
             {
-                result.LeaseStatus = leaseStatus.Value.ToLeaseStatusType();
+                value1 = leaseStatus.Value.ToLeaseStatusType();
             }
+            result.LeaseStatus = value1;
+            LeaseStateType? value2 = default;
             var leaseState = element.Element("LeaseState");
             if (leaseState != null)
             {
-                result.LeaseState = leaseState.Value.ToLeaseStateType();
+                value2 = leaseState.Value.ToLeaseStateType();
             }
+            result.LeaseState = value2;
+            LeaseDurationType? value3 = default;
             var leaseDuration = element.Element("LeaseDuration");
             if (leaseDuration != null)
             {
-                result.LeaseDuration = leaseDuration.Value.ToLeaseDurationType();
+                value3 = leaseDuration.Value.ToLeaseDurationType();
             }
+            result.LeaseDuration = value3;
+            PublicAccessType? value4 = default;
             var publicAccess = element.Element("PublicAccess");
             if (publicAccess != null)
             {
-                result.PublicAccess = new PublicAccessType(publicAccess.Value);
+                value4 = new PublicAccessType(publicAccess.Value);
             }
+            result.PublicAccess = value4;
             return result;
         }
     }

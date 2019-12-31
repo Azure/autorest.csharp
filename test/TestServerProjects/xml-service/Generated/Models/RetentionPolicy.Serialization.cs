@@ -46,7 +46,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoRetentionPolicy");
+            writer.WriteStartElement(nameHint ?? "RetentionPolicy");
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
@@ -60,17 +60,21 @@ namespace xml_service.Models.V100
         }
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {
-            RetentionPolicy result = new RetentionPolicy();
+            RetentionPolicy result = default;
+            bool value = default;
             var enabled = element.Element("Enabled");
             if (enabled != null)
             {
-                result.Enabled = (bool)enabled;
+                value = (bool)enabled;
             }
+            result.Enabled = value;
+            int? value0 = default;
             var days = element.Element("Days");
             if (days != null)
             {
-                result.Days = (int?)days;
+                value0 = (int?)days;
             }
+            result.Days = value0;
             return result;
         }
     }

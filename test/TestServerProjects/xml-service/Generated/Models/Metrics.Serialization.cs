@@ -74,7 +74,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoMetrics");
+            writer.WriteStartElement(nameHint ?? "Metrics");
             if (Version != null)
             {
                 writer.WriteStartElement("Version");
@@ -92,35 +92,41 @@ namespace xml_service.Models.V100
             }
             if (RetentionPolicy != null)
             {
-                writer.WriteStartElement("RetentionPolicy");
-                writer.WriteObjectValue(RetentionPolicy, null);
-                writer.WriteEndElement();
+                writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             }
             writer.WriteEndElement();
         }
         internal static Metrics DeserializeMetrics(XElement element)
         {
-            Metrics result = new Metrics();
+            Metrics result = default;
+            string? value = default;
             var version = element.Element("Version");
             if (version != null)
             {
-                result.Version = (string?)version;
+                value = (string?)version;
             }
+            result.Version = value;
+            bool value0 = default;
             var enabled = element.Element("Enabled");
             if (enabled != null)
             {
-                result.Enabled = (bool)enabled;
+                value0 = (bool)enabled;
             }
+            result.Enabled = value0;
+            bool? value1 = default;
             var includeAPIs = element.Element("IncludeAPIs");
             if (includeAPIs != null)
             {
-                result.IncludeAPIs = (bool?)includeAPIs;
+                value1 = (bool?)includeAPIs;
             }
+            result.IncludeAPIs = value1;
+            RetentionPolicy? value2 = default;
             var retentionPolicy = element.Element("RetentionPolicy");
             if (retentionPolicy != null)
             {
-                result.RetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                value2 = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
             }
+            result.RetentionPolicy = value2;
             return result;
         }
     }

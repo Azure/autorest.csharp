@@ -43,24 +43,26 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Id");
             writer.WriteValue(Id);
             writer.WriteEndElement();
-            writer.WriteStartElement("AccessPolicy");
-            writer.WriteObjectValue(AccessPolicy, null);
-            writer.WriteEndElement();
+            writer.WriteObjectValue(AccessPolicy, "AccessPolicy");
             writer.WriteEndElement();
         }
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
-            SignedIdentifier result = new SignedIdentifier();
+            SignedIdentifier result = default;
+            string value = default;
             var id = element.Element("Id");
             if (id != null)
             {
-                result.Id = (string)id;
+                value = (string)id;
             }
+            result.Id = value;
+            AccessPolicy value0 = default;
             var accessPolicy = element.Element("AccessPolicy");
             if (accessPolicy != null)
             {
-                result.AccessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicy);
+                value0 = AccessPolicy.DeserializeAccessPolicy(accessPolicy);
             }
+            result.AccessPolicy = value0;
             return result;
         }
     }

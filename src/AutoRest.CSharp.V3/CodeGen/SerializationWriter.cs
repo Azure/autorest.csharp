@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 writer.Append($"public partial class {model.Name}: {typeof(IUtf8JsonSerializable)}");
 
-                if (model.Serializations.OfType<XmlSerialization>().Any())
+                if (model.Serializations.OfType<XmlElementSerialization>().Any())
                 {
                     writer.Append($", {typeof(IXmlSerializable)}");
                 }
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 WriteJsonSerialize(writer, model, jsonSerialization);
                                 WriteJsonDeserialize(writer, model, jsonSerialization);
                                 break;
-                            case XmlSerialization xmlSerialization:
+                            case XmlElementSerialization xmlSerialization:
                                 WriteXmlSerialize(writer, model, xmlSerialization);
                                 WriteXmlDeserialize(writer, model, xmlSerialization);
                                 break;
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteXmlSerialize(CodeWriter writer, ClientObject model, XmlSerialization serialization)
+        private void WriteXmlSerialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
         {
             const string namehint = "nameHint";
             writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {namehint})");
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteXmlDeserialize(CodeWriter writer, ClientObject model, XmlSerialization serialization)
+        private void WriteXmlDeserialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
         {
             var cs = _typeFactory.CreateType(model);
             var typeText = writer.Type(cs);

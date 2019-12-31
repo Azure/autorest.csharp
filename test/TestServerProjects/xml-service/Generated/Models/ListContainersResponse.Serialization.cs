@@ -107,58 +107,68 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("MaxResults");
             writer.WriteValue(MaxResults);
             writer.WriteEndElement();
+            writer.WriteStartElement("NextMarker");
+            writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
             if (Containers != null)
             {
                 writer.WriteStartElement("Containers");
                 foreach (var item in Containers)
                 {
-                    writer.WriteObjectValue(item, null);
+                    writer.WriteObjectValue(item, "Container");
                 }
                 writer.WriteEndElement();
             }
-            writer.WriteStartElement("NextMarker");
-            writer.WriteValue(NextMarker);
-            writer.WriteEndElement();
             writer.WriteEndElement();
         }
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
-            ListContainersResponse result = new ListContainersResponse();
+            ListContainersResponse result = default;
             var serviceEndpoint = element.Attribute("ServiceEndpoint");
             if (serviceEndpoint != null)
             {
                 result.ServiceEndpoint = (string)serviceEndpoint;
             }
+            string value = default;
             var prefix = element.Element("Prefix");
             if (prefix != null)
             {
-                result.Prefix = (string)prefix;
+                value = (string)prefix;
             }
+            result.Prefix = value;
+            string? value0 = default;
             var marker = element.Element("Marker");
             if (marker != null)
             {
-                result.Marker = (string?)marker;
+                value0 = (string?)marker;
             }
+            result.Marker = value0;
+            int value1 = default;
             var maxResults = element.Element("MaxResults");
             if (maxResults != null)
             {
-                result.MaxResults = (int)maxResults;
+                value1 = (int)maxResults;
             }
-            var containers = element.Element("Containers");
-            if (containers != null)
-            {
-                ICollection<Container>? value = new List<Container>();
-                var elements = containers.Elements("Container");
-                foreach (var e in elements)
-                {
-                    value.Add(Container.DeserializeContainer(e));
-                }
-                result.Containers = value;
-            }
+            result.MaxResults = value1;
+            string value2 = default;
             var nextMarker = element.Element("NextMarker");
             if (nextMarker != null)
             {
-                result.NextMarker = (string)nextMarker;
+                value2 = (string)nextMarker;
+            }
+            result.NextMarker = value2;
+            result.Containers = new List<Container>();
+            var containers = element.Element("Containers");
+            result.Containers = new List<Container>();
+            foreach (var e in containers.Elements("Container"))
+            {
+                Container value3 = default;
+                var container = e.Element("Container");
+                if (container != null)
+                {
+                    value3 = Container.DeserializeContainer(container);
+                }
+                result.Containers.Add(value3);
             }
             return result;
         }

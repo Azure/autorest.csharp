@@ -39,7 +39,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoJSONOutput");
+            writer.WriteStartElement(nameHint ?? "JSONOutput");
             if (Id != null)
             {
                 writer.WriteStartElement("id");
@@ -50,12 +50,14 @@ namespace xml_service.Models.V100
         }
         internal static JSONOutput DeserializeJSONOutput(XElement element)
         {
-            JSONOutput result = new JSONOutput();
+            JSONOutput result = default;
+            int? value = default;
             var id = element.Element("id");
             if (id != null)
             {
-                result.Id = (int?)id;
+                value = (int?)id;
             }
+            result.Id = value;
             return result;
         }
     }

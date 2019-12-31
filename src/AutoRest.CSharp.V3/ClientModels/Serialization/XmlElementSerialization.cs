@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
+// Licensed under the MIT License.
 
 namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
-    internal abstract class JsonSerialization: ObjectSerialization
+    internal abstract class XmlElementSerialization: ObjectSerialization
     {
+        public abstract string Name { get; }
+
         public abstract ClientTypeReference Type { get; }
     }
 }

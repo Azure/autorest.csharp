@@ -48,7 +48,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            RootWithRefAndNoMeta value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(document.Root);
+                            RootWithRefAndNoMeta value = default;
+                            var rootWithRefAndNoMeta = document.Element("RootWithRefAndNoMeta");
+                            if (rootWithRefAndNoMeta != null)
+                            {
+                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -79,7 +84,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/complex-type-ref-no-meta", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(model, null);
+                content.XmlWriter.WriteObjectValue(model, "RootWithRefAndNoMeta");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -114,7 +119,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            RootWithRefAndMeta value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(document.Root);
+                            RootWithRefAndMeta value = default;
+                            var rootWithRefAndMeta = document.Element("RootWithRefAndMeta");
+                            if (rootWithRefAndMeta != null)
+                            {
+                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -145,7 +155,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/complex-type-ref-with-meta", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(model, null);
+                content.XmlWriter.WriteObjectValue(model, "RootWithRefAndMeta");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -180,7 +190,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            Slideshow value = Slideshow.DeserializeSlideshow(document.Root);
+                            Slideshow value = default;
+                            var slideshow = document.Element("slideshow");
+                            if (slideshow != null)
+                            {
+                                value = Slideshow.DeserializeSlideshow(slideshow);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -211,7 +226,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/simple", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(slideshow, null);
+                content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -246,7 +261,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            AppleBarrel value = AppleBarrel.DeserializeAppleBarrel(document.Root);
+                            AppleBarrel value = default;
+                            var appleBarrel = document.Element("AppleBarrel");
+                            if (appleBarrel != null)
+                            {
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -277,7 +297,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/wrapped-lists", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(wrappedLists, null);
+                content.XmlWriter.WriteObjectValue(wrappedLists, "AppleBarrel");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -340,7 +360,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            Slideshow value = Slideshow.DeserializeSlideshow(document.Root);
+                            Slideshow value = default;
+                            var slideshow = document.Element("slideshow");
+                            if (slideshow != null)
+                            {
+                                value = Slideshow.DeserializeSlideshow(slideshow);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -371,7 +396,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/empty-list", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(slideshow, null);
+                content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -406,7 +431,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            AppleBarrel value = AppleBarrel.DeserializeAppleBarrel(document.Root);
+                            AppleBarrel value = default;
+                            var appleBarrel = document.Element("AppleBarrel");
+                            if (appleBarrel != null)
+                            {
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -437,7 +467,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/empty-wrapped-lists", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(appleBarrel, null);
+                content.XmlWriter.WriteObjectValue(appleBarrel, "AppleBarrel");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -472,11 +502,17 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ICollection<Banana> value = new List<Banana>();
-                            var elements = document.Root.Elements("banana");
-                            foreach (var e in elements)
+                            ICollection<Banana> value = default;
+                            value = new List<Banana>();
+                            foreach (var e in document.Elements("banana"))
                             {
-                                value.Add(Banana.DeserializeBanana(e));
+                                Banana value0 = default;
+                                var banana = e.Element("banana");
+                                if (banana != null)
+                                {
+                                    value0 = Banana.DeserializeBanana(banana);
+                                }
+                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -508,10 +544,12 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/root-list", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
+                content.XmlWriter.WriteStartElement("bananas");
                 foreach (var item in bananas)
                 {
-                    content.XmlWriter.WriteObjectValue(item, null);
+                    content.XmlWriter.WriteObjectValue(item, "banana");
                 }
+                content.XmlWriter.WriteEndElement();
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -546,11 +584,17 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ICollection<Banana> value = new List<Banana>();
-                            var elements = document.Root.Elements("banana");
-                            foreach (var e in elements)
+                            ICollection<Banana> value = default;
+                            value = new List<Banana>();
+                            foreach (var e in document.Elements("banana"))
                             {
-                                value.Add(Banana.DeserializeBanana(e));
+                                Banana value0 = default;
+                                var banana = e.Element("banana");
+                                if (banana != null)
+                                {
+                                    value0 = Banana.DeserializeBanana(banana);
+                                }
+                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -582,10 +626,12 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/root-list-single-item", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
+                content.XmlWriter.WriteStartElement("bananas");
                 foreach (var item in bananas)
                 {
-                    content.XmlWriter.WriteObjectValue(item, null);
+                    content.XmlWriter.WriteObjectValue(item, "banana");
                 }
+                content.XmlWriter.WriteEndElement();
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -620,11 +666,17 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ICollection<Banana> value = new List<Banana>();
-                            var elements = document.Root.Elements("banana");
-                            foreach (var e in elements)
+                            ICollection<Banana> value = default;
+                            value = new List<Banana>();
+                            foreach (var e in document.Elements("banana"))
                             {
-                                value.Add(Banana.DeserializeBanana(e));
+                                Banana value0 = default;
+                                var banana = e.Element("banana");
+                                if (banana != null)
+                                {
+                                    value0 = Banana.DeserializeBanana(banana);
+                                }
+                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -656,10 +708,12 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/empty-root-list", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
+                content.XmlWriter.WriteStartElement("bananas");
                 foreach (var item in bananas)
                 {
-                    content.XmlWriter.WriteObjectValue(item, null);
+                    content.XmlWriter.WriteObjectValue(item, "banana");
                 }
+                content.XmlWriter.WriteEndElement();
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -694,7 +748,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            Banana value = Banana.DeserializeBanana(document.Root);
+                            Banana value = default;
+                            var banana = document.Element("banana");
+                            if (banana != null)
+                            {
+                                value = Banana.DeserializeBanana(banana);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -725,7 +784,7 @@ namespace xml_service
                 request.Uri.AppendPath("/xml/empty-child-element", false);
                 request.Headers.Add("Content-Type", "application/xml");
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(banana, null);
+                content.XmlWriter.WriteObjectValue(banana, "banana");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -761,7 +820,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ListContainersResponse value = ListContainersResponse.DeserializeListContainersResponse(document.Root);
+                            ListContainersResponse value = default;
+                            var enumerationResults = document.Element("EnumerationResults");
+                            if (enumerationResults != null)
+                            {
+                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -794,7 +858,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            StorageServiceProperties value = StorageServiceProperties.DeserializeStorageServiceProperties(document.Root);
+                            StorageServiceProperties value = default;
+                            var storageServiceProperties = document.Element("StorageServiceProperties");
+                            if (storageServiceProperties != null)
+                            {
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -827,7 +896,7 @@ namespace xml_service
                 request.Uri.AppendQuery("comp", "properties", true);
                 request.Uri.AppendQuery("restype", "service", true);
                 using var content = new XmlWriterContent();
-                content.XmlWriter.WriteObjectValue(properties, null);
+                content.XmlWriter.WriteObjectValue(properties, "StorageServiceProperties");
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -864,11 +933,18 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ICollection<SignedIdentifier> value = new List<SignedIdentifier>();
-                            var elements = document.Root.Elements("SignedIdentifier");
-                            foreach (var e in elements)
+                            ICollection<SignedIdentifier> value = default;
+                            var signedIdentifiers = document.Element("SignedIdentifiers");
+                            value = new List<SignedIdentifier>();
+                            foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
                             {
-                                value.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
+                                SignedIdentifier value0 = default;
+                                var signedIdentifier = e.Element("SignedIdentifier");
+                                if (signedIdentifier != null)
+                                {
+                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(signedIdentifier);
+                                }
+                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -902,10 +978,12 @@ namespace xml_service
                 request.Uri.AppendQuery("comp", "acl", true);
                 request.Uri.AppendQuery("restype", "container", true);
                 using var content = new XmlWriterContent();
+                content.XmlWriter.WriteStartElement("SignedIdentifiers");
                 foreach (var item in properties)
                 {
-                    content.XmlWriter.WriteObjectValue(item, null);
+                    content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
                 }
+                content.XmlWriter.WriteEndElement();
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
@@ -942,7 +1020,12 @@ namespace xml_service
                     case 200:
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
-                            ListBlobsResponse value = ListBlobsResponse.DeserializeListBlobsResponse(document.Root);
+                            ListBlobsResponse value = default;
+                            var enumerationResults = document.Element("EnumerationResults");
+                            if (enumerationResults != null)
+                            {
+                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

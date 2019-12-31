@@ -64,48 +64,52 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoContainer");
+            writer.WriteStartElement(nameHint ?? "Container");
             writer.WriteStartElement("Name");
             writer.WriteValue(Name);
             writer.WriteEndElement();
-            writer.WriteStartElement("Properties");
-            writer.WriteObjectValue(Properties, null);
-            writer.WriteEndElement();
+            writer.WriteObjectValue(Properties, "Properties");
             if (Metadata != null)
             {
-                writer.WriteStartElement("Metadata");
                 foreach (var pair in Metadata)
                 {
+                    writer.WriteStartElement("!dictionary-item");
                     writer.WriteValue(pair.Value);
+                    writer.WriteEndElement();
                 }
-                writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }
         internal static Container DeserializeContainer(XElement element)
         {
-            Container result = new Container();
+            Container result = default;
+            string value = default;
             var name = element.Element("Name");
             if (name != null)
             {
-                result.Name = (string)name;
+                value = (string)name;
             }
+            result.Name = value;
+            ContainerProperties value0 = default;
             var properties = element.Element("Properties");
             if (properties != null)
             {
-                result.Properties = ContainerProperties.DeserializeContainerProperties(properties);
+                value0 = ContainerProperties.DeserializeContainerProperties(properties);
             }
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            result.Properties = value0;
+            IDictionary<string, string>? value1 = default;
+            var elements = element.Elements();
+            foreach (var e in elements)
             {
-                IDictionary<string, string>? value = new Dictionary<string, string>();
-                var elements = metadata.Elements();
-                foreach (var e in elements)
+                string value2 = default;
+                var dictionaryItem = e.Element("!dictionary-item");
+                if (dictionaryItem != null)
                 {
-                    value.Add(e.Name.LocalName, (string)e);
+                    value2 = (string)dictionaryItem;
                 }
-                result.Metadata = value;
+                value1.Add(e.Name.LocalName, value2);
             }
+            result.Metadata = value1;
             return result;
         }
     }

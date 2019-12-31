@@ -72,13 +72,15 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoAppleBarrel");
+            writer.WriteStartElement(nameHint ?? "AppleBarrel");
             if (GoodApples != null)
             {
                 writer.WriteStartElement("GoodApples");
                 foreach (var item in GoodApples)
                 {
+                    writer.WriteStartElement("Apple");
                     writer.WriteValue(item);
+                    writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
             }
@@ -87,7 +89,9 @@ namespace xml_service.Models.V100
                 writer.WriteStartElement("BadApples");
                 foreach (var item in BadApples)
                 {
+                    writer.WriteStartElement("Apple");
                     writer.WriteValue(item);
+                    writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
             }
@@ -95,28 +99,32 @@ namespace xml_service.Models.V100
         }
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
-            AppleBarrel result = new AppleBarrel();
+            AppleBarrel result = default;
+            result.GoodApples = new List<string>();
             var goodApples = element.Element("GoodApples");
-            if (goodApples != null)
+            result.GoodApples = new List<string>();
+            foreach (var e in goodApples.Elements("Apple"))
             {
-                ICollection<string>? value = new List<string>();
-                var elements = goodApples.Elements("Apple");
-                foreach (var e in elements)
+                string value = default;
+                var apple = e.Element("Apple");
+                if (apple != null)
                 {
-                    value.Add((string)e);
+                    value = (string)apple;
                 }
-                result.GoodApples = value;
+                result.GoodApples.Add(value);
             }
+            result.BadApples = new List<string>();
             var badApples = element.Element("BadApples");
-            if (badApples != null)
+            result.BadApples = new List<string>();
+            foreach (var e0 in badApples.Elements("Apple"))
             {
-                ICollection<string>? value = new List<string>();
-                var elements = badApples.Elements("Apple");
-                foreach (var e in elements)
+                string value = default;
+                var apple = e0.Element("Apple");
+                if (apple != null)
                 {
-                    value.Add((string)e);
+                    value = (string)apple;
                 }
-                result.BadApples = value;
+                result.BadApples.Add(value);
             }
             return result;
         }

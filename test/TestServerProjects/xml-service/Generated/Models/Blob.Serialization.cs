@@ -88,54 +88,62 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Snapshot");
             writer.WriteValue(Snapshot);
             writer.WriteEndElement();
-            writer.WriteStartElement("Properties");
-            writer.WriteObjectValue(Properties, null);
-            writer.WriteEndElement();
+            writer.WriteObjectValue(Properties, "Properties");
             if (Metadata != null)
             {
-                writer.WriteStartElement("Metadata");
                 foreach (var pair in Metadata)
                 {
+                    writer.WriteStartElement("!dictionary-item");
                     writer.WriteValue(pair.Value);
+                    writer.WriteEndElement();
                 }
-                writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }
         internal static Blob DeserializeBlob(XElement element)
         {
-            Blob result = new Blob();
+            Blob result = default;
+            string value = default;
             var name = element.Element("Name");
             if (name != null)
             {
-                result.Name = (string)name;
+                value = (string)name;
             }
+            result.Name = value;
+            bool value0 = default;
             var deleted = element.Element("Deleted");
             if (deleted != null)
             {
-                result.Deleted = (bool)deleted;
+                value0 = (bool)deleted;
             }
+            result.Deleted = value0;
+            string value1 = default;
             var snapshot = element.Element("Snapshot");
             if (snapshot != null)
             {
-                result.Snapshot = (string)snapshot;
+                value1 = (string)snapshot;
             }
+            result.Snapshot = value1;
+            BlobProperties value2 = default;
             var properties = element.Element("Properties");
             if (properties != null)
             {
-                result.Properties = BlobProperties.DeserializeBlobProperties(properties);
+                value2 = BlobProperties.DeserializeBlobProperties(properties);
             }
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            result.Properties = value2;
+            IDictionary<string, string>? value3 = default;
+            var elements = element.Elements();
+            foreach (var e in elements)
             {
-                IDictionary<string, string>? value = new Dictionary<string, string>();
-                var elements = metadata.Elements();
-                foreach (var e in elements)
+                string value4 = default;
+                var dictionaryItem = e.Element("!dictionary-item");
+                if (dictionaryItem != null)
                 {
-                    value.Add(e.Name.LocalName, (string)e);
+                    value4 = (string)dictionaryItem;
                 }
-                result.Metadata = value;
+                value3.Add(e.Name.LocalName, value4);
             }
+            result.Metadata = value3;
             return result;
         }
     }

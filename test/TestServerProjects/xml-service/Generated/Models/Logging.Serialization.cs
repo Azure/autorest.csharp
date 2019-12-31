@@ -60,7 +60,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoLogging");
+            writer.WriteStartElement(nameHint ?? "Logging");
             writer.WriteStartElement("Version");
             writer.WriteValue(Version);
             writer.WriteEndElement();
@@ -73,39 +73,47 @@ namespace xml_service.Models.V100
             writer.WriteStartElement("Write");
             writer.WriteValue(Write);
             writer.WriteEndElement();
-            writer.WriteStartElement("RetentionPolicy");
-            writer.WriteObjectValue(RetentionPolicy, null);
-            writer.WriteEndElement();
+            writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             writer.WriteEndElement();
         }
         internal static Logging DeserializeLogging(XElement element)
         {
-            Logging result = new Logging();
+            Logging result = default;
+            string value = default;
             var version = element.Element("Version");
             if (version != null)
             {
-                result.Version = (string)version;
+                value = (string)version;
             }
+            result.Version = value;
+            bool value0 = default;
             var delete = element.Element("Delete");
             if (delete != null)
             {
-                result.Delete = (bool)delete;
+                value0 = (bool)delete;
             }
+            result.Delete = value0;
+            bool value1 = default;
             var read = element.Element("Read");
             if (read != null)
             {
-                result.Read = (bool)read;
+                value1 = (bool)read;
             }
+            result.Read = value1;
+            bool value2 = default;
             var write = element.Element("Write");
             if (write != null)
             {
-                result.Write = (bool)write;
+                value2 = (bool)write;
             }
+            result.Write = value2;
+            RetentionPolicy value3 = default;
             var retentionPolicy = element.Element("RetentionPolicy");
             if (retentionPolicy != null)
             {
-                result.RetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                value3 = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
             }
+            result.RetentionPolicy = value3;
             return result;
         }
     }

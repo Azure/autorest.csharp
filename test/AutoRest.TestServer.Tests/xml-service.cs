@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutSimpleAsync(slideshow);
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutSimpleAsync(slideshow);
         }, true);
 
         [Test]
@@ -74,6 +74,22 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Who buys WonderWidgets", items[2]);
         }, true);
 
+
+        [Test]
+        public Task PutComplexTypeRefNoMetaAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new RootWithRefAndNoMeta
+            {
+                Something = "else",
+                RefToModel = new ComplexTypeNoMeta()
+                {
+                    ID = "myid"
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutComplexTypeRefNoMetaAsync(root);
+        }, true);
+
         [Test]
         public Task GetComplexTypeRefNoMetaAsync() => Test(async (host, pipeline) =>
         {
@@ -85,6 +101,21 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task PutComplexTypeRefWithMetaAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new RootWithRefAndMeta()
+            {
+                Something = "else",
+                RefToModel = new ComplexTypeWithMeta()
+                {
+                    ID = "myid"
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutComplexTypeRefWithMetaAsync(root);
+        }, true);
+
+        [Test]
         public Task GetComplexTypeRefWithMetaAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefWithMetaAsync();
@@ -92,6 +123,22 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual("else", value.Something);
             Assert.AreEqual("myid", value.RefToModel.ID);
+        }, true);
+
+        [Test]
+        public Task PutRootListSingleItemAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new[]
+            {
+                new Banana()
+                {
+                    Name = "Cavendish",
+                    Flavor = "Sweet",
+                    Expiration = DateTimeOffset.Parse("2018-02-28T00:40:00.123Z")
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutRootListSingleItemAsync(root);
         }, true);
 
         [Test]
@@ -107,6 +154,17 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task PutEmptyListAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new Slideshow
+            {
+                Slides = new List<Slide>()
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyListAsync(root);
+        }, true);
+
+        [Test]
         public Task GetEmptyListAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyListAsync();
@@ -119,6 +177,19 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task PutEmptyChildElementAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new Banana()
+            {
+                Name = "Unknown Banana",
+                Flavor = "",
+                Expiration = DateTimeOffset.Parse("2012-02-24T00:53:52.789Z")
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyChildElementAsync(root);
+        }, true);
+
+        [Test]
         public Task GetEmptyChildElementAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyChildElementAsync();
@@ -127,6 +198,18 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Unknown Banana", value.Name);
             Assert.AreEqual("", value.Flavor);
             Assert.AreEqual(DateTimeOffset.Parse("2012-02-24T00:53:52.789Z"), value.Expiration);
+        }, true);
+
+        [Test]
+        public Task PutWrappedListsAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new AppleBarrel()
+            {
+                BadApples = new[] {"Red Delicious"},
+                GoodApples = new[] {"Fuji", "Gala"}
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutWrappedListsAsync(root);
         }, true);
 
         [Test]

@@ -90,26 +90,43 @@ namespace xml_service.Models.V100
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
+            if (Items != null)
+            {
+                foreach (var item in Items)
+                {
+                    writer.WriteStartElement("item");
+                    writer.WriteValue(item);
+                    writer.WriteEndElement();
+                }
+            }
             writer.WriteEndElement();
         }
         internal static Slide DeserializeSlide(XElement element)
         {
-            Slide result = new Slide();
+            Slide result = default;
             var type = element.Attribute("type");
             if (type != null)
             {
                 result.Type = (string?)type;
             }
+            string? value = default;
             var title = element.Element("title");
             if (title != null)
             {
-                result.Title = (string?)title;
+                value = (string?)title;
             }
+            result.Title = value;
             result.Items = new List<string>();
-            var elements = element.Elements("item");
-            foreach (var e in elements)
+            result.Items = new List<string>();
+            foreach (var e in element.Elements("item"))
             {
-                result.Items.Add((string)e);
+                string value0 = default;
+                var item = e.Element("item");
+                if (item != null)
+                {
+                    value0 = (string)item;
+                }
+                result.Items.Add(value0);
             }
             return result;
         }

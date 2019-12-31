@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -90,22 +91,28 @@ namespace xml_service.Models.V100
         }
         internal static Banana DeserializeBanana(XElement element)
         {
-            Banana result = new Banana();
+            Banana result = default;
+            string? value = default;
             var name = element.Element("name");
             if (name != null)
             {
-                result.Name = (string?)name;
+                value = (string?)name;
             }
+            result.Name = value;
+            string? value0 = default;
             var flavor = element.Element("flavor");
             if (flavor != null)
             {
-                result.Flavor = (string?)flavor;
+                value0 = (string?)flavor;
             }
+            result.Flavor = value0;
+            DateTimeOffset? value1 = default;
             var expiration = element.Element("expiration");
             if (expiration != null)
             {
-                result.Expiration = expiration.GetDateTimeOffsetValue("S");
+                value1 = expiration.GetDateTimeOffsetValue("S");
             }
+            result.Expiration = value1;
             return result;
         }
     }

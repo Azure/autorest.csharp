@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -46,7 +47,7 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoAccessPolicy");
+            writer.WriteStartElement(nameHint ?? "AccessPolicy");
             writer.WriteStartElement("Start");
             writer.WriteValue(Start, "S");
             writer.WriteEndElement();
@@ -60,22 +61,28 @@ namespace xml_service.Models.V100
         }
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
-            AccessPolicy result = new AccessPolicy();
+            AccessPolicy result = default;
+            DateTimeOffset value = default;
             var start = element.Element("Start");
             if (start != null)
             {
-                result.Start = start.GetDateTimeOffsetValue("S");
+                value = start.GetDateTimeOffsetValue("S");
             }
+            result.Start = value;
+            DateTimeOffset value0 = default;
             var expiry = element.Element("Expiry");
             if (expiry != null)
             {
-                result.Expiry = expiry.GetDateTimeOffsetValue("S");
+                value0 = expiry.GetDateTimeOffsetValue("S");
             }
+            result.Expiry = value0;
+            string value1 = default;
             var permission = element.Element("Permission");
             if (permission != null)
             {
-                result.Permission = (string)permission;
+                value1 = (string)permission;
             }
+            result.Permission = value1;
             return result;
         }
     }

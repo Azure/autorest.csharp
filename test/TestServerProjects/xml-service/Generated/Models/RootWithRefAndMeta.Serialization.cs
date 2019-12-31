@@ -53,12 +53,10 @@ namespace xml_service.Models.V100
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "AutoRootWithRefAndMeta");
+            writer.WriteStartElement(nameHint ?? "RootWithRefAndMeta");
             if (RefToModel != null)
             {
-                writer.WriteStartElement("XMLComplexTypeWithMeta");
-                writer.WriteObjectValue(RefToModel, null);
-                writer.WriteEndElement();
+                writer.WriteObjectValue(RefToModel, "XMLComplexTypeWithMeta");
             }
             if (Something != null)
             {
@@ -70,17 +68,21 @@ namespace xml_service.Models.V100
         }
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
         {
-            RootWithRefAndMeta result = new RootWithRefAndMeta();
-            var refToModel = element.Element("XMLComplexTypeWithMeta");
-            if (refToModel != null)
+            RootWithRefAndMeta result = default;
+            ComplexTypeWithMeta? value = default;
+            var xMLComplexTypeWithMeta = element.Element("XMLComplexTypeWithMeta");
+            if (xMLComplexTypeWithMeta != null)
             {
-                result.RefToModel = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(refToModel);
+                value = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xMLComplexTypeWithMeta);
             }
+            result.RefToModel = value;
+            string? value0 = default;
             var something = element.Element("Something");
             if (something != null)
             {
-                result.Something = (string?)something;
+                value0 = (string?)something;
             }
+            result.Something = value0;
             return result;
         }
     }
